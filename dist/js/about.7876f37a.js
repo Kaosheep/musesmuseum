@@ -1,2 +1,0 @@
-"use strict";(self["webpackChunkmusesmuseum"]=self["webpackChunkmusesmuseum"]||[]).push([[443],{833:function(u,s,e){e.r(s),e.d(s,{default:function(){return l}});var n=e(3396);const t={class:"about"},a=(0,n._)("h1",null,"This is an about page",-1),r=[a];function c(u,s){return(0,n.wg)(),(0,n.iD)("div",t,r)}var i=e(89);const o={},f=(0,i.Z)(o,[["render",c]]);var l=f}}]);
-//# sourceMappingURL=about.7876f37a.js.map
