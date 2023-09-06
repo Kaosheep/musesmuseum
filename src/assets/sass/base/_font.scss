@@ -1,0 +1,13 @@
+$fontSizes: (
+  //  '.key' : value,
+  "h1": 64px,
+  "h2": 32px,
+  "h3": 20px,
+  "span": 14px,
+  "div": 16px,
+); // map
+@each $k,$v in $fontSizes{
+    #{$k}{
+        font-size: $v;
+    }
+}

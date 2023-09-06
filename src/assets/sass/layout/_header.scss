@@ -1,0 +1,124 @@
+header{
+    z-index: 30;
+    position: fixed;
+    top: 0;
+    left: 0;
+    text-align: start;
+    padding: 1rem;
+    height: 80px;
+    .logo{
+        display: inline-block;
+        height: 100%;
+        margin-left: 2rem;
+        img{
+            height: 100%;
+            object-fit: contain;
+        }
+    }
+    .burger{
+        vertical-align: top;
+        display: inline-block;
+        padding-top:13px ;
+        width: 26px;
+        height: 26px;
+        cursor: pointer;
+        &:hover .bar{
+            &::after{
+                right: 13px;
+            }
+            &::before{
+                left: 13px;
+            }
+        }
+        .bar{
+            width: 26px;
+            height: 3px;
+            background-color: #000;
+            position: relative;
+            transition: .3s;
+            &::after{
+                content: "";
+                position: absolute;
+                bottom: -8px;
+                right: 0;
+                width: 13px;
+                height: 3px;
+                background-color: #000;
+                transition: .3s;
+            }
+            &::before{
+                content: "";
+                position: absolute;
+                bottom: 8px;
+                left: 0;
+                width: 13px;
+                height: 3px;
+                background-color: #000;
+                transition: .3s;
+            }
+            
+        }
+        .bar.active{
+            transform: rotate(45deg);
+            transition: .3s;
+            &::after{
+                content: "";
+                position: absolute;
+                bottom: -8px;
+                right: 13px;
+                width: 13px;
+                height: 3px;
+                background-color: #000;
+                transform-origin: left;
+                transform: rotate(-90deg) translate(-6px,12px);
+                transition: .3s;
+            }
+            &::before{
+                content: "";
+                position: absolute;
+                bottom: 8px;
+                left: 13px;
+                width: 13px;
+                height: 3px;
+                background-color: #000;
+                transform: rotate(90deg) translate(2px,7.5px);
+                transition: .3s;
+            }
+        }
+    }
+}
+nav{
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    transform: translateY(-100%);
+    width: 100vw;
+    height: 100vh;
+    padding-top: 3.5rem;
+    text-align: center;
+    transition: .3s;
+    .logo{
+        margin-top: 40px;
+    }
+    .login{
+        margin: 3rem 0;
+        font-size: 1.25rem;
+    }
+    .menu{
+        >ul{
+            margin: auto;
+            max-width: 900px;
+            display: flex;
+            justify-content: space-evenly;
+            >li{
+                line-height: 2;
+                ul{
+                    li{
+                        line-height: 2;
+                    }
+                }
+            }
+        }
+        
+    }
+}

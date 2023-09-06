@@ -1,0 +1,77 @@
+footer{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #333;
+    .footer{
+        padding: 1.5rem 3rem;
+        display: flex;
+        max-width: 1100px;
+        margin: auto;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        .col{
+            h3{
+                color: #fff;
+            }
+            table tr td{
+                color: #fff;
+                line-height: 1.5;
+            }
+            label{
+                color: #fff;
+                line-height: 1.5;
+            }
+        }
+        .col:last-child{
+            align-self: center;
+        }
+        .send{
+            max-width: 180px;
+            width: 100%;
+            margin: auto;
+            font-size: 0;
+            input{
+                width: 80%;
+                border:none;
+                border-right:none ;
+                font-size: 1rem;
+                vertical-align:bottom;
+                height: 35px;
+                padding: 5px 10px;
+                &:focus{
+                    outline: none;
+                }
+            }
+            button{
+                width:20%;
+                border: none;
+                font-size: 1rem;
+                background-color: #fff;
+                border:none;
+                border-left:none ;
+                line-height: 33.5px;
+                height: 35px;
+                cursor: pointer;
+            }
+        }
+        .social{
+            span{
+                margin-right: 0.5rem;
+                text-align: center;
+                display: inline-block;
+                width: 40px;
+                height: 40px;
+                background-color: #fff;
+                border-radius: 50%;
+                padding: 10px 0;
+                .sicon{
+                    font-size: 20px;
+                }
+            }
+            
+        }
+    }
+    
+}
