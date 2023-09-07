@@ -1,126 +1,103 @@
 <template>
-  <div class="product">
-    
-  </div>
-  <Carousel v-model="value" loop>
-      <CarouselItem>
-        <img src="~@/assets/image/Venuslipstick.png">
-      </CarouselItem>
-      <CarouselItem>
-        <img src="~@/assets/image/AntoinettePoudre.png">
-      </CarouselItem>
-      <CarouselItem>
-        <img src="~@/assets/image/Louise-Maske.png">
-      </CarouselItem>
+  <Carousel v-model="value" autoplay loop autoplay-speed="4000" class="shopdetail_carousel">
+    <CarouselItem class="banner">
+      <img src="../assets/image/productimage/banner/AntoinettePoudre.png"/>
+    </CarouselItem>
+    <CarouselItem class="banner">
+      <img src="../assets/image/productimage/banner/Venuslipstick.png" />
+    </CarouselItem>
+    <CarouselItem class="banner">
+      <img src="../assets/image/productimage/banner/Louise-Maske.png" />
+    </CarouselItem>
   </Carousel>
-
-    <h1 style="text-align: center;">
-      {{ text }}
-    </h1>
-    <div class="Breadcrumbs">
+  <h1>熱銷商品</h1>
+  <div class="shopdetail_block">
+  <div class="shopdetail_Breadcrumbs">
     <a href="">首頁/ </a>
     <a href="">商城 /</a>
     <a href="">熱銷商品</a>
-   </div>
-   <select class=filter>
+  </div>
+  <select class="shopdetail_filter">
     <option>熱門排行</option>
     <option>價格低至高</option>
     <option>價格高至低</option>
     <option>名稱筆畫</option>
-   </select>
-  
-    <div class="shoprowone">
-      <nav>
-        <a>熱銷商品</a>
-        <a>仿品收藏</a>
-        <a>經典畫作</a>
-        <a>典雅瓷器</a>
-        <a>書籍影視</a>
-        <a>設計小物</a>
-        <a>禮品專區</a>
-      </nav>
-      <div>
-        <div class="container">
-    <div class="item">1</div>
-    <div class="item">2</div>
-    <div class="item">3</div>
-    <div class="item">4</div>
-    <div class="item">5</div>
-    <div class="item">6</div>
-    <div class="item">7</div>
-    <div class="item">8</div>
-    <div class="item">9</div>
-</div>
+  </select>
+  </div>
+  <div class="shopdetail_wrap">
+    <aside class="shopdetail_aside">
+      <a href="">熱銷商品</a>
+      <a href="">仿品收藏</a>
+      <a href="">經典畫作</a>
+      <a href="">典雅瓷器</a>
+      <a href="">書籍影視</a>
+      <a href="">設計小物</a>
+      <a href="">禮品專區</a>
+    </aside>
+    <div class="shopdetail_container">
+      <div class="item" v-for="(item, index) in productlist" :key="index">
+
+        <div class="image">
+          <img :src="require('../assets/image/productimage/productimage'+index +'.png')" :alt="item.item"/>
+        </div>
+        <div class="info">
+          <span>{{ item.item }}</span>
+          <span>{{ item.price }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <Page :total="30" class="pagination"/>
 </template>
 
 <script>
-  export default {
-    data () {
-      return {
-          value: 0,
-          text: '熱銷商品'
-      }
-    },
-    methods: {
-      callName(){
-        this.text = 'eeeee'
-      }
-    },
-  }
+export default {
+  data() {
+    return {
+      value: 0,
+      productlist: [
+        {
+          item: "小謬思雕像",
+          price: 3500,
+        },
+        {
+          item: "手繪紅鶴小廢包",
+          price: 3000,
+        },
+        {
+          item: "維納斯口紅",
+          price: 2500,
+        },
+        {
+          item: "諾貝爾仿徽",
+          price: 3500,
+        },
+        {
+          item: "謬思聯名素T",
+          price: 400,
+        },
+        {
+          item: "草地上的聖母 (水彩)",
+          price: 300,
+        },
+        {
+          item: "黑帝斯筆記本",
+          price: 1500,
+        },
+        {
+          item: "謬思博物館小模型",
+          price: 2500,
+        },
+      ],
+    };
+  },
+  methods: {},
+};
 </script>
-<style>
-.demo-carousel{
-  width: 100%;
-  height: 10rem;
-  background-color: #ddd;
-}
-.Breadcrumbs a{
-  color: black;
-  padding-left: 5px;
-}
-select .filter{
-  justify-content: flex-end
-}
-nav{
-  border: 1px solid black;
-  background-color: #F4F2F2;
-}
-nav a{
-  color: black;
-  margin-bottom: 10px;
-  display: block;
-  border-bottom: 1px solid red;
-}
-.container{
-     display: grid;
-     grid-template-columns:repeat(3,1fr);
-     grid-template-rows: repeat(3,1fr);
-     height: 800px;
-     width: 800px;
-     grid-gap: 10px;
-     margin: auto;
- }
-.container div{
-    text-align: center;
-    background: pink;
-}
-.shoprowone{
-  display: flex;
-  justify-content: space-around;
+<style scoped lang="scss">
+@import "../assets/sass/style.scss";
+h1{
   text-align: center;
-}
-.shoprowtwo{
-  display: flex;
-  justify-content: space-around;
-  text-align: center;
-}
-.shoprowthree{
-  display: flex;
-  justify-content: space-around;
-  text-align: center;
-}
-.shoprowone nav div{
-  color: black;
+  font-size: 32px;
 }
 </style>
-
