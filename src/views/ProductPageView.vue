@@ -20,32 +20,16 @@
         <div class="product_price">NTD 3,500</div>
         <div class="product_function">
           <div class="product_count">
-            <button @click="decrement">-</button>
-            <input type="text" v-model="count">
-            <button @click="increment">+</button>
+            <button @click="decrease">-</button>
+            <div>{{ count }}</div>
+            <button @click="increase">+</button>
           </div>
           <button>加入購物車</button>
         </div>
-        <div class="product_detail_sub">
-          <span>商品說明</span>
-          <span>+</span>
-          <div>
-            內容
-          </div>
-        </div>
-        <div>
-          <span>規格尺寸</span>
-          <span>+</span>
-          <div>
-            內容
-          </div>
-        </div>
-        <div>
-          <span>歷史說明</span>
-          <span>+</span>
-          <div>
-            內容
-          </div>
+        <div class="product_detail_sub" v-for="(title, index) in navTitle" :key="index">
+          <span @click="txtAppear(index)" class="navTitle">{{ title.title }}</span>
+          <span class="navIcon">+</span>
+          <p v-html="title.txt" :id="'navtxt' + index"></p>
         </div>
       </div>
     </div>
@@ -71,18 +55,45 @@
 export default {
   data() {
     return {
-      count: 0
+      count: 0,
+      navTitle: [
+        {
+          title: "商品說明",
+          txt: "成分:<br> 玫瑰精油（Rose Essential Oil）、維多利亞玫瑰精油 （Bulgarian Rose Essential Oil）、紫羅蘭香精。",
+        },
+        {
+          title: "規格尺寸",
+          txt: "100ml/瓶",
+        },
+        {
+          title: "設計概念",
+          txt: "十字寶球造型香水的設計概是融合了神秘、歷史和奇幻元素的香水，具有以下的特點和理念：<br>神秘與歷史：這款香水的設計靈感來自神秘的歷史事件或傳說中的寶藏。試圖喚起使用者對古老文明、探險和冒險的感覺。<br>裝置設計：香水瓶的外觀以十字寶球為靈感，採用獨特的球形或交叉圖案設計。這個設計元素可能代表著寶藏、交匯、神秘和歷史的符號。<br>香調的神秘性：香水的香調採用了特殊的手法，以創造一種深沉、複雜的香氣。",
+        },
+      ],
     }
   },
   methods: {
-    increment() {
-      this.count++;
-    },
-    decrement() {
+    decrease() {
       if (this.count > 0) {
         this.count--;
       }
-    }
+    },
+    increase() {
+      this.count++;
+    },
+    deleteProduct(index) {
+      this.navTitle.splice(index, 1);
+    },
+
+    txtAppear(index) {
+      const navtxtId = 'navtxt' + index
+      const navtxtIds = document.getElementById(navtxtId);
+      if (navtxtIds.style.display === "none") {
+        navtxtIds.style.display = "block"
+      } else {
+        navtxtIds.style.display = "none"
+      }
+    },
   }
 }
 </script>
@@ -156,6 +167,21 @@ export default {
   }
 }
 
+.product_count {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+.product_count div {
+  width: 50px;
+  text-align: center;
+  font-size: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
 .product_card {
   display: flex;
   margin: 0 auto;
@@ -164,5 +190,25 @@ export default {
 .product_card div {
   width: 25%;
   border: 1px solid black;
+}
+
+.navTitle,
+.navIcon {
+  display: inline-block;
+  width: 50%;
+  font-size: 24px;
+}
+
+.navTitle {
+  text-align: left;
+  margin-top: 20px;
+}
+
+.navIcon {
+  text-align: right;
+}
+
+.product_detail_sub p {
+  width: 100%;
 }
 </style>
