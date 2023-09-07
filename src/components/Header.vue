@@ -12,7 +12,7 @@
         <img src="../assets/image/logo/smalllogo.png" alt="">
     </div>
     <div class="login">
-        <router-link :to="'/loginpage'">會員登入</router-link>
+        <router-link :to="'/login'">會員登入</router-link>
     </div>
     <div class="menu">
         <ul>
@@ -29,6 +29,7 @@
         </ul>
     </div>
  </nav>
+ <router-view/>
 </template>
 
 <script>
