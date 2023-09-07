@@ -29,6 +29,7 @@
         </ul>
     </div>
  </nav>
+ <router-view/>
 </template>
 
 <script>
@@ -36,7 +37,7 @@ export default {
     data(){
         return {
             navlist:[
-                {title:'購票專區',link:"/ticket"},
+                {title:'購票專區',link:"/shopdetail"},
                 {title:'展覽資訊',link:"/exhibition",sublist:[
                     {subtitle:'常設展覽',sublink:"/"},
                     {subtitle:'當期展覽',sublink:"/"},
