@@ -1,0 +1,21 @@
+//共用變數放最上面
+//base
+@import "base/reset";
+@import "base/var";
+@import "base/color";
+@import "base/font";
+//function
+@import "mixin/mixin";
+//component
+// @import "component/body";
+// @import "component/title";
+@import "component/btn";
+@import "component/card";
+@import "component/grid";
+//layout
+@import "layout/header";
+@import "layout/footer";
+//page
+@import "page/index.scss";
+@import "page/about.scss";
+//plugin
