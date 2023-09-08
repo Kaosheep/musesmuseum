@@ -53,7 +53,7 @@ export default {
                 ]},
                 {title:'參觀與服務' ,link:"/Visit",sublist:[
                     {subtitle:'注意事項',sublink:"/"},
-                    {subtitle:'常見問題',sublink:"/"},
+                    {subtitle:'常見問題',sublink:"/faq"},
                     {subtitle:'交通資訊',sublink:"/"}
                 ]},
                 {title:'關於我們',link:"/About",sublist:[

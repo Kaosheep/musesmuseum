@@ -52,7 +52,10 @@
       </div>
     </aside>
     <div class="shop_container">
-      <div class="item" v-for="(item, index) in produstdisplay" :key="index">
+      <div v-if="produstdisplay == 0">
+        查無商品
+      </div>
+      <div class="item" v-for="(item, index) in produstdisplay" :key="index" v-else>
         <router-link to="/productpage">
           <div class="image">
             <img

@@ -74,5 +74,6 @@ export default {
 @import "../assets/sass/style.scss";
 main {
   min-height: calc(100vh - 238px);
+  margin: auto;
 }
 </style>

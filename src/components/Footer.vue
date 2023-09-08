@@ -23,7 +23,7 @@
             <div class="send">
                 <form action="">
                 <input type="text" placeholder="輸入電子信箱..." id="email">
-                <button ><i class="fa-solid fa-magnifying-glass"></i></button>
+                <button><font-awesome-icon :icon="['fas', 'paper-plane']" /></button>
             </form>
             </div>
         </div>
