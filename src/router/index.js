@@ -52,13 +52,9 @@ const routes = [
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
-  routes,
+  routes: routes,
   scrollBehavior(to, from, savedPosition) {
-    return {
-      // el: document.getElementById('main'),
-      el: '#main',
-      left:0,
-    }
+    return { top: 0 }
   },
 })
 

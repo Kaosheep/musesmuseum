@@ -1,5 +1,11 @@
 <template>
-  <Carousel v-model="value" autoplay loop autoplay-speed="4000" class="shop_carousel">
+  <Carousel
+    v-model="value"
+    autoplay
+    loop
+    autoplay-speed="4000"
+    class="shop_carousel"
+  >
     <CarouselItem class="banner">
       <img src="../assets/image/productimage/banner/AntoinettePoudre.png" />
     </CarouselItem>
@@ -26,18 +32,22 @@
   </div>
   <div class="shop_wrap">
     <aside class="shop_aside">
-      <router-link :to=a.link v-for="a in aside">{{a.name}}</router-link>
+      <router-link :to="a.link" v-for="a in aside">{{ a.name }}</router-link>
       <div class="search">
         <label for="search">搜尋商品</label>
         <form action="">
-          <input type="text" placeholder="輸入商品..." id="search" v-model="searchinput" />
+          <input
+            type="text"
+            placeholder="輸入商品..."
+            id="search"
+            v-model="searchinput"
+          />
           <button type="button" @click="searchClick">
             <i class="fa-solid fa-magnifying-glass"></i>
           </button>
           <button type="button" @click="reset">
-            <font-awesome-icon :icon="['fas', 'rotate-right']" />  
+            <font-awesome-icon :icon="['fas', 'rotate-right']" />
           </button>
-          
         </form>
       </div>
     </aside>
@@ -45,10 +55,14 @@
       <div class="item" v-for="(item, index) in produstdisplay" :key="index">
         <router-link to="/productpage">
           <div class="image">
-            <img :src="require('../assets/image/productimage/productimage' +
-              index +
-              '.png')
-              " :alt="item.title" />
+            <img
+              :src="
+                require('../assets/image/productimage/productimage' +
+                  index +
+                  '.png')
+              "
+              :alt="item.title"
+            />
           </div>
           <div class="info">
             <span>{{ item.title }}</span>
@@ -56,15 +70,14 @@
           </div>
         </router-link>
       </div>
-      
     </div>
   </div>
-  <div class="page"><Page :total="30" class="pagination" size="small"/></div>
+  <div class="page"><Page :total="30" class="pagination" size="small" /></div>
   <Footer></Footer>
 </template>
 
 <script>
-import Footer from '/src/components/Footer.vue'
+import Footer from "/src/components/Footer.vue";
 export default {
   components: {
     Footer,
@@ -72,19 +85,19 @@ export default {
   data() {
     return {
       value: 0,
-      aside:[
-        {link:'',name:'熱銷商品'},
-        {link:'',name:'仿品收藏'},
-        {link:'',name:'經典畫作'},
-        {link:'',name:'典雅瓷器'},
-        {link:'',name:'書籍影視'},
-        {link:'',name:'設計小物'},
-        {link:'',name:'禮品專區'}
+      aside: [
+        { link: "", name: "熱銷商品" },
+        { link: "", name: "仿品收藏" },
+        { link: "", name: "經典畫作" },
+        { link: "", name: "典雅瓷器" },
+        { link: "", name: "書籍影視" },
+        { link: "", name: "設計小物" },
+        { link: "", name: "禮品專區" },
       ],
-      produstdisplay:[
+      produstdisplay: [
         {
-          title: "小謬思雕像",
-          price: 3500,
+          title: "MUSE筆記本",
+          price: 350,
         },
         {
           title: "手繪紅鶴小廢包",
@@ -111,14 +124,14 @@ export default {
           price: 1500,
         },
         {
-          title: "謬思博物館小模型",
-          price: 2500,
+          title: "皮革筆記本",
+          price: 499,
         },
       ],
       productlist: [
         {
-          title: "小謬思雕像",
-          price: 3500,
+          title: "MUSE筆記本",
+          price: 350,
         },
         {
           title: "手繪紅鶴小廢包",
@@ -145,27 +158,27 @@ export default {
           price: 1500,
         },
         {
-          title: "謬思博物館小模型",
-          price: 2500,
+          title: "皮革筆記本",
+          price: 499,
         },
       ],
-      searchinput: '',
+      searchinput: "",
     };
   },
   methods: {
     searchClick() {
       const res = this.produstdisplay.filter((item) => {
         let answer = false;
-        const title = item.title
+        const title = item.title;
         answer = title.includes(this.searchinput);
         return answer;
-      })
-      this.produstdisplay = res
+      });
+      this.produstdisplay = res;
     },
-    reset(){
-      this.searchinput='';
-      this.produstdisplay = this.productlist
-    }
+    reset() {
+      this.searchinput = "";
+      this.produstdisplay = this.productlist;
+    },
   },
 };
 </script>

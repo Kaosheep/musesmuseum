@@ -1,6 +1,6 @@
 header{
     z-index: 30;
-    position: fixed;
+    position: sticky;
     top: 0;
     left: 0;
     text-align: start;
@@ -95,7 +95,7 @@ nav{
     transform: translateY(-100%);
     width: 100vw;
     height: 100vh;
-    padding-top: 3.5rem;
+    padding-top: 3%;
     text-align: center;
     transition: .3s;
     background-color: #fff;

@@ -3,15 +3,15 @@
     <div class="shop_Breadcrumbs">
       <a href="">首頁/ </a>
       <a href="">商城 /</a>
-      <a href="">熱銷商品</a>
+      <span> 熱銷商品</span>
     </div>
     <div class="product_info">
       <div class="product_image">
         <heart/>
-        <img src="../assets/image/productimage/productimage1.png" alt="" />
+        <img src="../assets/image/productimage/productimage0.png" alt="" />
       </div>
       <div class="product_txt">
-          <h1>小謬思銅像</h1>
+          <h1>MUSE筆記本</h1>
           <p>
             作為謬思博物館的精神象徵，將智慧和美感帶入您的生活中。謬思女神小銅像，讓智慧之光永遠照耀著您的生活。
           </p>
@@ -30,8 +30,7 @@
             商品說明
             <template #content
               >成分:<br />
-              玫瑰精油（Rose Essential Oil）、維多利亞玫瑰精油 （Bulgarian Rose
-              Essential Oil）、紫羅蘭香精。</template
+              聚酯纖維。</template
             >
           </Panel>
           <Panel name="2">

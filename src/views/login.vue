@@ -73,7 +73,6 @@ export default {
 <style scoped lang="scss">
 @import "../assets/sass/style.scss";
 main {
-  min-height: calc(100vh - 158px);
-  padding-top: 80px;
+  min-height: calc(100vh - 238px);
 }
 </style>

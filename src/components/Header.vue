@@ -42,10 +42,6 @@ export default {
                     {subtitle:'常設展覽',sublink:"/"},
                     {subtitle:'當期展覽',sublink:"/"},
                 ]},
-                {title:'展覽資訊',link:"/exhibition",sublist:[
-                    {subtitle:'常設展覽',sublink:"/"},
-                    {subtitle:'當期展覽',sublink:"/"},
-                ]},
                 {title:'藝術典藏',link:"/collection",sublist:[
                     {subtitle:'文物區',sublink:"/"},
                     {subtitle:'畫作區',sublink:"/"},
