@@ -12,17 +12,17 @@
         <img src="../assets/image/logo/smalllogo.png" alt="">
     </div>
     <div class="login">
-        <router-link :to="'/login'">會員登入</router-link>
+        <router-link :to="'/login'" @click="closemenu">會員登入</router-link>
     </div>
     <div class="menu">
         <ul>
             <li v-for="(li,index) in navlist"
             :key="index">
-                <router-link :to="li.link"><h3>{{li.title}}</h3></router-link>
+                <router-link :to="li.link" @click="closemenu"><h3>{{li.title}}</h3></router-link>
                 <ul v-if="li.sublist">
                     <li v-for="(subli,index) in li.sublist"
                     :key="index">
-                        <router-link :to="subli.sublink">{{subli.subtitle}}</router-link>
+                        <router-link :to="subli.sublink" @click="closemenu">{{subli.subtitle}}</router-link>
                     </li>
                 </ul>
             </li>
@@ -37,7 +37,7 @@ export default {
     data(){
         return {
             navlist:[
-                {title:'購票專區',link:"/shopdetail"},
+                {title:'購票專區',link:"/"},
                 {title:'展覽資訊',link:"/exhibition",sublist:[
                     {subtitle:'常設展覽',sublink:"/"},
                     {subtitle:'當期展覽',sublink:"/"},
@@ -64,7 +64,7 @@ export default {
                     {subtitle:'歷史沿革',sublink:"/"},
                     {subtitle:'歷代館長',sublink:"/"},
                 ]},
-                {title:'商品',link:"/Shop"}
+                {title:'商品',link:"/shop"}
             ],
             isClick:false
         }
@@ -75,7 +75,7 @@ export default {
             const headerlogo = document.querySelector('header .logo')
             this.isClick = !this.isClick;
             if(this.isClick){
-             nav.style.transform = 'translateY(0%)';   
+                nav.style.transform = 'translateY(0%)';   
             }else{
                 nav.style.transform = 'translateY(-100%)'; 
             }
@@ -86,6 +86,12 @@ export default {
                 headerlogo.style.height = '100%';
                 headerlogo.style.transition = '.2s .2s';
             }
+        },
+        closemenu(){
+            document.querySelector('nav').style.transform = 'translateY(-100%)';
+            document.querySelector('header .logo').style.height = '100%';
+            document.querySelector('header .logo').style.transition = '.2s .2s';
+            this.isClick=false;
         }
     }
 }

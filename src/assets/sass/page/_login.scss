@@ -1,0 +1,35 @@
+#lightBox {
+    border: 1px solid #666;
+    box-shadow: 0px 0px 3px #666;
+    position:relative;
+    margin: auto;
+    max-width: 500px;
+    padding: 0rem 0 2.5rem;
+    text-align: center;
+    .memlogin_title {
+        padding-bottom: 8px;
+    }
+    .memlogin_acti #memId {
+        width: 208px;
+        height: 25px;
+        margin: 10px 0px;
+    }
+    .memlogin_acti #memPsw {
+        width: 208px;
+        height: 25px;
+        margin: 10px 0px;
+    }
+    .resetPsw_OTP {
+        // text-align: right;
+    }
+    .resetPsw_email {
+        // text-align: right;
+    }
+    .memlogin_submit #btnLogin {
+        width: 208px;
+        height: 40px;
+        color: #ad0000;
+        margin-top: 1rem;
+    }
+}
+

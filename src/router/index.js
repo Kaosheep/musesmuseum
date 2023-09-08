@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
-// import LoginView from '../views/LoginView.vue'
+
 const routes = [
   {
     path: '/',
@@ -16,31 +16,45 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
   },
   {
-<<<<<<< HEAD
     path: '/login',
     name: 'login',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/LoginView.vue')
-=======
-    path: '/shopdetail',
-    name: 'shopdetail',
+    component: () => import(/* webpackChunkName: "about" */ '../views/login.vue')
+  },
+  {
+    path: '/shop',
+    name: 'shop',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/shopdetail.vue')
->>>>>>> kao
+    component: () => import(/* webpackChunkName: "about" */ '../views/shop.vue')
+  },
+  {
+    path: '/fqa',
+    name: 'fqa',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "about" */ '../views/FqaView.vue')
+  },
+  {
+    path: '/productpage',
+    name: 'productpage',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "about" */ '../views/productpage.vue')
   }
+
 ]
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes,
   scrollBehavior(to, from, savedPosition) {
-    // 始终在元素 #main 上方滚动 10px
     return {
-      // 也可以这么写
       // el: document.getElementById('main'),
       el: '#main',
       left:0,

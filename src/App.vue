@@ -7,7 +7,7 @@ export default {
   name: 'HomeView',
   components: {
     Header,
-    Footer
+    Footer,
   }
 }
 </script>
