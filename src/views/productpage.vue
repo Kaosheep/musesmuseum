@@ -1,5 +1,10 @@
 <template>
   <main>
+    <div class="shop_Breadcrumbs">
+      <a href="">首頁/ </a>
+      <a href="">商城 /</a>
+      <a href="">熱銷商品</a>
+    </div>
     <div class="product_info">
       <div class="product_image">
         <heart/>
@@ -42,15 +47,18 @@
     </div>
     <productwrap/>
   </main>
+  <Footer></Footer>
 </template>
 
 <script>
 import heart from '/src/components/heart.vue'
 import productwrap from '/src/components/productwrap.vue'
+import Footer from '/src/components/Footer.vue'
 export default {
   components: {
     heart,
-    productwrap
+    productwrap,
+    Footer,
   },
   data() {
     return {

@@ -26,13 +26,7 @@
   </div>
   <div class="shop_wrap">
     <aside class="shop_aside">
-      <a href="">熱銷商品</a>
-      <a href="">仿品收藏</a>
-      <a href="">經典畫作</a>
-      <a href="">典雅瓷器</a>
-      <a href="">書籍影視</a>
-      <a href="">設計小物</a>
-      <a href="">禮品專區</a>
+      <router-link :to=a.link v-for="a in aside">{{a.name}}</router-link>
       <div class="search">
         <label for="search">搜尋商品</label>
         <form action="">
@@ -62,16 +56,31 @@
           </div>
         </router-link>
       </div>
+      
     </div>
   </div>
-  <Page :total="30" class="pagination" />
+  <div class="page"><Page :total="30" class="pagination" size="small"/></div>
+  <Footer></Footer>
 </template>
 
 <script>
+import Footer from '/src/components/Footer.vue'
 export default {
+  components: {
+    Footer,
+  },
   data() {
     return {
       value: 0,
+      aside:[
+        {link:'',name:'熱銷商品'},
+        {link:'',name:'仿品收藏'},
+        {link:'',name:'經典畫作'},
+        {link:'',name:'典雅瓷器'},
+        {link:'',name:'書籍影視'},
+        {link:'',name:'設計小物'},
+        {link:'',name:'禮品專區'}
+      ],
       produstdisplay:[
         {
           title: "小謬思雕像",

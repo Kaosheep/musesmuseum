@@ -4,15 +4,15 @@
         <div :class="['bar',{active:isClick}]"></div>   
     </div>
     <div class="logo">
-        <img src="../assets/image/logo/smalllogo.png" alt="">
+        <router-link to="/"><img src="../assets/image/logo/smalllogo.png" alt=""></router-link>
     </div>
  </header>
  <nav>
     <div class="logo">
-        <img src="../assets/image/logo/smalllogo.png" alt="">
+        <router-link to="/" @click="closemenu"><img src="../assets/image/logo/smalllogo.png" alt=""></router-link>
     </div>
     <div class="login">
-        <router-link :to="'/login'" @click="closemenu">會員登入</router-link>
+        <router-link to="/login" @click="closemenu">會員登入</router-link>
     </div>
     <div class="menu">
         <ul>
