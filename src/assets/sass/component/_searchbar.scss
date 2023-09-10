@@ -1,0 +1,37 @@
+.searchbar_search{
+    margin: auto;
+    max-width: 250px;
+    width: 100%;
+    font-size: 0;
+    box-shadow: 3px 3px 0px $myellow;
+    border-radius: 4px;
+    overflow: hidden;
+    input{
+        color: $mblue;
+        width: 80%;
+        border:1px solid $mblue;
+        border-right:none ;
+        border-radius: 4px 0 0 4px;
+        font-size: 1rem;
+        vertical-align:bottom;
+        height: 35px;
+        padding: 5px 10px;
+        &:focus{
+            outline: none;
+        }
+    }
+    button{
+        width:20%;
+        border:1px solid $mblue;
+        border-radius:0 4px 4px 0;
+        font-size: 1rem;
+        background-color: #fff;
+        border-left:none ;
+        line-height: 33.5px;
+        height: 35px;
+        cursor: pointer;
+        #searchbar_searchglass path{
+            fill: $mblue;
+        }
+    }
+}

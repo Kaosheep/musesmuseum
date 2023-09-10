@@ -1,0 +1,17 @@
+//RWD
+@mixin m(){
+    @media screen and (max-width:$m){
+        @content;
+    }
+};
+@mixin t(){
+    @media screen and (max-width:$t){
+        @content;
+    }
+};
+//客製化斷點
+@mixin set($val){
+    @media screen and (max-width:$val){
+        @content;
+    }
+};

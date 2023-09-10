@@ -1,3 +1,4 @@
+// function shopslide(){
 let productwrap = document.querySelector(".productwrap");
 let products = document.querySelector(".product");
 let isDragging = false , startX, startScrollLeft;
@@ -71,4 +72,5 @@ document.addEventListener("mouseup",dragStop);
 products.addEventListener("scroll",infinitescroll);
 productwrap.addEventListener("mouseenter",()=>clearTimeout(timeoutid));
 productwrap.addEventListener("mouseleave",autoplay);
-
+// }
+export default shopslide;

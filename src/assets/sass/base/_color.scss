@@ -1,0 +1,15 @@
+$color : (
+    'mgreen':#009CA8,
+    'myellow':#FBF796,
+    'mpink':#EB5F86,
+    'mblue':#1E5289,
+);
+@each $k,$v in $color{
+    .#{$k}{
+        color: $v;
+    }
+}
+$mgreen:#009CA8;
+$myellow:#FBF796;
+$mpink:#EB5F86;
+$mblue:#1E5289;

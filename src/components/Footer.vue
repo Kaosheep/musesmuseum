@@ -22,9 +22,9 @@
             <label for="email">訂閱電子報</label>
             <div class="send">
                 <form action="">
-                <input type="text" placeholder="輸入電子信箱..." id="email">
-                <button><font-awesome-icon :icon="['fas', 'paper-plane']" /></button>
-            </form>
+                    <input type="text" placeholder="輸入電子信箱..." id="email">
+                    <button><font-awesome-icon :icon="['fas', 'paper-plane']" id="footer_send"/></button>
+                </form>
             </div>
         </div>
         <div class="col">

@@ -7,11 +7,11 @@
 //function
 @import "mixin/mixin";
 //component
-// @import "component/body";
-// @import "component/title";
 @import "component/btn";
 @import "component/card";
 @import "component/grid";
+@import "component/searchbar";
+@import "component/searchbarclick";
 //layout
 @import "layout/header";
 @import "layout/footer";

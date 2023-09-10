@@ -1,0 +1,60 @@
+.searchbarclick_search{
+    margin: auto;
+    max-width: 250px;
+    width: 100%;
+    font-size: 0;
+    transition: .3s;
+    input{
+        color: $mblue;
+        width: 0%;
+        border:0px solid $mblue;
+        border-right:none ;
+        border-radius: 4px 0 0 4px;
+        font-size: 1rem;
+        vertical-align:bottom;
+        height: 35px;
+        padding: 0px 0px;
+        transition: .3s;
+        box-shadow: 3px 3px 0px $myellow;
+        &:focus{
+            outline: none;
+        }
+    }
+    button{
+        box-shadow: 3px 3px 0px $myellow;
+        width:20%;
+        border:1px solid $mblue;
+        border-radius:4px 4px 4px 4px;
+        font-size: 1rem;
+        background-color: #fff;
+        border-left:1px solid $mblue ;
+        line-height: 33.5px;
+        height: 35px;
+        cursor: pointer;
+        transition: .3s;
+        #searchbar_searchglass path{
+            fill: $mblue;
+        }
+    }
+}
+.searchbarclick_search.click{
+    max-width: 250px;
+    width: 100%;
+    input{
+        padding: 5px 10px;
+        width: 80%;
+        border:1px solid $mblue;
+        border-right:none ;
+        border-radius: 4px 0 0 4px;
+    }
+    button{
+        
+        width:20%;
+        border:1px solid $mblue;
+        border-radius:0 4px 4px 0;
+        font-size: 1rem;
+        background-color: #fff;
+        border-left:none ;
+
+    }
+}
