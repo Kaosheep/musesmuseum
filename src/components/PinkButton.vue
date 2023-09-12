@@ -4,7 +4,12 @@
    
 <script>
 export default {
-    props: ['text'],
+    props: {
+        "text": {
+            type: String || Number,
+            default: "按鈕樣式"
+        }
+    },
 }
 </script>
 
@@ -13,8 +18,16 @@ export default {
 button{
     border-radius: 4px;
     border: 2px solid $mpink;
-    width: 100px;
-    color: $blue;
+    background-color: #fff;
+    width: 120px;
+    color: $mblue;
+    line-height: 2rem;
+    transition: .3s;
+    cursor:pointer;
+    &:hover{
+        background-color:$mpink;
+        color: #fff;
+    }
 }
 
 </style>

@@ -106,8 +106,6 @@ export default {
     togglemenu() {
       const nav = document.querySelector("nav");
       const header = document.querySelector("header .logo");
-      const headerlogo = document.querySelector("header .logo img");
-      const myPseudoElement = window.getComputedStyle(header, ':after');
 
       this.isClick = !this.isClick;
       if (this.isClick) {

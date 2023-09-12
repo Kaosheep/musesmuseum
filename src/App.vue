@@ -12,7 +12,7 @@ export default {
 </script>
 
 <template>
-  <router-view/>
+  <Header></Header>
 </template>
 
 <style lang="scss">

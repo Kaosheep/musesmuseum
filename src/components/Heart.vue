@@ -19,7 +19,7 @@ export default {
   }
 }
 </script>
-<style scoped>
+<style scoped lang="scss">
 .heart{
     cursor: pointer;
     position: absolute;
@@ -31,13 +31,13 @@ export default {
 .heart path{
     fill : #FFF;
     stroke-width: 10;
-    stroke: #AD0000;
+    stroke: $mpink;
     stroke-dasharray: 440;
     stroke-dashoffset: 0;
 }
 
 .heart.active path{
-    fill : #AD0000;
+    fill : $mpink;
     animation: none;
 }
 @keyframes heart {
@@ -53,7 +53,7 @@ export default {
     }
     100%{
         stroke-dashoffset: 880;
-        fill: #FFAEAE;
+        fill: $mpink;
     }
 }
 @media screen and (hover:hover) {

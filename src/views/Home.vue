@@ -1,5 +1,4 @@
 <template>
-<Header></Header>
   <main class="home_main">
     <div class="home_slider">
       <div class="wrap">
@@ -59,6 +58,7 @@
                 <img src="" alt="" />
               </div>
             </div>
+            <PinkButton/>
           </div>
         </section>
         <section>
@@ -234,10 +234,14 @@
 <script>
 import Header from "/src/components/Header.vue";
 import ThinArrow from "/src/components/ThinArrow.vue";
+import Searchbarclick from "/src/components/Searchbarclick.vue";
+import PinkButton from "/src/components/PinkButton.vue";
 export default {
   components: {
     ThinArrow,
-    Header 
+    Header ,
+    Searchbarclick,
+    PinkButton
   },
   data() {
     return {
