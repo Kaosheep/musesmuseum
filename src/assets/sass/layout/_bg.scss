@@ -1,0 +1,14 @@
+.bg {
+    background: linear-gradient(
+      90deg,
+      #fff 15%,
+      $mgreen 15%,
+      $mgreen calc(15% + 3px),
+      #fff calc(15% + 3px)
+    );
+    top: 0;
+    left: 0;
+    height: 50%;
+    width: 100%;
+    z-index: -999;
+  }

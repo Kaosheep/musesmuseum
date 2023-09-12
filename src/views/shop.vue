@@ -56,7 +56,7 @@
         查無商品
       </div>
       <div class="item" v-for="(item, index) in produstdisplay" :key="index" v-else>
-        <router-link to="/productpage">
+        <router-link to="/ProductPage">
           <div class="image">
             <img
               :src="
@@ -76,7 +76,6 @@
     </div>
   </div>
   <div class="page"><Page :total="30" class="pagination" size="small" /></div>
-  <Footer></Footer>
 </template>
 
 <script>
@@ -184,6 +183,9 @@ export default {
       this.produstdisplay = this.productlist;
     },
   },
+  mounted(){
+    document.body.style.height = `auto`;
+  }
 };
 </script>
 <style scoped lang="scss">

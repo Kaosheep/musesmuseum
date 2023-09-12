@@ -6,9 +6,16 @@ $fontSizes: (
   "h3": 20px,
   "span": 16px,
   "div": 16px,
+  "p" : 16px,
+  "li" : 16px,
+  "a":16px
 ); // map
 @each $k,$v in $fontSizes{
     #{$k}{
         font-size: $v;
+        color: $mblue;
     }
+}
+a:hover{
+  color: $mgreen;
 }

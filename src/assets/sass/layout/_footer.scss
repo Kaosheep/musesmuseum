@@ -1,65 +1,154 @@
-footer{
+footer {
     width: 100%;
-    background-color: #333;
-    .footer{
-        padding: 1.5rem 3rem;
+    position: relative;
+    .cube {
+        z-index: 5;
+        position: absolute;
+        width: 50px;
+        height:50px;
         display: flex;
-        max-width: 1100px;
-        margin: auto;
-        justify-content: space-between;
-        flex-wrap: wrap;
-        .col{
-            h3{
-                color: #fff;
+        justify-content: center;
+        align-items: center;
+        perspective: 1500px;
+        left: 17%;
+        top: -40px;
+        .flat {
+            width: 50px;
+            height: 50px;
+            position: relative;
+            transform-style: preserve-3d;
+            transform: translateZ(-200px) rotateX(-30deg) rotateY(0deg) rotateZ(45deg);
+
+            >* {
+                width: 100%;
+                height: 100%;
+                text-align: center;
+                border: 1px solid #fff;
+                position: absolute;
+                top: 0;
+                left: 0;
+                backface-visibility: hidden;
             }
-            table tr td{
-                color: #fff;
-                line-height: 1.5;
+            .front {
+                transform: rotate(0deg) translateZ(25px);
+                background-color: $mgreen;
             }
-            label{
-                color: #fff;
-                line-height: 1.5;
+            .top {
+                transform: rotateX(90deg) translateZ(25px);
+                background-color: $mpink;
             }
-        }
-        .col:last-child{
-            align-self: center;
-        }
-        .send{
-            max-width: 180px;
-            width: 100%;
-            margin: auto;
-            font-size: 0;
-            input{
-                width: 80%;
-                border:none;
-                border-right:none ;
-                font-size: 1rem;
-                vertical-align:bottom;
-                height: 35px;
-                padding: 5px 10px;
-                &:focus{
-                    outline: none;
-                }
-                
-            }
-            button{
-                width:20%;
-                border: none;
-                font-size: 1rem;
-                background-color: #fff;
-                border:none;
-                border-left:none ;
-                line-height: 33.5px;
-                height: 35px;
-                cursor: pointer;
-                #footer_send path{
-                    fill: red;
-                }
+            .right {
+                transform: rotateY(-90deg) translateZ(25px);
+                background-color: $myellow;
             }
             
         }
-        .social{
-            span{
+        &:nth-child(2){
+            left: 23%;
+            .front {
+                background-color: $mblue;
+            }
+        }
+    }
+
+    .footer {
+        background-color: $mgreen;
+        position: relative;
+        height: 50px;
+        clip-path: polygon(15% 0%, 100% 0, 100% 100%, 0% 100%);
+        padding: 1.5rem 3rem;
+        width: 100%;
+        margin-left: auto;
+
+        &::after {
+            content: "";
+            width: calc(100% - 6px);
+            height: calc(100% - 6px);
+            clip-path: polygon(15% 0%, 100% 0, 100% 100%, 0.5% 100%);
+            position: absolute;
+            background-color: $myellow;
+            top: 3px;
+            right: 3px;
+            z-index: -99;
+        }
+
+        .colwrap {
+            width: 80%;
+            margin-left: auto;
+            .row {
+                display: flex;
+                max-width: 1100px;
+                justify-content: space-between;
+                flex-wrap: wrap;
+                
+
+                .col {
+                    h3 {
+                        color: $mblue;
+                    }
+
+                    table tr td {
+                        color: $mblue;
+                        line-height: 1.5;
+                    }
+
+                    label {
+                        color: $mblue;
+                        line-height: 1.5;
+                    }
+                }
+
+                .col:last-child {
+                    align-self: center;
+                }
+
+                .send {
+                    max-width: 180px;
+                    width: 100%;
+                    margin: auto;
+                    font-size: 0;
+
+                    input {
+                        width: 80%;
+                        border: 1px solid $mblue;
+                        border-radius: 4px;
+                        font-size: 1rem;
+                        vertical-align: bottom;
+                        height: 35px;
+                        padding: 5px 10px;
+
+                        &:focus {
+                            outline: none;
+                        }
+
+                    }
+
+                    button {
+                        margin-left: 1%;
+                        width: 19%;
+                        border: none;
+                        font-size: 1rem;
+                        border-radius: 4px;
+                        background-color: $mblue;
+                        border: 1px solid $mblue;
+                        line-height: 33.5px;
+                        height: 35px;
+                        cursor: pointer;
+
+                        #footer_send path {
+                            fill: #fff;
+                        }
+                    }
+                }
+            }
+
+
+
+
+        }
+
+        .social {
+            span {
                 margin-right: 0.5rem;
                 text-align: center;
                 display: inline-block;
@@ -68,12 +157,19 @@ footer{
                 background-color: #fff;
                 border-radius: 50%;
                 padding: 10px 0;
-                .sicon{
+
+                .sicon {
                     font-size: 20px;
                 }
+
+                #social_envelope path,
+                #social_facebook path,
+                #social_youtub path {
+                    fill: $mblue;
+                }
             }
-            
+
         }
     }
-    
+
 }

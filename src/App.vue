@@ -2,21 +2,17 @@
 // @ is an alias to /src
 import Header from '/src/components/Header.vue'
 import Footer from '/src/components/Footer.vue'
-import searchbar from '/src/components/searchbar.vue'
-import searchbarclick from '/src/components/searchbarclick.vue'
 export default {
   name: 'HomeView',
   components: {
     Header,
     Footer,
-    searchbar,
-    searchbarclick
   }
 }
 </script>
 
 <template>
-  <Header></Header>
+  <router-view/>
 </template>
 
 <style lang="scss">

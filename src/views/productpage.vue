@@ -1,5 +1,5 @@
 <template>
-  <main>
+  <main class="productpage_main">
     <div class="shop_Breadcrumbs">
       <a href="">首頁/ </a>
       <a href="">商城 /</a>
@@ -7,7 +7,7 @@
     </div>
     <div class="product_info">
       <div class="product_image">
-        <heart/>
+        <Heart></Heart>
         <img src="../assets/image/productimage/productimage0.png" alt="" />
       </div>
       <div class="product_txt">
@@ -44,19 +44,18 @@
       <h2>設計概念</h2>
       <p>十字寶球造型香水的設計概是融合了神秘、歷史和奇幻元素的香水，具有以下的特點和理念：<br />神秘與歷史：這款香水的設計靈感來自神秘的歷史事件或傳說中的寶藏。試圖喚起使用者對古老文明、探險和冒險的感覺。<br />裝置設計：香水瓶的外觀以十字寶球為靈感，採用獨特的球形或交叉圖案設計。這個設計元素可能代表著寶藏、交匯、神秘和歷史的符號。<br />香調的神秘性：香水的香調採用了特殊的手法，以創造一種深沉、複雜的香氣。</p>
     </div>
-    <productwrap/>
+    <ProductWrap></ProductWrap>
   </main>
-  <Footer></Footer>
 </template>
 
 <script>
-import heart from '/src/components/heart.vue'
-import productwrap from '/src/components/productwrap.vue'
+import Heart from '/src/components/Heart.vue'
+import ProductWrap from '/src/components/ProductWrap.vue'
 import Footer from '/src/components/Footer.vue'
 export default {
   components: {
-    heart,
-    productwrap,
+    Heart,
+    ProductWrap,
     Footer,
   },
   data() {
@@ -77,6 +76,9 @@ export default {
       this.navTitle.splice(index, 1);
     },
   },
+  mounted(){
+    document.body.style.height = `auto`;
+  }
 };
 </script>
 
@@ -85,7 +87,7 @@ export default {
 h1{
   font-size: 20px;
 }
-main{
+.productpage_main{
   max-width: 1000px;
   margin: 0 auto;
 }

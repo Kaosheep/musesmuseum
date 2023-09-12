@@ -12,11 +12,13 @@
 @import "component/grid";
 @import "component/searchbar";
 @import "component/searchbarclick";
+@import "component/dotbg";
 //layout
 @import "layout/header";
 @import "layout/footer";
+@import "layout/bg";
 //page
-@import "page/index.scss";
+@import "page/home.scss";
 @import "page/about.scss";
 @import "page/shop.scss";
 @import "page/productpage.scss";

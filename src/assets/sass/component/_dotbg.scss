@@ -1,0 +1,6 @@
+.dotbg {
+    background: radial-gradient(circle, $mgreen 10%, transparent 11%), radial-gradient(circle at bottom left, $mgreen 5%, transparent 6%), radial-gradient(circle at bottom right, $mgreen 5%, transparent 6%), radial-gradient(circle at top left, $mgreen 5%, transparent 6%), radial-gradient(circle at top right, $mgreen 5%, transparent 6%);
+    background-size: 2.5em 2.5em;
+    background-color: #ffffff;
+    opacity: 1
+}

@@ -73,4 +73,4 @@ products.addEventListener("scroll",infinitescroll);
 productwrap.addEventListener("mouseenter",()=>clearTimeout(timeoutid));
 productwrap.addEventListener("mouseleave",autoplay);
 // }
-export default shopslide;
+export {};
