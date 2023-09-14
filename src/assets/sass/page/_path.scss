@@ -1,0 +1,72 @@
+.path_main{
+
+    .path_container {
+        max-width: 800px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: auto;
+        flex-wrap: wrap;
+        padding-top: 10%;
+        h1{
+            width: 100%;
+            text-align: center;
+        }
+        .front,.back {
+            cursor: pointer;
+            height: 300px;
+            width: 300px;
+            border-radius: 50%;
+            background-color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            span{
+                font-size: 2rem;
+            }
+        }
+        .front{
+
+            &::after{
+                content: "";
+                position: absolute;
+                background-color: $mpink;
+                width: 100%;
+                height: 100%;
+                top: 0;
+                left: 0;
+                border-radius: 50%;
+                opacity: .3;
+                transform-origin:53% 53%;
+                animation: pathrotate 3s 0s linear infinite;
+                pointer-events: none;
+            }
+        }
+        .back{
+
+            &::after{
+                content: "";
+                position: absolute;
+                background-color: $mblue;
+                width: 100%;
+                height: 100%;
+                top: 0;
+                left: 0;
+                border-radius: 50%;
+                opacity: .3;
+                transform-origin:47% 47%;
+                animation: pathrotate 3s -0.1s linear infinite;
+                pointer-events: none;
+            }
+        }
+        @keyframes pathrotate {
+            0%{
+                transform: rotate(0deg);
+            }
+            100%{
+                transform: rotate(360deg);
+            }
+        }
+    }
+}

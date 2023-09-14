@@ -1,22 +1,19 @@
 <template>
-    
+    <Header></Header>
 </template>
    
 <script>
+import Header from '/src/components/Header.vue'
 export default {
-    data(){
-       return {
-       
-       }
-    },
-    methods:{
-    
-    }
+  name: 'Index',
+  components: {
+    Header,
+  }
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-@import "../assets/sass/style.scss";
+@import "@/assets/sass/style.scss";
 
 </style>
