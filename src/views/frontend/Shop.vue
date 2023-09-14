@@ -7,13 +7,13 @@
     class="shop_carousel"
   >
     <CarouselItem class="banner">
-      <img src="@/assets/image/productimage/banner/AntoinettePoudre.png" />
+      <img src="../assets/image/productimage/banner/AntoinettePoudre.png" />
     </CarouselItem>
     <CarouselItem class="banner">
-      <img src="@/assets/image/productimage/banner/Venuslipstick.png" />
+      <img src="../assets/image/productimage/banner/Venuslipstick.png" />
     </CarouselItem>
     <CarouselItem class="banner">
-      <img src="@/assets/image/productimage/banner/Louise-Maske.png" />
+      <img src="../assets/image/productimage/banner/Louise-Maske.png" />
     </CarouselItem>
   </Carousel>
   <h1>熱銷商品</h1>
@@ -60,7 +60,7 @@
           <div class="image">
             <img
               :src="
-                require('@/assets/image/productimage/productimage' +
+                require('../assets/image/productimage/productimage' +
                   index +
                   '.png')
               "
@@ -189,7 +189,7 @@ export default {
 };
 </script>
 <style scoped lang="scss">
-@import "@/assets/sass/style.scss";
+@import "../assets/sass/style.scss";
 
 h1 {
   text-align: center;

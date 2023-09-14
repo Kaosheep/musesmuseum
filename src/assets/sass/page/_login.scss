@@ -1,30 +1,43 @@
-#lightBox {
-    border: 1px solid #666;
-    box-shadow: 0px 0px 3px #666;
-    position:relative;
-    margin: auto;
-    max-width: 500px;
-    padding: 0rem 0 2.5rem;
+.pinkBtn{
+    display: block;
+}
+
+form  {
+    max-width: 1000px;
+    max-height: 560px;
+    border: 3px solid #009CA8;
+    border-radius: 8px;
+    // position:relative;
+    margin: 130px auto;
+    padding: 50px 100px;
     text-align: center;
     .memlogin_title {
         padding-bottom: 8px;
     }
     .memlogin_acti #memId {
-        width: 208px;
-        height: 25px;
-        margin: 10px 0px;
+       
     }
-    .memlogin_acti #memPsw {
-        width: 208px;
-        height: 25px;
-        margin: 10px 0px;
+    .memlogin_acti{
+        max-width: 160px;
+        margin: auto;
     }
-
-    .memlogin_submit #btnLogin {
-        width: 208px;
-        height: 40px;
-        color: #ad0000;
-        margin-top: 1rem;
+    .memlogin_acti label{
+        color: #009CA8;
+        text-align: start;
+        display:block;
+    }
+   //不見了~~
+.backGroundCardBlue{
+    @include dotbg();
+   font-size: 500px;
+    width: 1000px;
+    height: 560px;
+    background-color: #009CA8;
+    border-radius: 8px;
+    left:300px;
+    top:150px;
+    position: absolute;
+    z-index: 3;
     }
 }
 
