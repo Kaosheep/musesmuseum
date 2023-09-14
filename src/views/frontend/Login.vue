@@ -5,7 +5,7 @@
       <div class="backGroundCard">
         
       </div>
-      <div class="backGroundCardbBlue">123</div>
+      <div class="backGroundCardbBlue">123456789000000</div>
       <!-- <div id="lightBox" style="display: block"> -->
         <form class="memlogin_group">
           <button class="pinkBtn">
