@@ -30,6 +30,11 @@ const routes = [
     path: '/ProductPage',
     name: 'ProductPage',
     component: () => import('../views/ProductPage.vue')
+  },
+  {
+    path: '/VisitInformation',
+    name: 'VisitInformation',
+    component: () => import('../views/VisitInformation.vue')
   }
 
 ]
@@ -37,7 +42,7 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes: routes
-  
+
 })
 
 export default router
