@@ -6,24 +6,12 @@
           <h1>登入</h1>
           <p>立即登入，隨時收到獨家優惠</p>
           <div class="memlogin_acti">
-            <input
-              type="text"
-              id="memId"
-              name="memId"
-              placeholder="&nbsp&#128231; 電子郵件 或 手機號碼"
-              v-model="memId"
-              required
-            />
+            <input type="text" id="memId" name="memId" placeholder="&nbsp&#128231; 電子郵件 或 手機號碼" v-model="memId"
+              required />
           </div>
           <div class="memlogin_acti">
-            <input
-              type="password"
-              id="memPsw"
-              name="memPsw"
-              placeholder="&nbsp&#x1F513;&nbsp 密碼"
-              v-model="memPsw"
-              required
-            />
+            <input type="password" id="memPsw" name="memPsw" placeholder="&nbsp&#x1F513;&nbsp 密碼" v-model="memPsw"
+              required />
           </div>
 
           <div class="resetPsw_OTP">
@@ -34,12 +22,7 @@
           </div>
 
           <div class="memlogin_submit">
-            <input
-              type="button"
-              id="btnLogin"
-              value="登入"
-              @click="checkLoginData"
-            />
+            <input type="button" id="btnLogin" value="登入" @click="checkLoginData" />
             <!-- <input type="button" id="btnCancel" value="取消"> -->
           </div>
         </form>
@@ -69,13 +52,14 @@ export default {
       }
     },
   },
-  mounted(){
+  mounted() {
     document.body.style.height = `auto`;
   }
 };
 </script>
 <style scoped lang="scss">
-@import "../assets/sass/style.scss";
+@import "@/assets/sass/style.scss";
+
 main {
   min-height: calc(100vh - 130px);
   margin: auto;

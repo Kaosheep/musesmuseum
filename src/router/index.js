@@ -1,9 +1,10 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
 const routes = [
-  {path: '/',
-  name: 'Path',
-  component: () => import('../views/Path.vue'),
+  {
+    path: '/',
+    name: 'Path',
+    component: () => import('../views/Path.vue'),
   },
   {
     path: '/Home',
@@ -57,37 +58,9 @@ const routes = [
         name: 'ManageLogin',
         component: () => import('../views/backend/ManageLogin.vue'),
       },
-      
+
     ]
   },
-<<<<<<< HEAD
-  {
-    path: '/Login',
-    name: 'Login',
-    component: () => import('../views/Login.vue')
-  },
-  {
-    path: '/Shop',
-    name: 'Shop',
-    component: () => import('../views/Shop.vue')
-  },
-  {
-    path: '/Faq',
-    name: 'Faq',
-    component: () => import('../views/Faq.vue')
-  },
-  {
-    path: '/ProductPage',
-    name: 'ProductPage',
-    component: () => import('../views/ProductPage.vue')
-  },
-  {
-    path: '/VisitInformation',
-    name: 'VisitInformation',
-    component: () => import('../views/VisitInformation.vue')
-  }
-=======
->>>>>>> ea8c22b18a598e8c76d75b5b5b61448f0e1f7bc9
 
 ]
 

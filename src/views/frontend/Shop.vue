@@ -1,19 +1,13 @@
 <template>
-  <Carousel
-    v-model="value"
-    autoplay
-    loop
-    autoplay-speed="4000"
-    class="shop_carousel"
-  >
+  <Carousel v-model="value" autoplay loop autoplay-speed="4000" class="shop_carousel">
     <CarouselItem class="banner">
-      <img src="../assets/image/productimage/banner/AntoinettePoudre.png" />
+      <img src="@/assets/image/productimage/banner/AntoinettePoudre.png" />
     </CarouselItem>
     <CarouselItem class="banner">
-      <img src="../assets/image/productimage/banner/Venuslipstick.png" />
+      <img src="@/assets/image/productimage/banner/Venuslipstick.png" />
     </CarouselItem>
     <CarouselItem class="banner">
-      <img src="../assets/image/productimage/banner/Louise-Maske.png" />
+      <img src="@/assets/image/productimage/banner/Louise-Maske.png" />
     </CarouselItem>
   </Carousel>
   <h1>熱銷商品</h1>
@@ -36,12 +30,7 @@
       <div class="search">
         <label for="search">搜尋商品</label>
         <form action="">
-          <input
-            type="text"
-            placeholder="輸入商品..."
-            id="search"
-            v-model="searchinput"
-          />
+          <input type="text" placeholder="輸入商品..." id="search" v-model="searchinput" />
           <button type="button" @click="searchClick">
             <i class="fa-solid fa-magnifying-glass"></i>
           </button>
@@ -58,14 +47,10 @@
       <div class="item" v-for="(item, index) in produstdisplay" :key="index" v-else>
         <router-link to="/ProductPage">
           <div class="image">
-            <img
-              :src="
-                require('../assets/image/productimage/productimage' +
-                  index +
-                  '.png')
-              "
-              :alt="item.title"
-            />
+            <img :src="require('@/assets/image/productimage/productimage' +
+              index +
+              '.png')
+              " :alt="item.title" />
           </div>
           <div class="info">
             <span>{{ item.title }}</span>
@@ -75,7 +60,9 @@
       </div>
     </div>
   </div>
-  <div class="page"><Page :total="30" class="pagination" size="small" /></div>
+  <div class="page">
+    <Page :total="30" class="pagination" size="small" />
+  </div>
 </template>
 
 <script>
@@ -183,13 +170,13 @@ export default {
       this.produstdisplay = this.productlist;
     },
   },
-  mounted(){
+  mounted() {
     document.body.style.height = `auto`;
   }
 };
 </script>
 <style scoped lang="scss">
-@import "../assets/sass/style.scss";
+@import "@/assets/sass/style.scss";
 
 h1 {
   text-align: center;
