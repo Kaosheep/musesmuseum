@@ -1,11 +1,5 @@
 <template>
-  <Carousel
-    v-model="value"
-    autoplay
-    loop
-    autoplay-speed="4000"
-    class="shop_carousel"
-  >
+  <Carousel v-model="value" autoplay loop autoplay-speed="4000" class="shop_carousel">
     <CarouselItem class="banner">
       <img src="@/assets/image/productimage/banner/AntoinettePoudre.png" />
     </CarouselItem>
@@ -87,7 +81,9 @@
       </div>
     </div>
   </div>
-  <div class="page"><Page :total="30" class="pagination" size="small" /></div>
+  <div class="page">
+    <Page :total="30" class="pagination" size="small" />
+  </div>
 </template>
 
 <script>
@@ -235,14 +231,13 @@ export default {
       this.produstdisplay = this.productlist;
     },
   },
-  mounted(){
+  mounted() {
     document.body.style.height = `auto`;
   }
 };
 </script>
 <style scoped lang="scss">
   @import "@/assets/sass/style.scss";
-
   h1 {
     text-align: center;
     font-size: 32px;

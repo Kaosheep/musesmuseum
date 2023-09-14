@@ -5,35 +5,39 @@
     top: 50%;
     transform: translate(-50%, -50%);
 }
+
 //雙層框實線
 //左下left buttom
-@mixin shadowlb($color:$mgreen){
+@mixin shadowlb($color: $mgreen) {
     border: 3px solid $color;
     box-shadow: -8px 8px 0px $color;
     background-color: $color;
 }
+
 //右下
-@mixin shadowrb($color:$mgreen){
+@mixin shadowrb($color: $mgreen) {
     border: 3px solid $color;
     box-shadow: 8px 8px 0px $color;
     background-color: $color;
 }
+
 //雙層框虛線
 //左下left buttom
-@mixin shadowlb($color:$mgreen){
+@mixin shadowlb($color: $mgreen) {
     border: 3px dashed $color;
     box-shadow: -8px 8px 0px $color;
     background-color: $color;
 }
+
 //右下
-@mixin shadowrb($color:$mgreen){
+@mixin shadowrb($color: $mgreen) {
     border: 3px dashed $color;
     box-shadow: 8px 8px 0px $color;
     background-color: $color;
 }
 
 //綠色點點背景
-@mixin dotbg($color:$mgreen){
+@mixin dotbg($color: $mgreen) {
     background: radial-gradient(circle, $color 10%, transparent 11%), radial-gradient(circle at bottom left, $color 5%, transparent 6%), radial-gradient(circle at bottom right, $color 5%, transparent 6%), radial-gradient(circle at top left, $color 5%, transparent 6%), radial-gradient(circle at top right, $color 5%, transparent 6%);
     background-size: 2.5em 2.5em;
     background-color: #ffffff;
