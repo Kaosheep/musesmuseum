@@ -1,0 +1,93 @@
+.visitInformation-main {
+    width: 83.33%;
+    margin: auto;
+    position: relative;
+}
+
+
+
+.visitInformation-title {
+    width: 216px;
+    height: 90px;
+    background-color: $mgreen;
+    position: relative;
+    border-radius: 5px;
+    box-shadow: 10px 10px 0px $myellow;
+}
+
+
+.visitInformation-main h1 {
+    margin-top: 0;
+    width: 65%;
+    text-align: left;
+    color: #fff;
+    position: absolute;
+    @include tc();
+}
+
+.visitInformation-ulBorder {
+    border: 1px solid $mgreen;
+    margin-top: 30px;
+    padding: 20px;
+    width: 998px;
+    position: relative;
+    background-color: #fff;
+    z-index: 3;
+
+}
+
+.visitInformation-greenbg {
+    @include dotbg();
+    position: absolute;
+    left: 30px;
+    bottom: -30px;
+    border: 1px solid $mgreen;
+}
+
+
+
+
+.visitInformation-main ul {
+    position: relative;
+    width: 90%;
+
+}
+
+.visitInformation-main li {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+
+.visitInformation-icon {
+    width: 10%;
+    text-align: center;
+}
+
+.visitInformation-nav+.visitInformation-nav {
+    margin-top: 10px;
+}
+
+.visitInformation-icon img {
+    vertical-align: top;
+}
+
+.visitInformation-txt {
+    width: calc(90% - 20.67px);
+    border-bottom: 2px solid $mgreen;
+
+}
+
+.visitInformation-nav::after {
+    content: "";
+    width: 20.67px;
+    height: 20.67px;
+    border-radius: 50%;
+    background-color: $myellow;
+    position: absolute;
+    right: 0;
+    transform: translateY(50%);
+
+}

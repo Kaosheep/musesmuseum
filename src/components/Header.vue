@@ -5,8 +5,8 @@
         <div :class="['bar', { 'active': isClick}]"></div>
       </div>
       <div :class="['logo', { 'togglec':isClick }]">
-        <router-link to="/"
-          ><img src="../assets/image/logo/logo.png" alt=""
+        <router-link to="/Home"
+          ><img src="@/assets/image/logo/logo.png" alt=""
         /></router-link>
       </div>
     </div>
@@ -22,8 +22,8 @@
   </header>
   <nav>
     <div class="logo">
-      <router-link to="/" @click="closemenu"
-        ><img src="../assets/image/logo/logo.png" alt=""
+      <router-link to="/Home" @click="closemenu"
+        ><img src="@/assets/image/logo/logo.png" alt=""
       /></router-link>
     </div>
     <div class="login">

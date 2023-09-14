@@ -3,10 +3,9 @@
     <div class="home_slider">
       <div class="wrap">
         <section>
-          
           <div class="spotlight">
             <div class="maxlogo">
-              <img src="../assets/image/home/buliding0.jpg" alt="" />
+              <img src="@/assets/image/home/buliding0.jpg" alt="" />
               <div class="light yellow"></div>
               <div class="light green"></div>
               <div class="light pink"></div>
@@ -58,8 +57,8 @@
                 <img src="" alt="" />
               </div>
             </div>
-            <PinkButton/>
           </div>
+          
         </section>
         <section>
           <div class="sectiontitle">
@@ -92,7 +91,9 @@
               </RouterLink>
             </div>
             <div class="more">
-              <a href=""><ThinArrow :text="'更多消息'"></ThinArrow></a>
+              <router-link to="/News"
+                ><ThinArrow :text="'更多消息'"></ThinArrow
+              ></router-link>
             </div>
           </div>
         </section>
@@ -105,7 +106,7 @@
               <div class="txtframe"><h1>VISIT</h1></div>
               <div class="card">
                 <a href="">
-                  <img src="..\assets\image\home\buliding0.jpg" alt="" />
+                  <img src="@\assets\image\home\buliding0.jpg" alt="" />
                   <div class="txt">
                     <h2>參觀與服務<br />Visit</h2>
                     <button type="button">
@@ -122,7 +123,7 @@
               <div class="txtframe"><h1>SPACE</h1></div>
               <div class="card">
                 <a href="">
-                  <img src="..\assets\image\home\buliding0.jpg" alt="" />
+                  <img src="@\assets\image\home\buliding0.jpg" alt="" />
                   <div class="txt">
                     <h2>園區導覽<br />Space</h2>
                     <button type="button">
@@ -163,11 +164,7 @@
             <h2>商品<br />Shop</h2>
           </div>
           <div class="shop">
-            <img
-              class="homelight"
-              src="../assets/image/home/light.png"
-              alt=""
-            />
+            <img class="homelight" src="@/assets/image/home/light.png" alt="" />
             <div class="block">
               <div class="shopframe">
                 <div class="productrow">
@@ -180,7 +177,7 @@
                     <router-link to="/">
                       <img
                         :src="
-                          require('../assets/image/productimage/productimage' +
+                          require('@/assets/image/productimage/productimage' +
                             num +
                             '.png')
                         "
@@ -192,7 +189,7 @@
                 </div>
               </div>
             </div>
-            <img class="homecart" src="../assets/image/home/cart.png" alt="" />
+            <img class="homecart" src="@/assets/image/home/cart.png" alt="" />
             <div class="floor">
               <ThinArrow :text="'更多商品'"></ThinArrow>
             </div>
@@ -203,24 +200,24 @@
             <div class="slide">
               <p class="max" id="max1">MUSESMUSEUM</p>
               <div class="homenav">
-              <ul>
-                <li v-for="(li, index) in homenav" :key="index">
-                  <RouterLink :to="li.link"
-                    >{{ li.title }}<br />{{ li.entitle }}</RouterLink
-                  >
-                </li>
-              </ul>
-              <div class="footerinfo">
-                
+                <ul>
+                  <li v-for="(li, index) in homenav" :key="index">
+                    <RouterLink :to="li.link"
+                      >{{ li.title }}<br />{{ li.entitle }}</RouterLink
+                    >
+                  </li>
+                </ul>
+                <div class="footerinfo"></div>
+                <div class="social"></div>
               </div>
-              <div class="social">
-
-              </div>
-            </div>
             </div>
             <div class="box">
               <div class="slide">
                 <p class="max" id="max2">MUSESMUSEUM</p>
+                
+                <div class="totop" @click="totop">
+                  <font-awesome-icon :icon="['fas', 'arrow-left']" id="totop" />
+                </div>
               </div>
             </div>
           </div>
@@ -228,7 +225,20 @@
       </div>
     </div>
   </main>
-  <footer></footer>
+  <footer>
+    <div class="anchor">
+      <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <span></span>
+      </ul>
+    </div>
+  </footer>
 </template>
 
 <script>
@@ -236,12 +246,14 @@ import Header from "/src/components/Header.vue";
 import ThinArrow from "/src/components/ThinArrow.vue";
 import Searchbarclick from "/src/components/Searchbarclick.vue";
 import PinkButton from "/src/components/PinkButton.vue";
+import cube from "/src/components/cube.vue";
 export default {
   components: {
     ThinArrow,
-    Header ,
+    Header,
     Searchbarclick,
-    PinkButton
+    PinkButton,
+    cube
   },
   data() {
     return {
@@ -293,7 +305,11 @@ export default {
       ],
     };
   },
-  methods: {},
+  methods: {
+    totop() {
+      window.scrollTo(0, 0);
+    },
+  },
   mounted() {
     let sections = [...document.querySelectorAll("section")];
     let slider = document.querySelector(".home_slider");
@@ -306,7 +322,6 @@ export default {
     let txtframe = document.querySelectorAll(".txtframe");
     let max1 = document.getElementById("max1");
     let max2 = document.getElementById("max2");
-    console.log(max2.getBoundingClientRect().bottom)
 
     const images = [...document.querySelectorAll(".gallery img")];
     const angle = 360 / images.length;
@@ -350,9 +365,19 @@ export default {
       txtframe.forEach((txtframe) => {
         setTransform(txtframe, `translateX(${intersectionratio * 20}px)`);
       });
-      // console.log(max2.offsetParent)
-      setTransform(max1, `translateX(${-window.innerWidth + (current/5)}px) translateY(${window.innerWidth*0.0785}px)`);
-      setTransform(max2, `translateX(${-window.innerWidth + (current/5) }px) translateY(${(-window.innerWidth + (current/5))*0.2588190451}px) skewY(15deg)`);
+
+      setTransform(
+        max1,
+        `translateX(${-window.innerWidth + current / 5}px) translateY(${
+          window.innerWidth * 0.0785
+        }px)`
+      );
+      setTransform(
+        max2,
+        `translateX(${-window.innerWidth + current / 5}px) translateY(${
+          (-window.innerWidth + current / 5) * 0.2588190451
+        }px) skewY(15deg)`
+      );
     }
 
     animate();
@@ -396,14 +421,40 @@ export default {
         });
       });
     }
-
     resize();
+
+    let anchorli = [...document.querySelectorAll(".anchor ul li")];
+    anchorli.forEach((li, i) => {
+      li.addEventListener("click", (e) => {
+        window.scrollTo(
+          0,
+          (Math.ceil(parseInt(document.body.style.height)) / 6.5) * i
+        );
+      });
+    });
+    window.addEventListener("scroll", () => {
+      sliderWidth = slider.getBoundingClientRect().width;
+      sectionWidth = sliderWidth / sections.length;
+      let anchorline = document.querySelector(".anchor ul span");
+      let srcolloff =
+        document.documentElement.scrollTop /
+        (parseInt(document.body.style.height) - sectionWidth);
+      anchorline.style.backgroundImage = `linear-gradient(90deg,#EB5F86 ${
+        srcolloff * 100
+      }%,#009CA8 ${srcolloff * 100}%)`;
+      // anchorli.forEach((li, i) => {
+      //   for(j=0;j<i;j++){
+          
+      //   }
+      // })
+
+    });
   },
 };
 </script>
 
 <style scoped lang="scss">
-@import "../assets/sass/style.scss";
+@import "@/assets/sass/style.scss";
 body {
   overscroll-behavior: none;
 }
@@ -414,7 +465,7 @@ footer {
   position: fixed;
   width: 100%;
   height: 80px;
+
   background-image: linear-gradient(180deg, $myellow 60%, #fff 100%);
 }
-
 </style>
