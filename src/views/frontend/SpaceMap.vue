@@ -6,9 +6,9 @@
             <h2>Attractions</h2>
         </div>
         <div class="map">
-            <img src="../assets/image/space/map.png" alt="">
+            <img src="@/assets/image/space/map.png" alt="">
             <div class="map_pf">
-                <img src="../assets/image/space/mapPF.png" alt="">
+                <img src="@/assets/image/space/mapPF.png" alt="">
             </div>
         </div>
     </main>

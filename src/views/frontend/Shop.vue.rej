@@ -1,9 +1,0 @@
-diff a/src/views/frontend/Shop.vue b/src/views/frontend/Shop.vue	(rejected hunks)
-@@ -189,6 +189,7 @@
- };
- </script>
- <style scoped lang="scss">
-+@import "@/assets/sass/style.scss";
- 
- h1 {
-   text-align: center;

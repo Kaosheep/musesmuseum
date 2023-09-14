@@ -45,7 +45,27 @@ const routes = [
         path: '/News',
         name: 'News',
         component: () => import('../views/frontend/News.vue')
-      }
+      },
+      {
+        path: '/Space',
+        name: 'Space',
+        component: () => import('../views/frontend/Space.vue')
+      },
+      {
+        path: '/SpaceMap',
+        name: 'SpaceMap',
+        component: () => import('../views/frontend/SpaceMap.vue')
+      },
+      {
+        path: '/Tick',
+        name: 'Tick',
+        component: () => import('../views/frontend/Tick.vue')
+      },
+      {
+        path: '/VisitInformation',
+        name: 'VisitInformation',
+        component: () => import('../views/frontend/VisitInformation.vue')
+      },
     ]
   },
   {

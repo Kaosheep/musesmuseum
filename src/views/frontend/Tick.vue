@@ -20,7 +20,7 @@
 <div class="white">-售出票券無法線上退票，請至現場退票。</div>
 <div class="white">-兒童票、優待票請現場出示身分證。</div>
 <div class="white">-愛心票請現場出示身心障礙證明（手冊）。</div>
-<img class=shormatrix src="../assets/image/tick/shortmatrix.png"/>
+<img class=shormatrix src="@/assets/image/tick/shortmatrix.png"/>
 
 </div>
 <div class="buytick">
@@ -60,16 +60,16 @@
   </div>
   <button class="submit">送出</button>
  </div> 
- <img class=squarematrix src="../assets/image/tick/squarematrix.png">
- <img class=bigmatrix src="../assets/image/tick/bigmatrix.png">
+ <img class=squarematrix src="@/assets/image/tick/squarematrix.png">
+ <img class=bigmatrix src="@/assets/image/tick/bigmatrix.png">
  
 </div>
-<img class=cube src="../assets/image/tick/cube1.png"/>
-<img class=cube2 src="../assets/image/tick/cube2.png"/>
+<img class=cube src="@/assets/image/tick/cube1.png"/>
+<img class=cube2 src="@/assets/image/tick/cube2.png"/>
 <div class="frame"></div>
 
 
-<img class=longmatrix src="../assets/image/tick/longmatrix.png"/>
+<img class=longmatrix src="@/assets/image/tick/longmatrix.png"/>
 
 
 

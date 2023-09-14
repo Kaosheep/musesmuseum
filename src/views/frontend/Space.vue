@@ -7,7 +7,7 @@
         </div>
         <div class="space_card">
             <div class="space_img">
-                <img src="../assets/image/space/spaceTheShop.png" alt="">
+                <img src="@/assets/image/space/spaceTheShop.png" alt="">
             </div>
             <div class="space_info">
                 <div class="space_text">
@@ -28,7 +28,7 @@
                 <div class="shadow_re"></div>
             </div>
             <div class="space_img">
-                <img src="../assets/image/space/spaceTheShop.png" alt="">
+                <img src="@/assets/image/space/spaceTheShop.png" alt="">
             </div>
         </div>
     </main>
