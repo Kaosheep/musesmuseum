@@ -54,7 +54,7 @@ export default {
   data() {
     return {
       navlist: [
-        { title: "購票專區", link: "/" },
+        { title: "購票專區", link: "/Tick" },
         {
           title: "展覽資訊",
           link: "/Exb",
