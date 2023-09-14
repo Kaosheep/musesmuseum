@@ -69,7 +69,12 @@ const routes = [
       {
         path: '/SpecialExhibition',
         name: 'SpecialExhibition',
-        component: () => import('../views/frontend/SpecialExhibition.vue'),
+        component: () => import('../views/frontend/SpecialExhibition.vue')
+      },
+      {
+        path: '/VisitTraffic',
+        name: 'VisitTraffic',
+        component: () => import('../views/frontend/VisitTraffic.vue')
       },
     ]
   },

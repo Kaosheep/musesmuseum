@@ -1,9 +1,9 @@
 .visitInformation-main {
     width: 83.33%;
-    margin: auto;
     position: relative;
+    margin-left: 10%;
+    margin-top: 1%;
 }
-
 
 
 .visitInformation-title {
@@ -29,19 +29,23 @@
     border: 1px solid $mgreen;
     margin-top: 30px;
     padding: 20px;
-    width: 998px;
+    width: 75%;
     position: relative;
     background-color: #fff;
-    z-index: 3;
-
+    border-radius: 5px;
 }
 
-.visitInformation-greenbg {
+.visitInformation-ulBorder::after {
     @include dotbg();
+    content: "";
+    width: 100%;
+    height: 100%;
     position: absolute;
     left: 30px;
     bottom: -30px;
     border: 1px solid $mgreen;
+    border-radius: 5px;
+    z-index: -99;
 }
 
 
