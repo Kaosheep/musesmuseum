@@ -18,28 +18,17 @@
       <a href="">熱銷商品</a>
     </div>
     <div class="search">
-      <img src="@/assets/image/productimage/heart.png" alt="">
-      <img src="@/assets/image/productimage/shoppingcar.png" alt="">
-      <label for="search"></label>
-      <form action="">
-        <input
-          type="text"
-          placeholder="Search"
-          id="search"
-          v-model="searchinput"
-        />
-        <button type="button" @click="searchClick">
-          <i class="fa-solid fa-magnifying-glass"></i>
-        </button>
-        <!-- <button type="button" @click="reset">
-          <font-awesome-icon :icon="['fas', 'rotate-right']" />
-        </button> -->
-      </form>
+      <Searchbar/>
+      <Heart/>
+      <font-awesome-icon :icon="['fas', 'cart-shopping']" />
     </div>
   </div>
   <div class="shop_wrap">
     <aside class="shop_aside">
-      <router-link :to="a.link" v-for="a in aside">{{ a.name }}
+      <router-link :to="a.link" v-for="a in aside">
+        <button class="pinkBtn">
+          {{ a.name }}
+        </button>
       </router-link>
       <select class="shop_filter">
         <option>
@@ -71,9 +60,9 @@
           </div>
           <div class="info">
             <span>
-              <img src="@/assets/image/productimage/heart.png" alt="">
+              <Heart></Heart>
               {{item.title}}
-              <img src="@/assets/image/productimage/shoppingcar.png" alt="">
+              <font-awesome-icon :icon="['fas', 'cart-shopping']" id="car" />
             </span>
             <span>${{item.price}}</span>
           </div>
@@ -88,18 +77,22 @@
 
 <script>
 import Footer from "/src/components/Footer.vue";
+import Searchbar from "/src/components/Searchbar.vue";
+import Heart from "/src/components/Heart.vue";
 
 export default {
   components: {
-    Footer,
+    Footer, 
+    Searchbar,
+    Heart,
   },
   data() {
     return {
       value: 0,
       aside: [
         { link: "", name: "熱銷商品" },
-        { link: "", name: "MUSES系列" },
-        { link: "", name: "聯名彩妝" },
+        { link: "", name: "聯名系列" },
+        { link: "", name: "時尚彩妝" },
         { link: "", name: "典藏畫作" },
         { link: "", name: "生活用品" },
         { link: "", name: "精選書籍" },

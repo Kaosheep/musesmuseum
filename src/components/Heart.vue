@@ -22,7 +22,7 @@ export default {
 <style scoped lang="scss">
 .heart{
     cursor: pointer;
-    position: absolute;
+    // position: absolute;
     right: 5px;
     top: 5px;
     width: 40px;
