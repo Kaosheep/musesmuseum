@@ -25,7 +25,7 @@
                 <div class="space_text">
                     <p>提供各式咖啡、茶和點心，讓您盡情品味。室內舒適的座椅，希望您在寧靜的氛圍中放鬆身心，另外提供免費的Wi-Fi，讓您可以隨時與親朋好友分享您在博物館的體驗。</p>
                 </div>
-                <div class="shadow_re"></div>
+                <div class="shadow"></div>
             </div>
             <div class="space_img">
                 <img src="@/assets/image/space/spaceTheShop.png" alt="">
@@ -121,7 +121,7 @@ export default {
     }
 
     .space_info {
-        margin: 0 30px;
+        margin: 0 90px;
         position: relative;
 
         .space_img {
@@ -148,7 +148,7 @@ export default {
             border: 2px dashed $mblue;
         }
 
-        .shadow_re{
+        .shadow{
             z-index: 1;
             margin-top: 15px;
             margin-left: -15px;
