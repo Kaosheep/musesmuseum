@@ -5,8 +5,8 @@
         <div :class="['bar', { 'active': isClick}]"></div>
       </div>
       <div :class="['logo', { 'togglec':isClick }]">
-        <router-link to="/"
-          ><img src="../assets/image/logo/logo.png" alt=""
+        <router-link to="/Home"
+          ><img src="@/assets/image/logo/logo.png" alt=""
         /></router-link>
       </div>
     </div>
@@ -22,8 +22,8 @@
   </header>
   <nav>
     <div class="logo">
-      <router-link to="/" @click="closemenu"
-        ><img src="../assets/image/logo/logo.png" alt=""
+      <router-link to="/Home" @click="closemenu"
+        ><img src="@/assets/image/logo/logo.png" alt=""
       /></router-link>
     </div>
     <div class="login">
@@ -54,7 +54,7 @@ export default {
   data() {
     return {
       navlist: [
-        { title: "購票專區", link: "/" },
+        { title: "購票專區", link: "/Tick" },
         {
           title: "展覽資訊",
           link: "/Exb",
@@ -75,8 +75,8 @@ export default {
           title: "園區導覽",
           link: "/Space",
           sublist: [
-            { subtitle: "館內地圖", sublink: "/" },
-            { subtitle: "周邊景點", sublink: "/" },
+            { subtitle: "館內地圖", sublink: "/Space" },
+            { subtitle: "周邊景點", sublink: "/SpaceMap" },
             { subtitle: "附屬空間", sublink: "/" },
           ],
         },
@@ -84,7 +84,7 @@ export default {
           title: "參觀與服務",
           link: "/Visit",
           sublist: [
-            { subtitle: "注意事項", sublink: "/" },
+            { subtitle: "注意事項", sublink: "/VisitInformation" },
             { subtitle: "常見問題", sublink: "/faq" },
             { subtitle: "交通資訊", sublink: "/" },
           ],
@@ -126,5 +126,5 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-@import "../assets/sass/style.scss";
+@import "@/assets/sass/style.scss";
 </style>

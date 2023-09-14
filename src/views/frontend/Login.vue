@@ -1,7 +1,7 @@
 <template>
-  <div class="bg">
+   <div class="bg">
     <main>
-     
+           
       <div class="backGroundCard">
         
       </div>
@@ -65,7 +65,7 @@
             <!-- <input type="button" id="btnCancel" value="取消"> -->
           </div>
         </form>
-      <!-- </div> -->
+              <!-- </div> -->
     </main>
   </div>
 </template>
@@ -91,13 +91,13 @@ export default {
       }
     },
   },
-  mounted(){
+  mounted() {
     document.body.style.height = `auto`;
   }
 };
 </script>
 <style scoped lang="scss">
-@import "../assets/sass/style.scss";
+@import "@/assets/sass/style.scss";
 // main {
 //   min-height: calc(100vh - 130px);
 //   margin: auto;

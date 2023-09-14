@@ -1,19 +1,13 @@
 <template>
-  <Carousel
-    v-model="value"
-    autoplay
-    loop
-    autoplay-speed="4000"
-    class="shop_carousel"
-  >
+  <Carousel v-model="value" autoplay loop autoplay-speed="4000" class="shop_carousel">
     <CarouselItem class="banner">
-      <img src="../assets/image/productimage/banner/AntoinettePoudre.png" />
+      <img src="@/assets/image/productimage/banner/AntoinettePoudre.png" />
     </CarouselItem>
     <CarouselItem class="banner">
-      <img src="../assets/image/productimage/banner/Venuslipstick.png" />
+      <img src="@/assets/image/productimage/banner/Venuslipstick.png" />
     </CarouselItem>
     <CarouselItem class="banner">
-      <img src="../assets/image/productimage/banner/Louise-Maske.png" />
+      <img src="@/assets/image/productimage/banner/Louise-Maske.png" />
     </CarouselItem>
   </Carousel>
   <h1>熱銷商品</h1>
@@ -24,8 +18,8 @@
       <a href="">熱銷商品</a>
     </div>
     <div class="search">
-      <img src="../assets/image/productimage/heart.png" alt="">
-      <img src="../assets/image/productimage/shoppingcar.png" alt="">
+      <img src="@/assets/image/productimage/heart.png" alt="">
+      <img src="@/assets/image/productimage/shoppingcar.png" alt="">
       <label for="search"></label>
       <form action="">
         <input
@@ -68,7 +62,7 @@
           <div class="image">
             <img
               :src="
-                require('../assets/image/productimage/productimage' +
+                require('@/assets/image/productimage/productimage' +
                   index +
                   '.png')
               "
@@ -77,9 +71,9 @@
           </div>
           <div class="info">
             <span>
-              <img src="../assets/image/productimage/heart.png" alt="">
+              <img src="@/assets/image/productimage/heart.png" alt="">
               {{item.title}}
-              <img src="../assets/image/productimage/shoppingcar.png" alt="">
+              <img src="@/assets/image/productimage/shoppingcar.png" alt="">
             </span>
             <span>${{item.price}}</span>
           </div>
@@ -87,7 +81,9 @@
       </div>
     </div>
   </div>
-  <div class="page"><Page :total="30" class="pagination" size="small" /></div>
+  <div class="page">
+    <Page :total="30" class="pagination" size="small" />
+  </div>
 </template>
 
 <script>
@@ -235,14 +231,13 @@ export default {
       this.produstdisplay = this.productlist;
     },
   },
-  mounted(){
+  mounted() {
     document.body.style.height = `auto`;
   }
 };
 </script>
 <style scoped lang="scss">
-  @import "../assets/sass/style.scss";
-
+  @import "@/assets/sass/style.scss";
   h1 {
     text-align: center;
     font-size: 32px;

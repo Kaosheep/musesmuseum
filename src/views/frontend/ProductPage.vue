@@ -8,7 +8,7 @@
     <div class="product_info">
       <div class="product_image">
         <Heart></Heart>
-        <img src="../assets/image/productimage/productimage0.png" alt="" />
+        <img src="@/assets/image/productimage/productimage0.png" alt="" />
       </div>
       <div class="product_txt">
           <h1>MUSE筆記本</h1>
@@ -83,7 +83,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../assets/sass/style.scss";
+@import "@/assets/sass/style.scss";
 h1{
   font-size: 20px;
 }
