@@ -18,9 +18,9 @@
       <a href="">熱銷商品</a>
     </div>
     <div class="search">
-      <Searchbar/>
       <Heart/>
-      <font-awesome-icon :icon="['fas', 'cart-shopping']" />
+      <font-awesome-icon :icon="['fas', 'cart-shopping']" id="car1"/>
+      <Searchbar/>
     </div>
   </div>
   <div class="shop_wrap">
@@ -100,7 +100,7 @@ export default {
       ],
       produstdisplay: [
         {
-          title: "MUSE筆記本",
+          title: "MUSES筆記本",
           price: 350,
         },
         {
@@ -116,11 +116,11 @@ export default {
           price: 3500,
         },
         {
-          title: "謬思聯名素T",
+          title: "MUSES素T",
           price: 400,
         },
         {
-          title: "???面膜",
+          title: "路易絲面膜",
           price: 300,
         },
         {
@@ -132,15 +132,15 @@ export default {
           price: 499,
         },
         {
-          title: "謬思博物館迷你模型",
+          title: "MUSES博物館迷你模型",
           price: 1499,
         },
         {
-          title: "謬思聯名咖啡杯盤組",
+          title: "MUSES咖啡杯盤組",
           price: 699,
         },
         {
-          title: "謬思聯名帆布袋",
+          title: "MUSES帆布袋",
           price: 450,
         },
         {
@@ -154,7 +154,7 @@ export default {
       ],
       productlist: [
       {
-          title: "MUSE筆記本",
+          title: "MUSES筆記本",
           price: 350,
         },
         {
@@ -170,11 +170,11 @@ export default {
           price: 3500,
         },
         {
-          title: "謬思聯名素T",
+          title: "MUSES素T",
           price: 400,
         },
         {
-          title: "???面膜",
+          title: "路易絲面膜",
           price: 300,
         },
         {
@@ -186,15 +186,15 @@ export default {
           price: 499,
         },
         {
-          title: "謬思博物館迷你模型",
+          title: "MUSES博物館迷你模型",
           price: 1499,
         },
         {
-          title: "謬思聯名咖啡杯盤組",
+          title: "MUSES咖啡杯盤組",
           price: 699,
         },
         {
-          title: "謬思聯名帆布袋",
+          title: "MUSES帆布袋",
           price: 450,
         },
         {

@@ -25,7 +25,7 @@ export default {
     // position: absolute;
     right: 5px;
     top: 5px;
-    width: 40px;
+    width: 30px;
     z-index: 3;
 }
 .heart path{

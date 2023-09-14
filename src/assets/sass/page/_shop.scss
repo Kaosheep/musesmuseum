@@ -1,6 +1,6 @@
 .shop_carousel{
     margin: 3% auto;
-    width: 65%;
+    width: 55%;
     height: 400px;
     overflow: hidden;
     border-radius: 8px;
@@ -16,7 +16,7 @@
 }
 .shop_wrap{
     margin: 2rem auto 0px;
-    max-width: 1200px;
+    max-width: 1050px;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -49,10 +49,9 @@
         grid-template-rows:repeat(3,1fr) ;
         justify-items: center;
         align-items:flex-end;
-        gap: 50px;
+        gap: 25px;
     }
     .item{
-        // position: relative; ??????
         width: 100%;
         text-align: center;
         img{
@@ -70,12 +69,9 @@
                 #car path{
                     fill: $mgreen;
                 }
-
-                font-awesome-icon, Heart{
-                    width: 25px;
+                #car{
                     height: 25px;
                 }
-
             }
             span:first-child{
                 color: $mblue;
@@ -92,7 +88,7 @@
 }
 .shop_block{
     margin: auto;
-    max-width: 1200px;
+    max-width: 1050px;
     display: flex;
     justify-content: space-between;
     .shop_Breadcrumbs{
@@ -100,9 +96,20 @@
             color: $mblue;
         }
     }
+    .search{
+        display: flex;
+        align-items: center;
+        #car1 path{
+            fill: $mgreen;
+        }
+        #car1{
+            height: 25px;
+            margin: 0px 15px;
+        }
+    }
 }
 .page{
-    max-width: 1200px;
+    max-width: 1050px;
     margin: auto;
    .pagination{
         width:80%;
