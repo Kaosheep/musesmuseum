@@ -1,16 +1,66 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
 const routes = [
+  {path: '/',
+  name: 'Path',
+  component: () => import('../views/Path.vue'),
+  },
   {
-    path: '/',
+    path: '/Home',
     name: 'Home',
-    component: () => import('../views/Home.vue')
+    component: () => import('../views/frontend/Home.vue'),
+    children: [
+      {
+        path: '',
+        name: 'Index',
+        component: () => import('../views/frontend/Index.vue'),
+      },
+      {
+        path: '/About',
+        name: 'About',
+        component: () => import('../views/frontend/About.vue')
+      },
+      {
+        path: '/Login',
+        name: 'Login',
+        component: () => import('../views/frontend/Login.vue')
+      },
+      {
+        path: '/Shop',
+        name: 'Shop',
+        component: () => import('../views/frontend/Shop.vue')
+      },
+      {
+        path: '/Faq',
+        name: 'Faq',
+        component: () => import('../views/frontend/Faq.vue')
+      },
+      {
+        path: '/ProductPage',
+        name: 'ProductPage',
+        component: () => import('../views/frontend/ProductPage.vue')
+      },
+      {
+        path: '/News',
+        name: 'News',
+        component: () => import('../views/frontend/News.vue')
+      }
+    ]
   },
   {
-    path: '/About',
-    name: 'About',
-    component: () => import('../views/About.vue')
+    path: '/Admin',
+    name: 'Admin',
+    component: () => import('../views/backend/Admin.vue'),
+    children: [
+      {
+        path: '',
+        name: 'ManageLogin',
+        component: () => import('../views/backend/ManageLogin.vue'),
+      },
+      
+    ]
   },
+<<<<<<< HEAD
   {
     path: '/Login',
     name: 'Login',
@@ -36,6 +86,8 @@ const routes = [
     name: 'VisitInformation',
     component: () => import('../views/VisitInformation.vue')
   }
+=======
+>>>>>>> ea8c22b18a598e8c76d75b5b5b61448f0e1f7bc9
 
 ]
 

@@ -1,18 +1,15 @@
 <script>
 // @ is an alias to /src
-import Header from '/src/components/Header.vue'
-import Footer from '/src/components/Footer.vue'
 export default {
-  name: 'HomeView',
+  name: 'Path',
   components: {
-    Header,
-    Footer,
+
   }
 }
 </script>
 
 <template>
-  <router-view/>
+<RouterView></RouterView>
 </template>
 
 <style lang="scss">

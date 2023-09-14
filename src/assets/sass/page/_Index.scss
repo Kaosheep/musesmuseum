@@ -27,7 +27,7 @@
                 position: relative;
 
                 .spotlight {
-                    width: 75%;
+                    width: 70%;
                     padding-left: 80px;
                     display: flex;
                     justify-content: center;
@@ -35,11 +35,15 @@
 
                     .maxlogo {
                         position: relative;
-
+                        width: 75%;
+                        text-align: center;
                         img {
+                            object-fit: cover;
+                            width: 100%;
                             max-width: 600px;
                             -webkit-mask: url('@/assets/image/home/mmodel.png') no-repeat center center;
                             mask: url('@/assets/image/home/mmodel.png') no-repeat center center;
+                            mask-size: contain;
                         }
 
                         .light {
@@ -177,9 +181,19 @@
                     display: inline-block;
                     position: relative;
                     height: 100%;
-                    width: 200px;
+                    min-width: 200px;
                     background-color: $myellow;
                     z-index: 3;
+                    &::after {
+                        content: "";
+                        position: absolute;
+                        border-top: 100px solid transparent;
+                        border-right: 140px solid transparent;
+                        border-bottom: 100px solid $myellow;
+                        left: 100%;
+                        bottom: 0px;
+                        z-index: 2;
+                    }
                 }
 
                 .sectiontitle {
@@ -191,7 +205,7 @@
                         display: flex;
                         flex-direction: column;
                         animation: txtgo 10s linear infinite;
-                        margin: 0 2rem;
+                        min-width:100px ;
                     }
 
                     .txtskew {
@@ -231,16 +245,6 @@
                     }
                 }
 
-                #newtitle::after {
-                    content: "";
-                    position: absolute;
-                    border-top: 100px solid transparent;
-                    border-right: 140px solid transparent;
-                    border-bottom: 100px solid $myellow;
-                    right: 0;
-                    bottom: 0px;
-                    z-index: 2;
-                }
 
                 .new {
                     .container {
@@ -425,7 +429,6 @@
                                     text-align: center;
                                     transition: 0.1s;
                                     pointer-events: none;
-                                    z-index: -1;
 
                                     #visitarrow,
                                     #spacearrow {
@@ -534,24 +537,29 @@
                 .footersilde {
                     background-color: $myellow;
                     width: 100%;
+
                     .slide {
                         width: 100%;
                         height: 100%;
                         position: relative;
-                        #max1{
+
+                        #max1 {
                             color: $mpink;
                         }
-                        #max2{
+
+                        #max2 {
                             transform-origin: left;
                         }
-                        .homenav{
+
+                        .homenav {
                             padding-left: 32%;
                             position: absolute;
                             left: 0;
                             bottom: 0;
                         }
                     }
-                    .box{
+
+                    .box {
                         width: 30%;
                         height: 100%;
                         position: absolute;
@@ -559,6 +567,7 @@
                         left: 0;
                         overflow: hidden;
                         background-color: #fff;
+
                         &::after {
                             content: "";
                             position: absolute;
@@ -570,6 +579,33 @@
                             background-color: $myellow;
                             clip-path: polygon(0 0, 0% 100%, 100% 100%);
                         }
+
+                        .totop {
+                            position: absolute;
+                            right: 1rem;
+                            bottom: 1.5rem;
+                            background-color: $mpink;
+                            width: 70px;
+                            height: 70px;
+                            border: none;
+                            border-radius: 50%;
+                            text-align: center;
+                            transition: 0.1s;
+                            transform: skewY(15deg);
+                            padding: 15px;
+                            cursor: pointer;
+                        }
+
+                        #totop {
+                            height: 40px;
+                            pointer-events: none;
+
+                            path {
+                                fill: #fff;
+                            }
+
+
+                        }
                     }
                 }
 
@@ -577,11 +613,32 @@
         }
     }
 
+}
 
-
-
-
-
-
+.anchor {
+    padding: 2rem 0 0 90px;
+    ul {
+        display: flex;
+        width: fit-content;
+        position: relative;
+        li {
+            width: 10px;
+            height: 10px;
+            background-color: $mgreen;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        li+li{
+            margin-left: 1rem;
+        }
+        span{
+            position: absolute;
+            width: 156px;
+            height: 2px;
+            background:linear-gradient(90deg,$mpink 0%,$mgreen 0%);
+            @include tc();
+            transition:.3s
+        }
+    }
 
 }
