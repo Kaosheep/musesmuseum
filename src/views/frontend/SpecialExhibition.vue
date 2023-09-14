@@ -1,8 +1,8 @@
 <template>
-    <input type="search" id="searchBtn" name="searchBtn" placeholder="Search &#128269;">
+    <Searchbar></Searchbar>
     <div class="exhi_section">
         <div class="exhi_img">
-            <img src="./specialExhibition_image/sing_in_spring.jpg" alt="">
+            <img src="@/assets/image/exhibition/specialexhibition/spec_ex0.jpg" alt="">
         </div>
         <div class="exhi_desc">
             <span>2024/02/01-03/30</span>
@@ -12,3 +12,11 @@
         <div class="exhi_desc_bgc"></div>
     </div>
 </template>
+<script>
+import Searchbar from '/src/components/Searchbar.vue'
+export default {
+    components: {
+        Searchbar,
+    }
+}
+</script>

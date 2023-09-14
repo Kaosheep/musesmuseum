@@ -1,6 +1,6 @@
 .searchbar_search{
     margin: auto;
-    // width: 100%;
+    width: 100%;
     width: 250px;
     font-size: 0;
     box-shadow: 3px 3px 0px $myellow;
@@ -14,7 +14,7 @@
         border-radius: 4px 0 0 4px;
         font-size: 1rem;
         vertical-align:bottom;
-        // height: 35px;
+        height: 35px;
         padding: 5px 10px;
         &:focus{
             outline: none;
@@ -27,8 +27,8 @@
         font-size: 1rem;
         background-color: #fff;
         border-left:none ;
-        // line-height: 33.5px;
-        // height: 35px;
+        line-height: 33.5px;
+        height: 35px;
         cursor: pointer;
         #searchbar_searchglass path{
             fill: $mblue;
