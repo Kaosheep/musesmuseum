@@ -71,6 +71,11 @@ const routes = [
         name: 'SpecialExhibition',
         component: () => import('../views/frontend/SpecialExhibition.vue'),
       },
+      {
+        path: '/MemberSignUp',
+        name: 'MemberSignUp',
+        component: () => import('../views/frontend/MemberSignUp.vue'),
+      },
     ]
   },
   {

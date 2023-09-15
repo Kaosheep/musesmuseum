@@ -2,42 +2,29 @@
     display: block;
 }
 
-.memlogin_group {
+.memloginGroup {
     max-width: 1000px;
     max-height: 560px;
     border: 3px solid #009CA8;
     border-radius: 8px;
-    // position:relative;
+    position:relative;
     margin: 130px auto;
     padding: 50px 100px;
     text-align: center;
+    background-color: #fff;
     .memlogin_title {
         padding-bottom: 8px;
     }
-    .memlogin_acti #memId {
+    .memloginActi #memId {
        
     }
-    .memlogin_acti{
+    .memloginActi{
         max-width: 160px;
-        margin: auto;
+        margin:auto;
     }
-    .memlogin_acti label{
+    .memloginActi label{
         color: #009CA8;
         text-align: start;
         display:block;
     }
-   //不見了~~
-
 }
-
-   .backGroundCardbBlue{
-    @include dotbg();
-   font-size: 500px;
-    width: 1000px;
-    height: 560px;
-    background-color: #009CA8;
-    border-radius: 8px;
-    left:300px;
-    top:500px;
-    // position: absolute;
-    }
