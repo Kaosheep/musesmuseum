@@ -18,9 +18,8 @@
       <a href="">熱銷商品</a>
     </div>
     <div class="search">
-      <Heart/>
-      <font-awesome-icon :icon="['fas', 'cart-shopping']" id="car1"/>
-      <Searchbar/>
+      <Searchbar @click="searchClick"/>
+      <Searchbarclick/>
     </div>
   </div>
   <div class="shop_wrap">
@@ -58,15 +57,22 @@
               :alt="item.title"
             />
           </div>
-          <div class="info">
-            <span>
-              <Heart></Heart>
-              {{item.title}}
-              <font-awesome-icon :icon="['fas', 'cart-shopping']" id="car" />
-            </span>
-            <span>${{item.price}}</span>
-          </div>
         </router-link>
+        <div class="info">
+          <span>
+            <Heart>
+            </Heart>
+            <router-link to="/ProductPage">
+              {{item.title}}
+            </router-link>
+            <font-awesome-icon :icon="['fas', 'cart-shopping']" id="car" />
+          </span>
+          <router-link to="/ProductPage">
+            <span>
+              ${{item.price}}
+            </span>
+          </router-link>   
+        </div>
       </div>
     </div>
   </div>
@@ -79,12 +85,14 @@
 import Footer from "/src/components/Footer.vue";
 import Searchbar from "/src/components/Searchbar.vue";
 import Heart from "/src/components/Heart.vue";
+import Searchbarclick from "/src/components/Searchbarclick.vue";
 
 export default {
   components: {
     Footer, 
     Searchbar,
     Heart,
+    Searchbarclick,
   },
   data() {
     return {
@@ -153,7 +161,7 @@ export default {
         },
       ],
       productlist: [
-      {
+        {
           title: "MUSES筆記本",
           price: 350,
         },

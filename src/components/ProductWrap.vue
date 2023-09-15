@@ -1,5 +1,8 @@
 <template>
   <div class="productwrap">
+    <button id="left">
+      <i class="fa-solid fa-arrow-left"></i>
+    </button>
     <div class="product">
       <div class="object" v-for="(object, index) in productlist" :key="index">
         <a href=""
@@ -13,12 +16,11 @@
           />
           <p>{{ object.title }}</p></a
         >
-      </div>
+      </div>      
     </div>
-    <div class="btn">
-      <button id="left"><i class="fa-solid fa-arrow-left"></i></button>
-      <button id="right"><i class="fa-solid fa-arrow-right"></i></button>
-    </div>
+    <button id="right">
+      <i class="fa-solid fa-arrow-right"></i>
+    </button>
   </div>
 </template>
 
@@ -59,13 +61,14 @@ export default {
 .productwrap {
   width: 100%;
   padding: 30px;
+  display: flex;
 }
-.product {
+.product{
   max-width: 1100px;
   margin: auto;
   height: 220px;
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
@@ -86,19 +89,11 @@ export default {
   cursor: grab;
   user-select: none;
 }
-.productwrap .btn {
-  display: block;
-  margin: auto;
-  text-align: center;
-}
-.productwrap .btn button {
-  margin: 0px 50px;
-}
-.object {
+.object{
   scroll-snap-align: start;
   width: 220px;
   height: 220px;
-  padding: 30px;
+  padding: 25px;
   background-image: radial-gradient(circle, white 60%, rgba(0, 0, 0, 0) 60%);
   text-align: center;
   flex-shrink: 0;
@@ -107,9 +102,16 @@ export default {
   width: 90%;
   height: 90%;
   object-fit: contain;
+  vertical-align: bottom;
 }
 .object h4 {
   padding-top: 40px;
   word-spacing: 2px;
+}
+button{
+  padding: 5px 0.5rem;
+  margin-bottom: 1rem;
+  border-radius: 4px;
+  border: none;
 }
 </style>
