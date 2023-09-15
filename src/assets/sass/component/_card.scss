@@ -5,9 +5,21 @@
     width: 1000px;
     height: 560px;
     // background-color: #009CA8;
-    border: 3px solid #009CA8;
+    border: 3px solid $mgreen;
     border-radius: 8px;
     left:460px;
     top:150px;
     position: absolute;
+    }
+
+.backGroundCard{
+    max-width: 1000px;
+    max-height: 560px;
+    padding: 50px 100px;
+    margin: 130px auto;
+    text-align: center;
+    border-radius: 8px;
+    border: 3px solid $mgreen;
+    background-color: #fff;
+    position:relative;
     }
