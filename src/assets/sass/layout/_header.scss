@@ -7,19 +7,36 @@ header {
     text-align: center;
     padding: 1.25rem 5px 4rem;
     height: 100vh;
-    // border: 2px solid $mgreen;
-    background: linear-gradient(0deg,#fff 0% ,$myellow 5% );
+    background: linear-gradient(0deg, #fff 0%, $myellow 5%);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+
+    @include t() {
+        width: 100%;
+        height: 60px;
+        flex-direction: row;
+        padding: 0.5rem 1rem;
+        background: linear-gradient(0deg, #fff 0%, $myellow 0%);
+    }
+
     .menuconsole {
+        @include t() {
+            display: flex;
+            align-items: center;
+        }
 
         .logo {
             display: inline-block;
             width: 100%;
             margin-top: 1rem;
             position: relative;
-            &::after{
+
+            @include t() {
+                margin: 0 0 0 1rem;
+            }
+
+            &::after {
                 content: "";
                 position: absolute;
                 width: 50px;
@@ -29,22 +46,29 @@ header {
                 background-color: #fff;
                 z-index: -50;
                 transition: .3s;
-                
+
             }
+
             img {
                 width: 90%;
                 object-fit: contain;
                 transition: .3s;
+
+                @include t() {
+                    width: 50px;
+                    height: 100%;
+                }
             }
         }
 
-        .logo.togglec{
-            &::after{
+        .logo.togglec {
+            &::after {
                 width: 0px;
                 height: 0px;
             }
+
             img {
-                width: 0%;
+                width: 0px;
             }
         }
 
@@ -72,7 +96,7 @@ header {
                 background-color: $mpink;
                 position: relative;
                 transition: .3s;
-                
+
                 &::after {
                     content: "";
                     position: absolute;
@@ -140,7 +164,12 @@ header {
             padding: 10px 0;
             position: relative;
             cursor: pointer;
-            &::after{
+
+            @include t() {
+                margin-top: 0;
+            }
+
+            &::after {
                 content: "";
                 position: absolute;
                 width: 0px;
@@ -148,20 +177,23 @@ header {
                 border-radius: 50%;
                 left: 50%;
                 top: 50%;
-                transform: translate(-50%,-50%);
+                transform: translate(-50%, -50%);
                 background-color: #fff;
                 z-index: -50;
                 transition: .3s;
-                
+
             }
-            &:hover::after{
+
+            &:hover::after {
                 width: 40px;
                 height: 40px;
             }
+
             .sicon {
                 font-size: 20px;
             }
 
+            #social_cart path,
             #social_envelope path,
             #social_facebook path,
             #social_youtub path {
@@ -184,14 +216,30 @@ nav {
     text-align: center;
     transition: .3s;
     background-color: #fff;
+    padding-left: 70px;
+    @include t() {
+        padding-top: 7%;
+        padding-left: 0px;
+    }
 
     .logo {
         margin-top: 40px;
+
+        img {
+            @include t() {
+                width: 30%;
+            }
+        }
+
     }
 
     .login {
         margin: 3rem 0;
         font-size: 1.25rem;
+
+        @include t() {
+            margin: 1rem 0;
+        }
     }
 
     .menu {
@@ -200,10 +248,15 @@ nav {
             max-width: 900px;
             display: flex;
             justify-content: space-evenly;
-
+            flex-wrap: wrap;
+            @include t(){
+                justify-content: flex-start;
+            }
             >li {
                 line-height: 2;
-
+                @include t(){
+                    width: 25%;
+                }
                 ul {
                     li {
                         line-height: 2;
