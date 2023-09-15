@@ -1,225 +1,135 @@
-.shop_carousel{
-    margin: 3% auto;
-    width: 55%;    
-    height: 40vh;
-    overflow: hidden;
-    border-radius: 8px;
-    aspect-ratio: 4/3;
-    .banner{
-        width: 100%;
-        height: 40vh;
-        img{
-            width:100%;
-            object-fit: cover;
-        }
-    }
-}
-.shop_wrap{
-    margin: 2rem auto 0px;
-    max-width: 1050px;
-    width: 55%;
+.shopping_stepbar{
+    width: 85%;
+    margin: 2rem auto;
     display: flex;
-    justify-content: space-between;
-    .shop_aside{
-        width: 10%;
-        .pinkBtn:first-child{
-            margin-top: 0;
-        }
-        .pinkBtn{
-            margin: 10px 0px;
-        }
-        .shop_filter{
-            margin: 5px 0px;
-            min-width: 100px;
-            width: 100%;
-            display: block;
-            padding: 10px 0px;
-            border: 1px solid $mgreen;
-            border-radius: 8px;
-            color: $mblue;
-            option{
-                color: $mblue;
-                text-align: center;
-            }
+    align-items: center;
+    justify-content: center;
+    div{
+        border-radius: 50%;
+        border: 3px solid $myellow;
+        margin: 1%;
+        width: 100px;
+        height: 100px; 
+        display: flex;
+        justify-content: center;
+        align-items: center;    
+        p{
+            text-align: center;
+            color: $mgreen;
         }
     }
-    .shop_container{
-        width: 75%;
-        display: grid;
-        grid-template-columns:repeat(3,1fr) ;
-        grid-template-rows:repeat(3,1fr) ;
-        justify-items: center;
-        align-items:flex-end;
-        gap: 25px;
-    }
-    .item{
-        width: 100%;
-        text-align: center;
-        img{
-            height: 240px;
-            max-width: 240px;
-            border-radius: 8px;
-            object-fit: cover;
+    svg{
+        margin: 1%;   
+        width: 20%;
+        height: 19px;
+        fill: none;
+        line{
+            stroke: $myellow;
+            stroke-width: 3px;
         }
     }
-    .info{
-        margin: 10px 0px;
-        text-align: center;
-        span{
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            color: $mblue;
-            #car path{
-                fill: $mgreen;
-            }
-            #car{
-                height: 25px;
-                color: $mgreen;
-            }
-        }
-        a{
-            span{
-                text-align: center;
-                color: $mpink;
-                display: block;
-            }
-        }
-    } 
 }
-.shop_block{
+.shopping_mbl{
+    width: 70%;
+    max-width: 700px;
     margin: auto;
-    max-width: 1050px;
-    width: 55%;
-    display: flex;
-    justify-content: space-between;
-    .shop_Breadcrumbs{
-        a{
-            color: $mblue;
+    .shopping_mbi{
+        display: flex;
+        border: 3px solid $mgreen;
+        border-radius: 8px;
+        padding: 2rem 1rem;
+        align-items: center;
+        position: relative;
+        input{
+            width: 25px;
+            height: 25px;
+            margin: 0rem 1rem;
         }
+        .shopping_productimage{
+            width: 25%;
+            margin: 0rem 1rem;
+            img{
+                width: 100%;
+                border-radius: 8px;
+                vertical-align: bottom;
+            }
+        }
+        .shopping_productinfo{            
+            margin: 0rem 2rem;
+            p{
+                font-size: 1.5rem;                
+                padding: 1rem 0;
+            }
+            .shopping_function{
+                padding: 1rem 0;
+                .shopping_productcount{
+                    button{
+                        width: 1.5rem;
+                        height: 1.5rem;
+                        font-size: 1rem;
+                        line-height:  1.5rem;
+                        border-radius: 4px;
+                        border: none;
+                        background-color: $mgreen;
+                        vertical-align: middle;
+                    }
+                    #minus path {
+                        fill: #fff
+                    }
+                    #plus path {
+                        fill: #fff
+                    }
+                    span{
+                        display: inline-block;
+                        text-align: center;
+                        width: 65px;
+                        font-size: 1.5rem;
+                        color: $mpink;
+                    }
+                }
+            }
+        }
+        .shopping_itemdelete{
+            width: 20px;
+            height: 20px;
+            border: none;
+            background: white;
+            color: $mblue;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+        
     }
-    .searchbarclick_search{
-        display: none;
-    }
-
-}
-.page{
-    max-width: 1050px;
-    margin: auto;
-   .pagination{
-        width:80%;
-        margin-left: auto;
-        padding: 1rem 0 4rem;
-        text-align: center;
-    } 
 }
 @include t() {
     @media screen and (max-width:$t) {
-        .shop_carousel{
-            margin: 3% auto;
+        .shopping_stepbar{
             width: 100%;
-        }
-        .shop_block{
-            width: 75%;
-            flex-direction: column;
-            .search{
-                margin-right: auto;
-                .searchbar_search{
-                    display: none;
-                }
-                .searchbarclick_search{
-                    display: block;
-                }
+            div{
+                width: 85px;
+                height: 85px;
             }
-        }
-        .shop_wrap{
-            flex-direction: column;
-            width: 100%;
-            .shop_aside{
-                margin: auto;
-                width: 75%;
-                display: flex;
-                flex-wrap: wrap;
-                a{
-                    margin: 0.5rem;
-                    .pinkBtn{
-                        margin: 0px;
-                    }
-                }
-                .shop_filter{
-                    width: 25%;
-                    margin: 0.5rem;
-                }
+            svg{
+                margin: 0.5%;   
+                width: 15%;
+                height: 19px;
             }
-            .shop_container{
-                margin: 1rem auto;
-                grid-template-columns:repeat(2,1fr);
-                grid-template-rows:repeat(2,1fr);
-                gap: 8%;
-            }
-            .item{
-                text-align: center;
-            }
-            .info{
-                margin: auto;
-                width: 85%;
-            } 
         }
     }
 }
 @include m() {
     @media screen and (max-width:$m) {
-        .shop_carousel{
-            margin: 3% auto;
+        .shopping_stepbar{
             width: 100%;
-        }
-        .shop_block{
-            display: flex;
-            flex-wrap: wrap;
-            width: 100%;
-            margin-left: 1rem;
-            .search{
-                display: block;
-                margin-right: auto;
-                .searchbar_search{
-                    display: none;
-                }
-                .searchbarclick_search{
-                    display: block;
-                    margin: left;
-                }
+            p{
+                font-size: 14px;
             }
-        }
-        .shop_wrap{
-            flex-direction: column;
-            width: 100%;
-            .shop_aside{
-                margin: auto;
-                width: 100%;
-                display: flex;
-                flex-wrap: wrap;
-                a{
-                    margin: 0.7rem;
-                    .pinkBtn{
-                        margin: 0px;
-                    }
-                }
-                .shop_filter{
-                    width: 57%;
-                    margin: auto;
-                    margin: 0.5rem;
-                }
+            svg{
+                margin: 0.5%;   
+                width: 12%;
+                height: 19px;
             }
-            .shop_container{
-                margin: 1.5rem auto;
-                grid-template-columns:repeat(1,1fr);
-                grid-template-rows:repeat(1,1fr);
-                gap: 1%;
-            }
-            .info{
-                margin: auto;
-                width: 85%;
-            } 
         }
     }
 }
