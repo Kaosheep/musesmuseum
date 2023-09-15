@@ -11,6 +11,9 @@
       </div>
     </div>
     <div class="social">
+      <span>
+        <i class="sicon fa-solid fa-cart-shopping" id="social_cart"></i>
+      </span>
       <span
         ><i class="sicon fa-solid fa-envelope" id="social_envelope"></i
       ></span>
@@ -81,7 +84,7 @@ export default {
           ],
         },
         {
-          title: "參觀與服務",
+          title: "參觀服務",
           link: "/Visit",
           sublist: [
             { subtitle: "注意事項", sublink: "/VisitInformation" },

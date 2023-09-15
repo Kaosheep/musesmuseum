@@ -1,26 +1,32 @@
 <template>
-    <h1>{{ text }}</h1>
-    <main>
-        <aside>
-            <ul>
-                <li v-for="(title, index) in fqaNav" :key="index">
-                    <a :href="'#qaNav' + index">{{ title }}</a>
-                </li>
-            </ul>
-        </aside>
-        <div class="QA">
-            <div v-for="(section, sectionIndex) in sections" :key="sectionIndex" :class="QAitem">
-                <h2 :id="'qaNav' + (sectionIndex + 1)">{{ fqaNav[sectionIndex + 1] }}</h2>
-                <div class="QAitem" v-for="(qa, qaIndex) in section" :key="qaIndex">
-                    <h3 @click="toggleAnswer(sectionIndex, qaIndex)">{{ qa.question }}</h3>
-                    <p v-html="qa.answer" :id="'qaAnswer' + sectionIndex + '-' + qaIndex"></p>
+    <Header></Header>
+    <div class="Fqaoutside">
+        <h2 class="Fqa-title">{{ text }}</h2>
+        <main class="Fqa-main">
+            <aside class="Fqa-aside">
+                <ul>
+                    <li v-for="(title, index) in fqaNav" :key="index" class="Fqa-li">
+                        <a class="Fqa-a" :href="'#qaNav' + index">{{ title }}</a>
+                    </li>
+                </ul>
+            </aside>
+            <div class="FQA-QA">
+                <div v-for="(section, sectionIndex) in sections" :key="sectionIndex" :class="FQA - QAitem">
+                    <h3 class="FQA-questionH2" :id="'qaNav' + (sectionIndex + 1)">{{ fqaNav[sectionIndex + 1] }}</h3>
+                    <div class="FQA-QAitem" v-for="(qa, qaIndex) in section" :key="qaIndex">
+                        <h4 @click="toggleAnswer(sectionIndex, qaIndex)">{{ qa.question }}</h4>
+                        <p v-html="qa.answer" :id="'qaAnswer' + sectionIndex + '-' + qaIndex" style="display: none;"></p>
+                    </div>
                 </div>
             </div>
-        </div>
-    </main>
+
+        </main>
+    </div>
 </template>
   
 <script>
+import Header from '@/components/Header.vue';
+
 export default {
     data() {
         return {
@@ -104,6 +110,12 @@ export default {
             ],
         };
     },
+    mounted() {
+        document.body.style.height = `auto`;
+    },
+    components: {
+        Header
+    },
     methods: {
         toggleAnswer(sectionIndex, qaIndex) {
             const answerId = 'qaAnswer' + sectionIndex + '-' + qaIndex;
@@ -118,51 +130,8 @@ export default {
 };
 </script>
   
-<style>
-* {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-}
-
-main {
-    text-align: left;
-    width: 80%;
-    margin: auto;
-    display: flex;
-    flex-wrap: wrap;
-}
-
-li a {
-    text-decoration: none;
-    color: black;
-    display: block;
-}
-
-li+li {
-    margin-top: 10px;
-}
-
-
-aside {
-    width: 30%;
-}
-
-.QA {
-    width: 70%;
-}
-
-.QAitem {
-    margin-bottom: 20px;
-    cursor: pointer;
-}
-
-.QA p {
-    display: none;
-}
-
-h2 {
-    margin-bottom: 10px;
-}
+<style scoped lang="scss">
+@import "@/assets/sass/style.scss";
+@import "@/assets/sass/page/_Fqa.scss";
 </style>
   

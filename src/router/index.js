@@ -69,7 +69,17 @@ const routes = [
       {
         path: '/SpecialExhibition',
         name: 'SpecialExhibition',
-        component: () => import('../views/frontend/SpecialExhibition.vue'),
+        component: () => import('../views/frontend/SpecialExhibition.vue')
+      },
+      {
+        path: '/VisitTraffic',
+        name: 'VisitTraffic',
+        component: () => import('../views/frontend/VisitTraffic.vue')
+      },
+      {
+        path: '/MemberSignUp',
+        name: 'MemberSignUp',
+        component: () => import('../views/frontend/MemberSignUp.vue'),
       },
     ]
   },
@@ -83,6 +93,23 @@ const routes = [
         name: 'ManageLogin',
         component: () => import('../views/backend/ManageLogin.vue'),
       },
+      {
+        path: '/DashBoard',
+        name: 'DashBoard',
+        component: () => import('../views/backend/DashBoard.vue'),
+        children:[
+          {
+            path: '',
+            name: 'newsm',
+            component: () => import('../views/backend/newsm.vue'),
+          },
+          {
+            path: '/Memberm',
+            name: 'Memberm',
+            component: () => import('../views/backend/Memberm.vue'),
+          }
+        ]
+      }
 
     ]
   },

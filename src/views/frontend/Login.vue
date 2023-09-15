@@ -5,18 +5,17 @@
       <div class="backGroundCard">
         
       </div>
-      <div class="backGroundCardbBlue">123456789000000</div>
+      <div class="backGroundCardbBlue"></div>
       <!-- <div id="lightBox" style="display: block"> -->
-        <form class="memlogin_group">
-          <button class="pinkBtn">
-            會員註冊
+        <form class="memloginGroup">
+          <router-link :to="a.link" v-for="a in memBtnLink">
+          <button :class="[a.name === '會員登入' ? 'pinkBtn' : 'pinkBtnLight']">
+            {{a.name}}
           </button>
-          <button class="pinkBtn">
-            會員登入
-          </button>
+          </router-link>
           <!-- <h1>登入</h1> -->
           <!-- <p>帳號</p> -->
-          <div class="memlogin_acti">
+          <div class="memloginActi">
             <label for="memId">帳號</label>
             <input
               type="text"
@@ -28,7 +27,7 @@
               required
             />
           </div>
-          <div class="memlogin_acti">
+          <div class="memloginActi">
             <label for="memPsw">密碼</label>
             <input
               type="password"
@@ -40,7 +39,7 @@
               required
             />
           </div>
-          <div class="memlogin_acti">
+          <div class="memloginActi">
               <label for="verification">驗證碼:</label>
               <div id="verification-code"></div>
               <input 
@@ -50,11 +49,11 @@
               placeholder="輸入隨機碼">
               <p id="message"></p>
           </div>
-          <div class="resetPsw_email">
+          <div class="resetPswEmail">
             <a href="#">忘記密碼</a>
           </div>
 
-          <div class="memlogin_submit">
+          <div class="memloginSubmit">
             <input
               type="button"
               id="btnLogin"
@@ -80,6 +79,10 @@ export default {
     return {
       memId: "",
       memPsw: "",
+      memBtnLink:[
+        { link:"/MemberSignUp", name:"會員註冊" },
+        { link:"", name:"會員登入" },
+      ]
     };
   },
   methods: {
@@ -102,4 +105,16 @@ export default {
 //   min-height: calc(100vh - 130px);
 //   margin: auto;
 // }
+.pinkBtnLight{
+  width: 100px;
+  height: 37px;
+  padding: 5px 10px;
+  margin: 5px 0;
+  font-size: 16px;
+  text-align: center;
+  border: 1px solid #EB5F86;
+  border-radius: 4px;
+  color: #fff;
+  background-color: #EB5F86;
+}
 </style>

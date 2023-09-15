@@ -1,0 +1,39 @@
+.Fqaoutside {
+    width: 83.33%;
+    margin: auto;
+}
+
+.Fqa-main {
+    text-align: left;
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: 80px;
+}
+
+.Fqa-title {
+    margin-bottom: 50px;
+}
+
+.Fqa-li+.Fqa-li {
+    margin-top: 10px;
+}
+
+
+.Fqa-aside {
+    width: 20%;
+}
+
+.FQA-QA {
+    width: 70%;
+}
+
+.FQA-QAitem {
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+
+
+
+.FQA-questionH3 {
+    margin-bottom: 10px;
+}

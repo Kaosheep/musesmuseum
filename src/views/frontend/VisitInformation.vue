@@ -1,5 +1,5 @@
 <template>
-    <Header />
+    <Header></Header>
     <main class="visitInformation-main">
         <div class="visitInformation-title">
             <h1>參觀須知<br>Notice</h1>
@@ -16,7 +16,6 @@
                 </li>
             </ul>
         </div>
-        <div class="visitInformation-greenbg" id="visitInformationGreenbg"></div>
     </main>
 </template>
   
@@ -51,29 +50,14 @@ export default {
                     imgurl: require("@/assets/image/visit/visitImage06.png"),
                     txt: "展場內需降低談話音量，通訊設備或電子裝置應調整為靜音。",
                 },
-                {
-                    imgurl: require("@/assets/image/visit/visitImage07.png"),
-                    txt: "請勿碰觸、破壞展示品或設施。",
-                },
 
             ],
         }
     },
     mounted() {
         document.body.style.height = `auto`;
-        // 获取<div>元素
-        this.visitInformationUlBorder = document.getElementById("visitInformationUlBorder");
 
-        // 获取<div>元素的宽度和高度
-        let width = this.visitInformationUlBorder.getBoundingClientRect().width;
-        let height = this.visitInformationUlBorder.getBoundingClientRect().height;
 
-        // 获取<article>元素
-        this.visitInformationGreenbg = document.getElementById("visitInformationGreenbg");
-
-        // 设置<article>元素的宽度和高度
-        this.visitInformationGreenbg.style.width = width + "px";
-        this.visitInformationGreenbg.style.height = height + "px";
 
     },
     components: {
