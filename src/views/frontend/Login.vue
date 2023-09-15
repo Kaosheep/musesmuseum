@@ -1,44 +1,28 @@
 <template>
    <div class="bg">
-    <main>
-           
-      <div class="backGroundCard">
-        
-      </div>
+    <main class="bgcGY">
       <div class="backGroundCardbBlue"></div>
-      <!-- <div id="lightBox" style="display: block"> -->
-        <form class="memloginGroup">
+        <form class="backGroundCard">
           <router-link :to="a.link" v-for="a in memBtnLink">
-          <button :class="[a.name === '會員登入' ? 'pinkBtn' : 'pinkBtnLight']">
+          <button :class="[a.name === '會員註冊' ? 'pinkBtn' : 'pinkBtnLight']">
             {{a.name}}
           </button>
           </router-link>
-          <!-- <h1>登入</h1> -->
-          <!-- <p>帳號</p> -->
-          <div class="memloginActi">
-            <label for="memId">帳號</label>
+       
+          <div class="memloginActi" v-for="i in memAllInfo">
+            <label  :key="i.id">{{ i.memTitColumn }}</label>
             <input
-              type="text"
-              id="memId"
-              name="memId"
-              class="fillInClumn"
-              placeholder="電子郵件"
-              v-model="memId"
-              required
+            :key="i.id"
+            :type="i.type"
+            :id="i.id"
+            :name="i.name"
+            :class="i.class"
+            :placeholder="i.placeholder"
+        
+            required
             />
           </div>
-          <div class="memloginActi">
-            <label for="memPsw">密碼</label>
-            <input
-              type="password"
-              id="memPsw"
-              name="memPsw"
-              class="fillInClumn"
-              placeholder="密碼"
-              v-model="memPsw"
-              required
-            />
-          </div>
+         
           <div class="memloginActi">
               <label for="verification">驗證碼:</label>
               <div id="verification-code"></div>
@@ -77,8 +61,10 @@ export default {
   },
   data() {
     return {
-      memId: "",
-      memPsw: "",
+      memAllInfo:[
+            { memTitColumn:"帳號",type:"email",id:"memId",name:"memId",class:"fillInClumn",placeholder:"電子郵件" },
+            { memTitColumn:"密碼",type:"password",id:"memPsw",name:"memPsw",class:"fillInClumn",placeholder:"密碼" },
+      ],
       memBtnLink:[
         { link:"/MemberSignUp", name:"會員註冊" },
         { link:"", name:"會員登入" },
@@ -105,16 +91,5 @@ export default {
 //   min-height: calc(100vh - 130px);
 //   margin: auto;
 // }
-.pinkBtnLight{
-  width: 100px;
-  height: 37px;
-  padding: 5px 10px;
-  margin: 5px 0;
-  font-size: 16px;
-  text-align: center;
-  border: 1px solid #EB5F86;
-  border-radius: 4px;
-  color: #fff;
-  background-color: #EB5F86;
-}
+
 </style>
