@@ -1,0 +1,123 @@
+.VisitTraffic {
+    width: 83.33%;
+    margin: auto;
+}
+
+.VisitTraffic-title {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.VisitTraffic-h1 {
+    width: 30%;
+}
+
+.VisitTraffic-add {
+    width: 70%;
+}
+
+.VisitTraffic-nav {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#VisitTrafficPublic,
+#VisitTrafficCar,
+#VisitTrafficPork {
+    width: 150px;
+    height: 66.35px;
+    background-color: $myellow;
+    border-radius: 8px 8px 0 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-right: 30px;
+    cursor: pointer;
+}
+
+#VisitTrafficCar,
+#VisitTrafficPork {
+    background-color: #fff;
+    border: 2px solid $myellow;
+    border-radius: 8px 8px 0 0;
+}
+
+#VisitTrafficPF,
+#VisitTrafficCF,
+#VisitTrafficPorkF {
+    margin-top: 0px;
+    background-color: $myellow;
+    padding: 30px 60px;
+    margin-bottom: 100px;
+    border-radius: 0 8px 8px 8px;
+
+}
+
+.VisitTrafficFlex {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.VisitTrafficPFtext {
+    width: 50%;
+    box-sizing: border-box;
+
+}
+
+.VisitTrafficPF-p {
+    margin-top: 20px;
+    width: 85%;
+    background-color: #fff;
+    margin-left: auto;
+    padding: 30px;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+}
+
+// 自行開車
+
+.VisitTrafficCFCar-0,
+.VisitTrafficCFCar-1,
+.VisitTrafficPorkCar-0,
+.VisitTrafficPorkCar-1 {
+    width: 50%;
+    padding: 20px 0;
+    box-sizing: border-box;
+}
+
+.VisitTrafficCFCarP-0,
+.VisitTrafficCFCarP-1,
+.VisitTrafficCFCarP-2,
+.VisitTrafficPorkCarP-0,
+.VisitTrafficPorkCarP-1,
+.VisitTrafficPorkCarP-2 {
+    margin-top: 20px;
+    width: 85%;
+    background-color: #fff;
+    margin-left: auto;
+    padding: 30px;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+}
+
+.VisitTrafficCFCarP-2,
+.VisitTrafficPorkCarP-2 {
+    margin: auto;
+    width: 92%;
+    height: 200px;
+    margin-right: 0;
+    margin-left: auto;
+}
+
+.VisitTrafficPorkCarP-2 {
+    height: 400px;
+}

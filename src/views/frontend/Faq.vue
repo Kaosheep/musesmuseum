@@ -117,7 +117,7 @@ export default {
         Header
     },
     methods: {
-        toggleAnswer(sectionIndex, qaIndex) {
+        /*toggleAnswer(sectionIndex, qaIndex) {
             const answerId = 'qaAnswer' + sectionIndex + '-' + qaIndex;
             const answerElement = document.getElementById(answerId);
             if (answerElement.style.display === "none") {
@@ -125,9 +125,9 @@ export default {
             } else {
                 answerElement.style.display = "none";
             }
-        },
+        },*/
     },
-};
+}
 </script>
   
 <style scoped lang="scss">
