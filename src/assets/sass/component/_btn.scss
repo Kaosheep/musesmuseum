@@ -1,19 +1,20 @@
+@import "@/assets/sass/base/_color.scss";
 .fillInClumn{
     width: 165px;
     height: 37px;
-    color:#EB5F86;
+    color: $mpink;
     margin: 10px 0px;
     padding: 0 10px;
     background-color: #fff;
-    border: 3px solid #EB5F86;
+    border: 3px solid $mpink;
     border-radius: 4px;
 }
 
 .fillInClumn:focus{
-    color:#009CA8;
-    background-color: #FBF796;
-    outline-color:#FBF796;
-    border: 3px solid #FBF796;  
+    color:$mgreen;
+    background-color: $myellow;
+    outline-color:$myellow;
+    border: 3px solid $myellow;  
 }
 
 .pinkBtn{
@@ -23,30 +24,43 @@
     margin: 5px 0;
     font-size: 16px;
     text-align: center;
-    border: 1px solid #EB5F86;
+    border: 1px solid $mpink;
     border-radius: 4px;
-    color: #1E5289;
+    color: $mblue;
     background-color: #fff;
 }
 
 .pinkBtn:hover{
     color: #fff;
-    background-color: #EB5F86;
+    background-color: $mpink;
     cursor: pointer;
+}
+
+.pinkBtnLight{
+    width: 100px;
+    height: 37px;
+    padding: 5px 10px;
+    margin: 5px 0;
+    font-size: 16px;
+    text-align: center;
+    border: 1px solid $mpink;
+    border-radius: 4px;
+    color: #fff;
+    background-color: $mpink;
 }
 
 .submitBtn{
     width: 100px;
     height: 37px;
-    color: #1E5289;
+    color: $mblue;
     margin-top: 50px;
-    border:3px solid #EB5F86;
+    border:3px solid $mpink;
     border-radius: 8px;
-    background-color: #FBF796;
+    background-color: $myellow;
 }
 .submitBtn:hover {
     color: #fff;
-    border:3px solid #FBF796;
-    background-color: #009CA8;
+    border:3px solid $myellow;
+    background-color: $mblue;
     cursor: pointer;
 }

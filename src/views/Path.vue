@@ -1,5 +1,5 @@
 <template>
-  <main class="path_main">
+  <main class="path_main bgcGY">
     <div class="path_container">
       <h1>MUSESMUSEUM</h1>
       <RouterLink to="/Home">
@@ -31,9 +31,4 @@ export default {
 <style scoped lang="scss">
 @import "@/assets/sass/style.scss";
 
-main {
-  width: 100vw;
-  height: 100vh;
-  background-image: linear-gradient(45deg, $mgreen 50%, $myellow 50%);
-}
 </style>

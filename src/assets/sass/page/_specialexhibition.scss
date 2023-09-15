@@ -1,3 +1,15 @@
+template {
+    position: relative;
+}
+.img_deco {
+    width: 100%;
+    position: relative;
+}
+.img_deco img {
+    width: 10%;
+    position: absolute;
+    left: 3%;
+}
 .exhi_section {
     max-width: 1200px;
     margin: 5% auto;
@@ -7,30 +19,66 @@
 }
 .exhi_img {
     width: 50%;
-    margin: 1%;
-    border-radius: 4px;
+    margin: 1%;   
     overflow: hidden;
 }
 .exhi_img img {
     width: 100%;
     object-fit: cover;
     vertical-align: bottom;
+    border-radius: 4px;
 }
 .exhi_desc {
+    padding: 6%;
+    line-height: 2em;
+    background-color: #fff;
     width: 50%;
     border: 3px dashed #1E5289;
     border-radius: 4px;
     margin: 1%;
-    
+    position: relative;
+    z-index: 1;
 }
-.exhi_desc p {
-    width: 50%;
+.exhi_desc .bgc_deco {
+    width: 100%;
 }
+.exhi_desc .bgc_deco img {
+    width: 18%;
+    position: absolute;
+    left: -44%;
+    bottom: -34%;
+}
+.exhi_desc .back_deco {
+    width: 100%;
+}
+.exhi_desc .back_deco img {
+    width: 10%;
+    position: absolute;
+    left: -20%;
+    top: -15%;
+}
+.exhi_desc .exhi_desc_deco {
+    width: 100%;
+}
+.exhi_desc .exhi_desc_deco img {
+    width: 28%;
+    position: absolute;
+    right: -10%;
+    top: -15%;
+}
+
 .exhi_desc_bgc {    
-    width: 50%;
-    height: 50%;
+    width: 40vw;
+    height: 28vw;
     background-color: #1E5289;
     border-radius: 4px;
     position: absolute;
-    left: 2%;
+    right: -0.1%;
+    top: 5.5%;
+    z-index: 0;
+}
+.buy_tickbtn img {
+    width: 4%;
+    position: absolute;
+    right: 8%
 }

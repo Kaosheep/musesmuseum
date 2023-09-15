@@ -6,13 +6,13 @@
 <div>  
 <div class="FareAndIllustrate">票價</div>
 </div>
-<div class="SweatBee"><li>成人票$210</li></div>
+<div class="SweatBee"><li>成人票${{price}}</li></div>
 <div class="white">13歲(含)以上之遊客</div>
-<div class="SweatBee"><li>兒童票$100</li></div>
+<div class="SweatBee"><li>兒童票${{price2}}</li></div>
 <div class="white">3歲(含)至12歲之兒童</div>
-<div class="SweatBee"><li>老人票$100</li></div>
+<div class="SweatBee"><li>老人票${{price3}}</li></div>
 <div class="white">65歲(含)以上之長者</div>
-<div class="SweatBee"><li>愛心票$100</li></div>
+<div class="SweatBee"><li>愛心票${{price4}}</li></div>
 <div class="white">持有主管機關核發之身心障礙證明(手冊)者。</div>
 <div class="FareAndIllustrate">說明</div>
 <div class="white">-本館為一票可觀賞當期所有展覽(包含常設展)。</div>
@@ -27,78 +27,93 @@
   <div class="tick">成人票
     <button class="addandsub" @click="reduce1">-</button>
     <span>{{qua}}</span>
-    <button class="addandsub" @click="add1">+</button>
-    <span class="red">${{subtl*200}}</span> 
-    <span>清除</span>
+    <button :style="{ backgroundColor: buttonColor }"  class="addandsub" @click="add1">+</button>
+    <span class="red" v-show="qua">${{subt1(qua,price)}}</span> 
+    <button class="clear" @click="clear">清除</button>
   </div>
   <div class="tick">兒童票
     <button class="addandsub" @click="reduce2">-</button>
     <span>{{qua2}}</span>
     <button class="addandsub" @click="add2">+</button>
-    <span class="red">${{subt2}}</span>
-     <span>清除</span>
+    <span class="red" v-show="qua2">${{subt1(qua2,price2)}}</span>
+    <button class="clear" @click="clear2">清除</button>
     </div>
   <div class="tick">老人票
     <button class="addandsub" @click="reduce3">-</button>
     <span>{{qua3}}</span>
     <button class="addandsub" @click="add3">+</button>
-    <span class="red" >${{subt3}}</span> 
-    <span>清除</span>
+    <span class="red" v-show="qua3">${{subt1(qua3,price3)}}</span> 
+    <button class="clear" @click="clear3">清除</button>
   </div>
   <div class="tick">愛心票
     <button class="addandsub" @click="reduce4">-</button>
     <span>{{qua4}}</span>
     <button class="addandsub" @click="add4">+</button>
-    <span class="red">${{subt4}}</span> 
-    <span>清除</span>
+    <span class="red" v-show="qua4">${{subt1(qua4,price4)}}</span> 
+    <button class="clear" @click="clear4">清除</button>
   </div>
   <div class="line"></div>
   <div class="ball"></div>
   <div class="sumline"></div>
   <div class="sum">總金額
-    <span class="sumred">${{sum}}</span>
+    <span style="color:#EB5F86">${{ total }}</span>
   </div>
   <button class="submit">送出</button>
- </div> 
- <img class=squarematrix src="@/assets/image/tick/squarematrix.png">
- <img class=bigmatrix src="@/assets/image/tick/bigmatrix.png">
+</div> 
+<img class=squarematrix src="@/assets/image/tick/squarematrix.png">
+<img class=bigmatrix src="@/assets/image/tick/bigmatrix.png">
  
 </div>
 <img class=cube src="@/assets/image/tick/cube1.png"/>
 <img class=cube2 src="@/assets/image/tick/cube2.png"/>
 <div class="frame"></div>
-
-
 <img class=longmatrix src="@/assets/image/tick/longmatrix.png"/>
-
-
-
 
 </template>
 
-<script >
+<script>
+
 export default {
     data() {
     return {
+      price:200,
+      price2:100,
+      price3:100,
+      price4:100,
       qua: 0,
       qua2:0,
       qua3:0,
       qua4:0,
-      subtl:0,
-      subt2:0,
-      subt3:0,
-      subt4:0,
       sum:0,
+      buttonColor: 'white'
     };
   },
+  computed: {
+    total() {
+      return this.price * this.qua + this.price2 * this.qua2 + this.price3*this.qua3+this.price4*this.qua4;
+    },
+  },
   methods: {
+    subt1(qua,price){   
+      return qua*price;
+    },    
+    subt2(qua2,price2){   
+      return qua2*price2;
+    }, 
+    subt3(qua3,price3){   
+      return qua3*price3;
+    },   
+    subt4(qua4,price4){   
+      return qua4*price4;
+    },     
     reduce1() {
       if (this.qua > 0) {
         this.qua--;
       }
     },
     add1() {
-      this.qua++;
+      this.qua++,
+      this.buttonColor = this.buttonColor === 'white' ? '#1E5289' : 'white';
     },
     reduce2() {
       if (this.qua2 > 0) {
@@ -123,11 +138,22 @@ export default {
     },
     add4() {
       this.qua4++;
+      
+    },
+    clear(){
+      this.qua = 0;
+    },
+    clear2(){
+      this.qua2 = 0;
+    },
+    clear3(){
+      this.qua3 = 0;
+    },
+    clear4(){
+      this.qua4 = 0;
     },
   },
 }
-
-
 </script>
 
 <style lang="scss">
@@ -150,6 +176,7 @@ margin-left: 10%;
   margin-left: 10%;
   padding-top: 10px;
   padding-left: 10px;
+  padding-bottom: 10px;
 }
 
 .FareAndIllustrate{
@@ -185,12 +212,12 @@ margin-left: 10%;
 }
 .frame{
   border: 3px solid #009CA8;
-  width: 32%;
+  width: 31%;
   height: 65%;
   background-color: white;
   position: absolute;
-  top:120px;
-  left: 140px;
+  top:110px;
+  left: 130px;
   border-radius:10px;
 }
 .shormatrix{
@@ -207,7 +234,7 @@ margin-left: 10%;
   height: 100px;
   position: absolute;
   left: 46%;
-  bottom: 78%;
+  bottom: 76%;
   z-index: 0;
 }
 .buytick{
@@ -236,6 +263,7 @@ margin-left: 10%;
   color: #1E5289;
   background-color: white;
   border:1px solid #1E5289;
+  border-radius: 5px;
 }
 .line{
   border:1px solid #009CA8;
@@ -298,5 +326,12 @@ margin-left: 10%;
   bottom: 10%;
   left: 55%;
 }
-</style>
+.clear{
+  border:none;
+  background-color:white;
+  color:#1E5289;
+  
+  justify-content: end;
+}
+</style> 
 

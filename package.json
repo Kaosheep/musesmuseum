@@ -26,12 +26,26 @@
     "@vue/cli-plugin-vuex": "~5.0.0",
     "@vue/cli-service": "~5.0.0",
     "sass": "^1.32.7",
-    "sass-loader": "^12.0.0"
+    "sass-loader": "^12.0.0",
+    "webpack": "^5.88.2"
   },
   "browserslist": [
     "> 1%",
     "last 2 versions",
     "not dead",
     "not ie 11"
-  ]
+  ],
+  "description": "```\r npm install\r ```\r ## plugin\r npm install gsap\r npm install --save three\r npx serve .\r npm install view-ui-plus --save\r npm i --save @fortawesome/fontawesome-svg-core\r npm i --save @fortawesome/free-solid-svg-icons\r npm i --save @fortawesome/vue-fontawesome@latest-3\r ### Compiles and hot-reloads for development\r ```\r npm run serve\r ```",
+  "main": "babel.config.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kaosheep/musesmuseum.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Kaosheep/musesmuseum/issues"
+  },
+  "homepage": "https://github.com/Kaosheep/musesmuseum#readme"
 }
