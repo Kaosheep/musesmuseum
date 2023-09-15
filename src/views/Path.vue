@@ -7,7 +7,7 @@
           <span>前台</span>
         </div>
       </RouterLink>
-      <RouterLink to="/BackEnd">
+      <RouterLink to="/Admin">
         <div class="back">
           <span>後台</span>
         </div>

@@ -95,16 +95,18 @@ export default {
     function resize() {
       sliderWidth = slider.getBoundingClientRect().width;
       sectionWidth = sliderWidth / sections.length;
-      document.body.style.height = `${
-        sliderWidth - (window.innerWidth - window.innerHeight)
-      }px`;
+      document.body.style.height = `${sliderWidth - (window.innerWidth - window.innerHeight)
+        }px`;
       gallerycircle();
       followcursor();
     }
     function animate() {
       current = parseFloat(lerp(current, target, ease)).toFixed(2);
       target = window.scrollY;
-      setTransform(slider, `translateX(-${current}px)`);
+      if (window.innerWidth > 768) {
+        setTransform(slider, `translateX(-${current}px)`);
+      }
+
       animateimg();
       requestAnimationFrame(animate);
     }
@@ -125,14 +127,12 @@ export default {
 
       setTransform(
         max1,
-        `translateX(${-window.innerWidth + current / 5}px) translateY(${
-          window.innerWidth * 0.0785
+        `translateX(${-window.innerWidth + current / 5}px) translateY(${window.innerWidth * 0.0785
         }px)`
       );
       setTransform(
         max2,
-        `translateX(${-window.innerWidth + current / 5}px) translateY(${
-          (-window.innerWidth + current / 5) * 0.2588190451
+        `translateX(${-window.innerWidth + current / 5}px) translateY(${(-window.innerWidth + current / 5) * 0.2588190451
         }px) skewY(15deg)`
       );
     }
@@ -142,13 +142,11 @@ export default {
     function gallerycircle() {
       galleryr = document.querySelector(".new .gallery").clientWidth;
       images.forEach((image, i) => {
-        image.style.transform = `rotate3d(0,1,0,${
-          (i + 1) * angle
-        }deg) translateZ(${galleryr}px)`;
+        image.style.transform = `rotate3d(0,1,0,${(i + 1) * angle
+          }deg) translateZ(${galleryr}px)`;
         image.onclick = () => {
-          gallery.style.transform = `perspective(1800px) rotateX(-5deg) rotateY(-${
-            (i + 1) * angle
-          }deg)`;
+          gallery.style.transform = `perspective(1800px) rotateX(-5deg) rotateY(-${(i + 1) * angle
+            }deg)`;
         };
       });
     }
@@ -190,29 +188,29 @@ export default {
       });
     });
     window.addEventListener("scroll", () => {
-      sliderWidth = slider.getBoundingClientRect().width;
-      sectionWidth = sliderWidth / sections.length;
-      let anchorline = document.querySelector(".anchor ul span");
-      let srcolloff =
-        document.documentElement.scrollTop /
-        (parseInt(document.body.style.height) - sectionWidth);
-      anchorline.style.backgroundImage = `linear-gradient(90deg,#EB5F86 ${
-        (srcolloff * 100)-6
-      }%,#009CA8 ${(srcolloff * 100)-6}%)`;
-      console.log(Math.floor(srcolloff*0.7*10))
-      console.log(srcolloff * 100)
-      anchorli.forEach((li,i)=>{
-        if(i<Math.floor(srcolloff*0.7*10)){
-          for(let i=0;i<Math.floor(srcolloff*0.7*10);i++){
-          anchorli[i].style.backgroundColor = `#EB5F86`;
-        }
-        }
-        else{
-          anchorli[i].style.backgroundColor = `#009CA8`;
-        }
-      })
-        
-      anchorli[0].style.backgroundColor = `#EB5F86`;
+      if (window.innerWidth > 768) {
+        sliderWidth = slider.getBoundingClientRect().width;
+        sectionWidth = sliderWidth / sections.length;
+        let anchorline = document.querySelector(".anchor ul span");
+        let srcolloff =
+          document.documentElement.scrollTop /
+          (parseInt(document.body.style.height) - sectionWidth);
+        anchorline.style.backgroundImage = `linear-gradient(90deg,#EB5F86 ${(srcolloff * 100) - 6
+          }%,#009CA8 ${(srcolloff * 100) - 6}%)`;
+        anchorli.forEach((li, i) => {
+          if (i < Math.floor(srcolloff * 0.7 * 10)) {
+            for (let i = 0; i < Math.floor(srcolloff * 0.7 * 10); i++) {
+              anchorli[i].style.backgroundColor = `#EB5F86`;
+            }
+          }
+          else {
+            anchorli[i].style.backgroundColor = `#009CA8`;
+          }
+        })
+
+        anchorli[0].style.backgroundColor = `#EB5F86`;
+      }
+
 
     });
   },
