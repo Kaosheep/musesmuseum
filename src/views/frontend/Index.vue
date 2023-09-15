@@ -252,7 +252,6 @@
 <script src="@/js/Index.js"></script>
 
 <style scoped lang="scss">
-@import "@/assets/sass/style.scss";
 body {
   overscroll-behavior: none;
 }

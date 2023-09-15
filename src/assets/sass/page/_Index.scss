@@ -9,7 +9,7 @@
         position: static;
         height: auto;
         width: auto;
-       }
+    }
 
     .home_slider {
         position: absolute;
@@ -57,18 +57,22 @@
                     display: flex;
                     justify-content: center;
                     align-items: center;
+
                     @include t() {
                         margin-top: 100px;
                         width: 100%;
                         padding-left: 0
                     }
+
                     .maxlogo {
                         position: relative;
                         width: 75%;
                         text-align: center;
-                        @include t(){
+
+                        @include t() {
                             width: 50%;
                         }
+
                         img {
                             object-fit: cover;
                             width: 100%;
@@ -130,9 +134,11 @@
 
                 .smalltitle {
                     padding: 0.6rem 0;
-                    @include t(){
+
+                    @include t() {
                         padding-left: 2rem;
                     }
+
                     h2 {
                         font-size: 1.25rem;
                         font-weight: 700;
@@ -145,9 +151,11 @@
                     display: flex;
                     flex-direction: column;
                     justify-content: space-between;
-                    @include t(){
+
+                    @include t() {
                         width: 100%;
                     }
+
                     .ticket {
                         background-image: url('@/assets/image/home/ticket.png');
                         background-size: contain;
@@ -155,9 +163,11 @@
                         width: 250px;
                         height: 120px;
                         margin-left: auto;
-                        @include t(){
-                            margin:4rem auto 2.5rem;
+
+                        @include t() {
+                            margin: 4rem auto 2.5rem;
                         }
+
                         a {
                             display: inline-block;
                             width: 100%;
@@ -213,18 +223,21 @@
                         width: fit-content;
                         margin-left: auto;
                         padding-right: 2rem;
+
                         @include t() {
                             padding: 0;
                             margin: auto;
                             width: 100%;
                         }
+
                         ul {
                             @include t() {
                                 width: 100%;
                                 display: flex;
                                 flex-wrap: wrap;
                                 justify-content: center;
-                                li{
+
+                                li {
                                     text-align: center;
                                     width: 30%;
                                     padding: 0.5rem 0;
@@ -262,26 +275,30 @@
                     height: 100%;
                     overflow: hidden;
                     position: relative;
-                    @include t(){
+
+                    @include t() {
                         position: absolute;
                         right: 0;
                     }
+
                     .txtgo {
                         display: flex;
                         flex-direction: column;
                         animation: txtgo 10s linear infinite;
                         min-width: 100px;
-                        @include t(){
+
+                        @include t() {
                             min-width: 64px;
                             opacity: .3;
                         }
                     }
 
                     .txtskew {
-                        
+
                         animation: txtgos linear infinite;
                         animation-duration: 10s;
-                        @include t(){
+
+                        @include t() {
                             animation: txtgo 10s linear infinite;
                         }
                     }
@@ -320,6 +337,7 @@
 
 
                 .new {
+                    display: none;
                     .container {
                         width: 75vw;
                         padding-top: 8%;
@@ -328,6 +346,10 @@
                         justify-content: center;
                         overflow: hidden;
                         position: relative;
+
+                        @include t() {
+                            width: 85vw;
+                        }
                     }
 
                     .gallery {
@@ -358,17 +380,25 @@
                     width: calc(100% - 80px);
                     display: flex;
                     margin-left: 1.5rem;
-                    @include t(){
+
+                    @include t() {
                         flex-direction: column;
+
                     }
+
                     .item {
                         width: 29%;
                         height: 100%;
                         padding: 2rem .5rem 1rem 0;
                         border-left: 2px solid $mblue;
-                        @include t(){
+
+                        @include t() {
                             width: 100%;
+                            height: 260px;
+                            border-bottom: 2px solid $mblue;
+                            padding: 1rem 0;
                         }
+
                         a {
                             display: flex;
                             flex-direction: column;
@@ -377,40 +407,53 @@
                             height: 100%;
                             margin-top: auto;
                             position: relative;
-                            @include t(){
+
+                            @include t() {
                                 flex-direction: row;
                             }
+
                             .image {
                                 width: 100%;
                                 height: 40%;
                                 overflow: hidden;
-                                @include t(){
+
+                                @include t() {
                                     order: -1;
                                     width: 100%;
                                     height: auto;
                                 }
+
                                 img {
-                                vertical-align: bottom;
-                                width: 125%;
-                                height: 100%;
-                                object-fit: cover;
-                            }
+                                    vertical-align: bottom;
+                                    width: 125%;
+                                    height: 100%;
+                                    object-fit: cover;
+
+                                    @include t() {
+                                        width: 100%;
+                                        height: auto;
+                                    }
+                                }
                             }
 
-                            
+
 
                             .txt {
                                 padding: 1rem;
                                 height: 50%;
-                                @include t(){
+
+                                @include t() {
                                     width: 70%;
-                                    padding: 0.5rem;
+                                    height: 100%;
+                                    padding: 0.5rem 0.5rem 2rem;
                                 }
+
                                 h3 {
                                     margin: 1rem 0;
                                     background-color: $myellow;
-                                    @include t(){
-                                        margin:0 0 0.5rem 0;
+
+                                    @include t() {
+                                        margin: 0 0 0.5rem 0;
                                     }
                                 }
 
@@ -419,19 +462,18 @@
                                     -webkit-box-orient: vertical;
                                     -webkit-line-clamp: 5;
                                     overflow: hidden;
-                                    @include t(){
-                                        height: 40%;
-                                    }
+
                                 }
                             }
                         }
 
                         .seemore {
                             text-align: end;
-                            @include t(){
+
+                            @include t() {
                                 position: absolute;
                                 right: 0;
-                                bottom: 0;
+                                bottom: -24px;
                             }
                         }
 
@@ -441,10 +483,20 @@
                         width: 13%;
                         position: relative;
 
+                        @include t() {
+                            width: 100%;
+                            text-align: end;
+                            padding: 1rem 0;
+                        }
+
                         a {
                             position: absolute;
                             bottom: 1.5rem;
                             left: 0;
+
+                            @include t() {
+                                position: static;
+                            }
                         }
                     }
                 }
@@ -454,6 +506,14 @@
                     width: 200px;
                     object-position: bottom;
                     object-fit: contain;
+
+                    @include t() {
+                        position: absolute;
+                        z-index: -5;
+                        bottom: 0;
+                        left: 0;
+                        opacity: .5;
+                    }
                 }
 
                 .container {
@@ -464,6 +524,16 @@
                         width: 75%;
                         height: 50%;
 
+                        @include t() {
+                            width: 85%;
+                        }
+
+                        &:first-child {
+                            @include t() {
+                                margin-left: auto;
+                            }
+                        }
+
                         &:last-child {
                             margin-left: auto;
                         }
@@ -472,6 +542,10 @@
                             position: absolute;
                             top: 0;
                             left: -25%;
+
+                            @include t() {
+                                left: -5%;
+                            }
 
                             h1 {
                                 font-size: 64px;
@@ -519,6 +593,11 @@
 
                                 h2 {
                                     pointer-events: none;
+
+                                    @include t() {
+                                        display: inline-block;
+                                        height: 150px;
+                                    }
                                 }
 
                                 button {
@@ -561,6 +640,12 @@
                         margin-left: auto;
                         border: 2px solid $mgreen;
                         padding: 7% 8% 2.5%;
+
+                        @include t() {
+                            width: 92%;
+                            height: auto;
+                            padding: 7% 8%
+                        }
 
                         .shopframe {
                             width: 100%;
@@ -606,6 +691,10 @@
                                     text-align: center;
                                     padding: 0px 5px;
 
+                                    @include t() {
+                                        width: 45%;
+                                    }
+
                                     img {
                                         width: 100%;
                                         border: 3px solid #fff;
@@ -620,6 +709,10 @@
                         position: absolute;
                         z-index: 5;
                         bottom: 0;
+
+                        @include t() {
+                            display: none;
+                        }
                     }
 
                     .homelight {
@@ -648,6 +741,11 @@
                         clip-path: polygon(10% 0%, 100% 0%, 100% 100%, 0% 100%);
                         background-color: $myellow;
                         text-align: end;
+
+                        @include t() {
+                            padding-right: 1.5rem;
+                            clip-path: polygon(8% 0%, 100% 0%, 100% 100%, 0% 100%);
+                        }
                     }
                 }
 
@@ -673,6 +771,12 @@
                             position: absolute;
                             left: 0;
                             bottom: 0;
+
+                            @include t() {
+                                position: static;
+                                padding: 4rem 0 2rem 32%;
+                            }
+
                         }
                     }
 
@@ -711,6 +815,10 @@
                             transform: skewY(15deg);
                             padding: 15px;
                             cursor: pointer;
+
+                            @include t() {
+                                transform: skewY(15deg) rotate(90deg);
+                            }
                         }
 
                         #totop {
@@ -733,9 +841,10 @@
 }
 
 .anchor {
-    @include t(){
+    @include t() {
         display: none;
     }
+
     padding: 2rem 0 0 90px;
 
     ul {
