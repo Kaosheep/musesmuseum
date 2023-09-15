@@ -41,6 +41,7 @@
             <div class="txtgo txtskew">
               <h1>Current Exhibitions</h1>
               <h1>Current Exhibitions</h1>
+              
             </div>
           </div>
           <div class="smalltitle">
@@ -57,9 +58,12 @@
                 <img src="" alt="" />
               </div>
             </div>
-            <div class="moreexb"><router-link to="/SpecialExhibition"><ThinArrow :text="'更多展覽'"></ThinArrow></router-link></div>
+            <div class="moreexb">
+              <router-link to="/SpecialExhibition"
+                ><ThinArrow :text="'更多展覽'"></ThinArrow
+              ></router-link>
+            </div>
           </div>
-          
         </section>
         <section>
           <div class="sectiontitle">
@@ -166,9 +170,9 @@
           </div>
           <div class="shop">
             <div class="homelight">
-             <img  src="@/assets/image/home/light.png" alt="" /> 
+              <img src="@/assets/image/home/light.png" alt="" />
             </div>
-            
+
             <div class="block">
               <div class="shopframe">
                 <div class="productrow">
@@ -218,7 +222,7 @@
             <div class="box">
               <div class="slide">
                 <p class="max" id="max2">MUSESMUSEUM</p>
-                
+
                 <div class="totop" @click="totop">
                   <font-awesome-icon :icon="['fas', 'arrow-left']" id="totop" />
                 </div>
@@ -245,7 +249,7 @@
   </footer>
 </template>
 
-<script src="@/js/Index.js" ></script>
+<script src="@/js/Index.js"></script>
 
 <style scoped lang="scss">
 @import "@/assets/sass/style.scss";
@@ -254,6 +258,9 @@ body {
 }
 
 footer {
+  @include t() {
+    display: none;
+  }
   bottom: 0;
   right: 0;
   position: fixed;
