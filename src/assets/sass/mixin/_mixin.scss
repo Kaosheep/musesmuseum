@@ -38,7 +38,7 @@
 
 //綠色點點背景
 @mixin dotbg($color: $mgreen) {
-    background: radial-gradient(circle, $color 10%, transparent 11%), radial-gradient(circle at bottom left, $color 5%, transparent 6%), radial-gradient(circle at bottom right, $color 5%, transparent 6%), radial-gradient(circle at top left, $color 5%, transparent 6%), radial-gradient(circle at top right, $color 5%, transparent 6%);
+    background: radial-gradient(circle, $color 15%, transparent 11%), radial-gradient(circle at bottom left, $color 15%, transparent 6%), radial-gradient(circle at bottom right, $color 15%, transparent 6%), radial-gradient(circle at top left, $color 15%, transparent 6%), radial-gradient(circle at top right, $color 15%, transparent 6%);
     background-size: 2.5em 2.5em;
     background-color: #ffffff;
     opacity: 1

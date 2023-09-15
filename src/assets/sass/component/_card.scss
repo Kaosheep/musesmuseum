@@ -1,0 +1,13 @@
+
+.backGroundCardbBlue{
+    @include dotbg();
+    // font-size: 500px;
+    width: 1000px;
+    height: 560px;
+    // background-color: #009CA8;
+    border: 3px solid #009CA8;
+    border-radius: 8px;
+    left:460px;
+    top:150px;
+    position: absolute;
+    }

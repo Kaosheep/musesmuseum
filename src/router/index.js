@@ -76,6 +76,11 @@ const routes = [
         name: 'VisitTraffic',
         component: () => import('../views/frontend/VisitTraffic.vue')
       },
+      {
+        path: '/MemberSignUp',
+        name: 'MemberSignUp',
+        component: () => import('../views/frontend/MemberSignUp.vue'),
+      },
     ]
   },
   {
