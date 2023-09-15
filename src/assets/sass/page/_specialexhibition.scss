@@ -1,25 +1,36 @@
 .exhi_section {
+    max-width: 1200px;
     margin: 5% auto;
     width: 85%;
     display: flex;
+    position: relative;
 }
 .exhi_img {
     width: 50%;
     margin: 1%;
+    border-radius: 4px;
+    overflow: hidden;
 }
 .exhi_img img {
     width: 100%;
-    border-radius: 4px;
+    object-fit: cover;
+    vertical-align: bottom;
 }
 .exhi_desc {
     width: 50%;
     border: 3px dashed #1E5289;
     border-radius: 4px;
     margin: 1%;
-    position: relative;
+    
 }
-.exhi_desc .exhi_desc_bgc {
+.exhi_desc p {
     width: 50%;
-    color: #1E5289;
+}
+.exhi_desc_bgc {    
+    width: 50%;
+    height: 50%;
+    background-color: #1E5289;
+    border-radius: 4px;
     position: absolute;
+    left: 2%;
 }
