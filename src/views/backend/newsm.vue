@@ -28,9 +28,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.dmain {
-    background-color: #ffffff80;
-    height: 80%;
-    border-radius: 0 10px 10px 10px;
-}
+
 </style>
