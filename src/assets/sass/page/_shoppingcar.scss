@@ -1,0 +1,225 @@
+.shop_carousel{
+    margin: 3% auto;
+    width: 55%;    
+    height: 40vh;
+    overflow: hidden;
+    border-radius: 8px;
+    aspect-ratio: 4/3;
+    .banner{
+        width: 100%;
+        height: 40vh;
+        img{
+            width:100%;
+            object-fit: cover;
+        }
+    }
+}
+.shop_wrap{
+    margin: 2rem auto 0px;
+    max-width: 1050px;
+    width: 55%;
+    display: flex;
+    justify-content: space-between;
+    .shop_aside{
+        width: 10%;
+        .pinkBtn:first-child{
+            margin-top: 0;
+        }
+        .pinkBtn{
+            margin: 10px 0px;
+        }
+        .shop_filter{
+            margin: 5px 0px;
+            min-width: 100px;
+            width: 100%;
+            display: block;
+            padding: 10px 0px;
+            border: 1px solid $mgreen;
+            border-radius: 8px;
+            color: $mblue;
+            option{
+                color: $mblue;
+                text-align: center;
+            }
+        }
+    }
+    .shop_container{
+        width: 75%;
+        display: grid;
+        grid-template-columns:repeat(3,1fr) ;
+        grid-template-rows:repeat(3,1fr) ;
+        justify-items: center;
+        align-items:flex-end;
+        gap: 25px;
+    }
+    .item{
+        width: 100%;
+        text-align: center;
+        img{
+            height: 240px;
+            max-width: 240px;
+            border-radius: 8px;
+            object-fit: cover;
+        }
+    }
+    .info{
+        margin: 10px 0px;
+        text-align: center;
+        span{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: $mblue;
+            #car path{
+                fill: $mgreen;
+            }
+            #car{
+                height: 25px;
+                color: $mgreen;
+            }
+        }
+        a{
+            span{
+                text-align: center;
+                color: $mpink;
+                display: block;
+            }
+        }
+    } 
+}
+.shop_block{
+    margin: auto;
+    max-width: 1050px;
+    width: 55%;
+    display: flex;
+    justify-content: space-between;
+    .shop_Breadcrumbs{
+        a{
+            color: $mblue;
+        }
+    }
+    .searchbarclick_search{
+        display: none;
+    }
+
+}
+.page{
+    max-width: 1050px;
+    margin: auto;
+   .pagination{
+        width:80%;
+        margin-left: auto;
+        padding: 1rem 0 4rem;
+        text-align: center;
+    } 
+}
+@include t() {
+    @media screen and (max-width:$t) {
+        .shop_carousel{
+            margin: 3% auto;
+            width: 100%;
+        }
+        .shop_block{
+            width: 75%;
+            flex-direction: column;
+            .search{
+                margin-right: auto;
+                .searchbar_search{
+                    display: none;
+                }
+                .searchbarclick_search{
+                    display: block;
+                }
+            }
+        }
+        .shop_wrap{
+            flex-direction: column;
+            width: 100%;
+            .shop_aside{
+                margin: auto;
+                width: 75%;
+                display: flex;
+                flex-wrap: wrap;
+                a{
+                    margin: 0.5rem;
+                    .pinkBtn{
+                        margin: 0px;
+                    }
+                }
+                .shop_filter{
+                    width: 25%;
+                    margin: 0.5rem;
+                }
+            }
+            .shop_container{
+                margin: 1rem auto;
+                grid-template-columns:repeat(2,1fr);
+                grid-template-rows:repeat(2,1fr);
+                gap: 8%;
+            }
+            .item{
+                text-align: center;
+            }
+            .info{
+                margin: auto;
+                width: 85%;
+            } 
+        }
+    }
+}
+@include m() {
+    @media screen and (max-width:$m) {
+        .shop_carousel{
+            margin: 3% auto;
+            width: 100%;
+        }
+        .shop_block{
+            display: flex;
+            flex-wrap: wrap;
+            width: 100%;
+            margin-left: 1rem;
+            .search{
+                display: block;
+                margin-right: auto;
+                .searchbar_search{
+                    display: none;
+                }
+                .searchbarclick_search{
+                    display: block;
+                    margin: left;
+                }
+            }
+        }
+        .shop_wrap{
+            flex-direction: column;
+            width: 100%;
+            .shop_aside{
+                margin: auto;
+                width: 100%;
+                display: flex;
+                flex-wrap: wrap;
+                a{
+                    margin: 0.7rem;
+                    .pinkBtn{
+                        margin: 0px;
+                    }
+                }
+                .shop_filter{
+                    width: 57%;
+                    margin: auto;
+                    margin: 0.5rem;
+                }
+            }
+            .shop_container{
+                margin: 1.5rem auto;
+                grid-template-columns:repeat(1,1fr);
+                grid-template-rows:repeat(1,1fr);
+                gap: 1%;
+            }
+            .info{
+                margin: auto;
+                width: 85%;
+            } 
+        }
+    }
+}

@@ -81,6 +81,11 @@ const routes = [
         name: 'MemberSignUp',
         component: () => import('../views/frontend/MemberSignUp.vue'),
       },
+      {
+        path: '/Shoppingcar',
+        name: 'Shoppingcar',
+        component: () => import('../views/frontend/Shoppingcar.vue'),
+      },
     ]
   },
   {
