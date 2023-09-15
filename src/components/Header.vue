@@ -121,8 +121,6 @@ export default {
     },
     closemenu() {
       document.querySelector("nav").style.transform = "translateX(-100%)";
-      document.querySelector("header .logo img").style.width = "100%";
-      document.querySelector("header .logo img").style.transition = ".2s .2s";
       this.isClick = false;
     },
   },
