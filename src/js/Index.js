@@ -68,127 +68,129 @@ export default {
     },
   },
   mounted() {
-    let sections = [...document.querySelectorAll("section")];
-    let slider = document.querySelector(".home_slider");
-    let sliderWidth, galleryr;
-    let sectionWidth;
-    let current = 0;
-    let target = 0;
-    let ease = 0.05;
-    let gallery = document.querySelector(".gallery");
-    let txtframe = document.querySelectorAll(".txtframe");
-    let max1 = document.getElementById("max1");
-    let max2 = document.getElementById("max2");
+    console.log(window.innerWidth)
+    if (window.innerWidth > 820) {
+      let sections = [...document.querySelectorAll("section")];
+      let slider = document.querySelector(".home_slider");
+      let sliderWidth, galleryr;
+      let sectionWidth;
+      let current = 0;
+      let target = 0;
+      let ease = 0.05;
+      let gallery = document.querySelector(".gallery");
+      let txtframe = document.querySelectorAll(".txtframe");
+      let max1 = document.getElementById("max1");
+      let max2 = document.getElementById("max2");
 
-    const images = [...document.querySelectorAll(".gallery img")];
-    const angle = 360 / images.length;
-    window.addEventListener("resize", () => {
-      resize();
-    });
+      const images = [...document.querySelectorAll(".gallery img")];
+      const angle = 360 / images.length;
+      window.addEventListener("resize", () => {
+        resize();
+      });
 
-    function lerp(start, end, t) {
-      return start * (1 - t) + end * t;
-    }
-    function setTransform(el, transform) {
-      el.style.transform = transform;
-    }
-    function resize() {
-      sliderWidth = slider.getBoundingClientRect().width;
-      sectionWidth = sliderWidth / sections.length;
-      document.body.style.height = `${sliderWidth - (window.innerWidth - window.innerHeight)
-        }px`;
-      gallerycircle();
-      followcursor();
-    }
-    function animate() {
-      current = parseFloat(lerp(current, target, ease)).toFixed(2);
-      target = window.scrollY;
-      if (window.innerWidth > 768) {
+      function lerp(start, end, t) {
+        return start * (1 - t) + end * t;
+      }
+      function setTransform(el, transform) {
+        el.style.transform = transform;
+      }
+      function resize() {
+        sliderWidth = slider.getBoundingClientRect().width;
+        sectionWidth = sliderWidth / sections.length;
+        document.body.style.height = `${sliderWidth - (window.innerWidth - window.innerHeight)
+          }px`;
+        gallerycircle();
+        followcursor();
+      }
+      function animate() {
+        current = parseFloat(lerp(current, target, ease)).toFixed(2);
+        target = window.scrollY;
+
         setTransform(slider, `translateX(-${current}px)`);
+
+
+        animateimg();
+        requestAnimationFrame(animate);
+      }
+      let newimgs = [...document.querySelectorAll(".eventwrap .item .image img")];
+      let newimgWidth = document.querySelector(
+        ".eventwrap .item .image img"
+      ).offsetWidth;
+      function animateimg() {
+        let ratio = current / newimgWidth;
+        let intersectionratio;
+        newimgs.forEach((image, i) => {
+          intersectionratio = ratio * 0.7 - i * 1.5;
+          setTransform(image, `translateX(-${intersectionratio * 8}px)`);
+        });
+        txtframe.forEach((txtframe) => {
+          setTransform(txtframe, `translateX(${intersectionratio * 20}px)`);
+        });
+
+        setTransform(
+          max1,
+          `translateX(${-window.innerWidth + current / 5}px) translateY(${window.innerWidth * 0.0785
+          }px)`
+        );
+        setTransform(
+          max2,
+          `translateX(${-window.innerWidth + current / 5}px) translateY(${(-window.innerWidth + current / 5) * 0.2588190451
+          }px) skewY(15deg)`
+        );
       }
 
-      animateimg();
-      requestAnimationFrame(animate);
-    }
-    let newimgs = [...document.querySelectorAll(".eventwrap .item .image img")];
-    let newimgWidth = document.querySelector(
-      ".eventwrap .item .image img"
-    ).offsetWidth;
-    function animateimg() {
-      let ratio = current / newimgWidth;
-      let intersectionratio;
-      newimgs.forEach((image, i) => {
-        intersectionratio = ratio * 0.7 - i * 1.5;
-        setTransform(image, `translateX(-${intersectionratio * 8}px)`);
-      });
-      txtframe.forEach((txtframe) => {
-        setTransform(txtframe, `translateX(${intersectionratio * 20}px)`);
-      });
+      animate();
 
-      setTransform(
-        max1,
-        `translateX(${-window.innerWidth + current / 5}px) translateY(${window.innerWidth * 0.0785
-        }px)`
-      );
-      setTransform(
-        max2,
-        `translateX(${-window.innerWidth + current / 5}px) translateY(${(-window.innerWidth + current / 5) * 0.2588190451
-        }px) skewY(15deg)`
-      );
-    }
-
-    animate();
-
-    function gallerycircle() {
-      galleryr = document.querySelector(".new .gallery").clientWidth;
-      images.forEach((image, i) => {
-        image.style.transform = `rotate3d(0,1,0,${(i + 1) * angle
-          }deg) translateZ(${galleryr}px)`;
-        image.onclick = () => {
-          gallery.style.transform = `perspective(1800px) rotateX(-5deg) rotateY(-${(i + 1) * angle
-            }deg)`;
-        };
-      });
-    }
-
-    function followcursor() {
-      let btns = document.querySelectorAll(".container .row .card button");
-      let txts = document.querySelectorAll(".container .row .card .txt");
-      let btnWidth = document.querySelector(
-        ".container .row .card button"
-      ).offsetWidth;
-      let txtWidth = document.querySelector(
-        ".container .row .card .txt"
-      ).offsetWidth;
-      let txtHeight = document.querySelector(
-        ".container .row .card .txt"
-      ).offsetHeight;
-      txts.forEach((txt, index) => {
-        txt.addEventListener("mousemove", (e) => {
-          let x = e.offsetX;
-          let y = e.offsetY;
-          btns[index].style.right = `${txtWidth - btnWidth * 0.5 - x}px`;
-          btns[index].style.bottom = `${txtHeight - btnWidth * 0.5 - y}px`;
+      function gallerycircle() {
+        galleryr = document.querySelector(".new .gallery").clientWidth;
+        images.forEach((image, i) => {
+          image.style.transform = `rotate3d(0,1,0,${(i + 1) * angle
+            }deg) translateZ(${galleryr}px)`;
+          image.onclick = () => {
+            gallery.style.transform = `perspective(1800px) rotateX(-5deg) rotateY(-${(i + 1) * angle
+              }deg)`;
+          };
         });
-        txt.addEventListener("mouseout", (e) => {
-          btns[index].style.right = `0px`;
-          btns[index].style.bottom = `0px`;
+      }
+
+      function followcursor() {
+        let btns = document.querySelectorAll(".container .row .card button");
+        let txts = document.querySelectorAll(".container .row .card .txt");
+        let btnWidth = document.querySelector(
+          ".container .row .card button"
+        ).offsetWidth;
+        let txtWidth = document.querySelector(
+          ".container .row .card .txt"
+        ).offsetWidth;
+        let txtHeight = document.querySelector(
+          ".container .row .card .txt"
+        ).offsetHeight;
+        txts.forEach((txt, index) => {
+          txt.addEventListener("mousemove", (e) => {
+            let x = e.offsetX;
+            let y = e.offsetY;
+            btns[index].style.right = `${txtWidth - btnWidth * 0.5 - x}px`;
+            btns[index].style.bottom = `${txtHeight - btnWidth * 0.5 - y}px`;
+          });
+          txt.addEventListener("mouseout", (e) => {
+            btns[index].style.right = `0px`;
+            btns[index].style.bottom = `0px`;
+          });
+        });
+      }
+      resize();
+
+      let anchorli = [...document.querySelectorAll(".anchor ul li")];
+      anchorli.forEach((li, i) => {
+        li.addEventListener("click", (e) => {
+          window.scrollTo(
+            0,
+            (Math.ceil(parseInt(document.body.style.height)) / 6.5) * i
+          );
         });
       });
-    }
-    resize();
+      window.addEventListener("scroll", () => {
 
-    let anchorli = [...document.querySelectorAll(".anchor ul li")];
-    anchorli.forEach((li, i) => {
-      li.addEventListener("click", (e) => {
-        window.scrollTo(
-          0,
-          (Math.ceil(parseInt(document.body.style.height)) / 6.5) * i
-        );
-      });
-    });
-    window.addEventListener("scroll", () => {
-      if (window.innerWidth > 768) {
         sliderWidth = slider.getBoundingClientRect().width;
         sectionWidth = sliderWidth / sections.length;
         let anchorline = document.querySelector(".anchor ul span");
@@ -211,7 +213,7 @@ export default {
         anchorli[0].style.backgroundColor = `#EB5F86`;
       }
 
-
-    });
-  },
+      );
+    }
+  }
 };

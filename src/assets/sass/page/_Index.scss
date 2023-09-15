@@ -4,18 +4,26 @@
     left: 0;
     width: 100%;
     height: 100vh;
-    @include t(){
+
+    @include t() {
         position: static;
-    }
+        height: auto;
+        width: auto;
+       }
+
     .home_slider {
         position: absolute;
         top: 0;
         left: 0;
         width: 700vw;
         height: 100vh;
-        @include t(){
-            width:100%
+
+        @include t() {
+            position: static;
+            width: 100%;
+            height: auto;
         }
+
         .wrap {
             position: absolute;
             top: 0;
@@ -23,14 +31,25 @@
             display: flex;
             justify-content: space-around;
             width: 100%;
-            @include t(){
+
+            @include t() {
+                position: static;
                 flex-direction: column;
+                height: auto;
             }
+
             section {
                 display: flex;
                 width: 100vw;
                 height: calc(100vh - 80px);
                 position: relative;
+
+                @include t() {
+                    height: auto;
+                    flex-direction: column;
+                    overflow: hidden;
+                    width: auto;
+                }
 
                 .spotlight {
                     width: 70%;
@@ -38,11 +57,18 @@
                     display: flex;
                     justify-content: center;
                     align-items: center;
-
+                    @include t() {
+                        margin-top: 100px;
+                        width: 100%;
+                        padding-left: 0
+                    }
                     .maxlogo {
                         position: relative;
                         width: 75%;
                         text-align: center;
+                        @include t(){
+                            width: 50%;
+                        }
                         img {
                             object-fit: cover;
                             width: 100%;
@@ -104,7 +130,9 @@
 
                 .smalltitle {
                     padding: 0.6rem 0;
-
+                    @include t(){
+                        padding-left: 2rem;
+                    }
                     h2 {
                         font-size: 1.25rem;
                         font-weight: 700;
@@ -117,7 +145,9 @@
                     display: flex;
                     flex-direction: column;
                     justify-content: space-between;
-
+                    @include t(){
+                        width: 100%;
+                    }
                     .ticket {
                         background-image: url('@/assets/image/home/ticket.png');
                         background-size: contain;
@@ -125,7 +155,9 @@
                         width: 250px;
                         height: 120px;
                         margin-left: auto;
-
+                        @include t(){
+                            margin:4rem auto 2.5rem;
+                        }
                         a {
                             display: inline-block;
                             width: 100%;
@@ -161,7 +193,9 @@
                         text-align: end;
                         animation: scrollhint .5s 0s linear infinite alternate-reverse;
 
-
+                        @include t() {
+                            display: none;
+                        }
 
                     }
 
@@ -179,6 +213,27 @@
                         width: fit-content;
                         margin-left: auto;
                         padding-right: 2rem;
+                        @include t() {
+                            padding: 0;
+                            margin: auto;
+                            width: 100%;
+                        }
+                        ul {
+                            @include t() {
+                                width: 100%;
+                                display: flex;
+                                flex-wrap: wrap;
+                                justify-content: center;
+                                li{
+                                    text-align: center;
+                                    width: 30%;
+                                    padding: 0.5rem 0;
+                                }
+
+                            }
+
+                        }
+
                     }
                 }
 
@@ -190,6 +245,7 @@
                     min-width: 200px;
                     background-color: $myellow;
                     z-index: 3;
+
                     &::after {
                         content: "";
                         position: absolute;
@@ -206,17 +262,28 @@
                     height: 100%;
                     overflow: hidden;
                     position: relative;
-
+                    @include t(){
+                        position: absolute;
+                        right: 0;
+                    }
                     .txtgo {
                         display: flex;
                         flex-direction: column;
                         animation: txtgo 10s linear infinite;
-                        min-width:100px ;
+                        min-width: 100px;
+                        @include t(){
+                            min-width: 64px;
+                            opacity: .3;
+                        }
                     }
 
                     .txtskew {
+                        
                         animation: txtgos linear infinite;
                         animation-duration: 10s;
+                        @include t(){
+                            animation: txtgo 10s linear infinite;
+                        }
                     }
 
                     h1 {
@@ -279,7 +346,8 @@
                             cursor: pointer;
                         }
                     }
-                    .moreexb{
+
+                    .moreexb {
                         text-align: end;
                     }
 
@@ -290,13 +358,17 @@
                     width: calc(100% - 80px);
                     display: flex;
                     margin-left: 1.5rem;
-
+                    @include t(){
+                        flex-direction: column;
+                    }
                     .item {
                         width: 29%;
                         height: 100%;
                         padding: 2rem .5rem 1rem 0;
                         border-left: 2px solid $mblue;
-
+                        @include t(){
+                            width: 100%;
+                        }
                         a {
                             display: flex;
                             flex-direction: column;
@@ -304,27 +376,42 @@
                             width: 100%;
                             height: 100%;
                             margin-top: auto;
-
+                            position: relative;
+                            @include t(){
+                                flex-direction: row;
+                            }
                             .image {
                                 width: 100%;
                                 height: 40%;
                                 overflow: hidden;
-                            }
-
-                            img {
+                                @include t(){
+                                    order: -1;
+                                    width: 100%;
+                                    height: auto;
+                                }
+                                img {
                                 vertical-align: bottom;
                                 width: 125%;
                                 height: 100%;
                                 object-fit: cover;
                             }
+                            }
+
+                            
 
                             .txt {
                                 padding: 1rem;
                                 height: 50%;
-
+                                @include t(){
+                                    width: 70%;
+                                    padding: 0.5rem;
+                                }
                                 h3 {
                                     margin: 1rem 0;
                                     background-color: $myellow;
+                                    @include t(){
+                                        margin:0 0 0.5rem 0;
+                                    }
                                 }
 
                                 p {
@@ -332,12 +419,20 @@
                                     -webkit-box-orient: vertical;
                                     -webkit-line-clamp: 5;
                                     overflow: hidden;
+                                    @include t(){
+                                        height: 40%;
+                                    }
                                 }
                             }
                         }
 
                         .seemore {
                             text-align: end;
+                            @include t(){
+                                position: absolute;
+                                right: 0;
+                                bottom: 0;
+                            }
                         }
 
                     }
@@ -532,7 +627,8 @@
                         z-index: 5;
                         top: 0;
                         right: 7.5%;
-                        &::after{
+
+                        &::after {
                             content: "";
                             position: absolute;
                             height: 100px;
@@ -588,7 +684,7 @@
                         left: 0;
                         overflow: hidden;
                         background-color: #fff;
-                        
+
                         &::after {
                             content: "";
                             position: absolute;
@@ -637,11 +733,16 @@
 }
 
 .anchor {
+    @include t(){
+        display: none;
+    }
     padding: 2rem 0 0 90px;
+
     ul {
         display: flex;
         width: fit-content;
         position: relative;
+
         li {
             width: 15px;
             height: 15px;
@@ -649,16 +750,18 @@
             border-radius: 50%;
             cursor: pointer;
         }
-        li+li{
+
+        li+li {
             margin-left: 1rem;
         }
-        span{
+
+        span {
             position: absolute;
-            width:200px;
+            width: 200px;
             height: 4px;
-            background:linear-gradient(90deg,$mpink 0%,$mgreen 0%);
+            background: linear-gradient(90deg, $mpink 0%, $mgreen 0%);
             @include tc();
-            transition:.3s;
+            transition: .3s;
             z-index: -1;
         }
     }
