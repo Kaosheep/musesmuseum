@@ -1,12 +1,4 @@
-<script>
-// @ is an alias to /src
-export default {
-  name: 'Path',
-  components: {
 
-  }
-}
-</script>
 
 <template>
 <RouterView></RouterView>
@@ -21,3 +13,23 @@ export default {
 }
 
 </style>
+<script>
+// @ is an alias to /src
+export default {
+  name: 'Path',
+  components: {
+
+  },
+  data(){
+    return{
+   
+    }
+  },
+  methods:{
+    
+  },
+  mounted(){
+    
+  }
+}
+</script>
