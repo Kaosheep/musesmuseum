@@ -1,39 +1,43 @@
 <template>
-   <div class="bg">
-    <main class="bgcGY">
+   <div class="bgcGY">
+    <main>
         <div class="backGroundCardbBlue"></div>
-        <form class="backGroundCard">
-          <router-link :to="a.link" v-for="a in memBtnLink">
-          <button :class="[a.name === '會員登入' ? 'pinkBtn' : 'pinkBtnLight']">
-            {{a.name}}
-          </button>
-          </router-link>
-          <div class="memloginActi" v-for="i in memAllInfo">
-            <label  :key="i.id">{{ i.memTitColumn }}</label>
-            <input
-            :key="i.id"
-            :type="i.type"
-            :id="i.id"
-            :name="i.name"
-            :class="i.class"
-            :placeholder="i.placeholder"
-             required
-            />
+        <div class="backGroundCard">
+          <div class="backGroundCardBtns">
+            <router-link :to="a.link" v-for="a in memBtnLink">
+              <button :class="[a.name === '會員登入' ? 'pinkBtn' : 'pinkBtnLight']">
+                {{a.name}}
+              </button>
+            </router-link>
           </div>
-          <!-- <div class="resetPswEmail">
-            <a href="#">信箱驗證</a>
-          </div> -->
-          <div class="memloginSubmit">
-            <input
-              type="button"
-              id="btnLogin"
-              class="submitBtn"
-              value="送出"
-              @click="checkLoginData"
-            />  
-            <!-- <input type="button" id="btnCancel" value="取消"> -->
-          </div>
-        </form>
+          <form>
+            <div class="memloginActi" v-for="i in memAllInfo">
+              <label  :key="i.id">{{ i.memTitColumn }}</label>
+              <input
+              :key="i.id"
+              :type="i.type"
+              :id="i.id"
+              :name="i.name"
+              :class="i.class"
+              :placeholder="i.placeholder"
+              required
+              />
+            </div>
+            <!-- <div class="resetPswEmail">
+              <a href="#">信箱驗證</a>
+            </div> -->
+            <div class="memloginSubmit">
+              <input
+                type="button"
+                id="btnLogin"
+                class="submitBtn"
+                value="送出"
+                @click="checkLoginData"
+              />  
+              <!-- <input type="button" id="btnCancel" value="取消"> -->
+            </div>
+          </form>
+        </div>
     </main>
    </div>
 </template>
@@ -57,7 +61,7 @@ export default {
  
       memBtnLink:[
         { link:"", name:"會員註冊" },
-        { link:"/Login", name:"會員登入" },
+        { link:"/Home/Login", name:"會員登入" },
       ],
     };
   },

@@ -58,8 +58,8 @@ export default {
  
       memBtnLink:[
         { link:"", name:"會員資料" },
-        { link:"/SearchProduct", name:"訂單查詢" },
-        { link:"/SearchTicket", name:"票券查詢" },
+        { link:"/Home/SearchProduct", name:"訂單查詢" },
+        { link:"/Home/SearchTicket", name:"票券查詢" },
       ],
     };
   },

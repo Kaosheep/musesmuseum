@@ -1,5 +1,5 @@
 <template>
-  <div class="bgcGY">
+  <div class="bgcGY cardCenter">
     <main>
       <div class="backGroundCardbBlue"></div>
       <div class="backGroundCard">
@@ -11,26 +11,26 @@
           </router-link>
         </div>
         <form>
-        <div class="memloginActi" v-for="i in memAllInfo">
-          <label :key="i.id">{{ i.memTitColumn }}</label>
-          <input :key="i.id" :type="i.type" :id="i.id" :name="i.name" :class="i.class" :placeholder="i.placeholder"
-            required />
-        </div>
+          <div class="memloginActi" v-for="i in memAllInfo">
+            <label :key="i.id">{{ i.memTitColumn }}</label>
+            <input :key="i.id" :type="i.type" :id="i.id" :name="i.name" :class="i.class" :placeholder="i.placeholder"
+              required />
+          </div>
 
-        <div class="memloginActi">
-          <label for="verification">驗證碼:</label>
-          <div id="verification-code"></div>
-          <input type="text" id="entered-code" class="fillInClumn" placeholder="輸入隨機碼">
-          <p id="message"></p>
-        </div>
-        <div class="resetPswEmail">
-          <a href="#">忘記密碼</a>
-        </div>
+          <div class="memloginActi">
+            <label for="verification">驗證碼:</label>
+            <div id="verification-code"></div>
+            <input type="text" id="entered-code" class="fillInClumn" placeholder="輸入隨機碼">
+            <p id="message"></p>
+          </div>
+          <div class="resetPswEmail">
+            <a href="#">忘記密碼</a>
+          </div>
 
-        <div class="memloginSubmit">
-          <input type="button" id="btnLogin" class="submitBtn" value="登入" @click="checkLoginData" />
-          <!-- <input type="button" id="btnCancel" value="取消"> -->
-        </div>
+          <div class="memloginSubmit">
+            <input type="button" id="btnLogin" class="submitBtn" value="登入" @click="checkLoginData" />
+            <!-- <input type="button" id="btnCancel" value="取消"> -->
+          </div>
         </form>
       </div>
     </main>
@@ -50,7 +50,7 @@ export default {
         { memTitColumn: "密碼", type: "password", id: "memPsw", name: "memPsw", class: "fillInClumn", placeholder: "密碼" },
       ],
       memBtnLink: [
-        { link: "/MemberSignUp", name: "會員註冊" },
+        { link: "/Home/MemberSignUp", name: "會員註冊" },
         { link: "", name: "會員登入" },
       ]
     };
@@ -90,11 +90,4 @@ export default {
 //   min-height: calc(100vh - 130px);
 //   margin: auto;
 // }
-form{
-  height: 300px;
-  width: 200px;
-  margin: -85px auto 100px auto;
-  // background-color: red;
-  
-}
 </style>
