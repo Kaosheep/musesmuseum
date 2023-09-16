@@ -33,21 +33,42 @@
     width: 70%;
     max-width: 700px;
     margin: auto;
+    position: relative;
+    .dot{
+        width: 136px;
+        height: 80px;
+        background-image: url('@/assets/image/exhibition/specialexhibition/spex_deco5.png');
+        background-size: 1rem;
+        position: absolute;
+        top: -15%;
+        left: 65%;
+    }
+    .checkAll{
+        width: 25px;
+        height: 25px;
+        margin: 1% 2%;
+    }
+    label{
+        color: $mgreen;
+        font-size: 1.5rem;
+        margin: 1.5% 0;
+    }
     .shopping_mbi{
         display: flex;
-        border: 3px solid $mgreen;
+        border: 1px solid $mgreen;
         border-radius: 8px;
-        padding: 2rem 1rem;
+        padding: 2% 1%;
         align-items: center;
         position: relative;
         input{
             width: 25px;
             height: 25px;
-            margin: 0rem 1rem;
+            margin: 0 1%;
         }
         .shopping_productimage{
-            width: 25%;
-            margin: 0rem 1rem;
+            min-width: 100px;
+            width: 30%;
+            margin: 0 1%;
             img{
                 width: 100%;
                 border-radius: 8px;
@@ -55,13 +76,13 @@
             }
         }
         .shopping_productinfo{            
-            margin: 0rem 2rem;
+            margin: 0 2%;
             p{
                 font-size: 1.5rem;                
-                padding: 1rem 0;
+                padding: 1% 0;
             }
             .shopping_function{
-                padding: 1rem 0;
+                padding: 1% 0;
                 .shopping_productcount{
                     button{
                         width: 1.5rem;
@@ -96,8 +117,8 @@
             background: white;
             color: $mblue;
             position: absolute;
-            top: 20px;
-            right: 20px;
+            top: 3%;
+            right: 3%;
         }
         
     }
@@ -116,9 +137,21 @@
                 height: 19px;
             }
         }
+        .shopping_mbl{
+            width: 80%;
+            .shopping_mbi{
+                .shopping_productinfo{
+                     p{
+                        font-size: 1.2rem;
+                    }
+                }
+            }
+
+        }
+                
     }
 }
-@include m() {
+@include m(){
     @media screen and (max-width:$m) {
         .shopping_stepbar{
             width: 100%;
@@ -126,9 +159,38 @@
                 font-size: 14px;
             }
             svg{
-                margin: 0.5%;   
+                margin: 0.5%;
                 width: 12%;
                 height: 19px;
+            }
+        }
+        .shopping_mbl{
+            width: 90%;
+            .checkAll{
+                width: 15px;
+                height: 15px;
+            }
+            label{
+                font-size: 1rem;
+            }
+            .shopping_mbi{
+                input{
+                    width: 15px;
+                    height: 15px;
+                }
+                .shopping_productinfo{
+                    p{
+                        font-size: 1rem;
+                    }
+                    .shopping_function{
+                        .shopping_productcount{
+                            span{
+                                font-size: 1em;
+                                width: 45px;
+                            }
+                        }
+                    }
+                }
             }
         }
     }
