@@ -41,7 +41,6 @@
             <div class="txtgo txtskew">
               <h1>Current Exhibitions</h1>
               <h1>Current Exhibitions</h1>
-              
             </div>
           </div>
           <div class="smalltitle">
@@ -50,7 +49,12 @@
           <div class="new">
             <div class="container">
               <div class="gallery" ref="galleryRef">
-                <img :src="img.imgsrc" :alt="img.imgtitle" v-for="img in galleryimgs"  @click="rotateGallery(i)"/>
+                <img
+                  :src="img.imgsrc"
+                  :alt="img.imgtitle"
+                  v-for="(img, imgindex) in galleryimgs"
+                  :key="imgindex"
+                />
               </div>
             </div>
             <div class="moreexb">

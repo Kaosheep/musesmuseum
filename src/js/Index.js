@@ -99,20 +99,20 @@ export default {
 
       anchorli[0].style.backgroundColor = `#EB5F86`;
     },
-    // gallerycircle() {
-    //   const images = [...document.querySelectorAll(".gallery img")];
-    //   let galleryr = document.querySelector(".new .gallery").clientWidth;
-    //   let gallery = document.querySelector(".gallery");
-    //   const angle = 360 / images.length;
-    //   images.forEach((image, i) => {
-    //     image.style.transform = `rotate3d(0,1,0,${(i + 1) * angle
-    //       }deg) translateZ(${galleryr}px)`;
-    //     image.onclick = () => {
-    //       gallery.style.transform = `perspective(1800px) rotateX(-5deg) rotateY(-${(i + 1) * angle
-    //         }deg)`;
-    //     };
-    //   });
-    // },
+    gallerycircle() {
+      const images = [...document.querySelectorAll(".gallery img")];
+      let galleryr = document.querySelector(".new .gallery").clientWidth;
+      let gallery = document.querySelector(".gallery");
+      const angle = 360 / images.length;
+      images.forEach((image, i) => {
+        image.style.transform = `rotate3d(0,1,0,${(i + 1) * angle
+          }deg) translateZ(${galleryr}px)`;
+        image.onclick = () => {
+          gallery.style.transform = `perspective(1800px) rotateX(-5deg) rotateY(-${(i + 1) * angle
+            }deg)`;
+        };
+      });
+    },
     followcursor() {
       let btns = document.querySelectorAll(".container .row .card button");
       let txts = document.querySelectorAll(".container .row .card .txt");
@@ -138,45 +138,23 @@ export default {
         });
       });
     },
-    // resize() {
-    //   let slider = document.querySelector(".home_slider");
-    //   if (window.innerWidth > 768) {
-    //     let sliderWidth = slider.getBoundingClientRect().width;
-    //     document.body.style.height = `${sliderWidth - (window.innerWidth - window.innerHeight)
-    //       }px`;
-    //     this.gallerycircle();
-
-    //   } else {
-    //     document.body.style.height = 'auto';
-    //     slider.style.transform = `translateX(0px)`
-    //   }
-
-    // },
-    gallerycircle() {
-      const gallery = this.$refs.galleryRef;
-      const galleryimgs = this.galleryimgs;
-      const galleryr = gallery.clientWidth;
-
-      galleryimgs.forEach((image, i) => {
-        image.style.transform = `rotate3d(0,1,0,${(i + 1) * 60}deg) translateZ(${galleryr}px)`;
-      });
-    },
-    rotateGallery(i) {
-      const gallery = this.$refs.galleryRef;
-      gallery.style.transform = `perspective(1800px) rotateX(-5deg) rotateY(-${(i + 1) * 60}deg)`;
-    },
     resize() {
-      const slider = document.querySelector(".home_slider");
+      
       if (window.innerWidth > 768) {
-        
-        const sliderWidth = slider.getBoundingClientRect().width;
-        document.body.style.height = `${sliderWidth - (window.innerWidth - window.innerHeight)}px`;
+        let slider = document.querySelector(".home_slider");
+        let sliderWidth = slider.getBoundingClientRect().width;
+        document.body.style.height = `${sliderWidth - (window.innerWidth - window.innerHeight)
+          }px`;
         this.gallerycircle();
+
       } else {
-        document.body.style.height = "auto";
-        slider.style.transform = `translateX(0px)`;
+        let slider = document.querySelector(".home_slider");
+        document.body.style.height = 'auto';
+        slider.style.transform = `translateX(0px)`
       }
+
     },
+
   
   },
   mounted() {
@@ -256,7 +234,7 @@ export default {
 
   },
   beforeUnmount() {
-
+    window.removeEventListener("resize", this.resize);
     window.removeEventListener("scroll", this.anchor);
   }
 
