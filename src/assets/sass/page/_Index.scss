@@ -337,7 +337,10 @@
 
 
                 .new {
-                    display: none;
+                    @include t(){
+                        display: none;
+                    }
+                    
                     .container {
                         width: 75vw;
                         padding-top: 8%;

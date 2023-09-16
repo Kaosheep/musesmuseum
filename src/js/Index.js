@@ -59,6 +59,14 @@ export default {
           title: "諾貝爾仿徽",
           price: 3500,
         },
+      ],
+      galleryimgs:[
+        {imgsrc:'',imgtitle:''},
+        {imgsrc:'',imgtitle:''},
+        {imgsrc:'',imgtitle:''},
+        {imgsrc:'',imgtitle:''},
+        {imgsrc:'',imgtitle:''},
+        {imgsrc:'',imgtitle:''},
       ]
     };
   },
@@ -90,122 +98,22 @@ export default {
       })
 
       anchorli[0].style.backgroundColor = `#EB5F86`;
-    }
-  },
-  mounted() {
-    let sections = [...document.querySelectorAll("section")];
-    let slider = document.querySelector(".home_slider");
-    let sliderWidth, galleryr;
-    let sectionWidth;
-    let current = 0;
-    let target = 0;
-    let ease = 0.05;
-    let gallery = document.querySelector(".gallery");
-    let txtframe = document.querySelectorAll(".txtframe");
-    let max1 = document.getElementById("max1");
-    let max2 = document.getElementById("max2");
-
-    const images = [...document.querySelectorAll(".gallery img")];
-    const angle = 360 / images.length;
-    window.addEventListener("resize", () => {
-      resize();
-    });
-
-    function lerp(start, end, t) {
-      return start * (1 - t) + end * t;
-    }
-    function setTransform(el, transform) {
-      el.style.transform = transform;
-    }
-    function resize() {
-      if (window.innerWidth > 768) {
-        let sliderWidth = slider.getBoundingClientRect().width;
-        let sectionWidth = sliderWidth / sections.length;
-        document.body.style.height = `${sliderWidth - (window.innerWidth - window.innerHeight)
-          }px`;
-      } else {
-        document.body.style.height = 'auto';
-        slider.style.transform = `translateX(0px)`
-      }
-
-      gallerycircle();
-      followcursor();
-    }
-    function animate() {
-      current = parseFloat(lerp(current, target, ease)).toFixed(2);
-      target = window.scrollY;
-      if (window.innerWidth > 768) {
-        setTransform(slider, `translateX(-${current}px)`);
-      } else {
-
-        setTransform(slider, `translateY('')`);
-
-      }
-
-
-
-      animateimg();
-      requestAnimationFrame(animate);
-    }
-    let newimgs = [...document.querySelectorAll(".eventwrap .item .image img")];
-    let newimgWidth = document.querySelector(
-      ".eventwrap .item .image img"
-    ).offsetWidth;
-    function animateimg() {
-      let ratio = current / newimgWidth;
-      let intersectionratio;
-      newimgs.forEach((image, i) => {
-        intersectionratio = ratio * 0.7 - i * 1.5;
-        setTransform(image, `translateX(-${intersectionratio * 8}px)`);
-      });
-      txtframe.forEach((txtframe) => {
-        setTransform(txtframe, `translateX(${intersectionratio * 20}px)`);
-      });
-
-      setTransform(
-        max1,
-        `translateX(${-window.innerWidth + current / 5}px) translateY(${window.innerWidth * 0.0785
-        }px)`
-      );
-      setTransform(
-        max2,
-        `translateX(${-window.innerWidth + current / 5}px) translateY(${(-window.innerWidth + current / 5) * 0.2588190451
-        }px) skewY(15deg)`
-      );
-    }
-
-    animate();
-
-    function gallerycircle() {
-      galleryr = document.querySelector(".new .gallery").clientWidth;
-      images.forEach((image, i) => {
-        image.style.transform = `rotate3d(0,1,0,${(i + 1) * angle
-          }deg) translateZ(${galleryr}px)`;
-        image.onclick = () => {
-          gallery.style.transform = `perspective(1800px) rotateX(-5deg) rotateY(-${(i + 1) * angle
-            }deg)`;
-        };
-      });
-    }
-
-
-    resize();
-
-    let anchorli = [...document.querySelectorAll(".anchor ul li")];
-    anchorli.forEach((li, i) => {
-      li.addEventListener("click", (e) => {
-        window.scrollTo(
-          0,
-          (Math.ceil(parseInt(document.body.style.height)) / 6.5) * i
-        );
-      });
-    });
-
-    window.addEventListener("scroll", this.anchor);
-
-
-
-    function followcursor() {
+    },
+    // gallerycircle() {
+    //   const images = [...document.querySelectorAll(".gallery img")];
+    //   let galleryr = document.querySelector(".new .gallery").clientWidth;
+    //   let gallery = document.querySelector(".gallery");
+    //   const angle = 360 / images.length;
+    //   images.forEach((image, i) => {
+    //     image.style.transform = `rotate3d(0,1,0,${(i + 1) * angle
+    //       }deg) translateZ(${galleryr}px)`;
+    //     image.onclick = () => {
+    //       gallery.style.transform = `perspective(1800px) rotateX(-5deg) rotateY(-${(i + 1) * angle
+    //         }deg)`;
+    //     };
+    //   });
+    // },
+    followcursor() {
       let btns = document.querySelectorAll(".container .row .card button");
       let txts = document.querySelectorAll(".container .row .card .txt");
       let btnWidth = document.querySelector(
@@ -229,12 +137,126 @@ export default {
           btns[index].style.bottom = `0px`;
         });
       });
+    },
+    // resize() {
+    //   let slider = document.querySelector(".home_slider");
+    //   if (window.innerWidth > 768) {
+    //     let sliderWidth = slider.getBoundingClientRect().width;
+    //     document.body.style.height = `${sliderWidth - (window.innerWidth - window.innerHeight)
+    //       }px`;
+    //     this.gallerycircle();
+
+    //   } else {
+    //     document.body.style.height = 'auto';
+    //     slider.style.transform = `translateX(0px)`
+    //   }
+
+    // },
+    gallerycircle() {
+      const gallery = this.$refs.galleryRef;
+      const galleryimgs = this.galleryimgs;
+      const galleryr = gallery.clientWidth;
+
+      galleryimgs.forEach((image, i) => {
+        image.style.transform = `rotate3d(0,1,0,${(i + 1) * 60}deg) translateZ(${galleryr}px)`;
+      });
+    },
+    rotateGallery(i) {
+      const gallery = this.$refs.galleryRef;
+      gallery.style.transform = `perspective(1800px) rotateX(-5deg) rotateY(-${(i + 1) * 60}deg)`;
+    },
+    resize() {
+      const slider = document.querySelector(".home_slider");
+      if (window.innerWidth > 768) {
+        
+        const sliderWidth = slider.getBoundingClientRect().width;
+        document.body.style.height = `${sliderWidth - (window.innerWidth - window.innerHeight)}px`;
+        this.gallerycircle();
+      } else {
+        document.body.style.height = "auto";
+        slider.style.transform = `translateX(0px)`;
+      }
+    },
+  
+  },
+  mounted() {
+
+    let slider = document.querySelector(".home_slider");
+    let current = 0;
+    let target = 0;
+    let ease = 0.05;
+    let txtframe = document.querySelectorAll(".txtframe");
+    let max1 = document.getElementById("max1");
+    let max2 = document.getElementById("max2");
+
+
+    function lerp(start, end, t) {
+      return start * (1 - t) + end * t;
+    }
+    function setTransform(el, transform) {
+      el.style.transform = transform;
+    }
+
+    function animate() {
+      current = parseFloat(lerp(current, target, ease)).toFixed(2);
+      target = window.scrollY;
+      if (window.innerWidth > 768) {
+        setTransform(slider, `translateX(-${current}px)`);
+      } else {
+        setTransform(slider, `translateY('')`);
+      }
+      animateimg();
+      requestAnimationFrame(animate);
+    }
+    let newimgs = [...document.querySelectorAll(".eventwrap .item .image img")];
+    let newimgWidth = document.querySelector(
+      ".eventwrap .item .image img"
+    ).offsetWidth;
+
+    function animateimg() {
+      let ratio = current / newimgWidth;
+      let intersectionratio;
+      newimgs.forEach((image, i) => {
+        intersectionratio = ratio * 0.7 - i * 1.5;
+        setTransform(image, `translateX(-${intersectionratio * 8}px)`);
+      });
+      txtframe.forEach((txtframe) => {
+        setTransform(txtframe, `translateX(${intersectionratio * 20}px)`);
+      });
+
+      setTransform(
+        max1,
+        `translateX(${-window.innerWidth + current / 5}px) translateY(${window.innerWidth * 0.0785
+        }px)`
+      );
+      setTransform(
+        max2,
+        `translateX(${-window.innerWidth + current / 5}px) translateY(${(-window.innerWidth + current / 5) * 0.2588190451
+        }px) skewY(15deg)`
+      );
     }
 
 
+
+    let anchorli = [...document.querySelectorAll(".anchor ul li")];
+    anchorli.forEach((li, i) => {
+      li.addEventListener("click", (e) => {
+        window.scrollTo(
+          0,
+          (Math.ceil(parseInt(document.body.style.height)) / 6.5) * i
+        );
+      });
+    });
+    window.addEventListener("resize", this.resize);
+    window.addEventListener("scroll", this.anchor);
+    animate();
+    this.followcursor();
+    this.resize();
+    this.gallerycircle();
+
   },
   beforeUnmount() {
-    console.log(this.anchor)
+
     window.removeEventListener("scroll", this.anchor);
   }
 

@@ -1,5 +1,5 @@
 <template>
-  <Carousel v-model="value" autoplay loop autoplay-speed="4000" class="shop_carousel">
+  <Carousel v-model="value" autoplay loop :autoplay-speed="4000" class="shop_carousel">
     <CarouselItem class="banner">
       <img src="@/assets/image/productimage/banner/AntoinettePoudre.png" />
     </CarouselItem>

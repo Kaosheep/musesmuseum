@@ -49,13 +49,8 @@
           </div>
           <div class="new">
             <div class="container">
-              <div class="gallery">
-                <img src="" alt="" />
-                <img src="" alt="" />
-                <img src="" alt="" />
-                <img src="" alt="" />
-                <img src="" alt="" />
-                <img src="" alt="" />
+              <div class="gallery" ref="galleryRef">
+                <img :src="img.imgsrc" :alt="img.imgtitle" v-for="img in galleryimgs"  @click="rotateGallery(i)"/>
               </div>
             </div>
             <div class="moreexb">

@@ -87,7 +87,7 @@ export default {
         },
         {
           title: "參觀服務",
-          link: "/Visit",
+          link: "/VisitInformation",
           sublist: [
             { subtitle: "注意事項", sublink: "/VisitInformation" },
             { subtitle: "常見問題", sublink: "/faq" },
@@ -129,5 +129,5 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-@import "@/assets/sass/style.scss";
+
 </style>
