@@ -32,7 +32,7 @@
       /></router-link>
     </div>
     <div class="login">
-      <router-link to="/Login" @click="closemenu">會員登入</router-link>
+      <router-link to="Home/Login" @click="closemenu">會員登入</router-link>
     </div>
     <div class="menu">
       <ul>
@@ -59,50 +59,50 @@ export default {
   data() {
     return {
       navlist: [
-        { title: "購票專區", link: "/Tick" },
+        { title: "購票專區", link: "Home/Tick" },
         {
           title: "展覽資訊",
           link: "/Exb",
           sublist: [
-            { subtitle: "常設展覽", sublink: "/" },
-            { subtitle: "當期展覽", sublink: "/SpecialExhibition" },
+            { subtitle: "常設展覽", sublink: "Home/" },
+            { subtitle: "當期展覽", sublink: "Home/SpecialExhibition" },
           ],
         },
         {
           title: "藝術典藏",
           link: "/Collection",
           sublist: [
-            { subtitle: "文物區", sublink: "/" },
-            { subtitle: "畫作區", sublink: "/" },
+            { subtitle: "文物區", sublink: "Home/" },
+            { subtitle: "畫作區", sublink: "Home/" },
           ],
         },
         {
           title: "園區導覽",
           link: "/Space",
           sublist: [
-            { subtitle: "館內地圖", sublink: "/Space" },
-            { subtitle: "周邊景點", sublink: "/SpaceMap" },
-            { subtitle: "附屬空間", sublink: "/" },
+            { subtitle: "館內地圖", sublink: "Home/Space" },
+            { subtitle: "周邊景點", sublink: "Home/SpaceMap" },
+            { subtitle: "附屬空間", sublink: "Home/" },
           ],
         },
         {
           title: "參觀服務",
           link: "/Visit",
           sublist: [
-            { subtitle: "注意事項", sublink: "/VisitInformation" },
-            { subtitle: "常見問題", sublink: "/faq" },
-            { subtitle: "交通資訊", sublink: "/" },
+            { subtitle: "注意事項", sublink: "Home/VisitInformation" },
+            { subtitle: "常見問題", sublink: "Home/faq" },
+            { subtitle: "交通資訊", sublink: "Home/" },
           ],
         },
         {
           title: "關於我們",
           link: "/About",
           sublist: [
-            { subtitle: "歷史沿革", sublink: "/" },
-            { subtitle: "歷代館長", sublink: "/" },
+            { subtitle: "歷史沿革", sublink: "Home/" },
+            { subtitle: "歷代館長", sublink: "Home/" },
           ],
         },
-        { title: "商品", link: "/Shop" },
+        { title: "商品", link: "Home/Shop" },
       ],
       isClick: false,
     };
