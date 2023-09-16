@@ -2,14 +2,18 @@ template {
     position: relative;
 }
 .img_deco {
-    width: 100%;
-    position: relative;
-}
-.img_deco img {
-    width: 10%;
+    background: radial-gradient(circle, transparent 14%, #009CA8 15%, #009CA8 25%, transparent 26%);
+    background-size: 1em 1em;
+    background-color: transparent;
+    opacity: 1;
+    width: 4em;
+    height: 9em;
+    transform: rotate(45deg);
     position: absolute;
-    left: 3%;
+    left: 6%;
+    z-index: 3;
 }
+
 .exhi_section {
     max-width: 1200px;
     margin: 5% auto;
@@ -39,34 +43,75 @@ template {
     position: relative;
     z-index: 1;
 }
-.exhi_desc .bgc_deco {
-    width: 100%;
-}
-.exhi_desc .bgc_deco img {
-    width: 18%;
+.exhi_desc .bgc_deco_a {
+    background: radial-gradient(circle, #1E5289 25%, transparent 26%);
+    background-size: 1em 1em;
+    background-color: transparent;
+    opacity: 1;
+    width: 2em;
+    height: 2em;
     position: absolute;
     left: -44%;
-    bottom: -34%;
+    bottom: -22%;
+}
+.exhi_desc .bgc_deco_b {
+    background: radial-gradient(circle, #1E5289 25%, transparent 26%);
+    background-size: 1em 1em;
+    background-color: transparent;
+    opacity: 1;
+    width: 2em;
+    height: 2em;
+    position: absolute;
+    left: -31%;
+    bottom: -22%;
+}
+.exhi_desc .bgc_deco_c {
+    background: radial-gradient(circle, #1E5289 25%, transparent 26%);
+    background-size: 1em 1em;
+    background-color: transparent;
+    opacity: 1;
+    width: 2em;
+    height: 2em;
+    position: absolute;
+    left: -37.5%;
+    bottom: -13%;
+}
+.exhi_desc .bgc_deco_d {
+    background: radial-gradient(circle, #1E5289 25%, transparent 26%);
+    background-size: 1em 1em;
+    background-color: transparent;
+    opacity: 1;
+    width: 2em;
+    height: 2em;
+    position: absolute;
+    left: -37.5%;
+    bottom: -30%;
 }
 .exhi_desc .back_deco {
-    width: 100%;
-}
-.exhi_desc .back_deco img {
-    width: 10%;
+    background: radial-gradient(circle, #EB5F86 25%, transparent 26%);
+    background-size: 1em 1em;
+    background-color: transparent;
+    opacity: 1;
+    width: 2em;
+    height: 2em;
+    transform: rotate(45deg);
     position: absolute;
-    left: -20%;
-    top: -15%;
+    left: -20.5%;
+    bottom: -27%;
 }
 .exhi_desc .exhi_desc_deco {
-    width: 100%;
-}
-.exhi_desc .exhi_desc_deco img {
-    width: 28%;
+    background: radial-gradient(circle at top right, transparent 10%, #EB5F86 10%, #EB5F86 20%, transparent 21%), radial-gradient(circle at left bottom, transparent 10%, #EB5F86 10%, #EB5F86 20%, transparent 21%), radial-gradient(circle at top left, transparent 10%, #EB5F86 10%, #EB5F86 20%, transparent 21%), radial-gradient(circle at right bottom, transparent 10%, #EB5F86 10%, #EB5F86 20%, transparent 21%), radial-gradient(circle at center, #EB5F86 30%, transparent 31%);
+    background-size: 2em 2em;
+    background-color: #FBF796;
+    opacity: 1;
+    width: 12em;
+    height: 3em;
+    border-radius: 4px;
+    transform: rotate(45deg);
     position: absolute;
-    right: -10%;
-    top: -15%;
+    right: -12%;
+    top: 1%;
 }
-
 .exhi_desc_bgc {    
     width: 40vw;
     height: 28vw;
@@ -77,8 +122,15 @@ template {
     top: 5.5%;
     z-index: 0;
 }
-.buy_tickbtn img {
-    width: 4%;
+.buy_tickbtn_deco {
+    background: radial-gradient(circle, #009CA8 25%, transparent 26%);
+    background-size: 1em 1em;
+    background-color: transparent;
+    opacity: 1;
+    width: 2em;
+    height: 2em;
+    transform: rotate(45deg);
     position: absolute;
-    right: 8%
+    left: 82%;
+    bottom: -31%;
 }
