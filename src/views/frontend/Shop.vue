@@ -238,7 +238,6 @@ export default {
 };
 </script>
 <style scoped lang="scss">
-  @import "@/assets/sass/style.scss";
   h1 {
     text-align: center;
     font-size: 32px;

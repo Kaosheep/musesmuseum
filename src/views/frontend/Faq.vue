@@ -1,5 +1,4 @@
 <template>
-    <Header></Header>
     <div class="Fqaoutside">
         <h2 class="Fqa-title">{{ text }}</h2>
         <main class="Fqa-main">
@@ -131,7 +130,5 @@ export default {
 </script>
   
 <style scoped lang="scss">
-@import "@/assets/sass/style.scss";
-@import "@/assets/sass/page/_Fqa.scss";
 </style>
   

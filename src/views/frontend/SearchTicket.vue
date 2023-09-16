@@ -40,7 +40,6 @@ export default {
 };
 </script>
 <style scoped lang="scss">
-@import "@/assets/sass/style.scss";
 // main {
 //   min-height: calc(100vh - 130px);
 //   margin: auto;
