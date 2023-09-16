@@ -1,17 +1,30 @@
 <template>
-  <main>
-    <VerHeader :title="'畫作區 Paintings'"></VerHeader>
-    <div class="painting_wrap">
-      <div class="paintings_col" v-for="(img, imgindex) in paintings" :key="imgindex">
-        <div class="img">
-          <!-- <img
-            :src="require('../assets/image/paint/paint' + imgindex + '.jpg')"
-            :alt="img.imgname"
-          /> -->
-        </div>
-        <div class="txt">
-          <h2>{{ img.imgname }}</h2>
-          <h3>{{ img.imgen }}</h3>
+  <main class="painting_main">
+    <div class="title"><VerHeader :title="'畫 作 區 Paintings'"></VerHeader></div>
+    <div class="container">
+      <div class="paintsearchbar"><Searchbar></Searchbar></div>
+      <button class="paintsearch" type="button" @click="scrollpage">
+        <img src="@/assets/image/paint/arrow.svg" alt="" />
+      </button>
+      <div class="viexport">
+        <span></span><span></span>
+        <div class="wrap">
+          <div class="col" v-for="(img, imgindex) in paintings" :key="imgindex">
+            <div class="img">
+              <img
+                :src="require('@/assets/image/paint/paint' + imgindex + '.jpg')"
+                :alt="img.imgname"
+              />
+            </div>
+            <div class="txtcard">
+              <div class="color">
+                <div class="txt">
+                  <h2>{{ img.imgname }}</h2>
+                  <h3>{{ img.imgen }}</h3>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -20,14 +33,16 @@
 
 <script>
 import VerHeader from "@/components/VerHeader.vue";
+import Searchbar from "@/components/Searchbar.vue";
 export default {
   components: {
     VerHeader,
+    Searchbar,
   },
   data() {
     return {
       paintings: [
-        { imgname: "1871凡爾賽宮德皇登基", imgen: "loremlorem" },
+        { imgname: "凡爾賽宮德皇登基", imgen: "loremlorem" },
         { imgname: "伏爾加河上的縴夫", imgen: "loremlorem" },
         { imgname: "俄國婦女", imgen: " Russian women" },
         { imgname: "哺乳聖母", imgen: "loremlorem" },
@@ -39,21 +54,45 @@ export default {
         { imgname: "施洗者約翰與聖母", imgen: "loremlorem" },
         { imgname: "查理五世", imgen: "loremlorem" },
         { imgname: "特洛伊王子", imgen: "loremlorem" },
-        { imgname: "迦拿的婚禮", imgen: "loremlorem" },
       ],
     };
   },
-  methods: {},
+  methods: {
+    scrollpage() {
+      document.querySelector(".wrap").scrollLeft +=
+        document.querySelector(".col").offsetWidth;
+    },
+  },
+  mounted() {
+    document.body.style.height = `auto`;
+    let imgs = [...document.querySelectorAll(".col")];
+    let wrap = document.querySelector(".wrap");
+    let coln = Math.round(wrap.offsetWidth / imgs[0].offsetWidth);
+
+    imgs
+      .slice(-coln)
+      .reverse()
+      .forEach((col) => {
+        wrap.insertAdjacentHTML("afterbegin", col.outerHTML);
+      });
+    imgs.slice(0, coln).forEach((col) => {
+      wrap.insertAdjacentHTML("beforeend", col.outerHTML);
+    });
+    function infinitescrolls() {    
+      if (Math.ceil(wrap.scrollLeft) + document.querySelector('.viexport').offsetWidth > wrap.scrollWidth) {
+        wrap.style.scrollBehavior = "auto";
+        wrap.scrollLeft = wrap.offsetWidth;
+        wrap.style.scrollBehavior = "smooth";
+      }
+    }
+    infinitescrolls();
+    wrap.addEventListener('scroll',infinitescrolls)
+  },
 };
 </script>
 
 <style scoped lang="scss">
-main {
-  width: 83.33%;
-  margin: auto;
-  
-}
-.painting_wrap{
-    display: inline-block;
+h2 {
+  font-size: 20px;
 }
 </style>
