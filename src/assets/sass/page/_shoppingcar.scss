@@ -44,16 +44,16 @@
         left: 65%;
     }
     .checkAll{
-        width: 25px;
-        height: 25px;
-        margin: 1% 2%;
+        width: 20px;
+        height: 20px;
+        margin: 0 2%;
     }
     label{
         color: $mgreen;
-        font-size: 1.5rem;
-        margin: 1.5% 0;
+        font-size: 1.2rem;
     }
     .shopping_mbi{
+        background-color: #fff;
         display: flex;
         border: 1px solid $mgreen;
         border-radius: 8px;
@@ -123,6 +123,36 @@
         
     }
 }
+.shopping_total{
+    width: 70%;
+    max-width: 700px;
+    margin: auto;
+    text-align: right;
+    p{
+        padding: 1% 0;
+        font-size: 1rem;
+        span{
+            color: $mpink;
+            font-size: 1.5rem;
+            padding: 0 0.5rem;
+        }
+    }
+    p:nth-child(2){
+        border-top: 1px $mgreen solid;
+    }
+}
+.shopping_nextstep{
+    margin: auto;
+    width: 10%;
+    min-width: 100px;
+    .pinkBtn{
+        background-color: $myellow;
+    }
+    .pinkBtn:hover{
+        background-color: $mpink;
+    }
+}
+
 @include t() {
     @media screen and (max-width:$t) {
         .shopping_stepbar{
@@ -166,6 +196,9 @@
         }
         .shopping_mbl{
             width: 90%;
+            .dot{
+                display: none;
+            }
             .checkAll{
                 width: 15px;
                 height: 15px;

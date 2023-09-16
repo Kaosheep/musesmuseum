@@ -12,7 +12,7 @@
     </div>
     <div class="social">
       <span>
-        <router-link to="/Shoppingcar">
+        <router-link to="/Home/Shoppingcar">
           <i class="sicon fa-solid fa-cart-shopping" id="social_cart"></i>
         </router-link>
       </span>

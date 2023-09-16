@@ -60,17 +60,21 @@
       </button>
     </div>
   </div>
-  <div class="total">
+  <div class="shopping_total">
     <p>
-      共<span>1</span>件商品<span>$300</span>
+      共<span>1</span>件商品
     </p>
     <p>
       總金額<span>$300</span>
     </p>
   </div>
-  <button>
-    下一步
-  </button>
+  <div class="shopping_nextstep">
+    <router-link to="/">
+      <button class="pinkBtn">
+        下一步
+      </button>
+    </router-link>
+  </div>
 </template>
 
 <script>
