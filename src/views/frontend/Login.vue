@@ -57,11 +57,27 @@ export default {
   },
   methods: {
     checkLoginData() {
-      if (this.memId === "test" && this.memPsw === "test") {
-        window.alert("登入成功");
-      } else {
-        window.alert("帳密錯誤");
+      // if (this.memId === "test" && this.memPsw === "test") {
+      //   window.alert("登入成功");
+      // } else {
+      //   window.alert("帳密錯誤");
+      // }
+      console.log('checkLoginData');
+      let input = {
+      mem_account:'charmy101@gmail.com',
+      mem_psw:'charmy101'
+
+    }
+    fetch(
+      'https://tibamef2e.com/cgd103/g1/api/getConfirmMember.php',{
+      method:'POST',
+      body:new URLSearchParams(input)
       }
+    )
+    .then(res => res.json())
+    .then(json => console.log(json))
+
+
     },
   },
   mounted() {
