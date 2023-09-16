@@ -17,74 +17,89 @@ const routes = [
         component: () => import('../views/frontend/Index.vue'),
       },
       {
-        path: '/About',
+        path: 'About',
         name: 'About',
         component: () => import('../views/frontend/About.vue')
       },
       {
-        path: '/Login',
+        path: 'Login',
         name: 'Login',
         component: () => import('../views/frontend/Login.vue')
       },
       {
-        path: '/Shop',
+        path: 'Shop',
         name: 'Shop',
         component: () => import('../views/frontend/Shop.vue')
       },
       {
-        path: '/Faq',
+        path: 'Faq',
         name: 'Faq',
         component: () => import('../views/frontend/Faq.vue')
       },
       {
-        path: '/ProductPage',
+        path: 'ProductPage',
         name: 'ProductPage',
         component: () => import('../views/frontend/ProductPage.vue')
       },
       {
-        path: '/News',
+        path: 'News',
         name: 'News',
         component: () => import('../views/frontend/News.vue')
       },
       {
-        path: '/Space',
+        path: 'Space',
         name: 'Space',
         component: () => import('../views/frontend/Space.vue')
       },
       {
-        path: '/SpaceMap',
+        path: 'SpaceMap',
         name: 'SpaceMap',
         component: () => import('../views/frontend/SpaceMap.vue')
       },
       {
-        path: '/Tick',
+        path: 'Tick',
         name: 'Tick',
         component: () => import('../views/frontend/Tick.vue')
       },
       {
-        path: '/VisitInformation',
+        path: 'VisitInformation',
         name: 'VisitInformation',
         component: () => import('../views/frontend/VisitInformation.vue')
       },
       {
-        path: '/SpecialExhibition',
+        path: 'SpecialExhibition',
         name: 'SpecialExhibition',
         component: () => import('../views/frontend/SpecialExhibition.vue')
       },
       {
-        path: '/VisitTraffic',
+        path: 'VisitTraffic',
         name: 'VisitTraffic',
         component: () => import('../views/frontend/VisitTraffic.vue')
       },
       {
-        path: '/MemberSignUp',
+        path: 'MemberSignUp',
         name: 'MemberSignUp',
         component: () => import('../views/frontend/MemberSignUp.vue'),
       },
       {
-        path: '/Shoppingcar',
+        path: 'Shoppingcar',
         name: 'Shoppingcar',
         component: () => import('../views/frontend/Shoppingcar.vue'),
+      },
+      {
+        path: 'MemberInfo',
+        name: 'MemberInfo',
+        component: () => import('../views/frontend/MemberInfo.vue'),
+      },
+      {
+        path: 'SearchTicket',
+        name: 'SearchTicket',
+        component: () => import('../views/frontend/SearchTicket.vue'),
+      },
+      {
+        path: 'SearchProduct',
+        name: 'SearchProduct',
+        component: () => import('../views/frontend/SearchProduct.vue'),
       },
     ]
   },
@@ -109,7 +124,7 @@ const routes = [
             component: () => import('../views/backend/newsm.vue'),
           },
           {
-            path: '/Memberm',
+            path: 'Memberm',
             name: 'Memberm',
             component: () => import('../views/backend/Memberm.vue'),
           }

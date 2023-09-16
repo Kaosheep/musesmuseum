@@ -1,5 +1,6 @@
 <template>
-   <div class="bg">
+
+<div class="bg">
     <main class="bgcGY">
         <div class="backGroundCardbBlue"></div>
         <form class="backGroundCard">
@@ -20,9 +21,9 @@
              required
             />
           </div>
-          <!-- <div class="resetPswEmail">
+          <div class="resetPswEmail">
             <a href="#">信箱驗證</a>
-          </div> -->
+          </div>
           <div class="memloginSubmit">
             <input
               type="button"
@@ -36,8 +37,8 @@
         </form>
     </main>
    </div>
-</template>
 
+</template>
 <script>
 import Footer from "@/components/Footer.vue";
 export default {
@@ -56,8 +57,9 @@ export default {
         ],
  
       memBtnLink:[
-        { link:"", name:"會員註冊" },
-        { link:"/Login", name:"會員登入" },
+        { link:"", name:"會員資料" },
+        { link:"/SearchProduct", name:"訂單查詢" },
+        { link:"/SearchTicket", name:"票券查詢" },
       ],
     };
   },
@@ -77,5 +79,9 @@ export default {
 </script>
 <style scoped lang="scss">
 @import "@/assets/sass/style.scss";
+// main {
+//   min-height: calc(100vh - 130px);
+//   margin: auto;
+// }
 
 </style>
