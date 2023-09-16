@@ -27,7 +27,7 @@ export default {
   height: 100%;
   overflow: hidden;
   position: relative;
-
+  display: inline-block;
   @include t() {
     position: absolute;
     right: 0;
