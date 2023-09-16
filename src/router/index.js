@@ -87,6 +87,11 @@ const routes = [
         component: () => import('../views/frontend/Shoppingcar.vue'),
       },
       {
+        path: 'Shopping',
+        name: 'Shopping',
+        component: () => import('../views/frontend/Shopping.vue'),
+      },
+      {
         path: 'MemberInfo',
         name: 'MemberInfo',
         component: () => import('../views/frontend/MemberInfo.vue'),

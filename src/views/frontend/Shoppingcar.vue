@@ -69,11 +69,12 @@
     </p>
   </div>
   <div class="shopping_nextstep">
-    <router-link to="/">
+    <router-link to="/home/Shopping">
       <button class="pinkBtn">
         下一步
       </button>
     </router-link>
+    <div class="dot"></div>
   </div>
 </template>
 

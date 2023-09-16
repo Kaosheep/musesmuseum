@@ -18,6 +18,9 @@
             color: $mgreen;
         }
     }
+    div:first-child{
+        background: $myellow;
+    }
     svg{
         margin: 1%;   
         width: 20%;
@@ -142,6 +145,7 @@
     }
 }
 .shopping_nextstep{
+    position: relative;
     margin: auto;
     width: 10%;
     min-width: 100px;
@@ -151,8 +155,15 @@
     .pinkBtn:hover{
         background-color: $mpink;
     }
+    .dot{
+        width: 45px;
+        height: 45px;
+        background-image: url('@/assets/image/exhibition/specialexhibition/spex_deco5.png');
+        background-size: 3rem;
+        position: absolute;
+        left: -200%;
+    }
 }
-
 @include t() {
     @media screen and (max-width:$t) {
         .shopping_stepbar{
