@@ -1,5 +1,5 @@
 <template>
-  <div class="shopping_stepbar">
+  <div class="shoppingcar_stepbar">
     <div>
       <p>
         確認商品
@@ -25,21 +25,21 @@
     </div>
   </div>
   <!-- mbl:mightbuylist；mbi:mightbuyitem -->
-  <div class="shopping_mbl">
+  <div class="shoppingcar_mbl">
     <div class="dot"></div>
     <input type="checkbox" class="checkAll">
     <label>全選</label>
-    <div class="shopping_mbi">
+    <div class="shoppingcar_mbi">
       <input type="checkbox">
-      <div class="shopping_productimage">
+      <div class="shoppingcar_productimage">
         <img src="@/assets/image/productimage/productimage0.png" alt="" />
       </div>
-      <div class="shopping_productinfo">
+      <div class="shoppingcar_productinfo">
         <p>
             MUSES質感束帶筆記本
         </p>
-        <div class="shopping_function">
-          <div class="shopping_productcount">
+        <div class="shoppingcar_function">
+          <div class="shoppingcar_productcount">
             <button @click="decrease">
               <font-awesome-icon :icon="['fas', 'minus']" id="minus"/>
             </button>
@@ -55,20 +55,20 @@
           </div>
         </div>  
       </div>  
-      <button class="shopping_itemdelete">
+      <button class="shoppingcar_itemdelete">
         X
       </button>
     </div>
   </div>
-  <div class="shopping_total">
+  <div class="shoppingcar_total">
     <p>
       共<span>1</span>件商品
     </p>
     <p>
-      總金額<span>$300</span>
+      商品總計<span>$300</span>
     </p>
   </div>
-  <div class="shopping_nextstep">
+  <div class="shoppingcar_nextstep">
     <router-link to="/home/Shopping">
       <button class="pinkBtn">
         下一步

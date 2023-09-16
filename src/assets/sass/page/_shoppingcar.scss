@@ -1,4 +1,4 @@
-.shopping_stepbar{
+.shoppingcar_stepbar{
     width: 85%;
     margin: 2rem auto;
     display: flex;
@@ -32,7 +32,7 @@
         }
     }
 }
-.shopping_mbl{
+.shoppingcar_mbl{
     width: 70%;
     max-width: 700px;
     margin: auto;
@@ -55,7 +55,7 @@
         color: $mgreen;
         font-size: 1.2rem;
     }
-    .shopping_mbi{
+    .shoppingcar_mbi{
         background-color: #fff;
         display: flex;
         border: 1px solid $mgreen;
@@ -68,7 +68,7 @@
             height: 25px;
             margin: 0 1%;
         }
-        .shopping_productimage{
+        .shoppingcar_productimage{
             min-width: 100px;
             width: 30%;
             margin: 0 1%;
@@ -78,15 +78,15 @@
                 vertical-align: bottom;
             }
         }
-        .shopping_productinfo{            
+        .shoppingcar_productinfo{            
             margin: 0 2%;
             p{
                 font-size: 1.5rem;                
                 padding: 1% 0;
             }
-            .shopping_function{
+            .shoppingcar_function{
                 padding: 1% 0;
-                .shopping_productcount{
+                .shoppingcar_productcount{
                     button{
                         width: 1.5rem;
                         height: 1.5rem;
@@ -113,7 +113,7 @@
                 }
             }
         }
-        .shopping_itemdelete{
+        .shoppingcar_itemdelete{
             width: 20px;
             height: 20px;
             border: none;
@@ -126,7 +126,7 @@
         
     }
 }
-.shopping_total{
+.shoppingcar_total{
     width: 70%;
     max-width: 700px;
     margin: auto;
@@ -144,7 +144,7 @@
         border-top: 1px $mgreen solid;
     }
 }
-.shopping_nextstep{
+.shoppingcar_nextstep{
     position: relative;
     margin: auto;
     width: 10%;
@@ -166,7 +166,7 @@
 }
 @include t() {
     @media screen and (max-width:$t) {
-        .shopping_stepbar{
+        .shoppingcar_stepbar{
             width: 100%;
             div{
                 width: 85px;
@@ -178,10 +178,10 @@
                 height: 19px;
             }
         }
-        .shopping_mbl{
+        .shoppingcar_mbl{
             width: 80%;
-            .shopping_mbi{
-                .shopping_productinfo{
+            .shoppingcar_mbi{
+                .shoppingcar_productinfo{
                      p{
                         font-size: 1.2rem;
                     }
@@ -194,7 +194,7 @@
 }
 @include m(){
     @media screen and (max-width:$m) {
-        .shopping_stepbar{
+        .shoppingcar_stepbar{
             width: 100%;
             p{
                 font-size: 14px;
@@ -205,7 +205,7 @@
                 height: 19px;
             }
         }
-        .shopping_mbl{
+        .shoppingcar_mbl{
             width: 90%;
             .dot{
                 display: none;
@@ -217,17 +217,17 @@
             label{
                 font-size: 1rem;
             }
-            .shopping_mbi{
+            .shoppingcar_mbi{
                 input{
                     width: 15px;
                     height: 15px;
                 }
-                .shopping_productinfo{
+                .shoppingcar_productinfo{
                     p{
                         font-size: 1rem;
                     }
-                    .shopping_function{
-                        .shopping_productcount{
+                    .shoppingcar_function{
+                        .shoppingcar_productcount{
                             span{
                                 font-size: 1em;
                                 width: 45px;
