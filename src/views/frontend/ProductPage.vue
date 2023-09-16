@@ -107,7 +107,7 @@
 </script>
 
 <style lang="scss" scoped>
-@import "@/assets/sass/style.scss";
+
   h1{
     font-size: 20px;
   }

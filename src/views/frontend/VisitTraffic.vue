@@ -144,6 +144,6 @@ export default {
 </script>
   
 <style scoped lang="scss">
-@import "@/assets/sass/style.scss";
+
 @import "@/assets/sass/page/_visitTraffic.scss";
 </style>
