@@ -20,15 +20,14 @@
             <th>商品編號</th>
             <th>商品名稱</th>
             <th>狀態</th>
-            <th>庫存</th>
             <th></th>
           </tr>
           <tr v-for="(i, index) in news" :key="index">
             <td><input type="checkbox"></td>
-            <td>{{ i.news_id }}</td>
-            <td>{{ i.news_title }}</td>
+            <td>{{  }}</td>
+            <td>{{  }}</td>
             <td>
-              <p v-if="parseInt(i.news_status) === 1">已上架</p>
+              <p v-if="parseInt() === 1">已上架</p>
               <p v-else>未上架</p>
             </td>
             <td>

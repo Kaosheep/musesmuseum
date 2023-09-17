@@ -1,15 +1,13 @@
 <template>
   <div>
     <div>
-      <button class="bTab">商品管理</button>
-      <button class="bTab">訂單管理</button>
+      <button class="bTab">管理員帳號</button>
     </div>
     <form action="">
       <div class="admin_editbar">
         <div>
           <PinkButton class="btn_admin" text="新增" />
           <PinkButton class="btn_admin" text="刪除" />
-          <PinkButton class="btn_admin" text="上架" />
         </div>
         <Searchbar class="onlyB" />
       </div>
@@ -17,19 +15,18 @@
         <table>
           <tr>
             <th></th>
-            <th>商品編號</th>
-            <th>商品名稱</th>
-            <th>狀態</th>
-            <th>庫存</th>
+            <th>管理員編號</th>
+            <th>管理員名稱</th>
+            <th>權限類型</th>
             <th></th>
           </tr>
           <tr v-for="(i, index) in news" :key="index">
             <td><input type="checkbox"></td>
-            <td>{{ i.news_id }}</td>
-            <td>{{ i.news_title }}</td>
+            <td>{{  }}</td>
+            <td>{{  }}</td>
             <td>
-              <p v-if="parseInt(i.news_status) === 1">已上架</p>
-              <p v-else>未上架</p>
+              <p v-if="parseInt() === 1">全權</p>
+              <p v-else>部分</p>
             </td>
             <td>
               <button class="edit">編輯</button>
@@ -59,16 +56,16 @@ export default {
   methods: {
 
   },
-  // mounted() {
-  //   fetch('http://localhost/musesmuseum_dbtest/php/aa.php')
-  //     .then(res => res.json())
-  //     .then(res => {
-  //       this.news = res;
-  //       console.log(res)
+//   mounted() {
+//     fetch('http://localhost/musesmuseum_dbtest/php/aa.php')
+//       .then(res => res.json())
+//       .then(res => {
+//         this.news = res;
+//         console.log(res)
 
-  //     })
+//       })
 
-  // }
+//   }
 
 }
 </script>
