@@ -1,0 +1,163 @@
+.art_main {
+    position: relative;
+    width: 95%;
+    height: 100vh;
+    padding-left: 80px;
+    overflow: hidden;
+    display: flex;
+
+    @include t() {
+        height: calc(100vh - 70px);
+        width: 100%;
+    }
+    .title{
+        height: 100vh;
+        overflow-y: hidden;
+        @include t() {
+            height: calc(100vh - 70px);
+        }
+    }
+    .circle {
+        position: absolute;
+        right: 0;
+        transform: translateX(40%);
+        width: 100vw;
+        height: 100vw;
+        border-radius: 50%;
+        background: radial-gradient($mlblue 20%, transparent 21%, transparent 79%, $mlblue 80%);
+        background-size: 1em 1em;
+        background-color: #ffffff;
+        z-index: -99;
+
+    }
+
+    .block {
+        .btn {
+            width: 40%;
+            text-align: center;
+            padding-top: 3rem;
+
+            button {
+                width: 50px;
+                height: 50px;
+                margin: 0.5rem;
+                cursor: pointer;
+                background-color: #ffffff;
+                border: none;
+                border-radius: 50%;
+                transition: .3s;
+
+                &:hover {
+                    background-color: $mlblue;
+                }
+            }
+        }
+
+        .container {
+            width: 40%;
+            height: calc(100vh - 114px);
+            position: relative;
+
+            @include t() {
+                height: calc(100vh - 184px);
+            }
+
+            @include set (900px) {
+                width: 55%;
+            }
+
+            &::before {
+                content: "";
+                background-color: transparent;
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                top: 0;
+                left: 0;
+            }
+
+            .veiw {
+
+
+                z-index: -1;
+                width: 100%;
+                height: calc(100vh - 114px);
+                overflow-y: scroll;
+                scrollbar-width: 0;
+                scroll-behavior: smooth;
+
+                @include t() {
+                    height: calc(100vh - 184px);
+                }
+
+                &::-webkit-scrollbar {
+                    display: none;
+                }
+
+                .warp {
+                    display: flex;
+                    flex-direction: column;
+
+                    .infocard {
+                        flex-shrink: 0;
+                        height: calc(100vh - 114px);
+                        padding: 3rem 1rem;
+
+                        @include t() {
+                            height: calc(100vh - 184px);
+                        }
+
+                        p {
+                            &:nth-child(3) {
+                                text-align: end;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+
+        .artwarp {
+            position: fixed;
+            top: 50%;
+            right: -90vw;
+            width: 100vw;
+            z-index: -10;
+
+            @include set (1200px) {
+                right: -100vw;
+            }
+
+            @include set (900px) {
+                right: -120vw;
+            }
+
+            @include t () {
+                top: 40%;
+                right: -120vw;
+            }
+
+            ul {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                li {
+                    position: absolute;
+                    transform-origin: 25vw;
+                    left: 0;
+                    transform: rotate(calc(360deg/6 * var(--i)));
+                    transition: .4s;
+
+                    .art {
+                        // width: 350px;
+                        transform: translateX(55vw) rotate(calc(360deg / -6 * var(--i)));
+                        cursor: all-scroll;
+                    }
+                }
+            }
+
+        }
+    }
+}
