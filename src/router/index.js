@@ -130,13 +130,33 @@ const routes = [
         children:[
           {
             path: '',
-            name: 'newsm',
-            component: () => import('../views/backend/newsm.vue'),
+            name: 'Newsm',
+            component: () => import('../views/backend/Newsm.vue'),
           },
           {
             path: 'Memberm',
             name: 'Memberm',
             component: () => import('../views/backend/Memberm.vue'),
+          },
+          {
+            path: 'Exhm',
+            name: 'Exhm',
+            component: () => import('../views/backend/Exhm.vue'),
+          },
+          {
+            path: 'Shopm',
+            name: 'Shopm',
+            component: () => import('../views/backend/Shopm.vue'),
+          },
+          {
+            path: 'Ticketsm',
+            name: 'Ticketsm',
+            component: () => import('../views/backend/Ticketsm.vue'),
+          },
+          {
+            path: 'Manager',
+            name: 'Manager',
+            component: () => import('../views/backend/Manager.vue'),
           }
         ]
       }
