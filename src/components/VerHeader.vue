@@ -28,6 +28,7 @@ export default {
   overflow: hidden;
   position: relative;
   display: inline-block;
+  z-index: -20;
   @include t() {
     position: absolute;
     right: 0;

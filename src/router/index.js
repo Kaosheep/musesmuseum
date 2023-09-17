@@ -110,6 +110,11 @@ const routes = [
         path: 'Paintings',
         name: 'Paintings',
         component: () => import('../views/frontend/Paintings.vue'),
+      },
+      {
+        path: 'Art',
+        name: 'Art',
+        component: () => import('../views/frontend/Art.vue'),
       }
     ]
   },
