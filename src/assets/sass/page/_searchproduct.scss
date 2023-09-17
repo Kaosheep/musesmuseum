@@ -1,0 +1,16 @@
+.headerRow{}
+.yellowRow{
+    width: 500px;
+    height: 80px;
+    margin:5px 0;
+    background-color: $myellow;
+    border-radius: 4px;
+}
+.whiteRow{
+    width: 500px;
+    height: 80px;
+    margin:5px 0;
+    background-color: #fff;
+    border:3px solid $myellow;
+    border-radius: 4px;
+}
