@@ -135,8 +135,8 @@ const routes = [
         children:[
           {
             path: '',
-            name: 'Newsm',
-            component: () => import('../views/backend/Newsm.vue'),
+            name: 'newsm',
+            component: () => import('../views/backend/newsm.vue'),
           },
           {
             path: 'Memberm',
