@@ -27,7 +27,7 @@
   <div class="tick">成人票
     <button class="addandsub" @click="reduce1">-</button>
     <span>{{qua}}</span>
-    <button :style="{ backgroundColor: buttonColor }"  class="addandsub" @click="add1">+</button>
+    <button class="addandsub" @click="add1">+</button>
     <span class="red" v-show="qua">${{subt1(qua,price)}}</span> 
     <button class="clear" @click="clear">清除</button>
   </div>
@@ -84,8 +84,7 @@ export default {
       qua2:0,
       qua3:0,
       qua4:0,
-      sum:0,
-      buttonColor: 'white'
+      sum:0,  
     };
   },
   computed: {
@@ -112,8 +111,7 @@ export default {
       }
     },
     add1() {
-      this.qua++,
-      this.buttonColor = this.buttonColor === 'white' ? '#1E5289' : 'white';
+      this.qua++
     },
     reduce2() {
       if (this.qua2 > 0) {
@@ -330,8 +328,6 @@ margin-left: 10%;
   border:none;
   background-color:white;
   color:#1E5289;
-  
-  justify-content: end;
 }
 </style> 
 

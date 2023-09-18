@@ -86,6 +86,11 @@ const routes = [
         name: 'Shoppingcar',
         component: () => import('../views/frontend/Shoppingcar.vue'),
       },
+      {
+        path: '/History',
+        name: 'History',
+        component: () => import('../views/frontend/History.vue'),
+      },
     ]
   },
   {
