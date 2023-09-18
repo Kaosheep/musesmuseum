@@ -1,0 +1,136 @@
+template {
+    position: relative;
+}
+.img_deco {
+    background: radial-gradient(circle, transparent 14%, #009CA8 15%, #009CA8 25%, transparent 26%);
+    background-size: 1em 1em;
+    background-color: transparent;
+    opacity: 1;
+    width: 4em;
+    height: 9em;
+    transform: rotate(45deg);
+    position: absolute;
+    left: 6%;
+    z-index: 3;
+}
+
+.exhi_section {
+    max-width: 1200px;
+    margin: 5% auto;
+    width: 85%;
+    display: flex;
+    position: relative;
+}
+.exhi_img {
+    width: 50%;
+    margin: 1%;   
+    overflow: hidden;
+}
+.exhi_img img {
+    width: 100%;
+    object-fit: cover;
+    vertical-align: bottom;
+    border-radius: 4px;
+}
+.exhi_desc {
+    padding: 6%;
+    line-height: 2em;
+    background-color: #fff;
+    width: 50%;
+    border: 3px dashed #EB5F86;
+    border-radius: 4px;
+    margin: 1%;
+    position: relative;
+    z-index: 1;
+}
+.exhi_desc .bgc_deco_a {
+    background: radial-gradient(circle, #1E5289 25%, transparent 26%);
+    background-size: 1em 1em;
+    background-color: transparent;
+    opacity: 1;
+    width: 2em;
+    height: 2em;
+    position: absolute;
+    left: -44%;
+    bottom: -22%;
+}
+.exhi_desc .bgc_deco_b {
+    background: radial-gradient(circle, #1E5289 25%, transparent 26%);
+    background-size: 1em 1em;
+    background-color: transparent;
+    opacity: 1;
+    width: 2em;
+    height: 2em;
+    position: absolute;
+    left: -31%;
+    bottom: -22%;
+}
+.exhi_desc .bgc_deco_c {
+    background: radial-gradient(circle, #1E5289 25%, transparent 26%);
+    background-size: 1em 1em;
+    background-color: transparent;
+    opacity: 1;
+    width: 2em;
+    height: 2em;
+    position: absolute;
+    left: -37.5%;
+    bottom: -13%;
+}
+.exhi_desc .bgc_deco_d {
+    background: radial-gradient(circle, #1E5289 25%, transparent 26%);
+    background-size: 1em 1em;
+    background-color: transparent;
+    opacity: 1;
+    width: 2em;
+    height: 2em;
+    position: absolute;
+    left: -37.5%;
+    bottom: -30%;
+}
+.exhi_desc .back_deco {
+    background: radial-gradient(circle, #EB5F86 25%, transparent 26%);
+    background-size: 1em 1em;
+    background-color: transparent;
+    opacity: 1;
+    width: 2em;
+    height: 2em;
+    transform: rotate(45deg);
+    position: absolute;
+    left: -20.5%;
+    bottom: -27%;
+}
+.exhi_desc .exhi_desc_deco {
+    background: radial-gradient(circle at top right, transparent 10%, #EB5F86 10%, #EB5F86 20%, transparent 21%), radial-gradient(circle at left bottom, transparent 10%, #EB5F86 10%, #EB5F86 20%, transparent 21%), radial-gradient(circle at top left, transparent 10%, #EB5F86 10%, #EB5F86 20%, transparent 21%), radial-gradient(circle at right bottom, transparent 10%, #EB5F86 10%, #EB5F86 20%, transparent 21%), radial-gradient(circle at center, #EB5F86 30%, transparent 31%);
+    background-size: 2em 2em;
+    background-color: #FBF796;
+    opacity: 1;
+    width: 12em;
+    height: 3em;
+    border-radius: 4px;
+    transform: rotate(45deg);
+    position: absolute;
+    right: -12%;
+    top: 1%;
+}
+.exhi_desc_bgc {    
+    width: 40vw;
+    height: 28vw;
+    background-color: #1E5289;
+    border-radius: 4px;
+    position: absolute;
+    right: -0.1%;
+    top: 5.5%;
+    z-index: 0;
+}
+.buy_tickbtn_deco {
+    background: radial-gradient(circle, #009CA8 25%, transparent 26%);
+    background-size: 1em 1em;
+    background-color: transparent;
+    opacity: 1;
+    width: 2em;
+    height: 2em;
+    transform: rotate(45deg);
+    position: absolute;
+    left: 82%;
+    bottom: -31%;
+}
