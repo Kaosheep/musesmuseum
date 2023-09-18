@@ -68,7 +68,6 @@
 <img class=cube2 src="@/assets/image/tick/cube2.png"/>
 <div class="frame"></div>
 <img class=longmatrix src="@/assets/image/tick/longmatrix.png"/>
-
 </template>
 
 <script>
