@@ -11,10 +11,10 @@
         <div class="wrap">
           <div class="col" v-for="(img, imgindex) in paintings" :key="imgindex">
             <div class="img">
-              <img
+              <!-- <img
                 :src="require('@/assets/image/paint/paint' + imgindex + '.jpg')"
                 :alt="img.imgname"
-              />
+              /> -->
             </div>
             <div class="txtcard">
               <div class="color">

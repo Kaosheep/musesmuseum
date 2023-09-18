@@ -98,7 +98,7 @@ export default {
           title: "關於我們",
           link: "/About",
           sublist: [
-            { subtitle: "歷史沿革", sublink: "/" },
+            { subtitle: "歷史沿革", sublink: "/Home/History" },
             { subtitle: "歷代館長", sublink: "/" },
           ],
         },
