@@ -1,6 +1,10 @@
 <template>
   <div class="bgcGY cardCenter">
    <main>
+    <div class="search">
+        <Searchbar @click="searchClick"/>
+        <!-- <Searchbarclick/> -->
+    </div>
        <div class="backGroundCardbBlue"></div>
        <div class="backGroundCard">
          <div class="backGroundCardBtns">
@@ -44,9 +48,13 @@
 
 <script>
 import Footer from "@/components/Footer.vue";
+import Searchbar from "/src/components/Searchbar.vue";
+import Searchbarclick from "/src/components/Searchbarclick.vue";
 export default {
  components: {
    Footer,
+   Searchbar,
+   Searchbarclick,
  },
  data() {
    return {
@@ -81,5 +89,31 @@ export default {
 };
 </script>
 <style scoped lang="scss">
+.search{
+height: 202px;
+display: flex;
+justify-content: end;
+align-items: center;
+}
+.searchbar_search{
+  margin: 0;
+  box-shadow: 3px 3px 0px $mgreen;
+}
 
+.backGroundCard{
+  display: flex;
+  // flex-wrap: wrap;
+  align-items: flex-start; 
+  justify-content: space-between;
+  form{
+    height: 100%;
+    width: 50%;
+    margin: auto;
+  }
+}
+.backGroundCardBtns,
+
+.cardCenter{
+  align-items: start;
+}
 </style>
