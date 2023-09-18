@@ -92,6 +92,7 @@ const routes = [
         component: () => import('../views/frontend/Shoppingcar.vue'),
       },
       {
+<<<<<<< HEAD
         path: 'Shopping',
         name: 'Shopping',
         component: () => import('../views/frontend/Shopping.vue'),
@@ -115,7 +116,18 @@ const routes = [
         path: 'Paintings',
         name: 'Paintings',
         component: () => import('../views/frontend/Paintings.vue'),
+      },
+      {
+        path: 'Art',
+        name: 'Art',
+        component: () => import('../views/frontend/Art.vue'),
       }
+=======
+        path: '/History',
+        name: 'History',
+        component: () => import('../views/frontend/History.vue'),
+      },
+>>>>>>> yby
     ]
   },
   {
@@ -142,6 +154,26 @@ const routes = [
             path: 'Memberm',
             name: 'Memberm',
             component: () => import('../views/backend/Memberm.vue'),
+          },
+          {
+            path: 'Exhm',
+            name: 'Exhm',
+            component: () => import('../views/backend/Exhm.vue'),
+          },
+          {
+            path: 'Shopm',
+            name: 'Shopm',
+            component: () => import('../views/backend/Shopm.vue'),
+          },
+          {
+            path: 'Ticketsm',
+            name: 'Ticketsm',
+            component: () => import('../views/backend/Ticketsm.vue'),
+          },
+          {
+            path: 'Manager',
+            name: 'Manager',
+            component: () => import('../views/backend/Manager.vue'),
           }
         ]
       }

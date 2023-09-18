@@ -5,7 +5,7 @@
       <div class="backGroundCard">
         <div class="backGroundCardBtns">
           <router-link :to="a.link" v-for="a in memBtnLink">
-            <button :class="[a.name === '會員註冊' ? 'pinkBtn' : 'pinkBtnLight']">
+            <button :class="[a.name === '會員登入' ? 'pinkBtnLight' : 'pinkBtn']">
               {{ a.name }}
             </button>
           </router-link>
@@ -13,7 +13,13 @@
         <form>
           <div class="memloginActi" v-for="i in memAllInfo">
             <label :key="i.id">{{ i.memTitColumn }}</label>
-            <input :key="i.id" :type="i.type" :id="i.id" :name="i.name" :class="i.class" :placeholder="i.placeholder"
+            <input 
+            :key="i.id" 
+            :type="i.type" 
+            :id="i.id" 
+            :name="i.name" 
+            :class="i.class" 
+            :placeholder="i.placeholder"
               required />
           </div>
 

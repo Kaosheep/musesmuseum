@@ -1,0 +1,264 @@
+{
+  "accessors": [
+    {
+      "bufferView": 2,
+      "componentType": 5126,
+      "count": 5677,
+      "max": [
+        1.0020049810409546,
+        0.06716399639844894,
+        1.0016299486160278
+      ],
+      "min": [
+        -1.001708984375,
+        -0.07132499665021896,
+        -1.0019819736480713
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 68124,
+      "componentType": 5126,
+      "count": 5677,
+      "max": [
+        0.9988057613372803,
+        1.0,
+        0.9982636570930481
+      ],
+      "min": [
+        -0.9993149042129517,
+        -1.0,
+        -0.9998406171798706
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 3,
+      "componentType": 5126,
+      "count": 5677,
+      "max": [
+        0.9701016545295715,
+        0.9998186230659485,
+        0.9956046938896179,
+        1.0
+      ],
+      "min": [
+        -0.9971657395362854,
+        -0.9980689287185669,
+        -0.9223200678825378,
+        1.0
+      ],
+      "type": "VEC4"
+    },
+    {
+      "bufferView": 1,
+      "componentType": 5126,
+      "count": 5677,
+      "max": [
+        0.9999989867210388,
+        0.9822180271148682
+      ],
+      "min": [
+        0.0,
+        0.0
+      ],
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 0,
+      "componentType": 5125,
+      "count": 32652,
+      "type": "SCALAR"
+    }
+  ],
+  "asset": {
+    "extras": {
+      "author": "Kostroman (https://sketchfab.com/Kostroman)",
+      "license": "CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
+      "source": "https://sketchfab.com/3d-models/old-coin-24a7725e2a624467a6d30847b0aa4140",
+      "title": "Old coin"
+    },
+    "generator": "Sketchfab-12.65.0",
+    "version": "2.0"
+  },
+  "bufferViews": [
+    {
+      "buffer": 0,
+      "byteLength": 130608,
+      "name": "floatBufferViews",
+      "target": 34963
+    },
+    {
+      "buffer": 0,
+      "byteLength": 45416,
+      "byteOffset": 130608,
+      "byteStride": 8,
+      "name": "floatBufferViews",
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 136248,
+      "byteOffset": 176024,
+      "byteStride": 12,
+      "name": "floatBufferViews",
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 90832,
+      "byteOffset": 312272,
+      "byteStride": 16,
+      "name": "floatBufferViews",
+      "target": 34962
+    }
+  ],
+  "buffers": [
+    {
+      "byteLength": 403104,
+      "uri": "scene3.bin"
+    }
+  ],
+  "images": [
+    {
+      "uri": "textures3/DefaultMaterial_baseColor.jpeg"
+    },
+    {
+      "uri": "textures3/DefaultMaterial_metallicRoughness.png"
+    },
+    {
+      "uri": "textures3/DefaultMaterial_normal.png"
+    }
+  ],
+  "materials": [
+    {
+      "doubleSided": true,
+      "name": "DefaultMaterial",
+      "normalTexture": {
+        "index": 2
+      },
+      "occlusionTexture": {
+        "index": 1
+      },
+      "pbrMetallicRoughness": {
+        "baseColorTexture": {
+          "index": 0
+        },
+        "metallicRoughnessTexture": {
+          "index": 1
+        },
+        "roughnessFactor": 0.6826894429953365
+      }
+    }
+  ],
+  "meshes": [
+    {
+      "name": "defaultMaterial",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 1,
+            "POSITION": 0,
+            "TANGENT": 2,
+            "TEXCOORD_0": 3
+          },
+          "indices": 4,
+          "material": 0,
+          "mode": 4
+        }
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "children": [
+        1
+      ],
+      "matrix": [
+        1.1245202756138113,
+        0.10344020610519243,
+        0.039070995745026614,
+        0.0,
+        -0.10297971813584184,
+        1.1251423864585064,
+        -0.014900455956033704,
+        0.0,
+        -0.04026904067270909,
+        0.011268125372098729,
+        1.1291695052035209,
+        0.0,
+        -5.7572418882045895e-05,
+        -0.0022466024383902554,
+        0.001902196439914405,
+        1.0
+      ],
+      "name": "Sketchfab_model"
+    },
+    {
+      "children": [
+        2
+      ],
+      "matrix": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        -4.371139006309477e-08,
+        0.999999999999999,
+        0.0,
+        0.0,
+        -0.999999999999999,
+        -4.371139006309477e-08,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "name": "Collada visual scene group"
+    },
+    {
+      "children": [
+        3
+      ],
+      "name": "ZBrush_defualt_group"
+    },
+    {
+      "mesh": 0,
+      "name": "defaultMaterial"
+    }
+  ],
+  "samplers": [
+    {
+      "magFilter": 9729,
+      "minFilter": 9987,
+      "wrapS": 10497,
+      "wrapT": 10497
+    }
+  ],
+  "scene": 0,
+  "scenes": [
+    {
+      "name": "Sketchfab_Scene",
+      "nodes": [
+        0
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "sampler": 0,
+      "source": 0
+    },
+    {
+      "sampler": 0,
+      "source": 1
+    },
+    {
+      "sampler": 0,
+      "source": 2
+    }
+  ]
+}

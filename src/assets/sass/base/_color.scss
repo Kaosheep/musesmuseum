@@ -3,6 +3,7 @@ $color : (
     'myellow':#FBF796,
     'mpink':#EB5F86,
     'mblue':#1E5289,
+    'mlblue':#C3E3E8
 );
 @each $k,$v in $color{
     .#{$k}{
@@ -13,3 +14,4 @@ $mgreen:#009CA8;
 $myellow:#FBF796;
 $mpink:#EB5F86;
 $mblue:#1E5289;
+$mlblue:#C3E3E8

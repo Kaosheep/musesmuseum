@@ -1,0 +1,239 @@
+{
+  "accessors": [
+    {
+      "bufferView": 2,
+      "componentType": 5126,
+      "count": 910,
+      "max": [
+        12.044699668884277,
+        12.044699668884277,
+        24.832300186157227
+      ],
+      "min": [
+        -12.044699668884277,
+        -12.044699668884277,
+        0.14598099887371063
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 10920,
+      "componentType": 5126,
+      "count": 910,
+      "max": [
+        0.9970734715461731,
+        0.9970734715461731,
+        0.9326395988464355
+      ],
+      "min": [
+        -0.9970734715461731,
+        -0.9970734715461731,
+        -0.6996056437492371
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 3,
+      "componentType": 5126,
+      "count": 910,
+      "max": [
+        0.9977272748947144,
+        0.7825243473052979,
+        0.9970305562019348,
+        1.0
+      ],
+      "min": [
+        -0.7230835556983948,
+        -0.899549663066864,
+        -0.9746401906013489,
+        1.0
+      ],
+      "type": "VEC4"
+    },
+    {
+      "bufferView": 1,
+      "componentType": 5126,
+      "count": 910,
+      "max": [
+        0.9991769790649414,
+        0.9997439980506897
+      ],
+      "min": [
+        0.00025655300123617053,
+        0.00025655300123617053
+      ],
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 0,
+      "componentType": 5125,
+      "count": 3828,
+      "type": "SCALAR"
+    }
+  ],
+  "asset": {
+    "extras": {
+      "author": "wolfgar74 (https://sketchfab.com/wolfgar74)",
+      "license": "CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
+      "source": "https://sketchfab.com/3d-models/decretive-medieval-goblet-free-090a0d261897437a9aa4776b040edc40",
+      "title": "Decretive Medieval Goblet (Free)"
+    },
+    "generator": "Sketchfab-12.68.0",
+    "version": "2.0"
+  },
+  "bufferViews": [
+    {
+      "buffer": 0,
+      "byteLength": 15312,
+      "name": "floatBufferViews",
+      "target": 34963
+    },
+    {
+      "buffer": 0,
+      "byteLength": 7280,
+      "byteOffset": 15312,
+      "byteStride": 8,
+      "name": "floatBufferViews",
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 21840,
+      "byteOffset": 22592,
+      "byteStride": 12,
+      "name": "floatBufferViews",
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 14560,
+      "byteOffset": 44432,
+      "byteStride": 16,
+      "name": "floatBufferViews",
+      "target": 34962
+    }
+  ],
+  "buffers": [
+    {
+      "byteLength": 58992,
+      "uri": "scene0.bin"
+    }
+  ],
+  "images": [
+    {
+      "uri": "textures0/DecoratedCup_baseColor.png"
+    },
+    {
+      "uri": "textures0/DecoratedCup_metallicRoughness.png"
+    },
+    {
+      "uri": "textures0/DecoratedCup_normal.png"
+    }
+  ],
+  "materials": [
+    {
+      "doubleSided": true,
+      "name": "DecoratedCup",
+      "normalTexture": {
+        "index": 2
+      },
+      "occlusionTexture": {
+        "index": 1
+      },
+      "pbrMetallicRoughness": {
+        "baseColorTexture": {
+          "index": 0
+        },
+        "metallicRoughnessTexture": {
+          "index": 1
+        }
+      }
+    }
+  ],
+  "meshes": [
+    {
+      "name": "Object_0",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 1,
+            "POSITION": 0,
+            "TANGENT": 2,
+            "TEXCOORD_0": 3
+          },
+          "indices": 4,
+          "material": 0,
+          "mode": 4
+        }
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "children": [
+        1
+      ],
+      "matrix": [
+        2.220446049250313e-16,
+        -2.220446049250313e-16,
+        1.0,
+        0.0,
+        1.0,
+        4.930380657631324e-32,
+        -2.220446049250313e-16,
+        0.0,
+        0.0,
+        1.0,
+        2.220446049250313e-16,
+        0.0,
+        1.3552527156068805e-20,
+        -2.202285662861181e-20,
+        9.918212890625e-05,
+        1.0
+      ],
+      "name": "Sketchfab_model"
+    },
+    {
+      "children": [
+        2
+      ],
+      "name": "MedivalGoblet.obj.cleaner.materialmerger.gles"
+    },
+    {
+      "mesh": 0,
+      "name": "Object_2"
+    }
+  ],
+  "samplers": [
+    {
+      "magFilter": 9729,
+      "minFilter": 9987,
+      "wrapS": 10497,
+      "wrapT": 10497
+    }
+  ],
+  "scene": 0,
+  "scenes": [
+    {
+      "name": "Sketchfab_Scene",
+      "nodes": [
+        0
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "sampler": 0,
+      "source": 0
+    },
+    {
+      "sampler": 0,
+      "source": 1
+    },
+    {
+      "sampler": 0,
+      "source": 2
+    }
+  ]
+}

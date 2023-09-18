@@ -7,17 +7,6 @@
         </button>
       </div>
       <div class="dashboradview">
-        <div>
-          <button class="bTab">最新消息</button>
-        </div>
-        <div class="function_bar">
-          <div>
-            <PinkButton class="btn_admin" text="新增"/>
-            <PinkButton class="btn_admin" text="刪除"/>
-            <PinkButton class="btn_admin" text="上架"/>
-          </div>
-          <Searchbar class="onlyB" />
-        </div>
         <RouterView></RouterView>
       </div>
     </div>
@@ -38,11 +27,11 @@ export default {
     return {
       consolelist: [
         { title: "消息管理", link: "/DashBoard" },
-        { title: "會員管理", link: "/Memberm" },
-        { title: "展覽管理", link: "/newsm" },
-        { title: "購物管理", link: "/newsm" },
-        { title: "訂票管理", link: "/newsm" },
-        { title: "帳號管理", link: "/newsm" },
+        { title: "會員管理", link: "/DashBoard/Memberm" },
+        { title: "展覽管理", link: "/DashBoard/Exhm" },
+        { title: "購物管理", link: "/DashBoard/Shopm"},
+        { title: "訂票管理", link: "/DashBoard/Ticketsm" },
+        { title: "帳號管理", link: "/DashBoard/Manager" },
         { title: "會員登出", link: "/" },
       ],
     }
@@ -56,11 +45,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.onlyB {
-  position: relative;
-  box-shadow: none;
-  margin-right: 0;
-}
 
 main {
   width: 100vw;
@@ -69,29 +53,5 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
-
-  .bTab {
-    background-color: #ffffff80;
-    border-radius: 10px 10px 0 0;
-    border-width: 1px 1px 0 1px;
-    border-style: none;
-    padding: 8px;
-  }
-  .btn_admin{
-    margin-right: 10px;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    width: 70px;
-    height: 40px;
-    background-color: $mblue;
-    color: #fff;
-    border: none;
-    cursor:pointer;
-    &:hover{
-        background-color:$mpink;
-        color: #fff;
-    }
-  }
-
 }
 </style>

@@ -1,11 +1,11 @@
 <template>
-   <div class="bgcGY">
+   <div class="bgcGY cardCenter">
     <main>
         <div class="backGroundCardbBlue"></div>
         <div class="backGroundCard">
           <div class="backGroundCardBtns">
             <router-link :to="a.link" v-for="a in memBtnLink">
-              <button :class="[a.name === '會員登入' ? 'pinkBtn' : 'pinkBtnLight']">
+              <button :class="[a.name === '會員註冊' ? 'pinkBtnLight' : 'pinkBtn']">
                 {{a.name}}
               </button>
             </router-link>

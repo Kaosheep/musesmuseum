@@ -72,7 +72,7 @@ export default {
           title: "藝術典藏",
           link: "/Collection",
           sublist: [
-            { subtitle: "文物區", sublink: "/" },
+            { subtitle: "文物區", sublink: "/Home/Art" },
             { subtitle: "畫作區", sublink: "/Home/Paintings" },
           ],
         },
