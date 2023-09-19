@@ -1,15 +1,14 @@
 <template>
   <div>
     <div>
-      <button class="bTab">商品管理</button>
-      <button class="bTab">訂單管理</button>
+      <a class="bTab" href="">最新消息</a>
     </div>
     <form action="">
       <div class="admin_editbar">
         <div>
-          <PinkButton class="btn_admin" text="新增" />
-          <PinkButton class="btn_admin" text="刪除" />
-          <PinkButton class="btn_admin" text="上架" />
+          <PinkButton class="btn_admin" text="新增"/>
+          <PinkButton class="btn_admin" text="上架"/>
+          <PinkButton class="btn_admin" text="下架"/>
         </div>
         <Searchbar class="onlyB" />
       </div>
@@ -17,24 +16,25 @@
         <table>
           <tr>
             <th></th>
-            <th>商品編號</th>
-            <th>商品名稱</th>
+            <th>消息編號</th>
+            <th>消息標題</th>
             <th>狀態</th>
             <th>庫存</th>
             <th></th>
           </tr>
-          <tr v-for="(i, index) in news" :key="index">
+          <tr v-for="(i, index) in test" :key="index">
             <td><input type="checkbox"></td>
-            <td>{{ i.news_id }}</td>
-            <td>{{ i.news_title }}</td>
+            <td>{{ i.id }}</td>
+            <td>{{ i.title }}</td>
             <td>
-              <p v-if="parseInt(i.news_status) === 1">已上架</p>
+              <p v-if="parseInt(i.statusn) === 1">上架中</p>
               <p v-else>未上架</p>
             </td>
             <td>
               <button class="edit">編輯</button>
             </td>
           </tr>
+
         </table>
       </div>
     </form>
@@ -45,6 +45,7 @@
 import PinkButton from "/src/components/PinkButton.vue";
 import Searchbar from "/src/components/Searchbar.vue";
 import Searchbarclick from "/src/components/Searchbarclick.vue";
+
 export default {
   components: {
     Searchbar,
@@ -53,39 +54,54 @@ export default {
   },
   data() {
     return {
-      news: []
+      news: [],
+      test: [
+        {
+          id: "MN20230901",
+          title: "「科技奇觀展」探索未來科...",
+          statusn: "0",
+        },
+        {
+          id: "MN20231101",
+          title: "「古文明珍寶展」現已開展...",
+          statusn: "1",
+
+        }
+      ],
     }
   },
   methods: {
-
+ 
   },
-  // mounted() {
-  //   fetch('http://localhost/musesmuseum_dbtest/php/aa.php')
-  //     .then(res => res.json())
-  //     .then(res => {
-  //       this.news = res;
-  //       console.log(res)
+  mounted() {
 
-  //     })
-
-  // }
-
+  }
 }
 </script>
 
 <style scoped lang="scss">
 @import "@/assets/sass/style.scss";
-div{
-  form{
+
+div {
+  form {
     height: 80vh;
   }
 }
+
 .bTab {
   background-color: #ffffff80;
   border-radius: 10px 10px 0 0;
   border-width: 1px 1px 0 1px;
   border-style: none;
   padding: 8px;
+  color: #000;
+  line-height: 2rem;
+    transition: .3s;
+    cursor:pointer;
+    &:hover{
+        background-color:$mpink;
+        color: #fff;
+    }
 }
 
 .admin_editbar {
@@ -115,7 +131,6 @@ div{
 
   &:hover {
     background-color: $mpink;
-    color: #fff;
   }
 }
 
@@ -150,9 +165,12 @@ div{
 
       &:last-child {
         button {
+          color: #000;
           border: none;
-          padding: 5px 10px;
           cursor: pointer;
+        }
+        &:hover{
+          color: $mblue;
         }
       }
 
@@ -166,3 +184,4 @@ div{
 
 }
 </style>
+    
