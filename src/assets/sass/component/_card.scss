@@ -4,6 +4,8 @@
     // font-size: 500px;
     width: 1000px;
     height: 560px;
+    max-width: 1000px;
+    max-height: 560px;
     // background-color: #009CA8;
     border: 3px solid $mgreen;
     border-radius: 8px;
@@ -13,8 +15,8 @@
     }
 
 .backGroundCard{
-    max-width: 1000px;
-    max-height: 560px;
+    width: 1000px;
+    height: 560px;
     padding: 50px 100px;
     margin: 0 auto;
     text-align: center;
@@ -27,4 +29,29 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+@include t() {
+        .backGroundCardbBlue{
+            display: none;
+            }
+        
+        .backGroundCard{
+            width: 350px;
+            display: block;
+            height: 600px;
+            // max-width: 1000px;
+            // max-height: 560px;
+            padding: 30px 0;
+            // margin: 0 auto;
+            // text-align: center;
+            // border-radius: 8px;
+            // border: 3px solid $mgreen;
+            // background-color: #fff;
+            // position:relative;
+            }
+
+
+
+    
 }
