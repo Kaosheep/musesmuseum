@@ -120,11 +120,14 @@ const routes = [
         path: 'Art',
         name: 'Art',
         component: () => import('../views/frontend/Art.vue'),
+<<<<<<< HEAD
       },
       {
         path: 'History',
         name: 'History',
         component: () => import('../views/frontend/History.vue'),
+=======
+>>>>>>> Jeff_dev
       }
     ]
   },

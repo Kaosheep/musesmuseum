@@ -1,4 +1,5 @@
 <template>
+<<<<<<< HEAD
    
     </template>
     
@@ -9,3 +10,7 @@
     <style lang="scss">
     
     </style>
+=======
+    
+</template>
+>>>>>>> Jeff_dev
