@@ -236,6 +236,7 @@ export default {
   beforeUnmount() {
     window.removeEventListener("resize", this.resize);
     window.removeEventListener("scroll", this.anchor);
+    document.body.style.height = `auto`;
   }
 
 };

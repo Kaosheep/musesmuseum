@@ -42,7 +42,7 @@
     }
     </script>
     
-    <style lang="scss">
+    <style lang="scss" scoped>
     .title{
       padding: 5px;
       background-color:#009CA8;
