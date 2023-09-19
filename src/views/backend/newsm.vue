@@ -3,12 +3,12 @@
     <div>
       <a class="bTab" href="">最新消息</a>
     </div>
-    <form action="">
+    <div>
       <div class="admin_editbar">
         <div>
-          <PinkButton class="btn_admin" text="新增"/>
-          <PinkButton class="btn_admin" text="上架"/>
-          <PinkButton class="btn_admin" text="下架"/>
+          <PinkButton class="btn_admin" text="新增" />
+          <PinkButton class="btn_admin" text="上架" />
+          <PinkButton class="btn_admin" text="下架" />
         </div>
         <Searchbar class="onlyB" />
       </div>
@@ -31,13 +31,45 @@
               <p v-else>未上架</p>
             </td>
             <td>
-              <button class="edit">編輯</button>
+              <button class="edit" @click="showEditForm()">編輯</button>
             </td>
           </tr>
 
         </table>
       </div>
-    </form>
+      <form action="" class="pop" v-if="showForm" @submit.prevent="submitForm">
+        <h2>編輯</h2>
+          <table>
+            <tr>
+              <th>消息編號</th>
+              <th>日期</th>
+            </tr>
+            <tr>
+              <td>mn</td>
+              <td>rate</td>
+            </tr>
+          </table>
+          <div>
+            <div>標題</div>
+            <input type="text" name="" id="">
+            <div>內容</div>
+            <textarea name="" id="" cols="30" rows="7"></textarea>
+            <div class="switch_status">
+              <div>狀態</div>
+              <select name="" id="">
+                <option value="">上架中</option>
+              </select>
+              <label for="fileInput">選擇圖片</label>
+              <input type="file" id="fileInput" accept="image/*" style="display: none;" />
+            </div>
+            <div class="form_btn">
+              <PinkButton class="btn_admin" text="取消" @click="hideEditForm" />
+              <PinkButton class="btn_admin" text="儲存" />
+            </div>
+          </div>
+        </form>
+    </div>
+
   </div>
 </template>
    
@@ -68,10 +100,20 @@ export default {
 
         }
       ],
+      showForm: false
     }
   },
   methods: {
- 
+    showEditForm() {
+      this.showForm = true;
+    },
+    hideEditForm() {
+      this.showForm = false;
+    },
+    submitForm() {
+      this.hideEditForm();
+    }
+
   },
   mounted() {
 
@@ -83,6 +125,8 @@ export default {
 @import "@/assets/sass/style.scss";
 
 div {
+  color: #000;
+
   form {
     height: 80vh;
   }
@@ -96,12 +140,13 @@ div {
   padding: 8px;
   color: #000;
   line-height: 2rem;
-    transition: .3s;
-    cursor:pointer;
-    &:hover{
-        background-color:$mpink;
-        color: #fff;
-    }
+  transition: .3s;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $mpink;
+    color: #fff;
+  }
 }
 
 .admin_editbar {
@@ -169,7 +214,8 @@ div {
           border: none;
           cursor: pointer;
         }
-        &:hover{
+
+        &:hover {
           color: $mblue;
         }
       }
@@ -182,6 +228,26 @@ div {
     }
   }
 
+}
+
+.pop {
+  position: absolute;
+  top: -1%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  background-color: rgba(255, 248, 248);
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  border-radius: 10px;
+
+  .form_btn {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+  }
 }
 </style>
     
