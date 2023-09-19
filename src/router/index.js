@@ -92,7 +92,6 @@ const routes = [
         component: () => import('../views/frontend/Shoppingcar.vue'),
       },
       {
-<<<<<<< HEAD
         path: 'Shopping',
         name: 'Shopping',
         component: () => import('../views/frontend/Shopping.vue'),
@@ -122,12 +121,6 @@ const routes = [
         name: 'Art',
         component: () => import('../views/frontend/Art.vue'),
       }
-=======
-        path: '/History',
-        name: 'History',
-        component: () => import('../views/frontend/History.vue'),
-      },
->>>>>>> yby
     ]
   },
   {
