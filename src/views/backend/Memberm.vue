@@ -1,155 +1,258 @@
 <template>
+  <div>
     <div>
-      <button class="bTab">會員名單</button>
+      <a class="bTab" href="">會員名單</a>
     </div>
-    <div class="admin_editbar">
-      <div>
-        <PinkButton class="btn_admin" text="新增" />
-        <PinkButton class="btn_admin" text="凍結" />
-      </div>
+    <div>
+      <div class="admin_editbar">
+        <div>
+          <PinkButton class="btn_admin" text="新增" />
+          <PinkButton class="btn_admin" text="凍結" />
+        </div>
         <Searchbar class="onlyB" />
-     </div>
-    <div class="dmain">
-      <table>
-        <tr>
-          <th></th>
-          <th>會員編號</th>
-          <th>信箱</th>
-          <th>狀態</th>
-          <th></th>
-        </tr>
-        <tr v-for="(i, index) in news" :key="index">
-          <td><input type="checkbox"></td>
-          <td>{{}}</td>
-          <td>{{}}</td>
-          <td>
-            <p v-if="parseInt() === 1">一般</p>
-            <p v-else>凍結</p>
-          </td>
-          <td>
-            <button class="edit">編輯</button>
-          </td>
-        </tr>
-      </table>
+      </div>
+      <div class="dmain">
+        <table>
+          <tr>
+            <th></th>
+            <th>會員編號</th>
+            <th>姓名</th>
+            <th>狀態</th>
+            <th></th>
+          </tr>
+          <tr v-for="(i, index) in memt" :key="index">
+            <td><input type="checkbox"></td>
+            <td>{{ i.id }}</td>
+            <td>{{ i.name }}</td>
+            <td>
+              <p v-if="parseInt(i.statusn) === 1">一般</p>
+              <p v-else>凍結</p>
+            </td>
+            <td>
+              <button class="edit" @click="showEditForm()">編輯</button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <form action="" class="pop" v-if="showForm" @submit.prevent="submitForm">
+        <h2>編輯</h2> 
+        <div>會員編號</div>
+        <div>MM2023061901</div>
+        <div>會員姓名</div>
+        <div>生日</div>     
+        <div>1995/01/01</div>
+        <div>E-mail</div>
+        <div>muse001@gmail.com</div>
+        <div>連絡電話</div>
+        <div>0989123456</div>
+        <div>通訊地址</div>
+        <Addressfrom/>
+        <div>會員狀態</div>
+        <div>
+          <select name="" id="">
+            <option value="">一般</option>
+          </select>
+        </div>
+        
+          <div class="form_btn">
+            <PinkButton class="btn_admin" text="取消" @click="hideEditForm"/>
+            <PinkButton class="btn_admin" text="儲存" />
+          </div>
+      </form>
     </div>
-  </template>
+
+  </div>
+</template>
      
-  <script>
-  import PinkButton from "/src/components/PinkButton.vue";
-  import Searchbar from "/src/components/Searchbar.vue";
-  import Searchbarclick from "/src/components/Searchbarclick.vue";
-  export default {
-    components: {
-      Searchbar,
-      Searchbarclick,
-      PinkButton
+<script>
+import PinkButton from "/src/components/PinkButton.vue";
+import Searchbar from "/src/components/Searchbar.vue";
+import Searchbarclick from "/src/components/Searchbarclick.vue";
+import Addressfrom from "/src/views/backend/Address.vue";
+
+export default {
+  components: {
+    Searchbar,
+    Searchbarclick,
+    PinkButton,
+    Addressfrom
+  },
+  data() {
+    return {
+      news: [],
+      test: [
+        {
+          id: "MN20230901",
+          title: "「科技奇觀展」探索未來科...",
+          statusn: "0",
+        },
+        {
+          id: "MN20231101",
+          title: "「古文明珍寶展」現已開展...",
+          statusn: "1",
+
+        }
+      ],
+      memt: [
+        {
+          id: "MM2023061901",
+          name: "阿阿阿",
+          statusn: "1",
+        }, {
+          id: "MM2023061902",
+          name: "欸欸欸",
+          statusn: "0",
+        }
+
+      ],
+      showForm: false
+    }
+  },
+  methods: {
+    showEditForm() {
+      this.showForm = true;
     },
-    data() {
-      return {
-        news: []
-      }
+    hideEditForm() {
+      this.showForm = false;
     },
-    methods: {
-  
-    },
-    // mounted() {
-    //   fetch('http://localhost/musesmuseum_dbtest/php/aa.php')
-    //     .then(res => res.json())
-    //     .then(res => {
-    //       this.news = res;
-    //       console.log(res)
-  
-    //     })
-  
-    // }
-  
+    submitForm() {
+      this.hideEditForm();
+    }
+
+  },
+  mounted() {
+
   }
-  </script>
+}
+</script>
   
-  <style scoped lang="scss">
-  @import "@/assets/sass/style.scss";
-  
-  .bTab {
-    background-color: #ffffff80;
-    border-radius: 10px 10px 0 0;
-    border-width: 1px 1px 0 1px;
-    border-style: none;
-    padding: 8px;
+<style scoped lang="scss">
+@import "@/assets/sass/style.scss";
+
+div {
+  color: #000;
+
+  form {
+    height: 80vh;
   }
-  .admin_editbar{
-    display: flex;
-    background-color: #f2f2f2;
-    padding: 5px;
-    border-top-right-radius: 10px;
-  }
-  .onlyB {
-    position: relative;
-    box-shadow: none;
-    margin-right: 0;
-    width: 190px;
-  }
-  
-  .btn_admin {
-    margin-right: 10px;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    width: 70px;
-    height: 40px;
-    background-color: $mblue;
+}
+
+.bTab {
+  background-color: #ffffff80;
+  border-radius: 10px 10px 0 0;
+  border-width: 1px 1px 0 1px;
+  border-style: none;
+  padding: 8px;
+  color: #000;
+  line-height: 2rem;
+  transition: .3s;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $mpink;
     color: #fff;
-    border: none;
-    cursor: pointer;
-  
-    &:hover {
-      background-color: $mpink;
-      color: #fff;
+  }
+}
+
+.admin_editbar {
+  display: flex;
+  background-color: #f2f2f2;
+  padding: 5px;
+  border-top-right-radius: 10px;
+}
+
+.onlyB {
+  position: relative;
+  box-shadow: none;
+  margin-right: 0;
+  width: 190px;
+}
+
+.btn_admin {
+  margin-right: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  width: 70px;
+  height: 40px;
+  background-color: $mblue;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $mpink;
+  }
+}
+
+.dmain {
+  background-color: #ffffff80;
+  height: 80%;
+  border-radius: 0 10px 10px 10px;
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+
+    th,
+    td {
+      padding: 10px;
+      text-align: left;
+      border-bottom: 1px solid #ccc;
+    }
+
+    th {
+      background-color: #f2f2f2;
+      font-weight: bold;
+    }
+
+    td {
+      &:first-child {
+        input[type="checkbox"] {
+          margin-right: 5px;
+        }
+      }
+
+      &:last-child {
+        button {
+          color: #000;
+          border: none;
+          cursor: pointer;
+        }
+
+        &:hover {
+          color: $mblue;
+        }
+      }
+
+      p {
+        margin: 0;
+        padding: 5px;
+
+      }
     }
   }
-  
-  .dmain {
-    background-color: #ffffff80;
-    height: 80%;
-    border-radius: 0 10px 10px 10px;
-  
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      border-spacing: 0;
-  
-      th,
-      td {
-        padding: 10px;
-        text-align: left;
-        border-bottom: 1px solid #ccc;
-      }
-  
-      th {
-        background-color: #f2f2f2;
-        font-weight: bold;
-      }
-  
-      td {
-        &:first-child {
-          input[type="checkbox"] {
-            margin-right: 5px;
-          }
-        }
-  
-        &:last-child {
-          button {
-            border: none;
-            padding: 5px 10px;
-            cursor: pointer;
-          }
-        }
-  
-        p {
-          margin: 0;
-          padding: 5px;
-  
-        }
-      }
-    }
-  
+
+}
+
+.pop {
+  position: absolute;
+  top: -1%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  background-color: rgba(255, 248, 248);
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  border-radius: 10px;
+
+  .form_btn {
+    position: absolute;
+    bottom: 0;
+    right: 0;
   }
-  </style>
+}
+</style>
+      
