@@ -25,10 +25,12 @@ export default {
 
 <style scoped lang="scss">
 main{
-    width: 83.33%;
+    padding-left: 70px;
     margin: auto;
     overflow-x: hidden;
-
+    @include t(){
+        padding: 0;
+    }
 }
 
 </style>
