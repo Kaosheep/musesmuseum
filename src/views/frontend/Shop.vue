@@ -29,14 +29,14 @@
           {{ a.name }}
         </button>
       </router-link>
-      <select class="shop_filter">
+      <select class="shop_filter" v-model="sortType" @change="priceClick(sortType)">
         <option>
           商品排序
         </option>
-        <option>
+        <option value="asc">
           價格低至高
         </option>
-        <option>
+        <option value="desc">
           價格高至低
         </option>
       </select>
@@ -46,16 +46,9 @@
         查無商品
       </div>
       <div class="item" v-for="(item, index) in produstdisplay" :key="index" v-else>
-        <router-link to="/ProductPage">
+        <router-link to="/Home/ProductPage">
           <div class="image">
-            <img
-              :src="
-                require('@/assets/image/productimage/productimage' +
-                  index +
-                  '.png')
-              "
-              :alt="item.title"
-            />
+            <img :src="item.image" :alt="item.title"/>
           </div>
         </router-link>
         <div class="info">
@@ -77,7 +70,7 @@
     </div>
   </div>
   <div class="page">
-    <Page :total="30" class="pagination" size="small" />
+    <Page :total="10" class="pagination"/>
   </div>
 </template>
 
@@ -110,111 +103,138 @@ export default {
         {
           title: "MUSES筆記本",
           price: 350,
+          image: require('@/assets/image/productimage/productimage0.png'),
         },
         {
           title: "手繪紅鶴小廢包",
           price: 3000,
+          image: require('@/assets/image/productimage/productimage1.png'),
         },
         {
           title: "維納斯口紅",
           price: 2500,
+          image: require('@/assets/image/productimage/productimage2.png'),
         },
         {
           title: "諾貝爾仿徽",
           price: 3500,
+          image: require('@/assets/image/productimage/productimage3.png'),
         },
         {
           title: "MUSES素T",
           price: 400,
+          image: require('@/assets/image/productimage/productimage4.png'),
         },
         {
           title: "路易絲面膜",
           price: 300,
+          image: require('@/assets/image/productimage/productimage5.png'),
         },
         {
           title: "草地上的聖母筆記本",
           price: 1500,
+          image: require('@/assets/image/productimage/productimage6.png'),
         },
         {
           title: "皮革筆記本",
           price: 499,
+          image: require('@/assets/image/productimage/productimage7.png'),
         },
         {
           title: "MUSES博物館迷你模型",
           price: 1499,
+          image: require('@/assets/image/productimage/productimage8.png'),
         },
         {
           title: "MUSES咖啡杯盤組",
           price: 699,
+          image: require('@/assets/image/productimage/productimage9.png'),
         },
         {
           title: "MUSES帆布袋",
           price: 450,
+          image: require('@/assets/image/productimage/productimage10.png'),
         },
         {
           title: "派對動物-A款",
           price: 299,
+          image: require('@/assets/image/productimage/productimage11.png'),
         },
         {
           title: "派對動物-B款",
           price: 299,
+          image: require('@/assets/image/productimage/productimage12.png'),
         },
       ],
-      productlist: [
+      produstlist: [
         {
           title: "MUSES筆記本",
           price: 350,
+          image: require('@/assets/image/productimage/productimage0.png'),
         },
         {
           title: "手繪紅鶴小廢包",
           price: 3000,
+          image: require('@/assets/image/productimage/productimage1.png'),
         },
         {
           title: "維納斯口紅",
           price: 2500,
+          image: require('@/assets/image/productimage/productimage2.png'),
         },
         {
           title: "諾貝爾仿徽",
           price: 3500,
+          image: require('@/assets/image/productimage/productimage3.png'),
         },
         {
           title: "MUSES素T",
           price: 400,
+          image: require('@/assets/image/productimage/productimage4.png'),
         },
         {
           title: "路易絲面膜",
           price: 300,
+          image: require('@/assets/image/productimage/productimage5.png'),
         },
         {
           title: "草地上的聖母筆記本",
           price: 1500,
+          image: require('@/assets/image/productimage/productimage6.png'),
         },
         {
           title: "皮革筆記本",
           price: 499,
+          image: require('@/assets/image/productimage/productimage7.png'),
         },
         {
           title: "MUSES博物館迷你模型",
           price: 1499,
+          image: require('@/assets/image/productimage/productimage8.png'),
         },
         {
           title: "MUSES咖啡杯盤組",
           price: 699,
+          image: require('@/assets/image/productimage/productimage9.png'),
         },
         {
           title: "MUSES帆布袋",
           price: 450,
+          image: require('@/assets/image/productimage/productimage10.png'),
         },
         {
           title: "派對動物-A款",
           price: 299,
+          image: require('@/assets/image/productimage/productimage11.png'),
         },
         {
           title: "派對動物-B款",
           price: 299,
+          image: require('@/assets/image/productimage/productimage12.png'),
         },
       ],
       searchinput: "",
+      sortType: "商品排序",
     };
   },
   methods: {
@@ -231,6 +251,22 @@ export default {
       this.searchinput = "";
       this.produstdisplay = this.productlist;
     },
+    priceClick(type){
+      if(this.sortType != type){
+        this.sortType = type;
+      }
+    },
+  },
+  computed: {
+    produstdisplay() {
+      return this.produstdisplay.slice().sort((a, b) => {
+        if(this.sortType === 'asc') {
+          return a.price - b.price;
+        } else if(this.sortType === 'desc'){
+          return b.price - a.price;
+        }
+      });
+    }
   },
   mounted() {
     document.body.style.height = `auto`;
