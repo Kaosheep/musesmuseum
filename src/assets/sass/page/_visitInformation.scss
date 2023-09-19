@@ -1,8 +1,17 @@
 .visitInformation-main {
     width: 83.33%;
+    margin-left: auto;
     position: relative;
-    margin-left: 10%;
     margin-top: 1%;
+
+    @include t() {
+        width: 90%;
+        margin: auto;
+        margin-bottom: 100px;
+    }
+
+    //t是平板
+
 }
 
 
@@ -13,6 +22,13 @@
     position: relative;
     border-radius: 5px;
     box-shadow: 10px 10px 0px $myellow;
+
+    @include t() {
+        margin-top: 20px;
+        box-shadow: none;
+        width: 50%;
+    }
+
 }
 
 
@@ -23,17 +39,67 @@
     color: #fff;
     position: absolute;
     @include tc();
+
+    @include t() {
+        width: 80%;
+        text-align: center;
+    }
 }
 
+
 .visitInformation-ulBorder {
-    border: 1px solid $mgreen;
+    border: 3px solid $mgreen;
     margin-top: 30px;
     padding: 20px;
+    padding-right: 40px;
     width: 75%;
     position: relative;
     background-color: #fff;
     border-radius: 5px;
+
+    @include t() {
+        margin-top: 20px;
+        box-shadow: none;
+        width: 100%;
+    }
 }
+
+.visitInformation-ulBorder::before {
+    content: "";
+    background:
+        //y上面
+        radial-gradient(circle at top 5px left 25px, $mgreen 2.5px, transparent 2.5px),
+        radial-gradient(circle at top 5px left 35px, $mgreen 2.5px, transparent 2.5px),
+        radial-gradient(circle at top 15px left 25px, $mgreen 2.5px, transparent 2.5px),
+        radial-gradient(circle at top 15px left 35px, $mgreen 2.5px, transparent 2.5px),
+        //中左
+        radial-gradient(circle at top 25px left 5px, $mgreen 2.5px, transparent 2.5px),
+        radial-gradient(circle at top 25px left 15px, $mgreen 2.5px, transparent 2.5px),
+        radial-gradient(circle at top 35px left 5px, $mgreen 2.5px, transparent 2.5px),
+        radial-gradient(circle at top 35px left 15px, $mgreen 2.5px, transparent 2.5px),
+        //中右
+        radial-gradient(circle at top 25px left 45px, $mgreen 2.5px, transparent 2.5px),
+        radial-gradient(circle at top 25px left 55px, $mgreen 2.5px, transparent 2.5px),
+        radial-gradient(circle at top 35px left 45px, $mgreen 2.5px, transparent 2.5px),
+        radial-gradient(circle at top 35px left 55px, $mgreen 2.5px, transparent 2.5px),
+        //中左
+        radial-gradient(circle at top 45px left 25px, $mgreen 2.5px, transparent 2.5px),
+        radial-gradient(circle at top 55px left 35px, $mgreen 2.5px, transparent 2.5px),
+        radial-gradient(circle at top 45px left 35px, $mgreen 2.5px, transparent 2.5px),
+        radial-gradient(circle at top 55px left 25px, $mgreen 2.5px, transparent 2.5px);
+    width: 70px;
+    height: 60px;
+    position: absolute;
+    right: 0%;
+    transform: translateX(50%);
+    top: -105.06px;
+
+    @include t() {
+        display: none;
+    }
+}
+
+
 
 .visitInformation-ulBorder::after {
     @include dotbg();
@@ -46,28 +112,29 @@
     border: 1px solid $mgreen;
     border-radius: 5px;
     z-index: -99;
+
+    @include t() {
+        display: none;
+    }
 }
 
 
 
-
-.visitInformation-main ul {
-    position: relative;
-    width: 90%;
-
-}
-
-.visitInformation-main li {
+.visitInformation-nav {
     width: 100%;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
+    position: relative;
+
+
 }
 
-
 .visitInformation-icon {
-    width: 10%;
+    width: 13%;
     text-align: center;
+
+
 }
 
 .visitInformation-nav+.visitInformation-nav {
@@ -79,19 +146,57 @@
 }
 
 .visitInformation-txt {
-    width: calc(90% - 20.67px);
+    width: 87%;
     border-bottom: 2px solid $mgreen;
+    height: 51px;
+    display: flex;
+    align-items: center;
+
+
+    @include m() {
+        margin-left: auto;
+        width: 75%;
+        height: 90px;
+    }
 
 }
 
-.visitInformation-nav::after {
-    content: "";
+.visitInformation-txt::after {
+    content: '';
     width: 20.67px;
     height: 20.67px;
     border-radius: 50%;
     background-color: $myellow;
     position: absolute;
-    right: 0;
+    left: 100%;
+    bottom: 0;
     transform: translateY(50%);
+}
+
+
+.visitInformation-bg {
+    background:
+        //y上面
+        radial-gradient(circle at top 5px left 15px, $mgreen 2.5px, transparent 2.5px),
+        radial-gradient(circle at top 15px left 5px, $mgreen 2.5px, transparent 2.5px),
+        radial-gradient(circle at top 15px left 25px, $mgreen 2.5px, transparent 2.5px),
+        radial-gradient(circle at top 25px left 15px, $mgreen 2.5px, transparent 2.5px);
+    height: 35px;
+    width: 35px;
+    position: relative;
+    top: 100px;
+    left: 100px;
+
+    @include t() {
+        display: none;
+    }
+}
+
+footer {
+    display: none;
+
+    @include t() {
+        display: inline-block;
+    }
 
 }

@@ -1,8 +1,8 @@
 <template>
-    <Header></Header>
+    <Header v-if="windowWidth > 768"></Header>
     <main class="visitInformation-main">
         <div class="visitInformation-title">
-            <h1>參觀須知<br>Notice</h1>
+            <h1>參觀須知 <br v-if="windowWidth < 769">Notice</h1>
         </div>
         <div class="visitInformation-ulBorder" id="visitInformationUlBorder">
             <ul>
@@ -16,11 +16,15 @@
                 </li>
             </ul>
         </div>
+        <div class="visitInformation-bg"></div>
     </main>
+    <Footer></Footer>
 </template>
   
 <script>
 import Header from '@/components/Header.vue';
+import Footer from '@/components/Footer.vue';
+
 
 export default {
     data() {
@@ -50,22 +54,21 @@ export default {
                     imgurl: require("@/assets/image/visit/visitImage06.png"),
                     txt: "展場內需降低談話音量，通訊設備或電子裝置應調整為靜音。",
                 },
-
             ],
+            windowWidth: window.innerWidth,
         }
     },
     mounted() {
         document.body.style.height = `auto`;
-
-
-
     },
+
     components: {
-        Header
+        Header,
+        Footer
     },
-
-
 }
+
+
 </script>
 <style scoped lang="scss">
 @import "@/assets/sass/page/_visitInformation.scss";
