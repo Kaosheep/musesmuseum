@@ -12,7 +12,6 @@
     }
     .title{
         height: 100vh;
-        overflow-y: hidden;
         @include t() {
             height: calc(100vh - 70px);
         }
@@ -74,12 +73,10 @@
                 position: absolute;
                 top: 0;
                 left: 0;
+                z-index: 2;
             }
 
             .veiw {
-
-
-                z-index: -1;
                 width: 100%;
                 height: calc(100vh - 114px);
                 overflow-y: scroll;
@@ -123,7 +120,6 @@
             top: 50%;
             right: -90vw;
             width: 100vw;
-            z-index: -10;
 
             @include set (1200px) {
                 right: -100vw;

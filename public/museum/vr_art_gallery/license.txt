@@ -1,0 +1,11 @@
+Model Information:
+* title:	VR Art Gallery
+* source:	https://sketchfab.com/3d-models/vr-art-gallery-c4c28eb803254b1ebbfc58638d617a9c
+* author:	Pranav Rana (https://sketchfab.com/pranavrana)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "VR Art Gallery" (https://sketchfab.com/3d-models/vr-art-gallery-c4c28eb803254b1ebbfc58638d617a9c) by Pranav Rana (https://sketchfab.com/pranavrana) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

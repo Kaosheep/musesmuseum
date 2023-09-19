@@ -125,6 +125,11 @@ const routes = [
         path: 'History',
         name: 'History',
         component: () => import('../views/frontend/History.vue'),
+      },
+      {
+        path: 'Museumspace',
+        name: 'Museumspace',
+        component: () => import('../views/frontend/Museumspace.vue'),
       }
     ]
   },

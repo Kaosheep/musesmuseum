@@ -62,7 +62,7 @@ export default {
         { title: "購票專區", link: "/Home/Tick" },
         {
           title: "展覽資訊",
-          link: "/Exb",
+          link: "/",
           sublist: [
             { subtitle: "常設展覽", sublink: "/Home/CurrentExhibition" },
             { subtitle: "當期展覽", sublink: "/Home/SpecialExhibition" },
@@ -70,7 +70,7 @@ export default {
         },
         {
           title: "藝術典藏",
-          link: "/Collection",
+          link: "/",
           sublist: [
             { subtitle: "文物區", sublink: "/Home/Art" },
             { subtitle: "畫作區", sublink: "/Home/Paintings" },
@@ -80,9 +80,9 @@ export default {
           title: "園區導覽",
           link: "/Space",
           sublist: [
-            { subtitle: "館內地圖", sublink: "/Home/Space" },
+            { subtitle: "館內地圖", sublink: "/Home/Museumspace" },
             { subtitle: "周邊景點", sublink: "/Home/SpaceMap" },
-            { subtitle: "附屬空間", sublink: "/" },
+            { subtitle: "附屬空間", sublink: "/Space" },
           ],
         },
         {
