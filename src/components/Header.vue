@@ -99,7 +99,7 @@ export default {
           link: "/About",
           sublist: [
             { subtitle: "歷史沿革", sublink: "/Home/History" },
-            { subtitle: "歷代館長", sublink: "/" },
+            { subtitle: "歷代館長", sublink: "/Home/Curator" },
           ],
         },
         { title: "商品", link: "/Home/Shop" },

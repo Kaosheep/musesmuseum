@@ -1,7 +1,9 @@
 <template>
+  
   <div class="title">購票</div>
-<div class="entitle">Book Tickets</div>
+  <div class="entitle">Book Tickets</div>
 <div  style="display: flex;">
+<div class="forrwd">
 <div class="block">
 <div>  
 <div class="FareAndIllustrate">票價</div>
@@ -21,8 +23,8 @@
 <div class="white">-兒童票、優待票請現場出示身分證。</div>
 <div class="white">-愛心票請現場出示身心障礙證明（手冊）。</div>
 <img class=shormatrix src="@/assets/image/tick/shortmatrix.png"/>
-
 </div>
+
 <div class="buytick">
   <div class="tick">成人票
     <button class="addandsub" @click="reduce1">-</button>
@@ -60,6 +62,7 @@
   </div>
   <button class="submit">送出</button>
 </div> 
+</div>
 <img class=squarematrix src="@/assets/image/tick/squarematrix.png">
 <img class=bigmatrix src="@/assets/image/tick/bigmatrix.png">
  
@@ -68,6 +71,7 @@
 <img class=cube2 src="@/assets/image/tick/cube2.png"/>
 <div class="frame"></div>
 <img class=longmatrix src="@/assets/image/tick/longmatrix.png"/>
+
 </template>
 
 <script>
@@ -154,6 +158,123 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
+ @media screen and (max-width:767px) {
+  
+  .title{
+color: #1E5289;
+margin-left: 10%;
+margin-top: 3%;
+}
+.entitle{
+  color: #1E5289;
+margin-left: 10%;
+}
+.shormatrix{
+  display: none;
+}
+.longmatrix{
+  display: none;
+}
+.squarematrix{
+  display: none;
+}
+.bigmatrix{
+  display: none;
+}
+.block{
+  background-color:#009CA8;
+  width: 100%;
+  height: 50%;
+  border-radius: 10px;
+  position: relative;
+  z-index: 1;
+  margin-left: 10%;
+  padding-top: 10px;
+  padding-left: 10px;
+  padding-bottom: 10px;
+}
+.buytick{
+  border:3px solid #009CA8;
+  width: 100%;
+  height: 40%;
+  background-color: white;
+  border-radius:10px;
+  margin-top: 20%;
+  margin-left: 10%;
+  margin-block-end: 20%;
+  position: relative;
+  bottom: 20px;
+  z-index: 1;
+ 
+}
+.addandsub{
+  width: 30px;
+  height: 30px;
+  margin-left: 20px;
+  margin-right:20px;
+  color: #1E5289;
+  background-color: white;
+  border:1px solid #1E5289;
+  border-radius: 5px;
+}
+.SweatBee{
+  color:#1E5289;
+  background-color: white;
+  border-radius: 5px;
+  width: 30%;
+  margin-left: 10px;
+  text-align: center;
+}
+.white{
+  color:white;
+  margin-left: 20px;
+}
+.red{
+  color: #EB5F86;
+}
+.clear{
+  border:none;
+  background-color:white;
+  color:#1E5289;
+}
+.submit{
+  width: 200px;
+  height: 50px;
+  margin: 20px;
+  margin-left: 25%;
+  border:1px solid #EB5F86;
+  background-color: #FBF796;
+  color: #1E5289;
+}
+.FareAndIllustrate{
+  color:#1E5289;
+  background-color: #FBF796;
+  width: 15%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 10px;
+  text-align: center;
+  
+}
+.tick{
+  margin-top: 20px;
+  margin-bottom: 30px;
+  margin-left: 15%;
+  color: #009CA8;
+}
+.sum{
+  color:#009CA8;
+  text-align: center;
+}
+ }
+
+
+@media screen and (min-width:768px){
+.forrwd{
+  display: flex;
+  width: 90%;
+}
 .title{
 color: #1E5289;
 margin-left: 10%;
@@ -165,8 +286,8 @@ margin-left: 10%;
 }
 .block{
   background-color:#009CA8;
-  width: 30%;
-  height: 50%;
+  width: 35%;
+  height: 70%;
   border-radius: 10px;
   position: relative;
   z-index: 1;
@@ -236,11 +357,12 @@ margin-left: 10%;
 }
 .buytick{
   border:3px solid #009CA8;
-  width: 32%;
-  height: 60%;
+  width: 35%;
+  height: 63%;
   background-color: white;
   border-radius:10px;
-  margin-left: 10%;
+  margin-left: 11%;
+  margin-right: 0px;
   margin-block-end: 20%;
   position: relative;
   bottom: 20px;
@@ -327,6 +449,7 @@ margin-left: 10%;
   border:none;
   background-color:white;
   color:#1E5289;
+}
 }
 </style> 
 
