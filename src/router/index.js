@@ -125,6 +125,11 @@ const routes = [
         path: 'History',
         name: 'History',
         component: () => import('../views/frontend/History.vue'),
+      },
+      {
+        path: 'Curator',
+        name: 'Curator',
+        component: () => import('../views/frontend/Curator.vue'),
       }
     ]
   },
