@@ -16,7 +16,7 @@
         </div>
       </div>
       <div class="product_txt">
-        <h1 v-if="foundObject">
+        <h1>
           {{ foundObject.title }}
         </h1>
         <span>
@@ -76,7 +76,7 @@
   import Heart from '/src/components/Heart.vue'
   import ProductWrap from '/src/components/ProductWrap.vue'
   import Footer from '/src/components/Footer.vue'
-  import { createRouter, createWebHistory } from 'vue-router';
+  // import { createRouter, createWebHistory } from 'vue-router';
 
   export default {
     components: {

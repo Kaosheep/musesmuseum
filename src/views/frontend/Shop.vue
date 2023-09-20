@@ -79,7 +79,7 @@ import Footer from "/src/components/Footer.vue";
 import Searchbar from "/src/components/Searchbar.vue";
 import Heart from "/src/components/Heart.vue";
 import Searchbarclick from "/src/components/Searchbarclick.vue";
-import { createRouter, createWebHistory } from 'vue-router';
+// import { createRouter, createWebHistory } from 'vue-router';
 
 export default {
   components: {
