@@ -3,11 +3,11 @@
     <div class="shop_Breadcrumbs">
       <a href="">首頁 / </a>
       <a href="">商城 / </a>
-      <span>熱銷商品</span>
+      <span>{{ foundObject.title }}</span>
     </div>
     <div class="product_info">
       <div class="product_image">
-        <img src="@/assets/image/productimage/productimage0.png" alt="" />
+        <img :src="foundObject.image" :alt="foundObject.title"/>
         <div>
           <Heart></Heart>
           <p>
@@ -16,11 +16,11 @@
         </div>
       </div>
       <div class="product_txt">
-        <h1>
-          <!-- {{foundObject.item.title}} -->1212
+        <h1 v-if="foundObject">
+          {{ foundObject.title }}
         </h1>
         <span>
-          $ 300
+          {{ foundObject.price }}
         </span>
         <div class="product_function">
           <div class="product_count">
@@ -76,6 +76,8 @@
   import Heart from '/src/components/Heart.vue'
   import ProductWrap from '/src/components/ProductWrap.vue'
   import Footer from '/src/components/Footer.vue'
+  import { createRouter, createWebHistory } from 'vue-router';
+
   export default {
     components: {
       Heart,
@@ -85,7 +87,8 @@
     data() {
       return {
         count: 0,
-        // foundObject:"",
+        foundObject:{
+        },
         produstdisplay: [
           {
             id: 0,
@@ -168,10 +171,12 @@
         ],
       };
     },
-    // mounted() {
-    //   const idToFind = this.$route.params.id;
-    //   this.foundObject = produstdisplay.find(item => item.id === idToFind);
-    // },
+    mounted() {
+      const idToFind = parseInt(this.$route.params.id);
+      this.foundObject = this.produstdisplay.find(item => item.id === idToFind);
+
+      document.body.style.height = `auto`;
+    },
     methods: {
       decrease() {
         if (this.count > 0) {
@@ -185,14 +190,7 @@
         this.navTitle.splice(index, 1);
       },
     },
-    mounted(){
-      document.body.style.height = `auto`;
-    }
   };
-  // const routes = [
-  //   { path: '@/Home/ProductPage/:id', produstdisplay }
-  // ];
-
 </script>
 
 <style lang="scss" scoped>
