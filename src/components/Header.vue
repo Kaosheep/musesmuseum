@@ -82,7 +82,7 @@ export default {
           sublist: [
             { subtitle: "館內地圖", sublink: "/Home/Museumspace" },
             { subtitle: "周邊景點", sublink: "/Home/SpaceMap" },
-            { subtitle: "附屬空間", sublink: "/Space" },
+            { subtitle: "附屬空間", sublink: "/Home/Space" },
           ],
         },
         {
@@ -99,7 +99,7 @@ export default {
           link: "/About",
           sublist: [
             { subtitle: "歷史沿革", sublink: "/Home/History" },
-            { subtitle: "歷代館長", sublink: "/" },
+            { subtitle: "歷代館長", sublink: "/Home/Curator" },
           ],
         },
         { title: "商品", link: "/Home/Shop" },

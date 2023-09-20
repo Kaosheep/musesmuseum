@@ -1,8 +1,10 @@
 <template>
     <div class="Fqaoutside">
-        <h2 class="Fqa-title">{{ text }}</h2>
+        <div class="Fqa-title">
+            <h1>常見問題 <br> FAQ</h1>
+        </div>
         <main class="Fqa-main">
-            <aside class="Fqa-aside">
+            <aside class="Fqa-aside" style="display: none;">
                 <ul>
                     <li v-for="(title, index) in fqaNav" :key="index" class="Fqa-li">
                         <a class="Fqa-a" :href="'#qaNav' + index">{{ title }}</a>
@@ -116,7 +118,7 @@ export default {
         Header
     },
     methods: {
-        /*toggleAnswer(sectionIndex, qaIndex) {
+        toggleAnswer(sectionIndex, qaIndex) {
             const answerId = 'qaAnswer' + sectionIndex + '-' + qaIndex;
             const answerElement = document.getElementById(answerId);
             if (answerElement.style.display === "none") {
@@ -124,11 +126,12 @@ export default {
             } else {
                 answerElement.style.display = "none";
             }
-        },*/
+        },
     },
 }
 </script>
   
 <style scoped lang="scss">
+@import "@/assets/sass/page/_Faq.scss";
 </style>
   

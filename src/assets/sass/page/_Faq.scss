@@ -1,0 +1,62 @@
+.Fqaoutside {
+    width: 83.33%;
+    margin: auto;
+}
+
+.Fqa-title {
+    width: 216px;
+    height: 90px;
+    background-color: $mgreen;
+    position: relative;
+    border-radius: 5px;
+    box-shadow: 10px 10px 0px $myellow;
+
+    @include t() {
+        margin-top: 20px;
+        box-shadow: none;
+        width: 50%;
+    }
+
+}
+
+.Fqa-title h1 {
+    color: #fff;
+}
+
+.Fqa-main {
+    text-align: left;
+    display: flex;
+    flex-wrap: wrap;
+    width: 80%;
+    margin: auto;
+    margin-top: 50px;
+}
+
+
+
+.Fqa-li+.Fqa-li {
+    margin-top: 10px;
+}
+
+
+.Fqa-aside {
+    width: 20%;
+}
+
+.FQA-QA {
+    width: 70%;
+}
+
+.FQA-QAitem {
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+
+.Fqa-li {
+    background-color: $myellow;
+}
+
+
+.FQA-questionH3 {
+    margin-bottom: 10px;
+}
