@@ -82,7 +82,7 @@ export default {
           sublist: [
             { subtitle: "館內地圖", sublink: "/Home/Museumspace" },
             { subtitle: "周邊景點", sublink: "/Home/SpaceMap" },
-            { subtitle: "附屬空間", sublink: "/Home/Space" },
+            { subtitle: "附屬空間", sublink: "/Home/SpaceAround" },
           ],
         },
         {

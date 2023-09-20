@@ -130,6 +130,11 @@ const routes = [
         path: 'Museumspace',
         name: 'Museumspace',
         component: () => import('../views/frontend/Museumspace.vue'),
+      },
+      {
+        path: 'SpaceAround',
+        name: 'SpaceAround',
+        component: () => import('../views/frontend/SpaceAround.vue'),
       }
     ]
   },
