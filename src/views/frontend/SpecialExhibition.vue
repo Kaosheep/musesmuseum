@@ -3,10 +3,15 @@
         <VerHeader></VerHeader>
     </div>
     <div class="exb_search">
-        <Searchbar></Searchbar>
+        <div class="spec_title">
+            <span>當期展覽</span>
+        </div>
+        <Searchbar @click="searchClick" />
+        <Searchbarclick />
     </div>
     <div class="img_deco">
     </div>
+
     <div class="exhi_section">
         <div class="exhi_img">
             <img src="@/assets/image/exhibition/specialexhibition/spec_ex0.jpg" alt="">
@@ -27,36 +32,47 @@
             <div class="buy_tickbtn_deco"></div>
         </div>
         <div class="exhi_desc_bgc"></div>
+        <button class="exsearch" type="button" @click="scrollpage">
+            <img src="@/assets/image/exhibition/specialexhibition/arrow_logo.svg" alt="" />
+        </button>
     </div>
-
+    <div class="m_date">
+        <span>2024/02/01-2024/03/30</span>
+    </div>
+    <div class="m_title">
+        <span>春之詠歌：多彩藝術的季節華章</span>
+    </div>
     <div class="buy_tickbtn">
-
         <ThinArrow :text="'前往購票'"></ThinArrow>
     </div>
 </template>
 <script>
 import VerHeader from '/src/components/VerHeader.vue'
 import Searchbar from '/src/components/Searchbar.vue'
+import Searchbarclick from '/src/components/Searchbarclick.vue'
 import ThinArrow from '/src/components/ThinArrow.vue'
 export default {
     components: {
         VerHeader,
         Searchbar,
+        Searchbarclick,
         ThinArrow,
+    },
+    methods: {
+        scrollpage() {
+            document.querySelector(".wrap").scrollLeft +=
+                document.querySelector(".col").offsetWidth;
+        },
     }
 }
 </script>
 <style scoped lang="scss">
-.exb_search {
-    margin: auto;
-    margin-top: 2%;
-    text-align: end;
-    width: 83.33%;
-
-}
-
 .searchbar_search {
     margin-left: auto;
+}
+
+.searchbarclick_search {
+    display: none;
 }
 
 .buy_tickbtn {
