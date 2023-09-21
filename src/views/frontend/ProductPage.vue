@@ -28,11 +28,15 @@
         </span>
         <div class="product_function">
           <div class="product_count">
-            <button @click="decrease"><font-awesome-icon :icon="['fas', 'minus']" id="minus"/></button>
+            <button @click="decrease">
+              <font-awesome-icon :icon="['fas', 'minus']" id="minus"/>
+            </button>
             <span>
               {{ count }}
             </span>
-            <button @click="increase"><font-awesome-icon :icon="['fas', 'plus']" id="plus"/></button>
+            <button @click="increase">
+              <font-awesome-icon :icon="['fas', 'plus']" id="plus"/>
+            </button>
           </div>
           <button>
             加入購物車
