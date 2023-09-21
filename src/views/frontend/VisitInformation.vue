@@ -1,5 +1,5 @@
 <template>
-    <Header v-if="windowWidth > 768"></Header>
+
     <main class="visitInformation-main">
         <div class="visitInformation-title">
             <h1>參觀須知 <br v-if="windowWidth < 769">Notice</h1>
@@ -18,7 +18,7 @@
         </div>
         <div class="visitInformation-bg"></div>
     </main>
-    <Footer></Footer>
+ 
 </template>
   
 <script>
