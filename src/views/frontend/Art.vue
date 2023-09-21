@@ -49,6 +49,7 @@
       </div>
     </div>
   </main>
+  
 </template>
 
 <script>
@@ -71,6 +72,15 @@ export default {
   },
   data() {
     return {
+      value: 0,
+      setting: {
+        autoplay: false,
+        autoplaySpeed: 2000,
+        dots: "inside",
+        radiusDot: false,
+        trigger: "click",
+        arrow: "hover",
+      },
       infolist: [
         {
           artname: "雪霜白",
@@ -80,11 +90,11 @@ export default {
           au: "李鶴",
         },
         {
-          artname: "雪霜白",
-          enname: "Snowfrost White",
+          artname: "埃及陶壺",
+          enname: "Egyptian Elegance Vessel",
           story:
-            "有一天，李鶴漫步在村莊的山區，突然在清澈的山泉旁發現了一株特別的白色植物。這種植物的花瓣洁白無瑕，仿佛結了一層薄霜。李鶴被這種純潔和優雅的美所深深吸引，決定將這種美麗帶回村莊。回到陶工坊，他開始思考如何將這種優雅和純潔的美轉化為陶瓷藝術品。經過長時間的實驗和嘗試，他終於研發出一種特殊的白瓷釉料，這種釉料能夠在瓷器上創造出如同那株植物花瓣上的薄霜一樣的純白光澤。",
-          au: "李鶴",
+            '約在公元前2500年的古埃及，一位名叫賽赫特的陶匠，以他無與倫比的技藝和無限的創造力，製作了一個優美的陶壺，這個陶壺後來被稱為"埃及寶瓶"。<br>這個陶壺的形狀獨特，高約30公分，呈現出完美的對稱，並裝飾有華麗的印花，描繪了當時的埃及神話和神聖的動物，如法老的金字塔和聖牛荷魯斯。陶壺的底部刻有古埃及的魔法符號，據說可以為持有者帶來好運和祝福。這個埃及寶瓶成為了當時埃及社會的珍貴珍寶，不僅僅是一個實用的容器，更是一個藝術品和象徵，代表了古埃及文明的繁榮和智慧。',
+          au: "賽赫特",
         },
         {
           artname: "雪霜白",
@@ -142,7 +152,7 @@ export default {
       let li = document.querySelectorAll(".artwarp ul li");
       let art = document.querySelectorAll(".artwarp ul li .art");
       this.count++;
-      console.log(this.count);
+
       art.forEach((art) => {
         art.style.transform = `translateX(55vw) rotate(calc(360deg / -6 * var(--i) - ${
           this.count * 60

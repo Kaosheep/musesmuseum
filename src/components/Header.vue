@@ -70,7 +70,7 @@ export default {
         },
         {
           title: "園區導覽",
-          link: "/Space",
+          link: "/",
           sublist: [
             { subtitle: "館內地圖", sublink: "/Home/Museumspace" },
             { subtitle: "周邊景點", sublink: "/Home/SpaceMap" },
@@ -79,7 +79,7 @@ export default {
         },
         {
           title: "參觀服務",
-          link: "/VisitInformation",
+          link: "/",
           sublist: [
             { subtitle: "注意事項", sublink: "/Home/VisitInformation" },
             { subtitle: "常見問題", sublink: "/Home/faq" },
@@ -88,7 +88,7 @@ export default {
         },
         {
           title: "關於我們",
-          link: "/About",
+          link: "/",
           sublist: [
             { subtitle: "歷史沿革", sublink: "/Home/History" },
             { subtitle: "歷代館長", sublink: "/Home/Curator" },

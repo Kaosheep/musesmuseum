@@ -49,12 +49,21 @@
           <div class="new">
             <div class="container">
               <div class="gallery" ref="galleryRef">
-                <img
-                  :src="img.imgsrc"
-                  :alt="img.imgtitle"
+                <div
+                  class="img"
                   v-for="(img, imgindex) in galleryimgs"
                   :key="imgindex"
-                />
+                >
+                  <img
+                    :src="require('@/assets/image/exb/e' + imgindex + '.jpg')"
+                    :alt="img.imgtitle"
+                  />
+                  <div class="imginfo">
+                    <h3>{{ img.imgtitle }}</h3>
+                    <p>{{ img.time }}</p>
+                    <p>{{ img.info }}</p>
+                  </div>
+                </div>
               </div>
             </div>
             <div class="moreexb">
@@ -90,7 +99,10 @@
                   <ThinArrow :text="'More'"></ThinArrow>
                 </div>
                 <div class="image">
-                  <img src="" alt="" />
+                  <img
+                    :src="require('@/assets/image/news/n' + index + '.jpg')"
+                    alt=""
+                  />
                 </div>
               </RouterLink>
             </div>
@@ -153,6 +165,22 @@
           </div>
           <div class="smalltitle">
             <h2>藝術典藏<br />Collection</h2>
+          </div>
+          <div :class="['artblock',{'show':isshow}]">
+            <div class="balla">
+              <div class="artballa">
+                <h3>
+                  文物區
+                </h3>
+              </div>
+            </div>
+            <div class="ballp">
+              <div class="artball">
+                <h3>
+                  畫作區
+                </h3>
+              </div>
+            </div>
           </div>
         </section>
         <section>

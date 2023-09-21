@@ -19,6 +19,9 @@
         .paintsearchbar {
             text-align: end;
             padding-right: 3rem;
+            @include m(){
+                padding: 0;
+            }
         }
 
         .paintsearch {
@@ -155,6 +158,7 @@
                             height: 100%;
                             object-fit: cover;
                             transition: .5s;
+                            object-position: top;
                         }
                     }
 
