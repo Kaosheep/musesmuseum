@@ -13,15 +13,15 @@
             </aside>
             <div class="FQA-QA">
                 <div v-for="(section, sectionIndex) in   sections  " :key="sectionIndex" :class="FQA - QAitem">
-                    <h2 class="FQA-questionH2" :id="'qaNav' + (sectionIndex + 1)">{{ fqaNav[sectionIndex + 1] }}
-                    </h2>
+                    <h3 class="FQA-questionH2" :id="'qaNav' + (sectionIndex + 1)">{{ fqaNav[sectionIndex + 1] }}
+                    </h3>
 
                     <div class="FQA-QAitem" v-for="(qa, qaIndex) in   section  " :key="qaIndex">
                         <div class="FQA-item mgreen" :id="'FQA-item' + sectionIndex + '-' + qaIndex"
-                            style="border-color: #009CA8;">
-                            <h3 class="FQA-questionH3 " @click="toggleAnswer(sectionIndex, qaIndex)">
+                            style="border-color: #009CA8;" @click="toggleAnswer(sectionIndex, qaIndex)">
+                            <h4 class="FQA-questionH3 ">
                                 {{ qa.question }}
-                            </h3>
+                            </h4>
                             <span class="Fqa-plus ">
                                 <span class="Fqa-plusC" :id="'FqaPlusC' + sectionIndex + '-' + qaIndex"
                                     style="display:block;"></span>

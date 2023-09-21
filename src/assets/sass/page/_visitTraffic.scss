@@ -1,6 +1,6 @@
 .VisitTraffic {
-    width: 83.33%;
-    margin: auto;
+    width: calc(100% - 70px);
+    margin-left: auto;
 
     @include t() {
         width: 90%;
@@ -11,17 +11,39 @@
 
 .VisitTraffic-title {
     display: flex;
-    flex-wrap: wrap;
+    align-items: center;
 }
 
+
+
+
 .VisitTraffic-h1 {
-    width: 30%;
+    width: 216px;
+    height: 90px;
+    background-color: $mpink;
+    margin-bottom: 30px;
+    margin-left: 30px;
+    border-radius: 5px;
+    text-align: center;
+    color: #fff;
+
+    @include t() {
+        width: 80%;
+        text-align: center;
+    }
 }
 
 .VisitTraffic-add {
-    width: 70%;
+    width: 50%;
+    margin-left: auto;
     display: flex;
     align-items: center;
+}
+
+// 表格
+.VisitTraffic-allFrom {
+    width: 85%;
+    margin: auto;
 }
 
 .VisitTraffic-nav {
@@ -34,20 +56,20 @@
 #VisitTrafficPork {
     width: 150px;
     height: 66.35px;
-    background-color: $myellow;
     border-radius: 8px 8px 0 0;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     margin-right: 30px;
+    border: 2px solid $myellow;
+    border-bottom: 0px;
     cursor: pointer;
 }
 
 #VisitTrafficCar,
 #VisitTrafficPork {
     background-color: #fff;
-    border: 2px solid $myellow;
     border-radius: 8px 8px 0 0;
 }
 
@@ -56,7 +78,7 @@
 #VisitTrafficPorkF {
     margin-top: 0px;
     background-color: $myellow;
-    padding: 30px 60px;
+    padding: 20px 40px;
     margin-bottom: 100px;
     border-radius: 0 8px 8px 8px;
 
@@ -76,10 +98,11 @@
 .VisitTrafficPF-p {
     margin-top: 20px;
     width: 85%;
+    margin: auto;
     background-color: #fff;
     margin-left: auto;
-    padding: 30px;
-    height: 300px;
+    padding: 20px;
+    height: 200px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -106,10 +129,11 @@
 .VisitTrafficPorkCarP-2 {
     margin-top: 20px;
     width: 85%;
+    margin: auto;
     background-color: #fff;
     margin-left: auto;
-    padding: 30px;
-    height: 300px;
+    padding: 20px;
+    height: 200px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -122,10 +146,93 @@
     margin: auto;
     width: 92%;
     height: 200px;
-    margin-right: 0;
-    margin-left: auto;
+
 }
 
 .VisitTrafficPorkCarP-2 {
-    height: 400px;
+    height: 280px;
+    margin: auto;
+}
+
+
+// 輪播圖
+.VisitTrafficBoard {
+    width: 60%;
+    margin: auto;
+    position: relative;
+    padding: 0;
+    overflow: hidden;
+
+}
+
+.VisitTrafficcarousel {
+    width: 100%;
+    padding: 0;
+    text-align: center;
+
+
+}
+
+.VisitTraffic-hidden {
+    visibility: hidden;
+}
+
+.VisitTrafficPic {
+    animation: VisitTrafficCarousel 15s linear infinite;
+}
+
+
+.VisitTrafficImg1 {
+    position: absolute;
+    top: 0;
+    left: 100%;
+    width: 100%;
+    height: 100%;
+    animation-delay: 0s;
+
+}
+
+.VisitTrafficImg2 {
+    position: absolute;
+    top: 0;
+    left: 100%;
+    width: 100%;
+    height: 100%;
+    animation-delay: 5s;
+}
+
+.VisitTrafficImg3 {
+    position: absolute;
+    top: 0;
+    left: 100%;
+    width: 100%;
+    height: 100%;
+    animation-delay: 10s;
+}
+
+@keyframes VisitTrafficCarousel {
+    6.66666% {
+        opacity: 1;
+        left: 0;
+    }
+
+    33.3333% {
+        opacity: 1;
+        left: 0%;
+    }
+
+    39.9999% {
+        opacity: 1;
+        left: -100%;
+    }
+
+    41% {
+        opacity: 0;
+        left: -100%;
+    }
+
+    42% {
+        opacity: 0;
+        left: 100%;
+    }
 }

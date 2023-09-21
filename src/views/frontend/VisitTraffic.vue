@@ -1,48 +1,65 @@
 <template>
-    <Header></Header>
     <main class="VisitTraffic">
         <div class="VisitTraffic-title">
             <h1 class="VisitTraffic-h1">交通資訊<br>traffic</h1>
             <p class="VisitTraffic-add">地址：希臘市和平區謬思路100號</p>
         </div>
-        <div class="VisitTraffic-nav">
-            <span id="VisitTrafficPublic" @click="PublicAppear">大眾運輸</span>
-            <span id="VisitTrafficCar" @click="CarAppear">自行開車</span>
-            <span id="VisitTrafficPork" @click="PorkAppear">停車資訊</span>
+        <div class="VisitTraffic-allFrom">
+            <div class="VisitTraffic-nav">
+                <span id="VisitTrafficPublic" @click="PublicAppear" style="background-color: #FBF796;">大眾運輸</span>
+                <span id="VisitTrafficCar" @click="CarAppear">自行開車</span>
+                <span id="VisitTrafficPork" @click="PorkAppear">停車資訊</span>
+            </div>
+            <!-- 大眾運輸表格 -->
+            <form id="VisitTrafficPF" style="display: block;">
+                <div class="VisitTrafficFlex">
+                    <div v-for="(item, index) in VisitTrafficPublicForm " class="VisitTrafficPFtext">
+                        <h2 class="VisitTrafficPF-h2">{{ item.title }}</h2>
+                        <p v-html="item.text" class="VisitTrafficPF-p"></p>
+                    </div>
+                </div>
+            </form>
+            <!-- 自行開車表格  -->
+            <form id="VisitTrafficCF" style="display: none;">
+                <div class="VisitTrafficFlex">
+                    <div v-for="(item, index) in  VisitTrafficCarForm " :class="'VisitTrafficCFCar-' + index">
+                        <h2 :class="'VisitTrafficCFCarH2-' + index">{{ item.title }}</h2>
+                        <p :class="'VisitTrafficCFCarP-' + index" v-html="item.text"></p>
+                    </div>
+                </div>
+            </form>
+            <!-- 停車資訊 -->
+            <form id="VisitTrafficPorkF" style="display: none;">
+                <div class="VisitTrafficFlex">
+                    <div v-for="( item, index ) in  VisitTrafficPorkForm " :class="'VisitTrafficPorkCar-' + index">
+                        <h2 :class="'VisitTrafficPorkCarH2-' + index">{{ item.title }}</h2>
+                        <p v-html="item.text" :class="'VisitTrafficPorkCarP-' + index"></p>
+                    </div>
+                </div>
+            </form>
         </div>
-        <!-- 大眾運輸表格 -->
-        <form id="VisitTrafficPF" style="display: block;">
-            <div class="VisitTrafficFlex">
-                <div v-for="(item, index) in VisitTrafficPublicForm " class="VisitTrafficPFtext">
-                    <h2 class="VisitTrafficPF-h2">{{ item.title }}</h2>
-                    <p v-html="item.text" class="VisitTrafficPF-p"></p>
-                </div>
-            </div>
-        </form>
-        <!-- 自行開車表格  -->
-        <form id="VisitTrafficCF" style="display: none;">
-            <div class="VisitTrafficFlex">
-                <div v-for="(item, index) in  VisitTrafficCarForm " :class="'VisitTrafficCFCar-' + index">
-                    <h2 :class="'VisitTrafficCFCarH2-' + index">{{ item.title }}</h2>
-                    <p :class="'VisitTrafficCFCarP-' + index" v-html="item.text"></p>
-                </div>
-            </div>
-        </form>
-        <!-- 停車資訊 -->
-        <form id="VisitTrafficPorkF" style="display: none;">
-            <div class="VisitTrafficFlex">
-                <div v-for="( item, index ) in  VisitTrafficPorkForm " :class="'VisitTrafficPorkCar-' + index">
-                    <h2 :class="'VisitTrafficPorkCarH2-' + index">{{ item.title }}</h2>
-                    <p v-html="item.text" :class="'VisitTrafficPorkCarP-' + index"></p>
-                </div>
-            </div>
-        </form>
+        <!-- 輪播 -->
+        <div class="VisitTrafficBoard">
+            <ul class="VisitTrafficcarousel">
+                <li class="VisitTraffic-hidden VisitTrafficImg">
+                    <img src="@/assets/image/VisitTraffic/house1.jpg" alt="輪播圖">
+                </li>
+                <li class="VisitTrafficPic VisitTrafficImg1">
+                    <img src="@/assets/image/VisitTraffic/house1.jpg" alt="輪播圖">
+                </li>
+                <li class="VisitTrafficPic VisitTrafficImg2">
+                    <img src="@/assets/image/VisitTraffic/house2.jpg" alt="輪播圖">
+                </li>
+                <li class="VisitTrafficPic VisitTrafficImg3">
+                    <img ssrc="@/assets/image/VisitTraffic/house3.jpg" alt="輪播圖">
+                </li>
+            </ul>
+        </div>
 
     </main>
 </template>
 <script>
 import Header from '@/components/Header.vue';
-import { text } from '@fortawesome/fontawesome-svg-core';
 
 export default {
     data() {
@@ -116,12 +133,12 @@ export default {
                 VisitTrafficPFId.style.display = "block";
                 VisitTrafficCFId.style.display = "none";
                 VisitTrafficPorkFId.style.display = "none";
-                VisitTrafficPublicId.style.backgroundColor = "$myellow";
-                VisitTrafficPublicId.style.borderColor = "#fff";
+                VisitTrafficPublicId.style.backgroundColor = "#FBF796";
+                VisitTrafficPublicId.style.borderColor = "#FBF796";
                 VisitTrafficCarId.style.backgroundColor = "#fff";
-                VisitTrafficCarId.style.borderColor = "$myellow";
+                VisitTrafficCarId.style.borderColor = "#FBF796";
                 VisitTrafficPorkId.style.backgroundColor = "#fff";
-                VisitTrafficPorkId.style.borderColor = "$myellow";
+                VisitTrafficPorkId.style.borderColor = "#FBF796";
 
 
             }
@@ -133,6 +150,7 @@ export default {
             const VisitTrafficPFId = document.getElementById("VisitTrafficPF");
             const VisitTrafficCFId = document.getElementById("VisitTrafficCF");
             const VisitTrafficPorkFId = document.getElementById("VisitTrafficPorkF");
+
             if (VisitTrafficCFId.style.display === "none") {
                 VisitTrafficCFId.style.display = "block";
                 VisitTrafficPFId.style.display = "none";
@@ -140,14 +158,17 @@ export default {
 
 
                 VisitTrafficPublicId.style.backgroundColor = "#fff";
-                VisitTrafficPublicId.style.borderColor = "$myellow";
-                VisitTrafficCarId.style.backgroundColor = "$myellow";
-                VisitTrafficCarId.style.borderColor = "#fff";
+                VisitTrafficPublicId.style.borderColor = "#FBF796";
+                VisitTrafficCarId.style.backgroundColor = "#FBF796";
+                VisitTrafficCarId.style.borderColor = "#FBF796";
                 VisitTrafficPorkId.style.backgroundColor = "#fff";
-                VisitTrafficPorkId.style.borderColor = "$myellow";
+                VisitTrafficPorkId.style.borderColor = "#FBF796";
             }
         },
         PorkAppear() {
+            const VisitTrafficPublicId = document.getElementById("VisitTrafficPublic");
+            const VisitTrafficCarId = document.getElementById("VisitTrafficCar");
+            const VisitTrafficPorkId = document.getElementById("VisitTrafficPork");
             const VisitTrafficPFId = document.getElementById("VisitTrafficPF");
             const VisitTrafficCFId = document.getElementById("VisitTrafficCF");
             const VisitTrafficPorkFId = document.getElementById("VisitTrafficPorkF");
@@ -157,11 +178,11 @@ export default {
                 VisitTrafficCFId.style.display = "none";
 
                 VisitTrafficPublicId.style.backgroundColor = "#fff";
-                VisitTrafficPublicId.style.borderColor = "$myellow";
+                VisitTrafficPublicId.style.borderColor = "#FBF796";
                 VisitTrafficCarId.style.backgroundColor = "#fff";
-                VisitTrafficCarId.style.borderColor = "$myellow";
-                VisitTrafficPorkId.style.backgroundColor = "$myellow";
-                VisitTrafficPorkId.style.borderColor = "#fff";
+                VisitTrafficCarId.style.borderColor = "#FBF796";
+                VisitTrafficPorkId.style.backgroundColor = "#FBF796";
+                VisitTrafficPorkId.style.borderColor = "#FBF796";
             }
         },
     }
@@ -169,5 +190,7 @@ export default {
 </script>
   
 <style scoped lang="scss">
-@import "@/assets/sass/page/_visitTraffic.scss";
+* {
+    box-sizing: border-box;
+}
 </style>

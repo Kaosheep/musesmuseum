@@ -1,5 +1,4 @@
 <template>
-
     <main class="visitInformation-main">
         <div class="visitInformation-title">
             <h1>參觀須知 <br v-if="windowWidth < 769">Notice</h1>
@@ -18,7 +17,6 @@
         </div>
         <div class="visitInformation-bg"></div>
     </main>
- 
 </template>
   
 <script>

@@ -61,7 +61,7 @@
 
 .FQA-QAitem {
     margin-bottom: 20px;
-    cursor: pointer;
+
     position: relative;
 }
 
@@ -83,13 +83,12 @@
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
-    // margin-bottom: 10px;
 }
-
 
 
 .FQA-questionH3 {
     width: 80%;
+    cursor: pointer;
 }
 
 .fqa-answer {
@@ -97,6 +96,7 @@
     padding: 10px;
     border: 3px solid;
     border-radius: 8px;
+    border-top: 0px;
 }
 
 .Fqa-plus,
@@ -128,5 +128,6 @@
     position: absolute;
     top: 0;
     left: 0;
+    animation: plusC 3s linear;
     @include tc();
 }
