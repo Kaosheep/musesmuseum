@@ -41,6 +41,11 @@ const routes = [
         name: 'ProductPage',
         component: () => import('../views/frontend/ProductPage.vue')
       },
+      // {
+      //   path: 'SearchProductDetail/:id',
+      //   name: 'SearchProductDetail',
+      //   component: () => import('../views/frontend/SearchProductDetail.vue')
+      // },
       {
         path: 'News',
         name: 'News',
