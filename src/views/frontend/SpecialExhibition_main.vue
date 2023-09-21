@@ -10,27 +10,22 @@
         <Searchbar></Searchbar>
       </div>
       <div class="slideshow">
-        <router-link to="/Home/SpecialExhibition">
-          <div class="slideshow_main">
-            <span>當期展覽</span>
-            <img
-              src="@/assets/image/exhibition/specialexhibition/spec_ex0.jpg"
-              alt=""
-            />
+
+        <div class="slideshow_main">
+          <span class="exhi_title">當期展覽</span>
+          <router-link to="/Home/SpecialExhibition">
+            <img src="@/assets/image/exhibition/specialexhibition/spec_ex0.jpg" alt="" />
             <div class="deco_main"></div>
-          </div>
-        </router-link>
+          </router-link>
+          <span class="exhi_period">2024/02/01-2024/03/30</span>
+          <span class="exhi_name">春之詠歌：多彩藝術的季節華章</span>
+        </div>
+
         <div class="slideshow_left">
-          <img
-            src="@/assets/image/exhibition/specialexhibition/spec_ex1.png"
-            alt=""
-          />
+          <img src="@/assets/image/exhibition/specialexhibition/spec_ex1.png" alt="" />
         </div>
         <div class="slideshow_right">
-          <img
-            src="@/assets/image/exhibition/specialexhibition/spec_ex3.jpg"
-            alt=""
-          />
+          <img src="@/assets/image/exhibition/specialexhibition/spec_ex3.jpg" alt="" />
         </div>
       </div>
     </div>
