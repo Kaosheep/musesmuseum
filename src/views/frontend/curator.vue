@@ -1,5 +1,5 @@
-<!-- <template>
-</head>
+ <template>
+<!-- <head>
 <body>
   <div id='wrap'>
     <h1 data-splitting='words'>Selected Demos</h1>
@@ -142,11 +142,13 @@
       </a>
     </a>
   </div>  
+  </body>
+  </head> -->
   </template>
   
   
   <style >
-  body {
+  /* body {
   scroll-behavior: smooth;
   background: #eeece5;
   cursor: none;
@@ -1402,6 +1404,6 @@ body #wrap .panel .thumb img.light {
 }
 body #wrap .panel .thumb img.lighter {
   filter: saturate(0) blur(calc(50px - (var(--progress) * 125px))) brightness(1) contrast(4);
-}
-  </style>
-   -->
+} */
+  </style> 
+  

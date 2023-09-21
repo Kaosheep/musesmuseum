@@ -1,0 +1,132 @@
+.Fqaoutside {
+    width: 83.33%;
+    margin: auto;
+
+    @include t() {
+        width: 90%;
+    }
+
+}
+
+
+.Fqa-title {
+    width: 216px;
+    height: 90px;
+    background-color: $mgreen;
+    position: relative;
+    border-radius: 5px;
+    box-shadow: 10px 10px 0px $myellow;
+
+    @include t() {
+        margin-top: 20px;
+        box-shadow: none;
+        width: 50%;
+    }
+
+}
+
+.Fqa-title h1 {
+    color: #fff;
+}
+
+.Fqa-main {
+    display: flex;
+    flex-wrap: wrap;
+    width: 90%;
+    margin-top: 50px;
+    margin: auto;
+}
+
+
+
+
+.Fqa-li+.Fqa-li {
+    margin-top: 10px;
+}
+
+
+.Fqa-aside {
+    width: 20%;
+}
+
+.FQA-QA {
+    width: 80%;
+    margin: auto;
+    margin-top: 50px;
+
+    @include t() {
+        width: 100%;
+    }
+}
+
+.FQA-QAitem {
+    margin-bottom: 20px;
+    cursor: pointer;
+    position: relative;
+}
+
+.Fqa-li {
+    background-color: $myellow;
+    margin: auto;
+}
+
+
+// 主內文
+
+.FQA-item {
+    padding: 10px;
+    width: 100%;
+    background-color: $myellow;
+    border-radius: 8px;
+    border: 3px solid;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    // margin-bottom: 10px;
+}
+
+
+
+.FQA-questionH3 {
+    width: 80%;
+}
+
+.fqa-answer {
+    width: 100%;
+    padding: 10px;
+    border: 3px solid;
+    border-radius: 8px;
+}
+
+.Fqa-plus,
+.Fqa-plusR,
+.Fqa-plusC {
+    display: inline-block;
+}
+
+.Fqa-plus {
+    position: relative;
+    width: 20px;
+    height: 20px;
+}
+
+.Fqa-plusR {
+    background-color: $mgreen;
+    width: 20px;
+    height: 5px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    @include tc();
+}
+
+.Fqa-plusC {
+    background-color: $mgreen;
+    width: 5px;
+    height: 20px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    @include tc();
+}

@@ -37,7 +37,7 @@ const routes = [
         component: () => import('../views/frontend/Faq.vue')
       },
       {
-        path: 'ProductPage',
+        path: 'ProductPage/:id',
         name: 'ProductPage',
         component: () => import('../views/frontend/ProductPage.vue')
       },
@@ -130,6 +130,11 @@ const routes = [
         path: 'Museumspace',
         name: 'Museumspace',
         component: () => import('../views/frontend/Museumspace.vue'),
+      },
+      {
+        path: 'SpaceAround',
+        name: 'SpaceAround',
+        component: () => import('../views/frontend/SpaceAround.vue'),
       }
     ]
   },
@@ -147,7 +152,7 @@ const routes = [
         path: '/DashBoard',
         name: 'DashBoard',
         component: () => import('../views/backend/DashBoard.vue'),
-        children:[
+        children: [
           {
             path: '',
             name: 'newsm',

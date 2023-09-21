@@ -45,8 +45,8 @@
       <div v-if="produstdisplay == 0">
         查無商品
       </div>
-      <div class="item" v-for="(item, index) in produstdisplay" :key="index" v-else>
-        <router-link to="/Home/ProductPage/#">
+      <div class="item" v-for="(item, id) in produstdisplay" :key="id" v-else>
+        <router-link to="/Home/ProductPage/:id" @click="goToProductDetail(id)">
           <div class="image">
             <img :src="item.image" :alt="item.title"/>
           </div>
@@ -55,12 +55,12 @@
           <span>
             <Heart>
             </Heart>
-            <router-link to="/ProductPage">
+            <router-link to="/Home/ProductPage">
               {{item.title}}
             </router-link>
             <font-awesome-icon :icon="['fas', 'cart-shopping']" id="car" />
           </span>
-          <router-link to="/ProductPage">
+          <router-link to="/Home/ProductPage">
             <span>
               ${{item.price}}
             </span>
@@ -79,6 +79,7 @@ import Footer from "/src/components/Footer.vue";
 import Searchbar from "/src/components/Searchbar.vue";
 import Heart from "/src/components/Heart.vue";
 import Searchbarclick from "/src/components/Searchbarclick.vue";
+// import { createRouter, createWebHistory } from 'vue-router';
 
 export default {
   components: {
@@ -255,6 +256,14 @@ export default {
       if(this.sortType != type){
         this.sortType = type;
       }
+    },
+    goToProductDetail(id){
+      this.$router.push({
+        name: 'ProductPage',
+        params: {
+          id: id,
+        }
+      });
     },
   },
   computed: {

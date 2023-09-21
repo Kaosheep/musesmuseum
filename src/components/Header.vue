@@ -2,12 +2,10 @@
   <header>
     <div class="menuconsole">
       <div class="burger" @click="togglemenu">
-        <div :class="['bar', { 'active': isClick}]"></div>
+        <div :class="['bar', { 'active': isClick }]"></div>
       </div>
-      <div :class="['logo', { 'togglec':isClick }]">
-        <router-link to="/Home"
-          ><img src="@/assets/image/logo/logo.png" alt=""
-        /></router-link>
+      <div :class="['logo', { 'togglec': isClick }]">
+        <router-link to="/Home"><img src="@/assets/image/logo/logo.png" alt="" /></router-link>
       </div>
     </div>
     <div class="social">
@@ -16,20 +14,14 @@
           <i class="sicon fa-solid fa-cart-shopping" id="social_cart"></i>
         </router-link>
       </span>
-      <span
-        ><i class="sicon fa-solid fa-envelope" id="social_envelope"></i
-      ></span>
-      <span
-        ><i class="sicon fa-brands fa-square-facebook" id="social_facebook"></i
-      ></span>
+      <span><i class="sicon fa-solid fa-envelope" id="social_envelope"></i></span>
+      <span><i class="sicon fa-brands fa-square-facebook" id="social_facebook"></i></span>
       <span><i class="sicon fa-brands fa-youtube" id="social_youtub"></i></span>
     </div>
   </header>
   <nav>
     <div class="logo">
-      <router-link to="/Home" @click="closemenu"
-        ><img src="@/assets/image/logo/logo.png" alt=""
-      /></router-link>
+      <router-link to="/Home" @click="closemenu"><img src="@/assets/image/logo/logo.png" alt="" /></router-link>
     </div>
     <div class="login">
       <router-link to="/Home/Login" @click="closemenu">會員登入</router-link>
@@ -37,9 +29,9 @@
     <div class="menu">
       <ul>
         <li v-for="(li, index) in navlist" :key="index">
-          <router-link :to="li.link" @click="closemenu"
-            ><h3>{{ li.title }}</h3></router-link
-          >
+          <router-link :to="li.link" @click="closemenu">
+            <h3>{{ li.title }}</h3>
+          </router-link>
           <ul v-if="li.sublist">
             <li v-for="(subli, index) in li.sublist" :key="index">
               <router-link :to="subli.sublink" @click="closemenu">{{
@@ -82,7 +74,7 @@ export default {
           sublist: [
             { subtitle: "館內地圖", sublink: "/Home/Museumspace" },
             { subtitle: "周邊景點", sublink: "/Home/SpaceMap" },
-            { subtitle: "附屬空間", sublink: "/Space" },
+            { subtitle: "附屬空間", sublink: "/Home/SpaceAround" },
           ],
         },
         {
@@ -91,7 +83,7 @@ export default {
           sublist: [
             { subtitle: "注意事項", sublink: "/Home/VisitInformation" },
             { subtitle: "常見問題", sublink: "/Home/faq" },
-            { subtitle: "交通資訊", sublink: "/" },
+            { subtitle: "交通資訊", sublink: "/Home/VisitTraffic" },
           ],
         },
         {
@@ -99,7 +91,7 @@ export default {
           link: "/About",
           sublist: [
             { subtitle: "歷史沿革", sublink: "/Home/History" },
-            { subtitle: "歷代館長", sublink: "/" },
+            { subtitle: "歷代館長", sublink: "/Home/Curator" },
           ],
         },
         { title: "商品", link: "/Home/Shop" },
@@ -129,7 +121,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-header{
+header {
   display: flex;
 }
 </style>
