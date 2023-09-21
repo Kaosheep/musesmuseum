@@ -1,13 +1,14 @@
 <template>
   <div>
     <div>
-      <a class="bTab" href="">會員名單</a>
+      <button class="bTab">會員名單</button>
     </div>
     <div>
       <div class="admin_editbar">
         <div>
           <PinkButton class="btn_admin" text="新增" />
-          <PinkButton class="btn_admin" text="凍結" />
+          <PinkButton class="btn_admin" text="一般" @click="toggleStatus('1')" :disabled="!canToggle('1')" />
+          <PinkButton class="btn_admin" text="凍結" @click="toggleStatus('0')" :disabled="!canToggle('0')" />
         </div>
         <Searchbar class="onlyB" />
       </div>
@@ -21,7 +22,7 @@
             <th></th>
           </tr>
           <tr v-for="(i, index) in memt" :key="index">
-            <td><input type="checkbox"></td>
+            <td><input type="checkbox" v-model="i.selected"></td>
             <td>{{ i.id }}</td>
             <td>{{ i.name }}</td>
             <td>
@@ -35,35 +36,50 @@
         </table>
       </div>
       <form action="" class="pop" v-if="showForm" @submit.prevent="submitForm">
-        <h2>編輯</h2> 
-        <div>會員編號</div>
-        <div>MM2023061901</div>
-        <div>會員姓名</div>
-        <div>生日</div>     
-        <div>1995/01/01</div>
-        <div>E-mail</div>
-        <div>muse001@gmail.com</div>
-        <div>連絡電話</div>
-        <div>0989123456</div>
+        <h2>編輯</h2>
+        <div>
+          <div>會員編號</div>
+          <div>MM2023061901</div>
+        </div>
+        <div class="info_col">
+          <div>
+            <div>會員姓名</div>
+            <div>阿阿阿</div>
+          </div>
+          <div>
+            <div>生日</div>
+            <div>1995/01/01</div>
+          </div>
+        </div>
+        <div class="info_col">
+          <div>
+            <div>E-mail</div>
+            <div>muse001@gmail.com</div>
+          </div>
+          <div>
+            <div>連絡電話</div>
+            <div>0989123456</div>
+          </div>
+        </div>
         <div>通訊地址</div>
-        <Addressfrom/>
+        <Addressfrom />
         <div>會員狀態</div>
         <div>
           <select name="" id="">
             <option value="">一般</option>
           </select>
         </div>
-        
-          <div class="form_btn">
-            <PinkButton class="btn_admin" text="取消" @click="hideEditForm"/>
-            <PinkButton class="btn_admin" text="儲存" />
-          </div>
+
+        <div class="form_btn">
+          <PinkButton class="btn_admin" text="取消" @click="hideEditForm" />
+          <PinkButton class="btn_admin" text="儲存" />
+        </div>
       </form>
     </div>
 
   </div>
 </template>
-     
+   
 <script>
 import PinkButton from "/src/components/PinkButton.vue";
 import Searchbar from "/src/components/Searchbar.vue";
@@ -109,6 +125,16 @@ export default {
     }
   },
   methods: {
+    toggleStatus(newStatus) {
+      this.test.forEach(item => {
+        if (item.selected) {
+          item.statusn = newStatus;
+        }
+      });
+    },
+    canToggle(newStatus) {
+      return this.test.some(item => item.selected && item.statusn !== newStatus);
+    },
     showEditForm() {
       this.showForm = true;
     },
@@ -125,7 +151,7 @@ export default {
   }
 }
 </script>
-  
+
 <style scoped lang="scss">
 @import "@/assets/sass/style.scss";
 
@@ -144,7 +170,6 @@ div {
   border-style: none;
   padding: 8px;
   color: #000;
-  line-height: 2rem;
   transition: .3s;
   cursor: pointer;
 
@@ -185,6 +210,7 @@ div {
 }
 
 .dmain {
+  position: relative;
   background-color: #ffffff80;
   height: 80%;
   border-radius: 0 10px 10px 10px;
@@ -247,12 +273,25 @@ div {
   align-items: center;
   z-index: 999;
   border-radius: 10px;
+  overflow: auto;
+  div{
+    width: 100%;
+  }
+  .info_col{
+      display: flex;
+      div{
+        margin-right: 10px;
+      }
+    }
+ 
+
 
   .form_btn {
-    position: absolute;
+    position: fixed;
     bottom: 0;
-    right: 0;
+    right: 20px;
   }
 }
 </style>
-      
+    
+

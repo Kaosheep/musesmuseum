@@ -1,40 +1,46 @@
 <template>
     <div>
-        <button class="bTab">展覽資訊</button>
-    </div>
-    <div class="admin_editbar">
         <div>
-            <PinkButton class="btn_admin" text="新增" />
-            <PinkButton class="btn_admin" text="刪除" />
-            <PinkButton class="btn_admin" text="上架" />
+            <button class="bTab">訂單管理</button>
         </div>
-        <Searchbar class="onlyB" />
-    </div>
-    <div class="dmain">
-        <table>
-            <tr>
-                <th></th>
-                <th>展覽編號</th>
-                <th>展覽名稱</th>
-                <th>狀態</th>
-                <th></th>
-            </tr>
-            <tr v-for="(i, index) in exhm" :key="index">
-                <td><input type="checkbox"></td>
-                <td>{{i.id}}</td>
-                <td>{{i.title}}</td>
-                <td>
-                    <p v-if="parseInt(i.statusn) === 1">已上架</p>
-                    <p v-else>未上架</p>
-                </td>
-                <td>
-                    <button class="edit">編輯</button>
-                </td>
-            </tr>
-        </table>
+        <form action="">
+            <div class="admin_editbar">
+                <div>
+                    <PinkButton class="btn_admin" text="刪除" />
+                </div>
+                <Searchbar class="onlyB" />
+            </div>
+            <div class="dmain">
+                <table>
+                    <tr>
+                        <th></th>
+                        <th>商品編號</th>
+                        <th>商品名稱</th>
+                        <th>狀態</th>
+                        <th>金額</th>
+                        <th></th>
+                    </tr>
+                    <tr v-for="(i, index) in ordm" :key="index">
+                        <td><input type="checkbox"></td>
+                        <td>{{ i.id}}</td>
+                        <td>{{ i.mid}}</td>
+                        <td>
+                            <p v-if="parseInt(i.statusn) === 0">處理中</p>
+                            <p v-else-if="parseInt(i.statusn) === 1">已確認</p>
+                            <p v-else-if="parseInt(i.statusn) === 2">已出貨</p>
+                            <p v-else>結案</p>
+                        </td>
+                        <td>{{ i.price }}</td>
+                        <td>
+                            <button class="edit">編輯</button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </form>
     </div>
 </template>
-     
+   
 <script>
 import PinkButton from "/src/components/PinkButton.vue";
 import Searchbar from "/src/components/Searchbar.vue";
@@ -47,37 +53,49 @@ export default {
     },
     data() {
         return {
-            exhm: [
+            ordm: [
                 {
-                    id: "EXH20230901",
-                    title: "獨居沙漠，藝術家喬治亞．歐姬芙",
+                    id: "OD20230001",
+                    mid: "MM2023061901",
                     statusn: "0",
+                    price: "1,500",
                 },
                 {
-                    id: "EXH20231101",
-                    title: "派對對物：人要金裝，佛要...",
-                    statusn: "0",
+                    id: "OD20230002",
+                    mid: "MM2023061901",
+                    statusn: "1",
+                    price: "3,400",
                 },
                 {
-                    id: "EXH20230701",
-                    title: "線條、形狀、空間：建築美......",
-                    statusn: "0",
+                    id: "OD20230003",
+                    mid: "MM2023061901",
+                    statusn: "2",
+                    price: "3,400",
                 },
+                {
+                    id: "OD20230004",
+                    mid: "MM2023061901",
+                    statusn: "3",
+                    price: "3,400",
+                }
             ]
         }
     },
     methods: {
 
-    },
-    mounted() {
-
     }
 
 }
 </script>
-  
+
 <style scoped lang="scss">
 @import "@/assets/sass/style.scss";
+
+div {
+    form {
+        height: 80vh;
+    }
+}
 
 .bTab {
     background-color: #ffffff80;

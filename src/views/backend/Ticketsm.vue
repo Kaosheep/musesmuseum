@@ -2,8 +2,6 @@
   <div>
     <div>
       <button class="bTab">票種管理</button>
-      <button class="bTab">訂票管理</button>
-      <button class="bTab">日期管理</button>
     </div>
     <form action="">
       <div class="admin_editbar">
@@ -23,14 +21,11 @@
             <th>票價</th>
             <th></th>
           </tr>
-          <tr v-for="(i, index) in news" :key="index">
+          <tr v-for="(i, index) in tk" :key="index">
             <td><input type="checkbox"></td>
-            <td>{{  }}</td>
-            <td>{{  }}</td>
-            <td>
-              <p v-if="parseInt() === 1">已上架</p>
-              <p v-else>未上架</p>
-            </td>
+            <td>{{ i.id }}</td>
+            <td>{{ i.mid }}</td>
+            <td>{{i.price}}</td>
             <td>
               <button class="edit">編輯</button>
             </td>
@@ -53,23 +48,34 @@ export default {
   },
   data() {
     return {
-      news: []
+      tk: [
+                {
+                    id: "TK01",
+                    mid: "全票",
+                    price: "400",
+                },
+                {
+                    id: "TK02",
+                    mid: "孩童票",
+                    price: "350",
+                },
+                {
+                    id: "TK03",
+                    mid: "敬老票",
+                    price: "250",
+                },
+                {
+                    id: "TK04",
+                    mid: "愛心票",
+                    price: "200",
+                }
+            ]
     }
   },
   methods: {
 
   },
-  // mounted() {
-  //   fetch('http://localhost/musesmuseum_dbtest/php/aa.php')
-  //     .then(res => res.json())
-  //     .then(res => {
-  //       this.news = res;
-  //       console.log(res)
-
-  //     })
-
-  // }
-
+ 
 }
 </script>
 

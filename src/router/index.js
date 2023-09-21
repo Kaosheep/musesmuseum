@@ -192,6 +192,21 @@ const routes = [
             path: 'Manager',
             name: 'Manager',
             component: () => import('../views/backend/Manager.vue'),
+          },
+          {
+            path: 'Orderm',
+            name: 'Orderm',
+            component: () => import('../views/backend/Orderm.vue'),
+          },
+          {
+            path: 'TicketsOrdm',
+            name: 'TicketsOrdm',
+            component: () => import('../views/backend/TicketsOrdm.vue'),
+          },
+          {
+            path: 'ClosedOnm',
+            name: 'ClosedOnm',
+            component: () => import('../views/backend/ClosedOnm.vue'),
           }
         ]
       }

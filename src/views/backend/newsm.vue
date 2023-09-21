@@ -1,7 +1,7 @@
 <template>
   <div>
     <div>
-      <a class="bTab" href="">最新消息</a>
+      <button class="bTab">最新消息</button>
     </div>
     <div>
       <div class="admin_editbar">
@@ -19,8 +19,8 @@
             <th>消息編號</th>
             <th>消息標題</th>
             <th>狀態</th>
-            <th>庫存</th>
             <th></th>
+        
           </tr>
           <tr v-for="(i, index) in test" :key="index">
             <td><input type="checkbox" v-model="i.selected"></td>
@@ -152,7 +152,6 @@ div {
   border-style: none;
   padding: 8px;
   color: #000;
-  line-height: 2rem;
   transition: .3s;
   cursor: pointer;
 

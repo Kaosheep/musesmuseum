@@ -1,7 +1,8 @@
 <template>
   <div>
     <div>
-      <button class="bTab">管理員帳號</button>
+      <button class="bTab">訂票管理</button>
+      <button class="bTab">日期管理</button>
     </div>
     <form action="">
       <div class="admin_editbar">
@@ -15,16 +16,21 @@
         <table>
           <tr>
             <th></th>
-            <th>管理員編號</th>
-            <th>管理員名稱</th>
-            <th>權限類型</th>
+            <th>訂票編號</th>
+            <th>會員編號</th>
+            <th>使用狀態</th>
+            <th>金額</th>
             <th></th>
           </tr>
-          <tr v-for="(i, index) in news" :key="index">
+          <tr v-for="(i, index) in ordm" :key="index">
             <td><input type="checkbox"></td>
             <td>{{ i.id }}</td>
             <td>{{ i.mid }}</td>
-            <td>{{ i.statusn }}</td>
+            <td>
+              <p v-if="parseInt(i.statusn) === 1">已上架</p>
+              <p v-else>未上架</p>
+            </td>
+            <td>{{ i.price }}</td>
             <td>
               <button class="edit">編輯</button>
             </td>
@@ -47,51 +53,58 @@ export default {
   },
   data() {
     return {
-      news: [
-        {
-          id: "MA01",
-          mid: "館長",
-          statusn: "全權",
-          ac: "3",
-        },
-        {
-          id: "MA02",
-          mid: "員工1",
-          statusn: "部分",
-          ac: "3",
-        },
-        {
-          id: "MA03",
-          mid: "員工2",
-          statusn: "部分",
-          ac: "3",
-        },
-        {
-          id: "MA04",
-          mid: "員工3",
-          statusn: "部分",
-          ac: "3",
-        }
-      ]
+        ordm: [
+                {
+                    id: "OT20230001",
+                    mid: "MM2023061901",
+                    statusn: "0",
+                    price: "1,500",
+                },
+                {
+                    id: "OD20230002",
+                    mid: "MM2023061901",
+                    statusn: "1",
+                    price: "3,400",
+                },
+                {
+                    id: "OD20230003",
+                    mid: "MM2023061901",
+                    statusn: "0",
+                    price: "3,400",
+                },
+                {
+                    id: "OD20230004",
+                    mid: "MM2023061901",
+                    statusn: "1",
+                    price: "3,400",
+                }
+            ]
     }
   },
   methods: {
 
   },
+  // mounted() {
+  //   fetch('http://localhost/musesmuseum_dbtest/php/aa.php')
+  //     .then(res => res.json())
+  //     .then(res => {
+  //       this.news = res;
+  //       console.log(res)
 
+  //     })
+
+  // }
 
 }
 </script>
 
 <style scoped lang="scss">
 @import "@/assets/sass/style.scss";
-
-div {
-  form {
+div{
+  form{
     height: 80vh;
   }
 }
-
 .bTab {
   background-color: #ffffff80;
   border-radius: 10px 10px 0 0;

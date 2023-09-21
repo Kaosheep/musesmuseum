@@ -2,14 +2,13 @@
   <div>
     <div>
       <button class="bTab">商品管理</button>
-      <button class="bTab">訂單管理</button>
     </div>
     <form action="">
       <div class="admin_editbar">
         <div>
           <PinkButton class="btn_admin" text="新增" />
-          <PinkButton class="btn_admin" text="刪除" />
           <PinkButton class="btn_admin" text="上架" />
+          <PinkButton class="btn_admin" text="下架" />
         </div>
         <Searchbar class="onlyB" />
       </div>
@@ -22,12 +21,12 @@
             <th>狀態</th>
             <th></th>
           </tr>
-          <tr v-for="(i, index) in news" :key="index">
+          <tr v-for="(i, index) in shopm" :key="index">
             <td><input type="checkbox"></td>
-            <td>{{  }}</td>
-            <td>{{  }}</td>
+            <td>{{ i.id }}</td>
+            <td>{{ i.title }}</td>
             <td>
-              <p v-if="parseInt() === 1">已上架</p>
+              <p v-if="parseInt(i.statusn) === 1">已上架</p>
               <p v-else>未上架</p>
             </td>
             <td>
@@ -52,22 +51,35 @@ export default {
   },
   data() {
     return {
-      news: []
+      shopm: [
+                {
+                    id: "PD20230001",
+                    title: "小謬思銅像",
+                    statusn: "0",
+                },
+                {
+                    id: "PD20230002",
+                    title: "手繪紅鶴小廢包",
+                    statusn: "1",
+                },
+                {
+                    id: "PD20230003",
+                    title: "維納斯口紅",
+                    statusn: "0",
+                },
+                {
+                    id: "PD20230004",
+                    title: "諾貝爾仿徽",
+                    statusn: "0",
+                }
+            ]
     }
   },
   methods: {
 
   },
-  // mounted() {
-  //   fetch('http://localhost/musesmuseum_dbtest/php/aa.php')
-  //     .then(res => res.json())
-  //     .then(res => {
-  //       this.news = res;
-  //       console.log(res)
-
-  //     })
-
-  // }
+  mounted() {
+ }
 
 }
 </script>
