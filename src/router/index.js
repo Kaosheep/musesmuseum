@@ -67,9 +67,9 @@ const routes = [
         component: () => import('../views/frontend/VisitInformation.vue')
       },
       {
-        path: 'SpecialExhibition',
-        name: 'SpecialExhibition',
-        component: () => import('../views/frontend/SpecialExhibition.vue')
+        path: 'SpecialExhibition_main',
+        name: 'SpecialExhibition_main',
+        component: () => import('../views/frontend/SpecialExhibition_main.vue')
       },
       {
         path: 'CurrentExhibition',
