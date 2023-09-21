@@ -7,8 +7,8 @@
       <div class="admin_editbar">
         <div>
           <PinkButton class="btn_admin" text="新增" />
-          <PinkButton class="btn_admin" text="上架" />
-          <PinkButton class="btn_admin" text="下架" />
+          <PinkButton class="btn_admin" text="上架" @click="toggleStatus('1')" :disabled="!canToggle('1')"/>
+          <PinkButton class="btn_admin" text="下架" @click="toggleStatus('0')" :disabled="!canToggle('0')"/>
         </div>
         <Searchbar class="onlyB" />
       </div>
@@ -23,7 +23,7 @@
             <th></th>
           </tr>
           <tr v-for="(i, index) in test" :key="index">
-            <td><input type="checkbox"></td>
+            <td><input type="checkbox" v-model="i.selected"></td>
             <td>{{ i.id }}</td>
             <td>{{ i.title }}</td>
             <td>
@@ -104,6 +104,16 @@ export default {
     }
   },
   methods: {
+    toggleStatus(newStatus) {
+      this.test.forEach(item => {
+        if (item.selected) {
+          item.statusn = newStatus;
+        }
+      });
+    },
+    canToggle(newStatus) {
+      return this.test.some(item => item.selected && item.statusn !== newStatus);
+    },
     showEditForm() {
       this.showForm = true;
     },
