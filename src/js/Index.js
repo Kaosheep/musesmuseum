@@ -60,14 +60,15 @@ export default {
           price: 3500,
         },
       ],
-      galleryimgs:[
-        {imgsrc:'',imgtitle:''},
-        {imgsrc:'',imgtitle:''},
-        {imgsrc:'',imgtitle:''},
-        {imgsrc:'',imgtitle:''},
-        {imgsrc:'',imgtitle:''},
-        {imgsrc:'',imgtitle:''},
-      ]
+      galleryimgs: [
+        { imgtitle: '現代之魅' ,time:'2023/5/1-2023/6/15',info:'探索當代藝術的多樣性和深度，這個展覽將呈現來自世界各地的藝術家的傑出作品，包括繪畫、雕塑和多媒體藝術。'},
+        { imgtitle: '光之舞' ,time:'2023/5/1-2023/6/15',info:'這個展覽將探討光和色彩如何影響我們的情感和感知。通過投影、互動藝術和光學效應，觀眾將沉浸在充滿魔力的光之世界。'},
+        { imgtitle: '古典之美' ,time:'2023/5/1-2023/6/15',info:'一場關於古代藝術的探索之旅。這個展覽將展示古希臘和羅馬時期的藝術珍品，包括雕塑、陶瓷和古典繪畫。'},
+        { imgtitle: '數位幻境' ,time:'2023/5/1-2023/6/15',info:'通過虛擬現實和互動藝術，這個展覽將帶領觀眾進入一個全新的數位世界。體驗未來藝術的奇妙之處。'},
+        { imgtitle: '大自然的韻律' ,time:'2023/5/1-2023/6/15',info:'這個展覽將藉由藝術家對大自然的啟發，呈現出關於自然美的藝術作品。包括風景畫、植物描繪和生態藝術。'},
+        { imgtitle: '時光之旅' ,time:'2023/5/1-2023/6/15',info:'這個展覽將追溯藝術的演變，從古代到當代。通過展出各個時代的代表性藝術品，讓觀眾感受藝術的時光之旅。'},
+      ],
+      isshow:false
     };
   },
   methods: {
@@ -100,7 +101,7 @@ export default {
       anchorli[0].style.backgroundColor = `#EB5F86`;
     },
     gallerycircle() {
-      const images = [...document.querySelectorAll(".gallery img")];
+      const images = [...document.querySelectorAll(".gallery .img")];
       let galleryr = document.querySelector(".new .gallery").clientWidth;
       let gallery = document.querySelector(".gallery");
       const angle = 360 / images.length;
@@ -108,7 +109,7 @@ export default {
         image.style.transform = `rotate3d(0,1,0,${(i + 1) * angle
           }deg) translateZ(${galleryr}px)`;
         image.onclick = () => {
-          gallery.style.transform = `perspective(1800px) rotateX(-5deg) rotateY(-${(i + 1) * angle
+          gallery.style.transform = `perspective(2000px) rotateX(-5deg) rotateY(-${(i + 1) * angle
             }deg)`;
         };
       });
@@ -134,12 +135,17 @@ export default {
         });
         txt.addEventListener("mouseout", (e) => {
           btns[index].style.right = `16px`;
-          btns[index].style.bottom = `0px`;
+          if(window.innerWidth>414){
+             btns[index].style.bottom = `0px`;
+          }else{
+            btns[index].style.bottom = `32px`;
+          }
+         
         });
       });
     },
     resize() {
-      
+
       if (window.innerWidth > 768) {
         let slider = document.querySelector(".home_slider");
         let sliderWidth = slider.getBoundingClientRect().width;
@@ -154,8 +160,12 @@ export default {
       }
 
     },
+    show(){
+      if(document.querySelector('.artblock').getBoundingClientRect().left < 1500){
+        this.isshow=true
+      }
+    }
 
-  
   },
   mounted() {
 
@@ -166,7 +176,7 @@ export default {
     let txtframe = document.querySelectorAll(".txtframe");
     let max1 = document.getElementById("max1");
     let max2 = document.getElementById("max2");
-
+    let homecart = document.querySelector('.homecart');
 
     function lerp(start, end, t) {
       return start * (1 - t) + end * t;
@@ -194,9 +204,14 @@ export default {
     function animateimg() {
       let ratio = current / newimgWidth;
       let intersectionratio;
+
       newimgs.forEach((image, i) => {
-        intersectionratio = ratio * 0.7 - i * 1.5;
-        setTransform(image, `translateX(-${intersectionratio * 8}px)`);
+        intersectionratio = ratio - i * 1.5;
+        if (window.innerWidth > 768) {
+          setTransform(image, `translateX(-${intersectionratio * 8}px)`);
+        } else {
+          setTransform(image, `translateX(0px)`)
+        }
       });
       txtframe.forEach((txtframe) => {
         setTransform(txtframe, `translateX(${intersectionratio * 20}px)`);
@@ -212,6 +227,9 @@ export default {
         `translateX(${-window.innerWidth + current / 5}px) translateY(${(-window.innerWidth + current / 5) * 0.2588190451
         }px) skewY(15deg)`
       );
+
+      setTransform(homecart, `translateX(${intersectionratio * 20}px)`)
+
     }
 
 
@@ -227,6 +245,7 @@ export default {
     });
     window.addEventListener("resize", this.resize);
     window.addEventListener("scroll", this.anchor);
+    window.addEventListener("scroll", this.show);
     animate();
     this.followcursor();
     this.resize();
@@ -236,6 +255,7 @@ export default {
   beforeUnmount() {
     window.removeEventListener("resize", this.resize);
     window.removeEventListener("scroll", this.anchor);
+    window.removeEventListener("scroll", this.show);
     document.body.style.height = `auto`;
   }
 
