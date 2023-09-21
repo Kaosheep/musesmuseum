@@ -12,15 +12,29 @@
                 </ul>
             </aside>
             <div class="FQA-QA">
-                <div v-for="(section, sectionIndex) in sections" :key="sectionIndex" :class="FQA - QAitem">
-                    <h3 class="FQA-questionH2" :id="'qaNav' + (sectionIndex + 1)">{{ fqaNav[sectionIndex + 1] }}</h3>
-                    <div class="FQA-QAitem" v-for="(qa, qaIndex) in section" :key="qaIndex">
-                        <h4 @click="toggleAnswer(sectionIndex, qaIndex)">{{ qa.question }}</h4>
-                        <p v-html="qa.answer" :id="'qaAnswer' + sectionIndex + '-' + qaIndex" style="display: none;"></p>
+                <div v-for="(section, sectionIndex) in   sections  " :key="sectionIndex" :class="FQA - QAitem">
+                    <h2 class="FQA-questionH2" :id="'qaNav' + (sectionIndex + 1)">{{ fqaNav[sectionIndex + 1] }}
+                    </h2>
+
+                    <div class="FQA-QAitem" v-for="(qa, qaIndex) in   section  " :key="qaIndex">
+                        <div class="FQA-item mgreen" :id="'FQA-item' + sectionIndex + '-' + qaIndex"
+                            style="border-color: #009CA8;">
+                            <h3 class="FQA-questionH3 " @click="toggleAnswer(sectionIndex, qaIndex)">
+                                {{ qa.question }}
+                            </h3>
+                            <span class="Fqa-plus ">
+                                <span class="Fqa-plusC" :id="'FqaPlusC' + sectionIndex + '-' + qaIndex"
+                                    style="display:block;"></span>
+                                <span class="Fqa-plusR"></span>
+                            </span>
+
+                        </div>
+                        <p class="fqa-answer" v-html="qa.answer" :id="'qaAnswer' + sectionIndex + '-' + qaIndex"
+                            style="display: none; border-color: #009CA8;"></p>
+
                     </div>
                 </div>
             </div>
-
         </main>
     </div>
 </template>
@@ -48,7 +62,7 @@ export default {
                     },
                     {
                         question: "Q2.颱風天會休假嗎？",
-                        answer: "颱風天視當天氣候，歡迎致電詢問或查詢官網。",
+                        answer: "A:<br>颱風天視當天氣候，歡迎致電詢問或查詢官網。",
                     },
                 ],
                 [
@@ -121,10 +135,25 @@ export default {
         toggleAnswer(sectionIndex, qaIndex) {
             const answerId = 'qaAnswer' + sectionIndex + '-' + qaIndex;
             const answerElement = document.getElementById(answerId);
+            const FqaPlusCId = document.getElementById('FqaPlusC' + sectionIndex + '-' + qaIndex);
+            const borderColor = document.getElementById('FQA-item' + sectionIndex + '-' + qaIndex);
+
+
+
             if (answerElement.style.display === "none") {
                 answerElement.style.display = "block";
+                FqaPlusCId.style.display = "none";
+                answerElement.style.borderColor = "#EB5F86";
+                borderColor.style.borderColor = "#EB5F86";
+
+
+
             } else {
                 answerElement.style.display = "none";
+                FqaPlusCId.style.display = "block";
+                answerElement.style.borderColor = "#009CA8";
+                borderColor.style.borderColor = "#009CA8";
+
             }
         },
     },
