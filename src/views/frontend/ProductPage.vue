@@ -1,8 +1,12 @@
 <template>
   <main class="productpage_main">
     <div class="shop_Breadcrumbs">
-      <a href="">首頁 / </a>
-      <a href="">精選商城 / </a>
+      <router-link to="/Home">
+        首頁 / 
+      </router-link>
+      <router-link to="/Home/Shop">
+        精選商城 / 
+      </router-link>
       <span>{{ foundObject.title }}</span>
     </div>
     <div class="product_info">
@@ -172,6 +176,12 @@
     mounted() {
       const idToFind = parseInt(this.$route.params.id);
       this.foundObject = this.produstdisplay.find(item => item.id === idToFind);
+      // this.foundObject =  {
+      //       id: 11,
+      //       title: "派對動物-A款",
+      //       price: 299,
+      //       image: require('@/assets/image/productimage/productimage11.png'),
+      //     }
 
       document.body.style.height = `auto`;
     },
