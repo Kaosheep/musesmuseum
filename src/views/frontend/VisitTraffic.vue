@@ -104,9 +104,9 @@ export default {
     },
     methods: {
         PublicAppear() {
-            // const VisitTrafficPublicId = document.getElementById("VisitTrafficPublic");
-            // const VisitTrafficCarId = document.getElementById("VisitTrafficCar");
-            // const VisitTrafficPorkId = document.getElementById("VisitTrafficPork");
+            const VisitTrafficPublicId = document.getElementById("VisitTrafficPublic");
+            const VisitTrafficCarId = document.getElementById("VisitTrafficCar");
+            const VisitTrafficPorkId = document.getElementById("VisitTrafficPork");
             const VisitTrafficPFId = document.getElementById("VisitTrafficPF");
             const VisitTrafficCFId = document.getElementById("VisitTrafficCF");
             const VisitTrafficPorkFId = document.getElementById("VisitTrafficPorkF");
@@ -116,10 +116,20 @@ export default {
                 VisitTrafficPFId.style.display = "block";
                 VisitTrafficCFId.style.display = "none";
                 VisitTrafficPorkFId.style.display = "none";
+                VisitTrafficPublicId.style.backgroundColor = "$myellow";
+                VisitTrafficPublicId.style.borderColor = "#fff";
+                VisitTrafficCarId.style.backgroundColor = "#fff";
+                VisitTrafficCarId.style.borderColor = "$myellow";
+                VisitTrafficPorkId.style.backgroundColor = "#fff";
+                VisitTrafficPorkId.style.borderColor = "$myellow";
+
 
             }
         },
         CarAppear() {
+            const VisitTrafficPublicId = document.getElementById("VisitTrafficPublic");
+            const VisitTrafficCarId = document.getElementById("VisitTrafficCar");
+            const VisitTrafficPorkId = document.getElementById("VisitTrafficPork");
             const VisitTrafficPFId = document.getElementById("VisitTrafficPF");
             const VisitTrafficCFId = document.getElementById("VisitTrafficCF");
             const VisitTrafficPorkFId = document.getElementById("VisitTrafficPorkF");
@@ -127,6 +137,14 @@ export default {
                 VisitTrafficCFId.style.display = "block";
                 VisitTrafficPFId.style.display = "none";
                 VisitTrafficPorkFId.style.display = "none";
+
+
+                VisitTrafficPublicId.style.backgroundColor = "#fff";
+                VisitTrafficPublicId.style.borderColor = "$myellow";
+                VisitTrafficCarId.style.backgroundColor = "$myellow";
+                VisitTrafficCarId.style.borderColor = "#fff";
+                VisitTrafficPorkId.style.backgroundColor = "#fff";
+                VisitTrafficPorkId.style.borderColor = "$myellow";
             }
         },
         PorkAppear() {
@@ -137,6 +155,13 @@ export default {
                 VisitTrafficPorkFId.style.display = "block";
                 VisitTrafficPFId.style.display = "none";
                 VisitTrafficCFId.style.display = "none";
+
+                VisitTrafficPublicId.style.backgroundColor = "#fff";
+                VisitTrafficPublicId.style.borderColor = "$myellow";
+                VisitTrafficCarId.style.backgroundColor = "#fff";
+                VisitTrafficCarId.style.borderColor = "$myellow";
+                VisitTrafficPorkId.style.backgroundColor = "$myellow";
+                VisitTrafficPorkId.style.borderColor = "#fff";
             }
         },
     }
@@ -144,6 +169,5 @@ export default {
 </script>
   
 <style scoped lang="scss">
-
 @import "@/assets/sass/page/_visitTraffic.scss";
 </style>

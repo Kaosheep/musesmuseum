@@ -152,7 +152,7 @@ const routes = [
         path: '/DashBoard',
         name: 'DashBoard',
         component: () => import('../views/backend/DashBoard.vue'),
-        children:[
+        children: [
           {
             path: '',
             name: 'newsm',
