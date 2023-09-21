@@ -23,7 +23,7 @@
               <p>付款狀態</p>
               <p>訂單狀態</p>
             </div>
-            <div v-for="(rowitem, rowindex) in productInfoArr" 
+            <a v-for="(rowitem, rowindex) in productInfoArr" 
               :key="rowindex" 
               :class="[rowindex % 2 === 0 ? 'yellowRow' : 'whiteRow']">
                 <div class="itemInfoList">{{ rowitem.prodInfoLine }}</div>
@@ -44,7 +44,7 @@
                 :id="rowitem.id"
                 :name="rowitem.name"
                 ></div> -->
-            </div>
+            </a>
           </div>
        </div>
    </main>
