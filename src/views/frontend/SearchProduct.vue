@@ -26,7 +26,9 @@
             <div v-for="(rowitem, rowindex) in productInfoArr" 
               :key="rowindex" 
               :class="[rowindex % 2 === 0 ? 'yellowRow' : 'whiteRow']">
-                <div class="itemInfoList">{{ rowitem.prodInfoLine }}</div>
+              
+                <div class="itemInfoList">{{ rowitem.id }}</div>
+                <router-link :to="`/Home/SearchProductInfo/${rowitem.id}`" >
                 <div class="itemInfoList">
                   <img
                     :src="
@@ -36,7 +38,8 @@
                       :alt="rowitem.name"
                   />
                 </div>
-                <div class="itemInfoList">{{ rowitem.id }}</div>
+              </router-link>
+                <div class="itemInfoList">{{ rowitem.date}}</div>
                 <div class="itemInfoList">{{ rowitem.name }}</div>
                 <div class="itemInfoList">{{ rowitem.class }}</div>
                 <div class="itemInfoList">{{ rowitem.placeholder }}</div>
@@ -44,6 +47,7 @@
                 :id="rowitem.id"
                 :name="rowitem.name"
                 ></div> -->
+              
             </div>
           </div>
        </div>
@@ -64,11 +68,11 @@ export default {
  data() {
    return {
     productInfoArr:[
-        { prodInfoLine:"A00103",pic:"@/assets/image/productimage",id:"2023/08/01",name:"$1200",class:"已付款",placeholder:"已完成" },
-        { prodInfoLine:"B00103",type:"pic",id:"2023/08/01",name:"$1200",class:"已付款",placeholder:"已完成" },
-        { prodInfoLine:"C00103",type:"pic",id:"2023/08/01",name:"$1200",class:"已付款",placeholder:"已完成" },
-        { prodInfoLine:"D00103",type:"pic",id:"2023/08/01",name:"$1200",class:"已付款",placeholder:"已完成" },
-        { prodInfoLine:"E00103",type:"pic",id:"2023/08/01",name:"$1200",class:"已付款",placeholder:"已完成" },
+        { id:"A00103",pic:"@/assets/image/productimage",date:"2023/08/01",name:"$1200",class:"已付款",placeholder:"已完成" },
+        { id:"B00103",type:"pic",date:"2023/08/01",name:"$1200",class:"已付款",placeholder:"已完成" },
+        { id:"C00103",type:"pic",date:"2023/08/01",name:"$1200",class:"已付款",placeholder:"已完成" },
+        { id:"D00103",type:"pic",date:"2023/08/01",name:"$1200",class:"已付款",placeholder:"已完成" },
+        { id:"E00103",type:"pic",date:"2023/08/01",name:"$1200",class:"已付款",placeholder:"已完成" },
 
       ],
     memBtnLink:[
@@ -86,6 +90,14 @@ export default {
   //      window.alert("帳密錯誤");
   //    }
   //  },
+//   goToProductInfo(id) {
+//       this.$router.push({
+//         name: 'SearchProductInfo',
+//         params: {
+//           id: id,
+//         }
+//       });
+//     },
  },
  mounted() {
    document.body.style.height = `auto`;

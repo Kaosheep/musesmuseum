@@ -122,7 +122,7 @@ const routes = [
         component: () => import('../views/frontend/SearchProduct.vue'),
       },
       {
-        path: 'SearchProductInfo',
+        path: 'SearchProductInfo/:id',
         name: 'SearchProductInfo',
         component: () => import('../views/frontend/SearchProductInfo.vue'),
       },
