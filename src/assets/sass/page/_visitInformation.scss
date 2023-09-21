@@ -191,12 +191,3 @@
         display: none;
     }
 }
-
-footer {
-    display: none;
-
-    @include t() {
-        display: inline-block;
-    }
-
-}
