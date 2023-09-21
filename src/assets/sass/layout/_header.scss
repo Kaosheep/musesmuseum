@@ -29,7 +29,7 @@ header {
         }
 
         .logo {
-            width: 70px;
+            width: 100%;
             display: inline-block;
             margin-top: 1rem;
             position: relative;
@@ -52,7 +52,7 @@ header {
             }
 
             img {
-                width: 90%;
+                width: 80%;
                 object-fit: contain;
                 transition: .3s;
 

@@ -19,15 +19,15 @@
 
 .shop_wrap {
     margin: 2rem auto 0px;
-    max-width: 1050px;
     width: 83.33%;
+    max-width: 1050px;
     display: flex;
     justify-content: space-between;
 
     .shop_aside {
+        width: 20%;
         display: flex;
         flex-direction: column;
-        width: 20%;
         align-items: center;
 
         .pinkBtn:first-child {
@@ -51,17 +51,25 @@
                 color: $mblue;
                 text-align: center;
             }
+
         }
     }
 
     .shop_container {
         width: 80%;
         display: grid;
-        grid-template-columns: repeat(3, 30%);
+        grid-template-columns: repeat(3, 31%);
         grid-template-rows: repeat(3, 1fr);
         justify-items: center;
         align-items: flex-end;
         gap: 25px;
+        .page{
+            width: 100%;
+            grid-column-start: 1;
+            grid-column-end: 4;
+            text-align: center;
+            padding:1rem 0 2rem;
+        }
     }
 
     .item {
@@ -69,8 +77,8 @@
         text-align: center;
 
         img {
-            width: 100%;
             height: 240px;
+            width: 100%;
             max-width: 240px;
             border-radius: 8px;
             object-fit: cover;
@@ -88,13 +96,16 @@
             color: $mblue;
 
             a {
-                width: calc(100% - 60px);
+                max-width: calc(100% - 60px);
+                display: inline-block;
 
                 p {
                     width: 100%;
+                    display: inline-block;
                     overflow: hidden;
                     white-space: nowrap;
                     text-overflow: ellipsis;
+
                 }
             }
 
@@ -109,12 +120,16 @@
         }
 
         a {
+
+
             span {
                 text-align: center;
                 color: $mpink;
                 display: block;
             }
+
         }
+
     }
 }
 
@@ -137,12 +152,6 @@
 
 }
 
-.page {
-    text-align: center;
-    grid-column-start: 1;
-    grid-column-end: 4;
-
-}
 
 @include t() {
     @media screen and (max-width:$t) {
@@ -174,14 +183,14 @@
 
             .shop_aside {
                 margin: auto;
-                width: 75%;
+                width: 80%;
                 display: flex;
                 flex-wrap: wrap;
                 flex-direction: row;
-
+                justify-content: center;
                 a {
                     margin: 0.5rem;
-
+                    
                     .pinkBtn {
                         margin: 0px;
                     }
@@ -195,15 +204,13 @@
             .shop_container {
                 width: 100%;
                 margin: 1rem auto;
-                grid-template-columns: repeat(2, 50%);
+                grid-template-columns: repeat(2, 1fr);
                 grid-template-rows: repeat(2, 1fr);
-                align-items: center;
                 gap: 0px;
-                .page {
-
+                align-items: center;
+                .page{
                     grid-column-start: 1;
                     grid-column-end: 3;
-
                 }
             }
 
@@ -214,9 +221,9 @@
             .info {
                 margin: auto;
                 width: 85%;
+                text-align: center;
                 span{
-                    width: 240px;
-                    text-align: center;
+                    max-width: 240px;
                     margin: auto;
                 }
             }
@@ -234,7 +241,6 @@
         .shop_block {
             display: flex;
             flex-wrap: wrap;
-            flex-direction: row;
             width: 100%;
             margin-left: 1rem;
 
@@ -259,8 +265,8 @@
 
             .shop_aside {
                 margin: auto;
-                width: 100%;
-                display: flex;
+                width: 75%;
+                flex-direction: row;
                 flex-wrap: wrap;
 
                 a {
@@ -282,12 +288,9 @@
                 grid-template-columns: repeat(1, 1fr);
                 grid-template-rows: repeat(1, 1fr);
                 gap: 1%;
-
-                .page {
-                    text-align: center;
+                .page{
                     grid-column-start: 1;
                     grid-column-end: 2;
-
                 }
             }
 

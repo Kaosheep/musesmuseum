@@ -201,5 +201,6 @@
   .productpage_main{
     max-width: 1000px;
     margin: 0 auto;
+    width: 83.33%;
   }
 </style>
