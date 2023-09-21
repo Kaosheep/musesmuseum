@@ -7,8 +7,8 @@
       <div class="admin_editbar">
         <div>
           <PinkButton class="btn_admin" text="新增" />
-          <PinkButton class="btn_admin" text="上架" @click="toggleStatus('1')" :disabled="!canToggle('1')"/>
-          <PinkButton class="btn_admin" text="下架" @click="toggleStatus('0')" :disabled="!canToggle('0')"/>
+          <PinkButton class="btn_admin" text="上架" @click="toggleStatus('1')" :disabled="!canToggle('1')" />
+          <PinkButton class="btn_admin" text="下架" @click="toggleStatus('0')" :disabled="!canToggle('0')" />
         </div>
         <Searchbar class="onlyB" />
       </div>
@@ -39,35 +39,38 @@
       </div>
       <form action="" class="pop" v-if="showForm" @submit.prevent="submitForm">
         <h2>編輯</h2>
-          <table>
-            <tr>
-              <th>消息編號</th>
-              <th>日期</th>
-            </tr>
-            <tr>
-              <td>mn</td>
-              <td>rate</td>
-            </tr>
-          </table>
+        <div class="xedit">
           <div>
-            <div>標題</div>
-            <input type="text" name="" id="">
-            <div>內容</div>
-            <textarea name="" id="" cols="30" rows="7"></textarea>
-            <div class="switch_status">
-              <div>狀態</div>
-              <select name="" id="">
-                <option value="">上架中</option>
-              </select>
-              <label for="fileInput">選擇圖片</label>
-              <input type="file" id="fileInput" accept="image/*" style="display: none;" />
-            </div>
-            <div class="form_btn">
-              <PinkButton class="btn_admin" text="取消" @click="hideEditForm" />
-              <PinkButton class="btn_admin" text="儲存" />
+            <div>消息編號</div>
+            <div>MN2023061901</div>
+          </div>
+          <div>
+            <div>日期</div>
+            <div>2023/08/10</div>
+          </div>
+        </div>
+        <div>
+          <div>標題</div>
+          <input type="text" name="" id="">
+          <div>內容</div>
+          <textarea name="" id="" cols="30" rows="7"></textarea>
+          <div class="switch_status">
+            <div>狀態</div>
+            <select name="" id="">
+              <option value="">上架中</option>
+            </select>
+            <input type="file" id="fileInput" accept="image/*" style="display: none;" />
+            <label for="fileInput">選擇圖片</label>
+            <div class="img_wrap">
+              <img src="" alt="" id="img1" width="50">
             </div>
           </div>
-        </form>
+          <div class="form_btn">
+            <PinkButton class="btn_admin" text="取消" @click="hideEditForm" />
+            <PinkButton class="btn_admin" text="儲存" />
+          </div>
+        </div>
+      </form>
     </div>
 
   </div>
@@ -252,11 +255,43 @@ div {
   align-items: center;
   z-index: 999;
   border-radius: 10px;
+  overflow: auto;
+
+  .xedit {
+    display: flex;
+
+    div {
+      margin-right: 10px;
+
+      div {
+        margin-bottom: 10px;
+      }
+
+
+    }
+
+  }
+
+  input,
+  textarea {
+    margin-top: 10px;
+    width: 100%;
+    background-color: #ffffff1b;
+    border: 1px solid #009CA8;
+    border-radius: 10px;
+    resize: none;
+    box-shadow: inset 9px 2px 20px 0px rgba(247, 0, 0, 0.2);
+  }
+
+  .img_wrap {
+    width: 100%;
+    background-color: #000;
+  }
 
   .form_btn {
-    position: absolute;
+    position: fixed;
     bottom: 0;
-    right: 0;
+    right: 20px;
   }
 }
 </style>
