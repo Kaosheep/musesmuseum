@@ -1,9 +1,6 @@
 <template>
   <div>
     <div>
-      <button class="bTab">最新消息</button>
-    </div>
-    <div>
       <div class="admin_editbar">
         <div>
           <PinkButton class="btn_admin" text="新增" />
@@ -165,7 +162,7 @@ div {
   display: flex;
   background-color: #f2f2f2;
   padding: 5px;
-  border-top-right-radius: 10px;
+  border-radius:10px 10px 0 0;
 }
 
 .onlyB {
@@ -279,7 +276,7 @@ div {
     border: 1px solid #009CA8;
     border-radius: 10px;
     resize: none;
-    box-shadow: inset 9px 2px 20px 0px rgba(247, 0, 0, 0.2);
+
   }
 
   .img_wrap {

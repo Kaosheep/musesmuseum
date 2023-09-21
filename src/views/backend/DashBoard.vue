@@ -3,7 +3,7 @@
     <div class="dashborad">
       <div class="console">
         <Row>
-          <Menu :theme="theme" class="list_style" accordion>
+          <Menu :theme="theme" class="list_style" accordion :open-names="['1']" active-name="1-1">
             <Submenu v-for="(submenu, index) in menuData" :key="index" :name="submenu.name">
               <template #title>
                 {{ submenu.title }}
@@ -101,9 +101,7 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
-
   .list_style {
-    border-radius: 10px;
     background-color: #D9D9D9;
   }
 }
