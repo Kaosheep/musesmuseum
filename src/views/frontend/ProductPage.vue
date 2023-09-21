@@ -2,7 +2,7 @@
   <main class="productpage_main">
     <div class="shop_Breadcrumbs">
       <a href="">首頁 / </a>
-      <a href="">商城 / </a>
+      <a href="">精選商城 / </a>
       <span>{{ foundObject.title }}</span>
     </div>
     <div class="product_info">
@@ -76,7 +76,6 @@
   import Heart from '/src/components/Heart.vue'
   import ProductWrap from '/src/components/ProductWrap.vue'
   import Footer from '/src/components/Footer.vue'
-  // import { createRouter, createWebHistory } from 'vue-router';
 
   export default {
     components: {
@@ -87,8 +86,7 @@
     data() {
       return {
         count: 0,
-        foundObject:{
-        },
+        foundObject:{},
         produstdisplay: [
           {
             id: 0,
