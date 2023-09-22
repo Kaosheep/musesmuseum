@@ -56,7 +56,7 @@ export default {
           title: "展覽資訊",
           link: "/",
           sublist: [
-            { subtitle: "常設展覽", sublink: "/Home/CurrentExhibition" },
+            { subtitle: "常設展覽", sublink: "/Home/CurrentExhibition_main" },
             { subtitle: "當期展覽", sublink: "/Home/SpecialExhibition_main" },
           ],
         },
