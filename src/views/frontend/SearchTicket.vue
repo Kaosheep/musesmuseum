@@ -23,10 +23,13 @@
               <p>付款狀態</p>
               <p>訂單狀態</p>
             </div>
-            <div v-for="(rowitem, rowindex) in productInfoArr" 
+            <div 
+              v-for="(rowitem, rowindex) in pagedProductInfo" 
               :key="rowindex" 
-              :class="[rowindex % 2 === 0 ? 'yellowRow' : 'whiteRow']">
-                <div class="itemInfoList">{{ rowitem.prodInfoLine }}</div>
+              :class="[rowindex % 2 === 0 ? 'yellowRow' : 'whiteRow']"
+              >
+                <div class="itemInfoList">{{ rowitem.id }}</div>
+                
                 <div class="itemInfoList">
                   <img
                     :src="
@@ -36,15 +39,32 @@
                       :alt="rowitem.name"
                   />
                 </div>
-                <div class="itemInfoList">{{ rowitem.id }}</div>
+
+                <div class="itemInfoList">{{ rowitem.date}}</div>
                 <div class="itemInfoList">{{ rowitem.name }}</div>
                 <div class="itemInfoList">{{ rowitem.class }}</div>
                 <div class="itemInfoList">{{ rowitem.placeholder }}</div>
-                <!-- <div
-                :id="rowitem.id"
-                :name="rowitem.name"
-                ></div> -->
             </div>
+            <!-- <div class="pagination">
+              <button @click="prevPage" :disabled="currentPage === 1">上一頁</button>
+              <span>第 {{ currentPage }} 頁 / 共 {{ totalPages }} 頁</span>
+              <button @click="nextPage" :disabled="currentPage === totalPages">下一頁</button>
+            </div> -->
+            <div class="pagination">
+            <button @click="prevPage" :disabled="currentPage === 1"> &#8249; </button>
+            <span>
+              <button
+                v-for="page in totalPages"
+                :key="page"
+                @click="changePage(page)"
+                :class="{ active: currentPage === page }"
+              >
+                {{ page }}
+              </button>
+            </span>
+            <button @click="nextPage" :disabled="currentPage === totalPages"> &#8249; </button>
+          </div>
+
           </div>
        </div>
    </main>
@@ -64,28 +84,52 @@ export default {
  data() {
    return {
     productInfoArr:[
-        { prodInfoLine:"A00103",pic:"@/assets/image/productimage",id:"2023/08/01",name:"$1200",class:"已付款",placeholder:"已完成" },
-        { prodInfoLine:"B00103",type:"pic",id:"2023/08/01",name:"$1200",class:"已付款",placeholder:"已完成" },
-        { prodInfoLine:"C00103",type:"pic",id:"2023/08/01",name:"$1200",class:"已付款",placeholder:"已完成" },
-        { prodInfoLine:"D00103",type:"pic",id:"2023/08/01",name:"$1200",class:"已付款",placeholder:"已完成" },
-        { prodInfoLine:"E00103",type:"pic",id:"2023/08/01",name:"$1200",class:"已付款",placeholder:"已完成" },
+        { id:"A00103",pic:"@/assets/image/productimage",date:"2023/08/01",name:"$1200",class:"已付款",placeholder:"已完成" },
+        { id:"B00103",type:"pic",date:"2023/08/01",name:"$1200",class:"已付款",placeholder:"已完成" },
+        { id:"C00103",type:"pic",date:"2023/08/01",name:"$1200",class:"已付款",placeholder:"已完成" },
+        { id:"D00103",type:"pic",date:"2023/08/01",name:"$1200",class:"已付款",placeholder:"已完成" },
+        { id:"E00103",type:"pic",date:"2023/08/01",name:"$1200",class:"已付款",placeholder:"已完成" },
+        { id:"A00104",pic:"@/assets/image/productimage",date:"2023/08/01",name:"$1200",class:"已付款",placeholder:"已完成" },
+        { id:"B00104",type:"pic",date:"2023/08/01",name:"$1200",class:"已付款",placeholder:"已完成" },
+        { id:"C00104",type:"pic",date:"2023/08/01",name:"$1200",class:"已付款",placeholder:"已完成" },
+        { id:"D00104",type:"pic",date:"2023/08/01",name:"$1200",class:"已付款",placeholder:"已完成" },
+        { id:"E00104",type:"pic",date:"2023/08/01",name:"$1200",class:"已付款",placeholder:"已完成" },
 
       ],
     memBtnLink:[
-       { link:"/Home/MemberInfo", name:"會員資料" },
-       { link:"/Home/SearchProduct", name:"訂單查詢" },
-       { link:"", name:"票券查詢" },
+        { link: "/Home/MemberInfo", name: "會員資料" },
+        { link: "/Home/SearchProduct", name: "訂單查詢" },
+        { link: "", name: "票券查詢" },
      ],
+    currentPage: 1,
+    itemsPerPage: 5,
    };
  },
+ computed: {
+    pagedProductInfo() {
+      const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+      const endIndex = startIndex + this.itemsPerPage;
+      return this.productInfoArr.slice(startIndex, endIndex);
+    },
+    totalPages() {
+      return Math.ceil(this.productInfoArr.length / this.itemsPerPage);
+    },
+  },
  methods: {
-  //  checkLoginData() {
-  //    if (this.memId === "test" && this.memPsw === "test") {
-  //      window.alert("登入成功");
-  //    } else {
-  //      window.alert("帳密錯誤");
-  //    }
-  //  },
+    changePage(page) {
+    this.currentPage = page;
+  },
+    searchClick() {},
+    prevPage() {
+      if (this.currentPage > 1) {
+        this.currentPage--;
+      }
+    },
+    nextPage() {
+      if (this.currentPage < this.totalPages) {
+        this.currentPage++;
+      }
+    },
  },
  mounted() {
    document.body.style.height = `auto`;
