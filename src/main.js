@@ -19,3 +19,4 @@ vueapp.use(router)
 vueapp.use(ViewUIPlus)
 vueapp.component('font-awesome-icon', FontAwesomeIcon)
 vueapp.mount('#app')
+
