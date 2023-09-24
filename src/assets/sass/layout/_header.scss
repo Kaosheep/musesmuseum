@@ -11,7 +11,6 @@ header {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-
     @include t() {
         position: sticky;
         width: 100%;

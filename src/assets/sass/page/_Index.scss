@@ -228,6 +228,7 @@
                             padding: 0;
                             margin: auto;
                             width: 100%;
+                            margin-bottom: 80px;
                         }
 
                         ul {
@@ -424,6 +425,36 @@
 
                 }
 
+                .index_carousel{
+                    display: none;
+                    height:60vh;
+                    @include t(){
+                        display: block;
+                        margin-bottom: 80px;
+                    }
+                    @include m(){
+                        height:90vh;
+                    }
+                    .artcarousel{
+                        position: relative;
+                        height: 100%;
+                        img{
+                            height: 60vh;
+                            object-fit: cover;
+                            @include m(){
+                                height:90vh;
+                            }
+                        }
+                        .txt{
+                            width: 100%;
+                            padding: 3% 5% 5%;
+                            position: absolute;
+                            bottom: 0;
+                            right: 0;
+                            background-color: #fff;
+                        }
+                    }
+                }
 
                 .eventwrap {
                     width: calc(100% - 80px);
@@ -509,7 +540,7 @@
                                 height: 50%;
 
                                 @include t() {
-                                    max-width: 200px;
+                                    max-width: 300px;
                                     height: 100%;
                                     padding: 0.5rem 0.5rem 2rem;
                                 }
@@ -745,7 +776,56 @@
                     width: 100%;
                     height: 100%;
                     position: relative;
+                    
+                    @include t(){
+                        min-height: 500px;
+                    }
+                    .light {
+                        position: absolute;
+                        border-radius: 50%;
+                        opacity: .2;
+                        backdrop-filter: brightness(120%);
+                        z-index: -1;
+                        &.yellow {
+                            width: 300px;
+                            height: 300px;
+                            top: 0;
+                            right: 0;
+                            background-color: $myellow;
+                            transform-origin: 0% 50%;
+                            animation: circle 5s 0s cubic-bezier(.26, .46, .74, .53) infinite reverse;
+                        }
 
+                        &.green {
+                            width: 350px;
+                            height: 350px;
+                            right: 0;
+                            bottom: 10px;
+                            background-color: $mgreen;
+                            transform-origin: 20% 50%;
+                            animation: circle 5s 0s cubic-bezier(.17, .3, .83, .63) infinite;
+                        }
+
+                        &.pink {
+                            width: 330px;
+                            height: 330px;
+                            bottom: 20%;
+                            left: 0;
+                            background-color: $mpink;
+                            transform-origin: 110% 50%;
+                            animation: circle 6s linear infinite;
+                        }
+
+                        @keyframes circle {
+                            0% {
+                                transform: rotate(0deg)
+                            }
+
+                            100% {
+                                transform: rotate(360deg)
+                            }
+                        }
+                    }
                     .balla {
                         width: 50px;
                         height: 50px;
@@ -753,29 +833,76 @@
                         border-radius: 50%;
                         background-color: $mpink;
                         transform-origin: bottom;
-
+                        left: 10%;
+                        
                         .artballa {
-                            
                             width: 90%;
                             height: 90%;
                             border-radius: 50%;
                             text-align: end;
                             padding-top: 2rem;
-                            background-color: #fff;
-                            background-image: url("@/assets/image/home/a0.png");
+                            background: radial-gradient(#fff 20%, transparent 21% ,transparent 79%, #fff 80%);
+                            background-size: 1em 1em;
+                            background-color: $myellow;
+                            opacity: 1;
                             background-position: center;
-                            background-size: 150%;
-                            background-repeat: no-repeat;
                             transform: scale(0);
+                            position: relative;
+
                             h3 {
                                 font-size: 32px;
                                 font-weight: 700;
+                                position: absolute;
+                                top: 2rem;
+                                left: 50%;
+                                transform: translateX(-50%);
+                            }
+
+                            img {
+                                object-position: center;
+                                height: 120%;
                             }
                         }
 
                     }
+                    .ballb {
+                        width: 50px;
+                        height: 50px;
+                        position: absolute;
+                        border-radius: 50%;
+                        background-color: $mpink;
+                        transform-origin: bottom;
+                        left: 10%;
+                        .artballb {
+                            width: 90%;
+                            height: 90%;
+                            border-radius: 50%;
+                            text-align: center;
+                            background: radial-gradient(#fff 20%, transparent 21% ,transparent 79%, #fff 80%);
+                            background-size: 1em 1em;
+                            background-color: $myellow;
+                            opacity: 1;
+                            background-position: center;
+                            transform: scale(0);
+                            position: relative;
+                            padding-top:6rem ;
+                            h3 {
+                                font-size: 32px;
+                                font-weight: 700;
+                                position: absolute;
+                                top: 2rem;
+                                left: 50%;
+                                transform: translateX(-50%);
+                            }
 
-                    @keyframes down {
+                            img {
+                                object-position: bottom;
+                                height: 100%;
+                            }
+                        }
+
+                    }
+                    @keyframes downa {
                         0% {
                             width: 50px;
                             height: 50px;
@@ -787,29 +914,60 @@
                             width: 50px;
                             height: 50px;
                             bottom: 0%;
-                            left: 30%;
+                            left: 25%;
                         }
                     }
 
-                    @keyframes up {
+                    @keyframes upa {
                         0% {
                             width: 50px;
                             height: 50px;
                             bottom: 0%;
-                            left: 30%;
+                            left: 25%;
+                        }
+
+                        100% {
+                            width: 300px;
+                            height: 300px;
+                            bottom: 25%;
+                            left: 45%;
+                        }
+                    }
+                    @keyframes downb {
+                        0% {
+                            width: 50px;
+                            height: 50px;
+                            bottom: 100%;
+                            left:35%;
+                        }
+
+                        100% {
+                            width: 50px;
+                            height: 50px;
+                            bottom: 0%;
+                            left: 20%;
+                        }
+                    }
+
+                    @keyframes upb {
+                        0% {
+                            width: 50px;
+                            height: 50px;
+                            bottom: 0%;
+                            left: 20%;
                         }
 
                         100% {
                             width: 300px;
                             height: 300px;
                             bottom: 30%;
-                            left: 50%;
+                            left: 5%;
                         }
                     }
 
-                    @keyframes showinfo {
+                    @keyframes showinfoa {
                         0% {
-                            transform: scale(0) ;
+                            transform: scale(0);
 
                         }
 
@@ -817,15 +975,34 @@
                             transform: scale(1) translate(40px, -32px);
                         }
                     }
+                    @keyframes showinfob {
+                        0% {
+                            transform: scale(0);
+
+                        }
+
+                        100% {
+                            transform: scale(1) translate(-30px, -32px);
+                        }
+                    }
                 }
 
                 .artblock.show {
                     .balla {
-                        animation: down 1s 0s 1 cubic-bezier(.58, .08, .92, .43),
-                            up 1s 1s 1 cubic-bezier(.11, .46, .39, .85) forwards;
-                            .artballa{
-                                animation: showinfo .5s 1.8s 1 forwards;
-                            }
+                        animation: downa 1s 0s 1 cubic-bezier(.58, .08, .92, .43),
+                            upa 1s 1s 1 cubic-bezier(.11, .46, .39, .85) forwards;
+
+                        .artballa {
+                            animation: showinfoa .5s 1.8s 1 forwards;
+                        }
+                    }
+                    .ballb {
+                        animation: downb 1s 0s 1 cubic-bezier(.58, .08, .92, .43),
+                            upb 1s 1s 1 cubic-bezier(.11, .46, .39, .85) forwards;
+
+                        .artballb {
+                            animation: showinfob .5s 1.8s 1 forwards;
+                        }
                     }
                 }
 
@@ -1064,6 +1241,7 @@
 
     padding: 2rem 0 0 90px;
 
+
     ul {
         display: flex;
         width: fit-content;
@@ -1083,10 +1261,12 @@
 
         span {
             position: absolute;
-            width: 200px;
+            width: 186px;
             height: 4px;
             background: linear-gradient(90deg, $mpink 0%, $mgreen 0%);
-            @include tc();
+            top: 50%;
+            right: 0;
+            transform: translateY(-50%);
             transition: .3s;
             z-index: -1;
         }
