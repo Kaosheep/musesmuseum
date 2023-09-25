@@ -4,25 +4,25 @@
   <div class="entitle">Book Tickets</div>
   <div  style="display: flex;">
   <div class="forrwd">
-  <div class="block">
-  <div>  
-  <div class="FareAndIllustrate">票價</div>
-  </div>
-  <div class="SweatBee"><li>成人票${{price}}</li></div>
-  <div class="white">13歲(含)以上之遊客</div>
-  <div class="SweatBee"><li>兒童票${{price2}}</li></div>
-  <div class="white">3歲(含)至12歲之兒童</div>
-  <div class="SweatBee"><li>老人票${{price3}}</li></div>
-  <div class="white">65歲(含)以上之長者</div>
-  <div class="SweatBee"><li>愛心票${{price4}}</li></div>
-  <div class="white">持有主管機關核發之身心障礙證明(手冊)者。</div>
-  <div class="FareAndIllustrate">說明</div>
-  <div class="white">-本館為一票可觀賞當期所有展覽(包含常設展)。</div>
-  <div class="white">-票券無使用期限。</div>
-  <div class="white">-售出票券無法線上退票，請至現場退票。</div>
-  <div class="white">-兒童票、優待票請現場出示身分證。</div>
-  <div class="white">-愛心票請現場出示身心障礙證明（手冊）。</div>
-  <img class=shormatrix src="@/assets/image/tick/shortmatrix.png"/>
+    <div class="block">
+      <div>  
+        <div class="FareAndIllustrate">票價</div>
+      </div>
+    <div class="SweatBee"><li>成人票${{price}}</li></div>
+    <div class="white">13歲(含)以上之遊客</div>
+    <div class="SweatBee"><li>兒童票${{price2}}</li></div>
+    <div class="white">3歲(含)至12歲之兒童</div>
+    <div class="SweatBee"><li>老人票${{price3}}</li></div>
+    <div class="white">65歲(含)以上之長者</div>
+    <div class="SweatBee"><li>愛心票${{price4}}</li></div>
+    <div class="white">持有主管機關核發之身心障礙證明(手冊)者。</div>
+    <div class="FareAndIllustrate">說明</div>
+    <div class="white">-本館為一票可觀賞當期所有展覽(包含常設展)。</div>
+    <div class="white">-票券無使用期限。</div>
+    <div class="white">-售出票券無法線上退票，請至現場退票。</div>
+    <div class="white">-兒童票、優待票請現場出示身分證。</div>
+    <div class="white">-愛心票請現場出示身心障礙證明（手冊）。</div>
+    <img class=shormatrix src="@/assets/image/tick/shortmatrix.png"/>
   </div>
   
   <div class="buytick">
@@ -96,8 +96,8 @@
       },
     },
     methods: {
-      subt1(qua,price){   
-        return qua*price;
+      subt1(x,y){   
+        return x*y;
       },    
       subt2(qua2,price2){   
         return qua2*price2;

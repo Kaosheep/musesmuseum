@@ -147,6 +147,11 @@ const routes = [
         component: () => import('../views/frontend/History.vue'),
       },
       {
+        path: 'Curator',
+        name: 'Curator',
+        component: () => import('../views/frontend/Curator.vue'),
+      },
+      {
         path: 'Museumspace',
         name: 'Museumspace',
         component: () => import('../views/frontend/Museumspace.vue'),
