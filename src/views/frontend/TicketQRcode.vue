@@ -32,10 +32,11 @@
                 >
                   <div class="itemInfoList"  
                   @click="showSection">
-                    {{ rowitem.id }}
+                  {{ rowitem.id }}
                   </div>
                   <router-link 
                   :to="`/Home/TicketQRcode/${rowitem.id}`" 
+                 
                   >
                     <section class="itemInfoList" v-show="isSectionVisible">
                       {{ rowitem.id}}
@@ -102,9 +103,6 @@
       totalPages() {
         return Math.ceil(this.productInfoArr.length / this.itemsPerPage);
       },
-      current(){
-        
-      }
     },
    methods: {
     showSection() {
