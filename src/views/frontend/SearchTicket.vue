@@ -16,34 +16,38 @@
           </div>
           <div class="productInfo">
             <div class="headerRow">
-              <p>訂單編號</p>
-              <p></p>
-              <p>訂購日期</p>
+              <p>訂票編號</p>
+              <p>票劵</p>
+              <p class="hideInfo">訂購日期</p>
               <p>總金額</p>
-              <p>付款狀態</p>
-              <p>訂單狀態</p>
+              <p  class="hideInfo">付款狀態</p>
+              <p  class="hideInfo">使用張數</p>
             </div>
             <div 
               v-for="(rowitem, rowindex) in pagedProductInfo" 
               :key="rowindex" 
               :class="[rowindex % 2 === 0 ? 'yellowRow' : 'whiteRow']"
               >
-                <div class="itemInfoList">{{ rowitem.id }}</div>
-                
-                <div class="itemInfoList">
-                  <img
-                    :src="
-                      require('@/assets/image/productimage/productimage' +
-                      rowindex +
-                        '.png')"
-                      :alt="rowitem.name"
-                  />
-                </div>
-
-                <div class="itemInfoList">{{ rowitem.date}}</div>
-                <div class="itemInfoList">{{ rowitem.name }}</div>
-                <div class="itemInfoList">{{ rowitem.class }}</div>
-                <div class="itemInfoList">{{ rowitem.placeholder }}</div>
+                <div class="itemInfoList ">{{ rowitem.id }}</div>
+                <router-link :to="`/Home/TicketQRcode/${rowitem.id}`" >
+                  <div class="itemInfoList">
+                    {{ rowitem.ticketName}}
+                    {{ rowitem.ticketName}}
+                    <!-- <img
+                      :src="
+                        require('@/assets/image/productimage/productimage' +
+                        rowindex +
+                          '.png')"
+                        :alt="rowitem.name"
+                    /> -->
+                  </div>
+                </router-link>
+                <div class="itemInfoList hideInfo">{{ rowitem.date}}</div>
+                <div class="itemInfoList">{{ rowitem.price }}</div>
+                <div class="itemInfoList hideInfo">{{ rowitem.pay }}</div>
+                <router-link :to="`/Home/TicketQRcode/${rowitem.id}`" >
+                  <div class="itemInfoList hideInfo">{{ rowitem.finish }}</div>
+                </router-link>
             </div>
             <!-- <div class="pagination">
               <button @click="prevPage" :disabled="currentPage === 1">上一頁</button>
@@ -51,7 +55,10 @@
               <button @click="nextPage" :disabled="currentPage === totalPages">下一頁</button>
             </div> -->
             <div class="pagination">
-            <button @click="prevPage" :disabled="currentPage === 1"> &#8249; </button>
+              <Page :total="productInfoArr.length" :page-size="itemsPerPage" v-model="currentPage"/>
+            <!-- <button class="pageBtn" @click="prevPage" :disabled="currentPage === 1">
+              <i class="fa-solid fa-chevron-up fa-rotate-270" ></i>
+            </button>
             <span>
               <button
                 v-for="page in totalPages"
@@ -62,9 +69,10 @@
                 {{ page }}
               </button>
             </span>
-            <button @click="nextPage" :disabled="currentPage === totalPages"> &#8249; </button>
-          </div>
-
+            <button class="pageBtn" @click="nextPage" :disabled="currentPage === totalPages">  
+              <font-awesome-icon :icon="['fas', 'chevron-up']" rotation=90 style="color: $mblue;" />
+            </button> -->
+            </div>
           </div>
        </div>
    </main>
@@ -80,20 +88,21 @@ export default {
    Footer,
    Searchbar,
    Searchbarclick,
+  
  },
  data() {
    return {
     productInfoArr:[
-        { id:"A00103",pic:"@/assets/image/productimage",date:"2023/08/01",name:"$1200",class:"已付款",placeholder:"已完成" },
-        { id:"B00103",type:"pic",date:"2023/08/01",name:"$1200",class:"已付款",placeholder:"已完成" },
-        { id:"C00103",type:"pic",date:"2023/08/01",name:"$1200",class:"已付款",placeholder:"已完成" },
-        { id:"D00103",type:"pic",date:"2023/08/01",name:"$1200",class:"已付款",placeholder:"已完成" },
-        { id:"E00103",type:"pic",date:"2023/08/01",name:"$1200",class:"已付款",placeholder:"已完成" },
-        { id:"A00104",pic:"@/assets/image/productimage",date:"2023/08/01",name:"$1200",class:"已付款",placeholder:"已完成" },
-        { id:"B00104",type:"pic",date:"2023/08/01",name:"$1200",class:"已付款",placeholder:"已完成" },
-        { id:"C00104",type:"pic",date:"2023/08/01",name:"$1200",class:"已付款",placeholder:"已完成" },
-        { id:"D00104",type:"pic",date:"2023/08/01",name:"$1200",class:"已付款",placeholder:"已完成" },
-        { id:"E00104",type:"pic",date:"2023/08/01",name:"$1200",class:"已付款",placeholder:"已完成" },
+        { id:"A00103",pic:"",date:"2023/08/01",ticketName:"普通票",price:"$1200",pay:"已付款",finish:"1" },
+        { id:"B00103",pic:"",date:"2023/08/01",ticketName:"普通票",price:"$1200",pay:"已付款",finish:"1"  },
+        { id:"C00103",pic:"",date:"2023/08/01",ticketName:"普通票",price:"$1200",pay:"已付款",finish:"1"  },
+        { id:"D00103",pic:"",date:"2023/08/01",ticketName:"普通票",price:"$1200",pay:"已付款",finish:"2"  },
+        { id:"E00103",pic:"",date:"2023/08/01",ticketName:"普通票",price:"$1200",pay:"已付款",finish:"1"  },
+        { id:"A00104",pic:"",date:"2023/08/01",ticketName:"普通票",price:"$1200",pay:"已付款",finish:"1"  },
+        { id:"B00104",pic:"",date:"2023/08/01",ticketName:"普通票",price:"$1200",pay:"已付款",finish:"3"  },
+        { id:"C00104",pic:"",date:"2023/08/01",ticketName:"普通票",price:"$1200",pay:"已付款",finish:"1"  },
+        { id:"D00104",pic:"",date:"2023/08/01",ticketName:"普通票",price:"$1200",pay:"已付款",finish:"4"  },
+        { id:"E00104",pic:"",date:"2023/08/01",ticketName:"普通票",price:"$1200",pay:"已付款",finish:"1"  },
 
       ],
     memBtnLink:[
@@ -116,20 +125,7 @@ export default {
     },
   },
  methods: {
-    changePage(page) {
-    this.currentPage = page;
-  },
-    searchClick() {},
-    prevPage() {
-      if (this.currentPage > 1) {
-        this.currentPage--;
-      }
-    },
-    nextPage() {
-      if (this.currentPage < this.totalPages) {
-        this.currentPage++;
-      }
-    },
+
  },
  mounted() {
    document.body.style.height = `auto`;
@@ -137,23 +133,6 @@ export default {
 };
 </script>
 <style scoped lang="scss">
-.search{
-height: 202px;
-display: flex;
-justify-content: flex-end;
-align-items: center;
-}
-.searchbar_search{
-  margin: 0;
-  box-shadow: 3px 3px 0px $mgreen;
-}
-@include t(){
-  .search{
-    height:auto;
-    display: block;
-    margin: 20px 0;
-  }
-}
 
 .backGroundCard{
   display: flex;
@@ -161,38 +140,9 @@ align-items: center;
     align-items: flex-start; 
     justify-content: space-between;
 }
-.backGroundCardBtns{
-  margin-right: 30px;
-}
 
-.productInfo
- {
-  width: 100%;
-  // flex-basis: calc(50% - 10px); 
-
-}
 .cardCenter{
   align-items: start;
-}
-
-@include t(){
-  .backGroundCard{
-    display: block;
-  }
-  .backGroundCardBtns,
-  .productInfo{
-    margin-right: 0;
-  }
-  .search{
-    margin-right: auto;
-    .searchbar_search{
-        display: none;
-    }
-    .searchbarclick_search{
-        display: block;
-        margin: 20px auto 20px 0;
-    }
-  }
 }
 
 </style>

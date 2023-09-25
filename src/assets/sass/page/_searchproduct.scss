@@ -1,4 +1,17 @@
 .searchProdMain{
+    .backGroundCardBtns{
+        margin-right: 30px;
+    }
+    .search{
+        height: 202px;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+    }
+    .searchbar_search{
+        margin: 0;
+        box-shadow: 3px 3px 0px $mgreen;
+    }
     .searchbarclick_search{
         display: none;
     }
@@ -8,7 +21,7 @@
         justify-content: space-between;
         border-bottom: 2px solid $mblue;
         p{
-            // width: 80px;
+            width: 68px;
             color: $mgreen;
         }
     }
@@ -16,7 +29,7 @@
         width: 100%;
         height: 80px;
         margin:5px 0;
-        padding: 5px;
+     
         color: $mblue;
         display: flex;
         flex-direction: row;
@@ -29,6 +42,7 @@
         width: 100%;
         height: 80px;
         margin:5px 0;
+  
         color: $mblue;
         display: flex;
         flex-direction: row;
@@ -41,11 +55,75 @@
     }
     .itemInfoList{
         width: 100%;
+        min-width: 110px;
         img{
             width:70px;
             display: flex;
+            margin: auto;
         }
     }
- 
+    .productInfo{
+        width: 100%;
+        .pagination{
+            display: flex;
+            justify-content: end;
+           
+        }
+    }
 
 }
+@include t(){
+    .searchProdMain{
+        .backGroundCard{
+            display: block;
+            padding: 10px ;
+            &Btns{
+                width: 100%;
+                margin: auto;
+            }
+        }
+      
+        .productInfo{
+            margin-right: 0;
+            margin-top: 20px;
+            .headerRow{
+                padding: 0;
+                p{
+                    margin: 0 15px;
+                }
+            }
+        }
+        .search{
+            height:auto;
+            .searchbar_search{
+                display: none;
+            }
+            .searchbarclick_search{
+                display: block;
+                margin: 20px auto 20px 0;
+            }
+        }
+        .itemInfoList{
+        // width: 100%;
+        // min-width: 110px;
+            img{
+                width:50px;
+                // display: flex;
+                // margin: auto;
+            }
+        }
+        .hideInfo{
+            display: none;
+        }
+        .itemInfoList{
+            min-width: 0;
+        }
+        .pinkBtn{
+            margin: 0 5px;
+        }
+    }
+
+   
+      
+  }
+  

@@ -15,8 +15,10 @@
     }
 
 .backGroundCard{
+    display: flex;
     width: 1000px;
-    height: 560px;
+    height: 100%;
+    min-height: 560px;
     padding: 50px 100px;
     margin: 0 auto;
     text-align: center;
@@ -32,26 +34,16 @@
 }
 
 @include t() {
-        .backGroundCardbBlue{
-            display: none;
-            }
+    .backGroundCardbBlue{
+        display: none;
+    }
+    .backGroundCard{
+        width: 350px;
+        display: block;
+        // height: 100%;
+        min-height: 600px;
+        padding: 30px 0;
         
-        .backGroundCard{
-            width: 350px;
-            display: block;
-            height: 600px;
-            // max-width: 1000px;
-            // max-height: 560px;
-            padding: 30px 0;
-            // margin: 0 auto;
-            // text-align: center;
-            // border-radius: 8px;
-            // border: 3px solid $mgreen;
-            // background-color: #fff;
-            // position:relative;
-            }
-
-
-
-    
+    }
+  
 }
