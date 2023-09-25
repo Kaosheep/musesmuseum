@@ -62,6 +62,7 @@
                     <h3>{{ img.imgtitle }}</h3>
                     <p>{{ img.time }}</p>
                     <p>{{ img.info }}</p>
+                    <p><router-link to="/"><ThinArrow :text="'展覽資訊'"></ThinArrow></router-link></p>
                   </div>
                 </div>
               </div>
@@ -72,6 +73,30 @@
               ></router-link>
             </div>
           </div>
+          <Carousel
+            v-model="value"
+            :autoplay="setting.autoplay"
+            :autoplay-speed="setting.autoplaySpeed"
+            :dots="setting.dots"
+            :radius-dot="setting.radiusDot"
+            :trigger="setting.trigger"
+            :arrow="setting.arrow"
+            class="index_carousel"
+          >
+            <CarouselItem v-for="(img, imgindex) in galleryimgs">
+              <div class="artcarousel">
+                <img
+                  :src="require('@/assets/image/exb/e' + imgindex + '.jpg')"
+                  alt=""
+                />
+                <div class="txt">
+                  <h3>{{ img.imgtitle }}</h3>
+                  <p>{{ img.time }}</p>
+                  <p>{{ img.info }}</p>
+                </div>
+              </div>
+            </CarouselItem>
+          </Carousel>
         </section>
         <section>
           <div class="sectiontitle">
@@ -122,7 +147,7 @@
               <div class="txtframe"><h1>VISIT</h1></div>
               <div class="card">
                 <a href="">
-                  <img src="@\assets\image\home\buliding0.jpg" alt="" />
+                  <img src="@/assets/image/home/buliding0.jpg" alt="" />
                   <div class="txt">
                     <h2>參觀與服務<br />Visit</h2>
                     <button type="button">
@@ -166,21 +191,22 @@
           <div class="smalltitle">
             <h2>藝術典藏<br />Collection</h2>
           </div>
-          <div :class="['artblock',{'show':isshow}]">
+          <div :class="['artblock', { show: isshow }]">
             <div class="balla">
               <div class="artballa">
-                <h3>
-                  文物區
-                </h3>
+                <h3>文物區</h3>
+                <img src="@/assets/image/home/a0.png" alt="" />
               </div>
             </div>
-            <div class="ballp">
-              <div class="artball">
-                <h3>
-                  畫作區
-                </h3>
+            <div class="ballb">
+              <div class="artballb">
+                <h3>畫作區</h3>
+                <img src="@/assets/image/home/a1.png" />
               </div>
             </div>
+            <div class="light yellow"></div>
+            <div class="light green"></div>
+            <div class="light pink"></div>
           </div>
         </section>
         <section>

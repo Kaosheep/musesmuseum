@@ -14,6 +14,15 @@ export default {
   },
   data() {
     return {
+      value: 0,
+      setting: {
+        autoplay: true,
+        autoplaySpeed: 4000,
+        dots: 'inside',
+        radiusDot: true,
+        trigger: 'click',
+        arrow: 'always'
+      },
       homenav: [
         { title: "最新消息", entitle: "News", link: "/" },
         { title: "展覽資訊", entitle: "Current Exhibitions", link: "/" },
@@ -61,14 +70,14 @@ export default {
         },
       ],
       galleryimgs: [
-        { imgtitle: '現代之魅' ,time:'2023/5/1-2023/6/15',info:'探索當代藝術的多樣性和深度，這個展覽將呈現來自世界各地的藝術家的傑出作品，包括繪畫、雕塑和多媒體藝術。'},
-        { imgtitle: '光之舞' ,time:'2023/5/1-2023/6/15',info:'這個展覽將探討光和色彩如何影響我們的情感和感知。通過投影、互動藝術和光學效應，觀眾將沉浸在充滿魔力的光之世界。'},
-        { imgtitle: '古典之美' ,time:'2023/5/1-2023/6/15',info:'一場關於古代藝術的探索之旅。這個展覽將展示古希臘和羅馬時期的藝術珍品，包括雕塑、陶瓷和古典繪畫。'},
-        { imgtitle: '數位幻境' ,time:'2023/5/1-2023/6/15',info:'通過虛擬現實和互動藝術，這個展覽將帶領觀眾進入一個全新的數位世界。體驗未來藝術的奇妙之處。'},
-        { imgtitle: '大自然的韻律' ,time:'2023/5/1-2023/6/15',info:'這個展覽將藉由藝術家對大自然的啟發，呈現出關於自然美的藝術作品。包括風景畫、植物描繪和生態藝術。'},
-        { imgtitle: '時光之旅' ,time:'2023/5/1-2023/6/15',info:'這個展覽將追溯藝術的演變，從古代到當代。通過展出各個時代的代表性藝術品，讓觀眾感受藝術的時光之旅。'},
+        { imgtitle: '現代之魅', time: '2023/5/1-2023/6/15', info: '探索當代藝術的多樣性和深度，這個展覽將呈現來自世界各地的藝術家的傑出作品，包括繪畫、雕塑和多媒體藝術。' },
+        { imgtitle: '光之舞', time: '2023/5/1-2023/6/15', info: '這個展覽將探討光和色彩如何影響我們的情感和感知。通過投影、互動藝術和光學效應，觀眾將沉浸在充滿魔力的光之世界。' },
+        { imgtitle: '古典之美', time: '2023/5/1-2023/6/15', info: '一場關於古代藝術的探索之旅。這個展覽將展示古希臘和羅馬時期的藝術珍品，包括雕塑、陶瓷和古典繪畫。' },
+        { imgtitle: '數位幻境', time: '2023/5/1-2023/6/15', info: '通過虛擬現實和互動藝術，這個展覽將帶領觀眾進入一個全新的數位世界。體驗未來藝術的奇妙之處。' },
+        { imgtitle: '大自然的韻律', time: '2023/5/1-2023/6/15', info: '這個展覽將藉由藝術家對大自然的啟發，呈現出關於自然美的藝術作品。包括風景畫、植物描繪和生態藝術。' },
+        { imgtitle: '時光之旅', time: '2023/5/1-2023/6/15', info: '這個展覽將追溯藝術的演變，從古代到當代。通過展出各個時代的代表性藝術品，讓觀眾感受藝術的時光之旅。' },
       ],
-      isshow:false
+      isshow: false
     };
   },
   methods: {
@@ -88,8 +97,8 @@ export default {
       anchorline.style.backgroundImage = `linear-gradient(90deg,#EB5F86 ${(srcolloff * 100) - 6
         }%,#009CA8 ${(srcolloff * 100) - 6}%)`;
       anchorli.forEach((li, i) => {
-        if (i < Math.floor(srcolloff * 0.7 * 10)) {
-          for (let i = 0; i < Math.floor(srcolloff * 0.7 * 10); i++) {
+        if (i < Math.ceil(srcolloff * 0.6 * 10)) {
+          for (let i = 0; i < Math.ceil(srcolloff * 0.6 * 10); i++) {
             anchorli[i].style.backgroundColor = `#EB5F86`;
           }
         }
@@ -135,18 +144,18 @@ export default {
         });
         txt.addEventListener("mouseout", (e) => {
           btns[index].style.right = `16px`;
-          if(window.innerWidth>414){
-             btns[index].style.bottom = `0px`;
-          }else{
+          if (window.innerWidth > 414) {
+            btns[index].style.bottom = `0px`;
+          } else {
             btns[index].style.bottom = `32px`;
           }
-         
+
         });
       });
     },
     resize() {
 
-      if (window.innerWidth > 768) {
+      if (window.innerWidth > 820) {
         let slider = document.querySelector(".home_slider");
         let sliderWidth = slider.getBoundingClientRect().width;
         document.body.style.height = `${sliderWidth - (window.innerWidth - window.innerHeight)
@@ -160,10 +169,16 @@ export default {
       }
 
     },
-    show(){
-      if(document.querySelector('.artblock').getBoundingClientRect().left < 1500){
-        this.isshow=true
+    show() {
+      if (document.querySelector('.artblock').getBoundingClientRect().left < 1500) {
+        this.isshow = true
       }
+    },
+    ballmove(e) {
+      let x = (window.innerWidth - e.pageX) / 98;
+      let y = (window.innerHeight - e.pageY) / 100;
+      document.querySelector('.balla').style.transform = `translate(${x}px , ${y}px)`;
+      document.querySelector('.ballb').style.transform = `translate(${-x}px , ${-y}px)`;
     }
 
   },
@@ -188,7 +203,7 @@ export default {
     function animate() {
       current = parseFloat(lerp(current, target, ease)).toFixed(2);
       target = window.scrollY;
-      if (window.innerWidth > 768) {
+      if (window.innerWidth > 820) {
         setTransform(slider, `translateX(-${current}px)`);
       } else {
         setTransform(slider, `translateY('')`);
@@ -207,7 +222,7 @@ export default {
 
       newimgs.forEach((image, i) => {
         intersectionratio = ratio - i * 1.5;
-        if (window.innerWidth > 768) {
+        if (window.innerWidth > 820) {
           setTransform(image, `translateX(-${intersectionratio * 8}px)`);
         } else {
           setTransform(image, `translateX(0px)`)
@@ -246,6 +261,7 @@ export default {
     window.addEventListener("resize", this.resize);
     window.addEventListener("scroll", this.anchor);
     window.addEventListener("scroll", this.show);
+    window.addEventListener("mousemove", this.ballmove);
     animate();
     this.followcursor();
     this.resize();
@@ -256,6 +272,7 @@ export default {
     window.removeEventListener("resize", this.resize);
     window.removeEventListener("scroll", this.anchor);
     window.removeEventListener("scroll", this.show);
+    window.removeEventListener("mousemove", this.ballmove);
     document.body.style.height = `auto`;
   }
 

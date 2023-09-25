@@ -9,6 +9,13 @@ import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 export default {
+
+  data(){
+    return{
+      publicPath: process.env.BASE_URL,
+    }
+    
+  },
   mounted() {
     this.initThree();
   },
@@ -30,7 +37,7 @@ export default {
       camera.position.x = 10;
       camera.position.y = 3;
       const gltfLoader = new GLTFLoader();
-      gltfLoader.load("/art/scene0.gltf", (gltf) => {
+      gltfLoader.load(`/art/scene0.gltf`, (gltf) => {//${this.publicPath}
         var model = gltf.scene;
         scene.add(model);
         model.scale.set(0.25, 0.25, 0.25);
@@ -47,8 +54,8 @@ export default {
       let controls = new OrbitControls(camera, renderer.domElement);
       controls.enableDamping = true;
       controls.enablePan = false;
-      controls.touches.ONE = THREE.TOUCH.PAN;
-      controls.touches.TWO = THREE.TOUCH.DOLLY_ROTATE;
+      // controls.touches.ONE = THREE.TOUCH.PAN;
+      // controls.touches.TWO = THREE.TOUCH.DOLLY_ROTATE;
 
       function animate() {
         renderer.render(scene, camera);

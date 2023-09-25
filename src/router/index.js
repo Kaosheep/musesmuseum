@@ -41,11 +41,6 @@ const routes = [
         name: 'ProductPage',
         component: () => import('../views/frontend/ProductPage.vue')
       },
-      // {
-      //   path: 'SearchProductDetail/:id',
-      //   name: 'SearchProductDetail',
-      //   component: () => import('../views/frontend/SearchProductDetail.vue')
-      // },
       {
         path: 'News',
         name: 'News',
@@ -120,6 +115,11 @@ const routes = [
         path: 'SearchTicket',
         name: 'SearchTicket',
         component: () => import('../views/frontend/SearchTicket.vue'),
+      },
+      {
+        path: 'TicketQRcode',
+        name: 'TicketQRcode',
+        component: () => import('../views/frontend/TicketQRcode.vue')
       },
       {
         path: 'SearchProduct',
@@ -233,7 +233,14 @@ const routes = [
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
-  routes: routes
+  routes: routes,
+  scrollBehavior(to, from, savedPosition) {
+    if (savedPosition) {
+      return savedPosition
+    } else {
+      return { top: 0 }
+    }
+  },
 
 })
 

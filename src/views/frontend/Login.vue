@@ -10,7 +10,7 @@
             </button>
           </router-link>
         </div>
-        <form>
+        <form method="post">
           <div class="memloginActi" v-for="i in memAllInfo">
             <label :key="i.id">{{ i.memTitColumn }}</label>
             <input 
@@ -96,8 +96,24 @@ export default {
 };
 </script>
 <style scoped lang="scss">
-// main {
-//   min-height: calc(100vh - 130px);
-//   margin: auto;
-// }
+.backGroundCard{
+ 
+  form{
+      width:auto;
+      margin:auto 213px;
+      
+  }
+}
+@include t(){
+  .backGroundCard{
+    height: 100%;
+    min-height: 0;
+    form{
+        margin:30px auto;
+        button{
+          margin: 5px;
+        }
+    }
+  }
+}
 </style>

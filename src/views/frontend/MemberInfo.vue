@@ -63,6 +63,7 @@ export default {
        { link:"", name:"會員資料" },
        { link:"/Home/SearchProduct", name:"訂單查詢" },
        { link:"/Home/SearchTicket", name:"票券查詢" },
+       { link:"", name:"收藏清單" },
      ],
    };
  },
@@ -81,5 +82,19 @@ export default {
 };
 </script>
 <style scoped lang="scss">
-
+.backGroundCard{
+  form{
+      width:auto;
+      margin:auto 213px;
+      
+  }
+}
+@include t() {
+  .backGroundCard{
+    form{
+      margin:30px auto;
+        
+    }
+  }
+}
 </style>

@@ -1,5 +1,4 @@
 .art_main {
-
     position: relative;
     width: 95%;
     height: 100vh;
@@ -9,8 +8,11 @@
 
     @include t() {
         width: 100%;
+        padding: 0;
     }
-
+    @include m(){
+        height:calc(100vh - 60px) ;
+    }
     .title {
         height: 100vh;
 
@@ -31,15 +33,22 @@
     }
 
     .block {
+        position: relative;
+        padding-left: 3rem;
+        width: 40%;
+
         @include t() {
-            display: none;
+            width: 50%;
         }
 
         .btn {
-            width: 40%;
             text-align: center;
-            padding-top: 3rem;
-
+            padding-top: 5%;
+            position: relative;
+            z-index: 2;
+            @include t(){
+                padding-top:10%;
+            }
             button {
                 width: 50px;
                 height: 50px;
@@ -56,61 +65,60 @@
             }
         }
 
-        .container {
-            width: 40%;
-            height: calc(100vh - 114px);
+        .artinfo {
             position: relative;
-
-            @include t() {
-                height: calc(100vh - 60px);
+            z-index: 2;
+            height: 70vh;
+            border-radius: 20px;
+            padding: 0.5rem;
+            background-color: #fff;
+            @include shadowlb($color: $mpink);
+            @include t(){
+                height: 60vh;
             }
-
-
-
-            @include set (900px) {
-                width: 55%;
-            }
-
-            &::before {
-                content: "";
-                background-color: transparent;
-                width: 100%;
-                height: 100%;
-                position: absolute;
-                top: 0;
+            @include m(){
+                position: fixed;
+                bottom: 0;
                 left: 0;
-                z-index: 2;
+                height: 40vh;
+                box-shadow: none;
+                border-radius: 0px;
             }
-
-            .veiw {
+            .container {
                 width: 100%;
-                height: calc(100vh - 114px);
+                padding: 2rem 1rem;
+                height: 67vh;
+                overflow-x: hidden;
                 overflow-y: scroll;
-                scrollbar-width: 0;
-                scroll-behavior: smooth;
-
+                @include t(){
+                    height: 57vh;
+                }
+                @include m(){
+                    height: 37vh;
+                    padding: 1rem;
+                }
                 &::-webkit-scrollbar {
-                    display: none;
+                    width: 7px;
+                    height: 7px;
+                    background-color: #fff;
+                    border-radius: 4px;
                 }
 
-                .warp {
-                    display: flex;
-                    flex-direction: column;
-
-                    .infocard {
-                        flex-shrink: 0;
-                        height: calc(100vh - 114px);
-                        padding: 3rem 1rem;
-
-                        p {
-                            &:nth-child(3) {
-                                text-align: end;
-                            }
-                        }
-                    }
+                &::-webkit-scrollbar-track {
+                    background: #fff;
+                    border-radius: 4px;
                 }
+
+                &::-webkit-scrollbar-thumb {
+                    background: $mpink;
+                    border-radius: 4px;
+                }
+
             }
+
         }
+
+
 
 
         .artwarp {
@@ -119,14 +127,21 @@
             right: -90vw;
             width: 100vw;
 
-            @include set (1200px) {
+            @include set (1600px) {
                 right: -100vw;
+            }
+
+            @include set (1200px) {
+                right: -110vw;
             }
 
             @include set (900px) {
                 right: -120vw;
             }
-
+            @include m(){
+                top: 40%;
+                right: -130vw;
+            }
 
             ul {
                 display: flex;
