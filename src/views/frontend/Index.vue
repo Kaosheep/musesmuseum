@@ -62,6 +62,7 @@
                     <h3>{{ img.imgtitle }}</h3>
                     <p>{{ img.time }}</p>
                     <p>{{ img.info }}</p>
+                    <p><router-link to="/"><ThinArrow :text="'展覽資訊'"></ThinArrow></router-link></p>
                   </div>
                 </div>
               </div>
