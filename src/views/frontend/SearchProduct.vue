@@ -18,17 +18,17 @@
             <div class="headerRow">
               <p>訂單編號</p>
               <p></p>
-              <p>訂購日期</p>
+              <p class="hideInfo">訂購日期</p>
               <p>總金額</p>
-              <p>付款狀態</p>
+              <p class="hideInfo">付款狀態</p>
               <p>訂單狀態</p>
             </div>
-            <div v-for="(rowitem, rowindex) in productInfoArr" 
+            <div v-for="(rowitem, rowindex) in pagedProductInfo" 
               :key="rowindex" 
               :class="[rowindex % 2 === 0 ? 'yellowRow' : 'whiteRow']">
               
-                <div class="itemInfoList">{{ rowitem.id }}</div>
-                <router-link :to="`/Home/SearchProductInfo/${rowitem.id}`" >
+            <div class="itemInfoList">{{ rowitem.id }}</div>
+              <router-link :to="`/Home/SearchProductInfo/${rowitem.id}`" >
                 <div class="itemInfoList">
                   <img
                     :src="
@@ -39,15 +39,18 @@
                   />
                 </div>
               </router-link>
-                <div class="itemInfoList">{{ rowitem.date}}</div>
-                <div class="itemInfoList">{{ rowitem.name }}</div>
-                <div class="itemInfoList">{{ rowitem.class }}</div>
-                <div class="itemInfoList">{{ rowitem.placeholder }}</div>
+                <div class="itemInfoList hideInfo">{{ rowitem.date}}</div>
+                <div class="itemInfoList">{{ rowitem.price }}</div>
+                <div class="itemInfoList hideInfo">{{ rowitem.pay }}</div>
+                <div class="itemInfoList">{{ rowitem.finish }}</div>
                 <!-- <div
                 :id="rowitem.id"
                 :name="rowitem.name"
                 ></div> -->
-              
+            
+            </div>
+            <div class="pagination">
+                <Page :total="productInfoArr.length" :page-size="itemsPerPage" v-model="currentPage"/>
             </div>
           </div>
        </div>
@@ -68,11 +71,13 @@ export default {
  data() {
    return {
     productInfoArr:[
-        { id:"A00103",pic:"@/assets/image/productimage",date:"2023/08/01",name:"$1200",class:"已付款",placeholder:"已完成" },
-        { id:"B00103",type:"pic",date:"2023/08/01",name:"$1200",class:"已付款",placeholder:"已完成" },
-        { id:"C00103",type:"pic",date:"2023/08/01",name:"$1200",class:"已付款",placeholder:"已完成" },
-        { id:"D00103",type:"pic",date:"2023/08/01",name:"$1200",class:"已付款",placeholder:"已完成" },
-        { id:"E00103",type:"pic",date:"2023/08/01",name:"$1200",class:"已付款",placeholder:"已完成" },
+        { id:"A00103",pic:"",date:"2023/08/01",price:"$1200",pay:"已付款",finish:"已完成" },
+        { id:"A00103",pic:"",date:"2023/08/01",price:"$1200",pay:"已付款",finish:"已完成" },
+        { id:"A00103",pic:"",date:"2023/08/01",price:"$1200",pay:"已付款",finish:"已完成" },
+        { id:"A00104",pic:"",date:"2023/08/01",price:"$1200",pay:"已付款",finish:"已完成" },
+        { id:"A00103",pic:"",date:"2023/08/01",price:"$1200",pay:"已付款",finish:"已完成" },
+        { id:"A00103",pic:"",date:"2023/08/01",price:"$1200",pay:"已付款",finish:"已完成" },
+        { id:"A00105",pic:"",date:"2023/08/01",price:"$1200",pay:"已付款",finish:"已完成" },
 
       ],
     memBtnLink:[
@@ -80,8 +85,20 @@ export default {
        { link:"", name:"訂單查詢" },
        { link:"/Home/SearchTicket", name:"票券查詢" },
      ],
+     currentPage: 1,
+    itemsPerPage: 5,
    };
  },
+ computed: {
+    pagedProductInfo() {
+      const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+      const endIndex = startIndex + this.itemsPerPage;
+      return this.productInfoArr.slice(startIndex, endIndex);
+    },
+    totalPages() {
+      return Math.ceil(this.productInfoArr.length / this.itemsPerPage);
+    },
+  },
  methods: {
   //  checkLoginData() {
   //    if (this.memId === "test" && this.memPsw === "test") {
@@ -105,62 +122,21 @@ export default {
 };
 </script>
 <style scoped lang="scss">
-.search{
-height: 202px;
-display: flex;
-justify-content: flex-end;
-align-items: center;
-}
-.searchbar_search{
-  margin: 0;
-  box-shadow: 3px 3px 0px $mgreen;
-}
-@include t(){
-  .search{
-    height:auto;
-    display: block;
-    margin: 20px 0;
-  }
-}
-
 .backGroundCard{
-  display: flex;
-    // flex-wrap: wrap;
-    align-items: flex-start; 
-    justify-content: space-between;
+  // flex-wrap: wrap;
+  align-items: flex-start; 
+  justify-content: space-between;
 }
-.backGroundCardBtns{
-  margin-right: 30px;
-}
+// .backGroundCardBtns{
+//   margin-right: 30px;
+// }
 
-.productInfo
- {
-  width: 100%;
-  // flex-basis: calc(50% - 10px); 
-
+.productInfo{
+  white-space: nowrap;
 }
 .cardCenter{
   align-items: start;
 }
 
-@include t(){
-  .backGroundCard{
-    display: block;
-  }
-  .backGroundCardBtns,
-  .productInfo{
-    margin-right: 0;
-  }
-  .search{
-    margin-right: auto;
-    .searchbar_search{
-        display: none;
-    }
-    .searchbarclick_search{
-        display: block;
-        margin: 20px auto 20px 0;
-    }
-  }
-}
 
 </style>

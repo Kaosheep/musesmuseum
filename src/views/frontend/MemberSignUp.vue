@@ -80,5 +80,19 @@ export default {
 };
 </script>
 <style scoped lang="scss">
-
+.backGroundCard{
+  form{
+      width:auto;
+      margin:auto 213px;
+      
+  }
+}
+@include t() {
+  .backGroundCard{
+    form{
+      margin:30px auto;
+        
+    }
+  }
+}
 </style>
