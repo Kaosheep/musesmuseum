@@ -30,7 +30,7 @@
   <div class="shop_wrap">
     <aside class="shop_aside">
       <li v-for="(list, index) in aside" :key="index">
-        <button class="pinkBtn" @click="prodKind = list.kind">
+        <button class="pinkBtn" @click="selectkind(list.kind)">
           {{ list.kind }}
         </button>
       </li>
@@ -206,8 +206,7 @@ export default {
   },
   computed: {
     categoryFilter() {
-      if (!this.prodKind) return this.produstdislist;
-      return this.produstdislist.filter((v) => v.kind?.includes(this.prodKind));
+        return this.produstdislist.filter((v) => v.kind?.includes(this.prodKind));
     },
     searchFilter() {
       if (!this.searchinput) return this.categoryFilter;
@@ -230,10 +229,10 @@ export default {
       return this.productSorting.slice(startIndex, endIndex);
     },
   },
-  mounted() {
-    document.body.style.height = `auto`;
-  },
   methods: {
+    selectkind(kind){
+      this.prodKind = kind
+    },
     searchClick(text) {
       // <SSS @update-search-text="searchClick" />
       // this.$emit('update-search-text', '123')
