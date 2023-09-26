@@ -92,6 +92,7 @@ export default {
   height: 100vh;
   @include t(){
     height: auto;
+    padding-bottom: 80px;
   }
   main {
     width: 100%;
