@@ -88,40 +88,31 @@
     .info {
         margin: 10px 0px;
         text-align: center;
-
         span {
             display: flex;
             justify-content: space-between;
             align-items: center;
             color: $mblue;
-
             a {
                 max-width: calc(100% - 60px);
                 display: inline-block;
-
                 p {
                     width: 100%;
                     display: inline-block;
                     overflow: hidden;
                     white-space: nowrap;
                     text-overflow: ellipsis;
-
                 }
             }
-
             #car path {
                 fill: $mgreen;
             }
-
             #car {
                 height: 25px;
                 color: $mgreen;
             }
         }
-
         a {
-
-
             span {
                 text-align: center;
                 color: $mpink;
@@ -139,13 +130,11 @@
     width: 83.33%;
     display: flex;
     justify-content: space-between;
-
     .shop_Breadcrumbs {
         a {
             color: $mblue;
         }
     }
-
     .searchbarclick_search {
         display: none;
     }

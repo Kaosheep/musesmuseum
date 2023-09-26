@@ -69,12 +69,15 @@
           </router-link>
         </div>
       </div>
-      <Page
+    </div>
+  </div>
+  <div class="shop_paginationbar">
+    <Page
         :total="productSorting.length"
         :page-size="pageItems"
         v-model="currentPage"
-      />
-    </div>
+        class="shop_page"
+    />
   </div>
 </template>
 
@@ -273,8 +276,8 @@ export default {
 };
 </script>
 <style scoped lang="scss">
-h1 {
-  text-align: center;
-  font-size: 32px;
-}
+  h1 {
+    text-align: center;
+    font-size: 32px;
+  }
 </style>

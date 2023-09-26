@@ -16,6 +16,14 @@
         }
     }
 }
+@include t() {
+    @media screen and (max-width:$t) {
+        .shop_carousel {
+            margin: 3% auto;
+            width: 100%;
+        }
+    }
+}
 
 .shop_wrap {
     margin: 2rem auto 0px;
@@ -80,16 +88,13 @@
     .info {
         margin: 10px 0px;
         text-align: center;
-
         span {
             display: flex;
             justify-content: space-between;
             align-items: center;
             color: $mblue;
-
             a {
                 width: calc(100% - 60px);
-
                 p {
                     width: 100%;
                     overflow: hidden;
@@ -97,17 +102,14 @@
                     text-overflow: ellipsis;
                 }
             }
-
             #car path {
                 fill: $mgreen;
             }
-
             #car {
                 height: 25px;
                 color: $mgreen;
             }
         }
-
         a {
             span {
                 text-align: center;
@@ -124,119 +126,43 @@
     width: 83.33%;
     display: flex;
     justify-content: space-between;
-
     .shop_Breadcrumbs {
         a {
             color: $mblue;
         }
     }
-
     .searchbarclick_search {
         display: none;
     }
-
 }
-
-.page {
-    text-align: center;
-    grid-column-start: 1;
-    grid-column-end: 4;
-
-}
-
-@include t() {
-    @media screen and (max-width:$t) {
-        .shop_carousel {
-            margin: 3% auto;
+.shop_paginationbar{
+        margin: 3% auto;
+        max-width: 1050px;
+        width: 83.33%;
+    .shop_page{
+        width: 80%;
+        margin-left: auto;
+        text-align: center;
+    @include t() {
+        @media screen and (max-width:$t) {
             width: 100%;
         }
-
-        .shop_block {
-            width: 75%;
-            flex-direction: column;
-
-            .search {
-                margin-right: auto;
-
-                .searchbar_search {
-                    display: none;
-                }
-
-                .searchbarclick_search {
-                    display: block;
-                }
-            }
-        }
-
-        .shop_wrap {
-            flex-direction: column;
+    }
+    @include m() {
+        @media screen and (max-width:$m) {
             width: 100%;
-
-            .shop_aside {
-                margin: auto;
-                width: 75%;
-                display: flex;
-                flex-wrap: wrap;
-                flex-direction: row;
-
-                a {
-                    margin: 0.5rem;
-
-                    .pinkBtn {
-                        margin: 0px;
-                    }
-                }
-
-                .shop_filter {
-                    margin: 0.5rem;
-                }
-            }
-
-            .shop_container {
-                width: 100%;
-                margin: 1rem auto;
-                grid-template-columns: repeat(2, 50%);
-                grid-template-rows: repeat(2, 1fr);
-                align-items: center;
-                gap: 0px;
-                .page {
-
-                    grid-column-start: 1;
-                    grid-column-end: 3;
-
-                }
-            }
-
-            .item {
-                text-align: center;
-            }
-
-            .info {
-                margin: auto;
-                width: 85%;
-                span{
-                    width: 240px;
-                    text-align: center;
-                    margin: auto;
-                }
-            }
         }
+    }
     }
 }
 
-@include m() {
-    @media screen and (max-width:$m) {
-        .shop_carousel {
-            margin: 3% auto;
-            width: 100%;
-        }
 
+
+@include t() {
+    @media screen and (max-width:$t) {
         .shop_block {
-            display: flex;
-            flex-wrap: wrap;
-            flex-direction: row;
-            width: 100%;
-            margin-left: 1rem;
+            width: 75%;
+            flex-direction: column;
 
             .search {
                 display: block;
@@ -259,41 +185,91 @@
 
             .shop_aside {
                 margin: auto;
-                width: 100%;
+                width: 75%;
                 display: flex;
                 flex-wrap: wrap;
+                flex-direction: row;
 
-                a {
-                    margin: 0.7rem;
-
-                    .pinkBtn {
-                        margin: 0px;
-                    }
+                li {
+                    margin: 0.5rem;
                 }
 
                 .shop_filter {
-                    margin: auto;
                     margin: 0.5rem;
                 }
             }
 
             .shop_container {
-                margin: 1.5rem auto;
-                grid-template-columns: repeat(1, 1fr);
-                grid-template-rows: repeat(1, 1fr);
-                gap: 1%;
+                width: 75%;
+                margin: 1rem auto;
+                grid-template-columns: repeat(2, 1fr);
+                grid-template-rows: repeat(2, 1fr);
+                align-items: center;
+                gap: 0px;
+            }
 
-                .page {
-                    text-align: center;
-                    grid-column-start: 1;
-                    grid-column-end: 2;
-
-                }
+            .item {
+                text-align: center;
             }
 
             .info {
                 margin: auto;
                 width: 85%;
+                span{
+                    width: 240px;
+                    text-align: center;
+                    margin: auto;
+                }
+            }
+        }
+    }
+}
+
+@include m() {
+    @media screen and (max-width:$m) {
+        .shop_wrap {
+            flex-direction: column;
+            width: 100%;
+
+            .shop_aside {
+                margin: auto;
+                width: 100%;
+                display: flex;
+                flex-wrap: wrap;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+
+                li {
+                    margin: 0.5rem;
+                }
+
+                .shop_filter {
+                    margin: 0.5rem;
+                }
+            }
+
+            .shop_container {
+                width: 100%;
+                margin: 1rem auto;
+                grid-template-columns: repeat(1, 1fr);
+                grid-template-rows: repeat(1, 1fr);
+                align-items: center;
+                gap: 10px;
+            }
+
+            .item {
+                text-align: center;
+            }
+
+            .info {
+                margin: auto;
+                width: 85%;
+                span{
+                    width: 240px;
+                    text-align: center;
+                    margin: auto;
+                }
             }
         }
     }

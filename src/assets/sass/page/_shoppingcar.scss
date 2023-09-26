@@ -63,10 +63,13 @@
         padding: 2% 1%;
         align-items: center;
         position: relative;
+        margin-bottom: 0.5rem;
         input{
             width: 25px;
             height: 25px;
             margin: 0 1%;
+            text-align: center;
+            border: none;
         }
         .shoppingcar_productimage{
             min-width: 100px;
@@ -80,6 +83,7 @@
         }
         .shoppingcar_productinfo{            
             margin: 0 2%;
+            width: 30%;
             p{
                 font-size: 1.5rem;                
                 padding: 1% 0;
