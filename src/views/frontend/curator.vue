@@ -1,14 +1,14 @@
 <template>
   <div class="title">
-   <p class="curaror">歷任館長 Director-general</p>
+   <p>歷任館長 Director-general</p>
    <div class="block"></div>
   </div>
-  <div class="third">
-   <div class="three"><img src="@/assets/image/Curator/1.png"></div>
-   <p class="thirdname">Sophia Anne</p>
-   <div class="thirdcurator"><img src="@/assets/image/Curator/first.png"> </div>
-  <div class="thirdmatrix"><img src="@/assets/image/Curator/bluematrix.png"></div>
-   <div class="thirddottedline"><img src="@/assets/image/Curator/fifthdottedline.png"></div>
+  <div class="first">
+   <div class="one"><img src="@/assets/image/Curator/1.png"></div>
+   <p class="firstname">Sophia Anne</p>
+   <div class="firstcurator"><img src="@/assets/image/Curator/first.png"></div>
+   <div class="firstbluematrix"><img src="@/assets/image/Curator/bluematrix.png"></div>
+   <div class="firstdottedline"><img src="@/assets/image/Curator/firstdottedline.png"></div>
   </div>
   <div class="second">
   <div class="secondcurator"><img src="@/assets/image/Curator/second.png"></div>
@@ -60,25 +60,19 @@
  <style lang="scss" scoped>
 
  @media screen and (max-width:767px) {
-.title {
+.title p{
+  font-size: 20px;
   padding: 5px;
+  background-color:#FBF796;
   width:300px;
   height: 10%;
+  text-align: center;
   border-radius: 5px;
-  margin-left: 5%;
+  position:relative ;
+  margin-left: 10%;
   margin-top: 3%;
   margin-bottom: 10px;
-  position:relative;
-  z-index: 2; 
- }
- .curaror {
-  width:300px;
-   position:absolute;
-   text-align: center;
-   font-size: 20px; 
-   z-index: 2; 
-   background-color: #FBF796;
-   border-radius: 5px;
+  z-index: 1;
  }
  .block{
    position: absolute;
@@ -86,8 +80,43 @@
    border-radius: 5px;
    width: 300px;
    height: 35px;
-   left: 7%;
-   z-index: 0; 
+   left: 11%;
+   bottom: 81%;
+ }
+ .first{
+   display: flex;
+   margin-top: 10%;
+ }
+ .one img{
+   width: 70%;
+   height: 70%;
+   margin-left:40%;
+   position: relative;
+ }
+ .firstname{
+   position: absolute;
+   color: black;
+   left: 10%;
+   top: 40%;
+   font-size: 32px;
+ }
+ .firstcurator img{
+   width: 60%;
+   height: 78%;
+   position: relative;
+   margin-left: 37%;
+   z-index: 1;
+ }
+ .firstbluematrix img{
+   position: absolute;
+   z-index: 0;
+   top: 30%;
+   right: 1px;
+   width: 45%;
+   height: 20%;
+ }
+ .firstdottedline img{
+  display: none;
  }
  .second{
    display: flex;
@@ -110,9 +139,8 @@
    position: absolute;
    color: black;
    margin-top: 10%;
-   margin-left: 55%;
-   font-size: 30px;
-   width: 10%;
+   margin-left: 60%;
+   font-size: 32px;
    color: #1E5289;
  }
  .secondmatrix img{
@@ -140,14 +168,15 @@
  .thirdname{
   position: absolute;
    color: black;
+   left: 10%;
    top: 40%;
-   font-size: 27px;
+   font-size: 32px;
  }
  .thirdcurator img{
-   width: 70%;
+  width: 70%;
    height: 85%;
    position: relative;
-   margin-left: 23%;
+   margin-left: 27%;
    z-index: 1;
  }
  .thirdmatrix img{
@@ -214,7 +243,6 @@
  .firstcurator img{
    width: 78%;
    height: 78%;
-   top:10px;
    position: relative;
    z-index: 1;
  }
