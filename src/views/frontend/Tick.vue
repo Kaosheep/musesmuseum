@@ -71,7 +71,7 @@
   <img class=cube2 src="@/assets/image/tick/cube2.png"/>
   <div class="frame"></div>
   <img class=longmatrix src="@/assets/image/tick/longmatrix.png"/>
-  
+  <div>cube/</div>
   </template>
   
   <script>
@@ -96,6 +96,7 @@
       },
     },
     methods: {
+<<<<<<< HEAD
       subt1(x,y){   
         return x*y;
       },    
@@ -108,6 +109,11 @@
       subt4(qua4,price4){   
         return qua4*price4;
       },     
+=======
+      subt1(qua,price){   
+        return qua*price;
+      },        
+>>>>>>> yby
       reduce1() {
         if (this.qua > 0) {
           this.qua--;

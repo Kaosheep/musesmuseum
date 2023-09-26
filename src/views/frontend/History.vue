@@ -1,11 +1,22 @@
 <template>
   <div class="title">
+<<<<<<< HEAD
       <div style="color: white;">歷史沿革</div>
       <div style="color: white;">History</div>
     </div>
     <div class="block"></div>
   <div class="carousel-container">
     <div class="carousel-slide" :style="{ transform: `translateX(-${currentIndex * 100}%)` }">
+=======
+      <div class="history">歷史沿革</div>
+      <div class="history">History</div>
+      <div class="block"></div>
+    </div>
+    
+  <div class="carousel-container">
+    <div class="carousel-slide" :style="{ transform: `translateX(-${currentIndex * 100}%)` }">
+      <div class="carousel-track" :style="{ transform: `translateX(-${currentIndex * 100}%)` }"></div>
+>>>>>>> yby
       <img src="@/assets/image/history/slide1.png" alt="Slide 1">
       <button class="firstyear" @click="showContent(0)" :style="{ backgroundColor: yearColors[0] }">
         <div class="oneyear">{{ year }}</div>
@@ -35,7 +46,10 @@
           <div class="threeyear">{{ sixthyear }}</div>
           <p class="text3" v-if="contentIndex === 5">{{ text6 }}</p>
         </button>
+<<<<<<< HEAD
         
+=======
+>>>>>>> yby
         <div class="squarelattice"><img src="@/assets/image/history/squarelattice.png"></div>
     </div>
     <button class="prev-button" @click="prevSlide">←</button>
@@ -58,10 +72,23 @@ export default {
       text3: '2017年的Muses Museum博物館展示了與當年重大事件相關的珍貴文物和紀念品，讓人們回顧歷史並深入了解這些事件的影響。',
       text4: '2018年新冠病毒大流行迫使Muses Museum暫時關閉，但也推動了更多虛擬參觀選項的發展，讓民眾在家就可以線上欣賞藝術和文物帶來的陶冶與饗宴。',
       text5: '2020年Muses Museum博物館展示了令人驚嘆的藝術和文化遺產，吸引了數以百萬計的遊客。這一年，博物館提供了獨特的展覽。',
+<<<<<<< HEAD
       text6: '2023年的Muses Museum博物館展示了與當年重大事件相關的珍貴文物和紀念品，讓人們回顧歷史並深入了解這些事件的影響.',
       contentIndex: 0,
       currentIndex: 0,
       yearColors: ['#EB5F86', '', ''],
+=======
+      text6: '2023年的Muses Museum博物館展示了與當年重大事件相關的珍貴文物和紀念品，讓人們回顧歷史並深入了解這些事件的影響。',
+      contentIndex: 0,
+      yearColors: ['#EB5F86', '', ''],
+      twoyearColors: ['#EB5F86', '', ''],
+      yearColors: ['#EB5F86', '', ''],
+      yearColors: ['#EB5F86', '', ''],
+      yearColors: ['#EB5F86', '', ''],
+      yearColors: ['#EB5F86', '', ''],
+      currentIndex: 0,
+      isTransitioning: false,
+>>>>>>> yby
     };
   },
   methods: {
@@ -71,13 +98,37 @@ export default {
       this.yearColors[index] = '#EB5F86';
     },
     prevSlide() {
+<<<<<<< HEAD
       this.currentIndex = Math.max(this.currentIndex - 1, 0);
+=======
+      if (!this.isTransitioning) {
+        this.isTransitioning = true;
+        this.currentIndex = Math.max(this.currentIndex - 1, 0);
+        setTimeout(() => {
+          this.isTransitioning = false;
+        }, 300); 
+      }
+    },
+    nextSlide() {
+      if (!this.isTransitioning) {
+        this.isTransitioning = true;
+        if (this.currentIndex === 1) { 
+          this.currentIndex = 0; 
+        } else {
+          this.currentIndex = Math.min(this.currentIndex + 1, 1);
+        }
+        setTimeout(() => {
+          this.isTransitioning = false;
+        }, 300);
+      }
+>>>>>>> yby
     },
     nextSlide() {
   this.currentIndex = (this.currentIndex + 1) % 2;
 }
   },
 };
+<<<<<<< HEAD
 </script>
      
       
@@ -149,8 +200,86 @@ export default {
 }
   .Carousel{
     display: flex;
+=======
+
+</script>
+
+<style lang="scss" scoped>
+@media screen and (max-width:767px) {
+  .history{
+      color: white;
+      z-index: 3;
+    }
+  img{
+    width: 70%;
+>>>>>>> yby
   }
+  .squarelattice{
+      display: none;
+    }
+  .carousel-container {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow: hidden;
+  width: 100%;
+  height: 500px;
+  position: relative;
+  transition: transform 0.3s ease-in-out;
+  margin-top:-20%;
+  margin-left: 3%;
+}
+
+.carousel-slide {
+  flex: 0 0 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  color: black;
+  font-size: 24px;
+  display: flex;
+  transition: transform 0.3s ease-in-out; 
+  will-change: transform;
+}
+
+.prev-button,
+.next-button {
+  position: absolute;
+  top: 50%;
+  background-color: #009CA8;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.prev-button {
+  position: absolute;
+  top: 46%;
+  background-color: white;
+  color:#009CA8 ;
+  border: 1px solid #009CA8;
+  padding: 1px 5px;
+  cursor: pointer;
+  border-radius: 50%; 
+  font-size: 20px;
+  margin-left: 5%;
+}
+
+.next-button {
+  position: absolute;
+  top: 46%;
+  background-color: white;
+  color:#009CA8 ;
+  border: 1px solid #009CA8;
+  padding: 1px 5px;
+  cursor: pointer;
+  border-radius: 50%; 
+  font-size: 20px;
+  margin-left: 88%;
+}
   .title{
+<<<<<<< HEAD
     padding: 5px;
     background-color:#009CA8;
     width: 25%;
@@ -177,6 +306,33 @@ export default {
       top:-120px
   }
   .firstyear{
+=======
+      padding: 5px;
+      background-color:#009CA8;
+      width: 30%;
+      text-align: center;
+      border-radius: 5px;
+      position:relative ;
+      margin-left: 10%;
+      margin-top: 10%;
+      z-index: 1;
+    }
+    // .block{
+    //   position: absolute;
+    //   background-color:#FBF796;
+    //   border-radius: 5px;
+    //   width:30% ;
+    //   height: 30%;
+    //   left: 20%;
+    //   bottom: 70%;
+    // }
+    .squarelattice{
+      position: absolute;
+      left: 100%;
+      top:-120px
+    }
+    .firstyear{
+>>>>>>> yby
       border:none ;
       border-radius: 50px;
       background-color: #009CA8;
@@ -184,9 +340,15 @@ export default {
       width: 25px;
       height: 25px;
       left: 18%;
+<<<<<<< HEAD
       top:20%;
   }
   .oneyear{
+=======
+      top:44%;
+    }
+    .oneyear{
+>>>>>>> yby
       position: absolute;
       bottom: 80%;
       right: 3px;
@@ -201,9 +363,15 @@ export default {
       width: 25px;
       height: 25px;
       left: 47%;
+<<<<<<< HEAD
       top:38%
   }
   .twoyear{
+=======
+      top:52%
+    }
+    .twoyear{
+>>>>>>> yby
       position: absolute;
       bottom: 100%;
       right: 3px;
@@ -218,7 +386,11 @@ export default {
       width: 25px;
       height: 25px;
       left: 80%;
+<<<<<<< HEAD
       top:20%
+=======
+      top:46%
+>>>>>>> yby
     }
     .threeyear{
       position: absolute;
@@ -233,6 +405,7 @@ export default {
     position: relative;
     }
     .text1{
+<<<<<<< HEAD
       width: 400px;
       height: 200px;
       position: relative;
@@ -285,6 +458,65 @@ img{
   margin-bottom:10%;
 }
 
+=======
+        margin-top:100% ;
+        font-size: 20px;
+        width: 350px;
+        height: 200px;
+        position: relative;
+        right: 60px;
+        top:60px;
+        color:#009CA8 ;
+        background-color: #FBF796;
+        padding: 20px;
+        padding-bottom: 10px;
+        border-radius: 5px;
+      }
+      .text2{
+        margin-top:100% ;
+        font-size: 20px;
+        width: 350px;
+        height: 500px;
+        position: relative;
+        right: 170px;
+        top:30px;
+        color:#009CA8 ;
+        background-color: #FBF796;
+        padding: 30px;
+        padding-bottom: 10px;
+        border-radius: 5px;
+      }
+      .text3{
+        margin-top:100% ;
+        font-size: 20px;
+        width: 350px;
+        height: 500px;
+        position: relative;
+        right: 300px;
+        top:60px;
+        color:#009CA8 ;
+        background-color: #FBF796;
+        padding: 30px;
+        padding-bottom: 10px;
+        border-radius: 5px;
+      }
+}
+
+
+@media screen and (min-width:768px){
+.carousel-container {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow: hidden;
+  width: 100%;
+  height: 500px;
+  position: relative;
+  transition: transform 0.3s ease-in-out;
+  margin-top:-5%;
+  margin-left: 3%;
+}
+
+>>>>>>> yby
 .carousel-slide {
   flex: 0 0 100%;
   display: flex;
@@ -293,7 +525,13 @@ img{
   background-color: white;
   color: black;
   font-size: 24px;
+<<<<<<< HEAD
   transition: transform 0.3s ease-in-out; 
+=======
+  display: flex;
+  transition: transform 0.3s ease-in-out; 
+  will-change: transform;
+>>>>>>> yby
 }
 
 .prev-button,
@@ -307,9 +545,15 @@ img{
   cursor: pointer;
 }
 
+<<<<<<< HEAD
 .prev-button {
   position: absolute;
   top: 38%;
+=======
+  .prev-button {
+  position: absolute;
+  top: 46%;
+>>>>>>> yby
   background-color: white;
   color:#009CA8 ;
   border: 1px solid #009CA8;
@@ -320,9 +564,15 @@ img{
   margin-left: 8%;
 }
 
+<<<<<<< HEAD
 .next-button {
   position: absolute;
   top: 38%;
+=======
+  .next-button {
+  position: absolute;
+  top: 46%;
+>>>>>>> yby
   background-color: white;
   color:#009CA8 ;
   border: 1px solid #009CA8;
@@ -331,11 +581,17 @@ img{
   border-radius: 50%; 
   font-size: 20px;
   margin-left: 88%;
+<<<<<<< HEAD
 }
 .Carousel{
+=======
+  }
+  .Carousel{
+>>>>>>> yby
     display: flex;
   }
   .title{
+      color: white;
       padding: 5px;
       background-color:#009CA8;
       width: 10%;
@@ -347,6 +603,7 @@ img{
       margin-bottom: 10px;
       z-index: 1;
     }
+<<<<<<< HEAD
     .block{
       position: absolute;
       background-color:#FBF796;
@@ -355,7 +612,22 @@ img{
       height: 20%;
       left: 11%;
       bottom: 76%;
+=======
+    .history{
+      color: white;
+      position: relative;
+      z-index: 1;
+>>>>>>> yby
     }
+  //   .block{
+  //     position: absolute;
+  // background-color: #FBF796;
+  // border-radius: 5px;
+  // width: 100%;
+  // height: 100%;
+  // z-index: 0;
+  // bottom: 1px;
+  //   }
     .squarelattice{
       position: absolute;
       left: 100%;
@@ -369,7 +641,11 @@ img{
       width: 25px;
       height: 25px;
       left: 18%;
+<<<<<<< HEAD
       top:25%;
+=======
+      top:38%;
+>>>>>>> yby
     }
     .oneyear{
       position: absolute;
@@ -386,7 +662,11 @@ img{
       width: 25px;
       height: 25px;
       left: 47%;
+<<<<<<< HEAD
       top:48%
+=======
+      top:60%
+>>>>>>> yby
     }
     .twoyear{
       position: absolute;
@@ -403,7 +683,11 @@ img{
       width: 25px;
       height: 25px;
       left: 80%;
+<<<<<<< HEAD
       top:26%
+=======
+      top:39%
+>>>>>>> yby
     }
     .threeyear{
       position: absolute;
@@ -421,7 +705,7 @@ img{
       width: 400px;
       height: 100px;
       position: relative;
-      right: -30px;
+      right:-30px;
       top:-120px;
       color:#009CA8 ;
       background-color: #FBF796;
@@ -449,4 +733,9 @@ img{
       padding: 10px;
     }
   }
+<<<<<<< HEAD
       </style>
+=======
+      
+</style>
+>>>>>>> yby
