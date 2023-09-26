@@ -12,11 +12,7 @@
     "@fortawesome/vue-fontawesome": "^3.0.3",
     "core-js": "^3.8.3",
     "gsap": "^3.12.2",
-<<<<<<< HEAD
     "jquery": "^3.7.1",
-=======
-    "jQuery": "^1.7.4",
->>>>>>> yahan
     "primevue": "^3.34.1",
     "swiper": "^10.2.0",
     "three": "^0.156.0",
