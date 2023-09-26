@@ -1,11 +1,5 @@
 <template>
-  <Carousel
-    v-model="value"
-    autoplay
-    loop
-    :autoplay-speed="4000"
-    class="shop_carousel"
-  >
+  <Carousel v-model="value" autoplay loop :autoplay-speed="4000" class="shop_carousel">
     <CarouselItem class="banner">
       <img src="@/assets/image/productimage/banner/banner0.jpg" />
     </CarouselItem>
@@ -43,11 +37,7 @@
           {{ list.kind }}
         </button>
       </li>
-      <select
-        class="shop_filter"
-        v-model="sortType"
-        @change="priceClick(sortType)"
-      >
+      <select class="shop_filter" v-model="sortType" @change="priceClick(sortType)">
         <option>商品排序</option>
         <option value="asc">價格低至高</option>
         <option value="desc">價格高至低</option>
@@ -67,11 +57,7 @@
             <router-link :to="`/Home/ProductPage/${id}`">
               <p>{{ item.title }}</p>
             </router-link>
-            <font-awesome-icon
-              :icon="['fas', 'cart-shopping']"
-              id="car"
-              @click="addcart(id)"
-            />
+            <font-awesome-icon :icon="['fas', 'cart-shopping']" id="car" @click="addcart(id)" />
           </span>
           <router-link :to="`/Home/ProductPage/${id}`">
             <span> ${{ item.price }} </span>
@@ -81,12 +67,7 @@
     </div>
   </div>
   <div class="shop_paginationbar">
-    <Page
-        :total="productSorting.length"
-        :page-size="pageItems"
-        v-model="currentPage"
-        class="shop_page"
-    />
+    <Page :total="productSorting.length" :page-size="pageItems" v-model="currentPage" class="shop_page" />
   </div>
 </template>
 
@@ -219,7 +200,7 @@ export default {
   },
   computed: {
     categoryFilter() {
-        return this.produstdislist.filter((v) => v.kind?.includes(this.prodKind));
+      return this.produstdislist.filter((v) => v.kind?.includes(this.prodKind));
     },
     searchFilter() {
       if (!this.searchinput) return this.categoryFilter;
@@ -242,8 +223,19 @@ export default {
       return this.productSorting.slice(startIndex, endIndex);
     },
   },
+  watch: {
+    prodKind() {
+      this.currentPage = 1;
+    },
+    searchinput() {
+      this.currentPage = 1;
+    },
+    sortType() {
+      this.currentPage = 1;
+    },
+  },
   methods: {
-    selectkind(kind){
+    selectkind(kind) {
       this.prodKind = kind
     },
     searchClick(text) {
@@ -302,8 +294,8 @@ export default {
 };
 </script>
 <style scoped lang="scss">
-  h1 {
-    text-align: center;
-    font-size: 32px;
-  }
+h1 {
+  text-align: center;
+  font-size: 32px;
+}
 </style>
