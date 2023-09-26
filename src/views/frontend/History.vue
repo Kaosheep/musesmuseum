@@ -1,9 +1,10 @@
 <template>
   <div class="title">
-      <div style="color: white;">歷史沿革</div>
-      <div style="color: white;">History</div>
+      <div class="history">歷史沿革</div>
+      <div class="history">History</div>
+      <div class="block"></div>
     </div>
-    <div class="block"></div>
+    
   <div class="carousel-container">
     <div class="carousel-slide" :style="{ transform: `translateX(-${currentIndex * 100}%)` }">
       <div class="carousel-track" :style="{ transform: `translateX(-${currentIndex * 100}%)` }"></div>
@@ -36,7 +37,6 @@
           <div class="threeyear">{{ sixthyear }}</div>
           <p class="text3" v-if="contentIndex === 5">{{ text6 }}</p>
         </button>
-        
         <div class="squarelattice"><img src="@/assets/image/history/squarelattice.png"></div>
     </div>
     <button class="prev-button" @click="prevSlide">←</button>
@@ -83,14 +83,14 @@ export default {
         this.currentIndex = Math.max(this.currentIndex - 1, 0);
         setTimeout(() => {
           this.isTransitioning = false;
-        }, 300); // 过渡时间与 CSS 中的过渡时间一致
+        }, 300); 
       }
     },
     nextSlide() {
       if (!this.isTransitioning) {
         this.isTransitioning = true;
-        if (this.currentIndex === 1) { // 如果当前是最后一张幻灯片
-          this.currentIndex = 0; // 切换到第一张幻灯片
+        if (this.currentIndex === 1) { 
+          this.currentIndex = 0; 
         } else {
           this.currentIndex = Math.min(this.currentIndex + 1, 1);
         }
@@ -106,6 +106,10 @@ export default {
 
 <style lang="scss" scoped>
 @media screen and (max-width:767px) {
+  .history{
+      color: white;
+      z-index: 3;
+    }
   img{
     width: 70%;
   }
@@ -133,7 +137,7 @@ export default {
   color: black;
   font-size: 24px;
   display: flex;
-  transition: transform 0.3s ease-in-out; /* 添加过渡属性 */
+  transition: transform 0.3s ease-in-out; 
   will-change: transform;
 }
 
@@ -154,11 +158,11 @@ export default {
   background-color: white;
   color:#009CA8 ;
   border: 1px solid #009CA8;
-  padding: 5px 10px;
+  padding: 1px 5px;
   cursor: pointer;
   border-radius: 50%; 
   font-size: 20px;
-  margin-left: 8%;
+  margin-left: 5%;
 }
 
 .next-button {
@@ -167,15 +171,12 @@ export default {
   background-color: white;
   color:#009CA8 ;
   border: 1px solid #009CA8;
-  padding: 5px 10px;
+  padding: 1px 5px;
   cursor: pointer;
   border-radius: 50%; 
   font-size: 20px;
   margin-left: 88%;
 }
-.Carousel{
-    display: flex;
-  }
   .title{
       padding: 5px;
       background-color:#009CA8;
@@ -184,18 +185,18 @@ export default {
       border-radius: 5px;
       position:relative ;
       margin-left: 10%;
-      margin-top: 2%;
+      margin-top: 10%;
       z-index: 1;
     }
-    .block{
-      position: absolute;
-      background-color:#FBF796;
-      border-radius: 5px;
-      width:30% ;
-      height: 30%;
-      left: 20%;
-      bottom: 70%;
-    }
+    // .block{
+    //   position: absolute;
+    //   background-color:#FBF796;
+    //   border-radius: 5px;
+    //   width:30% ;
+    //   height: 30%;
+    //   left: 20%;
+    //   bottom: 70%;
+    // }
     .squarelattice{
       position: absolute;
       left: 100%;
@@ -209,7 +210,7 @@ export default {
       width: 25px;
       height: 25px;
       left: 18%;
-      top:38%;
+      top:44%;
     }
     .oneyear{
       position: absolute;
@@ -226,7 +227,7 @@ export default {
       width: 25px;
       height: 25px;
       left: 47%;
-      top:60%
+      top:52%
     }
     .twoyear{
       position: absolute;
@@ -243,7 +244,7 @@ export default {
       width: 25px;
       height: 25px;
       left: 80%;
-      top:39%
+      top:46%
     }
     .threeyear{
       position: absolute;
@@ -259,41 +260,45 @@ export default {
     }
     .text1{
         margin-top:100% ;
-        font-size: 30px;
-        width: 400px;
-        height: 300px;
+        font-size: 20px;
+        width: 350px;
+        height: 200px;
         position: relative;
-        right: 10px;
-        top:90px;
+        right: 60px;
+        top:60px;
         color:#009CA8 ;
         background-color: #FBF796;
-        padding: 10px;
+        padding: 20px;
         padding-bottom: 10px;
         border-radius: 5px;
       }
       .text2{
         margin-top:100% ;
-        font-size: 30px;
-        width: 400px;
-        height: 300px;
+        font-size: 20px;
+        width: 350px;
+        height: 500px;
         position: relative;
-        right: 180px;
-        top:50px;
+        right: 170px;
+        top:30px;
         color:#009CA8 ;
         background-color: #FBF796;
-        padding: 10px;
+        padding: 30px;
+        padding-bottom: 10px;
+        border-radius: 5px;
       }
       .text3{
         margin-top:100% ;
-        font-size: 30px;
-        width: 400px;
-        height: 300px;
+        font-size: 20px;
+        width: 350px;
+        height: 500px;
         position: relative;
-        right: 400px;
-        top:90px;
+        right: 300px;
+        top:60px;
         color:#009CA8 ;
         background-color: #FBF796;
-        padding: 10px;
+        padding: 30px;
+        padding-bottom: 10px;
+        border-radius: 5px;
       }
 }
 
@@ -320,7 +325,7 @@ export default {
   color: black;
   font-size: 24px;
   display: flex;
-  transition: transform 0.3s ease-in-out; /* 添加过渡属性 */
+  transition: transform 0.3s ease-in-out; 
   will-change: transform;
 }
 
@@ -335,7 +340,7 @@ export default {
   cursor: pointer;
 }
 
-.prev-button {
+  .prev-button {
   position: absolute;
   top: 46%;
   background-color: white;
@@ -348,7 +353,7 @@ export default {
   margin-left: 8%;
 }
 
-.next-button {
+  .next-button {
   position: absolute;
   top: 46%;
   background-color: white;
@@ -359,11 +364,12 @@ export default {
   border-radius: 50%; 
   font-size: 20px;
   margin-left: 88%;
-}
-.Carousel{
+  }
+  .Carousel{
     display: flex;
   }
   .title{
+      color: white;
       padding: 5px;
       background-color:#009CA8;
       width: 10%;
@@ -374,15 +380,20 @@ export default {
       margin-top: 2%;
       z-index: 1;
     }
-    .block{
-      position: absolute;
-      background-color:#FBF796;
-      border-radius: 5px;
-      width:10% ;
-      height: 9%;
-      left: 11%;
-      bottom: 86%;
+    .history{
+      color: white;
+      position: relative;
+      z-index: 1;
     }
+  //   .block{
+  //     position: absolute;
+  // background-color: #FBF796;
+  // border-radius: 5px;
+  // width: 100%;
+  // height: 100%;
+  // z-index: 0;
+  // bottom: 1px;
+  //   }
     .squarelattice{
       position: absolute;
       left: 100%;
@@ -448,7 +459,7 @@ export default {
       width: 400px;
       height: 100px;
       position: relative;
-      right: -30px;
+      right:-30px;
       top:-120px;
       color:#009CA8 ;
       background-color: #FBF796;

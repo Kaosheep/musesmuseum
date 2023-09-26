@@ -1,1434 +1,323 @@
 <template>
- <div id='wrap'>
-        <h1 data-splitting='words'>Selected Demos</h1>
-        <p class='subhead'>歷任館長</p>
-        <div class='panel'>
-            <h2 class='dark' data-splitting='words'>3D CSS Letter Transition</h2>
-            <div class='thumb'>
-                <p>Chou</p>
-                <div class='inner'>
-                    <img class='invert' loading='lazy'
-                        src='https://assets.codepen.io/383755/internal/screenshots/pens/xxVJZwo.default.png?fit=cover&amp;format=auto&amp;ha=true&amp;height=540&amp;quality=75&amp;v=2&amp;version=1569360312&amp;width=960'>
-                </div>
-            </div>
-        </div>
-        <div class='panel'>
-            <h2 data-splitting='words'>Generative Patterns 8</h2>
-            <div class='thumb'>
-                <p>Generative • CSS Vars • GSAP</p>
-                <div class='inner'>
-                    <img class='light' loading='lazy'
-                        src='https://assets.codepen.io/383755/internal/screenshots/pens/wvGyKEY.default.png?fit=cover&amp;format=auto&amp;ha=true&amp;height=540&amp;quality=75&amp;v=2&amp;version=1599706499&amp;width=960'>
-                </div>
-            </div>
-        </div>
-        <div class='panel'>
-            <h2 data-splitting='words'>NES Subscribe</h2>
-            <div class='thumb'>
-                <p>8-Bit • Form Input • Animation</p>
-                <div class='inner'>
-                    <img loading='lazy'
-                        src='https://assets.codepen.io/383755/internal/screenshots/pens/OJVJJoj.default.png?fit=cover&amp;format=auto&amp;ha=true&amp;height=540&amp;quality=75&amp;v=2&amp;version=1569360312&amp;width=960'>
-                </div>
-            </div>
-        </div>
-        <div class='panel'>
-            <h2 data-splitting='words'>CSS Neumorphic Toggle</h2>
-            <div class='thumb'>
-                <p>CSS • 3D • No JS</p>
-                <div class='inner'>
-                    <img loading='lazy'
-                        src='https://assets.codepen.io/383755/internal/screenshots/pens/YzXOBEN.default.png?fit=cover&amp;format=auto&amp;ha=true&amp;height=540&amp;quality=75&amp;v=2&amp;version=1569360312&amp;width=960'>
-                </div>
-            </div>
-        </div>
-        <div class='panel'>
-            <h2 data-splitting='words'>Take Me On</h2>
-            <div class='thumb'>
-                <p>Webcam • SVG • Canvas</p>
-                <div class='inner'>
-                    <img class='light' loading='lazy'
-                        src='https://assets.codepen.io/383755/internal/screenshots/pens/qBZWVmO.custom.png'>
-                </div>
-            </div>
-        </div>
-        <div class='panel'>
-            <h2 data-splitting='words'>SVG Turbulence Animation</h2>
-            <h2 data-splitting='words'>SVG Turbulence Animation</h2>
-            <div class='thumb'>
-                <p>SVG • Generative • Animation</p>
-                <div class='inner'>
-                    <img loading='lazy'
-                        src='https://assets.codepen.io/383755/internal/screenshots/pens/eYOXOdB.default.png?fit=cover&amp;format=auto&amp;ha=true&amp;height=540&amp;quality=75&amp;v=2&amp;version=1569360312&amp;width=960'>
-                </div>
-            </div>
-        </div>
-        <div class='panel'>
-            <h2 data-splitting='words'>Pure CSS Product Card</h2>
-            <h2 data-splitting='words'>Pure CSS Product Card</h2>
-            <div class='thumb'>
-                <p>HAML • No JS • Animation</p>
-                <div class='inner'>
-                    <img class='shift' loading='lazy'
-                        src='https://assets.codepen.io/383755/internal/screenshots/pens/OJXJeod.default.png?fit=cover&amp;format=auto&amp;ha=true&amp;height=540&amp;quality=75&amp;v=2&amp;version=1569360312&amp;width=960'>
-                </div>
-            </div>
-        </div>
-        <div class='panel'>
-            <h2 data-splitting='words'>Swissted Animated Flyers</h2>
-            <h2 data-splitting='words'>Swissted Animated Flyers</h2>
-            <div class='thumb'>
-                <p>Responsive • HAML • CSS Animation</p>
-                <div class='inner'>
-                    <img loading='lazy'
-                        src='https://assets.codepen.io/383755/internal/screenshots/pens/PoqVQRq.default.png?fit=cover&amp;format=auto&amp;ha=true&amp;height=540&amp;quality=75&amp;v=2&amp;version=1585620527&amp;width=960'>
-                </div>
-            </div>
-        </div>
-        <div class='panel'>
-            <h2 data-splitting='words'>Pure CSS Gritty</h2>
-            <h2 data-splitting='words'>Pure CSS Gritty</h2>
-            <div class='thumb'>
-                <p>CSS • HAML</p>
-                <div class='inner'>
-                    <img class='lighter' loading='lazy'
-                        src='https://assets.codepen.io/383755/internal/screenshots/pens/qgEGMZ.default.png?fit=cover&amp;format=auto&amp;ha=false&amp;height=540&amp;quality=75&amp;v=2&amp;version=1548377726&amp;width=960'>
-                </div>
-            </div>
-        </div>
-        <div class='panel'>
-            <h2 data-splitting='words'>Canyonlands</h2>
-            <h2 data-splitting='words'>Canyonlands</h2>
-            <div class='thumb'>
-                <p>GENERATIVE • JS • SVG</p>
-                <div class='inner'>
-                    <img class='light' loading='lazy'
-                        src='https://assets.codepen.io/383755/internal/screenshots/pens/RwWYGxj.default.png?fit=cover&amp;format=auto&amp;ha=false&amp;height=540&amp;quality=75&amp;v=2&amp;version=1548377726&amp;width=960'>
-                </div>
-            </div>
-        </div>
-        <p class='subhead final'>Fin</p>
-    </div>
-    <div id='frame'>
-        <div id='close'>
-            <div></div>
-            <strong class='circle' data-splitting='chars'>GO•BACK•</strong>
-        </div>
-        <div class='frame-wrap'>
-            <div class='frame-container'>
-                <iframe id='pen' loading='lazy' src='' style='border:0'></iframe>
-                <a id='penlink' target='_blank'><strong>View the Code <span>&rarr;</span></strong></a>
-            </div>
-        </div>
-    </div>
-    <div id='cursor'>
-        <strong class='circle' data-splitting='chars'>SEE•MORE•</strong>
-    </div>
-    <div id='loader'>
-        <div class='wrap'>
-            <span>L</span>
-            <span>O</span>
-            <span>A</span>
-            <span>D</span>
-            <span>I</span>
-            <span>N</span>
-            <span>G</span>
-            <span>•</span>
-            <span>•</span>
-            <span>•</span>
-        </div>
-    </div>
-    <div id='social'>
-        <a href='https://twitter.com/cobra_winfrey' target='_blank'>
-            <svg clip-rule='evenodd' fill-rule='evenodd' image-rendering='optimizeQuality'
-                shape-rendering='geometricPrecision' text-rendering='geometricPrecision' viewbox='0 0 3333 3333'
-                xmlns='http://www.w3.org/2000/svg'>
-                <path
-                    d='M1667 0c920 0 1667 746 1667 1667 0 920-746 1667-1667 1667C747 3334 0 2588 0 1667 0 747 746 0 1667 0zm900 1108c-66 30-137 49-212 58 76-46 135-118 162-204-71 42-151 73-234 90-68-72-163-116-270-116-204 0-369 165-369 369 0 29 3 57 9 84-307-16-579-162-761-386-33 56-50 120-50 186 0 128 65 241 164 307-61-2-117-19-167-46v5c0 179 127 328 296 362-31 8-64 13-97 13-24 0-47-2-70-7 47 147 183 253 345 257-127 99-285 158-459 158-30 0-59-2-88-5 164 105 358 166 566 166 679 0 1051-563 1051-1051 0-16 0-32-1-48 72-52 135-117 184-191z'>
-                </path>
-            </svg>
-            <a href='https://codepen.io/cobra_winfrey' target='_blank'>
-                <svg aria-hidden='true' class='svg-inline--fa fa-codepen fa-w-16 fa-3x' data-icon='codepen'
-                    data-prefix='fab' focusable='false' role='img' viewbox='0 0 512 512'
-                    xmlns='http://www.w3.org/2000/svg'>
-                    <path
-                        d='M502.285 159.704l-234-156c-7.987-4.915-16.511-4.96-24.571 0l-234 156C3.714 163.703 0 170.847 0 177.989v155.999c0 7.143 3.714 14.286 9.715 18.286l234 156.022c7.987 4.915 16.511 4.96 24.571 0l234-156.022c6-3.999 9.715-11.143 9.715-18.286V177.989c-.001-7.142-3.715-14.286-9.716-18.285zM278 63.131l172.286 114.858-76.857 51.429L278 165.703V63.131zm-44 0v102.572l-95.429 63.715-76.857-51.429L234 63.131zM44 219.132l55.143 36.857L44 292.846v-73.714zm190 229.715L61.714 333.989l76.857-51.429L234 346.275v102.572zm22-140.858l-77.715-52 77.715-52 77.715 52-77.715 52zm22 140.858V346.275l95.429-63.715 76.857 51.429L278 448.847zm190-156.001l-55.143-36.857L468 219.132v73.714z'
-                        fill='currentColor'></path>
-                </svg>
-            </a>
-        </a>
-    </div> 
-</template>
+  <div class="title">
+   <p class="curaror">歷任館長 Director-general</p>
+   <div class="block"></div>
+  </div>
+  <div class="third">
+   <div class="three"><img src="@/assets/image/Curator/1.png"></div>
+   <p class="thirdname">Sophia Anne</p>
+   <div class="thirdcurator"><img src="@/assets/image/Curator/first.png"> </div>
+  <div class="thirdmatrix"><img src="@/assets/image/Curator/bluematrix.png"></div>
+   <div class="thirddottedline"><img src="@/assets/image/Curator/fifthdottedline.png"></div>
+  </div>
+  <div class="second">
+  <div class="secondcurator"><img src="@/assets/image/Curator/second.png"></div>
+    <p class="secondname">Emily Chang</p>
+    <div class="two"><img src="@/assets/image/Curator/2.png"></div>
+    <div class="secondmatrix"><img src="@/assets/image/Curator/redmatrix.png"></div>
+    <div class="seconddottedline"><img src="@/assets/image/Curator/seconddottedline.png"></div>
+  </div>
+  <div class="third">
+   <div class="three"><img src="@/assets/image/Curator/3.png"></div>
+   <p class="thirdname">Emily Lam</p>
+   <div class="thirdcurator"><img src="@/assets/image/Curator/first.png"> </div>
+  <div class="thirdmatrix"><img src="@/assets/image/Curator/thirdmatrix.png"></div>
+   <div class="thirddottedline"><img src="@/assets/image/Curator/firstdottedline.png"></div>
+  </div>
+  <div class="second">
+  <div class="secondcurator"><img src="@/assets/image/Curator/second.png"></div>
+    <p class="secondname" style="color: black;">Jason Ming</p>
+    <div class="two"><img src="@/assets/image/Curator/4.png"></div>
+    <div class="secondmatrix"><img src="@/assets/image/Curator/fourthmatrix.png"></div>
+    <div class="fourthdottedline"><img src="@/assets/image/Curator/fourthdottedline.png"></div>
+  </div>
+  <div class="third">
+   <div class="three"><img src="@/assets/image/Curator/5.png"></div>
+   <p class="thirdname">Grace Wong</p>
+   <div class="thirdcurator"><img src="@/assets/image/Curator/first.png"> </div>
+  <div class="thirdmatrix"><img src="@/assets/image/Curator/redmatrix.png"></div>
+   <div class="thirddottedline"><img src="@/assets/image/Curator/fifthdottedline.png"></div>
+  </div>
+  <div class="second">
+  <div class="secondcurator"><img src="@/assets/image/Curator/second.png"></div>
+    <p class="secondname" style="color: black;">Benjamin Kim</p>
+    <div class="two"><img src="@/assets/image/Curator/6.png"></div>
+    <div class="secondmatrix"><img src="@/assets/image/Curator/sixthmatrix.png"></div>
+    <div class="seventhdottedline"><img src="@/assets/image/Curator/seventhdottedline.png"></div>
+  </div>
+  <div class="third">
+   <div class="three"><img src="@/assets/image/Curator/7.png"></div>
+   <p class="thirdname">Eric Wu</p>
+   <div class="thirdcurator"><img src="@/assets/image/Curator/first.png"> </div>
+  <div class="thirdmatrix"><img src="@/assets/image/Curator/seventhmatrix.png"></div>
+  </div>
+ </template>
+ 
+ <script>
+ 
+ </script>
+ 
+ <style lang="scss" scoped>
 
-<script>
-import { gsap } from 'gsap';
-
-export default {
-    data(){return {}},
-    method:{
-        gsapAnimation(){
-    },
-    mounted(){
-
-        let cursor = document.getElementById("cursor");
-let close = document.getElementById("close");
-let body = document.body;
-let iframe = document.getElementById("pen");
-let penLink = document.getElementById("penlink");
-let links = document.getElementsByTagName("a");
-
-let frames = [
-  "https://codepen.io/cobra_winfrey/debug/xxVJZwo",
-  "https://cdpn.io/cobra_winfrey/debug/wvGyKEY",
-  "https://codepen.io/cobra_winfrey/debug/OJVJJoj",
-  "https://cdpn.io/cobra_winfrey/debug/YzXOBEN",
-  "https://codepen.io/cobra_winfrey/debug/qBZWVmO",
-  "https://codepen.io/cobra_winfrey/debug/eYOXOdB",
-  "https://codepen.io/cobra_winfrey/debug/OJXJeod",
-  "https://codepen.io/cobra_winfrey/debug/PoqVQRq",
-  "https://cdpn.io/cobra_winfrey/debug/qgEGMZ",
-  "https://codepen.io/cobra_winfrey/debug/RwWYGxj"
-];
-
-// Load iFrames on demand & remove after modal is closed to reduce weight & smooth out transitions
-
-
-let cards = document.getElementsByClassName("inner");
-for (let i = 0; i < cards.length; i++) {
-  cards[i].addEventListener("mousemove", function (event) {
-    cursor.classList.add("active");
-  });
-  cards[i].addEventListener("mouseover", function (event) {
-    cursor.classList.add("active");
-  });
-
-  cards[i].addEventListener("mouseout", function (event) {
-    cursor.classList.remove("active");
-  });
-  cards[i].addEventListener(
-    "click",
-    function (i) {
-      body.classList.add("active");
-      iframe.setAttribute("src", frames[i]);
-      let penDebug = frames[i];
-      let penFull = penDebug.replace("debug", "pen");
-      penLink.setAttribute("href", penFull);
-    }.bind(null, i)
-  );
-}
-
-// hover events for social links
-console.log(links)
-for (link of links) {
-  link.addEventListener("mouseover", function (event) {
-    cursor.classList.add("linkhover");
-  });
-  link.addEventListener("mousemove", function (event) {
-    cursor.classList.add("linkhover");
-  });
-  link.addEventListener("mouseout", function (event) {
-    cursor.classList.remove("linkhover");
-  });
-}
-
-// Escape key option to exit active state
-
-document.onkeydown = function (evt) {
-  evt = evt || window.event;
-  let isEscape = false;
-  if ("key" in evt) {
-    isEscape = evt.key === "Escape" || evt.key === "Esc";
-  } else {
-    isEscape = evt.keyCode === 27;
-  }
-  if (isEscape) {
-    body.classList.remove("active");
-    setTimeout(() => {
-      iframe.setAttribute("src", "");
-    }, 2000);
-  }
-};
-
-close.addEventListener("click", function (event) {
-  body.classList.remove("active");
-  setTimeout(() => {
-    iframe.setAttribute("src", "");
-  }, 2000);
-});
-
-gsap.set("#cursor", { xPercent: -50, yPercent: -50 });
-const pos = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
-const mouse = { x: pos.x, y: pos.y };
-const speed = 0.35;
-
-const xSet = gsap.quickSetter(cursor, "x", "px");
-const ySet = gsap.quickSetter(cursor, "y", "px");
-
-window.addEventListener("mousemove", (e) => {
-  mouse.x = e.x;
-  mouse.y = e.y;
-});
-
-gsap.ticker.add(() => {
-  const dt = 1.0 - Math.pow(1.0 - speed, gsap.ticker.deltaRatio());
-
-  pos.x += (mouse.x - pos.x) * dt;
-  pos.y += (mouse.y - pos.y) * dt;
-  xSet(pos.x);
-  ySet(pos.y);
-});
-
-Splitting();
-
-// Individual section scroll progress
-
-gsap.utils.toArray(".panel").forEach((section, index) => {
-  gsap.to(this, {
-    scrollTrigger: {
-      trigger: section,
-      start: "top 100%",
-      end: "bottom 25%",
-      scrub: 0,
-      onUpdate: (self) => {
-        section.style.setProperty("--progress", self.progress);
-      }
-    }
-  });
-});
-
-// Full page scroll progress
-
-gsap.to("body", {
-  scrollTrigger: {
-    trigger: "body",
-    start: "top 100%",
-    end: "50% 50%",
-    scrub: 0,
-    onUpdate: (self) => {
-      body.style.setProperty("--progress", self.progress);
-    }
-  }
-});
-
-// Pull out the preloader
-
-document.addEventListener("DOMContentLoaded", function () {
-  body.classList.add("loaded");
-});
-
-// Set a delay on Scrolltrigger recalculation to accommodate element transition times
-
-function refresh() {
-  setTimeout(() => {
-    ScrollTrigger.refresh();
-  }, 2500);
-}
-
-window.addEventListener("resize", refresh);
-
-        }
-    },
-}
-</script>
-
-<style lang="scss" scoped>
-@font-face {
-  font-family: "Bogart-Semibold";
-  src: url("https://assets.codepen.io/383755/bogart-semibold.woff2") format("woff2");
-  font-weight: normal;
-  font-style: normal;
-}
-
-// 變數定義
-$bg: #eeece5;
-$y: #a58725;
-$b: #00eded;
-$w: $bg;
-$o: #fe4e01;
-$p: #eb98b4;
-$g: #08350e;
-$elastic: cubic-bezier(0.175, 0.885, 0.32, 1.275);
-$expo: cubic-bezier(1, 0.885, 0.32, 1);
-
-// Mixin 定義
-@mixin magic-border($width, $color, $duration, $direction) {
+ @media screen and (max-width:767px) {
+.title {
+  padding: 5px;
+  width:300px;
+  height: 10%;
+  border-radius: 5px;
+  margin-left: 5%;
+  margin-top: 3%;
+  margin-bottom: 10px;
+  position:relative;
+  z-index: 2; 
+ }
+ .curaror {
+  width:300px;
+   position:absolute;
+   text-align: center;
+   font-size: 20px; 
+   z-index: 2; 
+   background-color: #FBF796;
+   border-radius: 5px;
+ }
+ .block{
+   position: absolute;
+   background-color:#009CA8;
+   border-radius: 5px;
+   width: 300px;
+   height: 35px;
+   left: 7%;
+   z-index: 0; 
+ }
+ .second{
+   display: flex;
+   position: relative;
+ }
+ .secondcurator img{
+   width: 70%;
+   height: 80%;
+   position: relative;
+   z-index: 1;
+   
+ }
+ .two img{
+  width: 70%;
+   height: 70%;
+   margin-left:10%;
+   position: relative;
+ }
+ .secondname{
+   position: absolute;
+   color: black;
+   margin-top: 10%;
+   margin-left: 55%;
+   font-size: 30px;
+   width: 10%;
+   color: #1E5289;
+ }
+ .secondmatrix img{
+   position: absolute;
+   z-index: 0;
+   top: 5%;
+   right: 48%;
+   width: 50%;
+   height: 80%;
+ }
+ .seconddottedline img{
+   display: none;
+ }
+ .third{
+   display: flex;
+   margin-top: 10%;
+   position: relative;
+ }
+ .three img{
+  width: 70%;
+   height: 70%;
+   margin-left:40%;
+   position: relative;
+ }
+ .thirdname{
   position: absolute;
-  
-  &:after {
-    content: "";
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-    background: linear-gradient(to bottom, $o 50%, $y 50%) 50% 100% / 100% 200% no-repeat;
-    left: 0;
-    top: 0;
-    transform: scaleY(0);
-    transform-origin: bottom;
-    transition: transform $duration ease-in-out, background-position $duration ease-in-out;
-    transition-delay: $duration * 2.5, $duration * 3;
-  }
-
-  &:before {
-    content: "";
-    position: absolute;
-    width: calc(100% + #{$width * 2});
-    height: calc(100% + #{$width * 2});
-    top: calc(#{$width}/ -1);
-    left: calc(#{$width}/ -1);
-    background: linear-gradient(to right, $color 0%, $color 100%),
-      linear-gradient(to top, $color 50%, transparent 50%),
-      linear-gradient(to top, $color 50%, transparent 50%),
-      linear-gradient(to right, $color 0%, $color 100%),
-      linear-gradient(to left, $color 0%, $color 100%);
-    background-size: 100% $width, $width 200%, $width 200%, 0% $width, 0% $width;
-    background-position: 50% 100%, 0% 0%, 100% 0%, 100% 0%, 0% 0%;
-    background-repeat: no-repeat, no-repeat;
-    transition: transform $duration ease-in-out, background-position $duration ease-in-out,
-      background-size $duration ease-in-out, box-shadow $duration ease-in-out;
-    transform: scaleX(0) rotate(180deg * $direction);
-    transition-delay: $duration * 2, $duration, 0s, $duration * 3;
-  }
-
-  &:hover {
-    &:after {
-      transform: scaleY(1);
-      transform-origin: top;
-      background-position: 50% 0%;
-    }
-
-    &:before {
-      background-size: 200% $width, $width 400%, $width 400%, 55% $width,
-        55% $width;
-      background-position: 50% 100%, 0% 100%, 100% 100%, 100% 0%, 0% 0%;
-      transform: scaleX(1) rotate(180deg * $direction);
-      transition-delay: 0s, $duration, $duration * 2;
-    }
-  }
+   color: black;
+   top: 40%;
+   font-size: 27px;
+ }
+ .thirdcurator img{
+   width: 70%;
+   height: 85%;
+   position: relative;
+   margin-left: 23%;
+   z-index: 1;
+ }
+ .thirdmatrix img{
+  position: absolute;
+   z-index: 0;
+   top: 10%;
+   right: 1px;
+   width: 48%;
+   height: 80%;
+ }
+ .thirddottedline img{
+  display: none;
+ }
+ .fourthdottedline img{
+  display: none;
+ }
+ .seventhdottedline{
+  display: none;
+ }
 }
-
-body {
-  scroll-behavior: smooth;
-  background: $bg;
-  cursor: none;
-  font-family: "Lexend Mega", sans-serif;
-  pointer-events: none;
-  transition-delay: 2s;
-  max-width: 100vw;
-  box-sizing: border-box;
-  #social {
-    z-index: 97;
-    position: fixed;
-    right: 10px;
-    box-sizing: border-box;
-    top: 10px;
-    width: 30px;
-    height: 70px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    a {
-      &:last-of-type {
-        svg {
-          transform: translateX(150px);
-        }
-      }
-      &:hover {
-        svg {
-          transform: scale(0.9);
-          path {
-            fill: $g;
-          }
-        }
-      }
-    }
-    svg {
-      width: 25px;
-      height: 25px;
-      position: relative;
-
-      transition: 0.2s ease-in-out, transform 0.6s $expo;
-      transform: translateY(-150px);
-      path {
-        fill: $y;
-        transition: 0.2s ease-in-out;
-      }
-    }
-  }
-  #loader {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: $bg;
-    position: fixed;
-    box-sizing: border-box;
-    width: calc(100vw - 5px);
-    height: 100vh;
-
-    top: 0;
-    left: 0;
-    z-index: 999;
-    transition: transform 0.6s $expo;
-    transition-delay: 1.25s;
-    transform-origin: bottom;
-    background: $o;
-    transform-style: preserve-3d;
-    backface-visibility: hidden;
-    &:before {
-      content: "";
-      position: absolute;
-      width: 100%;
-      height: 75%;
-      top: -75%;
-      background: $y;
-      clip-path: polygon(0 15%, 100% 0, 100% 100%, 0% 100%);
-    }
-    .wrap {
-      width: 10px;
-      height: 10px;
-      position: relative;
-      animation: rotate 5s linear infinite;
-      transition: opacity 0.4s ease-in-out, animation-play-state 2s ease-in-out;
-      transition-delay: 0s, 0.4s;
-      span {
-        color: #fff;
-        position: absolute;
-        width: 12px;
-        height: 12px;
-        font-size: 12px;
-        transform-origin: 50% 40px;
-        top: -34px;
-        animation: popping 0.25s ease-in-out infinite alternate;
-        @keyframes popping {
-          to {
-            top: -24px;
-          }
-        }
-        @for $i from 1 through 10 {
-          &:nth-of-type(#{$i}) {
-            transform: rotate(#{(360/10) * $i}deg);
-            animation-delay: #{$i/-16}s;
-          }
-        }
-      }
-    }
-  }
-  &.loaded {
-    pointer-events: all;
-    #social {
-      a {
-        &:nth-of-type(1n) {
-          svg {
-            transform: translateX(0);
-            transition-delay: 0s, 2.4s;
-          }
-        }
-        &:last-of-type {
-          svg {
-            transition-delay: 0s, 2.6s;
-          }
-        }
-      }
-    }
-    #loader {
-      transform: scaleY(0);
-      color: transparent;
-      .wrap {
-        opacity: 0;
-        animation-iteration-count: 4;
-        span {
-          animation-play-state: paused;
-        }
-      }
-    }
-    #wrap {
-      transform: translateX(0%);
-      background: $bg;
-      p.subhead {
-        transform: translateY(0);
-        opacity: 1;
-
-        transition-delay: 2s;
-      }
-      .panel {
-        opacity: 1;
-        transition-delay: 1.75s;
-        &:before {
-          opacity: 0.15;
-          transition-delay: 2.5s;
-        }
-      }
-      h1 {
-        transition-delay: 1.75s;
-        transform: scaleX(1);
-        span.word {
-          &:before {
-            transform: translate(-50%, -50%);
-            background-position: 50% 0%;
-            transition-delay: 2s, 2s;
-          }
-        }
-      }
-    }
-  }
-  &.loaded::-webkit-scrollbar {
-    background: $y;
-    width: 5px;
-  }
-  &::-webkit-scrollbar {
-    background: $o;
-    width: 5px;
-  }
-  &::-webkit-scrollbar-thumb {
-    background: $o;
-  }
-  &.active {
-    cursor: auto;
-    overflow: hidden;
-    #frame .frame-container #penlink {
-      transform: rotate(0deg);
-      transition-delay: 0.3s, 2s;
-      span {
-        animation-play-state: running;
-      }
-    }
-    #wrap {
-      transform: translateX(-125vw);
-      transition-delay: 0s;
-      .panel h2 span.word:before {
-        transform: translate(-50%, 100px);
-        transition: 0s ease-in-out;
-        transition-delay: 0s;
-      }
-    }
-    #frame {
-      transform: translateX(0);
-      transition-delay: 0.25s;
-      #close {
-        transform: rotate(180deg) scale(1);
-        transition-delay: 1.2s, 0s;
-        strong {
-          .word {
-            animation-play-state: running;
-          }
-        }
-        strong {
-          span.char {
-            &:before {
-              transform: translateY(0);
-            }
-          }
-        }
-        &:hover {
-          box-shadow: 0 0 0 2px $o, inset 0 0 0 20px $o, 0 0 0 20px $bg,
-            0 0 0 22px $o;
-          strong {
-            span.char {
-              &:before {
-                color: $g;
-              }
-            }
-          }
-        }
-        div {
-          transition-delay: 1.8s;
-          transform: scaleX(1);
-          transform-origin: left;
-        }
-        &:before,
-        &:after {
-          transition-delay: 2.1s;
-        }
-        &:before {
-          transform: scaleY(1) rotate(-45deg);
-        }
-        &:after {
-          transform: scaleY(1) rotate(45deg);
-        }
-      }
-      &:before,
-      &:after {
-        transition-delay: 0.75s;
-        transform: translateX(-175%) skewX(5deg);
-      }
-      &:after {
-        transform: translateX(-150%) skewX(-15deg);
-      }
-      .frame-container iframe {
-        clip-path: polygon(-10% -10%, 110% -10%, 110% 110%, -10% 110%);
-        visibility: visible;
-        opacity: 1;
-      }
-    }
-  }
-  #close {
-    strong.circle {
-      position: absolute;
-      left: 0;
-      top: 0;
-      span.word {
-        span.char {
-          &:before {
-            color: $o;
-          }
-          @for $i from 1 through 8 {
-            &:nth-of-type(#{$i}) {
-              transform: rotate(#{($i - 1) * 45}deg);
-            }
-          }
-        }
-      }
-    }
-  }
-  strong.circle {
-    position: relative;
-    width: 30px;
-    height: 30px;
-    border-radius: 100%;
-    line-height: 1;
-    margin: 0;
-    transition: 0.3s ease-in-out;
-    &:before {
-      content: "";
-      position: absolute;
-      width: 20px;
-      height: 2px;
-      background: $bg;
-      top: calc(50% - 1px);
-      left: 5px;
-      transition: 0.3s ease-in-out;
-      transform-origin: left;
-      transform: scaleX(0);
-      transition-delay: 0.6s;
-    }
-    span.word {
-      position: absolute;
-      width: 0px;
-      height: 0px;
-      left: 50%;
-      top: 50%;
-      animation: rotate 10s linear infinite;
-      animation-play-state: paused;
-      @keyframes rotate {
-        to {
-          transform: rotate(360deg);
-        }
-      }
-      span.char {
-        font-size: 10px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        position: absolute;
-        left: calc(50% - 5px);
-        top: calc(50% - 30px);
-        width: 10px;
-        height: 10px;
-        transform-origin: 50% 30px;
-        overflow: hidden;
-        color: transparent;
-        &:before {
-          content: attr(data-char);
-          position: absolute;
-          width: 100%;
-          height: 100%;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          color: $g;
-          transform: translateY(100%);
-          transition: 0.3s ease-in-out;
-        }
-        @for $i from 1 through 9 {
-          &:nth-of-type(#{$i}) {
-            transform: rotate(#{($i - 1) * 40}deg);
-          }
-        }
-      }
-    }
-  }
-  #frame {
-    position: fixed;
-    z-index: 98;
-    left: 0;
-    top: 0;
-    width: 100vw;
-    height: 100vh;
-    background: $bg;
-    box-sizing: border-box;
-    display: grid;
-    place-items: center;
-    transition: 0.5s $expo;
-    transform: translateX(125%);
-    transition-delay: 0.5s;
-    transform-style: preserve-3d;
-    backface-visibility: hidden;
-    will-change: transform;
-    &:before,
-    &:after {
-      content: "";
-      position: absolute;
-      width: 125%;
-      height: 100%;
-      top: 0;
-      left: -12.5%;
-      background: $o;
-      transition: transform 1s $expo;
-      transition-delay: 0.25s;
-      z-index: 999;
-      transform: translateX(0) skewX(5deg);
-    }
-    &:after {
-      z-index: 98;
-      background: linear-gradient(to right, $bg 75%, $y 100%);
-      width: 125%;
-      transition: transform 1.25s $expo;
-    }
-    #close {
-      z-index: 999;
-      left: 45px;
-      top: 45px;
-      width: 30px;
-      height: 30px;
-      box-shadow: 0 0 0 2px $g, inset 0 0 0 $o, 0 0 0 20px $bg, 0 0 0 22px $o;
-      background: $bg;
-      border-radius: 100%;
-      position: absolute;
-      cursor: pointer;
-      transform: rotate(180deg) scale(0);
-      transition: transform 0.3s ease-in-out, box-shadow 0.2s ease-in-out;
-      &:hover {
-        div {
-          background: $bg;
-        }
-        &:before,
-        &:after {
-          background: $bg;
-        }
-      }
-      div {
-        position: absolute;
-        top: calc(50% - 1px);
-        width: 20px;
-        left: 5px;
-        height: 2px;
-        background: $g;
-        transition: transform 0.3s ease-in-out;
-        transition-delay: 0.6s;
-        transform-origin: right;
-        transform: scaleX(0);
-        &:before {
-          content: "";
-          position: absolute;
-          width: 80px;
-          height: 80px;
-          border-radius: 100%;
-          top: -40px;
-          left: -30px;
-        }
-      }
-      &:before,
-      &:after {
-        content: "";
-        position: absolute;
-        width: 10px;
-        height: 2px;
-        background: $g;
-        top: calc(50% - 1px);
-        left: 14px;
-        transition: transform 0.3s $elastic;
-        transition-delay: 0.3s;
-        transform-origin: right;
-        transform: scaleY(0) rotate(0deg);
-        z-index: 9;
-      }
-    }
-    .frame-wrap {
-      width: calc(100% - 10vw);
-      height: calc(100% - 10vw);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    .frame-container {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      max-width: 1200px;
-      max-height: 1200px;
-      display: flex;
-      align-items: flex-start;
-      justify-content: center;
-      flex-wrap: wrap;
-      #penlink {
-        position: absolute;
-        bottom: -10px;
-        text-decoration: none;
-        color: $o;
-        font-weight: 900;
-        transition: color 0.2s ease-in-out, transform 0.7s $elastic;
-        transition-delay: 0.2s;
-        letter-spacing: -2px;
-        padding: 10px 15px;
-        z-index: 9;
-        transform-origin: 50% 12.5vh;
-        transform: rotate(-180deg);
-        &:after {
-          z-index: -5;
-        }
-        &:hover {
-          color: $bg;
-        }
-        strong {
-          position: relative;
-          z-index: 9;
-        }
-        span {
-          display: inline-block;
-          animation: back-n-forth 0.5s ease-in-out infinite alternate;
-          animation-play-state: paused;
-          @keyframes back-n-forth {
-            to {
-              transform: translateX(-2.5px);
-            }
-          }
-        }
-        @include magic-border(2px, $g, 0.2s, 0);
-      }
-      iframe {
-        position: absolute;
-        top: 0;
-        left: 25px;
-        width: calc(100% - 50px);
-        height: calc(100% - 50px);
-        background: #fff;
-        border-radius: 5px;
-        visibility: hidden;
-        clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0% 100%);
-        transition: clip-path 0s linear, visibility 0s linear,
-          opacity 1s ease-in-out;
-        transition-delay: 0.75s, 0.75s, 1.25s;
-        opacity: 0;
-        box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.5);
-      }
-    }
-  }
-  &:hover {
-    #cursor {
-      opacity: 1;
-    }
-  }
-  #cursor {
-    position: fixed;
-    z-index: 97;
-    width: 30px;
-    height: 30px;
-    border-radius: 100%;
-    top: 0%;
-    left: 0%;
-    border: 2px solid $y;
-    box-shadow: inset 0 0 0 0 $y;
-    pointer-events: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transform-style: preserve-3d;
-    backface-visibility: hidden;
-    will-change: transform;
-    transition: opacity 0.3s ease-in-out, border-width 0.3s ease-in-out,
-      box-shadow 0.3s ease-in-out;
-    opacity: 0;
-    &:before,
-    &:after {
-      content: "";
-      position: absolute;
-      width: 10px;
-      height: 2px;
-      background: $bg;
-      top: calc(50% - 1px);
-      left: 14px;
-      transition: 0.3s $elastic;
-      transition-delay: 0.3s;
-      transform-origin: right;
-      transform: scaleY(0) rotate(0deg);
-      z-index: 9;
-    }
-    &.linkhover {
-      border-color: transparent;
-      border-width: 4px;
-      box-shadow: 0 0 0 2px $o;
-    }
-    &.active {
-      strong.circle {
-        span.word {
-          animation-play-state: running;
-        }
-      }
-      &:before,
-      &:after {
-        transition-delay: 0.6s;
-      }
-      &:before {
-        transform: scaleY(1) rotate(-45deg);
-      }
-      &:after {
-        transform: scaleY(1) rotate(45deg);
-      }
-      strong {
-        box-shadow: inset 0 0 0 20px $y;
-        &:before {
-          transform: scaleX(1);
-          transition-delay: 0.3s;
-        }
-        span.word {
-          span.char {
-            &:before {
-              transform: translateY(0px);
-            }
-          }
-        }
-      }
-    }
-  }
-  svg {
-    position: absolute;
-    width: 0;
-    height: 0;
-  }
-  #wrap {
-    display: block;
-    width: 1000px;
-    max-width: 85vw;
-    margin: 0px auto;
-    padding: 2.5vh 50px 25vh;
-    transition: 0.5s $expo;
-    transform: translateX(0%);
-    transition-delay: 0.75s;
-    transform-style: preserve-3d;
-    backface-visibility: hidden;
-    will-change: transform;
-    overflow: hidden;
-    position: relative;
-    box-sizing: border-box;
-    h1 {
-      text-align: center;
-      font-family: "Bogart-Semibold";
-      color: transparent;
-      font-size: 100px;
-      position: relative;
-      width: 100%;
-      line-height: 0.9;
-      padding: 10px 0;
-      overflow: hidden;
-      transition: transform 0.3s $expo;
-      transform: scaleX(0);
-      margin-bottom: 20px;
-      &:before,
-      &:after {
-        content: "";
-        position: absolute;
-        width: 100%;
-        height: 2px;
-        bottom: 0;
-        left: 0;
-        background: $y;
-        z-index: 2;
-      }
-      &:after {
-        transform-origin: left;
-        background: $o;
-        z-index: 3;
-        transform: scaleX(calc(1 - (var(--progress) * 2)));
-      }
-      span.word {
-        position: relative;
-        display: inline-block;
-        transform: translateY(calc((var(--progress) * 1200px) - 200px));
-        &:before {
-          position: absolute;
-          left: 50%;
-          top: 50%;
-          transform: translate(-50%, 150%);
-          content: attr(data-word);
-          color: $g;
-          -webkit-text-fill-color: transparent;
-          -webkit-text-stroke: 2px $g;
-          -webkit-background-clip: text;
-          background-image: linear-gradient(to bottom, $g 50%, $bg 50%);
-          background-size: 100% 200%;
-          background-position: 50% 100%;
-          transition: 0.75s $elastic, background-position 0.5s $expo;
-        }
-      }
-    }
-    p.subhead {
-      width: 100%;
-      text-align: center;
-      position: relative;
-      color: $g;
-      font-size: 1rem;
-      color: $y;
-      opacity: 0;
-      transform: translateY(50px);
-      transition: 0.6s ease-in-out;
-      &.final {
-        color: $g;
-        display: block;
-        margin: 0px auto;
-        width: 100px;
-        &:before,
-        &:after {
-          content: "";
-          position: absolute;
-          width: 25vw;
-          max-width: 500px;
-          height: 1px;
-          border-bottom: 2px $y dashed;
-          top: calc(50% - 1.5px);
-          opacity: 0.25;
-          left: 100px;
-        }
-        &:after {
-          left: auto;
-          right: 100px;
-        }
-      }
-    }
-    .panel {
-      --progress: 0;
-      position: relative;
-      width: 100%;
-      height: 100vh;
-      margin-bottom: 25vh;
-      max-height: 75vh;
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      grid-template-rows: repeat(5, 1fr);
-      grid-column-gap: 0px;
-      grid-row-gap: 0px;
-      padding: 20px;
-      box-sizing: border-box;
-      transition: 1s $expo;
-      transform-style: preserve-3d;
-      backface-visibility: hidden;
-      opacity: 0;
-      &:nth-of-type(even) {
-        .thumb {
-          &:after {
-            transform: scaleX(-1);
-            left: 50%;
-          }
-        }
-      }
-      &:last-of-type {
-        margin-bottom: 0;
-        .thumb {
-          &:after {
-            display: none;
-          }
-        }
-        &:nth-of-type(even) {
-          &:before {
-            right: -5%;
-          }
-        }
-      }
-      @for $i from 1 through 20 {
-        &:nth-of-type(#{$i}) {
-          &:before {
-            content: "#{$i}";
-          }
-        }
-        &:nth-of-type(even) {
-          &:before {
-            left: auto;
-            right: 0;
-            justify-content: flex-end;
-          }
-        }
-      }
-      &:before {
-        font-family: "Bogart-Semibold";
-        font-size: 400px;
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        width: 40%;
-        display: flex;
-        left: 0;
-        justify-content: flex-start;
-        align-items: center;
-        color: $bg;
-        -webkit-text-stroke: 2px $y;
-        line-height: 1;
-        opacity: 0;
-        transition: 1.75s ease-in-out;
-      }
-      h2 {
-        grid-area: 3 / 1 / 4 / 4;
-        font-family: "Bogart-Semibold";
-        font-size: 64px;
-        position: relative;
-        z-index: 3;
-        color: transparent;
-        line-height: 1;
-
-        pointer-events: none;
-        transform: translateY(calc(100px - (var(--progress) * 200px)));
-        span.word {
-          position: relative;
-          display: inline-block;
-          overflow: hidden;
-          color: transparent;
-          // box-shadow:0 2px 0 $y;
-          background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200%25' height='100%25'%3E%3Cdefs%3E%3Cstyle%3E .wave%7B animation:wave 1s ease-in-out infinite alternate; animation-delay:-0.25s; stroke:%23a58725; stroke-width:2; stroke-linecap:square; %7D @keyframes wave%7B to%7B d:path('M 0 40 Q 20 42.5 40 40 Q 60 37.5 80 40'); %7D %7D %3C/style%3E%3C/defs%3E%3Cpattern id='wavePattern' x='0' y='0' width='80' height='80' patternUnits='userSpaceOnUse'%3E%3Cpath fill='none' class='wave' d='M 0 40 Q 20 37.5 40 40 Q 60 42.5 80 40' /%3E%3C/pattern%3E%3Crect x='0' y='0' width='100%25' height='100%25' fill='url(%23wavePattern)'%3E%3C/rect%3E%3C/svg%3E")
-            0px 65px / 80px 80px repeat-x;
-          padding: 20px 0;
-          margin: -20px 0;
-          animation: waving 3s linear infinite;
-          @media (max-width: 1000px) {
-            padding: 40px 0px;
-            margin: -40px 0;
-          }
-          @for $i from 1 through 6 {
-            &:nth-of-type(#{$i}) {
-              background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200%25' height='100%25'%3E%3Cdefs%3E%3Cstyle%3E .wave%7B animation:wave 1s ease-in-out infinite alternate; animation-delay:#{$i * -0.25}s; stroke:%23a58725; stroke-width:2; stroke-linecap:square; %7D @keyframes wave%7B to%7B d:path('M 0 40 Q 20 42.5 40 40 Q 60 37.5 80 40'); %7D %7D %3C/style%3E%3C/defs%3E%3Cpattern id='wavePattern' x='0' y='0' width='80' height='80' patternUnits='userSpaceOnUse'%3E%3Cpath fill='none' class='wave' d='M 0 40 Q 20 37.5 40 40 Q 60 42.5 80 40' /%3E%3C/pattern%3E%3Crect x='0' y='0' width='100%25' height='100%25' fill='url(%23wavePattern)'%3E%3C/rect%3E%3C/svg%3E")
-                0px
-                65px /
-                80px
-                80px
-                repeat-x;
-            }
-          }
-          @keyframes waving {
-            to {
-              background-position: 200px 65px;
-            }
-          }
-          @keyframes waving2 {
-            to {
-              background-position: 200px 0px;
-            }
-          }
-          &:before {
-            content: attr(data-word);
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            color: transparent;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-image: linear-gradient(
-              to bottom,
-              transparent 25%,
-              $o 25%,
-              $o 75%,
-              transparent 75%
-            );
-            background-size: 100% 250%;
-            background-repeat: no-repeat;
-            background-position: 50% calc((var(--progress) * 200px) - 150px);
-            transition: transform 0.3s $elastic;
-            transition-delay: 1.25s;
-            -webkit-text-stroke: 2px $o;
-          }
-          &:nth-of-type(3n) {
-            &:before {
-              background-position: 50% calc((var(--progress) * -200px) + 25px);
-            }
-          }
-        }
-        @media (min-width: 1000px) {
-          grid-area: 3 / 1 / 4 / 5;
-          font-size: 82px;
-          &:nth-of-type(2) {
-            span.word {
-              color: transparent;
-              &:before,
-              &:after {
-                color: transparent;
-              }
-            }
-            z-index: 2;
-          }
-        }
-      }
-      &:nth-of-type(even) {
-        .thumb {
-          &:before {
-            left: -5%;
-            top: -5%;
-          }
-          &:hover {
-            &:before {
-              transform: translate(5%, 5%);
-            }
-          }
-        }
-        h2 {
-          text-align: right;
-          grid-area: 3 / 3 / 4 / 6;
-          @media (max-width: 768px) {
-            grid-area: 2 / 1 / 5 / 6;
-          }
-          @media (min-width: 1000px) {
-            grid-area: 3 / 2 / 4 / 6;
-            clip-path: none;
-            &:nth-of-type(2) {
-              z-index: 4;
-              clip-path: polygon(-5% -5%, 385px -5%, 385px 110%, -5% 110%);
-              span.word {
-                color: transparent;
-                &:before,
-                &:after {
-                  color: transparent;
-                }
-              }
-            }
-          }
-        }
-        .thumb {
-          grid-area: 2 / 1 / 5 / 4;
-          @media (max-width: 768px) {
-            grid-area: 2 / 1 / 5 / 6;
-          }
-          p {
-            top: -50px;
-          }
-        }
-      }
-      .thumb {
-        grid-area: 2 / 3 / 5 / 6;
-        position: relative;
-        box-shadow: 0 0 0 2px $g;
-        transition: box-shadow 0.3s ease-in-out;
-        border-radius: 5px;
-        @media (max-width: 768px) {
-          grid-area: 2 / 1 / 5 / 6;
-        }
-        p {
-          position: absolute;
-          width: 100%;
-          top: -30px;
-          margin: 0;
-          color: $y;
-          font-size: 12px;
-          left: 0;
-          text-align: center;
-        }
-        * {
-          border-radius: 5px;
-        }
-        .inner {
-          position: absolute;
-          width: 100%;
-          height: 100%;
-          left: 0;
-          top: 0;
-          overflow: hidden;
-          z-index: 0;
-          &:before,
-          &:after {
-            content: "";
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            background: $y;
-            mix-blend-mode: lighten;
-            opacity: 0.5;
-            z-index: 2;
-          }
-          &:after {
-            background: $bg;
-            opacity: 1;
-            z-index: -2;
-            mix-blend-mode: normal;
-          }
-        }
-        &:hover {
-          &:before {
-            transform: translate(-5%, -5%);
-            box-shadow: 0 0 0 2px $y, 0 0 0 6px $bg, 0 0 0 8px $o;
-            transition-delay: 0s, 0.2s;
-          }
-        }
-        &:before {
-          content: "";
-          position: absolute;
-          width: 100%;
-          height: 100%;
-          left: 5%;
-          top: 5%;
-          box-shadow: 0 0 0 2px $y, 0 0 0 0 $bg, 0 0 0 0 $o;
-          transition: transform 0.2s $expo, box-shadow 0.2s $expo;
-          transition-delay: 0.2s, 0s;
-          background: radial-gradient(
-                circle at center,
-                $y 1px,
-                rgba(255, 255, 255, 0.005) 1px,
-                rgba(255, 255, 255, 0.005) 20px
-              )
-              0px 0px / 20px 20px,
-            radial-gradient(
-                circle at center,
-                $y 1px,
-                rgba(255, 255, 255, 0.005) 1px,
-                rgba(255, 255, 255, 0.005) 20px
-              )
-              10px 10px / 20px 20px;
-          border-radius: 5px;
-        }
-        &:after {
-          content: "";
-          position: absolute;
-          width: 50%;
-          height: calc(100% + 25vh);
-          left: 0%;
-          top: 100%;
-          border-style: dashed;
-          border-width: 2px 2px 2px 2px;
-          border-color: transparent $y $y transparent;
-          border-radius: 0 0 10px 0;
-          opacity: 0.25;
-        }
-        img {
-          mix-blend-mode: exclusion;
-          padding: 2vmin;
-          position: absolute;
-          top: -75%;
-          left: 50%;
-          transform: translateY(calc(var(--progress) * 25%)) translateX(-50%);
-          width: auto;
-          height: 200%;
-          z-index: -1;
-          filter: saturate(0) blur(calc(50px - (var(--progress) * 125px)))
-            brightness(0.5) contrast(4);
-          mix-blend-mode: overlay;
-          &.invert {
-            filter: invert(1) saturate(0)
-              blur(calc(50px - (var(--progress) * 125px))) brightness(0.5)
-              contrast(4);
-          }
-          &.shift {
-            left: 0;
-          }
-          &.light {
-            filter: saturate(0) blur(calc(50px - (var(--progress) * 125px)))
-              brightness(0.75) contrast(4);
-          }
-          &.lighter {
-            filter: saturate(0) blur(calc(50px - (var(--progress) * 125px)))
-              brightness(1) contrast(4);
-          }
-        }
-      }
-    }
-  }
-}
-
-</style>
-
+ 
+ @media screen and (min-width:768px){
+ .title p{
+   font-size: 20px;
+   padding: 5px;
+   background-color:#FBF796;
+   width:20%;
+   height: 10%;
+   text-align: center;
+   border-radius: 5px;
+   position:relative ;
+   margin-left: 10%;
+   margin-top: 1%;
+   margin-bottom: 10px;
+   z-index: 1;
+ }
+ .block{
+   position: absolute;
+   background-color:#009CA8;
+   border-radius: 5px;
+   width: 20%;
+   height: 7%;
+   left: 11%;
+   bottom: 91%;
+ }
+ .first{
+   display: flex;
+   margin-top: 10%;
+ }
+ .one{
+   margin-left: 20%;
+   width: 10%;
+   height: 10%;
+   margin-right: 20%;
+   position: relative;
+ }
+ .firstname{
+   position: absolute;
+   color: black;
+   left: 25%;
+   top: 40%;
+   font-size: 50px;
+ }
+ .firstcurator img{
+   width: 78%;
+   height: 78%;
+   top:10px;
+   position: relative;
+   z-index: 1;
+ }
+ .firstbluematrix img{
+   position: absolute;
+   z-index: 0;
+   top: 30%;
+   right: 16%;
+   width: 33%;
+   height: 42%;
+ }
+ .firstdottedline img{
+   position: absolute;
+   height: 60%;
+   top: 71%;
+   right: 40%;
+ }
+ .second{
+   display: flex;
+   position: relative;
+ }
+ .secondcurator img{
+   width: 78%;
+   height: 78%;
+   position: relative;
+   z-index: 1;
+   margin-left: 25%;
+ }
+ .two{
+   margin-left: 20%;
+ }
+ .secondname{
+   position: absolute;
+   color: black;
+   margin-top: 10%;
+   margin-left: 50%;
+   font-size: 50px;
+   color: #1E5289;
+ }
+ .secondmatrix img{
+   position: absolute;
+   z-index: 0;
+   top: 5%;
+   right: 55%;
+   width: 33%;
+   height: 80%;
+ }
+ .seconddottedline img{
+   position: absolute;
+   height: 120%;
+   top: 80%;
+   right: 60%;
+ }
+ .third{
+   display: flex;
+   margin-top: 10%;
+   position: relative;
+ }
+ .three{
+   margin-left: 10%;
+   width: 10%;
+   height: 10%;
+   margin-right: 20%;
+ }
+ .thirdname{
+   position: absolute;
+   color: black;
+   left: 25%;
+   top: 30%;
+   font-size: 50px;
+ }
+ .thirdcurator img{
+   width: 78%;
+   height: 78%;
+   position: relative;
+   z-index: 1;
+   margin-left: 22%;
+ }
+ .thirdmatrix img{
+   position: absolute;
+   z-index: 0;
+   top: 10%;
+   right: 16%;
+   width: 33%;
+   height: 75%;
+ }
+ .thirddottedline img{
+   position: absolute;
+   height: 90%;
+   top: 90%;
+   right: 40%;
+ }
+ .fourthdottedline img{
+   position: absolute;
+   height: 120%;
+   top: 80%;
+   right: 50%;
+ }
+ .seventhdottedline{
+   position: absolute;
+   height: 120%;
+   top: 90%;
+   right: 50%;
+ }
+ }
+ </style>
