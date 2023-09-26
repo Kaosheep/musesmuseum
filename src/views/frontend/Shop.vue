@@ -95,6 +95,7 @@ import Footer from "/src/components/Footer.vue";
 import Searchbar from "/src/components/Searchbar.vue";
 import Heart from "/src/components/Heart.vue";
 import Searchbarclick from "/src/components/Searchbarclick.vue";
+import $ from "jquery";
 
 export default {
   components: {
@@ -281,6 +282,39 @@ export default {
         this.storage[id] += '1,';
       }
     },
+  },
+  mounted: {
+    $id(id) {
+      return document.getElementById(id);
+    },
+    showLoginForm() {
+        $.ajax({
+          url: "http://localhost/musesmuseum/piblic/php/ajaxLogout.php",
+          dataType: "json",
+          success(response){
+          },
+          error(xhr, status, error){
+            console.log(status, error);
+          }
+        });
+      }
+    },
+    sendForm() { 
+      let memId = $id("memId").value;
+      let memPsw = $id("memPsw").value;
+      $.ajax({
+        url: "http://localhost/musesmuseum/piblic/php/ajaxLogout.php",
+        method: "post",
+        contentType: "application/x-www-form-urlencoded",
+        data: {memId, memPsw},
+        dataType: "json",
+        success(response){
+         
+        },
+        error(xhr, status, error){
+          console.log(status, error);
+        }
+      });
   },
 };
 </script>
