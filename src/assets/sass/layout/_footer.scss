@@ -1,6 +1,10 @@
-footer {
+.comfooter {
     width: 100%;
     position: relative;
+    display: none;
+    @include t(){
+        display: block;
+    }
     .cube {
         z-index: 5;
         position: absolute;
@@ -10,8 +14,11 @@ footer {
         justify-content: center;
         align-items: center;
         perspective: 1500px;
-        left: 17%;
+        left: 10%;
         top: -40px;
+        @include m(){
+            left: 5%;
+        }
         .flat {
             width: 50px;
             height: 50px;
@@ -52,36 +59,22 @@ footer {
     }
 
     .footer {
-        background-color: $mgreen;
+        background-color: $myellow;
         position: relative;
-        height: 50px;
-        clip-path: polygon(15% 0%, 100% 0, 100% 100%, 0% 100%);
-        padding: 1.5rem 3rem;
+        padding:3rem 3rem 1.5rem ;
         width: 100%;
-        margin-left: auto;
-
-        &::after {
-            content: "";
-            width: calc(100% - 6px);
-            height: calc(100% - 6px);
-            clip-path: polygon(15% 0%, 100% 0, 100% 100%, 0.5% 100%);
-            position: absolute;
-            background-color: $myellow;
-            top: 3px;
-            right: 3px;
-            z-index: -99;
+        @include m(){
+            padding: 1.5rem 1rem;
         }
-
         .colwrap {
-            width: 80%;
-            margin-left: auto;
             .row {
                 display: flex;
-                max-width: 1100px;
                 justify-content: space-between;
                 flex-wrap: wrap;
-                
-
+                align-items: center;
+                @include m(){
+                    justify-content: center;
+                }
                 .col {
                     h3 {
                         color: $mblue;
@@ -102,44 +95,7 @@ footer {
                     align-self: center;
                 }
 
-                .send {
-                    max-width: 180px;
-                    width: 100%;
-                    margin: auto;
-                    font-size: 0;
 
-                    input {
-                        width: 80%;
-                        border: 1px solid $mblue;
-                        border-radius: 4px;
-                        font-size: 1rem;
-                        vertical-align: bottom;
-                        height: 35px;
-                        padding: 5px 10px;
-
-                        &:focus {
-                            outline: none;
-                        }
-
-                    }
-
-                    button {
-                        margin-left: 1%;
-                        width: 19%;
-                        border: none;
-                        font-size: 1rem;
-                        border-radius: 4px;
-                        background-color: $mblue;
-                        border: 1px solid $mblue;
-                        line-height: 33.5px;
-                        height: 35px;
-                        cursor: pointer;
-
-                        #footer_send path {
-                            fill: #fff;
-                        }
-                    }
-                }
             }
 
 
@@ -148,6 +104,8 @@ footer {
         }
 
         .social {
+            height: 100%;
+            padding: 1.5rem 0;
             span {
                 margin-right: 0.5rem;
                 text-align: center;
@@ -160,12 +118,17 @@ footer {
 
                 .sicon {
                     font-size: 20px;
+                    cursor: pointer;
                 }
 
                 #social_envelope path,
                 #social_facebook path,
                 #social_youtub path {
-                    fill: $mblue;
+                    fill: $mgreen;
+                    transition: .3s;
+                    &:hover{
+                        fill: $mblue;
+                    }
                 }
             }
 

@@ -57,8 +57,8 @@ export default {
                     急救設備AED`
                 },
             ],
-            // publicPath: process.env.BASE_URL,
-            publicPath: "",
+            publicPath: process.env.BASE_URL,
+            // publicPath: "",
         }
     },
     computed: {

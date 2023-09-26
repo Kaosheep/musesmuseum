@@ -1256,6 +1256,7 @@
 
                             @include t() {
                                 transform: skewY(15deg) rotate(90deg);
+                                bottom:2.5rem;
                             }
 
                             @include m() {

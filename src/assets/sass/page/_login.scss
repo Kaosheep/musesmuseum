@@ -3,6 +3,9 @@
 }
 
     .backGroundCard{
+        width: 90%;
+        margin: auto;
+        @include dotfm();
         .memlogin_title {
             padding-bottom: 8px;
         }

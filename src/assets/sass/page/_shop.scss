@@ -13,6 +13,7 @@
         img {
             width: 100%;
             object-fit: cover;
+            height: 40vh
         }
     }
 }
@@ -202,12 +203,13 @@
             }
 
             .shop_container {
-                width: 75%;
+                width: 100%;
                 margin: 1rem auto;
-                grid-template-columns: repeat(2, 1fr);
+                grid-template-columns: repeat(2, 48%);
                 grid-template-rows: repeat(2, 1fr);
                 align-items: center;
-                gap: 0px;
+                justify-content: center;
+                gap: 10px;
             }
 
             .item {
@@ -218,12 +220,15 @@
                 margin: auto;
                 width: 85%;
                 span{
-                    width: 240px;
+                    max-width: 240px;
                     text-align: center;
                     margin: auto;
                 }
             }
         }
+    }
+    .shop_paginationbar{
+        margin-bottom: 80px;
     }
 }
 
