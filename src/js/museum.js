@@ -57,7 +57,8 @@ export default {
                     急救設備AED`
                 },
             ],
-            publicPath: process.env.BASE_URL,
+            // publicPath: process.env.BASE_URL,
+            publicPath: "",
         }
     },
     computed: {
@@ -85,12 +86,12 @@ export default {
                 antialias: true,
                 alpha: true,
             });
-            renderer.setSize(window.innerWidth, 700);
+            renderer.setSize(window.innerWidth, 600);
             renderer.setClearColor(0xffffff, 0);
 
             const camera = new THREE.PerspectiveCamera(
                 50,
-                window.innerWidth / 700,
+                window.innerWidth / 600,
                 0.1,
                 1000
             );
@@ -282,9 +283,9 @@ export default {
 
             function animate() {
                 renderer.render(scene, camera);
-                camera.aspect = window.innerWidth / 700;
+                camera.aspect = window.innerWidth / 600;
                 camera.updateProjectionMatrix();
-                renderer.setSize(window.innerWidth, 700);
+                renderer.setSize(window.innerWidth, 600);
                 controls.update();
                 requestAnimationFrame(animate);
             }

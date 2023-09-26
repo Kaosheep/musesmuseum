@@ -5,6 +5,9 @@
       <span></span>
     </button>
     <canvas id="three"></canvas>
+    <div class="momap">
+      <img src="@/assets/image/museumspace/map.png" alt="">
+    </div>
     <button
       v-for="local in locallist"
       class="localbtn"
@@ -29,7 +32,6 @@
       </div>
     </div>
   </div>
- 
 </template>
 
 <script src="@/js/museum.js"></script>
@@ -44,9 +46,23 @@
   );
   position: relative;
   margin: auto;
+
+  #three {
   
-  #three{
     max-width: 1500px;
+    @include m(){
+      display: none;
+    }
+  }
+  .momap{
+    display: none;
+    padding: 4rem 1rem;
+    @include m(){
+      display: block;
+    }
+    img{
+      width: 100%;
+    }
   }
   button {
     cursor: pointer;
@@ -57,6 +73,9 @@
     border-radius: 50%;
     border: none;
     background-color: #fff;
+    @include m(){
+      pointer-events: none;
+    }
     p {
       white-space: nowrap;
     }
@@ -72,7 +91,7 @@
     border-radius: 20px;
     border: none;
     cursor: pointer;
-    @include t(){
+    @include t() {
       right: 16px;
     }
     p {
@@ -108,6 +127,10 @@
     @include t() {
       left: 81%;
     }
+    @include m(){
+      left: 73%;
+      top: 56%;
+    }
   }
   #localA {
     top: 20%;
@@ -115,12 +138,21 @@
     @include t() {
       top: 24%;
     }
+    @include m(){
+      left: 62%;
+      top: 17%;
+    }
   }
   #localB {
     top: 30%;
     left: 40%;
     @include t() {
       top: 33%;
+      
+    }
+    @include m(){
+      left: 50%;
+      top: 28%;
     }
   }
   #localC {
@@ -129,6 +161,10 @@
     @include t() {
       top: 58%;
     }
+    @include m(){
+      top:28%;
+      left: 25%;
+    }
   }
   #rest {
     top: 43%;
@@ -136,12 +172,19 @@
     @include t() {
       left: 77%;
     }
+    @include m(){
+      left: 50%;
+      top: 56%;
+    }
   }
   #info {
     top: 56%;
     left: 65%;
     @include t() {
       left: 72%;
+    }
+    @include m(){
+      left: 33%;
     }
   }
   .localinfo {
@@ -155,7 +198,7 @@
     transition: 0.5s;
     animation: slideinfo 0.3s 0s 1;
     border: 5px dashed $mgreen;
-    @include t(){
+    @include t() {
       display: none;
     }
     .info_img {
@@ -171,8 +214,7 @@
       text-align: center;
     }
     p {
-      @include t(){
-        
+      @include t() {
       }
       position: relative;
       z-index: 2;
@@ -189,5 +231,4 @@
     }
   }
 }
-
 </style>

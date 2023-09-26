@@ -663,6 +663,7 @@
                                 font-size: 64px;
                                 color: #fff;
                                 -webkit-text-stroke: 2px $mblue;
+                                font-family: 'Noto Sans TC', 'sans-serif';
                             }
 
                             z-index: 5;
@@ -891,6 +892,7 @@
                         transform-origin: bottom;
                         left: 10%;
                         bottom: -100%;
+                        
                         @include t(){
                             position: static;
                         }
@@ -1202,7 +1204,17 @@
                                 position: static;
                                 padding: 4rem 0 2rem 32%;
                             }
-
+                            table{
+                                tr{
+                                    td{
+                                        color: $mblue;
+                                        vertical-align: top;
+                                        &:first-child{
+                                            white-space: nowrap;
+                                        }
+                                    }
+                                }
+                            }
                         }
                     }
 
@@ -1247,20 +1259,93 @@
                             }
 
                             @include m() {
-                                bottom: 2.5rem;
+                                bottom:4rem;
                             }
                         }
 
                         #totop {
                             height: 40px;
                             pointer-events: none;
-
                             path {
                                 fill: #fff;
                             }
 
 
                         }
+                        
+                    }
+                    .tibame{
+                        background-color: #fff;
+                        position: absolute;
+                        right: 2rem;
+                        bottom: 2rem;
+                        width: 300px;
+                        height: 300px;
+                        border-radius: 50%;
+                        animation: pathrotate 20s 0s linear infinite;
+                        
+                        @include t(){
+                            position: static;
+                            margin-left: auto;
+                            margin-right: 2rem;
+                            margin-bottom: 2rem;
+                        }
+                        @include m(){
+                            width: 240px;
+                            height: 240px;
+                            margin-right: 1rem;
+                            margin-bottom: 1rem;
+                        }
+                        &::after{
+                            content: "";
+                            position: absolute;
+                            background-color: $mpink;
+                            width: 100%;
+                            height: 100%;
+                            top: 0;
+                            left: 0;
+                            border-radius: 50%;
+                            opacity: .3;
+                            transform-origin:53% 53%;
+                            animation: pathrotate 10s 0s linear infinite;
+                            pointer-events: none;
+                            z-index: -1;
+                        }
+                        #svg1 {
+                            position: absolute;
+                            @include tc();
+                            fill: $mblue;
+                            height: auto;
+                            max-width: 70vmin;
+                            transform-origin: center;
+                            width: 70%;
+                          }
+                          #svg2{
+                            position: absolute;
+                            @include tc();
+                            fill: $mblue;
+                            max-width: 65vmin;
+                            transform-origin: center;
+                            width: 65%;
+                          }
+                          #svg3{
+                            position: absolute;
+                            @include tc();
+                            fill: $mblue;
+                            height: auto;
+                            max-width: 95vmin;
+                            transform-origin: center;
+                            width:95%;
+                          }
+                          #svg4{
+                            position: absolute;
+                            @include tc();
+                            fill: $mblue;
+                            height: auto;
+                            max-width: 50vmin;
+                            transform-origin: center;
+                            width:50%;
+                          }
                     }
                 }
 

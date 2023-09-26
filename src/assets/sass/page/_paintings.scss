@@ -97,13 +97,15 @@
                     height: 100%;
                     width: calc(100%/3);
                     flex-shrink: 0;
+                    min-width: 250px;
+
                     &:nth-child(2n) {
-                        a{
+                        a {
                             flex-direction: column-reverse;
                         }
-                        
+
                     }
-                    
+
 
                     &:nth-child(3n+1) {
                         .txtcard {
@@ -150,12 +152,14 @@
 
                     a {
                         height: 100%;
+                        width: calc(100%/3);
                         min-width: 250px;
                         display: flex;
                         flex-direction: column;
                         justify-content: center;
                         cursor: pointer;
-                        
+                        flex-shrink: 0;
+
                         .img {
                             height: 40%;
                             border-radius: 10px;
