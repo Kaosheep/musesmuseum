@@ -7,13 +7,22 @@
     class="shop_carousel"
   >
     <CarouselItem class="banner">
-      <img src="@/assets/image/productimage/banner/AntoinettePoudre.png" />
+      <img src="@/assets/image/productimage/banner/banner0.jpg" />
     </CarouselItem>
     <CarouselItem class="banner">
-      <img src="@/assets/image/productimage/banner/Venuslipstick.png" />
+      <img src="@/assets/image/productimage/banner/banner1.jpg" />
     </CarouselItem>
     <CarouselItem class="banner">
-      <img src="@/assets/image/productimage/banner/Louise-Maske.png" />
+      <img src="@/assets/image/productimage/banner/banner2.jpg" />
+    </CarouselItem>
+    <CarouselItem class="banner">
+      <img src="@/assets/image/productimage/banner/banner3.jpg" />
+    </CarouselItem>
+    <CarouselItem class="banner">
+      <img src="@/assets/image/productimage/banner/banner4.jpg" />
+    </CarouselItem>
+    <CarouselItem class="banner">
+      <img src="@/assets/image/productimage/banner/banner5.jpg" />
     </CarouselItem>
   </Carousel>
   <h1>精選商城</h1>

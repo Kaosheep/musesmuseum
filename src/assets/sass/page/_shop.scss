@@ -1,7 +1,7 @@
 .shop_carousel {
-    margin: 3% auto;
+    margin: 1% auto 2%;
     width: 55%;
-    height: 40vh;
+    height: 56vh;
     overflow: hidden;
     border-radius: 8px;
     aspect-ratio: 4/3;
@@ -19,8 +19,9 @@
 @include t() {
     @media screen and (max-width:$t) {
         .shop_carousel {
-            margin: 3% auto;
-            width: 100%;
+            margin: 2% auto;
+            height: 25vh;
+            width: 90%;
         }
     }
 }
@@ -126,6 +127,7 @@
     width: 83.33%;
     display: flex;
     justify-content: space-between;
+    align-items: center;
     .shop_Breadcrumbs {
         a {
             color: $mblue;
@@ -163,7 +165,7 @@
         .shop_block {
             width: 75%;
             flex-direction: column;
-
+            align-items: start;
             .search {
                 display: block;
                 margin-right: auto;
