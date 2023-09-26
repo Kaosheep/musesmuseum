@@ -793,7 +793,6 @@
                         align-items: center;
                         flex-wrap: wrap;
                         margin-bottom: 50px;
-                        min-height: 500px;
                     }
                     .light {
                         position: absolute;
@@ -853,8 +852,6 @@
                         @include t(){
                             position: static;
                         }
-                        bottom: -100%;
-                        
                         .artballa {
                             width: 90%;
                             height: 90%;
