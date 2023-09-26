@@ -163,7 +163,8 @@
                         width: 250px;
                         height: 120px;
                         margin-left: auto;
-
+                        position: relative;
+                        z-index: 2;
                         @include t() {
                             margin: 4rem auto 2.5rem;
                         }
@@ -258,7 +259,7 @@
                     height: 100%;
                     min-width: 200px;
                     background-color: $myellow;
-                    z-index: 3;
+                    z-index: 1;
 
                     &::after {
                         content: "";
@@ -626,7 +627,9 @@
 
                 .container {
                     width: 100%;
-
+                    @include t(){
+                        margin: 50px 0;
+                    }
                     .row {
                         position: relative;
                         width: 90%;
@@ -783,7 +786,13 @@
                     position: relative;
                     
                     @include t(){
+                        padding: 50px 0px;
                         min-height: 500px;
+                        display: flex;
+                        justify-content: space-evenly;
+                        align-items: center;
+                        flex-wrap: wrap;
+                        margin-bottom: 50px;
                     }
                     .light {
                         position: absolute;
@@ -838,8 +847,11 @@
                         border-radius: 50%;
                         background-color: $mpink;
                         transform-origin: bottom;
-                        bottom: -100%;
                         
+                        bottom: -100%;
+                        @include t(){
+                            position: static;
+                        }
                         .artballa {
                             width: 90%;
                             height: 90%;
@@ -879,6 +891,9 @@
                         transform-origin: bottom;
                         left: 10%;
                         bottom: -100%;
+                        @include t(){
+                            position: static;
+                        }
                         .artballb {
                             width: 90%;
                             height: 90%;
@@ -1153,13 +1168,28 @@
                         width: 100%;
                         height: 100%;
                         position: relative;
-
+                        .mobile{
+                            display: none;
+                            @include m(){
+                                display: block;
+                                text-align: end;
+                                color: $mpink;
+                                margin-top: 40px;
+                                padding-right: 1rem;
+                            }
+                        }
                         #max1 {
                             color: $mpink;
+                            @include m(){
+                                display: none;
+                            }
                         }
 
                         #max2 {
                             transform-origin: left;
+                            @include m(){
+                                display: none;
+                            }
                         }
 
                         .homenav {

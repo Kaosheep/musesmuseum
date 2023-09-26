@@ -15,17 +15,21 @@
       <p>{{ local.title }}</p>
     </button>
     <div class="localinfo" v-if="currentInfo">
-      <div class="info_img" >
-        <img :src="require('../assets/image/museumspace/' + currentInfo.imgsrc)" :alt="currentInfo.infoid"/>
+      <div class="info_img">
+        <img
+          :src="require('@/assets/image/museumspace/' + currentInfo.imgsrc)"
+          :alt="currentInfo.infoid"
+        />
       </div>
       <div class="info_txt">
         <h3>{{ currentInfo.h }}</h3>
         <p>
-            {{ currentInfo.p }}
+          {{ currentInfo.p }}
         </p>
       </div>
     </div>
   </div>
+ 
 </template>
 
 <script src="@/js/museum.js"></script>
@@ -39,6 +43,11 @@
     rgba(195, 227, 232, 1) 70%
   );
   position: relative;
+  margin: auto;
+  
+  #three{
+    max-width: 1500px;
+  }
   button {
     cursor: pointer;
     position: absolute;
@@ -63,6 +72,9 @@
     border-radius: 20px;
     border: none;
     cursor: pointer;
+    @include t(){
+      right: 16px;
+    }
     p {
       text-align: end;
       width: 70px;
@@ -93,35 +105,44 @@
   #store {
     top: 32%;
     left: 70%;
+    @include t() {
+      left: 81%;
+    }
   }
   #localA {
     top: 20%;
     left: 42%;
-    @include t(){
-        top: 28%;
+    @include t() {
+      top: 24%;
     }
   }
   #localB {
     top: 30%;
     left: 40%;
-    @include t(){
-        top: 40%;
+    @include t() {
+      top: 33%;
     }
   }
   #localC {
     top: 50%;
     left: 30%;
-    @include t(){
-        top: 58%;
+    @include t() {
+      top: 58%;
     }
   }
   #rest {
     top: 43%;
     left: 67.5%;
+    @include t() {
+      left: 77%;
+    }
   }
   #info {
     top: 56%;
     left: 65%;
+    @include t() {
+      left: 72%;
+    }
   }
   .localinfo {
     width: 30%;
@@ -131,9 +152,12 @@
     top: 0;
     right: 0;
     padding: 4rem 1.5rem;
-    transition: .5s;
-    animation: slideinfo .3s 0s 1;
+    transition: 0.5s;
+    animation: slideinfo 0.3s 0s 1;
     border: 5px dashed $mgreen;
+    @include t(){
+      display: none;
+    }
     .info_img {
       width: 100%;
       margin: auto;
@@ -145,20 +169,25 @@
     h3 {
       line-height: 2;
       text-align: center;
-
     }
-    p{
-        position: relative;
-        z-index: 2;
+    p {
+      @include t(){
+        
+      }
+      position: relative;
+      z-index: 2;
+      white-space: pre-line;
+      text-align: justify;
     }
   }
   @keyframes slideinfo {
-    0%{
-        right: -100%;
+    0% {
+      right: -100%;
     }
-    100%{
-        right: 0;
+    100% {
+      right: 0;
     }
   }
 }
+
 </style>

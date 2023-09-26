@@ -24,12 +24,12 @@ export default {
         arrow: 'always'
       },
       homenav: [
-        { title: "最新消息", entitle: "News", link: "/" },
-        { title: "展覽資訊", entitle: "Current Exhibitions", link: "/" },
-        { title: "園區導覽", entitle: "Space", link: "/" },
-        { title: "參觀與服務", entitle: "Visit", link: "/" },
-        { title: "商品", entitle: "Shop", link: "/" },
-        { title: "關於我們", entitle: "About Us", link: "/" },
+        { title: "最新消息", entitle: "News", link: "/Home/News" },
+        { title: "展覽資訊", entitle: "Current Exhibitions", link: "/Home/CurrentExhibition_main" },
+        { title: "園區導覽", entitle: "Space", link: "/Home/Museumspace" },
+        { title: "參觀與服務", entitle: "Visit", link: "/Home/VisitInformation" },
+        { title: "商品", entitle: "Shop", link: "/Home/Shop" },
+        { title: "關於我們", entitle: "About Us", link: "/Home/History" },
       ],
       newscol: [
         {

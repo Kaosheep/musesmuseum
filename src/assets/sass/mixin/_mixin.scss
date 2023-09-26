@@ -21,13 +21,13 @@
 
 //雙層框虛線
 //左下left buttom
-@mixin shadowlb($color: $mgreen) {
+@mixin dshadowlb($color: $mgreen) {
     border: 3px dashed $color;
     box-shadow: -8px 8px 0px $color;
 }
 
 //右下
-@mixin shadowrb($color: $mgreen) {
+@mixin dshadowrb($color: $mgreen) {
     border: 3px dashed $color;
     box-shadow: 8px 8px 0px $color;
 }
@@ -39,9 +39,30 @@
     background-color: #ffffff;
     opacity: 1
 }
-
-
-
+//綠色點點背景框框
+@mixin dotfm(){
+    position: relative;
+    &::after {
+      content: "";
+      position: absolute;
+      top: 24px;
+      right: -24px;
+      height: 100%;
+      width: 100%;
+      border: 3px solid $mgreen;
+      border-radius: 10px;
+      @include dotbg();
+      z-index: -5;
+    }
+}
+//title
+@mixin title($color: $mpink){
+    display: inline-block;
+    padding: 1rem 2rem;
+    border-radius: 20px;
+    box-shadow: 8px 8px 0px $color;
+    text-align: center;
+}
 
 //RWD
 @mixin m() {

@@ -13,11 +13,11 @@
           </div>
           <div class="path">
             <div class="ticket">
-              <a href="">
+              <router-link to="/Home/Tick">
                 <p>前往購票</p>
                 <p>TICKET</p>
                 <p>MUSES</p>
-              </a>
+              </router-link>
             </div>
             <div class="scrollhint">
               <ThinArrow :text="'scroll'"></ThinArrow>
@@ -62,13 +62,17 @@
                     <h3>{{ img.imgtitle }}</h3>
                     <p>{{ img.time }}</p>
                     <p>{{ img.info }}</p>
-                    <p><router-link to="/"><ThinArrow :text="'展覽資訊'"></ThinArrow></router-link></p>
+                    <p>
+                      <router-link to="/"
+                        ><ThinArrow :text="'展覽資訊'"></ThinArrow
+                      ></router-link>
+                    </p>
                   </div>
                 </div>
               </div>
             </div>
             <div class="moreexb">
-              <router-link to="/SpecialExhibition"
+              <router-link to="/Home/SpecialExhibition"
                 ><ThinArrow :text="'更多展覽'"></ThinArrow
               ></router-link>
             </div>
@@ -132,7 +136,7 @@
               </RouterLink>
             </div>
             <div class="more">
-              <router-link to="/News"
+              <router-link to="/Home/News"
                 ><ThinArrow :text="'更多消息'"></ThinArrow
               ></router-link>
             </div>
@@ -146,7 +150,7 @@
             <div class="row">
               <div class="txtframe"><h1>VISIT</h1></div>
               <div class="card">
-                <a href="">
+                <router-link to="/Home/VisitInformation">
                   <img src="@/assets/image/home/buliding0.jpg" alt="" />
                   <div class="txt">
                     <h2>參觀與服務<br />Visit</h2>
@@ -157,14 +161,14 @@
                       />
                     </button>
                   </div>
-                </a>
+                </router-link>
               </div>
             </div>
             <div class="row">
               <div class="txtframe"><h1>SPACE</h1></div>
               <div class="card">
-                <a href="">
-                  <img src="@\assets\image\home\buliding0.jpg" alt="" />
+                <router-link to="/Home/Museumspace">
+                  <img src="@/assets/image/home/buliding0.jpg" alt="" />
                   <div class="txt">
                     <h2>園區導覽<br />Space</h2>
                     <button type="button">
@@ -174,7 +178,7 @@
                       />
                     </button>
                   </div>
-                </a>
+                </router-link>
               </div>
             </div>
           </div>
@@ -192,18 +196,22 @@
             <h2>藝術典藏<br />Collection</h2>
           </div>
           <div :class="['artblock', { show: isshow }]">
-            <div class="balla">
-              <div class="artballa">
-                <h3>文物區</h3>
-                <img src="@/assets/image/home/a0.png" alt="" />
+            <router-link to="/Home/Art">
+              <div class="balla">
+                <div class="artballa">
+                  <h3>文物區</h3>
+                  <img src="@/assets/image/home/a0.png" alt="" />
+                </div>
               </div>
-            </div>
-            <div class="ballb">
-              <div class="artballb">
-                <h3>畫作區</h3>
-                <img src="@/assets/image/home/a1.png" />
+            </router-link>
+            <router-link to="/Home/Paintings">
+              <div class="ballb">
+                <div class="artballb">
+                  <h3>畫作區</h3>
+                  <img src="@/assets/image/home/a1.png" />
+                </div>
               </div>
-            </div>
+            </router-link>
             <div class="light yellow"></div>
             <div class="light green"></div>
             <div class="light pink"></div>
@@ -252,7 +260,9 @@
             </div>
             <img class="homecart" src="@/assets/image/home/cart.png" alt="" />
             <div class="floor">
-              <ThinArrow :text="'更多商品'"></ThinArrow>
+              <router-link to="/Home/Shop">
+                <ThinArrow :text="'更多商品'"></ThinArrow>
+              </router-link>
             </div>
           </div>
         </section>
@@ -260,6 +270,7 @@
           <div class="footersilde">
             <div class="slide">
               <p class="max" id="max1">MUSESMUSEUM</p>
+              <h2 class="mobile">MUSESMUSEUM</h2>
               <div class="homenav">
                 <ul>
                   <li v-for="(li, index) in homenav" :key="index">

@@ -19,37 +19,42 @@ export default {
                     infoid: "store",
                     imgsrc: "local0.jpg",
                     h: "禮品店",
-                    p: "您可以尋找到美麗的明信片、精彩的博物館商品、精緻的手工藝品以及具有特色的紀念品，希望您帶回一些特別的東西，以永久紀念您在博物館的難忘時光。"
+                    p: `您可以尋找到美麗的明信片、精彩的博物館商品、精緻的手工藝品以及具有特色的紀念品，希望您帶回一些特別的東西，以永久紀念您在博物館的難忘時光。`
                 },
                 {
                     infoid: "localA",
                     imgsrc: "local1.jpg",
                     h: "展區A",
-                    p: "展覽將引領您進入一個充滿藝術與創新的世界。這個展覽將展示當代藝術家的最新作品，透過數位媒體、虛擬現實和互動裝置，讓您深入體驗藝術的未來。這是一個啟發靈感、探索創新和追尋藝術無限可能性的展覽，絕對不能錯過！"
+                    p: `展覽將引領您進入一個充滿藝術與創新的世界。這個展覽將展示當代藝術家的最新作品，透過數位媒體、虛擬現實和互動裝置，讓您深入體驗藝術的未來。這是一個啟發靈感、探索創新和追尋藝術無限可能性的展覽，絕對不能錯過！`
                 },
                 {
                     infoid: "localB",
                     imgsrc: "local2.jpg",
                     h: "展區B",
-                    p: "展覽將帶您穿越時光，欣賞世界各地的歷史藝術珍品。這次展覽匯集了來自不同文化和時代的精彩藝術品，從古埃及的青銅雕像到文藝復興時期的油畫傑作，讓您沉浸在藝術的豐富歷史中。這是一場引人入勝的藝術之旅，探索藝術如何反映了不同時代的價值觀和美學。"
+                    p: `展覽將帶您穿越時光，欣賞世界各地的歷史藝術珍品。
+                    這次展覽匯集了來自不同文化和時代的精彩藝術品，從古埃及的青銅雕像到文藝復興時期的油畫傑作，讓您沉浸在藝術的豐富歷史中。這是一場引人入勝的藝術之旅，探索藝術如何反映了不同時代的價值觀和美學。`
                 },
                 {
                     infoid: "localC",
                     imgsrc: "local3.jpg",
                     h: "展區C",
-                    p: "帶您穿越時光的魔法隧道，探索過去和未來的神奇之處。品味歷史、夢想未來，這趟時光之旅將改變您對時間的看法。別錯過這場獨一無二的奇幻之旅！"
+                    p: `帶您穿越時光的魔法隧道，探索過去和未來的神奇之處。品味歷史、夢想未來，這趟時光之旅將改變您對時間的看法。別錯過這場獨一無二的奇幻之旅！`
                 },
                 {
                     infoid: "rest",
                     imgsrc: "local4.jpg",
                     h: "餐廳",
-                    p: "提供各式咖啡、茶和點心，讓您盡情品味。室內舒適的座椅，希望您在寧靜的氛圍中放鬆身心，另外提供免費的Wi-Fi，讓您可以隨時與親朋好友分享您在博物館的體驗。"
+                    p: `提供各式咖啡、茶和點心，讓您盡情品味。室內舒適的座椅，希望您在寧靜的氛圍中放鬆身心，另外提供免費的Wi-Fi，讓您可以隨時與親朋好友分享您在博物館的體驗。`
                 },
                 {
                     infoid: "info",
                     imgsrc: "local5.jpg",
                     h: "服務處",
-                    p: "備有物品(輪椅、嬰兒車、語音導覽)租借<br>遺失物認領<br>導覽地圖<br>急救設備AED"
+                    p: `備有物品
+                    (輪椅、嬰兒車、語音導覽)租借
+                    遺失物認領
+                    導覽地圖
+                    急救設備AED`
                 },
             ]
         }
@@ -79,12 +84,12 @@ export default {
                 antialias: true,
                 alpha: true,
             });
-            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setSize(window.innerWidth, 700);
             renderer.setClearColor(0xffffff, 0);
 
             const camera = new THREE.PerspectiveCamera(
                 50,
-                window.innerWidth / window.innerHeight,
+                window.innerWidth / 700,
                 0.1,
                 1000
             );
@@ -97,6 +102,7 @@ export default {
             gltfLoader.load("/museum/vr_art_gallery/scene.gltf", (gltf) => {
                 var model = gltf.scene;
                 scene.add(model);
+
                 model.scale.set(0.25, 0.25, 0.25);
                 model.rotateX(-0.2);
                 model.rotateY(1);
@@ -275,9 +281,9 @@ export default {
 
             function animate() {
                 renderer.render(scene, camera);
-                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.aspect = window.innerWidth / 700;
                 camera.updateProjectionMatrix();
-                renderer.setSize(window.innerWidth, window.innerHeight);
+                renderer.setSize(window.innerWidth, 700);
                 controls.update();
                 requestAnimationFrame(animate);
             }

@@ -1,6 +1,8 @@
 <template>
   <main class="painting_main">
-    <div class="title"><VerHeader :title="'畫 作 區 Paintings'"></VerHeader></div>
+    <div class="title">
+      <VerHeader :title="'畫 作 區 Paintings'"></VerHeader>
+    </div>
     <div class="container">
       <div class="paintsearchbar"><Searchbar></Searchbar></div>
       <button class="paintsearch" type="button" @click="scrollpage">
@@ -10,20 +12,25 @@
         <span></span><span></span>
         <div class="wrap">
           <div class="col" v-for="(img, imgindex) in paintings" :key="imgindex">
-            <div class="img">
-              <img
-                :src="require('@/assets/image/paint/paint' + imgindex + '.jpg')"
-                :alt="img.imgname"
-              />
-            </div>
-            <div class="txtcard">
-              <div class="color">
-                <div class="txt">
-                  <h2>{{ img.imgname }}</h2>
-                  <h3>{{ img.imgen }}</h3>
+            <router-link :to="`/Home/PaintDetail/${imgindex}`">
+              <div class="img">
+                <img
+                  :src="
+                    require('@/assets/image/paint/paint' + imgindex + '.jpg')
+                  "
+                  :alt="img.imgname"
+                />
+              </div>
+              <div class="txtcard">
+                <div class="color">
+                  <div class="txt">
+                    <h2>{{ img.imgname }}</h2>
+                    <h3>{{ img.imgen }}</h3>
+                  </div>
                 </div>
               </div>
-            </div>
+              </router-link
+            >
           </div>
         </div>
       </div>
@@ -78,15 +85,19 @@ export default {
     imgs.slice(0, coln).forEach((col) => {
       wrap.insertAdjacentHTML("beforeend", col.outerHTML);
     });
-    function infinitescrolls() {    
-      if (Math.ceil(wrap.scrollLeft) + document.querySelector('.viexport').offsetWidth > wrap.scrollWidth) {
+    function infinitescrolls() {
+      if (
+        Math.ceil(wrap.scrollLeft) +
+          document.querySelector(".viexport").offsetWidth >
+        wrap.scrollWidth
+      ) {
         wrap.style.scrollBehavior = "auto";
         wrap.scrollLeft = wrap.offsetWidth;
         wrap.style.scrollBehavior = "smooth";
       }
     }
     infinitescrolls();
-    wrap.addEventListener('scroll',infinitescrolls)
+    wrap.addEventListener("scroll", infinitescrolls);
   },
 };
 </script>

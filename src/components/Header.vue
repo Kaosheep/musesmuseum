@@ -29,9 +29,10 @@
     <div class="menu">
       <ul>
         <li v-for="(li, index) in navlist" :key="index">
-          <router-link :to="li.link" @click="closemenu">
+          <router-link :to="li.link" @click="closemenu" v-if="li.link">
             <h3>{{ li.title }}</h3>
           </router-link>
+          <h3 v-else>{{ li.title }}</h3>
           <ul v-if="li.sublist">
             <li v-for="(subli, index) in li.sublist" :key="index">
               <router-link :to="subli.sublink" @click="closemenu">{{
@@ -54,7 +55,6 @@ export default {
         { title: "購票專區", link: "/Home/Tick" },
         {
           title: "展覽資訊",
-          link: "/",
           sublist: [
             { subtitle: "常設展覽", sublink: "/Home/CurrentExhibition_main" },
             { subtitle: "當期展覽", sublink: "/Home/SpecialExhibition_main" },
@@ -62,7 +62,6 @@ export default {
         },
         {
           title: "藝術典藏",
-          link: "/",
           sublist: [
             { subtitle: "文物區", sublink: "/Home/Art" },
             { subtitle: "畫作區", sublink: "/Home/Paintings" },
@@ -70,7 +69,6 @@ export default {
         },
         {
           title: "園區導覽",
-          link: "/",
           sublist: [
             { subtitle: "館內地圖", sublink: "/Home/Museumspace" },
             { subtitle: "周邊景點", sublink: "/Home/SpaceMap" },
@@ -79,7 +77,6 @@ export default {
         },
         {
           title: "參觀服務",
-          link: "/",
           sublist: [
             { subtitle: "注意事項", sublink: "/Home/VisitInformation" },
             { subtitle: "常見問題", sublink: "/Home/faq" },
@@ -88,7 +85,6 @@ export default {
         },
         {
           title: "關於我們",
-          link: "/",
           sublist: [
             { subtitle: "歷史沿革", sublink: "/Home/History" },
             { subtitle: "歷代館長", sublink: "/Home/Curator" },

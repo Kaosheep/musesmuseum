@@ -160,6 +160,11 @@ const routes = [
         path: 'SpaceAround',
         name: 'SpaceAround',
         component: () => import('../views/frontend/SpaceAround.vue'),
+      },
+      {
+        path: 'PaintDetail/:id',
+        name: 'PaintDetail',
+        component: () => import('../views/frontend/PaintDetail.vue'),
       }
     ]
   },

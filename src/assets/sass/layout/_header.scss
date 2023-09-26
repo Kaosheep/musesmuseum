@@ -219,8 +219,10 @@ nav {
     background-color: #fff;
     padding-left: 70px;
     @include t() {
-        padding-top: 7%;
-        padding-left: 0px;
+        padding: 0px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
     }
 
     .logo {
