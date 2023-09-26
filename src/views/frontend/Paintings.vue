@@ -9,8 +9,8 @@
         <img src="@/assets/image/paint/arrow.svg" alt="" />
       </button>
       <div class="viexport">
-        <span></span><span></span>
-        <div class="wrap">
+        <span class="painting_span"></span><span class="painting_span"></span>
+        <div class="painting_wrap">
           <div class="col" v-for="(img, imgindex) in paintings" :key="imgindex">
             <router-link :to="`/Home/PaintDetail/${imgindex}`">
               <div class="img">
@@ -72,8 +72,8 @@ export default {
   },
   mounted() {
     document.body.style.height = `auto`;
-    let imgs = [...document.querySelectorAll(".col")];
-    let wrap = document.querySelector(".wrap");
+    let imgs = [...document.querySelectorAll(".painting_wrap .col")];
+    let wrap = document.querySelector(".painting_wrap");
     let coln = Math.round(wrap.offsetWidth / imgs[0].offsetWidth);
 
     imgs
