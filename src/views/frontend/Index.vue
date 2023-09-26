@@ -62,15 +62,11 @@
                     <h3>{{ img.imgtitle }}</h3>
                     <p>{{ img.time }}</p>
                     <p>{{ img.info }}</p>
-<<<<<<< HEAD
                     <p>
                       <router-link to="/"
                         ><ThinArrow :text="'展覽資訊'"></ThinArrow
                       ></router-link>
                     </p>
-=======
-                    <p><router-link to="/"><ThinArrow :text="'展覽資訊'"></ThinArrow></router-link></p>
->>>>>>> Jeff_dev
                   </div>
                 </div>
               </div>
@@ -154,11 +150,7 @@
             <div class="row">
               <div class="txtframe"><h1>VISIT</h1></div>
               <div class="card">
-<<<<<<< HEAD
                 <router-link to="/Home/VisitInformation">
-=======
-                <a href="">
->>>>>>> Jeff_dev
                   <img src="@/assets/image/home/buliding0.jpg" alt="" />
                   <div class="txt">
                     <h2>參觀與服務<br />Visit</h2>
@@ -204,7 +196,6 @@
             <h2>藝術典藏<br />Collection</h2>
           </div>
           <div :class="['artblock', { show: isshow }]">
-<<<<<<< HEAD
             <router-link to="/Home/Art">
               <div class="balla">
                 <div class="artballa">
@@ -221,20 +212,6 @@
                 </div>
               </div>
             </router-link>
-=======
-            <div class="balla">
-              <div class="artballa">
-                <h3>文物區</h3>
-                <img src="@/assets/image/home/a0.png" alt="" />
-              </div>
-            </div>
-            <div class="ballb">
-              <div class="artballb">
-                <h3>畫作區</h3>
-                <img src="@/assets/image/home/a1.png" />
-              </div>
-            </div>
->>>>>>> Jeff_dev
             <div class="light yellow"></div>
             <div class="light green"></div>
             <div class="light pink"></div>
