@@ -9,6 +9,12 @@ import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 export default {
+  data(){
+    return{
+      publicPath: process.env.BASE_URL,
+    }
+    
+  },
   mounted() {
     this.initThree();
   },
@@ -32,7 +38,7 @@ export default {
 
 
       const gltfLoader = new GLTFLoader();
-      gltfLoader.load("/art/scene1.gltf", (gltf) => {
+      gltfLoader.load(`${this.publicPath}/art/scene1.gltf`, (gltf) => {
         var model = gltf.scene;
         scene.add(model);
         model.scale.set(0.15, 0.15, 0.15);
