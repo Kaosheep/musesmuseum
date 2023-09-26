@@ -277,7 +277,7 @@
                     <td>參觀時間</td>
                     <td>| 09:00-16:00</td>
                   </tr>
-                  
+
                   <tr>
                     <td>電話</td>
                     <td>| 02-1234567</td>
@@ -411,7 +411,6 @@ body {
   position: fixed;
   width: 100%;
   height: 80px;
-
   background-image: linear-gradient(180deg, $myellow 60%, #fff 100%);
 }
 </style>

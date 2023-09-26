@@ -1,5 +1,5 @@
 <template>
-  <footer>
+  <footer class="comfooter">
     <div class="cube">
       <div class="flat">
         <div class="front"></div>
@@ -26,29 +26,20 @@
                 <td>參觀時間</td>
                 <td>| 09:00-16:00</td>
               </tr>
-              <tr>
-                <td>地址</td>
-                <td>| 希臘市和平區謬思路100號</td>
-              </tr>
+
               <tr>
                 <td>電話</td>
                 <td>| 02-1234567</td>
               </tr>
+              <tr>
+                <td>休館時間</td>
+                <td>| 每週二、三</td>
+              </tr>
+              <tr>
+                <td>地址</td>
+                <td>| 希臘市和平區謬思路100號</td>
+              </tr>
             </table>
-          </div>
-          <div class="col">
-            <label for="email">訂閱電子報</label>
-            <div class="send">
-              <form action="">
-                <input type="text" placeholder="Email" id="email" />
-                <button>
-                  <font-awesome-icon
-                    :icon="['fas', 'chevron-right']"
-                    id="footer_send"
-                  />
-                </button>
-              </form>
-            </div>
           </div>
           <div class="col">
             <div class="social">
@@ -82,6 +73,4 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped lang="scss">
-
-</style>
+<style scoped lang="scss"></style>

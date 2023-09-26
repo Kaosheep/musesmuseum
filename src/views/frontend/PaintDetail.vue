@@ -179,7 +179,7 @@ main {
   max-width: 1280px;
   margin: auto;
   height: 100vh;
-  padding-right: 2rem;
+  padding-right: 0.7rem;
   overflow: hidden;
   @include t() {
     height: auto;

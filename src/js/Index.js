@@ -266,7 +266,7 @@ export default {
     this.followcursor();
     this.resize();
     this.gallerycircle();
-
+    document.querySelector('.comfooter').style.display = 'none';
   },
   beforeUnmount() {
     window.removeEventListener("resize", this.resize);
@@ -274,6 +274,7 @@ export default {
     window.removeEventListener("scroll", this.show);
     window.removeEventListener("mousemove", this.ballmove);
     document.body.style.height = `auto`;
+    document.querySelector('.comfooter').style.display = '';
   }
 
 };

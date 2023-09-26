@@ -1,18 +1,18 @@
 
-.backGroundCardbBlue{
-    @include dotbg();
-    // font-size: 500px;
-    width: 1000px;
-    height: 560px;
-    max-width: 1000px;
-    max-height: 560px;
-    // background-color: #009CA8;
-    border: 3px solid $mgreen;
-    border-radius: 8px;
-    left:480px;
-    top:230px;
-    position: absolute;
-    }
+// .backGroundCardbBlue{
+//     @include dotbg();
+//     // font-size: 500px;
+//     width: 1000px;
+//     height: 560px;
+//     max-width: 1000px;
+//     max-height: 560px;
+//     // background-color: #009CA8;
+//     border: 3px solid $mgreen;
+//     border-radius: 8px;
+//     left:480px;
+//     top:230px;
+//     position: absolute;
+//     }
 
 .backGroundCard{
     @include dotfm();
