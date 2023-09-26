@@ -175,8 +175,8 @@ export default {
       }
     },
     ballmove(e) {
-      let x = (window.innerWidth - e.pageX) / 98;
-      let y = (window.innerHeight - e.pageY) / 100;
+      let x = (window.innerWidth - e.pageX) / 80;
+      let y = (window.innerHeight - e.pageY) / 80;
       document.querySelector('.balla').style.transform = `translate(${x}px , ${y}px)`;
       document.querySelector('.ballb').style.transform = `translate(${-x}px , ${-y}px)`;
     }

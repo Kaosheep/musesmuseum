@@ -243,7 +243,7 @@
                     v-for="(pro, num) in productlist"
                     :key="num"
                   >
-                    <router-link to="/">
+                    <router-link :to="`/Home/ProductPage/${num}`">
                       <img
                         :src="
                           require('@/assets/image/productimage/productimage' +
@@ -272,13 +272,25 @@
               <p class="max" id="max1">MUSESMUSEUM</p>
               <h2 class="mobile">MUSESMUSEUM</h2>
               <div class="homenav">
-                <ul>
-                  <li v-for="(li, index) in homenav" :key="index">
-                    <RouterLink :to="li.link"
-                      >{{ li.title }}<br />{{ li.entitle }}</RouterLink
-                    >
-                  </li>
-                </ul>
+                <table>
+                  <tr>
+                    <td>參觀時間</td>
+                    <td>| 09:00-16:00</td>
+                  </tr>
+                  
+                  <tr>
+                    <td>電話</td>
+                    <td>| 02-1234567</td>
+                  </tr>
+                  <tr>
+                    <td>休館時間</td>
+                    <td>| 每週二、三</td>
+                  </tr>
+                  <tr>
+                    <td>地址</td>
+                    <td>| 希臘市和平區謬思路100號</td>
+                  </tr>
+                </table>
                 <div class="footerinfo"></div>
                 <div class="social"></div>
               </div>
@@ -292,12 +304,82 @@
                 </div>
               </div>
             </div>
+            <div class="tibame">
+              <svg viewBox="0 0 100 100" width="100" height="100" id="svg1">
+                <defs>
+                  <path
+                    id="circle"
+                    d="
+                      M 50, 50
+                      m -37, 0
+                      a 37,37 0 1,1 74,0
+                      a 37,37 0 1,1 -74,0"
+                  />
+                </defs>
+                <text font-size="7">
+                  <textPath xlink:href="#circle">
+                    |台僅供學習、展示之用。若有抵觸有關著作權,或有第三人主張侵害智慧
+                  </textPath>
+                </text>
+              </svg>
+              <svg viewBox="0 0 100 100" width="100" height="100" id="svg2">
+                <defs>
+                  <path
+                    id="circle"
+                    d="
+                      M 50, 50
+                      m -37, 0
+                      a 37,37 0 1,1 74,0
+                      a 37,37 0 1,1 -74,0"
+                  />
+                </defs>
+                <text font-size="10">
+                  <textPath xlink:href="#circle">
+                    |您可以私訊[緯育TibaMe],後續會由專人協助處理。
+                  </textPath>
+                </text>
+              </svg>
+              <svg viewBox="0 0 100 100" width="100" height="100" id="svg3">
+                <defs>
+                  <path
+                    id="circle"
+                    d="
+                      M 50, 50
+                      m -37, 0
+                      a 37,37 0 1,1 74,0
+                      a 37,37 0 1,1 -74,0"
+                  />
+                </defs>
+                <text font-size="7">
+                  <textPath xlink:href="#circle">
+                    |本網站為緯育TibaMe_前端設計工程師班第86期學員專題成果作品本平
+                  </textPath>
+                </text>
+              </svg>
+              <svg viewBox="0 0 100 100" width="100" height="100" id="svg4">
+                <defs>
+                  <path
+                    id="circle"
+                    d="
+                      M 50, 50
+                      m -37, 0
+                      a 37,37 0 1,1 74,0
+                      a 37,37 0 1,1 -74,0"
+                  />
+                </defs>
+                <text font-size="7">
+                  <textPath xlink:href="#circle">
+                    |財產權等情事,均由學員負法律上責任,緯育公司概不負責。若有侵權疑慮,
+                  </textPath>
+                </text>
+              </svg>
+            </div>
           </div>
         </section>
       </div>
     </div>
   </main>
-  <footer>
+  <footer class="index_footer">
     <div class="anchor">
       <ul>
         <li></li>
@@ -320,7 +402,7 @@ body {
   overscroll-behavior: none;
 }
 
-footer {
+.index_footer {
   @include t() {
     display: none;
   }

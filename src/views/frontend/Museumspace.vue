@@ -89,6 +89,10 @@ export default {
     rgba(251, 247, 150, 1) 30%,
     rgba(195, 227, 232, 1) 70%
   );
+  height: 100vh;
+  @include t(){
+    height: auto;
+  }
   main {
     width: 100%;
     max-width: 1280px;
@@ -129,6 +133,7 @@ export default {
   background-color: $mlblue;
   h2 {
     text-align: center;
+    line-height: 2;
   }
   .infocard {
     border: 3px dashed $mpink;

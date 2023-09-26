@@ -1,5 +1,7 @@
 .path_main{
-
+    height: 100vh;
+    background-image: linear-gradient(45deg, $mlblue 50%, $myellow 50%);
+    padding-bottom: 50px;
     .path_container {
         max-width: 800px;
         display: flex;
@@ -7,7 +9,15 @@
         align-items: center;
         margin: auto;
         flex-wrap: wrap;
-        padding-top: 10%;
+        padding-top: 5%;
+        @include t(){
+            justify-content: center;
+        }
+        p{
+        padding-top: 1rem;
+        width: 83.33%;
+        margin: auto;
+    }
         h1{
             width: 100%;
             text-align: center;
