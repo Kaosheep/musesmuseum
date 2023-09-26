@@ -41,11 +41,6 @@ const routes = [
         name: 'ProductPage',
         component: () => import('../views/frontend/ProductPage.vue')
       },
-      // {
-      //   path: 'SearchProductDetail/:id',
-      //   name: 'SearchProductDetail',
-      //   component: () => import('../views/frontend/SearchProductDetail.vue')
-      // },
       {
         path: 'News',
         name: 'News',
@@ -122,6 +117,11 @@ const routes = [
         component: () => import('../views/frontend/SearchTicket.vue'),
       },
       {
+        path: 'TicketQRcode',
+        name: 'TicketQRcode',
+        component: () => import('../views/frontend/TicketQRcode.vue')
+      },
+      {
         path: 'SearchProduct',
         name: 'SearchProduct',
         component: () => import('../views/frontend/SearchProduct.vue'),
@@ -145,6 +145,11 @@ const routes = [
         path: 'History',
         name: 'History',
         component: () => import('../views/frontend/History.vue'),
+      },
+      {
+        path: 'Curator',
+        name: 'Curator',
+        component: () => import('../views/frontend/Curator.vue'),
       },
       {
         path: 'Museumspace',
@@ -175,8 +180,8 @@ const routes = [
         children: [
           {
             path: '',
-            name: 'newsm',
-            component: () => import('../views/backend/newsm.vue'),
+            name: 'Newsm',
+            component: () => import('../views/backend/Newsm.vue'),
           },
           {
             path: 'Memberm',
@@ -228,7 +233,14 @@ const routes = [
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
-  routes: routes
+  routes: routes,
+  scrollBehavior(to, from, savedPosition) {
+    if (savedPosition) {
+      return savedPosition
+    } else {
+      return { top: 0 }
+    }
+  },
 
 })
 

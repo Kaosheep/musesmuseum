@@ -3,5 +3,5 @@
     RewriteBase /chd103/g1
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteRule ^(.*)$ /chd103/ingrid/g1/index.html [L]
+    RewriteRule ^(.*)$ /chd103/g1/index.html [L]
 </IfModule>
