@@ -96,24 +96,9 @@
       },
     },
     methods: {
-<<<<<<< HEAD
-      subt1(x,y){   
-        return x*y;
-      },    
-      subt2(qua2,price2){   
-        return qua2*price2;
-      }, 
-      subt3(qua3,price3){   
-        return qua3*price3;
-      },   
-      subt4(qua4,price4){   
-        return qua4*price4;
-      },     
-=======
       subt1(qua,price){   
         return qua*price;
       },        
->>>>>>> yby
       reduce1() {
         if (this.qua > 0) {
           this.qua--;
