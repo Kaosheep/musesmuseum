@@ -149,7 +149,7 @@ const routes = [
       {
         path: 'Curator',
         name: 'Curator',
-        component: () => import('../views/frontend/curator.vue'),
+        component: () => import('../views/frontend/Curator.vue'),
       },
       {
         path: 'Museumspace',

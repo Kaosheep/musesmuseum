@@ -2,7 +2,7 @@
   <main class="specexhi_main">
     <!-- 導覽列 -->
     <div class="carousel_header">
-      <VerHeader :title="'畫 作 區 Paintings'"></VerHeader>
+      <VerHeader :title="'展 覽 區 Exhibitions'"></VerHeader>
     </div>
     <div class="container">
       <!-- 搜尋列 -->
