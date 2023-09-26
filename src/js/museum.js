@@ -56,7 +56,8 @@ export default {
                     導覽地圖
                     急救設備AED`
                 },
-            ]
+            ],
+            publicPath: process.env.BASE_URL,
         }
     },
     computed: {
@@ -99,7 +100,7 @@ export default {
             camera.position.z = 2;
 
             const gltfLoader = new GLTFLoader();
-            gltfLoader.load("/museum/vr_art_gallery/scene.gltf", (gltf) => {
+            gltfLoader.load(`${this.publicPath}/museum/vr_art_gallery/scene.gltf`, (gltf) => {
                 var model = gltf.scene;
                 scene.add(model);
 
