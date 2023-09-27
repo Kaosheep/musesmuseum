@@ -66,7 +66,7 @@ export default {
   },
   methods: {
     scrollpage() {
-      document.querySelector(".wrap").scrollLeft +=
+      document.querySelector(".painting_wrap").scrollLeft +=
         document.querySelector(".col").offsetWidth;
     },
   },

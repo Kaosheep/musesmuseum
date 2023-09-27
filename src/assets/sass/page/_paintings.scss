@@ -4,7 +4,9 @@
     margin-left: auto;
     display: flex;
     overflow: hidden;
-
+    @include m(){
+        margin-bottom: 70px;
+    }
     .title {
         height: 100vh;
     }

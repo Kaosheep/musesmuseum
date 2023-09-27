@@ -155,7 +155,7 @@ header {
     }
 
     .social {
-        span {
+        .sspan {
             margin-top: 0.5rem;
             text-align: center;
             display: inline-block;
@@ -199,6 +199,21 @@ header {
             #social_facebook path,
             #social_youtub path {
                 fill: $mgreen;
+            }
+            span{
+                width: 20px;
+                height: 20px;
+                border-radius: 50%;
+                background-color: #fff;
+                position: absolute;
+                bottom: 80%;
+                left: 50%;
+                transform: translateX(-50%);
+                font-size: 16px;
+                line-height: 20px;
+                padding: 0;
+                color: $mpink;
+                border: 1px solid $myellow;
             }
         }
 

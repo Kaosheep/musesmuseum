@@ -66,7 +66,7 @@ export default {
 
 在藝術史上，哺乳聖母的描繪方式各異，但核心的元素通常保持不變：聖母瑪利亞將嬰兒耶穌擁入懷中，向觀者展現出母親般的親密和關愛。這種情感的呈現通過藝術形式傳遞給觀眾，喚起他們的信仰和虔誠。這些畫作往往還以寫實的技巧和精緻的細節呈現，使觀者感受到這個神聖場景的真實感。
 
-\哺乳聖母是基督教藝術中一個充滿情感和宗教象徵意義的重要主題。這個描繪將母愛和救贖的主題融合在一起，呈現出聖母瑪利亞作為耶穌的母親和基督救世主的形象，成為藝術作品中的靈性饗宴。
+哺乳聖母是基督教藝術中一個充滿情感和宗教象徵意義的重要主題。這個描繪將母愛和救贖的主題融合在一起，呈現出聖母瑪利亞作為耶穌的母親和基督救世主的形象，成為藝術作品中的靈性饗宴。
 `,
         },
         {
@@ -201,7 +201,22 @@ main {
     .img {
       width: 60%;
       height: 95%;
-      @include dotfm();
+      position: relative;
+    &::after {
+      @include m(){
+        display: none;
+      }
+      content: "";
+      position: absolute;
+      top: 24px;
+      right: -24px;
+      height: 100%;
+      width: 100%;
+      border: 3px solid $mgreen;
+      border-radius: 10px;
+      @include dotbg();
+      z-index: -5;
+    }
       @include t() {
         width: 100%;
       }

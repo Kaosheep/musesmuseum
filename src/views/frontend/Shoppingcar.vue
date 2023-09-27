@@ -83,8 +83,8 @@ export default {
   data() {
     return {
       storageitem: localStorage["addItemlist"],
-      // totalitem: 0,
-      // total: 0,
+      totalitem: 0,
+      total: 0,
       itemarr: [],
     };
   },
@@ -102,7 +102,12 @@ export default {
       }, 0);
     },
     counttotalitem() {
-      return this.itemarr.length;
+      return this.itemarr.reduce((totalitem, item) => {
+        return totalitem +=  parseInt(item[3]);
+      }, 0);
+    },
+    total() {
+      return 
     },
   },
   methods: {
