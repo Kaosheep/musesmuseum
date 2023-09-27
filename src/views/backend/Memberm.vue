@@ -172,11 +172,6 @@ div {
   color: #000;
   transition: .3s;
   cursor: pointer;
-
-  &:hover {
-    background-color: $mpink;
-    color: #fff;
-  }
 }
 
 .admin_editbar {
@@ -203,10 +198,6 @@ div {
   color: #fff;
   border: none;
   cursor: pointer;
-
-  &:hover {
-    background-color: $mpink;
-  }
 }
 
 .dmain {
@@ -244,10 +235,6 @@ div {
           color: #000;
           border: none;
           cursor: pointer;
-        }
-
-        &:hover {
-          color: $mblue;
         }
       }
 

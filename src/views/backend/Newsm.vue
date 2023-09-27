@@ -3,9 +3,9 @@
     <div>
       <div class="admin_editbar">
         <div>
-          <PinkButton class="btn_admin" text="新增" @click="showEditForm('add')" />
-          <PinkButton class="btn_admin" text="上架" @click="toggleStatus('1')" :disabled="!canToggle('1')" />
-          <PinkButton class="btn_admin" text="下架" @click="toggleStatus('0')" :disabled="!canToggle('0')" />
+          <button class="btn_admin" @click="showEditForm('add')">新增</button>
+          <button class="btn_admin" @click="toggleStatus('1')" :disabled="!canToggle('1')">上架</button>
+          <button class="btn_admin" @click="toggleStatus('0')" :disabled="!canToggle('0')">下架</button>
         </div>
         <Searchbar class="onlyB" />
       </div>
@@ -17,7 +17,6 @@
             <th>消息標題</th>
             <th>狀態</th>
             <th></th>
-
           </tr>
           <tr v-for="(i, index) in test" :key="index">
             <td><input type="checkbox" v-model="i.selected"></td>
@@ -43,14 +42,14 @@
           </div>
           <div>
             <div>日期</div>
-            <div>2023/08/10</div>
+            <input type="date" v-model="add_news.date">
           </div>
         </div>
         <div>
           <div>標題</div>
           <input type="text" name="" id="" v-model="add_news.title">
           <div>內容</div>
-          <textarea name="" id="" cols="30" rows="7" v-model="add_news.text"></textarea>
+          <textarea name="" id="" cols="30" rows="7" v-model="add_news.content"></textarea>
           <div class="switch_status">
             <div>狀態</div>
             <select v-model="status">
@@ -60,7 +59,7 @@
             <Upload multiple type="drag" action="//jsonplaceholder.typicode.com/posts/" show-upload-list>
               <div style="padding: 20px 0">
                 <Icon type="ios-cloud-upload" size="52" style="color: #3399ff"></Icon>
-                <p>Click or drag files here to upload</p>
+                <p>圖片上傳</p>
               </div>
             </Upload>
             <!-- <input type="file" id="fileInput" accept="image/*" style="display: none;" />
@@ -70,8 +69,8 @@
             </div> -->
           </div>
           <div class="form_btn">
-            <PinkButton type="button" class="btn_admin" text="取消" @click="hideEditForm" />
-            <PinkButton type="button" class="btn_admin" text="儲存" @click="addnews_btn()" />
+            <button type="button" class="btn_admin" @click="hideEditForm">取消</button>
+            <button type="button" class="btn_admin" @click="addnews_btn()">儲存</button>
           </div>
         </div>
       </form>
@@ -97,7 +96,8 @@ export default {
       add_news: [
         {
           title: '',
-          text: '',
+          content: '',
+          date: '',
         }
       ],
       test: [
@@ -130,10 +130,11 @@ export default {
       return this.test.some(item => item.selected && item.statusn !== newStatus);
     },
     showEditForm(type) {
-      if (type !== 'add') {
+      if (type == 'add') {
+        this.addnews = false;
+      }else{
         this.addnews = true;
       }
-
       this.showForm = true;
     },
     hideEditForm() {
@@ -143,31 +144,47 @@ export default {
       this.hideEditForm();
     },
     //新增
-    // addnews_btn() {
-    //   //先檢查資料格式是否符合DB規則
+    addnews_btn() {
+      //先檢查資料格式是否符合DB規則
+      const url = `http://localhost/musesmuseum/public/phps/news.php`
+      let headers = {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+      }
+      let currentDate = new Date();
+      let formattedDate = currentDate.toISOString().split("T")[0];
+      //以下是API文件中提及必寫的主體参數。
+      let body = {
+        "title": this.add_news.title,
+        "content": this.add_news.content,
+        "status": this.status,
+        "date": formattedDate,
+      }
+      fetch(url, {
+        method: "POST",
+        headers: headers,
+        //別忘了把主體参數轉成字串，否則資料會變成[object Object]，它無法被成功儲存在後台
+        // body: JSON.stringify(body)
+        body: JSON.stringify({ data: body })
 
-
-    //   const url = `http://localhost/musesmuseum/public/phps/news.php`
-    //   let headers = {
-    //     "Content-Type": "application/json",
-    //     "Accept": "application/json",
-    //   }
-    //   //以下是API文件中提及必寫的主體参數。
-    //   let body = {
-    //     "title": this.add_news.title,
-    //     "content": this.add_news.text,
-    //     'status': this.status,
-    //   }
-    //   fetch(url, {
-    //     method: "POST",
-    //     headers: headers,
-    //     //別忘了把主體参數轉成字串，否則資料會變成[object Object]，它無法被成功儲存在後台
-    //     body: JSON.stringify(body)
-    //   })
-    //     // .then(response => response.json())
-    //     // .then(json => console.log(json));
-    // }
-
+      })
+      .then(response => {
+          if (response.ok) {
+            return response.json(); // 如果請求成功，解析JSON數據
+          } else {
+            throw new Error("新增失敗"); // 如果請求不成功，拋出錯誤
+          }
+        })
+        .then(json => {
+          // 在成功時顯示提示
+          alert("新增成功：" + json.message); // 假設JSON數據中有一個message屬性
+        })
+        .catch(error => {
+          // 在失敗時顯示提示
+          console.log(error.message);
+          alert("新增失敗：" + error.message);
+        });
+    }
   },
   mounted() {
 
@@ -196,10 +213,6 @@ div {
   transition: .3s;
   cursor: pointer;
 
-  &:hover {
-    background-color: $mpink;
-    color: #fff;
-  }
 }
 
 .admin_editbar {
@@ -223,13 +236,10 @@ div {
   width: 70px;
   height: 40px;
   background-color: $mblue;
+  border-radius: 4px;
   color: #fff;
   border: none;
   cursor: pointer;
-
-  &:hover {
-    background-color: $mpink;
-  }
 }
 
 .dmain {
@@ -247,7 +257,7 @@ div {
       padding: 10px;
       text-align: center;
       border-bottom: 1px solid #ccc;
-      
+
     }
 
     th {
@@ -313,6 +323,8 @@ div {
     border: 1px solid #009CA8;
     border-radius: 10px;
     resize: none;
+    padding-left: 5px;
+    padding-right: 5px;
 
   }
 

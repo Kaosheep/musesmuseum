@@ -3,7 +3,7 @@
         <div>
             <div class="admin_editbar">
                 <div>
-                    <PinkButton class="btn_admin" text="新增"/>
+                    <PinkButton class="btn_admin" text="新增" />
                     <PinkButton class="btn_admin" text="上架" @click="toggleStatus('1')" :disabled="!canToggle('1')" />
                     <PinkButton class="btn_admin" text="下架" @click="toggleStatus('0')" :disabled="!canToggle('0')" />
                 </div>
@@ -47,27 +47,36 @@
                     <textarea name="" id="" cols="30" rows="10"></textarea>
                 </div>
 
-                <div>
-                    <div>展覽期間</div>
+                <div class="info_col">
+                    <div>
+                        <div>展覽期間</div>
+                        <div>
+                            <input type="date" id="dateInput" v-model="selectedDate" /> 至
+                            <input type="date" id="dateInput" v-model="selectedDate" />
+                        </div>
+                    </div>
+                    <div>
+                        <div>狀態</div>
+                        <div>
+                            <select name="" id="">
+                                <option value="">未上架</option>
+                            </select>
+                            <input type="file" id="fileInput" accept="image/*" style="display: none;" />
+                            <label class="img_box" for="fileInput">+選擇圖片</label>
+                            <div class="img_wrap">
+                                <img src="" alt="" id="img1" width="50">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="info_col">
                     <Space size="large" wrap>
-                        <DatePicker type="date" :options="options1" placeholder="Select date" style="width: 200px" />至
-                        <DatePicker type="date" :options="options1" placeholder="Select date" style="width: 200px" />
 
                     </Space>
-                </div>
-                <div>
-                    <div>狀態</div>
-                    <div>
-                        <select name="" id="">
-                            <option value="">未上架</option>
-                        </select>
+                    <div class="sub_col">
+
                     </div>
-                    <Upload type="drag" action="//jsonplaceholder.typicode.com/posts/">
-                        <div style="padding: 20px 0">
-                            <Icon type="ios-cloud-upload" size="52" style="color: #3399ff"></Icon>
-                            <p>Click or drag files here to upload</p>
-                        </div>
-                    </Upload>
                 </div>
                 <div class="form_btn">
                     <PinkButton class="btn_admin" text="取消" @click="hideEditForm" />
@@ -188,11 +197,6 @@ div {
     color: #000;
     transition: .3s;
     cursor: pointer;
-
-    &:hover {
-        background-color: $mpink;
-        color: #fff;
-    }
 }
 
 .admin_editbar {
@@ -219,10 +223,6 @@ div {
     color: #fff;
     border: none;
     cursor: pointer;
-
-    &:hover {
-        background-color: $mpink;
-    }
 }
 
 .dmain {
@@ -261,10 +261,6 @@ div {
                     border: none;
                     cursor: pointer;
                 }
-
-                &:hover {
-                    color: $mblue;
-                }
             }
 
             p {
@@ -290,25 +286,35 @@ div {
     z-index: 999;
     border-radius: 10px;
     overflow: auto;
+    div{
+        margin-top: 10px;
+        textarea {
+    width: 100%;
+    background-color: #ffffff1b;
+    border: 1px solid #009CA8;
+    border-radius: 10px;
+    resize: none;
+    padding-left: 5px;
+    padding-right: 5px;
 
+  }
+    }
 
     .info_col {
         display: flex;
         margin-right: 10px;
         margin-bottom: 10px;
-        justify-content: space-around;
-
         div {
-            width: 50%;
+            width: 100%;
             margin-top: 10px;
             margin-right: 10px;
-
-            :nth-child(2) {
-                text-decoration: underline;
-                padding: 5px;
+            .img_box{
+                padding-left: 5px;
+                padding-right: 5px;
+                border: 1px solid $mblue;
+                margin-left: 30px;
             }
         }
-
     }
 
 
@@ -316,7 +322,7 @@ div {
     .form_btn {
         position: fixed;
         bottom: 0;
-        right: 20px;
+        left: 20px;
     }
 }
 </style>

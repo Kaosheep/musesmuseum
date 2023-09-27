@@ -133,11 +133,6 @@ div{
   color: #fff;
   border: none;
   cursor: pointer;
-
-  &:hover {
-    background-color: $mpink;
-    color: #fff;
-  }
 }
 
 .dmain {
