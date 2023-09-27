@@ -17,8 +17,9 @@
 .backGroundCard{
     @include dotfm();
     display: flex;
-    width: 1000px;
-    height: 100%;
+    width: 90%;
+    height: 100%; 
+    max-width: 1000px;
     min-height: 560px;
     padding: 50px 100px;
     margin: 0 auto;
