@@ -47,8 +47,8 @@
 .visitInformation-ulBorder {
     border: 3px solid $mgreen;
     margin-top: 30px;
-    padding: 20px;
-    padding-right: 40px;
+    padding: 40px;
+    padding-right: 80.67px;
     width: 75%;
     position: relative;
     background-color: #fff;
@@ -56,10 +56,16 @@
 
     @include t() {
         margin-top: 20px;
+        padding: 20px;
+        padding-right: 40.67px;
         box-shadow: none;
         width: 100%;
     }
+
+
+
 }
+
 
 .visitInformation-ulBorder::before {
     content: "";
@@ -124,6 +130,11 @@
     align-items: center;
     position: relative;
 
+    @include t() {
+        margin-top: 10px;
+
+    }
+
 
 }
 
@@ -135,7 +146,7 @@
 }
 
 .visitInformation-nav+.visitInformation-nav {
-    margin-top: 10px;
+    margin-top: 25px;
 }
 
 .visitInformation-icon img {
