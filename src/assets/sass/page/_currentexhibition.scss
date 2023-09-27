@@ -1,0 +1,249 @@
+template {
+    position: relative;
+}
+.cur_exhi_main {
+    width: 95%;
+    margin-left: auto;
+    display: flex;
+    overflow: hidden;
+}
+.cur_container {
+    width: calc(100% - 64px);
+    .cur_scroll_left {
+        display: none;
+    }
+    .cur_exb_search {
+        margin: auto;
+        margin-top: 2%;
+        text-align: end;
+        width: 83.33%;
+        .searchbarclick_search {
+            display: none;
+        }
+        .cur_exhi_title {
+            display: none;
+            }
+        }
+    .cur_exhi_section {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 6% 12% 0 0;
+        position: relative;
+        .cur_img_deco {
+            background: linear-gradient(-45deg, #EB5F8699 20%, transparent 20% 80%, #EB5F8699 80% 100%), linear-gradient(45deg, #EB5F8699 20%, transparent 20% 80%, #EB5F8699 80% 100%), linear-gradient(-45deg, #ffffff 33%, transparent 33% 66%, #ffffff 66%), linear-gradient(45deg, transparent 33%, #EB5F86 33% 66%, transparent 66%);
+            background-size: 1em 1em;
+            background-color: transparent;
+            opacity: 1;
+            width: 3em;
+            height: 9em;
+            border-radius: 4px;
+            transform: rotate(45deg);
+            position: absolute;
+            left: 1.5%;
+            top: -10%;
+            z-index: 1;
+        }
+        .cur_exhi_img {
+            width: 50%;
+            margin: 1%;   
+            overflow: hidden;
+            position: relative;
+            img {
+                width: 100%;
+                object-fit: cover;
+                vertical-align: bottom;
+                border-radius: 4px;
+            }
+            
+        }
+        .cur_exhi_desc {
+            padding: 5%;
+            line-height: 2em;
+            background-color: #fff;
+            width: 50%;
+            border: 3px dashed #1E5289;
+            border-radius: 4px;
+            margin: 1%;
+            position: relative;
+            z-index: 2;
+            .cur_back_deco {
+                background: linear-gradient(45deg, #1E5289 20%, transparent 20%, transparent 80%, #1E5289 80%, #1E5289 100%), linear-gradient(135deg, #1E5289 20%, transparent 20%, transparent 80%, #1E5289 80%, #1E5289 100%);
+                background-size: 1em 1em;
+                background-color: transparent;
+                opacity: 1;
+                width: 2em;
+                height: 2em;
+                transform: rotate(45deg);
+                position: absolute;
+                left: -15.5%;
+                bottom: -48%;
+            }
+            .cur_exhi_desc_deco {
+                background: linear-gradient(45deg, #FBF796 0%, #FBF796 5%, transparent 5%, transparent 10%, #FBF796 10%, #FBF796 15%, transparent 15%, transparent 20%, #FBF796 20%, #FBF796 25%, transparent 25%, transparent 30%, #FBF796 30%, #FBF796 35%, transparent 35%, transparent 40%, #FBF796 40%, #FBF796 45%, transparent 45%, transparent 50%, #FBF796 50%, #FBF796 55%, transparent 55%, transparent 60%, #FBF796 60%, #FBF796 65%, transparent 65%, transparent 70%, #FBF796 70%, #FBF796 75%, transparent 70%, transparent 80%, #FBF796 80%, #FBF796 85%, transparent 85%, transparent 90%, #FBF796 90%, #FBF796 95%, transparent 95%), linear-gradient(135deg, #FBF796 0%, #FBF796 5%, transparent 5%, transparent 10%, #FBF796 10%, #FBF796 15%, transparent 15%, transparent 20%, #FBF796 20%, #FBF796 25%, transparent 25%, transparent 30%, #FBF796 30%, #FBF796 35%, transparent 35%, transparent 40%, #FBF796 40%, #FBF796 45%, transparent 45%, transparent 50%, #FBF796 50%, #FBF796 55%, transparent 55%, transparent 60%, #FBF796 60%, #FBF796 65%, transparent 65%, transparent 70%, #FBF796 70%, #FBF796 75%, transparent 70%, transparent 80%, #FBF796 80%, #FBF796 85%, transparent 85%, transparent 90%, #FBF796 90%, #FBF796 95%, transparent 95%);
+                background-size: 10em 10em;
+                background-color: #009CA8;
+                opacity: 1;
+                width: 12em;
+                height: 3em;
+                border-radius: 4px;
+                transform: rotate(45deg);
+                position: absolute;
+                right: -12%;
+                top: 1%;
+            }
+            .cur_buy_tickbtn_deco {
+                background: radial-gradient(circle, #009CA8 25%, transparent 26%);
+                background-size: 1em 1em;
+                background-color: transparent;
+                opacity: 1;
+                width: 2em;
+                height: 2em;
+                transform: rotate(45deg);
+                position: absolute;
+                left: 90%;
+                bottom: -28%;
+            }
+        }
+        .cur_exhi_desc_bgc {    
+            width: 48%;
+            height: 59vh;
+            background-color: #1E5289;
+            border-radius: 4px;
+            position: absolute;
+            right: -1%;
+            top: 4%;
+        }
+    }
+    .cur_scroll_right {
+        display: none;
+    }
+}
+
+.cur_m_title {
+    display: none;
+}
+@include m() {
+    @media screen and (max-width:$m) {
+        .cur_exhi_main {
+            width: 100%;
+
+            .carousel_header {
+                display: none;
+            }
+
+            .cur_container {
+                width: 100%;
+                position: relative;
+
+                .cur_scroll_left {
+                    display: block;
+                    position: absolute;
+                    left: 6px;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    background-color: transparent;
+                    border: none;
+                    z-index: 2;
+                    cursor: pointer;
+                    animation: scrollhint .8s 0s linear infinite alternate;
+                }
+
+                .cur_exb_search {
+                    display: flex;
+                    margin: 8% 7%;
+
+                    .searchbar_search {
+                        display: none;
+                    }
+
+                    .searchbarclick_search {
+                        display: block;
+                        margin: right;
+                    }
+
+                    .cur_exhi_title {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        width: 125px;
+                        height: 40px;
+                        background-color: #EB5F86;
+                        border-radius: 4px;
+
+                        span {
+                            color: #fff;
+                            font-weight: bold;
+                            display: block;
+                        }
+                    }
+                }
+
+                .cur_exhi_section {
+                    justify-content: center;
+                    align-items: center;
+                    margin: 6% 8% 0 0;
+                    position: relative;
+
+                    .cur_img_deco {
+                        display: none;
+                    }
+
+                    .cur_exhi_img {
+                        width: 86%;
+
+                        img {
+                            width: 100%;
+                            height: 60vh;
+                        }
+                    }
+
+                    .cur_exhi_desc {
+                        display: none;
+                    }
+
+                    .cur_exhi_desc_bgc {
+                        width: 85%;
+                        height: 60vh;
+                        z-index: -1;
+                        background: linear-gradient(45deg , #009CA8 10%,transparent 11%, transparent 89% , #009CA8 90%),linear-gradient(135deg , #009CA8 10%,transparent 11%, transparent 89% , #009CA8 90%),radial-gradient(circle, transparent 25%, #ffffff  26%),linear-gradient(45deg, transparent 46%, #009CA8 47%, #009CA8 52%, transparent 53%), linear-gradient(135deg, transparent 46%, #009CA8 47%, #009CA8 52%, transparent 53%);
+                        background-size: 1.5em 1.5em;
+                        background-color: #ffffff;
+                        opacity: 1;
+                        border: 3px solid #009CA8;
+                        border-radius: 4px;
+                    }
+                }
+
+                .cur_m_title {
+                    display: block;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+
+                    span {
+                        padding-top: 30px;
+                    }
+                }
+                .buy_tickbtn {
+                    display: none;
+                }
+                .cur_scroll_right {
+                    display: block;
+                    position: absolute;
+                    right: 0;
+                    top: 50%;
+                    transform: translateY(-50%) scaleX(-1);;
+                    background-color: transparent;
+                    border: none;
+                    z-index: 2;
+                    cursor: pointer;
+                    animation: scrollhint .8s 0s linear infinite alternate;
+                    img {
+                        transform: scaleX(-1);
+                    }
+                }
+            }
+        }
+    }
+}
