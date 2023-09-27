@@ -1,6 +1,6 @@
 <template>
     <main class="spe_specexhi_main">
-        <div class="carousel_header">
+        <div class="spe_carousel_header">
             <VerHeader :title="'展 覽 區 Exhibitions'"></VerHeader>
         </div>
         <div class="spe_container">
@@ -30,10 +30,9 @@
                     <div class="spe_exhi_desc_deco">
                     </div>
                     <span>2024/02/01-2024/03/30</span>
-                    <h3>春之詠歌：多彩藝術的季節</h3>
+                    <h3 style="color: #EB5F86;">春之詠歌：多彩藝術的季節</h3>
                     <p>來自各地藝術家們帶來的多種形式的作品，包括繪畫、雕塑、攝影、錄像藝術、裝置藝術和互動藝術。透過不同的媒介和風格，試圖捕捉春天所帶來的生命力和變化。</p>
                     <span>展覽地點：謬思藝廊</span>
-                    <div class="spe_buy_tickbtn_deco"></div>
                 </div>
                 <div class="spe_exhi_desc_bgc">
                     <div></div>
@@ -46,11 +45,12 @@
             <div class="spe_m_title">
                 <span>春之詠歌：多彩藝術的季節華章</span>
             </div>
-            <router-link to="/Home/Tick">
-                <div class="buy_tickbtn">
-                    <ThinArrow :text="'前往購票'"></ThinArrow>
-                </div>
-            </router-link>
+
+            <div class="buy_tickbtn">
+                <router-link to="/Home/Tick"><ThinArrow :text="'前往購票'"></ThinArrow></router-link>
+                <div class="spe_buy_tickbtn_deco"></div>
+            </div>
+
             <button class="spe_scroll_right" type="button" @click="scrollpage">
                 <img src="@/assets/image/paint/arrow.svg" alt="" />
             </button>
@@ -71,11 +71,3 @@ export default {
     }
 }
 </script>
-<style scoped lang="scss">
-.buy_tickbtn {
-    width: 100%;
-    text-align: end;
-    padding-right: 5%;
-    padding-top: 4%;
-}
-</style>
