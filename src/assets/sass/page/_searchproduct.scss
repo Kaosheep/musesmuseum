@@ -1,9 +1,15 @@
 .searchProdMain{
+   height: 100%;
+    z-index: 10;
+    .backGroundCard{
+        min-height: auto;
+    }
+  
     .backGroundCardBtns{
         margin-right: 30px;
     }
     .search{
-        height: 202px;
+        margin: 50px auto;
         display: flex;
         justify-content: flex-end;
         align-items: center;

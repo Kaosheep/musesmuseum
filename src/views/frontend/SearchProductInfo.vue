@@ -5,7 +5,7 @@
         <Searchbar @click="searchClick" />
         <Searchbarclick />
       </div>
-      <div class="backGroundCardbBlue"></div>
+      <!-- <div class="backGroundCardbBlue"></div> -->
       <div class="backGroundCard">
         <div class="backGroundCardBtns">
           <router-link :to="a.link" v-for="a in memBtnLink">
