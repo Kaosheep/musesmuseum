@@ -122,6 +122,11 @@ const routes = [
         component: () => import('../views/frontend/TicketQRcode.vue')
       },
       {
+        path: 'TicketQRcode/:id',
+        name: 'TicketQRcode',
+        component: () => import('../views/frontend/TicketQRcode.vue')
+      },
+      {
         path: 'SearchProduct',
         name: 'SearchProduct',
         component: () => import('../views/frontend/SearchProduct.vue'),

@@ -3,9 +3,8 @@
 }
 
     .backGroundCard{
-        width: 90%;
+     
         margin: auto;
-        @include dotfm();
         .memlogin_title {
             padding-bottom: 8px;
         }
@@ -28,8 +27,9 @@
         }
         
         form{
-            width: 200px;
-            margin: 0 auto;
+            width: 240px;
+            margin:auto 50px;
+            margin-right: 100px;
             
           }
     }

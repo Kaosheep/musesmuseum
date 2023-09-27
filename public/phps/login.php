@@ -31,13 +31,10 @@ try{
 	
 	//執行之
 	$member->execute();
-
 	if($member->rowCount() === 0){
-	//若有此人資料，請取回資料並顯示登入者名字
-	require_once("booksHeader.inc.php");
-	echo "<center>帳密錯誤, 請<a href='login_prepare.html'>重新登入~</a></center>";
-	require_once("booksFooter.inc.php");
-	exit("end---"); //php停止執行, 並輸出訊息
+		echo json_encode(["error" => "帳密錯誤"]);
+	} else {
+		echo json_encode(["success" => "登入成功"]);
 	}
 	//若有此人資料，請取回資料並顯示登入者名字
 	$memRow = $member->fetch(PDO::FETCH_ASSOC);
@@ -48,14 +45,14 @@ try{
 	
 }
 
-require_once("booksHeader.inc.php");
+// require_once("booksHeader.inc.php");
 ?>  
 
 <?php 
-echo $memRow["memName"], ", 您好~";
+// echo $memRow["memName"], ", 您好~";
 ?> 
 
 <?php 
-require_once("booksFooter.inc.php");
+// require_once("booksFooter.inc.php");
 
 ?>

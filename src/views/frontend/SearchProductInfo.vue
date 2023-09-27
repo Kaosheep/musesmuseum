@@ -41,9 +41,9 @@
 
           <div class="underRow">
             <p>付款狀態</p>
-            <div>123</div>
+            <div>已付款</div>
             <p>運送方式</p>
-            <div>456</div>
+            <div>宅配</div>
             <p>訂單狀態</p>
             <div>已完成</div>
             <p>總金額</p>
@@ -97,11 +97,11 @@ export default {
     // const idToFind = parseInt(this.$route.params.id);
     // this.productInfoArr = $ajax(`...php?id=${idToFind}`);
     this.productInfoArr = [
-      { id: "A00111", pic: "@/assets/image/productimage", name: "muses筆記", date: "2023/08/01", price: "$200", count: "2", total: "$400" },
-      { id: "A00104", pic: "@/assets/image/productimage", name: "muses筆記", date: "2023/08/01", price: "$200", count: "2", total: "$400" },
-      { id: "A00105", pic: "@/assets/image/productimage", name: "muses筆記", date: "2023/08/01", price: "$200", count: "2", total: "$400" },
-      { id: "A00106", pic: "@/assets/image/productimage", name: "muses筆記", date: "2023/08/01", price: "$200", count: "2", total: "$400" },
-      { id: "A00127", pic: "@/assets/image/productimage", name: "muses筆記", date: "2023/08/01", price: "$200", count: "2", total: "$400" },
+      { id: "W001", pic: "@/assets/image/productimage", name: "muses筆記", date: "2023/08/01", price: "$200", count: "2", total: "$400" },
+      { id: "K001", pic: "@/assets/image/productimage", name: "muses筆記", date: "2023/08/01", price: "$200", count: "2", total: "$400" },
+      { id: "K003", pic: "@/assets/image/productimage", name: "muses筆記", date: "2023/08/01", price: "$200", count: "2", total: "$400" },
+      { id: "L001", pic: "@/assets/image/productimage", name: "muses筆記", date: "2023/08/01", price: "$200", count: "2", total: "$400" },
+      { id: "L002", pic: "@/assets/image/productimage", name: "muses筆記", date: "2023/08/01", price: "$200", count: "2", total: "$400" },
     ]
 
     document.body.style.height = `auto`;
@@ -109,6 +109,15 @@ export default {
 };
 </script>
 <style scoped lang="scss">
+
+.backGroundCard{
+  align-items: flex-start; 
+  justify-content:center;
+  }
+  
+  .cardCenter{
+    align-items: start;
+  }
 .underRow{
   padding:10px 16px;
   display:flex;
@@ -125,9 +134,7 @@ export default {
     .productInfo{
       .headerRow{
         p{
-          margin: 0;
-          width: auto;
-          
+          margin: auto;
         }
       }
     }
