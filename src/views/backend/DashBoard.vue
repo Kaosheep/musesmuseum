@@ -8,8 +8,8 @@
               <template #title>
                 {{ submenu.title }}
               </template>
-              <MenuItem v-for="(item, itemIndex) in submenu.items" :key="itemIndex" :name="item.name">
-                <router-link :to="item.link">{{ item.text }}</router-link>
+              <MenuItem v-for="(item, itemIndex) in submenu.items" :key="itemIndex" :name="item.name" :to="item.link">
+              {{ item.text }}
               </MenuItem>
             </Submenu>
           </Menu>
@@ -65,7 +65,7 @@ export default {
             { name: '4-1', text: '商品管理', link: "/DashBoard/Shopm" },
             { name: '4-2', text: '訂單管理', link: "/DashBoard/Orderm" },
           ],
-        }, 
+        },
         {
           name: '5',
           title: '訂票管理',
@@ -80,6 +80,7 @@ export default {
           title: '帳號管理',
           items: [
             { name: '6-1', text: '管理員帳號', link: "/DashBoard/Manager" },
+            { name: '6-2', text: '管理員登出', link: "/" },
           ],
         },
       ],
@@ -101,6 +102,7 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
+
   .list_style {
     background-color: #D9D9D9;
   }

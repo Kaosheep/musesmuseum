@@ -3,7 +3,7 @@
     <div>
       <div class="admin_editbar">
         <div>
-          <PinkButton class="btn_admin" text="新增" />
+          <PinkButton class="btn_admin" text="新增" @click="showEditForm('add')" />
           <PinkButton class="btn_admin" text="上架" @click="toggleStatus('1')" :disabled="!canToggle('1')" />
           <PinkButton class="btn_admin" text="下架" @click="toggleStatus('0')" :disabled="!canToggle('0')" />
         </div>
@@ -17,7 +17,7 @@
             <th>消息標題</th>
             <th>狀態</th>
             <th></th>
-        
+
           </tr>
           <tr v-for="(i, index) in test" :key="index">
             <td><input type="checkbox" v-model="i.selected"></td>
@@ -34,9 +34,9 @@
 
         </table>
       </div>
-      <form action="" class="pop" v-if="showForm" @submit.prevent="submitForm">
+      <form action="" class="pop" v-show="showForm" @submit.prevent="submitForm">
         <h2>編輯</h2>
-        <div class="xedit">
+        <div class="xedit" v-show="addnews">
           <div>
             <div>消息編號</div>
             <div>MN2023061901</div>
@@ -48,23 +48,30 @@
         </div>
         <div>
           <div>標題</div>
-          <input type="text" name="" id="">
+          <input type="text" name="" id="" v-model="add_news.title">
           <div>內容</div>
-          <textarea name="" id="" cols="30" rows="7"></textarea>
+          <textarea name="" id="" cols="30" rows="7" v-model="add_news.text"></textarea>
           <div class="switch_status">
             <div>狀態</div>
-            <select name="" id="">
-              <option value="">上架中</option>
+            <select v-model="status">
+              <option value="1">上架中</option>
+              <option value="0">未上架</option>
             </select>
-            <input type="file" id="fileInput" accept="image/*" style="display: none;" />
+            <Upload multiple type="drag" action="//jsonplaceholder.typicode.com/posts/" show-upload-list>
+              <div style="padding: 20px 0">
+                <Icon type="ios-cloud-upload" size="52" style="color: #3399ff"></Icon>
+                <p>Click or drag files here to upload</p>
+              </div>
+            </Upload>
+            <!-- <input type="file" id="fileInput" accept="image/*" style="display: none;" />
             <label for="fileInput">選擇圖片</label>
             <div class="img_wrap">
               <img src="" alt="" id="img1" width="50">
-            </div>
+            </div> -->
           </div>
           <div class="form_btn">
-            <PinkButton class="btn_admin" text="取消" @click="hideEditForm" />
-            <PinkButton class="btn_admin" text="儲存" />
+            <PinkButton type="button" class="btn_admin" text="取消" @click="hideEditForm" />
+            <PinkButton type="button" class="btn_admin" text="儲存" @click="addnews_btn()" />
           </div>
         </div>
       </form>
@@ -87,6 +94,12 @@ export default {
   data() {
     return {
       news: [],
+      add_news: [
+        {
+          title: '',
+          text: '',
+        }
+      ],
       test: [
         {
           id: "MN20230901",
@@ -100,7 +113,9 @@ export default {
 
         }
       ],
-      showForm: false
+      showForm: false,
+      addnews: false,
+      status: 0
     }
   },
   methods: {
@@ -114,7 +129,11 @@ export default {
     canToggle(newStatus) {
       return this.test.some(item => item.selected && item.statusn !== newStatus);
     },
-    showEditForm() {
+    showEditForm(type) {
+      if (type !== 'add') {
+        this.addnews = true;
+      }
+
       this.showForm = true;
     },
     hideEditForm() {
@@ -122,7 +141,32 @@ export default {
     },
     submitForm() {
       this.hideEditForm();
-    }
+    },
+    //新增
+    // addnews_btn() {
+    //   //先檢查資料格式是否符合DB規則
+
+
+    //   const url = `http://localhost/musesmuseum/public/phps/news.php`
+    //   let headers = {
+    //     "Content-Type": "application/json",
+    //     "Accept": "application/json",
+    //   }
+    //   //以下是API文件中提及必寫的主體参數。
+    //   let body = {
+    //     "title": this.add_news.title,
+    //     "content": this.add_news.text,
+    //     'status': this.status,
+    //   }
+    //   fetch(url, {
+    //     method: "POST",
+    //     headers: headers,
+    //     //別忘了把主體参數轉成字串，否則資料會變成[object Object]，它無法被成功儲存在後台
+    //     body: JSON.stringify(body)
+    //   })
+    //     // .then(response => response.json())
+    //     // .then(json => console.log(json));
+    // }
 
   },
   mounted() {
@@ -162,7 +206,7 @@ div {
   display: flex;
   background-color: #f2f2f2;
   padding: 5px;
-  border-radius:10px 10px 0 0;
+  border-radius: 10px 10px 0 0;
 }
 
 .onlyB {
@@ -201,8 +245,9 @@ div {
     th,
     td {
       padding: 10px;
-      text-align: left;
+      text-align: center;
       border-bottom: 1px solid #ccc;
+      
     }
 
     th {
@@ -258,19 +303,11 @@ div {
 
     div {
       margin-right: 10px;
-
-      div {
-        margin-bottom: 10px;
-      }
-
-
     }
-
   }
 
   input,
   textarea {
-    margin-top: 10px;
     width: 100%;
     background-color: #ffffff1b;
     border: 1px solid #009CA8;

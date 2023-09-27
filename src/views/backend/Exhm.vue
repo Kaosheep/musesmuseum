@@ -1,52 +1,125 @@
 <template>
     <div>
-        <button class="bTab">展覽資訊</button>
-    </div>
-    <div class="admin_editbar">
         <div>
-            <PinkButton class="btn_admin" text="新增" />
-            <PinkButton class="btn_admin" text="刪除" />
-            <PinkButton class="btn_admin" text="上架" />
+            <div class="admin_editbar">
+                <div>
+                    <PinkButton class="btn_admin" text="新增"/>
+                    <PinkButton class="btn_admin" text="上架" @click="toggleStatus('1')" :disabled="!canToggle('1')" />
+                    <PinkButton class="btn_admin" text="下架" @click="toggleStatus('0')" :disabled="!canToggle('0')" />
+                </div>
+                <Searchbar class="onlyB" />
+            </div>
+            <div class="dmain">
+                <table>
+                    <tr>
+                        <th></th>
+                        <th>展覽編號</th>
+                        <th>展覽名稱</th>
+                        <th>狀態</th>
+                        <th></th>
+                    </tr>
+                    <tr v-for="(i, index) in exhm" :key="index">
+                        <td><input type="checkbox"></td>
+                        <td>{{ i.id }}</td>
+                        <td>{{ i.title }}</td>
+                        <td>
+                            <p v-if="parseInt(i.statusn) === 1">已上架</p>
+                            <p v-else>未上架</p>
+                        </td>
+                        <td>
+                            <button class="edit" @click="showEditForm()">編輯</button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <form action="" class="pop" v-if="showForm" @submit.prevent="submitForm">
+                <h2>編輯</h2>
+                <div>
+                    <div>展覽編號</div>
+                    <div>EXH20230901</div>
+                </div>
+                <div>
+                    <div>標題</div>
+                    <div>獨居沙漠，藝術家喬治亞．歐姬芙</div>
+                </div>
+                <div>
+                    <div>內容</div>
+                    <textarea name="" id="" cols="30" rows="10"></textarea>
+                </div>
+
+                <div>
+                    <div>展覽期間</div>
+                    <Space size="large" wrap>
+                        <DatePicker type="date" :options="options1" placeholder="Select date" style="width: 200px" />至
+                        <DatePicker type="date" :options="options1" placeholder="Select date" style="width: 200px" />
+
+                    </Space>
+                </div>
+                <div>
+                    <div>狀態</div>
+                    <div>
+                        <select name="" id="">
+                            <option value="">未上架</option>
+                        </select>
+                    </div>
+                    <Upload type="drag" action="//jsonplaceholder.typicode.com/posts/">
+                        <div style="padding: 20px 0">
+                            <Icon type="ios-cloud-upload" size="52" style="color: #3399ff"></Icon>
+                            <p>Click or drag files here to upload</p>
+                        </div>
+                    </Upload>
+                </div>
+                <div class="form_btn">
+                    <PinkButton class="btn_admin" text="取消" @click="hideEditForm" />
+                    <PinkButton class="btn_admin" text="儲存" />
+                </div>
+            </form>
         </div>
-        <Searchbar class="onlyB" />
-    </div>
-    <div class="dmain">
-        <table>
-            <tr>
-                <th></th>
-                <th>展覽編號</th>
-                <th>展覽名稱</th>
-                <th>狀態</th>
-                <th></th>
-            </tr>
-            <tr v-for="(i, index) in exhm" :key="index">
-                <td><input type="checkbox"></td>
-                <td>{{i.id}}</td>
-                <td>{{i.title}}</td>
-                <td>
-                    <p v-if="parseInt(i.statusn) === 1">已上架</p>
-                    <p v-else>未上架</p>
-                </td>
-                <td>
-                    <button class="edit">編輯</button>
-                </td>
-            </tr>
-        </table>
+
     </div>
 </template>
-     
+   
 <script>
 import PinkButton from "/src/components/PinkButton.vue";
 import Searchbar from "/src/components/Searchbar.vue";
 import Searchbarclick from "/src/components/Searchbarclick.vue";
+import Addressfrom from "/src/views/backend/Address.vue";
+
 export default {
     components: {
         Searchbar,
         Searchbarclick,
-        PinkButton
+        PinkButton,
+        Addressfrom
     },
     data() {
         return {
+            news: [],
+            test: [
+                {
+                    id: "MN20230901",
+                    title: "「科技奇觀展」探索未來科...",
+                    statusn: "0",
+                },
+                {
+                    id: "MN20231101",
+                    title: "「古文明珍寶展」現已開展...",
+                    statusn: "1",
+
+                }
+            ],
+            memt: [
+                {
+                    id: "MM2023061901",
+                    name: "阿阿阿",
+                    statusn: "1",
+                }, {
+                    id: "MM2023061902",
+                    name: "欸欸欸",
+                    statusn: "0",
+                }
+
+            ],
             exhm: [
                 {
                     id: "EXH20230901",
@@ -63,21 +136,48 @@ export default {
                     title: "線條、形狀、空間：建築美......",
                     statusn: "0",
                 },
-            ]
+            ],
+            showForm: false
         }
     },
     methods: {
+        toggleStatus(newStatus) {
+            this.test.forEach(item => {
+                if (item.selected) {
+                    item.statusn = newStatus;
+                }
+            });
+        },
+        canToggle(newStatus) {
+            return this.test.some(item => item.selected && item.statusn !== newStatus);
+        },
+        showEditForm() {
+            this.showForm = true;
+        },
+        hideEditForm() {
+            this.showForm = false;
+        },
+        submitForm() {
+            this.hideEditForm();
+        }
 
     },
     mounted() {
 
     }
-
 }
 </script>
-  
+
 <style scoped lang="scss">
 @import "@/assets/sass/style.scss";
+
+div {
+    color: #000;
+
+    form {
+        height: 80vh;
+    }
+}
 
 .bTab {
     background-color: #ffffff80;
@@ -85,13 +185,21 @@ export default {
     border-width: 1px 1px 0 1px;
     border-style: none;
     padding: 8px;
+    color: #000;
+    transition: .3s;
+    cursor: pointer;
+
+    &:hover {
+        background-color: $mpink;
+        color: #fff;
+    }
 }
 
 .admin_editbar {
     display: flex;
     background-color: #f2f2f2;
     padding: 5px;
-    border-top-right-radius: 10px;
+    border-radius: 10px 10px 0 0;
 }
 
 .onlyB {
@@ -114,11 +222,11 @@ export default {
 
     &:hover {
         background-color: $mpink;
-        color: #fff;
     }
 }
 
 .dmain {
+    position: relative;
     background-color: #ffffff80;
     height: 80%;
     border-radius: 0 10px 10px 10px;
@@ -131,7 +239,7 @@ export default {
         th,
         td {
             padding: 10px;
-            text-align: left;
+            text-align: center;
             border-bottom: 1px solid #ccc;
         }
 
@@ -149,9 +257,13 @@ export default {
 
             &:last-child {
                 button {
+                    color: #000;
                     border: none;
-                    padding: 5px 10px;
                     cursor: pointer;
+                }
+
+                &:hover {
+                    color: $mblue;
                 }
             }
 
@@ -164,4 +276,49 @@ export default {
     }
 
 }
+
+.pop {
+    position: absolute;
+    top: -1%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    background-color: rgba(255, 248, 248);
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+    border-radius: 10px;
+    overflow: auto;
+
+
+    .info_col {
+        display: flex;
+        margin-right: 10px;
+        margin-bottom: 10px;
+        justify-content: space-around;
+
+        div {
+            width: 50%;
+            margin-top: 10px;
+            margin-right: 10px;
+
+            :nth-child(2) {
+                text-decoration: underline;
+                padding: 5px;
+            }
+        }
+
+    }
+
+
+
+    .form_btn {
+        position: fixed;
+        bottom: 0;
+        right: 20px;
+    }
+}
 </style>
+    
+

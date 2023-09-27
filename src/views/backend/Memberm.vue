@@ -1,9 +1,6 @@
 <template>
   <div>
     <div>
-      <button class="bTab">會員名單</button>
-    </div>
-    <div>
       <div class="admin_editbar">
         <div>
           <PinkButton class="btn_admin" text="新增" />
@@ -61,15 +58,18 @@
             <div>0989123456</div>
           </div>
         </div>
-        <div>通訊地址</div>
-        <Addressfrom />
-        <div>會員狀態</div>
         <div>
-          <select name="" id="">
-            <option value="">一般</option>
-          </select>
+          <div>通訊地址</div>
+          <Addressfrom />
         </div>
-
+        <div>
+          <div>會員狀態</div>
+          <div>
+            <select name="" id="">
+              <option value="">一般</option>
+            </select>
+          </div>
+        </div>
         <div class="form_btn">
           <PinkButton class="btn_admin" text="取消" @click="hideEditForm" />
           <PinkButton class="btn_admin" text="儲存" />
@@ -183,7 +183,7 @@ div {
   display: flex;
   background-color: #f2f2f2;
   padding: 5px;
-  border-top-right-radius: 10px;
+  border-radius: 10px 10px 0 0;
 }
 
 .onlyB {
@@ -223,7 +223,7 @@ div {
     th,
     td {
       padding: 10px;
-      text-align: left;
+      text-align: center;
       border-bottom: 1px solid #ccc;
     }
 
@@ -274,16 +274,26 @@ div {
   z-index: 999;
   border-radius: 10px;
   overflow: auto;
-  div{
-    width: 100%;
-  }
-  .info_col{
-      display: flex;
-      div{
-        margin-right: 10px;
-      }
+
+
+  .info_col {
+    display: flex;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    justify-content: space-around;
+
+    div {
+      width: 50%;
+      margin-top: 10px;
+      margin-right: 10px;
+      :nth-child(2) {
+      text-decoration: underline;
+      padding-bottom: 5px;
     }
- 
+    }
+
+  }
+
 
 
   .form_btn {
