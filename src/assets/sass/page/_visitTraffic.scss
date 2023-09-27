@@ -18,6 +18,13 @@
     display: flex;
     align-items: center;
     flex-wrap: wrap;
+    width: calc(100% - 70px);
+    margin-left: auto;
+
+    @include t() {
+        width: 90%;
+        margin: auto;
+    }
 }
 
 
@@ -25,33 +32,28 @@
 
 .VisitTraffic-h1 {
     width: 216px;
-    height: 90px;
-    background-color: $mpink;
-    margin-bottom: 30px;
-    margin-left: 30px;
-    border-radius: 5px;
-    text-align: center;
+    margin-top: 30px;
     color: #fff;
+    background-color: $mpink;
+    display: inline-block;
+    padding: 1rem 2rem;
+    border-radius: 20px;
+    text-align: center;
+
 
     @include t() {
-        width: 40%;
-        display: flex;
-        font-size: 28px;
-        justify-content: center;
-        align-items: center;
+        width: 50%;
     }
 
     @media screen and (max-width:560px) {
+        font-size: 28px;
+        margin-top: 20px;
+        box-shadow: none;
         width: 50%;
     }
 
     @include m() {
-        width: 60%;
-        height: 75px;
-        display: flex;
-        font-size: 28px;
-        justify-content: center;
-        align-items: center;
+        width: 85%;
     }
 }
 
@@ -65,7 +67,7 @@
     @media screen and (max-width:570px) {
         width: 100%;
         text-align: left;
-        margin-left: 30px;
+        margin-left: 0;
         margin-bottom: 30px;
     }
 }
@@ -74,6 +76,14 @@
 .VisitTraffic-allFrom {
     width: 85%;
     margin: auto;
+
+    @include t() {
+        width: 90%;
+    }
+
+    @include m() {
+        width: 95%;
+    }
 }
 
 .VisitTraffic-nav {
@@ -268,5 +278,108 @@
         width: 95%;
         height: 200px;
         padding: 10px;
+    }
+}
+
+// 輪播圖
+.VisitTrafficBoard {
+    width: 60%;
+    margin: auto;
+    position: relative;
+    padding: 0;
+    overflow: hidden;
+
+    @include t() {
+        width: 90%;
+    }
+
+    @include m() {
+        width: 95%;
+    }
+
+
+}
+
+.VisitTrafficcarousel {
+    width: 100%;
+    padding: 0;
+    text-align: center;
+}
+
+.VisitTraffic-hidden {
+    visibility: hidden;
+}
+
+.VisitTrafficpicHidden {
+    width: 100%;
+}
+
+.VisitTrafficPic {
+
+    width: 100%;
+}
+
+.VisitTrafficimg {
+    animation: VisitTrafficCarousel 15s linear infinite;
+}
+
+.VisitTrafficImg1 {
+    position: absolute;
+    top: 0;
+    left: 100%;
+    width: 100%;
+    height: 100%;
+    animation-delay: 0s;
+
+}
+
+.VisitTrafficImg2 {
+    position: absolute;
+    top: 0;
+    left: 100%;
+    width: 100%;
+    height: 100%;
+    animation-delay: 5s;
+}
+
+.VisitTrafficImg3 {
+    position: absolute;
+    top: 0;
+    left: 100%;
+    width: 100%;
+    height: 100%;
+    animation-delay: 10s;
+}
+
+@keyframes VisitTrafficCarousel {
+    0% {
+        left: 100%;
+        opacity: 1;
+    }
+
+
+    6.6666666% {
+        opacity: 1;
+        left: 0;
+    }
+
+    33.3333333% {
+        opacity: 1;
+        left: 0%;
+    }
+
+    39.9999999% {
+        opacity: 1;
+        left: -100%;
+    }
+
+    40% {
+        opacity: 0;
+        left: -100%;
+    }
+
+    41% {
+        opacity: 0;
+        left: 100%;
     }
 }
