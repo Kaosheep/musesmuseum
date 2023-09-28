@@ -7,11 +7,24 @@
         margin: auto;
         margin-bottom: 100px;
     }
+
+    @include m() {
+        width: 100%;
+
+    }
 }
 
 .VisitTraffic-title {
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
+    width: calc(100% - 70px);
+    margin-left: auto;
+
+    @include t() {
+        width: 90%;
+        margin: auto;
+    }
 }
 
 
@@ -19,17 +32,28 @@
 
 .VisitTraffic-h1 {
     width: 216px;
-    height: 90px;
-    background-color: $mpink;
-    margin-bottom: 30px;
-    margin-left: 30px;
-    border-radius: 5px;
-    text-align: center;
+    margin-top: 30px;
     color: #fff;
+    background-color: $mpink;
+    display: inline-block;
+    padding: 1rem 2rem;
+    border-radius: 20px;
+    text-align: center;
+
 
     @include t() {
-        width: 80%;
-        text-align: center;
+        width: 50%;
+    }
+
+    @media screen and (max-width:560px) {
+        font-size: 28px;
+        margin-top: 20px;
+        box-shadow: none;
+        width: 50%;
+    }
+
+    @include m() {
+        width: 85%;
     }
 }
 
@@ -38,23 +62,40 @@
     margin-left: auto;
     display: flex;
     align-items: center;
+    justify-content: flex-start;
+
+    @media screen and (max-width:570px) {
+        width: 100%;
+        text-align: left;
+        margin-left: 0;
+        margin-bottom: 30px;
+    }
 }
 
 // 表格
 .VisitTraffic-allFrom {
     width: 85%;
     margin: auto;
+
+    @include t() {
+        width: 90%;
+    }
+
+    @include m() {
+        width: 95%;
+    }
 }
 
 .VisitTraffic-nav {
     display: flex;
     flex-wrap: wrap;
+
 }
 
 #VisitTrafficPublic,
 #VisitTrafficCar,
 #VisitTrafficPork {
-    width: 150px;
+    width: 100px;
     height: 66.35px;
     border-radius: 8px 8px 0 0;
     display: flex;
@@ -65,6 +106,17 @@
     border: 2px solid $myellow;
     border-bottom: 0px;
     cursor: pointer;
+
+    @include t() {
+        margin-right: 18px;
+    }
+
+    @include m() {
+        width: 80px;
+        margin-right: 10px;
+        height: 50px;
+    }
+
 }
 
 #VisitTrafficCar,
@@ -79,8 +131,16 @@
     margin-top: 0px;
     background-color: $myellow;
     padding: 20px 40px;
-    margin-bottom: 100px;
+    margin-bottom: 50px;
     border-radius: 0 8px 8px 8px;
+
+    @include t() {
+        padding: 10px 20px;
+    }
+
+    @include m() {
+        padding: 5px 15px;
+    }
 
 }
 
@@ -92,7 +152,11 @@
 .VisitTrafficPFtext {
     width: 50%;
     box-sizing: border-box;
+    padding: 10px;
 
+    @media screen and (max-width:570px) {
+        width: 100%;
+    }
 }
 
 .VisitTrafficPF-p {
@@ -102,12 +166,29 @@
     background-color: #fff;
     margin-left: auto;
     padding: 20px;
-    height: 200px;
+    height: 220px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     border-radius: 8px;
+
+    @include t() {
+        height: 280px;
+        padding: 10px;
+        width: 100%;
+    }
+
+    @media screen and (max-width:560px) {
+        padding: 10px;
+        width: 100%;
+        height: 150px;
+    }
+
+    @include t() {
+        height: 230px;
+    }
+
 }
 
 // 自行開車
@@ -119,6 +200,11 @@
     width: 50%;
     padding: 20px 0;
     box-sizing: border-box;
+
+    @include t() {
+        width: 100%;
+    }
+
 }
 
 .VisitTrafficCFCarP-0,
@@ -139,21 +225,61 @@
     align-items: center;
     justify-content: center;
     border-radius: 8px;
+
+    @include t() {
+        width: 95%;
+    }
+}
+
+.VisitTrafficPorkCar-2 {
+    width: 100%;
 }
 
 .VisitTrafficCFCarP-2,
 .VisitTrafficPorkCarP-2 {
     margin: auto;
-    width: 92%;
+    width: 95%;
     height: 200px;
 
 }
 
 .VisitTrafficPorkCarP-2 {
-    height: 280px;
-    margin: auto;
+    height: 350px;
 }
 
+// 自行開車
+
+.VisitTrafficPorkCarP-0,
+.VisitTrafficPorkCarP-1,
+.VisitTrafficPorkCarP-2 {
+    @media screen and (max-width:560px) {
+        width: 95%;
+        height: 350px;
+        padding: 10px;
+    }
+
+    @include m() {
+        height: 450px;
+    }
+}
+
+.VisitTrafficPorkCarP-0 {
+    @media screen and (max-width:560px) {
+        height: 250px;
+    }
+
+    @include m() {
+        height: 350px;
+    }
+}
+
+.VisitTrafficPorkCarP-1 {
+    @media screen and (max-width:560px) {
+        width: 95%;
+        height: 200px;
+        padding: 10px;
+    }
+}
 
 // 輪播圖
 .VisitTrafficBoard {
@@ -163,24 +289,39 @@
     padding: 0;
     overflow: hidden;
 
+    @include t() {
+        width: 90%;
+    }
+
+    @include m() {
+        width: 95%;
+    }
+
+
 }
 
 .VisitTrafficcarousel {
     width: 100%;
     padding: 0;
     text-align: center;
-
-
 }
 
 .VisitTraffic-hidden {
     visibility: hidden;
 }
 
-.VisitTrafficPic {
-    animation: VisitTrafficCarousel 15s linear infinite;
+.VisitTrafficpicHidden {
+    width: 100%;
 }
 
+.VisitTrafficPic {
+
+    width: 100%;
+}
+
+.VisitTrafficimg {
+    animation: VisitTrafficCarousel 15s linear infinite;
+}
 
 .VisitTrafficImg1 {
     position: absolute;
@@ -211,27 +352,33 @@
 }
 
 @keyframes VisitTrafficCarousel {
-    6.66666% {
+    0% {
+        left: 100%;
+        opacity: 1;
+    }
+
+
+    6.6666666% {
         opacity: 1;
         left: 0;
     }
 
-    33.3333% {
+    33.3333333% {
         opacity: 1;
         left: 0%;
     }
 
-    39.9999% {
+    39.9999999% {
         opacity: 1;
         left: -100%;
     }
 
-    41% {
+    40% {
         opacity: 0;
         left: -100%;
     }
 
-    42% {
+    41% {
         opacity: 0;
         left: 100%;
     }

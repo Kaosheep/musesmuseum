@@ -12,6 +12,7 @@
     }
     @include m(){
         height:calc(100vh - 60px) ;
+        margin-bottom: 70px;
     }
     .title {
         height: 100vh;
@@ -77,10 +78,11 @@
                 height: 60vh;
             }
             @include m(){
-                position: fixed;
+                position: absolute;
                 bottom: 0;
                 left: 0;
-                height: 40vh;
+                height: 35vh;
+                width: 100vw;
                 box-shadow: none;
                 border-radius: 0px;
             }
@@ -94,7 +96,7 @@
                     height: 57vh;
                 }
                 @include m(){
-                    height: 37vh;
+                    height: 32vh;
                     padding: 1rem;
                 }
                 &::-webkit-scrollbar {

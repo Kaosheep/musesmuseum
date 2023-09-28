@@ -82,11 +82,24 @@ main {
                     input {
                         background-color: transparent;
                         border: 0;
-                        box-shadow: inset 9px 2px 20px 0px rgba(247, 0, 0, 0.2);
+                        box-shadow: 2px 4px 6px 0px #1E5289;
                         border-radius: 10px;
                         padding: 5px;
                         margin-top: 10px;
+                        margin-left: 5px;
                         text-align: center;
+                    }
+
+                    button {
+                        background-color: transparent;
+                        padding: 5px;
+                        border: 0;
+                        box-shadow: 1px 1px 3px 0px #1E5289;
+                        border-radius: 10px;
+
+                        &:active {
+                            box-shadow: inset 1px 1px 6px 0px #1E5289;
+                        }
                     }
                 }
             }

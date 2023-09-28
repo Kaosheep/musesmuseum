@@ -1,8 +1,5 @@
 <template>
   <div>
-    <div>
-      <button class="bTab">商品管理</button>
-    </div>
     <form action="">
       <div class="admin_editbar">
         <div>
@@ -103,7 +100,7 @@ div{
   display: flex;
   background-color: #f2f2f2;
   padding: 5px;
-  border-top-right-radius: 10px;
+  border-radius: 10px 10px 0 0;
 }
 
 .onlyB {
@@ -123,11 +120,6 @@ div{
   color: #fff;
   border: none;
   cursor: pointer;
-
-  &:hover {
-    background-color: $mpink;
-    color: #fff;
-  }
 }
 
 .dmain {
@@ -143,7 +135,7 @@ div{
     th,
     td {
       padding: 10px;
-      text-align: left;
+      text-align: center;
       border-bottom: 1px solid #ccc;
     }
 

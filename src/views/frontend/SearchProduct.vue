@@ -125,7 +125,7 @@ export default {
 .backGroundCard{
   // flex-wrap: wrap;
   align-items: flex-start; 
-  justify-content: space-between;
+  justify-content:center;
 }
 // .backGroundCardBtns{
 //   margin-right: 30px;

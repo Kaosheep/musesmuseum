@@ -28,20 +28,14 @@
               :key="rowindex" 
               :class="[rowindex % 2 === 0 ? 'yellowRow' : 'whiteRow']"
               >
-                <div class="itemInfoList ">{{ rowitem.id }}</div>
-                <router-link :to="`/Home/TicketQRcode/${rowitem.id}`" >
+              <router-link :to="`/Home/TicketQRcode/${rowitem.id}`" >
+                <div class="itemInfoList">{{ rowitem.id }}</div>
+              </router-link>  
                   <div class="itemInfoList">
                     {{ rowitem.ticketName}}
                     {{ rowitem.ticketName}}
-                    <!-- <img
-                      :src="
-                        require('@/assets/image/productimage/productimage' +
-                        rowindex +
-                          '.png')"
-                        :alt="rowitem.name"
-                    /> -->
                   </div>
-                </router-link>
+               
                 <div class="itemInfoList hideInfo">{{ rowitem.date}}</div>
                 <div class="itemInfoList">{{ rowitem.price }}</div>
                 <div class="itemInfoList hideInfo">{{ rowitem.pay }}</div>
@@ -134,11 +128,34 @@ export default {
 </script>
 <style scoped lang="scss">
 
-.backGroundCard{
-  display: flex;
-    // flex-wrap: wrap;
-    align-items: flex-start; 
-    justify-content: space-between;
+
+.searchProdMain{
+  .backGroundCard{
+    // display: flex;
+    // align-items: flex-start; 
+    justify-content: center;
+  }
+  .itemInfoList{
+    margin: auto 27px;
+    width: 48px;
+  }
+  .yellowRow{
+    justify-content: center;
+  }
+}
+
+@include t(){
+  .searchProdMain{
+    .productInfo{
+      .headerRow{
+        p{
+          margin: auto;
+        }
+      }
+    }
+  }
+ 
+ 
 }
 
 .cardCenter{

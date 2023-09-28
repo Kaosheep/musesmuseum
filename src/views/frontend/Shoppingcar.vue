@@ -1,4 +1,5 @@
 <template>
+  <main>
   <div class="shoppingcar_stepbar">
     <div>
       <p>確認商品</p>
@@ -74,6 +75,7 @@
     </router-link>
   </div>
   <div class="dot"></div>
+</main>
 </template>
 
 <script>
@@ -83,8 +85,8 @@ export default {
   data() {
     return {
       storageitem: localStorage["addItemlist"],
-      // totalitem: 0,
-      // total: 0,
+      totalitem: 0,
+      total: 0,
       itemarr: [],
     };
   },
@@ -97,12 +99,14 @@ export default {
       }
     },
     totalAmount() {
-      return this.itemarr.reduce((total, item) => {
-        return total + this.subtotal(item[2], item[3]);
+      return this.itemarr.reduce((t, item) => {
+        return t + this.subtotal(item[2], item[3]);
       }, 0);
     },
     counttotalitem() {
-      return this.itemarr.length;
+      return this.itemarr.reduce((totalitem, item) => {
+        return totalitem +=  parseInt(item[3]);
+      }, 0);
     },
   },
   methods: {
@@ -153,5 +157,9 @@ export default {
 };
 </script>
 <style scoped lang="scss">
-@import "@/assets/sass/style.scss";
+main{
+  @include t(){
+    height: 72vh;
+  }
+}
 </style>

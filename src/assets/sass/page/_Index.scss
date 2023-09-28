@@ -142,7 +142,7 @@
                     h2 {
                         font-size: 1.25rem;
                         font-weight: 700;
-                        white-space: nowrap;
+                        // white-space: nowrap;
                     }
                 }
 
@@ -165,6 +165,7 @@
                         margin-left: auto;
                         position: relative;
                         z-index: 2;
+
                         @include t() {
                             margin: 4rem auto 2.5rem;
                         }
@@ -259,7 +260,7 @@
                     height: 100%;
                     min-width: 200px;
                     background-color: $myellow;
-                    z-index: 1;
+                    z-index: 2;
 
                     &::after {
                         content: "";
@@ -277,7 +278,7 @@
                     height: 100%;
                     overflow: hidden;
                     position: relative;
-
+                    min-width: 80px;
                     @include t() {
                         position: absolute;
                         right: 0;
@@ -409,7 +410,8 @@
                                             background-color: $mblue;
                                         }
                                     }
-                                    &:last-child{
+
+                                    &:last-child {
                                         padding-top: 2rem;
                                         text-align: end;
                                     }
@@ -430,28 +432,34 @@
 
                 }
 
-                .index_carousel{
+                .index_carousel {
                     display: none;
-                    height:60vh;
-                    @include t(){
+                    height: 60vh;
+
+                    @include t() {
                         display: block;
                         margin-bottom: 80px;
                     }
-                    @include m(){
-                        height:90vh;
+
+                    @include m() {
+                        height: 90vh;
                     }
-                    .artcarousel{
+
+                    .artcarousel {
                         position: relative;
                         height: 100%;
-                        img{
+
+                        img {
                             width: 100%;
                             height: 60vh;
                             object-fit: cover;
-                            @include m(){
-                                height:90vh;
+
+                            @include m() {
+                                height: 90vh;
                             }
                         }
-                        .txt{
+
+                        .txt {
                             width: 100%;
                             padding: 3% 5% 5%;
                             position: absolute;
@@ -627,9 +635,11 @@
 
                 .container {
                     width: 100%;
-                    @include t(){
+
+                    @include t() {
                         margin: 50px 0;
                     }
+
                     .row {
                         position: relative;
                         width: 90%;
@@ -638,6 +648,7 @@
                         @include t() {
                             width: 90%;
                             margin: auto;
+                            height: 230px;
                         }
 
                         &:first-child {
@@ -741,8 +752,7 @@
                                     @include m() {
                                         font-weight: 900;
                                         color: #fff;
-                                        -webkit-text-stroke: 1px #000;
-                                        text-stroke: 1px #000;
+                                        text-shadow: -2px 2px 5px #000;
                                     }
                                 }
 
@@ -785,8 +795,8 @@
                     width: 100%;
                     height: 100%;
                     position: relative;
-                    
-                    @include t(){
+
+                    @include t() {
                         padding: 50px 0px;
                         min-height: 500px;
                         display: flex;
@@ -795,12 +805,14 @@
                         flex-wrap: wrap;
                         margin-bottom: 50px;
                     }
+
                     .light {
                         position: absolute;
                         border-radius: 50%;
                         opacity: .2;
                         backdrop-filter: brightness(120%);
                         z-index: -1;
+
                         &.yellow {
                             width: 300px;
                             height: 300px;
@@ -841,6 +853,7 @@
                             }
                         }
                     }
+
                     .balla {
                         width: 50px;
                         height: 50px;
@@ -848,18 +861,22 @@
                         border-radius: 50%;
                         background-color: $mpink;
                         transform-origin: bottom;
-                        
                         bottom: -100%;
-                        @include t(){
+                        transition: .3s;
+                        &:hover{
+                            background-color: $mgreen;
+                        }
+                        @include t() {
                             position: static;
                         }
+
                         .artballa {
                             width: 90%;
                             height: 90%;
                             border-radius: 50%;
                             text-align: end;
                             padding-top: 2rem;
-                            background: radial-gradient(#fff 20%, transparent 21% ,transparent 79%, #fff 80%);
+                            background: radial-gradient(#fff 20%, transparent 21%, transparent 79%, #fff 80%);
                             background-size: 1em 1em;
                             background-color: $myellow;
                             opacity: 1;
@@ -883,6 +900,7 @@
                         }
 
                     }
+
                     .ballb {
                         width: 50px;
                         height: 50px;
@@ -892,23 +910,28 @@
                         transform-origin: bottom;
                         left: 10%;
                         bottom: -100%;
-                        
-                        @include t(){
+                        transition: .3s;
+                        &:hover{
+                            background-color: $mlblue;
+                        }
+                        @include t() {
                             position: static;
                         }
+
                         .artballb {
                             width: 90%;
                             height: 90%;
                             border-radius: 50%;
                             text-align: center;
-                            background: radial-gradient(#fff 20%, transparent 21% ,transparent 79%, #fff 80%);
+                            background: radial-gradient(#fff 20%, transparent 21%, transparent 79%, #fff 80%);
                             background-size: 1em 1em;
                             background-color: $myellow;
                             opacity: 1;
                             background-position: center;
                             transform: scale(0);
                             position: relative;
-                            padding-top:6rem ;
+                            padding-top: 6rem;
+
                             h3 {
                                 font-size: 32px;
                                 font-weight: 700;
@@ -925,6 +948,7 @@
                         }
 
                     }
+
                     @keyframes downa {
                         0% {
                             width: 50px;
@@ -956,12 +980,13 @@
                             left: 45%;
                         }
                     }
+
                     @keyframes downb {
                         0% {
                             width: 50px;
                             height: 50px;
                             bottom: 100%;
-                            left:35%;
+                            left: 35%;
                         }
 
                         100% {
@@ -998,6 +1023,7 @@
                             transform: scale(1) translate(40px, -32px);
                         }
                     }
+
                     @keyframes showinfob {
                         0% {
                             transform: scale(0);
@@ -1019,6 +1045,7 @@
                             animation: showinfoa .5s 1.8s 1 forwards;
                         }
                     }
+
                     .ballb {
                         animation: downb 1s 0s 1 cubic-bezier(.58, .08, .92, .43),
                             upb 1s 1s 1 cubic-bezier(.11, .46, .39, .85) forwards;
@@ -1170,9 +1197,11 @@
                         width: 100%;
                         height: 100%;
                         position: relative;
-                        .mobile{
+
+                        .mobile {
                             display: none;
-                            @include m(){
+
+                            @include m() {
                                 display: block;
                                 text-align: end;
                                 color: $mpink;
@@ -1180,16 +1209,19 @@
                                 padding-right: 1rem;
                             }
                         }
+
                         #max1 {
                             color: $mpink;
-                            @include m(){
+
+                            @include m() {
                                 display: none;
                             }
                         }
 
                         #max2 {
                             transform-origin: left;
-                            @include m(){
+
+                            @include m() {
                                 display: none;
                             }
                         }
@@ -1204,12 +1236,14 @@
                                 position: static;
                                 padding: 4rem 0 2rem 32%;
                             }
-                            table{
-                                tr{
-                                    td{
+
+                            table {
+                                tr {
+                                    td {
                                         color: $mblue;
                                         vertical-align: top;
-                                        &:first-child{
+
+                                        &:first-child {
                                             white-space: nowrap;
                                         }
                                     }
@@ -1256,26 +1290,28 @@
 
                             @include t() {
                                 transform: skewY(15deg) rotate(90deg);
-                                bottom:2.5rem;
+                                bottom: 2.5rem;
                             }
 
                             @include m() {
-                                bottom:4rem;
+                                bottom: 4rem;
                             }
                         }
 
                         #totop {
                             height: 40px;
                             pointer-events: none;
+
                             path {
                                 fill: #fff;
                             }
 
 
                         }
-                        
+
                     }
-                    .tibame{
+
+                    .tibame {
                         background-color: #fff;
                         position: absolute;
                         right: 2rem;
@@ -1284,20 +1320,22 @@
                         height: 300px;
                         border-radius: 50%;
                         animation: pathrotate 20s 0s linear infinite;
-                        
-                        @include t(){
+
+                        @include t() {
                             position: static;
                             margin-left: auto;
                             margin-right: 2rem;
                             margin-bottom: 2rem;
                         }
-                        @include m(){
+
+                        @include m() {
                             width: 240px;
                             height: 240px;
                             margin-right: 1rem;
                             margin-bottom: 1rem;
                         }
-                        &::after{
+
+                        &::after {
                             content: "";
                             position: absolute;
                             background-color: $mpink;
@@ -1307,11 +1345,12 @@
                             left: 0;
                             border-radius: 50%;
                             opacity: .3;
-                            transform-origin:53% 53%;
+                            transform-origin: 53% 53%;
                             animation: pathrotate 10s 0s linear infinite;
                             pointer-events: none;
                             z-index: -1;
                         }
+
                         #svg1 {
                             position: absolute;
                             @include tc();
@@ -1320,33 +1359,36 @@
                             max-width: 70vmin;
                             transform-origin: center;
                             width: 70%;
-                          }
-                          #svg2{
+                        }
+
+                        #svg2 {
                             position: absolute;
                             @include tc();
                             fill: $mblue;
                             max-width: 65vmin;
                             transform-origin: center;
                             width: 65%;
-                          }
-                          #svg3{
+                        }
+
+                        #svg3 {
                             position: absolute;
                             @include tc();
                             fill: $mblue;
                             height: auto;
                             max-width: 95vmin;
                             transform-origin: center;
-                            width:95%;
-                          }
-                          #svg4{
+                            width: 95%;
+                        }
+
+                        #svg4 {
                             position: absolute;
                             @include tc();
                             fill: $mblue;
                             height: auto;
                             max-width: 50vmin;
                             transform-origin: center;
-                            width:50%;
-                          }
+                            width: 50%;
+                        }
                     }
                 }
 

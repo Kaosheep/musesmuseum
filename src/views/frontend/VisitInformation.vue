@@ -1,7 +1,7 @@
 <template>
     <main class="visitInformation-main">
         <div class="visitInformation-title">
-            <h1>參觀須知 <br v-if="windowWidth < 769">Notice</h1>
+            <h1 class="visitInformationH1">參觀須知 Notice</h1>
         </div>
         <div class="visitInformation-ulBorder" id="visitInformationUlBorder">
             <ul>

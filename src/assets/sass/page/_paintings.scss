@@ -4,7 +4,9 @@
     margin-left: auto;
     display: flex;
     overflow: hidden;
-
+    @include m(){
+        margin-bottom: 70px;
+    }
     .title {
         height: 100vh;
     }
@@ -152,7 +154,6 @@
 
                     a {
                         height: 100%;
-                        width: calc(100%/3);
                         min-width: 250px;
                         display: flex;
                         flex-direction: column;
@@ -210,3 +211,6 @@
 
 
 }
+#artpopclose path {
+    fill: $mgreen;
+  }

@@ -2,26 +2,37 @@
   <header>
     <div class="menuconsole">
       <div class="burger" @click="togglemenu">
-        <div :class="['bar', { 'active': isClick }]"></div>
+        <div :class="['bar', { active: isClick }]"></div>
       </div>
-      <div :class="['logo', { 'togglec': isClick }]">
-        <router-link to="/Home"><img src="@/assets/image/logo/logo.png" alt="" /></router-link>
+      <div :class="['logo', { togglec: isClick }]">
+        <router-link to="/Home"
+          ><img src="@/assets/image/logo/logo.png" alt=""
+        /></router-link>
       </div>
     </div>
     <div class="social">
-      <span>
-        <router-link to="/Home/Shoppingcar">
-          <i class="sicon fa-solid fa-cart-shopping" id="social_cart"></i>
-        </router-link>
-      </span>
-      <span><i class="sicon fa-solid fa-envelope" id="social_envelope"></i></span>
-      <span><i class="sicon fa-brands fa-square-facebook" id="social_facebook"></i></span>
-      <span><i class="sicon fa-brands fa-youtube" id="social_youtub"></i></span>
+      <router-link to="/Home/Shoppingcar" @click="closemenu">
+        <span class="sspan">
+          <span v-if="totalitem>1">{{ totalitem }}</span>
+          <i
+            class="sicon fa-solid fa-cart-shopping"
+            id="social_cart"
+          ></i> </span
+      ></router-link>
+      <span class="sspan"
+        ><i class="sicon fa-solid fa-envelope" id="social_envelope"></i
+      ></span>
+      <span class="sspan"
+        ><i class="sicon fa-brands fa-square-facebook" id="social_facebook"></i
+      ></span>
+      <span class="sspan"><i class="sicon fa-brands fa-youtube" id="social_youtub"></i></span>
     </div>
   </header>
   <nav>
     <div class="logo">
-      <router-link to="/Home" @click="closemenu"><img src="@/assets/image/logo/logo.png" alt="" /></router-link>
+      <router-link to="/Home" @click="closemenu"
+        ><img src="@/assets/image/logo/logo.png" alt=""
+      /></router-link>
     </div>
     <div class="login">
       <router-link to="/Home/Login" @click="closemenu">會員登入</router-link>
@@ -93,7 +104,18 @@ export default {
         { title: "商品", link: "/Home/Shop" },
       ],
       isClick: false,
+      Storage:localStorage["addItemlist"]
     };
+  },
+  watch:{
+
+  },
+  computed:{
+    totalitem() {
+      if(this.Storage){
+        return this.Storage.split(",").length-1;
+      }
+    },
   },
   methods: {
     togglemenu() {

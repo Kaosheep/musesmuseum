@@ -1,7 +1,7 @@
 <template>
     <div class="Fqaoutside">
         <div class="Fqa-title">
-            <h1>常見問題 <br> FAQ</h1>
+            <h1>常見問題 FAQ</h1>
         </div>
         <main class="Fqa-main">
             <aside class="Fqa-aside" style="display: none;">
@@ -41,6 +41,7 @@
   
 <script>
 import Header from '@/components/Header.vue';
+import { Footer } from 'view-ui-plus';
 
 export default {
     data() {
@@ -58,7 +59,7 @@ export default {
                 [
                     {
                         question: "Q1.請問每天可以參觀的時間是什麼時候？會有固定公休時間嗎？",
-                        answer: "A:<br>周二～周四：０９００開館、２１：００閉館(最後入場時間１６：３０)<br>周一：休館<br>除農曆新年（除夕、大年初一、初二）、其餘國定假日皆正常開放。<br>（如星期一碰到補假日，則正常營業。）",
+                        answer: "A:<br>周一：休館<br>周二～周四：０９００開館、２１：００閉館(最後入場時間１６：３０)<br>除農曆新年（除夕、大年初一、初二）、其餘國定假日皆正常開放。<br>（如星期一碰到補假日，則正常營業。）",
                     },
                     {
                         question: "Q2.颱風天會休假嗎？",
@@ -122,6 +123,7 @@ export default {
                         answer: "A:<br>我們的地面基本都是平整，若有碰到階梯都有提供坡道，1樓到2樓也有提供電梯服務，若需要輪椅租借請洽1樓服務處。)"
                     },
                 ],
+
             ],
         };
     },
@@ -129,7 +131,8 @@ export default {
         document.body.style.height = `auto`;
     },
     components: {
-        Header
+        Header,
+        Footer
     },
     methods: {
         toggleAnswer(sectionIndex, qaIndex) {
@@ -142,23 +145,33 @@ export default {
 
             if (answerElement.style.display === "none") {
                 answerElement.style.display = "block";
-                FqaPlusCId.style.display = "none";
+                FqaPlusCId.classList.add('rotate');
+                FqaPlusCId.classList.remove('rotate1');
                 answerElement.style.borderColor = "#EB5F86";
                 borderColor.style.borderColor = "#EB5F86";
-
-
-
             } else {
                 answerElement.style.display = "none";
-                FqaPlusCId.style.display = "block";
+                FqaPlusCId.classList.remove('rotate');
+                FqaPlusCId.classList.add('rotate1');
                 answerElement.style.borderColor = "#009CA8";
                 borderColor.style.borderColor = "#009CA8";
-
             }
         },
     },
 }
 </script>
   
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.Fqa-plusC.rotate {
+    transform: translate(-50%, -50%) rotate(90deg);
+    transition: transform 0.3s ease;
+
+}
+
+.Fqa-plusC.rotate1 {
+    transform: translate(-50%, -50%) rotate(0deg);
+    transition: transform 0.3s ease;
+
+}
+</style>
   

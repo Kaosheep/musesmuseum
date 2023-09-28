@@ -1,6 +1,7 @@
 .Fqaoutside {
     width: 83.33%;
     margin: auto;
+    margin-bottom: 70px;
 
     @include t() {
         width: 90%;
@@ -9,24 +10,48 @@
 }
 
 
-.Fqa-title {
+// .Fqa-title {
+//     width: 216px;
+//     height: 90px;
+//     background-color: $mgreen;
+//     position: relative;
+//     border-radius: 5px;
+//     box-shadow: 10px 10px 0px $myellow;
+
+//     @include t() {
+//         margin-top: 20px;
+//         box-shadow: none;
+//         width: 50%;
+//     }
+
+// }
+
+.Fqa-title h1 {
     width: 216px;
-    height: 90px;
+    margin-top: 30px;
+    margin-left: 30px;
+    color: #fff;
     background-color: $mgreen;
-    position: relative;
-    border-radius: 5px;
-    box-shadow: 10px 10px 0px $myellow;
+    display: inline-block;
+    padding: 1rem 2rem;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 8px 8px 0px $myellow;
 
     @include t() {
+        width: 50%;
+    }
+
+    @media screen and (max-width:560px) {
+        font-size: 28px;
         margin-top: 20px;
         box-shadow: none;
         width: 50%;
     }
 
-}
-
-.Fqa-title h1 {
-    color: #fff;
+    @include m() {
+        width: 85%;
+    }
 }
 
 .Fqa-main {
@@ -35,6 +60,10 @@
     width: 90%;
     margin-top: 50px;
     margin: auto;
+
+    @include t() {
+        margin-top: 0;
+    }
 }
 
 
@@ -56,6 +85,8 @@
 
     @include t() {
         width: 100%;
+        margin-top: 30px;
+
     }
 }
 
@@ -83,12 +114,12 @@
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
+    cursor: pointer;
 }
-
 
 .FQA-questionH3 {
     width: 80%;
-    cursor: pointer;
+    color: $mblue;
 }
 
 .fqa-answer {
@@ -128,6 +159,6 @@
     position: absolute;
     top: 0;
     left: 0;
-    animation: plusC 3s linear;
+
     @include tc();
 }

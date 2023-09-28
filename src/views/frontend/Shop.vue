@@ -32,8 +32,7 @@
       <router-link to="/Home/Shop"> 精選商城 </router-link>
     </div>
     <div class="search">
-      <Searchbar @click="searchClick" />
-      <Searchbarclick />
+      <Searchbar :functype="1" @update-search-text="searchClick" />
     </div>
   </div>
   <div class="shop_wrap">
@@ -82,10 +81,10 @@
   </div>
   <div class="shop_paginationbar">
     <Page
-        :total="productSorting.length"
-        :page-size="pageItems"
-        v-model="currentPage"
-        class="shop_page"
+      :total="productSorting.length"
+      :page-size="pageItems"
+      v-model="currentPage"
+      class="shop_page"
     />
   </div>
 </template>
@@ -219,13 +218,18 @@ export default {
   },
   computed: {
     categoryFilter() {
-        return this.produstdislist.filter((v) => v.kind?.includes(this.prodKind));
+      return this.produstdislist.filter((v) => v.kind?.includes(this.prodKind));
     },
     searchFilter() {
-      if (!this.searchinput) return this.categoryFilter;
-      return this.categoryFilter.filter((v) =>
+      // if (!this.searchinput) return this.categoryFilter;
+      if(this.searchinput){
+        return this.categoryFilter.filter((v) =>
         v.title?.includes(this.searchinput)
       );
+      }else{
+        return this.categoryFilter
+      }
+      
     },
     productSorting() {
       return this.searchFilter.slice().sort((a, b) => {
@@ -242,13 +246,22 @@ export default {
       return this.productSorting.slice(startIndex, endIndex);
     },
   },
+  watch: {
+    prodKind() {
+      this.currentPage = 1;
+    },
+    searchinput() {
+      this.currentPage = 1;
+    },
+    sortType() {
+      this.currentPage = 1;
+    },
+  },
   methods: {
-    selectkind(kind){
-      this.prodKind = kind
+    selectkind(kind) {
+      this.prodKind = kind;
     },
     searchClick(text) {
-      // <SSS @update-search-text="searchClick" />
-      // this.$emit('update-search-text', '123')
       this.searchinput = text;
     },
     reset() {
@@ -279,31 +292,32 @@ export default {
         this.storage[id] += `${id},`;
         this.storage[id] += `${additem.title},`;
         this.storage[id] += `${additem.price},`;
-        this.storage[id] += '1,';
+        this.storage[id] += "1,";
       }
     },
   },
-  // mounted: {
-  //   $id(id) {
-  //     return document.getElementById(id);
-  //   },
-  //   showLoginForm() {
-  //       $.ajax({
-  //         url: "http://localhost/musesmuseum/piblic/php/ajaxLogout.php",
-  //         dataType: "json",
-  //         success(response){
-  //         },
-  //         error(xhr, status, error){
-  //           console.log(status, error);
-  //         }
-  //       });
-  //     }
-  //   },
+  mounted() {
+    
+    //   $id(id) {
+    //     return document.getElementById(id);
+    //   },
+    //   showLoginForm() {
+    //       $.ajax({
+    //         url: "http://localhost/musesmuseum/piblic/php/ajaxLogout.php",
+    //         dataType: "json",
+    //         success(response){
+    //         },
+    //         error(xhr, status, error){
+    //           console.log(status, error);
+    //         }
+    //       });
+    //     }
+  },
 };
 </script>
 <style scoped lang="scss">
-  h1 {
-    text-align: center;
-    font-size: 32px;
-  }
+h1 {
+  text-align: center;
+  font-size: 32px;
+}
 </style>

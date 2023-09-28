@@ -1,7 +1,7 @@
 <template>
     <main class="VisitTraffic">
         <div class="VisitTraffic-title">
-            <h1 class="VisitTraffic-h1">交通資訊<br>traffic</h1>
+            <h1 class="VisitTraffic-h1">交通資訊 traffic</h1>
             <p class="VisitTraffic-add">地址：希臘市和平區謬思路100號</p>
         </div>
         <div class="VisitTraffic-allFrom">
@@ -42,16 +42,16 @@
         <div class="VisitTrafficBoard">
             <ul class="VisitTrafficcarousel">
                 <li class="VisitTraffic-hidden VisitTrafficImg">
-                    <img src="@/assets/image/VisitTraffic/house1.jpg" alt="輪播圖">
+                    <img src="@/assets/image/VisitTraffic/house1.jpg" alt="輪播圖" class="VisitTrafficpicHidden">
                 </li>
-                <li class="VisitTrafficPic VisitTrafficImg1">
-                    <img src="@/assets/image/VisitTraffic/house1.jpg" alt="輪播圖">
+                <li class="VisitTrafficimg VisitTrafficImg1">
+                    <img src="@/assets/image/VisitTraffic/house1.jpg" alt="輪播圖" class="VisitTrafficPic">
                 </li>
-                <li class="VisitTrafficPic VisitTrafficImg2">
-                    <img src="@/assets/image/VisitTraffic/house2.jpg" alt="輪播圖">
+                <li class="VisitTrafficimg VisitTrafficImg2">
+                    <img src="@/assets/image/VisitTraffic/house2.jpg" alt="輪播圖" class="VisitTrafficPic">
                 </li>
-                <li class="VisitTrafficPic VisitTrafficImg3">
-                    <img ssrc="@/assets/image/VisitTraffic/house3.jpg" alt="輪播圖">
+                <li class="VisitTrafficimg VisitTrafficImg3">
+                    <img src="@/assets/image/VisitTraffic/house3.jpg" alt="輪播圖" class="VisitTrafficPic">
                 </li>
             </ul>
         </div>

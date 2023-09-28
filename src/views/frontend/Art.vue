@@ -151,7 +151,7 @@ export default {
   },
   methods: {
     back() {
-
+      document.querySelector('.container').scrollTop = 0;
       let li = document.querySelectorAll(".artwarp ul li");
       let art = document.querySelectorAll(".artwarp ul li .art");
       this.count--;
@@ -166,8 +166,10 @@ export default {
           this.count * 60
         }deg))`;
       });
+
     },
     next() {
+      document.querySelector('.container').scrollTop = 0;
       let li = document.querySelectorAll(".artwarp ul li");
       let art = document.querySelectorAll(".artwarp ul li .art");
       this.count++;
