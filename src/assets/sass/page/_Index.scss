@@ -1368,6 +1368,10 @@
                             max-width: 65vmin;
                             transform-origin: center;
                             width: 65%;
+                            @include m(){
+                                max-width: 30vmin;
+                                width: 30%;
+                            }
                         }
 
                         #svg3 {
@@ -1388,6 +1392,7 @@
                             max-width: 50vmin;
                             transform-origin: center;
                             width: 50%;
+
                         }
                     }
                 }
