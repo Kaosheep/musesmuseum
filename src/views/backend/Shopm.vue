@@ -1,11 +1,11 @@
 <template>
   <div>
-    <form action="">
+    <div>
       <div class="admin_editbar">
         <div>
           <PinkButton class="btn_admin" text="新增" />
-          <PinkButton class="btn_admin" text="上架" />
-          <PinkButton class="btn_admin" text="下架" />
+          <PinkButton class="btn_admin" text="上架" @click="toggleStatus('1')" :disabled="!canToggle('1')" />
+          <PinkButton class="btn_admin" text="下架" @click="toggleStatus('0')" :disabled="!canToggle('0')" />
         </div>
         <Searchbar class="onlyB" />
       </div>
@@ -27,12 +27,74 @@
               <p v-else>未上架</p>
             </td>
             <td>
-              <button class="edit">編輯</button>
+              <button class="edit" @click="showEditForm">編輯</button>
             </td>
           </tr>
         </table>
       </div>
-    </form>
+      <form action="" class="pop" v-if="showForm" @submit.prevent="submitForm">
+        <h2>編輯</h2>
+        <div class="info_col">
+          <div>
+            <div>商品編號</div>
+            <div>PD20230001</div>
+          </div>
+          <div>
+            <div>產品名稱</div>
+            <div>小謬思銅像</div>
+          </div>
+        </div>
+        <div>
+          <div>商品敘述</div>
+          <textarea name="" id="" cols="30" rows="5"></textarea>
+        </div>
+        <div class="info_col needspace">
+          <div>
+            <div>商品規格</div>
+            <textarea name="" id="" cols="30" rows="5"></textarea>
+          </div>
+          <div class="info_price">
+            <div>
+              <div>定價</div>
+              <div>3,500</div>
+            </div>
+            <div>
+              <div>售價</div>
+              <div>3,500</div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div>狀態</div>
+          <div>
+            <select name="" id="">
+              <option value="">未上架</option>
+            </select>
+            <input type="file" id="fileInput" accept="image/*" style="display: none;" />
+            <label class="img_box" for="fileInput">+選擇圖片</label>
+            <div class="img_wrap">
+              <img src="" alt="" id="img1" width="50">
+            </div>
+          </div>
+
+
+        </div>
+        <div class="info_col">
+          <Space size="large" wrap>
+
+          </Space>
+          <div class="sub_col">
+
+          </div>
+        </div>
+        <div class="form_btn">
+          <PinkButton class="btn_admin" text="刪除" @click="hideEditForm" />
+          <PinkButton class="btn_admin" text="取消" @click="hideEditForm" />
+          <PinkButton class="btn_admin" text="儲存" />
+        </div>
+      </form>
+    </div>
+
   </div>
 </template>
    
@@ -40,60 +102,133 @@
 import PinkButton from "/src/components/PinkButton.vue";
 import Searchbar from "/src/components/Searchbar.vue";
 import Searchbarclick from "/src/components/Searchbarclick.vue";
+import Addressfrom from "/src/views/backend/Address.vue";
+
 export default {
   components: {
     Searchbar,
     Searchbarclick,
-    PinkButton
+    PinkButton,
+    Addressfrom
   },
   data() {
     return {
       shopm: [
-                {
-                    id: "PD20230001",
-                    title: "小謬思銅像",
-                    statusn: "0",
-                },
-                {
-                    id: "PD20230002",
-                    title: "手繪紅鶴小廢包",
-                    statusn: "1",
-                },
-                {
-                    id: "PD20230003",
-                    title: "維納斯口紅",
-                    statusn: "0",
-                },
-                {
-                    id: "PD20230004",
-                    title: "諾貝爾仿徽",
-                    statusn: "0",
-                }
-            ]
+        {
+          id: "PD20230001",
+          title: "小謬思銅像",
+          statusn: "0",
+        },
+        {
+          id: "PD20230002",
+          title: "手繪紅鶴小廢包",
+          statusn: "1",
+        },
+        {
+          id: "PD20230003",
+          title: "維納斯口紅",
+          statusn: "0",
+        },
+        {
+          id: "PD20230004",
+          title: "諾貝爾仿徽",
+          statusn: "0",
+        }
+      ],
+      news: [],
+      test: [
+        {
+          id: "MN20230901",
+          title: "「科技奇觀展」探索未來科...",
+          statusn: "0",
+        },
+        {
+          id: "MN20231101",
+          title: "「古文明珍寶展」現已開展...",
+          statusn: "1",
+
+        }
+      ],
+      memt: [
+        {
+          id: "MM2023061901",
+          name: "阿阿阿",
+          statusn: "1",
+        }, {
+          id: "MM2023061902",
+          name: "欸欸欸",
+          statusn: "0",
+        }
+
+      ],
+      exhm: [
+        {
+          id: "EXH20230901",
+          title: "獨居沙漠，藝術家喬治亞．歐姬芙",
+          statusn: "0",
+        },
+        {
+          id: "EXH20231101",
+          title: "派對對物：人要金裝，佛要...",
+          statusn: "0",
+        },
+        {
+          id: "EXH20230701",
+          title: "線條、形狀、空間：建築美......",
+          statusn: "0",
+        },
+      ],
+      showForm: false
     }
   },
   methods: {
+    toggleStatus(newStatus) {
+      this.test.forEach(item => {
+        if (item.selected) {
+          item.statusn = newStatus;
+        }
+      });
+    },
+    canToggle(newStatus) {
+      return this.test.some(item => item.selected && item.statusn !== newStatus);
+    },
+    showEditForm() {
+      this.showForm = true;
+    },
+    hideEditForm() {
+      this.showForm = false;
+    },
+    submitForm() {
+      this.hideEditForm();
+    }
 
   },
   mounted() {
- }
 
+  }
 }
 </script>
 
 <style scoped lang="scss">
 @import "@/assets/sass/style.scss";
-div{
-  form{
+
+div {
+  color: #000;
+
+  form {
     height: 80vh;
   }
 }
+
 .bTab {
   background-color: #ffffff80;
   border-radius: 10px 10px 0 0;
   border-width: 1px 1px 0 1px;
   border-style: none;
   padding: 8px;
+  color: #000;
+  transition: .3s;
+  cursor: pointer;
 }
 
 .admin_editbar {
@@ -123,6 +258,7 @@ div{
 }
 
 .dmain {
+  position: relative;
   background-color: #ffffff80;
   height: 80%;
   border-radius: 0 10px 10px 10px;
@@ -153,8 +289,8 @@ div{
 
       &:last-child {
         button {
+          color: #000;
           border: none;
-          padding: 5px 10px;
           cursor: pointer;
         }
       }
@@ -168,4 +304,71 @@ div{
   }
 
 }
+
+.pop {
+  position: absolute;
+  top: -1%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  background-color: rgba(255, 248, 248);
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  border-radius: 10px;
+  overflow: auto;
+
+  div {
+    margin-top: 10px;
+
+    textarea {
+      width: 100%;
+      background-color: #ffffff1b;
+      border: 1px solid #009CA8;
+      border-radius: 10px;
+      resize: none;
+      padding-left: 5px;
+      padding-right: 5px;
+
+    }
+  }
+
+  .needspace {
+    justify-content: space-between;
+    .info_price{
+      display: flex;
+      width: 50%;
+    }
+  }
+
+  .info_col {
+    display: flex;
+    margin-right: 10px;
+    margin-bottom: 10px;
+
+
+
+    div {
+      width: 100%;
+      margin-top: 10px;
+      margin-right: 10px;
+
+      
+    }
+  }
+.img_box {
+        padding-left: 5px;
+        padding-right: 5px;
+        border: 1px solid $mblue;
+        margin-left: 30px;
+      }
+
+
+  .form_btn {
+    position: relative;
+  }
+}
 </style>
+    
+
