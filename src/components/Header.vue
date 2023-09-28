@@ -11,7 +11,7 @@
       </div>
     </div>
     <div class="social">
-      <router-link to="/Home/Shoppingcar">
+      <router-link to="/Home/Shoppingcar" @click="closemenu">
         <span class="sspan">
           <span v-if="totalitem>1">{{ totalitem }}</span>
           <i

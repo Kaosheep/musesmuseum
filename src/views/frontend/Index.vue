@@ -44,7 +44,7 @@
             </div>
           </div>
           <div class="smalltitle">
-            <h2>當期展覽<br />Current Exhibitions</h2>
+            <h2>當期展覽<br />Exhibitions</h2>
           </div>
           <div class="new">
             <div class="container">
@@ -151,7 +151,7 @@
               <div class="txtframe"><h1>VISIT</h1></div>
               <div class="card">
                 <router-link to="/Home/VisitInformation">
-                  <img src="@/assets/image/home/buliding0.jpg" alt="" />
+                  <img src="@/assets/image/museumspace/local1.jpg" alt="" />
                   <div class="txt">
                     <h2>參觀與服務<br />Visit</h2>
                     <button type="button">

@@ -11,6 +11,7 @@ header {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+
     @include t() {
         position: sticky;
         width: 100%;
@@ -21,7 +22,7 @@ header {
     }
 
     .menuconsole {
-        
+
         @include t() {
             display: flex;
             align-items: center;
@@ -200,7 +201,8 @@ header {
             #social_youtub path {
                 fill: $mgreen;
             }
-            span{
+
+            span {
                 width: 20px;
                 height: 20px;
                 border-radius: 50%;
@@ -228,20 +230,19 @@ nav {
     transform: translateX(-100%);
     width: 100vw;
     height: 100vh;
-    padding-top: 3%;
     text-align: center;
     transition: .3s;
     background-color: #fff;
     padding-left: 70px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
     @include t() {
         padding: 0px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
     }
 
     .logo {
-        margin-top: 40px;
 
         img {
             @include t() {
@@ -267,14 +268,18 @@ nav {
             display: flex;
             justify-content: space-evenly;
             flex-wrap: wrap;
-            @include t(){
+
+            @include t() {
                 justify-content: flex-start;
             }
+
             >li {
                 line-height: 2;
-                @include t(){
+
+                @include t() {
                     width: 25%;
                 }
+
                 ul {
                     li {
                         line-height: 2;
