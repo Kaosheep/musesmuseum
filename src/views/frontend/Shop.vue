@@ -32,8 +32,7 @@
       <router-link to="/Home/Shop"> 精選商城 </router-link>
     </div>
     <div class="search">
-      <Searchbar :functype="1" @click="searchClick" />
-      <Searchbarclick />
+      <Searchbar :functype="1" @update-search-text="searchClick" />
     </div>
   </div>
   <div class="shop_wrap">
@@ -222,10 +221,15 @@ export default {
       return this.produstdislist.filter((v) => v.kind?.includes(this.prodKind));
     },
     searchFilter() {
-      if (!this.searchinput) return this.categoryFilter;
-      return this.categoryFilter.filter((v) =>
+      // if (!this.searchinput) return this.categoryFilter;
+      if(this.searchinput){
+        return this.categoryFilter.filter((v) =>
         v.title?.includes(this.searchinput)
       );
+      }else{
+        return this.categoryFilter
+      }
+      
     },
     productSorting() {
       return this.searchFilter.slice().sort((a, b) => {
@@ -258,8 +262,6 @@ export default {
       this.prodKind = kind;
     },
     searchClick(text) {
-      // <SSS @update-search-text="searchClick" />
-      // this.$emit('update-search-text', '123')
       this.searchinput = text;
     },
     reset() {
