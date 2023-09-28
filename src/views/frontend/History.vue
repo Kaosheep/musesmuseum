@@ -97,7 +97,7 @@ export default {
   img{
   width: 90%;
   height: 20%;
-  margin-bottom:40%;
+  margin-bottom:20%;
   }
 
   .carousel-slide {
@@ -132,7 +132,7 @@ export default {
   cursor: pointer;
   border-radius: 50%; 
   font-size: 20px;
-  
+  right: 90%;
 }
 
   .next-button {
@@ -248,7 +248,7 @@ export default {
       width: 25px;
       height: 25px;
       left: 18%;
-      top:20%;
+      top:30%;
   }
   .oneyear{
       position: absolute;
@@ -257,7 +257,7 @@ export default {
       color:#009CA8 ;
       font-size: 30px;
   }
-  .secondyear{
+    .secondyear{
       border:none ;
       border-radius: 50px;
       background-color: #009CA8;
@@ -265,9 +265,9 @@ export default {
       width: 25px;
       height: 25px;
       left: 47%;
-      top:38%
+      top:50%
   }
-  .twoyear{
+    .twoyear{
       position: absolute;
       bottom: 100%;
       right: 3px;
@@ -282,7 +282,7 @@ export default {
       width: 25px;
       height: 25px;
       left: 80%;
-      top:20%
+      top:30%
     }
     .threeyear{
       position: absolute;
@@ -297,40 +297,40 @@ export default {
     position: relative;
     }
     .text1{
-      width: 400px;
-      height: 200px;
+      width: 350px;
+      height:100px;
       position: relative;
-      right: 30px;
-      top:130px;
+      right: 50px;
+      top:150px;
       color:#009CA8 ;
       background-color: #FBF796;
       padding: 10px;
       border-radius: 5px;
-      font-size: 25px;
+      font-size: 15px;
     }
     .text2{
-      width: 400px;
-      height: 200px;
+      width: 350px;
+      height:100px;
       position: absolute;
-      top:40px;
-      right: -800%;
+      top:50px;
+      right: -610%;
       color:#009CA8 ;
       background-color: #FBF796;
       padding: 10px;
       border-radius: 5px;
-      font-size: 25px;
+      font-size: 15px;
     }
     .text3{
-      width: 400px;
-      height: 200px;
+      width: 350px;
+      height: 100px;
       position: absolute;
-      right: -120%;
-      top:130px;
+      right: -100%;
+      top:150px;
       color:#009CA8 ;
       background-color: #FBF796;
       padding: 10px;
       border-radius: 5px;
-      font-size: 25px;
+      font-size: 15px;
     }
   }
   
