@@ -28,7 +28,7 @@
           </div>
 
           <div class="memloginSubmit">
-            <input type="button" id="btnLogin" class="submitBtn" value="登入" @click="checkLoginData" />
+            <input type="submit" id="btnLogin" class="submitBtn" value="登入" @click="checkLoginData" />
             <!-- <input type="button" id="btnCancel" value="取消"> -->
           </div>
         </form>
@@ -55,20 +55,22 @@ export default {
         { link: "/Home/MemberSignUp", name: "會員註冊" },
         { link: "", name: "會員登入" },
       ],
-      memId: "muses", 
-      memPsw: "muses",
-      router: null, //暫時登入用
+      // memId: "muses", 
+      // memPsw: "muses",
+      // router: null, //暫時登入用
     };
   },
   methods: {
-    checkLoginData() {
+    // checkLoginData() {
+      // console.log('checkLoginData');
+
       //暫時登入用
-      if (this.memId === "muses" && this.memPsw === "muses") {
-        window.alert("登入成功");
-        this.router.push('/Home/MemberInfo');
-      } else {
-        window.alert("帳密錯誤");
-      }
+      // if (this.memId === "muses" && this.memPsw === "muses") {
+      //   window.alert("登入成功");
+      //   this.router.push('/Home/MemberInfo');
+      // } else {
+      //   window.alert("帳密錯誤");
+      // }
    
         // 使用 $router.push 导航到目标路由
        
@@ -76,13 +78,13 @@ export default {
       //帳密
       // console.log('checkLoginData');
       // let input = {
-      // mem_account:'charmy101@gmail.com',
-      // mem_psw:'charmy101'
+      // memId:document.getElementById("memId").value,
+      // memPsw:document.getElementById("memPsw").value,
 
       // }
-      // 上課測試帳密
+      // // 上課測試帳密
       // fetch(
-      //   'https://tibamef2e.com/cgd103/g1/api/getConfirmMember.php',{
+      //   'http://localhost/musesmuseum/public/phps/login.php',{
       //   method:'POST',
       //   body:new URLSearchParams(input)
       //   }
@@ -110,19 +112,38 @@ export default {
   //   }
   // })
   // .catch(error => {
-  //   console.error(error);
+  //   console.error("error", error);
   //   window.alert('發生錯誤');
   // });
 
-    },
+    // },
   },
   mounted() {
-    //連接php的部分
-    // let input = {
-    //   memId: 'Sara',
-    //   memPsw: '111'
+    // 連接php的部分
+    let input = {
+      memId: 'Sara',
+      memPsw: '111'
 
-    // }
+    }
+    let memId = document.getElementById("memId").value;
+    let memPsw = document.getElementById("memPsw").value;
+    const data = new URLSearchParams({ memId, memPsw });
+    fetch("http://localhost/musesmuseum/public/phps/login.php", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: data,
+    })
+      .then((res) => res.json())
+      .then((json) => {
+        console.log(json);
+        // 在这里处理响应数据，可以更新 Vue 组件的数据
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+
     // fetch(
     //   'http://localhost/musesmuseum/public/phps/login.php', {
     //   method: 'POST',
@@ -130,6 +151,7 @@ export default {
     // }).then(res => res.json()).then(json => {
     //   console.log(json)
     // })
+
     this.router = this.$router;//暫時登入用
     document.body.style.height = `auto`;
   }
@@ -156,3 +178,9 @@ export default {
   }
 }
 </style>
+
+
+
+
+
+
