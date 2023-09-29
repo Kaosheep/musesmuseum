@@ -19,6 +19,11 @@
             id="social_cart"
           ></i> </span
       ></router-link>
+      <router-link to="/Home/MemberInfo" @click="closemenu">
+      <span class="sspan">
+       <i class="sicon fa-solid fa-user" id="social_user"></i> 
+      </span>
+      </router-link>
       <span class="sspan"
         ><i class="sicon fa-solid fa-envelope" id="social_envelope"></i
       ></span>

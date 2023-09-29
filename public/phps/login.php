@@ -2,36 +2,35 @@
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
 header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
+header("Content-Type: application/json"); 
 
 
 $memId = $_POST["memId"];//傳遞的資料用$memId代表
 $memPsw = $_POST["memPsw"];
-
+if ($member == null) {
+	$member["message"] = "無會員資訊";
+	$member["successful"] = false;
+	echo json_encode($member);
+	return;
+  }
+session_start();
 try{
 	//連線
-	$dbname = "books";
-	$user = "root";
-	$password = "";
+	require_once("connectMuses.php");
 
-	$dsn = "mysql:host=localhost;port=3306;dbname=$dbname;charset=utf8";
-
-	$options = array(PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION, PDO::ATTR_CASE=>PDO::CASE_NATURAL);
-
-	//建立pdo物件
-	$pdo = new PDO($dsn, $user, $password, $options);
 	//在`member`資料表 將來會有memId=:有命名的參數 資料帶入
-	$sql = "select * from `member` where memId=:memId and memPsw=:memPsw";
+	$sql = "select * from `members` where memId=:memId and memPsw=:memPsw";
 	//將sql指令編譯過
 	$member = $pdo->prepare($sql);
 
 	//將資料代入參數中(未知數中);
 	$member->bindValue(":memId", $memId);//:memId帶入$memId
 	$member->bindValue(":memPsw", $memPsw);
-
-	
 	//執行之
 	$member->execute();
-	if($member->rowCount() === 0){
+
+
+	if($member->rowCount() === 0){//查無此人, 帳密錯誤
 		echo json_encode(["error" => "帳密錯誤"]);
 	} else {
 		echo json_encode(["success" => "登入成功"]);
