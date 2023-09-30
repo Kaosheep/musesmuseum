@@ -130,19 +130,21 @@ export default {
     const data = new URLSearchParams({ memId, memPsw });
     fetch("http://localhost/musesmuseum/public/phps/login.php", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
+      // headers: {
+      //   "Content-Type": "application/x-www-form-urlencoded",
+      // },
       body: data,
     })
       .then((res) => res.json())
-      .then((json) => {
-        console.log(json);
-        // 在这里处理响应数据，可以更新 Vue 组件的数据
+      .then((res) => {
+        console.log(res);
+        if(!res.error){
+          alert('註冊成功');
+        }
       })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
+      // .catch((error) => {
+      //   console.error("Error:", error);
+      // });
 
     // fetch(
     //   'http://localhost/musesmuseum/public/phps/login.php', {
