@@ -24,7 +24,6 @@
                     <div class="spe_bgc_deco_a"></div>
                     <div class="spe_bgc_deco_b"></div>
                     <div class="spe_bgc_deco_c"></div>
-                    <div class="spe_bgc_deco_d"></div>
                     <div class="spe_back_deco">
                     </div>
                     <div class="spe_exhi_desc_deco">
@@ -33,6 +32,12 @@
                     <h3 style="color: #EB5F86;">春之詠歌：多彩藝術的季節</h3>
                     <p>來自各地藝術家們帶來的多種形式的作品，包括繪畫、雕塑、攝影、錄像藝術、裝置藝術和互動藝術。透過不同的媒介和風格，試圖捕捉春天所帶來的生命力和變化。</p>
                     <span>展覽地點：謬思藝廊</span>
+                    <div class="spe_buy_tickbtn">
+                        <div class="spe_buy_tickbtn_deco"></div>
+                        <router-link to="/Home/Tick">
+                            <ThinArrow :text="'前往購票'"></ThinArrow>
+                        </router-link>
+                    </div>
                 </div>
                 <div class="spe_exhi_desc_bgc">
                     <div></div>
@@ -46,10 +51,7 @@
                 <span>春之詠歌：多彩藝術的季節華章</span>
             </div>
 
-            <div class="buy_tickbtn">
-                <router-link to="/Home/Tick"><ThinArrow :text="'前往購票'"></ThinArrow></router-link>
-                <div class="spe_buy_tickbtn_deco"></div>
-            </div>
+
 
             <button class="spe_scroll_right" type="button" @click="scrollpage">
                 <img src="@/assets/image/paint/arrow.svg" alt="" />
