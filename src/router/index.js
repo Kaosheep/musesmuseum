@@ -47,6 +47,11 @@ const routes = [
         component: () => import('../views/frontend/News.vue')
       },
       {
+        path: 'News',
+        name: 'News',
+        component: () => import('../views/frontend/Newsajax.vue')
+      },
+      {
         path: 'Space',
         name: 'Space',
         component: () => import('../views/frontend/Space.vue')
