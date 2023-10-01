@@ -10,7 +10,7 @@
             </button>
           </router-link>
         </div>
-        <form method="post">
+        <form @submit.prevent>
           <div class="memloginActi" v-for="i in memAllInfo">
             <label :key="i.id">{{ i.memTitColumn }}</label>
             <input :key="i.id" :type="i.type" :id="i.id" :name="i.name" :class="i.class" :placeholder="i.placeholder"
@@ -61,18 +61,40 @@ export default {
     };
   },
   methods: {
-    // checkLoginData() {
-      // console.log('checkLoginData');
+    checkLoginData() {
+      console.log('checkLoginData');
 
+    
       //暫時登入用
-      // if (this.memId === "muses" && this.memPsw === "muses") {
-      //   window.alert("登入成功");
-      //   this.router.push('/Home/MemberInfo');
-      // } else {
-      //   window.alert("帳密錯誤");
-      // }
+      if (this.memId === "muses" && this.memPsw === "muses") {
+        window.alert("登入成功");
+        this.router.push('/Home/MemberInfo');
+      } else {
+        window.alert("帳密錯誤");
+      }
+      let input = {
+       memId: document.getElementById("memId").value,
+           memPsw: document.getElementById("memPsw").value
+      }
+      
+    const data = new URLSearchParams({ memId, memPsw });
+    fetch("http://localhost/musesmuseum/public/phps/login.php", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: new URLSearchParams(input),
+    })
+      .then((res) => res.json())
+      .then((json) => {
+        console.log(json);
+        // 在这里处理响应数据，可以更新 Vue 组件的数据
+      })
+      .catch((error) => {
+        console.error(error);
+      });
    
-        // 使用 $router.push 导航到目标路由
+     }   // 使用 $router.push 导航到目标路由
        
    
       //帳密
@@ -120,31 +142,12 @@ export default {
   },
   mounted() {
     // 連接php的部分
-    let input = {
-      memId: 'Sara',
-      memPsw: '111'
+    // let input = {
+    //   memId: 'Sara',
+    //   memPsw: '111'
 
-    }
-    let memId = document.getElementById("memId").value;
-    let memPsw = document.getElementById("memPsw").value;
-    const data = new URLSearchParams({ memId, memPsw });
-    fetch("http://localhost/musesmuseum/public/phps/login.php", {
-      method: "POST",
-      // headers: {
-      //   "Content-Type": "application/x-www-form-urlencoded",
-      // },
-      body: data,
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        console.log(res);
-        if(!res.error){
-          alert('註冊成功');
-        }
-      })
-      // .catch((error) => {
-      //   console.error("Error:", error);
-      // });
+    // }
+    
 
     // fetch(
     //   'http://localhost/musesmuseum/public/phps/login.php', {
