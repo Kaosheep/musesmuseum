@@ -13,26 +13,27 @@ try {
     $pdo = new PDO($dsn, $user, $password, $options);
 
     $data = json_decode(file_get_contents('php://input'));
-    $title = $data->data->title;
-    $content = $data->data->content;
-    $status = $data->data->status;
-    $date = $data->data->date;
 
-    $sql = "insert into news (news_title, news_content, news_status, news_date) values (:title, :content, :status, :date)";
-    $newStmt = $pdo->prepare($sql);
-    $newStmt->bindValue(":title", $title);
-    $newStmt->bindValue(":content", $content);
-    $newStmt->bindValue(":status", $status);
-    $newStmt->bindValue(":date", $date);
 
-    $newStmt->execute();
+    if(empty($data)){
+        $sql = "select * from `news`";
+        $news = $pdo->query($sql);
+        $newsRow = $news->fetchAll(PDO::FETCH_ASSOC);
+        
+    }else{
+        $sql = "select * from `news` where `news_id` = :news_id";
+        $newStmt = $pdo->prepare($sql);
+        $newStmt->bindValue(":news_id", $data->data->id);
+        $newStmt->execute();
+        $newsRow = $newStmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    echo json_encode($newsRow);
     
-    // 返回 JSON 響應
-    $response = ["message" => "新增成功"];
-    echo json_encode($response);
+
 } catch (PDOException $e) {
     // 返回 JSON 錯誤響應
-    $errorResponse = ["error" => "新增失敗：" . $e->getMessage()];
+    $errorResponse = ["message" => "新增失敗：" . $e->getMessage()];
     echo json_encode($errorResponse);
 }
 ?>

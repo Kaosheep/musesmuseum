@@ -76,16 +76,6 @@
               <img src="" alt="" id="img1" width="50">
             </div>
           </div>
-
-
-        </div>
-        <div class="info_col">
-          <Space size="large" wrap>
-
-          </Space>
-          <div class="sub_col">
-
-          </div>
         </div>
         <div class="form_btn">
           <PinkButton class="btn_admin" text="刪除" @click="hideEditForm" />
@@ -336,7 +326,8 @@ div {
 
   .needspace {
     justify-content: space-between;
-    .info_price{
+
+    .info_price {
       display: flex;
       width: 50%;
     }
@@ -354,15 +345,16 @@ div {
       margin-top: 10px;
       margin-right: 10px;
 
-      
+
     }
   }
-.img_box {
-        padding-left: 5px;
-        padding-right: 5px;
-        border: 1px solid $mblue;
-        margin-left: 30px;
-      }
+
+  .img_box {
+    padding-left: 5px;
+    padding-right: 5px;
+    border: 1px solid $mblue;
+    margin-left: 30px;
+  }
 
 
   .form_btn {

@@ -68,16 +68,8 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
-                <div class="info_col">
-                    <Space size="large" wrap>
-
-                    </Space>
-                    <div class="sub_col">
-
-                    </div>
-                </div>
+           
                 <div class="form_btn">
                     <PinkButton class="btn_admin" text="取消" @click="hideEditForm" />
                     <PinkButton class="btn_admin" text="儲存" />
