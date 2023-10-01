@@ -71,7 +71,7 @@ export default {
           title: '訂票管理',
           items: [
             { name: '5-1', text: '票種管理', link: "/DashBoard/Ticketsm" },
-            { name: '5-2', text: '訂票管理', link: "/DashBoard/Orderm" },
+            { name: '5-2', text: '訂票管理', link: "/DashBoard/TicketsOrdm" },
             { name: '5-3', text: '日期管理', link: "/DashBoard/ClosedOnm" },
           ],
         },

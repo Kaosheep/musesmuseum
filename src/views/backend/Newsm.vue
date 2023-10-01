@@ -18,19 +18,22 @@
             <th>狀態</th>
             <th></th>
           </tr>
-          <tr v-for="(i, index) in test" :key="index">
+          <tr v-for="(i, index) in news" :key="index">
             <td><input type="checkbox" v-model="i.selected"></td>
-            <td>{{ i.id }}</td>
-            <td>{{ i.title }}</td>
+            <td>{{ i.news_id }}</td>
+            <td>{{ i.news_title }}</td>
             <td>
-              <p v-if="parseInt(i.statusn) === 1">上架中</p>
+              <p v-if="parseInt(i.news_status) === 1">上架中</p>
               <p v-else>未上架</p>
             </td>
             <td>
-              <button class="edit" @click="showEditForm()">編輯</button>
+              <button class="edit" @click="showEditForm('edit', i.news_id)">編輯</button>
             </td>
           </tr>
-
+          <div class="pagination">
+            <button @click="previousPage" :disabled="currentPage === 1">上一頁</button>
+            <button @click="nextPage" :disabled="currentPage === totalPages">下一頁</button>
+          </div>
         </table>
       </div>
       <form action="" class="pop" v-show="showForm" @submit.prevent="submitForm">
@@ -38,11 +41,11 @@
         <div class="xedit" v-show="addnews">
           <div>
             <div>消息編號</div>
-            <div>MN2023061901</div>
+            <div v-text="add_news.id"></div>
           </div>
           <div>
             <div>日期</div>
-            <input type="date" v-model="add_news.date">
+            <input type="date" v-model="add_news.date" disabled>
           </div>
         </div>
         <div>
@@ -56,13 +59,9 @@
               <option value="1">上架中</option>
               <option value="0">未上架</option>
             </select>
-            <Upload multiple type="drag" action="//jsonplaceholder.typicode.com/posts/" show-upload-list>
-              <div style="padding: 20px 0">
-                <Icon type="ios-cloud-upload" size="52" style="color: #3399ff"></Icon>
-                <p>圖片上傳</p>
-              </div>
-            </Upload>
-            <!-- <input type="file" id="fileInput" accept="image/*" style="display: none;" />
+            <!-- <input @change="img($event)" type="file">
+            <img :src="src">
+            <input type="file" id="fileInput" accept="image/*" style="display: none;" />
             <label for="fileInput">選擇圖片</label>
             <div class="img_wrap">
               <img src="" alt="" id="img1" width="50">
@@ -70,7 +69,7 @@
           </div>
           <div class="form_btn">
             <button type="button" class="btn_admin" @click="hideEditForm">取消</button>
-            <button type="button" class="btn_admin" @click="addnews_btn()">儲存</button>
+            <button type="button" class="btn_admin" @click="addnews_btn(add_news.id)">儲存</button>
           </div>
         </div>
       </form>
@@ -95,6 +94,7 @@ export default {
       news: [],
       add_news: [
         {
+          id: '',
           title: '',
           content: '',
           date: '',
@@ -115,10 +115,39 @@ export default {
       ],
       showForm: false,
       addnews: false,
-      status: 0
+      status: 0,
+      src: '',
+      imgparam: {},
+      currentPage: 1, // 當前頁碼
+      pageSize: 10, // 每頁顯示的數據量
+
     }
   },
   methods: {
+    previousPage() {
+      // 切換到上一頁
+      if (this.currentPage > 1) {
+        this.currentPage--;
+      }
+    },
+    nextPage() {
+      // 切換到下一頁
+      if (this.currentPage < this.totalPages) {
+        this.currentPage++;
+      }
+    },
+    img(e) {
+      let that = this; // 改變 this 指向
+      let files = e.target.files[0]; // 圖片文件名
+      if (!e || !window.FileReader) return; // 檢查是否支援 FileReader
+      let reader = new FileReader();
+      reader.readAsDataURL(files); // 關鍵一步，在這裡轉換的
+      reader.onloadend = function () {
+        that.src = this.result; // 賦值
+      }
+      // this.imgparam = new FormData(); // 轉換為表單進行傳送給後端
+      // this.imgparam.append("images", files); // 第一個參數就是後端要接收的字段，要一致，不一致會傳送失敗
+    },
     toggleStatus(newStatus) {
       this.test.forEach(item => {
         if (item.selected) {
@@ -129,12 +158,53 @@ export default {
     canToggle(newStatus) {
       return this.test.some(item => item.selected && item.statusn !== newStatus);
     },
-    showEditForm(type) {
+    showEditForm(type, id) {
       if (type == 'add') {
         this.addnews = false;
-      }else{
+        this.add_news = [
+          {
+            id: '',
+            title: '',
+            content: '',
+            date: '',
+          }
+        ]
+      } else {
         this.addnews = true;
       }
+      if (type == 'edit') {
+        const url = `http://localhost/musesmuseum/public/phps/news_list.php`
+        let headers = {
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+        }
+        let body = {
+          "id": id,
+        }
+        fetch(url, {
+          method: "POST",
+          headers: headers,
+          //別忘了把主體参數轉成字串，否則資料會變成[object Object]，它無法被成功儲存在後台
+          // body: JSON.stringify(body)
+          body: JSON.stringify({ data: body })
+        })
+          .then(response => {
+            if (response.ok) {
+              return response.json(); // 如果請求成功，解析JSON數據
+            } else {
+              throw new Error("取得失敗"); // 如果請求不成功，拋出錯誤
+            }
+          })
+          .then(json => {
+            console.log(json.news_date)
+            this.add_news.title = json.news_title;
+            this.add_news.content = json.news_content;
+            this.add_news.date = json.news_date;
+            this.add_news.id = json.news_id;
+            this.status = json.news_status;
+          })
+      }
+
       this.showForm = true;
     },
     hideEditForm() {
@@ -144,49 +214,130 @@ export default {
       this.hideEditForm();
     },
     //新增
-    addnews_btn() {
-      //先檢查資料格式是否符合DB規則
-      const url = `http://localhost/musesmuseum/public/phps/news.php`
-      let headers = {
-        "Content-Type": "application/json",
-        "Accept": "application/json",
+    addnews_btn(id) {
+      if (id != undefined) {
+        const url = `http://localhost/musesmuseum/public/phps/news_add.php`
+        let headers = {
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+        }
+        //以下是API文件中提及必寫的主體参數。
+        let body = {
+          "id": this.add_news.id,
+          "title": this.add_news.title,
+          "content": this.add_news.content,
+          "status": this.status,
+          // 'image': this.imgparam.get('images')
+        }
+        fetch(url, {
+          method: "POST",
+          headers: headers,
+          //別忘了把主體参數轉成字串，否則資料會變成[object Object]，它無法被成功儲存在後台
+          // body: JSON.stringify(body)
+          body: JSON.stringify({ data: body })
+        })
+          .then(response => {
+            if (response.ok) {
+              return response.json(); // 如果請求成功，解析JSON數據
+            } else {
+              throw new Error("新增失敗"); // 如果請求不成功，拋出錯誤
+            }
+          })
+          .then(json => {
+            console.log(json)
+            // 在成功時顯示提示
+            alert(json.message); // 假設JSON數據中有一個message屬性
+            window.location.reload()
+          })
+          .catch(error => {
+            // 在失敗時顯示提示
+            alert(error.message);
+          });
+      } else {
+        const url = `http://localhost/musesmuseum/public/phps/news_add.php`
+        let headers = {
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+        }
+        let currentDate = new Date();
+        let formattedDate = currentDate.toISOString().split("T")[0];
+        //以下是API文件中提及必寫的主體参數。
+        let body = {
+          "title": this.add_news.title,
+          "content": this.add_news.content,
+          "status": this.status,
+          "date": formattedDate,
+          // 'image': this.imgparam.get('images')
+        }
+        fetch(url, {
+          method: "POST",
+          headers: headers,
+          //別忘了把主體参數轉成字串，否則資料會變成[object Object]，它無法被成功儲存在後台
+          // body: JSON.stringify(body)
+          body: JSON.stringify({ data: body })
+        })
+          .then(response => {
+            if (response.ok) {
+              return response.json(); // 如果請求成功，解析JSON數據
+            } else {
+              throw new Error("新增失敗"); // 如果請求不成功，拋出錯誤
+            }
+          })
+          .then(json => {
+            console.log(json)
+            // 在成功時顯示提示
+            alert(json.message); // 假設JSON數據中有一個message屬性
+            window.location.reload()
+          })
+          .catch(error => {
+            // 在失敗時顯示提示
+            alert(error.message);
+          });
       }
-      let currentDate = new Date();
-      let formattedDate = currentDate.toISOString().split("T")[0];
-      //以下是API文件中提及必寫的主體参數。
-      let body = {
-        "title": this.add_news.title,
-        "content": this.add_news.content,
-        "status": this.status,
-        "date": formattedDate,
-      }
-      fetch(url, {
-        method: "POST",
-        headers: headers,
-        //別忘了把主體参數轉成字串，否則資料會變成[object Object]，它無法被成功儲存在後台
-        // body: JSON.stringify(body)
-        body: JSON.stringify({ data: body })
 
-      })
-      .then(response => {
-          if (response.ok) {
-            return response.json(); // 如果請求成功，解析JSON數據
-          } else {
-            throw new Error("新增失敗"); // 如果請求不成功，拋出錯誤
-          }
-        })
-        .then(json => {
-          // 在成功時顯示提示
-          alert("新增成功：" + json.message); // 假設JSON數據中有一個message屬性
-        })
-        .catch(error => {
-          // 在失敗時顯示提示
-          console.log(error.message);
-          alert("新增失敗：" + error.message);
-        });
     }
   },
+  computed: {
+    news() {
+      // 根據當前頁碼和每頁顯示的數據量計算需要顯示的數據
+      const start = (this.currentPage - 1) * this.pageSize;
+      const end = start + this.pageSize;
+      return this.news.slice(start, end);
+    },
+    totalPages() {
+      // 計算總頁數
+      return Math.ceil(this.news.length / this.pageSize);
+    },
+  },
   mounted() {
+    //先檢查資料格式是否符合DB規則
+    const url = `http://localhost/musesmuseum/public/phps/news_list.php`
+    let headers = {
+      "Content-Type": "application/json",
+      "Accept": "application/json",
+    }
+    fetch(url, {
+      method: "POST",
+      headers: headers,
+    })
+      .then(response => {
+        if (response.ok) {
+          return response.json(); // 如果請求成功，解析JSON數據
+        } else {
+          throw new Error("取得消息失敗"); // 如果請求不成功，拋出錯誤
+        }
+      })
+      .then(json => {
+        console.log(json)
+        this.news = json;
+        // 在成功時顯示提示
+        // alert(json.message); // 假設JSON數據中有一個message屬性
+      })
+      .catch(error => {
+        // 在失敗時顯示提示
+        // alert(error.message);
+      });
+
 
   }
 }
@@ -246,6 +397,7 @@ div {
   background-color: #ffffff80;
   height: 80%;
   border-radius: 0 10px 10px 10px;
+
 
   table {
     width: 100%;
