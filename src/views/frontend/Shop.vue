@@ -43,11 +43,11 @@
       </select>
     </aside>
     <div class="shop_container">
-      <div v-if="productSorting == 0">還沒有商品唷!</div>
+      <div v-if="productSorting == 0">查無商品</div>
       <div class="item" v-for="(item, prod_id) in getPageItems" :key="prod_id" v-else>
         <router-link :to="`/Home/ProductPage/${prod_id}`">
           <div class="image">
-            <img :src="require('@/assets/image/productimage/' + item.prod_image)" :alt="item.prod_name" />
+            <img :src="require('@/assets/image/productimage/' + item.prod_img)" :alt="item.prod_name" />
           </div>
         </router-link>
         <div class="info">
@@ -56,7 +56,7 @@
             <router-link :to="`/Home/ProductPage/${prod_id}`">
               <p>{{ item.prod_name }}</p>
             </router-link>
-            <font-awesome-icon :icon="['fas', 'cart-shopping']" id="car" @click="addcart(prod_id)" />
+            <font-awesome-icon :icon="['fas', 'cart-shopping']" id="car" @click="addcart(item.prod_id)" />
           </span>
           <router-link :to="`/Home/ProductPage/${prod_id}`">
             <span> ${{ item.prod_sellingprice }} </span>
@@ -110,7 +110,6 @@ export default {
       return this.produstdislist.filter((v) => v.prod_kind?.includes(this.prodKind));
     },
     searchFilter() {
-      // if (!this.searchinput) return this.categoryFilter;
       if (this.searchinput) {
         return this.categoryFilter.filter((v) =>
           v.prod_name?.includes(this.searchinput)
@@ -150,10 +149,10 @@ export default {
       fetch(`${this.publicpath}shop.php`).then(async (response) => {
         this.produstdislist = await response.json();
         console.log(this.produstdislist); 
-        })
-        .catch((error) => {
-          console.error('發生錯誤:', error);
-        });
+      })
+      .catch((error) => {
+        console.error('發生錯誤:', error);
+      });
     },
     selectkind(prod_kind) {
       this.prodKind = prod_kind;
@@ -173,15 +172,15 @@ export default {
       if (this.storage["addItemlist"] == null) {
         this.storage["addItemlist"] = "";
       }
-      let additem = this.produstdislist.find((item) => item.id === prod_id);
+      let additem = this.produstdislist.find((item) => item.prod_id === prod_id);
 
       this.storage["addItemlist"] += `${prod_id},`;
       if (this.storage[prod_id]) {
         let itemstr = [...this.storage[prod_id].split(",")];
         // console.log(itemstr)
-        let nowamount = parseInt(itemstr.slice(3, 4));
+        let nowamount = parseInt(itemstr.slice(4, 5));
         nowamount++;
-        itemstr.splice(3, 1, nowamount);
+        itemstr.splice(4, 1, nowamount);
         this.storage[prod_id] = "";
         this.storage[prod_id] += itemstr;
       } else {
@@ -189,6 +188,7 @@ export default {
         this.storage[prod_id] += `${prod_id},`;
         this.storage[prod_id] += `${additem.prod_name},`;
         this.storage[prod_id] += `${additem.prod_sellingprice},`;
+        this.storage[prod_id] += `${additem.prod_img},`;
         this.storage[prod_id] += "1,";
       }
     },
