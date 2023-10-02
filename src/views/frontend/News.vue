@@ -2,54 +2,60 @@
   <div class="news">
     <main class="news_main">
       <h1>最新消息<br />NEWS</h1>
-      <div class="item" v-for="(item, index) in newscol" :key="index">
+      <div class="item" v-for="(item, j) in getPageItems" :key="j">
         <div class="txt">
-          <span>{{ item.time }}</span>
-          <h3>{{ item.title }}</h3>
-          <p>{{ item.info }}</p>
+          <span>{{ item.news_date }}</span>
+          <h3>{{ item.news_title }}</h3>
+          <p>{{ item.news_content }}</p>
         </div>
         <div class="image">
           <img
-            :src="require('@/assets/image/news/n' + index + '.jpg')"
+            :src="require('@/assets/image/news/' + item.news_img)"
             alt=""
           />
         </div>
       </div>
     </main>
-    <div class="page"><Page/></div>
+    <div class="page">
+      <Page
+        :total="newscol.length"
+        :page-size="pageItems"
+        v-model="currentPage"
+        @click="backtop"
+      />
+    </div>
   </div>
-  
 </template>
 
 <script>
 export default {
   data() {
     return {
-      newscol: [
-        {
-          time: "2023-08-25",
-          title: "抽象藝術簡談",
-          info: "本館將舉辦一系列藝術家講座，本次邀請知明藝術家小林堅丙、伍時媛分享他們的創作理念和經驗。為藝術愛好者提供與藝術家近距離互動的機會。本館將舉辦一系列藝術家講座，本次邀請知明藝術家小林堅丙、伍時媛分享他們的創作理念和經驗。為藝術愛好者提供與藝術家近距離互動的機會。",
-          imgsrc: "",
-        },
-        {
-          time: "2023-07-15",
-          title: "文青集社—意象創作展",
-          info: "近期熱門的文青集社來了!除了於本館展出最新作品外，經典系列也會收錄在這次創作展中。喜愛文青集社作品的人可別錯過了!",
-          imgsrc: "",
-        },
-        {
-          time: "2023-06-22",
-          title: "清晨台北",
-          info: "攝影新星—巫隆迺，用最擅長的黑白鏡頭帶領大家一同深入台灣角落。感受發生於台北之中的各種酸甜苦辣",
-          imgsrc: "",
-        },
-      ],
+      newscol: [],
+      publicpath: "http://localhost/musesmuseum/public/phps/",
+      currentPage: 1,
+      pageItems: 6,
     };
   },
-  methods: {},
+  computed: {
+    getPageItems() {
+      const startIndex = (this.currentPage - 1) * this.pageItems;
+      const endIndex = startIndex + this.pageItems;
+      return this.newscol.slice(startIndex, endIndex);
+    },
+  },
+  methods: {
+    fetchnews() {
+      fetch(`${this.publicpath}test.php`).then(async (response) => {
+        this.newscol = await response.json();
+      });
+    },
+    backtop() {
+      window.scrollTo(0, 0);
+    },
+  },
   mounted() {
-    document.body.style.height = `auto`;
+    this.fetchnews();
   },
 };
 </script>
@@ -57,17 +63,17 @@ export default {
 <style scoped lang="scss">
 .news {
   background-image: linear-gradient(45deg, $mlblue 50%, $myellow 50%);
-  padding:20px 0 50px;
+  padding: 20px 0 50px;
   .news_main {
     width: 71%;
     margin: auto;
-    @include t(){
+    @include t() {
       width: 90%;
     }
     h1 {
       margin: 0 0 2rem;
       background-color: #fff;
-      @include title($color:$mgreen);
+      @include title($color: $mgreen);
     }
     .item {
       border-radius: 10px;
@@ -78,21 +84,21 @@ export default {
       margin-bottom: 3rem;
       padding: 3rem;
       gap: 1rem;
-      @include t(){
+      @include t() {
         padding: 1.5rem;
       }
-      @include m(){
+      @include m() {
         flex-direction: column;
       }
       .txt {
         width: 50%;
-        @include m(){
-        width: 100%;
-      }
-        span{
+        @include m() {
+          width: 100%;
+        }
+        span {
           display: block;
         }
-        h3{
+        h3 {
           line-height: 1.5;
           margin: 1.5rem 0;
           background-color: $myellow;
@@ -101,19 +107,20 @@ export default {
       }
       .image {
         width: 50%;
-        @include m(){
-        width: 100%;
-      }
+        @include m() {
+          width: 100%;
+        }
         img {
           object-fit: cover;
           width: 100%;
           height: 100%;
           border-radius: 10px;
+          max-height: 300px;
         }
       }
     }
   }
-  .page{
+  .page {
     text-align: center;
   }
 }
