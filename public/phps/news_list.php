@@ -5,10 +5,10 @@ header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Ac
 header("Content-Type: application/json"); 
 
 try {
-    $dbname = "chd103_g1";
+    $dbname = "musesmuseum";
     $user = "root";
     $password = "";
-    $dsn = "mysql:host=localhost;port=3306;dbname=chd103_g1;charset=UTF8";	
+    $dsn = "mysql:host=localhost;port=3306;dbname=musesmuseum;charset=UTF8";	
     $options = [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, PDO::ATTR_CASE => PDO::CASE_NATURAL];
     $pdo = new PDO($dsn, $user, $password, $options);
 
