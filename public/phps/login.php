@@ -25,11 +25,11 @@ try{
 	$members->execute();
 
 
-	if($members->rowCount() === 0){//查無此人, 帳密錯誤
-		echo json_encode(["error" => "帳密錯誤"]);
-	} else {
-		echo json_encode(["success" => "登入成功"]);
-	}
+	// if($members->rowCount() === 0){//查無此人, 帳密錯誤
+	// 	echo json_encode(["error" => "帳密錯誤"]);
+	// } else {
+	// 	echo json_encode(["success" => "登入成功"]);
+	// }
 	//若有此人資料，請取回資料並顯示登入者名字
 	$memRow = $members->fetch(PDO::FETCH_ASSOC);
 	if ($members == null) {
@@ -37,6 +37,8 @@ try{
 		$members["successful"] = false;
 		echo json_encode($members);
 		return;
+	  }else{
+		echo json_encode($memRow);
 	  }
 }catch(PDOException $e){
 	echo "錯誤行號 : ", $e->getLine();

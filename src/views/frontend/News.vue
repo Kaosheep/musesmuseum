@@ -10,7 +10,7 @@
         </div>
         <div class="image">
           <img
-            :src="require('@/assets/image/news/' + item.news_img)"
+            :src="(`${this.$store.state.imgpublicpath}image/news/` + item.news_img)"
             alt=""
           />
         </div>
@@ -32,7 +32,6 @@ export default {
   data() {
     return {
       newscol: [],
-      publicpath: "http://localhost/musesmuseum/public/phps/",
       currentPage: 1,
       pageItems: 6,
     };
@@ -46,7 +45,7 @@ export default {
   },
   methods: {
     fetchnews() {
-      fetch(`${this.publicpath}test.php`).then(async (response) => {
+      fetch(`${this.$store.state.publicpath}test.php`).then(async (response) => {
         this.newscol = await response.json();
       });
     },
