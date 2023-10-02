@@ -52,8 +52,8 @@ export default {
  data() {
    return {
        memAllInfo:[
-           { memTitColumn:"姓名",type:"text",id:"memId",name:"memId",class:"fillInClumn",placeholder:"姓名",value:"巴特特" },  //帶上預設屬性日期不能選擇了
-           { memTitColumn:"生日",type:"date",id:"birthday",name:"birthday",class:"fillInClumn",placeholder:"" ,value:"2000/08/01" },
+           { memTitColumn:"姓名",type:"text",id:"memId",name:"memId",class:"fillInClumn",placeholder:"姓名",value:"巴特特" },  
+           { memTitColumn:"生日",type:"date",id:"birthday",name:"birthday",class:"fillInClumn",placeholder:"" ,value: '2000-01-01' },
            { memTitColumn:"信箱",type:"email",id:"email",name:"email",class:"fillInClumn",placeholder:"信箱" ,value:"muse001@gmail.com" },
            { memTitColumn:"聯絡電話",type:"text",id:"memPsw",name:"memPsw",class:"fillInClumn",placeholder:"電話" ,value:"0989123456" },
            { memTitColumn:"聯絡地址",type:"text",id:"memPsw",name:"memPsw",class:"fillInClumn",placeholder:"地址" ,value:"光明市珍珠區謬思路1號" },

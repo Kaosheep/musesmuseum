@@ -1,7 +1,6 @@
 <template>
   <div class="bgcGY cardCenter">
     <main>
-      <!-- <div class="backGroundCardbBlue"></div> -->
       <div class="backGroundCard ">
         <div class="backGroundCardBtns">
           <router-link :to="a.link" v-for="a in memBtnLink">
@@ -48,16 +47,14 @@ export default {
   data() {
     return {
       memAllInfo: [
-        { memTitColumn: "帳號", type: "text", id: "memId", name: "memId", class: "fillInClumn", placeholder: "帳號" },
-        { memTitColumn: "密碼", type: "password", id: "memPsw", name: "memPsw", class: "fillInClumn", placeholder: "密碼" },
+        { memTitColumn: "帳號", type: "text", id: "mbr_email", name: "mbr_email", class: "fillInClumn", placeholder: "帳號" },
+        { memTitColumn: "密碼", type: "password", id: "mbr_psw", name: "mbr_psw", class: "fillInClumn", placeholder: "密碼" },
       ],
       memBtnLink: [
         { link: "/Home/MemberSignUp", name: "會員註冊" },
         { link: "", name: "會員登入" },
       ],
-      // memId: "muses", 
-      // memPsw: "muses",
-      // router: null, //暫時登入用
+
     };
   },
   methods: {
@@ -65,19 +62,13 @@ export default {
       console.log('checkLoginData');
 
     
-      //暫時登入用
-      if (this.memId === "muses" && this.memPsw === "muses") {
-        window.alert("登入成功");
-        this.router.push('/Home/MemberInfo');
-      } else {
-        window.alert("帳密錯誤");
-      }
+   
       let input = {
-       memId: document.getElementById("memId").value,
-           memPsw: document.getElementById("memPsw").value
+        mbr_email: document.getElementById("mbr_email").value,
+        mbr_psw: document.getElementById("mbr_psw").value
       }
       
-    const data = new URLSearchParams({ memId, memPsw });
+    const data = new URLSearchParams({ mbr_email, mbr_psw });
     fetch("http://localhost/musesmuseum/public/phps/login.php", {
       method: "POST",
       headers: {
@@ -88,75 +79,23 @@ export default {
       .then((res) => res.json())
       .then((json) => {
         console.log(json);
-        // 在这里处理响应数据，可以更新 Vue 组件的数据
       })
       .catch((error) => {
         console.error(error);
       });
-   
-     }   // 使用 $router.push 导航到目标路由
+      //暫時登入用
+      if (this.mbr_email == mbr_email && this.mbr_psw == mbr_psw) {
+        window.alert("登入成功");
+        this.router.push('/Home/MemberInfo');
+      } else {
+        window.alert("帳密錯誤");
+      }
+     }  
        
    
-      //帳密
-      // console.log('checkLoginData');
-      // let input = {
-      // memId:document.getElementById("memId").value,
-      // memPsw:document.getElementById("memPsw").value,
-
-      // }
-      // // 上課測試帳密
-      // fetch(
-      //   'http://localhost/musesmuseum/public/phps/login.php',{
-      //   method:'POST',
-      //   body:new URLSearchParams(input)
-      //   }
-      // )
-      // .then(res => res.json())
-      // .then(json => console.log(json))
-
-      // 測試一直發生錯誤
-  //      let input = {
-  //     memId: 'Sara',
-  //     memPsw: '111'
-
-  //   }
-  //     fetch(
-  //   'http://localhost/musesmuseum/public/phps/login.php', {
-  //   method: 'POST',
-  //   body: new URLSearchParams(input)
-  // })
-  // .then(res => res.json())
-  // .then(json => {
-  //   if (json.error) {
-  //     window.alert(json.error); 
-  //   } else if (json.success) {
-  //     window.alert(json.success); 
-  //   }
-  // })
-  // .catch(error => {
-  //   console.error("error", error);
-  //   window.alert('發生錯誤');
-  // });
-
-    // },
+    
   },
   mounted() {
-    // 連接php的部分
-    // let input = {
-    //   memId: 'Sara',
-    //   memPsw: '111'
-
-    // }
-    
-
-    // fetch(
-    //   'http://localhost/musesmuseum/public/phps/login.php', {
-    //   method: 'POST',
-    //   body: new URLSearchParams(input)
-    // }).then(res => res.json()).then(json => {
-    //   console.log(json)
-    // })
-
     this.router = this.$router;//暫時登入用
     document.body.style.height = `auto`;
   }
