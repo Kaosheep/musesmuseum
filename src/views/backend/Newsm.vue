@@ -431,9 +431,6 @@ div {
           cursor: pointer;
         }
 
-        &:hover {
-          color: $mblue;
-        }
       }
 
       p {
