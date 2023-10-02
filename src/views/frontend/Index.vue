@@ -129,7 +129,7 @@
                 </div>
                 <div class="image">
                   <img
-                    :src="require('@/assets/image/news/n' + index + '.jpg')"
+                    :src="(`${this.$store.state.imgpublicpath}image/news/n` + index + '.jpg')"
                     alt=""
                   />
                 </div>
