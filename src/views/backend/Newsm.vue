@@ -1,128 +1,83 @@
 <template>
-  <div class="newsmmain">
-    <div class="admin_editbar">
-      <div>
-        <form action="">
+  <div>
+    <div>
+      <div class="admin_editbar">
+        <div>
           <button class="btn_admin" @click="showEditForm('add')">新增</button>
-          <button
-            class="btn_admin"
-            @click="toggleStatus('1')"
-            :disabled="!canToggle('1')"
-          >
-            上架
-          </button>
-          <button
-            class="btn_admin"
-            @click="toggleStatus('0')"
-            :disabled="!canToggle('0')"
-          >
-            下架
-          </button>
-        </form>
+          <button class="btn_admin" @click="toggleStatus('1')" :disabled="!canToggle('1')">上架</button>
+          <button class="btn_admin" @click="toggleStatus('0')" :disabled="!canToggle('0')">下架</button>
+        </div>
+        <Searchbar class="onlyB" />
       </div>
-      <Searchbar class="onlyB" />
-    </div>
-    <div class="dmain">
-      <table>
-        <tr>
-          <th></th>
-          <th>消息編號</th>
-          <th>消息標題</th>
-          <th>狀態</th>
-          <th></th>
-        </tr>
-        <tr v-for="i in getPageItems" :key="i.news_id">
-          <td><input type="checkbox" /></td>
-          <td>{{ i.news_id }}</td>
-          <td class="newsmtitle">{{ i.news_title }}</td>
-          <td>
-            <p v-if="i.news_status === 1">上架中</p>
-            <p v-else>未上架</p>
-          </td>
-          <td>
-            <button
-              class="edit"
-              @click="
-                showEditForm();
-                editid(i.news_id);
-              "
-            >
-              編輯
-            </button>
-          </td>
-        </tr>
-      </table>
-    </div>
-    <div class="page">
-      <Page
-        :total="newscol.length"
-        :page-size="pageItems"
-        v-model="currentPage"
-      />
-    </div>
-    <form action="" class="pop" v-if="showForm" @submit.prevent="submitForm">
-      <h2>編輯</h2>
-      <div class="xedit" v-show="addnews">
-        <div>
-          <div>消息編號</div>
-          <div>{{ editnew.news_id }}</div>
+      <div class="dmain">
+        <table>
+          <tr>
+            <th></th>
+            <th>消息編號</th>
+            <th>消息標題</th>
+            <th>狀態</th>
+            <th></th>
+          </tr>
+          <tr v-for="(i, index) in news" :key="index">
+            <td><input type="checkbox" v-model="i.selected"></td>
+            <td>{{ i.news_id }}</td>
+            <td>{{ i.news_title }}</td>
+            <td>
+              <p v-if="parseInt(i.news_status) === 1">上架中</p>
+              <p v-else>未上架</p>
+            </td>
+            <td>
+              <button class="edit" @click="showEditForm('edit', i.news_id)">編輯</button>
+            </td>
+          </tr>
+          <div class="pagination">
+            <button @click="previousPage" :disabled="currentPage === 1">上一頁</button>
+            <button @click="nextPage" :disabled="currentPage === totalPages">下一頁</button>
+          </div>
+        </table>
+      </div>
+      <form action="" class="pop" v-show="showForm" @submit.prevent="submitForm">
+        <h2>編輯</h2>
+        <div class="xedit" v-show="addnews">
+          <div>
+            <div>消息編號</div>
+            <div v-text="add_news.id"></div>
+          </div>
+          <div>
+            <div>日期</div>
+            <input type="date" v-model="add_news.date" disabled>
+          </div>
         </div>
         <div>
-          <div>日期</div>
-          <input type="date" v-model="editnew.news_date" />
-        </div>
-      </div>
-      <div>
-        <div>標題</div>
-        <input type="text" name="" id="" v-model="editnew.news_title" />
-        <div>內容</div>
-        <textarea
-          name=""
-          id=""
-          cols="30"
-          rows="7"
-          v-model="editnew.news_content"
-        ></textarea>
-        <div class="switch_status">
-          <div>狀態</div>
-          <select v-model="editnew.news_status">
-            <option value="1">上架中</option>
-            <option value="0">未上架</option>
-          </select>
-          <Upload
-            multiple
-            type="drag"
-            action="//jsonplaceholder.typicode.com/posts/"
-            show-upload-list
-          >
-            <div style="padding: 20px 0">
-              <Icon
-                type="ios-cloud-upload"
-                size="52"
-                style="color: #3399ff"
-              ></Icon>
-              <p>圖片上傳</p>
-            </div>
-          </Upload>
-          <!-- <input type="file" id="fileInput" accept="image/*" style="display: none;" />
+          <div>標題</div>
+          <input type="text" name="" id="" v-model="add_news.title">
+          <div>內容</div>
+          <textarea name="" id="" cols="30" rows="7" v-model="add_news.content"></textarea>
+          <div class="switch_status">
+            <div>狀態</div>
+            <select v-model="status">
+              <option value="1">上架中</option>
+              <option value="0">未上架</option>
+            </select>
+            <!-- <input @change="img($event)" type="file">
+            <img :src="src">
+            <input type="file" id="fileInput" accept="image/*" style="display: none;" />
             <label for="fileInput">選擇圖片</label>
             <div class="img_wrap">
               <img src="" alt="" id="img1" width="50">
             </div> -->
+          </div>
+          <div class="form_btn">
+            <button type="button" class="btn_admin" @click="hideEditForm">取消</button>
+            <button type="button" class="btn_admin" @click="addnews_btn(add_news.id)">儲存</button>
+          </div>
         </div>
-        <div class="form_btn">
-          <button type="button" class="btn_admin" @click="hideEditForm">
-            取消
-          </button>
-          <button type="button" class="btn_admin" @click="addnews_btn()">
-            儲存
-          </button>
-        </div>
-      </div>
-    </form>
+      </form>
+    </div>
+
   </div>
 </template>
-
+   
 <script>
 import PinkButton from "/src/components/PinkButton.vue";
 import Searchbar from "/src/components/Searchbar.vue";
@@ -132,64 +87,88 @@ export default {
   components: {
     Searchbar,
     Searchbarclick,
-    PinkButton,
+    PinkButton
   },
   data() {
     return {
-      currentPage: 1,
-      pageItems: 6,
+      news: [],
       add_news: [
         {
-          title: "",
-          content: "",
-          date: "",
-        },
+          id: '',
+          title: '',
+          content: '',
+          date: '',
+        }
       ],
-      newscol: [],
-      editnew: null,
-      publicpath: "http://localhost/musesmuseum/public/phps/",
+      test: [
+        {
+          id: "MN20230901",
+          title: "「科技奇觀展」探索未來科...",
+          statusn: "0",
+        },
+        {
+          id: "MN20231101",
+          title: "「古文明珍寶展」現已開展...",
+          statusn: "1",
+
+        }
+      ],
       showForm: false,
       addnews: false,
       status: 0,
-    };
-  },
-  computed: {
-    getPageItems() {
-      const startIndex = (this.currentPage - 1) * this.pageItems;
-      const endIndex = startIndex + this.pageItems;
-      return this.newscol.slice(startIndex, endIndex);
-    },
+      src: '',
+      imgparam: {},
+      currentPage: 1, // 當前頁碼
+      pageSize: 10, // 每頁顯示的數據量
+
+    }
   },
   methods: {
-    editid(clickid) {
-      return (this.editnew = this.newscol.find((n) =>
-        n.news_id?.includes(clickid)
-      ));
+    previousPage() {
+      // 切換到上一頁
+      if (this.currentPage > 1) {
+        this.currentPage--;
+      }
     },
-    // listnum() {
-    //   let trnum = Math.floor(
-    //     document.querySelector(".newsmmain").offsetHeight /
-    //       document.querySelector(".dmain").offsetHeight
-    //   );
-    //   if (this.newscol.length > trnum) {
-    //     return (this.pageItems = trnum);
-    //   } else {
-    //     return (this.pageItems = this.newscoll);
-    //   }
-    // },
+    nextPage() {
+      // 切換到下一頁
+      if (this.currentPage < this.totalPages) {
+        this.currentPage++;
+      }
+    },
+    img(e) {
+      let that = this; // 改變 this 指向
+      let files = e.target.files[0]; // 圖片文件名
+      if (!e || !window.FileReader) return; // 檢查是否支援 FileReader
+      let reader = new FileReader();
+      reader.readAsDataURL(files); // 關鍵一步，在這裡轉換的
+      reader.onloadend = function () {
+        that.src = this.result; // 賦值
+      }
+      // this.imgparam = new FormData(); // 轉換為表單進行傳送給後端
+      // this.imgparam.append("images", files); // 第一個參數就是後端要接收的字段，要一致，不一致會傳送失敗
+    },
     toggleStatus(newStatus) {
-      this.newscol.forEach((item) => {
+      this.test.forEach(item => {
         if (item.selected) {
           item.statusn = newStatus;
         }
       });
     },
     canToggle(newStatus) {
-      // return this.newscol.some(item => item.selected && item.statusn !== newStatus);
+      return this.test.some(item => item.selected && item.statusn !== newStatus);
     },
-    showEditForm(type) {
-      if (type == "add") {
+    showEditForm(type, id) {
+      if (type == 'add') {
         this.addnews = false;
+        this.add_news = [
+          {
+            id: '',
+            title: '',
+            content: '',
+            date: '',
+          }
+        ]
       } else {
         this.addnews = true;
       }
@@ -235,52 +214,88 @@ export default {
       this.hideEditForm();
     },
     //新增
-    // addnews_btn() {
-    //   //先檢查資料格式是否符合DB規則
-    //   const url = `http://localhost/musesmuseum/public/phps/news.php`
-    //   let headers = {
-    //     "Content-Type": "application/json",
-    //     "Accept": "application/json",
-    //   }
-    //   let currentDate = new Date();
-    //   let formattedDate = currentDate.toISOString().split("T")[0];
-    //   //以下是API文件中提及必寫的主體参數。
-    //   let body = {
-    //     "title": this.add_news.title,
-    //     "content": this.add_news.content,
-    //     "status": this.status,
-    //     "date": formattedDate,
-    //   }
-    //   fetch(url, {
-    //     method: "POST",
-    //     headers: headers,
-    //     //別忘了把主體参數轉成字串，否則資料會變成[object Object]，它無法被成功儲存在後台
-    //     // body: JSON.stringify(body)
-    //     body: JSON.stringify({ data: body })
+    addnews_btn(id) {
+      if (id != undefined) {
+        const url = `http://localhost/musesmuseum/public/phps/news_add.php`
+        let headers = {
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+        }
+        //以下是API文件中提及必寫的主體参數。
+        let body = {
+          "id": this.add_news.id,
+          "title": this.add_news.title,
+          "content": this.add_news.content,
+          "status": this.status,
+          // 'image': this.imgparam.get('images')
+        }
+        fetch(url, {
+          method: "POST",
+          headers: headers,
+          //別忘了把主體参數轉成字串，否則資料會變成[object Object]，它無法被成功儲存在後台
+          // body: JSON.stringify(body)
+          body: JSON.stringify({ data: body })
+        })
+          .then(response => {
+            if (response.ok) {
+              return response.json(); // 如果請求成功，解析JSON數據
+            } else {
+              throw new Error("新增失敗"); // 如果請求不成功，拋出錯誤
+            }
+          })
+          .then(json => {
+            console.log(json)
+            // 在成功時顯示提示
+            alert(json.message); // 假設JSON數據中有一個message屬性
+            window.location.reload()
+          })
+          .catch(error => {
+            // 在失敗時顯示提示
+            alert(error.message);
+          });
+      } else {
+        const url = `http://localhost/musesmuseum/public/phps/news_add.php`
+        let headers = {
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+        }
+        let currentDate = new Date();
+        let formattedDate = currentDate.toISOString().split("T")[0];
+        //以下是API文件中提及必寫的主體参數。
+        let body = {
+          "title": this.add_news.title,
+          "content": this.add_news.content,
+          "status": this.status,
+          "date": formattedDate,
+          // 'image': this.imgparam.get('images')
+        }
+        fetch(url, {
+          method: "POST",
+          headers: headers,
+          //別忘了把主體参數轉成字串，否則資料會變成[object Object]，它無法被成功儲存在後台
+          // body: JSON.stringify(body)
+          body: JSON.stringify({ data: body })
+        })
+          .then(response => {
+            if (response.ok) {
+              return response.json(); // 如果請求成功，解析JSON數據
+            } else {
+              throw new Error("新增失敗"); // 如果請求不成功，拋出錯誤
+            }
+          })
+          .then(json => {
+            console.log(json)
+            // 在成功時顯示提示
+            alert(json.message); // 假設JSON數據中有一個message屬性
+            window.location.reload()
+          })
+          .catch(error => {
+            // 在失敗時顯示提示
+            alert(error.message);
+          });
+      }
 
-    //   })
-    //   .then(response => {
-    //       if (response.ok) {
-    //         return response.json(); // 如果請求成功，解析JSON數據
-    //       } else {
-    //         throw new Error("新增失敗"); // 如果請求不成功，拋出錯誤
-    //       }
-    //     })
-    //     .then(json => {
-    //       // 在成功時顯示提示
-    //       alert("新增成功：" + json.message); // 假設JSON數據中有一個message屬性
-    //     })
-    //     .catch(error => {
-    //       // 在失敗時顯示提示
-    //       console.log(error.message);
-    //       alert("新增失敗：" + error.message);
-    //     });
-    // },
-    fetchnews() {
-      fetch(`${this.publicpath}test.php`).then(async (response) => {
-        this.newscol = await response.json();
-      });
-    },
+    }
   },
   computed: {
     news() {
@@ -295,9 +310,37 @@ export default {
     },
   },
   mounted() {
-    this.fetchnews();
-  },
-};
+    //先檢查資料格式是否符合DB規則
+    const url = `http://localhost/musesmuseum/public/phps/news_list.php`
+    let headers = {
+      "Content-Type": "application/json",
+      "Accept": "application/json",
+    }
+    fetch(url, {
+      method: "POST",
+      headers: headers,
+    })
+      .then(response => {
+        if (response.ok) {
+          return response.json(); // 如果請求成功，解析JSON數據
+        } else {
+          throw new Error("取得消息失敗"); // 如果請求不成功，拋出錯誤
+        }
+      })
+      .then(json => {
+        console.log(json)
+        this.news = json;
+        // 在成功時顯示提示
+        // alert(json.message); // 假設JSON數據中有一個message屬性
+      })
+      .catch(error => {
+        // 在失敗時顯示提示
+        // alert(error.message);
+      });
+
+
+  }
+}
 </script>
 
 <style scoped lang="scss">
@@ -305,11 +348,12 @@ export default {
 
 div {
   color: #000;
+
+  form {
+    height: 80vh;
+  }
 }
-.newsmmain {
-  height: 100%;
-  width: 100%;
-}
+
 .bTab {
   background-color: #ffffff80;
   border-radius: 10px 10px 0 0;
@@ -317,8 +361,9 @@ div {
   border-style: none;
   padding: 8px;
   color: #000;
-  transition: 0.3s;
+  transition: .3s;
   cursor: pointer;
+
 }
 
 .admin_editbar {
@@ -364,30 +409,22 @@ div {
       padding: 10px;
       text-align: center;
       border-bottom: 1px solid #ccc;
+
     }
 
     th {
       background-color: #f2f2f2;
       font-weight: bold;
     }
-    .newsmtitle {
-      text-align: start;
-    }
+
     td {
       &:first-child {
-        width: 8%;
+        input[type="checkbox"] {
+          margin-right: 5px;
+        }
       }
-      &:nth-child(2) {
-        width: 12%;
-      }
-      &:nth-child(3) {
-        width: 60%;
-      }
-      &:nth-child(4) {
-        width: 10%;
-      }
+
       &:last-child {
-        width: 10%;
         button {
           color: #000;
           border: none;
@@ -399,16 +436,19 @@ div {
       p {
         margin: 0;
         padding: 5px;
+
       }
     }
   }
+
 }
+
 .pop {
   position: absolute;
   top: -1%;
   left: 0;
   width: 100%;
-  height: 80vh;
+  height: 100%;
   padding: 20px;
   background-color: rgba(255, 248, 248);
   justify-content: center;
@@ -429,11 +469,12 @@ div {
   textarea {
     width: 100%;
     background-color: #ffffff1b;
-    border: 1px solid #009ca8;
+    border: 1px solid #009CA8;
     border-radius: 10px;
     resize: none;
     padding-left: 5px;
     padding-right: 5px;
+
   }
 
   .img_wrap {
@@ -442,7 +483,10 @@ div {
   }
 
   .form_btn {
-    text-align: center;
+    position: fixed;
+    bottom: 0;
+    right: 20px;
   }
 }
 </style>
+    
