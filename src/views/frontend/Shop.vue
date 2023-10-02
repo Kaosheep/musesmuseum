@@ -102,17 +102,18 @@ export default {
       pageItems: 9,
       prodKind: "所有商品",
       storage: localStorage,
+      publicpath: "http://localhost/musesmuseum/public/phps/",
     };
   },
   computed: {
     categoryFilter() {
-      return this.produstdislist.filter((v) => v.kind?.includes(this.prod_kind));
+      return this.produstdislist.filter((v) => v.prod_kind?.includes(this.prodKind));
     },
     searchFilter() {
       // if (!this.searchinput) return this.categoryFilter;
       if (this.searchinput) {
         return this.categoryFilter.filter((v) =>
-          v.title?.includes(this.searchinput)
+          v.prod_name?.includes(this.searchinput)
         );
       } else {
         return this.categoryFilter
@@ -121,9 +122,9 @@ export default {
     productSorting() {
       return this.searchFilter.slice().sort((a, b) => {
         if (this.sortType === "asc") {
-          return a.price - b.price;
+          return a.prod_sellingprice - b.prod_sellingprice;
         } else if (this.sortType === "desc") {
-          return b.price - a.price;
+          return b.prod_sellingprice - a.prod_sellingprice;
         }
       });
     },
@@ -148,10 +149,14 @@ export default {
     fetchprod() {
       fetch(`${this.publicpath}shop.php`).then(async (response) => {
         this.produstdislist = await response.json();
-      });
+        console.log(this.produstdislist); 
+        })
+        .catch((error) => {
+          console.error('發生錯誤:', error);
+        });
     },
-    selectkind(kind) {
-      this.prod_kind = kind;
+    selectkind(prod_kind) {
+      this.prodKind = prod_kind;
     },
     searchClick(text) {
       this.searchinput = text;
@@ -164,31 +169,32 @@ export default {
         this.sortType = type;
       }
     },
-    addcart(id) {
+    addcart(prod_id) {
       if (this.storage["addItemlist"] == null) {
         this.storage["addItemlist"] = "";
       }
-      let additem = this.produstdislist.find((item) => item.prod_id === id);
+      let additem = this.produstdislist.find((item) => item.id === prod_id);
 
-      this.storage["addItemlist"] += `${id},`;
-      if (this.storage[id]) {
-        let itemstr = [...this.storage[id].split(",")];
+      this.storage["addItemlist"] += `${prod_id},`;
+      if (this.storage[prod_id]) {
+        let itemstr = [...this.storage[prod_id].split(",")];
         // console.log(itemstr)
         let nowamount = parseInt(itemstr.slice(3, 4));
         nowamount++;
         itemstr.splice(3, 1, nowamount);
-        this.storage[id] = "";
-        this.storage[id] += itemstr;
+        this.storage[prod_id] = "";
+        this.storage[prod_id] += itemstr;
       } else {
-        this.storage[id] = "";
-        this.storage[id] += `${prod_id},`;
-        this.storage[id] += `${additem.prod_name},`;
-        this.storage[id] += `${additem.prod_sellingprice},`;
-        this.storage[id] += "1,";
+        this.storage[prod_id] = "";
+        this.storage[prod_id] += `${prod_id},`;
+        this.storage[prod_id] += `${additem.prod_name},`;
+        this.storage[prod_id] += `${additem.prod_sellingprice},`;
+        this.storage[prod_id] += "1,";
       }
     },
   },
   mounted() {
+    this.fetchprod();
   },
 };
 </script>
