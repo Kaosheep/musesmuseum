@@ -5,7 +5,7 @@
         <section>
           <div class="spotlight">
             <div class="maxlogo">
-              <img src="@/assets/image/home/buliding0.jpg" alt="" />
+              <img src="@/assets/image/home/logoimg.jpg" alt="" />
               <div class="light yellow"></div>
               <div class="light green"></div>
               <div class="light pink"></div>
