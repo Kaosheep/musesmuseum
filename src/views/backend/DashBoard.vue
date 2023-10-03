@@ -42,6 +42,7 @@ export default {
           title: '消息管理',
           items: [
             { name: '1-1', text: '消息管理', link: "/DashBoard" },
+            { name: '1-2', text: '常見問題管理', link: "/DashBoard/Faqm" },
           ],
         },
         {

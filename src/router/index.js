@@ -198,6 +198,11 @@ const routes = [
             name: 'Newsm',
             component: () => import('../views/backend/Newsm.vue'),
           },
+           {
+            path: 'Faqm',
+            name: 'Faqm',
+            component: () => import('../views/backend/Faqm.vue'),
+          },
           {
             path: 'Memberm',
             name: 'Memberm',
