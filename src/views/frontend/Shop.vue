@@ -44,8 +44,8 @@
     </aside>
     <div class="shop_container">
       <div v-if="productSorting == 0">查無商品</div>
-      <div class="item" v-for="(item, prod_id) in getPageItems" :key="prod_id" v-else>
-        <router-link :to="`/Home/ProductPage/${prod_id}`">
+      <div class="item" v-for="(item) in getPageItems" :key="item.prod_id" v-else>
+        <router-link :to="`/Home/ProductPage/${item.prod_id}`">
           <div class="image">
             <img :src="(`${this.$store.state.imgpublicpath}image/productimage/` + item.prod_img)" :alt="item.prod_name" />
           </div>
@@ -53,12 +53,12 @@
         <div class="info">
           <span>
             <Heart> </Heart>
-            <router-link :to="`/Home/ProductPage/${prod_id}`">
+            <router-link :to="`/Home/ProductPage/${item.prod_id}`">
               <p>{{ item.prod_name }}</p>
             </router-link>
             <font-awesome-icon :icon="['fas', 'cart-shopping']" id="car" @click="addcart(item.prod_id)" />
           </span>
-          <router-link :to="`/Home/ProductPage/${prod_id}`">
+          <router-link :to="`/Home/ProductPage/${item.prod_id}`">
             <span> ${{ item.prod_sellingprice }} </span>
           </router-link>
         </div>
@@ -88,7 +88,7 @@ export default {
       value: 0,
       aside: [
         { kind: "所有商品" },
-        { kind: "熱銷Top5" },
+        // { kind: "熱銷Top5" },
         { kind: "聯名系列" },
         { kind: "時尚彩妝" },
         { kind: "生活用品" },
