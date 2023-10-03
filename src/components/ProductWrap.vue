@@ -7,11 +7,7 @@
       <div class="object" v-for="(object, index) in productlist" :key="index">
         <a href=""
           ><img
-            :src="
-              require('../assets/image/productimage/productimage' +
-                index +
-                '.png')
-            "
+          :src="(`${this.$store.state.imgpublicpath}image/productimage/` + item.prod_img)"
             draggable="false"
           />
           <p>{{ object.title }}</p></a

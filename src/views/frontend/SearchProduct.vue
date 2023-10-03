@@ -31,10 +31,7 @@
               <router-link :to="`/Home/SearchProductInfo/${rowitem.id}`" >
                 <div class="itemInfoList">
                   <img
-                    :src="
-                      require('@/assets/image/productimage/productimage' +
-                      rowindex +
-                        '.png')"
+                      :src="(`${this.$store.state.imgpublicpath}image/productimage/` + item.prod_img)"
                       :alt="rowitem.name"
                   />
                 </div>

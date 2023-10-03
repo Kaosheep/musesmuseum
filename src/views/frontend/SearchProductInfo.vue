@@ -29,9 +29,7 @@
 
             <div class="itemInfoList">{{ rowitem.id }}</div>
             <div class="itemInfoList">
-              <img :src="require('@/assets/image/productimage/productimage' +
-                rowindex +
-                '.png')" :alt="rowitem.name" />
+              <img :src="(`${this.$store.state.imgpublicpath}image/productimage/` + item.prod_img)" :alt="rowitem.name" />
             </div>
             <div class="itemInfoList">{{ rowitem.name }}</div>
             <div class="itemInfoList">{{ rowitem.price }}</div>

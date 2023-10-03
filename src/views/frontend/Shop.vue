@@ -47,7 +47,7 @@
       <div class="item" v-for="(item, prod_id) in getPageItems" :key="prod_id" v-else>
         <router-link :to="`/Home/ProductPage/${prod_id}`">
           <div class="image">
-            <img :src="require('@/assets/image/productimage/' + item.prod_img)" :alt="item.prod_name" />
+            <img :src="(`${this.$store.state.imgpublicpath}image/productimage/` + item.prod_img)" :alt="item.prod_name" />
           </div>
         </router-link>
         <div class="info">

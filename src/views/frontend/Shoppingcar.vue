@@ -26,7 +26,7 @@
     <div class="shoppingcar_mbl" v-else>
       <div class="shoppingcar_mbi" v-for="(item, j) in itemarr" :key="j">
         <div class="shoppingcar_productimage">
-          <img :src="require('@/assets/image/productimage/' + item[3])" alt="" />
+          <img :src="(`${this.$store.state.imgpublicpath}image/productimage/` + item[3])" alt="" />
         </div>
         <div class="shoppingcar_productinfo">
           <p>{{ item[1] }}</p>
