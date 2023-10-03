@@ -1,6 +1,8 @@
 <template>
   <div class="bgcGY cardCenter">
     <main>
+      <span id="memName">&nbsp;</span>   <!-- 使用者姓名 -->
+      <span id="spanLogin"></span>  
       <div class="backGroundCard">
         <div class="backGroundCardBtns">
           <router-link :to="a.link" v-for="a in memBtnLink">
@@ -112,6 +114,7 @@ export default {
           return response.json();
         })
         .then((result) => {
+          // console.log(this.mem)
           this.mem = result;
           if (
             this.mem.mbr_email == document.getElementById("mbr_email").value &&
@@ -126,16 +129,18 @@ export default {
         .catch(function (error) {
           console.log(error);
         });
-      //暫時登入用
     },
   },
   mounted() {
-    this.router = this.$router; //暫時登入用
+    this.router = this.$router; 
     document.body.style.height = `auto`;
   },
 };
 </script>
 <style scoped lang="scss">
+span{
+  justify-content: flex-end;
+}
 @include t() {
   .backGroundCard {
     height: 100%;

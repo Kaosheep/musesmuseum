@@ -33,7 +33,7 @@
                id="btnLogin"
                class="submitBtn"
                value="送出"
-               @click="checkLoginData"
+               @click="sendUserData"
              />  
              <!-- <input type="button" id="btnCancel" value="取消"> -->
            </div>
@@ -70,13 +70,35 @@ export default {
  },
  methods: {
 
-  //  checkLoginData() {
-  //    if (this.memId === "test" && this.memPsw === "test") {
-  //      window.alert("登入成功");
-  //    } else {
-  //      window.alert("帳密錯誤");
-  //    }
-  //  },
+  senduserData() {
+      console.log("senduserData");
+
+      // let input = {
+      //   mbr_email: document.getElementById("mbr_email").value,
+      //   mbr_psw: document.getElementById("mbr_psw").value,
+      // };
+
+      const data = new URLSearchParams({ mbr_email, mbr_psw });
+      fetch("http://localhost/musesmuseum/public/phps/MemberInfo.php", 
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        // body: new URLSearchParams(input),
+      }
+      )
+        .then((response) => {
+          return response.json();
+        })
+        .then((result) => {
+          this.memAllInfo = result;
+      
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    },
  },
  mounted() {
    document.body.style.height = `auto`;
