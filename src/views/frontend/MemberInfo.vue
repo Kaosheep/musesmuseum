@@ -12,12 +12,12 @@
          </div>
          <form>
            <div class="memloginActi" v-for="i in memAllInfo">
-             <label  :key="i.id">{{ i.memTitColumn }}</label>
+             <label  :key="i.id">{{ i.memAllInfo }}</label>
              <input
              :key="i.id"
              :type="i.type"
              :id="i.id"
-             :name="i.name"
+             :name="i.mbr_email"
              :class="i.class"
              :placeholder="i.placeholder"
              :value="i.value"
@@ -69,7 +69,17 @@ export default {
    };
  },
  methods: {
-
+  //綸a方法
+  // senduserData() {
+  //     fetch("http://localhost/musesmuseum/public/phps/MemberInfo.php").then(async (response) => {
+  //       this.memAllInfo = await response.json();
+  //       console.log(this.memAllInfo); 
+  //     })
+  //     .catch((error) => {
+  //       console.error('發生錯誤:', error);
+  //     });
+  //   },
+  //目前
   senduserData() {
       console.log("senduserData");
 
@@ -93,7 +103,7 @@ export default {
         })
         .then((result) => {
           this.memAllInfo = result;
-      
+      console.log(memAllInfo);
         })
         .catch(function (error) {
           console.log(error);
@@ -102,6 +112,7 @@ export default {
  },
  mounted() {
    document.body.style.height = `auto`;
+  //  senduserData();
  }
 };
 </script>
