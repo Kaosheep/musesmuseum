@@ -45,7 +45,7 @@ export default {
   },
   methods: {
     fetchnews() {
-      fetch(`${this.$store.state.publicpath}test.php`).then(async (response) => {
+      fetch(`${this.$store.state.publicpath}news_fetch.php`).then(async (response) => {
         this.newscol = await response.json();
       });
     },

@@ -59,6 +59,7 @@
         class="pop"
         v-show="showForm"
         @submit.prevent="submitForm"
+        id="edform"
       >
         <h2>編輯</h2>
         <div class="xedit" v-show="addnews">
@@ -68,7 +69,7 @@
           </div>
           <div>
             <div>日期</div>
-            <input type="date" v-model="add_news.date" disabled />
+            <input type="date" v-model="add_news.date" />
           </div>
         </div>
         <div>
@@ -90,11 +91,10 @@
             </select>
 
             <div class="uploadblock">
-                <input @change="img($event)" type="file" />
-                <img :src="src" />
+              <input @change="img($event)" type="file" id="fileimg" />
+              <img :src="(`${this.$store.state.imgpublicpath}image/news/` + image)" alt="尚未選取圖片"/>
             </div>
           </div>
-
 
           <div class="form_btn">
             <button type="button" class="btn_admin" @click="hideEditForm">
@@ -134,7 +134,7 @@ export default {
           title: "",
           content: "",
           date: "",
-          img:""
+          src: "",
         },
       ],
       test: [
@@ -153,8 +153,7 @@ export default {
       addnews: false,
       status: 0,
       src: "",
-      phppath:`${this.$store.state.publicpath}uploadimg.php`,
-      imgparam: {},
+      image: "",
       currentPage: 1, // 當前頁碼
       pageSize: 6, // 每頁顯示的數據量
     };
@@ -220,24 +219,22 @@ export default {
         fetch(url, {
           method: "POST",
           headers: headers,
-          //別忘了把主體参數轉成字串，否則資料會變成[object Object]，它無法被成功儲存在後台
-          // body: JSON.stringify(body)
           body: JSON.stringify({ data: body }),
         })
           .then((response) => {
             if (response.ok) {
-              return response.json(); // 如果請求成功，解析JSON數據
+              return response.json(); 
             } else {
-              throw new Error("取得失敗"); // 如果請求不成功，拋出錯誤
+              throw new Error("取得失敗"); 
             }
           })
           .then((json) => {
-            console.log(json.news_date);
             this.add_news.title = json.news_title;
             this.add_news.content = json.news_content;
             this.add_news.date = json.news_date;
             this.add_news.id = json.news_id;
             this.status = json.news_status;
+            this.image = json.news_img;
           });
       }
 
@@ -252,79 +249,60 @@ export default {
     //新增
     addnews_btn(id) {
       if (id != undefined) {
-        const url = `http://localhost/musesmuseum/public/phps/news_add.php`;
-        let headers = {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        };
-        //以下是API文件中提及必寫的主體参數。
-        let body = {
-          id: this.add_news.id,
-          title: this.add_news.title,
-          content: this.add_news.content,
-          status: this.status,
-          // 'image': this.imgparam.get('images')
-        };
+        const url = `http://localhost/musesmuseum/public/phps/news_updateupload.php`;
+        const formData = new FormData();
+        formData.append("id", this.add_news.id);
+        formData.append("title", this.add_news.title);
+        formData.append("content", this.add_news.content);
+        formData.append("status", this.status);
+        formData.append("date", this.add_news.date);
+        formData.append("image", document.getElementById("fileimg").files[0]);
+
         fetch(url, {
           method: "POST",
-          headers: headers,
-          //別忘了把主體参數轉成字串，否則資料會變成[object Object]，它無法被成功儲存在後台
-          // body: JSON.stringify(body)
-          body: JSON.stringify({ data: body }),
+          body: formData,  
         })
           .then((response) => {
             if (response.ok) {
-              return response.json(); // 如果請求成功，解析JSON數據
+              return response.json();
             } else {
-              throw new Error("新增失敗"); // 如果請求不成功，拋出錯誤
+              throw new Error("新增失敗");
             }
           })
           .then((json) => {
-            console.log(json);
-            // 在成功時顯示提示
-            alert(json.message); // 假設JSON數據中有一個message屬性
+            alert(json);
             window.location.reload();
           })
           .catch((error) => {
-            // 在失敗時顯示提示
-            alert(error.message);
+            console.log(error.message);
           });
       } else {
-        const url = `http://localhost/musesmuseum/public/phps/news_add.php`;
-        let headers = {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        };
-        let currentDate = new Date();
-        let formattedDate = currentDate.toISOString().split("T")[0];
-        //以下是API文件中提及必寫的主體参數。
-        let body = {
-          title: this.add_news.title,
-          content: this.add_news.content,
-          status: this.status,
-          date: formattedDate,
-        };
+        const url = `http://localhost/musesmuseum/public/phps/news_insertupload.php`;
+        const formData = new FormData();
+        formData.append("id", this.add_news.id);
+        formData.append("title", this.add_news.title);
+        formData.append("content", this.add_news.content);
+        formData.append("status", this.status);
+        formData.append("date", this.add_news.date);
+        formData.append("image", document.getElementById("fileimg").files[0]);
+
         fetch(url, {
           method: "POST",
-          headers: headers,
-          body: JSON.stringify({ data: body }),
+          body: formData,  
         })
           .then((response) => {
             if (response.ok) {
-              return response.json(); // 如果請求成功，解析JSON數據
+              return response.json();
             } else {
-              throw new Error("新增失敗"); // 如果請求不成功，拋出錯誤
+              throw new Error("新增失敗");
             }
           })
           .then((json) => {
-            console.log(json);
-            // 在成功時顯示提示
-            alert(json.message); // 假設JSON數據中有一個message屬性
+            alert(json);
             window.location.reload();
           })
           .catch((error) => {
-            // 在失敗時顯示提示
-            alert(error.message);
+            console.log(error.message);
           });
       }
     },
@@ -360,7 +338,6 @@ export default {
         }
       })
       .then((json) => {
-        console.log(json);
         this.news = json;
         // 在成功時顯示提示
         // alert(json.message); // 假設JSON數據中有一個message屬性
