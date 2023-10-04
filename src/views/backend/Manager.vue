@@ -17,11 +17,11 @@
             <th>權限類型</th>
             <th></th>
           </tr>
-          <tr v-for="(i, index) in news" :key="index">
+          <tr v-for="(i, index) in manager" :key="index">
             <td><input type="checkbox"></td>
-            <td>{{ i.id }}</td>
-            <td>{{ i.mid }}</td>
-            <td>{{ i.statusn }}</td>
+            <td>{{ i.ma_id  }}</td>
+            <td>{{ i.ma_name }}</td>
+            <td>{{ i.ma_type }}</td>
             <td>
               <button class="edit">編輯</button>
             </td>
@@ -44,36 +44,38 @@ export default {
   },
   data() {
     return {
-      news: [
-        {
-          id: "MA01",
-          mid: "館長",
-          statusn: "全權",
-          ac: "3",
-        },
-        {
-          id: "MA02",
-          mid: "員工1",
-          statusn: "部分",
-          ac: "3",
-        },
-        {
-          id: "MA03",
-          mid: "員工2",
-          statusn: "部分",
-          ac: "3",
-        },
-        {
-          id: "MA04",
-          mid: "員工3",
-          statusn: "部分",
-          ac: "3",
-        }
-      ]
+      manager: []
     }
   },
   methods: {
 
+  }, mounted() {
+    //先檢查資料格式是否符合DB規則
+    const url = `http://localhost/musesmuseum/public/phps/manager_list.php`;
+    let headers = {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    };
+    fetch(url, {
+      method: "POST",
+      headers: headers,
+    })
+      .then((response) => {
+        if (response.ok) {
+          return response.json(); // 如果請求成功，解析JSON數據
+        } else {
+          throw new Error("取得消息失敗"); // 如果請求不成功，拋出錯誤
+        }
+      })
+      .then((json) => {
+        this.manager = json;
+        // 在成功時顯示提示
+        // alert(json.message); // 假設JSON數據中有一個message屬性
+      })
+      .catch((error) => {
+        // 在失敗時顯示提示
+        // alert(error.message);
+      });
   },
 
 

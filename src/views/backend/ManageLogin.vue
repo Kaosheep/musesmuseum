@@ -6,15 +6,15 @@
                 <div>
                     <div>
                         <label>管理員帳號:</label>
-                        <input type="text">
+                        <input type="text" v-model="account">
                     </div>
                     <div>
                         <label>管理員密碼:</label>
-                        <input type="text">
+                        <input type="password" v-model="pwd">
                     </div>
                     <div>
-                        <button>
-                            <RouterLink to="/DashBoard">登入</RouterLink>
+                        <button type="button" @click="login()">
+                            登入
                         </button>
                     </div>
 
@@ -26,15 +26,85 @@
 </template>
    
 <script>
+import { AudioAnalyser } from 'three';
+
 export default {
     data() {
         return {
-
+            account: "",
+            pwd: "",
         }
     },
     methods: {
+        login() {
 
-    }
+            if (this.account.length > 0) {
+                const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+                emailPattern.test(this.account);
+
+                if (!emailPattern.test(this.account)) {
+                    alert("無效帳號");
+                    return false;
+                }
+            } else {
+                alert("請輸入帳號");
+                return false;
+            }
+            if (this.pwd.length <= 3) {
+                alert("密碼長度不符");
+                return false;
+            }
+            const url = `http://localhost/musesmuseum/public/phps/manager_login.php`;
+            let headers = {
+                "Content-Type": "application/json",
+                Accept: "application/json",
+            };
+            let body = {
+                account: this.account,
+                pwd: this.pwd,
+            };
+            fetch(url, {
+                method: "POST",
+                headers: headers,
+                body: JSON.stringify({ data: body }),
+            })
+                .then((response) => {
+                    if (response.ok) {
+                        return response.json();
+                    } else {
+                        throw new Error("取得失敗");
+                    }
+                })
+                .then((json) => {
+                    if (json.result['ma_id']) {
+                        let manager = JSON.stringify(json.result);
+                        document.cookie = "manager= " + manager + "; expires=Thu, 01 Jan 2025 00:00:00 UTC; path=/";
+                        document.location.href = "/DashBoard";
+                    } else {
+                        alert(json.result);
+                    }
+                });
+        }
+    },
+    mounted() {
+        const name = "manager" + "=";
+        const decodedCookie = decodeURIComponent(document.cookie);
+        const cookieArray = decodedCookie.split(';');
+
+        for (let i = 0; i < cookieArray.length; i++) {
+            let cookie = cookieArray[i];
+            while (cookie.charAt(0) === ' ') {
+                cookie = cookie.substring(1);
+            }
+            if (cookie.indexOf(name) === 0) {
+                console.log(cookie.substring(name.length, cookie.length));
+                if(cookie.substring(name.length, cookie.length)){
+                    document.location.href = "/DashBoard";
+                }
+            }
+        }
+        return "";
+    },
 }
 </script>
 
