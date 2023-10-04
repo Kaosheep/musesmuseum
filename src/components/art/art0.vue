@@ -37,7 +37,7 @@ export default {
       camera.position.x = 10;
       camera.position.y = 3;
       const gltfLoader = new GLTFLoader();
-      gltfLoader.load(`${this.publicPath}/art/scene0.gltf`, (gltf) => {//
+      gltfLoader.load(`${this.publicPath}art/scene0.gltf`, (gltf) => {//
         var model = gltf.scene;
         scene.add(model);
         model.scale.set(0.25, 0.25, 0.25);

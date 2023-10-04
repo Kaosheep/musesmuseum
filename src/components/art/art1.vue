@@ -38,7 +38,7 @@ export default {
 
 
       const gltfLoader = new GLTFLoader();
-      gltfLoader.load(`${this.publicPath}/art/scene1.gltf`, (gltf) => {
+      gltfLoader.load(`${this.publicPath}art/scene1.gltf`, (gltf) => {
         var model = gltf.scene;
         scene.add(model);
         model.scale.set(0.15, 0.15, 0.15);

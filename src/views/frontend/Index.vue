@@ -245,7 +245,7 @@
                   >
                     <router-link :to="`/Home/ProductPage/${num}`">
                       <img
-                        :src="(`${this.$store.state.imgpublicpath}image/productimage/` + item.prod_img)"
+                        :src="(`${this.$store.state.imgpublicpath}image/productimage/` + num)"
                         :alt="pro.title"
                       />
                       <p>{{ pro.title }}</p>

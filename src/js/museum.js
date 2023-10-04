@@ -101,7 +101,7 @@ export default {
             camera.position.z = 2;
 
             const gltfLoader = new GLTFLoader();
-            gltfLoader.load(`${this.publicPath}/museum/vr_art_gallery/scene.gltf`, (gltf) => {
+            gltfLoader.load(`${this.publicPath}museum/vr_art_gallery/scene.gltf`, (gltf) => {
                 var model = gltf.scene;
                 scene.add(model);
 

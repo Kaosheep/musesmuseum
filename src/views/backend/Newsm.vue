@@ -92,7 +92,7 @@
 
             <div class="uploadblock">
               <input @change="img($event)" type="file" id="fileimg" />
-              <img :src="(`${this.$store.state.imgpublicpath}image/news/` + image)" alt="尚未選取圖片"/>
+              <img :src="(`${this.$store.state.imgpublicpath}image/news/` + add_news.image)" alt="尚未選取圖片"/>
             </div>
           </div>
 
@@ -133,8 +133,9 @@ export default {
           id: "",
           title: "",
           content: "",
-          date: "",
+          date: new Date(),
           src: "",
+          image:""
         },
       ],
       test: [
@@ -202,6 +203,7 @@ export default {
             title: "",
             content: "",
             date: "",
+            image:""
           },
         ];
       } else {
@@ -234,7 +236,7 @@ export default {
             this.add_news.date = json.news_date;
             this.add_news.id = json.news_id;
             this.status = json.news_status;
-            this.image = json.news_img;
+            this.add_news.image = json.news_img;
           });
       }
 
@@ -493,11 +495,14 @@ div {
   width: 400px;
   height: 400px;
   margin: auto;
+  text-align: center;
   input {
     border: none;
   }
   img {
-    width: 100%;
+    width: 90%;
+    height: 80%;
+    object-fit: contain;
   }
 }
 </style>
