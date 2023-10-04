@@ -125,6 +125,7 @@ export default {
           } else {
             window.alert("帳密錯誤");
           }
+          //寫記住id
         })
         .catch(function (error) {
           console.log(error);

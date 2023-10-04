@@ -4,22 +4,19 @@ header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
 header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
 header("Content-Type: application/json"); 
 
-$mbr_email = $_POST["mbr_email"];
-$mbr_psw = $_POST["mbr_psw"];
-
-// $mbrInfoArray = array(
-//     "mbr_name" = $_POST["mbr_name"];
-//     "mbr_birth" = $_POST["mbr_birth"];
-//     "mbr_email" = $_POST["mbr_email"];
-//     "mbr_phone" = $_POST["mbr_phone"];
-//     "mbr_addr" = $_POST["mbr_addr"];
-
-// )
 
 
 
 session_start();
 try{
+    // $mbr_email = $_POST["mbr_email"];
+    // $mbr_psw = $_POST["mbr_psw"];
+    if (isset($_POST["mbr_email"])) {
+        $mbr_email = $_POST["mbr_email"];
+    } else {
+        // 处理未定义的情况，或者设置默认值
+        $mbr_email = ""; // 或者其他默认值
+    }
 	//連線
 	require_once("connectMuses.php");
 
@@ -27,11 +24,19 @@ try{
 	$sql = "select * from `members` where `mbr_id`= 'M0001' ";
 	//將sql指令編譯過
 	$members = $pdo->query($sql);
-    if($result->num_rows > 0){
-       while($row = $result->fetch_assoc()){
-        echo $mbr_email;
-       }
-    }
+    if ( $members->rowCount()=== 0) { //查無資料
+        $result = ["error" => false, "msg" => "無資料", "members" => "{}"];
+        echo json_encode($result);
+      } else { 
+        $membersRows = $members->fetchAll(PDO::FETCH_ASSOC);
+        $result = ["error" => false, "msg" => "取得資料", "members" => $membersRows];
+        // echo json_encode($result);//送出json字串
+      }
+    // if($result->num_rows > 0){
+    //    while($row = $result->fetch_assoc()){
+    //     echo $mbr_email;
+    //    }
+    // }
 
 	//將資料代入參數中(未知數中);
 
@@ -41,39 +46,15 @@ try{
     // $members->bindValue(":mbr_phone", $mbr_phone);
     // $members->bindValue(":mbr_addr", $mbr_addr);
 
-    
 	//執行之
 	$members->execute();
     $mbrInfoArray = $members->fetchAll(PDO::FETCH_ASSOC);
     echo json_encode($mbrInfoArray);
-	// if($members->rowCount() === 0){//查無此人, 帳密錯誤
-	// 	echo json_encode(["error" => "帳密錯誤"]);
-	// } else {
-	// 	echo json_encode(["success" => "登入成功"]);
-	// }
-	//若有此人資料，請取回資料並顯示登入者名字
-	// $memRow = $members->fetch(PDO::FETCH_ASSOC);
-	// if ($members == null) {
-	// 	$members["message"] = "無會員資訊";
-	// 	$members["successful"] = false;
-	// 	echo json_encode($members);
-	// 	return;
-	//   }else{
-	// 	echo json_encode($memRow);
-	//   }
+
     }catch(PDOException $e){
         echo "錯誤行號 : ", $e->getLine();
         echo "錯誤原因 : ", $e->getMessage();
 }
 
-// require_once("booksHeader.inc.php");
+
 ?>  
-
-<?php 
-// echo $memRow["memName"], ", 您好~";
-?> 
-
-<?php 
-// require_once("booksFooter.inc.php");
-
-?>

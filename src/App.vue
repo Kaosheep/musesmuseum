@@ -1,17 +1,16 @@
 
 
 <template>
-<RouterView></RouterView>
+  <RouterView></RouterView>
 </template>
 
 <style lang="scss">
 #app {
-  font-family: 'Quicksand','Kosugi Maru','Noto Sans TC', 'sans-serif';
+  font-family: 'Quicksand', 'Kosugi Maru', 'Noto Sans TC', 'sans-serif';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
 }
-
 </style>
 <script>
 // @ is an alias to /src
@@ -20,16 +19,41 @@ export default {
   components: {
 
   },
-  data(){
-    return{
-   
+  data() {
+    return {
+      isLogin: false,
+      userData: null
     }
   },
-  methods:{
-    
+  methods: {
+    setUserData(data) {
+      localStorage.setItem('user', JSON.stringify(data))
+    },
+    updateUser() {
+      if (localStorage.getItem('user')) {
+        this.isLogin = true
+        this.userData = JSON.parse(localStorage.getItem('user'))
+      }
+    },
   },
-  mounted(){
-    
+  mounted() {
+    // localStorage.clear()
+    this.updateUser()
+    window.addEventListener("storage", this.updateUser);
+
+    fetch('./php').then((res) => res.json()).then((res) => {
+      if (res !== 0) {
+        this.setUserData(res)
+      } else {
+        this.setUserData(null)
+      }
+    })
+
+    // this.setUserData({
+    //   no: 1234,
+    //   name: 'Hi'
+    // })
+    // this.setUserData(null)
   }
 }
 </script>
