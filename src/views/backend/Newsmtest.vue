@@ -55,10 +55,11 @@
         </table>
       </div>
       <form
-        action=""
+        action="http://localhost/musesmuseum/public/phps/uploadimg.php"
+        method="post"
+        enctype="multipart/form-data"
         class="pop"
         v-show="showForm"
-        @submit.prevent="submitForm"
       >
         <h2>編輯</h2>
         <div class="xedit" v-show="addnews">
@@ -68,15 +69,15 @@
           </div>
           <div>
             <div>日期</div>
-            <input type="date" v-model="add_news.date" disabled />
+            <input type="date" v-model="add_news.date" name="news_date"/>
           </div>
         </div>
         <div>
           <div>標題</div>
-          <input type="text" name="" id="" v-model="add_news.title" />
+          <input type="text" name="news_title" id="" v-model="add_news.title" />
           <div>內容</div>
           <textarea
-            name=""
+            name="news_content"
             id=""
             cols="30"
             rows="7"
@@ -84,26 +85,25 @@
           ></textarea>
           <div class="switch_status">
             <div>狀態</div>
-            <select v-model="status">
+            <select v-model="status" name="news_status">
               <option value="1">上架中</option>
               <option value="0">未上架</option>
             </select>
 
             <div class="uploadblock">
-                <input @change="img($event)" type="file" />
-                <img :src="src" />
+              <input @change="img($event)" type="file" name="news_img"/>
+              <img :src="src" />
             </div>
           </div>
-
 
           <div class="form_btn">
             <button type="button" class="btn_admin" @click="hideEditForm">
               取消
             </button>
             <button
-              type="button"
+              type="submit"
               class="btn_admin"
-              @click="addnews_btn(add_news.id)"
+              @submit=""
             >
               儲存
             </button>
@@ -134,7 +134,7 @@ export default {
           title: "",
           content: "",
           date: "",
-          img:""
+          img: "",
         },
       ],
       test: [
@@ -153,7 +153,7 @@ export default {
       addnews: false,
       status: 0,
       src: "",
-      phppath:`${this.$store.state.publicpath}uploadimg.php`,
+      phppath: `${this.$store.state.publicpath}uploadimg.php`,
       imgparam: {},
       currentPage: 1, // 當前頁碼
       pageSize: 6, // 每頁顯示的數據量
