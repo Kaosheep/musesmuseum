@@ -17,8 +17,7 @@
             <div class="spe_exhi_section">
                 <div class="spe_img_deco"></div>
                 <div class="spe_exhi_img">
-                    <img src="@/assets/image/exhibition/specialexhibition/spec_ex0.jpg" alt="">
-
+                    <img :src="spexhiImg" alt="">
                 </div>
                 <div class="spe_exhi_desc">
                     <div class="spe_bgc_deco_a"></div>
@@ -28,10 +27,10 @@
                     </div>
                     <div class="spe_exhi_desc_deco">
                     </div>
-                    <span>2024/02/01-2024/03/30</span>
-                    <h3 style="color: #EB5F86;">春之詠歌：多彩藝術的季節</h3>
-                    <p>來自各地藝術家們帶來的多種形式的作品，包括繪畫、雕塑、攝影、錄像藝術、裝置藝術和互動藝術。透過不同的媒介和風格，試圖捕捉春天所帶來的生命力和變化。</p>
-                    <span>展覽地點：謬思藝廊</span>
+                    <span>{{ formattedExhibitionDate }}</span>
+                    <h3 class="spe_title">{{ spexhiTitle }}</h3>
+                    <p>{{ spexhiDesc }}</p>
+                    <span class="spe_loc">展覽地點：{{ spexhiLoc }}</span>
                     <div class="spe_buy_tickbtn">
                         <div class="spe_buy_tickbtn_deco"></div>
                         <router-link to="/Home/Tick">
@@ -45,10 +44,10 @@
             </div>
 
             <div class="spe_m_date">
-                <span>2024/02/01-2024/03/30</span>
+                <span>{{ formattedExhibitionDate }}</span>
             </div>
             <div class="spe_m_title">
-                <span>春之詠歌：多彩藝術的季節華章</span>
+                <span>{{ spexhiTitle }}</span>
             </div>
 
 
@@ -70,6 +69,25 @@ export default {
         Searchbar,
         Searchbarclick,
         ThinArrow,
-    }
+    },
+    data() {
+        return {
+            spexhiImg: "/src/assets/image/exhibition/specialexhibition/spec_ex0.jpg",
+            spexhi_startdate: "2023-10-01",
+            spexhi_enddate: "2023-12-30",
+            spexhiTitle: "春之詠歌：多彩藝術的季節",
+            spexhiDesc: "來自各地藝術家們帶來的多種形式的作品，包括繪畫、雕塑、攝影、錄像藝術、裝置藝術和互動藝術。透過不同的媒介和風格，試圖捕捉春天所帶來的生命力和變化。",
+            spexhiLoc: "展區A",
+        };
+    },
+    computed: {
+        formattedExhibitionDate() {
+            const startDate = new Date(this.spexhi_startdate);
+            const endDate = new Date(this.spexhi_enddate);
+            const formattedStartDate = startDate.toLocaleDateString();
+            const formattedEndDate = endDate.toLocaleDateString();
+            return `${formattedStartDate} - ${formattedEndDate}`;
+        },
+    },
 }
 </script>
