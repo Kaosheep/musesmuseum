@@ -22,7 +22,7 @@ export default {
   data() {
     return {
       isLogin: false,
-      userData: null
+      userData: null//抓他傳到php都要
     }
   },
   methods: {
@@ -41,7 +41,7 @@ export default {
     this.updateUser()
     window.addEventListener("storage", this.updateUser);
 
-    fetch('./php').then((res) => res.json()).then((res) => {
+    fetch('http://localhost/musesmuseum/public/phps/login.php').then((res) => res.json()).then((res) => {
       if (res !== 0) {
         this.setUserData(res)
       } else {
