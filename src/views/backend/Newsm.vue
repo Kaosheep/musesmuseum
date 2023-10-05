@@ -4,20 +4,9 @@
       <div class="admin_editbar">
         <div>
           <button class="btn_admin" @click="showEditForm('add')">新增</button>
-          <button
-            class="btn_admin"
-            @click="updatestatus(1)"
-            :disabled="!canToggle('1')"
-          >
-            上架
-          </button>
-          <button
-            class="btn_admin"
-            @click="toggleStatus('0')"
-            :disabled="!canToggle('0')"
-          >
-            下架
-          </button>
+          <button class="btn_admin" @click="updatestatus(1)">上架</button>
+          <button class="btn_admin" @click="updatestatus(0)">下架</button>
+          <button class="btn_admin" @click="deleten">刪除</button>
         </div>
         <Searchbar class="onlyB" />
       </div>
@@ -30,8 +19,14 @@
             <th>狀態</th>
             <th></th>
           </tr>
-          <tr v-for="(i, index) in news" :key="index">
-            <td><input type="checkbox" v-model="i.selected" /></td>
+          <tr v-for="(i, index) in pagenews" :key="index">
+            <td>
+              <input
+                type="checkbox"
+                class="statusinput"
+                @change="inchecked(i.news_id, $event)"
+              />
+            </td>
             <td>{{ i.news_id }}</td>
             <td>{{ i.news_title }}</td>
             <td>
@@ -109,8 +104,7 @@
                 <img
                   v-else
                   :src="
-                    `${$store.state.imgpublicpath}image/news/` +
-                    add_news.image
+                    `${$store.state.imgpublicpath}image/news/` + add_news.image
                   "
                   alt=""
                 />
@@ -161,6 +155,7 @@ export default {
           image: "",
         },
       ],
+      newsched: [],
       test: [
         {
           id: "MN20230901",
@@ -173,6 +168,7 @@ export default {
           statusn: "1",
         },
       ],
+      wchecked: false,
       showForm: false,
       addnews: false,
       status: 0,
@@ -182,6 +178,63 @@ export default {
     };
   },
   methods: {
+    deleten(){
+      fetch(`${this.$store.state.publicpath}news_del.php`, {
+        method: "post",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded; charset=utf-8",
+        },
+        body: JSON.stringify({ data: Object.values(this.newsched) }),
+      })
+        .then((response) => {
+          if (response.ok) {
+            return response.json();
+          } else {
+            throw new Error("新增失敗");
+          }
+        })
+        .then((json) => {
+          alert(json);
+          window.location.reload();
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    },
+    inchecked(id, e) {
+      if (e.target.checked) {
+        this.newsched.push({ id: id });
+        console.log(this.newsched);
+        console.log(Object.values(this.newsched));
+      } else {
+        this.newsched.splice(this.newsched.indexOf(id), 1);
+        console.log(this.newsched);
+      }
+    },
+    updatestatus(b) {
+      this.newsched.splice(0,0,{type:b});
+      fetch(`${this.$store.state.publicpath}news_updatestatus.php`, {
+        method: "post",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded; charset=utf-8",
+        },
+        body: JSON.stringify({ data: Object.values(this.newsched) }),
+      })
+        .then((response) => {
+          if (response.ok) {
+            return response.json();
+          } else {
+            throw new Error("新增失敗");
+          }
+        })
+        .then((json) => {
+          alert(json);
+          window.location.reload();
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    },
     previousPage() {
       // 切換到上一頁
       if (this.currentPage > 1) {
@@ -202,21 +255,8 @@ export default {
       reader.readAsDataURL(files);
 
       reader.onloadend = function () {
-
         that.add_news.image = files.name;
       };
-    },
-    toggleStatus(newStatus) {
-      this.test.forEach((item) => {
-        if (item.selected) {
-          item.statusn = newStatus;
-        }
-      });
-    },
-    canToggle(newStatus) {
-      return this.test.some(
-        (item) => item.selected && item.statusn !== newStatus
-      );
     },
     showEditForm(type, id) {
       if (type == "add") {
@@ -332,12 +372,9 @@ export default {
           });
       }
     },
-    updatestatus(n){
-      
-    }
   },
   computed: {
-    news() {
+    pagenews() {
       // 根據當前頁碼和每頁顯示的數據量計算需要顯示的數據
       const start = (this.currentPage - 1) * this.pageSize;
       const end = start + this.pageSize;
@@ -368,12 +405,9 @@ export default {
       })
       .then((json) => {
         this.news = json;
-        // 在成功時顯示提示
-        // alert(json.message); // 假設JSON數據中有一個message屬性
       })
       .catch((error) => {
-        // 在失敗時顯示提示
-        // alert(error.message);
+        console.log(error.message);
       });
   },
 };

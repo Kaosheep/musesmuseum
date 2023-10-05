@@ -1,7 +1,7 @@
 <template>
   <div class="bgcGY cardCenter">
     <main>
-      <span id="memName">&nbsp;</span>   <!-- 使用者姓名 -->
+      <span v-for="i in mem">{{ i.mbr_name }}123</span>   <!-- 使用者姓名 -->
       <span id="spanLogin"></span>  
       <div class="backGroundCard">
         <div class="backGroundCardBtns">
@@ -110,31 +110,69 @@ export default {
         },
         body: new URLSearchParams(input),
       })
-        .then((response) => {
-          return response.json();
-        })
-        .then((result) => {
-          // console.log(this.mem)
-          this.mem = result;
-          if (
-            this.mem.mbr_email == document.getElementById("mbr_email").value &&
-            this.mem.mbr_psw == document.getElementById("mbr_psw").value
-          ) {
-            window.alert("登入成功");
-            this.router.push("/Home/MemberInfo");
+      .then((response) => {
+        return response.json();
+      })
+      .then((result) => {
+        console.log(this.mem)
+        this.mem = result;
+        this.memEmail = result.mbr_email;
+        if (
+          this.mem.mbr_email == document.getElementById("mbr_email").value &&
+          this.mem.mbr_psw == document.getElementById("mbr_psw").value
+        ) {
+          window.alert("登入成功");
+          this.router.push("/Home/MemberInfo");
+        } else {
+          window.alert("帳密錯誤");
+        }
+
+      })  
+        //寫記住id
+        .then(() => {
+          if (this.memEmail) {
+            let members = JSON.stringify(this.mem);
+            document.cookie = "members= " + members + "; expires=Thu, 01 Jan 2025 00:00:00 UTC; path=/";
+            document.location.href = "/Home/MemberInfo";
           } else {
-            window.alert("帳密錯誤");
+            alert("無法獲取 mbr_email");
           }
-          //寫記住id
         })
-        .catch(function (error) {
-          console.log(error);
-        });
+      // .then((json) => {
+      //     if (json.result['mbr_email']) {
+      //         let members = JSON.stringify(json.result);
+      //         document.cookie = "members= " + members + "; expires=Thu, 01 Jan 2025 00:00:00 UTC; path=/";
+      //         document.location.href = "/MemberInfo";
+      //     } else {
+      //         alert(json.result);
+      //     }
+      // })
+      .catch(function (error) {
+        console.log(error);
+      });
     },
   },
   mounted() {
     this.router = this.$router; 
     document.body.style.height = `auto`;
+    const name = "members" + "=";
+    const decodedCookie = decodeURIComponent(document.cookie);
+    const cookieArray = decodedCookie.split(';');
+
+    for (let i = 0; i < cookieArray.length; i++) {
+      let cookie = cookieArray[i];
+      while (cookie.charAt(0) === ' ') {
+          cookie = cookie.substring(1);
+      }
+      if (cookie.indexOf(name) === 0) {
+          console.log(cookie.substring(name.length, cookie.length));
+          if(cookie.substring(name.length, cookie.length)){
+              document.location.href = "/Home/MemberInfo";
+          }
+      }
+    }
+    return "";
+   
   },
 };
 </script>

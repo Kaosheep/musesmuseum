@@ -1,22 +1,23 @@
 <?php
+// session_start();
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
 header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
 header("Content-Type: application/json"); 
 try{
 	require_once("./connectMuses.php");
-    $sql = "select * from news order by news_date DESC"; 
-    $news = $pdo->query($sql);
+    $sql = "select * from faq order by faq_id DESC"; 
+    $faq = $pdo->query($sql);
     
-    $news->execute();
+    $faq->execute();
 
 
-    if ($news->rowCount() === 0) { //無此會員資料
+    if ($faq->rowCount() === 0) { //無此會員資料
         echo "{}";
       } else {
-        $newRows = $news->fetchAll(PDO::FETCH_ASSOC);
+        $faqRows = $faq->fetchAll(PDO::FETCH_ASSOC);
         
-        echo json_encode($newRows);//送出json字串
+        echo json_encode($faqRows);//送出json字串
       }
 
   

@@ -8,16 +8,8 @@ header("Content-Type: application/json");
 try {
    require_once("./connectMuses.php");
    $data = json_decode(file_get_contents('php://input'));
-   $type = $data->data[0]->type;
 
-   if($type == 1){
-      $sql = "update news set news_status=1 where news_id=:id";
-   }else{
-      $sql = "update news set news_status=0 where news_id=:id";
-   };
-
-   $idArray = array();
-   unset($data->data[0]);
+   $sql = "DELETE FROM news WHERE news_id=:id";
    
    foreach ($data->data as $item) {
 
@@ -27,7 +19,7 @@ try {
       $news->execute();
 
    };
-   echo json_encode("更新成功"); 
+   echo json_encode("刪除成功"); 
 
 } catch (Exception $e) {
  echo "錯誤行號 : ", $e->getLine(), "<br>";
