@@ -6,7 +6,7 @@
           <button class="btn_admin" @click="showEditForm('add')">新增</button>
           <button class="btn_admin" @click="updatestatus(1)">上架</button>
           <button class="btn_admin" @click="updatestatus(0)">下架</button>
-          <button class="btn_admin" @click="delete">刪除</button>
+          <button class="btn_admin" @click="deleten">刪除</button>
         </div>
         <Searchbar class="onlyB" />
       </div>
@@ -178,7 +178,7 @@ export default {
     };
   },
   methods: {
-    delete(){
+    deleten(){
       fetch(`${this.$store.state.publicpath}news_del.php`, {
         method: "post",
         headers: {
