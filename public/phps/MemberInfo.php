@@ -15,7 +15,7 @@ try{
    
 
 	//在`member`資料表 將來會有mbr_email=:有命名的參數 資料帶入
-	$sql = "select * from `members` where mbr_email=:mbr_email;";
+	$sql = "select * from `members` ;"; //where mbr_email=:mbr_email
 	//將sql指令編譯過
 	$members = $pdo->query($sql);
     if ( $members->rowCount()=== 0) { //查無資料
