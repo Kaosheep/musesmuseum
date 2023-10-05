@@ -12,6 +12,9 @@
               {{ item.text }}
               </MenuItem>
             </Submenu>
+            <MenuItem name="1">
+              <div @click="logout()">管理員登出</div>
+            </MenuItem>
           </Menu>
         </Row>
         <!-- <button type="button" v-for="btn in consolelist">
@@ -81,7 +84,6 @@ export default {
           title: '帳號管理',
           items: [
             { name: '6-1', text: '管理員帳號', link: "/DashBoard/Manager" },
-            { name: '6-2', text: '管理員登出', link: "/" },
           ],
         },
       ],
@@ -89,24 +91,34 @@ export default {
   },
 
   methods: {
-
+    logout() {
+      // 在這裡執行登出功能，例如發送請求到後端清除會話狀態
+      // 清除 cookie 的程式碼可以放在這裡或在登出功能中執行
+      this.clearCookie();
+    },
+    clearCookie() {
+      // 清除 cookie 的程式碼示例，你需要根據你的實際情況來實現
+      document.cookie = "manager=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+      // 清除 cookie 後重新載入頁面
+      window.location.reload();
+    }
   },
   mounted() {
-        const name = "manager" + "=";
-        const decodedCookie = decodeURIComponent(document.cookie);
-        const cookieArray = decodedCookie.split(';');
+    const name = "manager" + "=";
+    const decodedCookie = decodeURIComponent(document.cookie);
+    const cookieArray = decodedCookie.split(';');
 
-        for (let i = 0; i < cookieArray.length; i++) {
-            let cookie = cookieArray[i];
-            while (cookie.charAt(0) === ' ') {
-                cookie = cookie.substring(1);
-            }
-            if (cookie.indexOf(name) !== 0) {
-              document.location.href = "/Admin";
-            }
-        }
-        return "";
-    },
+    for (let i = 0; i < cookieArray.length; i++) {
+      let cookie = cookieArray[i];
+      while (cookie.charAt(0) === ' ') {
+        cookie = cookie.substring(1);
+      }
+      if (cookie.indexOf(name) !== 0) {
+        document.location.href = "/Admin";
+      }
+    }
+    return "";
+  },
 }
 
 </script>
