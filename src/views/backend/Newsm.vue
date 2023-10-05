@@ -6,7 +6,7 @@
           <button class="btn_admin" @click="showEditForm('add')">新增</button>
           <button
             class="btn_admin"
-            @click="toggleStatus('1')"
+            @click="updatestatus(1)"
             :disabled="!canToggle('1')"
           >
             上架
@@ -67,11 +67,12 @@
             <div>消息編號</div>
             <div v-text="add_news.id"></div>
           </div>
-          <div>
-            <div>日期</div>
-            <input type="date" v-model="add_news.date" />
-          </div>
         </div>
+        <div class="newsdate">
+          <div>日期</div>
+          <input type="date" v-model="add_news.date" />
+        </div>
+
         <div>
           <div>標題</div>
           <input type="text" name="" id="" v-model="add_news.title" />
@@ -91,8 +92,30 @@
             </select>
 
             <div class="uploadblock">
-              <input @change="img($event)" type="file" id="fileimg" />
-              <img :src="(`${this.$store.state.imgpublicpath}image/news/` + add_news.image)" alt="尚未選取圖片"/>
+              <label for="fileimg">
+                <p v-if="add_news.image == null">上傳圖片</p>
+                <p v-else>{{ add_news.image }}</p>
+
+                <input
+                  @change="img($event)"
+                  type="file"
+                  id="fileimg"
+                  style="display: none"
+                />
+                <img
+                  v-if="add_news.image == null"
+                  :src="`${$store.state.imgpublicpath}image/news/u.png`"
+                />
+                <img
+                  v-else
+                  :src="
+                    `${$store.state.imgpublicpath}image/news/` +
+                    add_news.image
+                  "
+                  alt=""
+                />
+                <!-- <img v-else :src="src" alt="" /> -->
+              </label>
             </div>
           </div>
 
@@ -133,9 +156,9 @@ export default {
           id: "",
           title: "",
           content: "",
-          date: new Date(),
+          date: "",
           src: "",
-          image:""
+          image: "",
         },
       ],
       test: [
@@ -153,8 +176,7 @@ export default {
       showForm: false,
       addnews: false,
       status: 0,
-      src: "",
-      image: "",
+      src: 0,
       currentPage: 1, // 當前頁碼
       pageSize: 6, // 每頁顯示的數據量
     };
@@ -178,8 +200,10 @@ export default {
       if (!e || !window.FileReader) return;
       let reader = new FileReader();
       reader.readAsDataURL(files);
+
       reader.onloadend = function () {
-        that.src = this.result;
+
+        that.add_news.image = files.name;
       };
     },
     toggleStatus(newStatus) {
@@ -203,7 +227,7 @@ export default {
             title: "",
             content: "",
             date: "",
-            image:""
+            image: "",
           },
         ];
       } else {
@@ -225,9 +249,9 @@ export default {
         })
           .then((response) => {
             if (response.ok) {
-              return response.json(); 
+              return response.json();
             } else {
-              throw new Error("取得失敗"); 
+              throw new Error("取得失敗");
             }
           })
           .then((json) => {
@@ -262,7 +286,7 @@ export default {
 
         fetch(url, {
           method: "POST",
-          body: formData,  
+          body: formData,
         })
           .then((response) => {
             if (response.ok) {
@@ -290,7 +314,7 @@ export default {
 
         fetch(url, {
           method: "POST",
-          body: formData,  
+          body: formData,
         })
           .then((response) => {
             if (response.ok) {
@@ -308,6 +332,9 @@ export default {
           });
       }
     },
+    updatestatus(n){
+      
+    }
   },
   computed: {
     news() {
@@ -467,6 +494,9 @@ div {
       margin-right: 10px;
     }
   }
+  .newsdate {
+    display: inline-block;
+  }
 
   input,
   textarea {
@@ -491,11 +521,14 @@ div {
   }
 }
 .uploadblock {
+  margin-top: 1.5rem;
   border: 1px solid #009ca8;
-  width: 400px;
-  height: 400px;
-  margin: auto;
+  width: 100%;
+  height: 350px;
   text-align: center;
+  border-radius: 10px;
+  padding: 1rem;
+  line-height: 2;
   input {
     border: none;
   }
