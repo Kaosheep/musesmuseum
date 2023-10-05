@@ -3,12 +3,14 @@
     <div>
       <div class="admin_editbar">
         <div>
-          <button class="btn_admin" @click="showEditForm('add')">新增</button>
-          <button class="btn_admin" @click="toggleStatus('1')" :disabled="!canToggle('1')">上架</button>
-          <button class="btn_admin" @click="toggleStatus('0')" :disabled="!canToggle('0')">下架</button>
+          <button class="btn_admin" @click="showEditForm('add')"
+          >
+            新增
+          </button>
         </div>
         <Searchbar class="onlyB" />
       </div>
+
       <div class="dmain">
         <table>
           <tr>
@@ -16,7 +18,7 @@
             <th>編號</th>
             <th>標題</th>
             <th>回答</th>
-            <th>狀態</th>
+            <!-- <th>狀態</th> -->
             <th></th>
           </tr>
           <tr v-for="(i, index) in faq" :key="index">
@@ -25,49 +27,59 @@
             <td>{{ i.faq_question }}</td>
             <td>{{ i.faq_ans }}</td>
             <td>
-              <p v-if="parseInt(i.faq_status) === 1">上架中</p>
-              <p v-else>未上架</p>
-            </td>
-            <td>
-              <button class="edit" @click="showEditForm('edit', i.faq_id)">編輯</button>
+              <button class="edit" @click="showEditForm('edit', i.faq_id)"
+              >
+                編輯
+              </button>
             </td>
           </tr>
           <div class="pagination">
-            <button @click="previousPage" :disabled="currentPage === 1">上一頁</button>
-            <button @click="nextPage" :disabled="currentPage === totalPages">下一頁</button>
+            <button @click="previousPage" :disabled="currentPage === 1">  
+              上一頁
+            </button>
+            <button @click="nextPage" :disabled="currentPage === totalPages">
+              下一頁
+            </button>
           </div>
         </table>
       </div>
-      <form action="" class="pop" v-show="showForm" @submit.prevent="submitForm">
+      <form 
+        action="" 
+        class="pop" 
+        v-show="showForm" 
+        @submit.prevent="submitForm"
+        id="edform"
+      >
         <h2>編輯</h2>
-        <div class="xedit" v-show="addnews">
+        <div class="xedit" v-show="addfaqs">
           <div>
             <div>編號</div>
-            <div>QA001</div>
+            <div v-text="add_faq.id"></div>
           </div>
         </div>
         <div>
           <div>標題</div>
-          <input type="text" name="" id="" v-model="add_news.title">
+          <input type="text" name="" id="" v-model="add_faq.question">
           <div>內容</div>
-          <textarea name="" id="" cols="30" rows="7" v-model="add_news.content"></textarea>
-          <div class="switch_status">
-            <div>狀態</div>
-            <select v-model="status">
-              <option value="1">上架中</option>
-              <option value="0">未上架</option>
-            </select>
-            <!-- <input @change="img($event)" type="file">
-            <img :src="src">
-            <input type="file" id="fileInput" accept="image/*" style="display: none;" />
-            <label for="fileInput">選擇圖片</label>
-            <div class="img_wrap">
-              <img src="" alt="" id="img1" width="50">
-            </div> -->
-          </div>
+          <textarea 
+            name=""
+            id="" 
+            cols="30" 
+            rows="7" 
+            v-model="add_faq.ans"
+          ></textarea>
+
           <div class="form_btn">
-            <button type="button" class="btn_admin" @click="hideEditForm">取消</button>
-            <button type="button" class="btn_admin" @click="addnews_btn(add_news.id)">儲存</button>
+            <button type="button" class="btn_admin" @click="hideEditForm">
+              取消
+            </button>
+            <button 
+              type="button" 
+              class="btn_admin" 
+              @click="addfaqs_btn(add_faq.id)"
+            >
+              儲存
+            </button>
           </div>
         </div>
       </form>
@@ -90,24 +102,18 @@ export default {
   data() {
     return {
       faq: [],
-      
-      add_news: [
-        {
+      add_faq: [{
           id: '',
-          title: '',
-          content: '',
-          date: '',
-        }
-      ],
-     
+          question: '',
+          ans: '',  
+        }],
       showForm: false,
-      addnews: false,
-      status: 0,
-      src: '',
-      imgparam: {},
+      addfaqs: false,
+      // status: 0,
+      // src: '',
+      // imgparam: {},
       currentPage: 1, // 當前頁碼
       pageSize: 5, // 每頁顯示的數據量
-
     }
   },
   methods: {
@@ -123,50 +129,27 @@ export default {
         this.currentPage++;
       }
     },
-    img(e) {
-      let that = this; // 改變 this 指向
-      let files = e.target.files[0]; // 圖片文件名
-      if (!e || !window.FileReader) return; // 檢查是否支援 FileReader
-      let reader = new FileReader();
-      reader.readAsDataURL(files); // 關鍵一步，在這裡轉換的
-      reader.onloadend = function () {
-        that.src = this.result; // 賦值
-      }
-      // this.imgparam = new FormData(); // 轉換為表單進行傳送給後端
-      // this.imgparam.append("images", files); // 第一個參數就是後端要接收的字段，要一致，不一致會傳送失敗
-    },
-    toggleStatus(newStatus) {
-      this.faq.forEach(item => {
-        if (item.selected) {
-          item.statusn = newStatus;
-        }
-      });
-    },
-    canToggle(newStatus) {
-      return this.faq.some(item => item.selected && item.statusn !== newStatus);
-    },
     showEditForm(type, id) {
       if (type == 'add') {
-        this.addnews = false;
-        this.add_news = [
+        this.addfaqs = false;
+        this.add_faqsaddfaqs = [
           {
             id: '',
-            title: '',
-            content: '',
-            date: '',
-          }
-        ]
+            question: '',
+            ans: '',
+          },
+        ];
       } else {
-        this.addnews = true;
+        this.addfaqs = true;
       }
       if (type == 'edit') {
         const url = `http://localhost/musesmuseum/public/phps/faq_list.php`
         let headers = {
           "Content-Type": "application/json",
-          "Accept": "application/json",
+          Accept: "application/json",
         }
         let body = {
-          "id": id,
+          id: id,
         }
         fetch(url, {
           method: "POST",
@@ -179,17 +162,13 @@ export default {
             if (response.ok) {
               return response.json(); // 如果請求成功，解析JSON數據
             } else {
-              throw new Error("取得失敗"); // 如果請求不成功，拋出錯誤
+              //throw new Error("取得失敗"); // 如果請求不成功，拋出錯誤
             }
           })
-          .then(json => {
-            console.log(json.news_date)
-            this.add_news.title = json.news_title;
-            this.add_news.content = json.news_content;
-            this.add_news.date = json.news_date;
-            this.add_news.id = json.news_id;
-            this.status = json.news_status;
-          })
+          .then((json) => {
+            this.add_faqsaddfaqs.question = json.faqsaddfaqs_question;
+            this.add_faqsaddfaqs.ans = json.faqsaddfaqs_ans;
+          });
       }
 
       this.showForm = true;
@@ -201,88 +180,60 @@ export default {
       this.hideEditForm();
     },
     //新增
-    // addnews_btn(id) {
-    //   if (id != undefined) {
-    //     const url = `http://localhost/musesmuseum/public/phps/news_add.php`
-    //     let headers = {
-    //       "Content-Type": "application/json",
-    //       "Accept": "application/json",
-    //     }
-    //     //以下是API文件中提及必寫的主體参數。
-    //     let body = {
-    //       "id": this.add_news.id,
-    //       "title": this.add_news.title,
-    //       "content": this.add_news.content,
-    //       "status": this.status,
-    //       // 'image': this.imgparam.get('images')
-    //     }
-    //     fetch(url, {
-    //       method: "POST",
-    //       headers: headers,
-    //       //別忘了把主體参數轉成字串，否則資料會變成[object Object]，它無法被成功儲存在後台
-    //       // body: JSON.stringify(body)
-    //       body: JSON.stringify({ data: body })
-    //     })
-    //       .then(response => {
-    //         if (response.ok) {
-    //           return response.json(); // 如果請求成功，解析JSON數據
-    //         } else {
-    //           throw new Error("新增失敗"); // 如果請求不成功，拋出錯誤
-    //         }
-    //       })
-    //       .then(json => {
-    //         console.log(json)
-    //         // 在成功時顯示提示
-    //         alert(json.message); // 假設JSON數據中有一個message屬性
-    //         window.location.reload()
-    //       })
-    //       .catch(error => {
-    //         // 在失敗時顯示提示
-    //         alert(error.message);
-    //       });
-    //   } else {
-    //     const url = `http://localhost/musesmuseum/public/phps/news_add.php`
-    //     let headers = {
-    //       "Content-Type": "application/json",
-    //       "Accept": "application/json",
-    //     }
-    //     let currentDate = new Date();
-    //     let formattedDate = currentDate.toISOString().split("T")[0];
-    //     //以下是API文件中提及必寫的主體参數。
-    //     let body = {
-    //       "title": this.add_news.title,
-    //       "content": this.add_news.content,
-    //       "status": this.status,
-    //       "date": formattedDate,
-    //       // 'image': this.imgparam.get('images')
-    //     }
-    //     fetch(url, {
-    //       method: "POST",
-    //       headers: headers,
-    //       //別忘了把主體参數轉成字串，否則資料會變成[object Object]，它無法被成功儲存在後台
-    //       // body: JSON.stringify(body)
-    //       body: JSON.stringify({ data: body })
-    //     })
-    //       .then(response => {
-    //         if (response.ok) {
-    //           return response.json(); // 如果請求成功，解析JSON數據
-    //         } else {
-    //           throw new Error("新增失敗"); // 如果請求不成功，拋出錯誤
-    //         }
-    //       })
-    //       .then(json => {
-    //         console.log(json)
-    //         // 在成功時顯示提示
-    //         alert(json.message); // 假設JSON數據中有一個message屬性
-    //         window.location.reload()
-    //       })
-    //       .catch(error => {
-    //         // 在失敗時顯示提示
-    //         alert(error.message);
-    //       });
-    //   }
+    addfaqs_btn(id) {
+      if (id != undefined) {
+        const url = `http://localhost/musesmuseum/public/phps/faq_updateupload.php`;
+        const formData = new FormData();
+        formData.append("id", this.add_faq.id);
+        formData.append("question", this.add_faq.question);
+        formData.append("ans", this.add_faq.ans);
 
-    // }
+        fetch(url, {
+          method: "POST",
+          body: formData,  
+        })
+          .then((response) => {
+            if (response.ok) {
+              return response.json();
+            } else {
+              throw new Error("新增失敗");
+            }
+          })
+          .then((json) => {
+            alert(json);
+            window.location.reload();
+          })
+          .catch((error) => {
+            console.log(error.message);
+          });
+      } else {
+        const url = `http://localhost/musesmuseum/public/phps/faq_insertupload.php`;
+        const formData = new FormData();
+        formData.append("id", this.add_faq.id);
+        formData.append("question", this.add_faq.question);
+        formData.append("ans", this.add_faq.ans);
+
+        fetch(url, {
+          method: "POST",
+          body: formData,  
+        })
+          .then((response) => {
+            if (response.ok) {
+              return response.json();
+            } else {
+              throw new Error("新增失敗");
+            }
+          })
+          .then((json) => {
+            alert("新增成功");//要抓錯誤
+            window.location.reload();
+          })
+          .catch((error) => {
+            //console.log(error.message);
+          });
+      }
+    },
+ 
   },
   computed: {
     faq() {
@@ -301,28 +252,27 @@ export default {
     const url = `http://localhost/musesmuseum/public/phps/faq_list.php`
     let headers = {
       "Content-Type": "application/json",
-      "Accept": "application/json",
+      Accept: "application/json",
     }
     fetch(url, {
       method: "POST",
       headers: headers,
     })
-      .then(response => {
+      .then((response) => {
         if (response.ok) {
           return response.json(); // 如果請求成功，解析JSON數據
         } else {
-          throw new Error("取得消息失敗"); // 如果請求不成功，拋出錯誤
+          throw new Error("取得消息失敗");
         }
       })
-      .then(json => {
-        console.log(json)
+      .then((json) => {
         this.faq = json;
         // 在成功時顯示提示
-        // alert(json.message); // 假設JSON數據中有一個message屬性
+        //alert(json.message); // 假設JSON數據中有一個message屬性
       })
       .catch(error => {
         // 在失敗時顯示提示
-        // alert(error.message);
+        //alert(error.message);
       });
 
 
@@ -402,16 +352,45 @@ div {
     th {
       background-color: #f2f2f2;
       font-weight: bold;
+
     }
 
     td {
+
+      // display: inline-block;
+
       &:first-child {
+        // width: 5%;
+        // background-color: #009CA8;
+
         input[type="checkbox"] {
           margin-right: 5px;
+
         }
       }
 
+      // &:nth-child(2) {
+      //   width: 10%;
+      // }
+
+      // &:nth-child(3),
+      // &:nth-child(4) {
+      //   background-color: #f00;
+      //   width: 33%;
+      //   overflow: hidden;
+      //   text-overflow: ellipsis;
+      //   white-space: nowrap;
+      // }
+
+      // &:nth-child(5) {
+      //   background-color: #0f0;
+      //   width: 13%;
+      // }
+
       &:last-child {
+        // background-color: #00f;
+        // width: 5%;
+
         button {
           color: #000;
           border: none;
