@@ -2,6 +2,7 @@
   <div class="bgcGY cardCenter">
     <main>
       <div class="backGroundCardbBlue"></div>
+      <span>{{ mbr_name }} 123</span> 
       <div class="backGroundCard">
         <div class="backGroundCardBtns">
           <router-link :to="a.link" v-for="a in memBtnLink">
@@ -49,6 +50,7 @@ export default {
   },
   data() {
     return {
+      mbr_name: '', 
       memAllInfo: [
         //  { memTitColumn:"姓名",type:"text",id:"mbr_id",name:"mbr_id",class:"fillInClumn",placeholder:"姓名",value:"巴特特" },  
         //  { memTitColumn:"生日",type:"date",id:"birthday",name:"birthday",class:"fillInClumn",placeholder:"" ,value: '2000-01-01' },
@@ -86,16 +88,7 @@ export default {
     };
   },
   methods: {
-    //綸a方法
-    // senduserData() {
-    //     fetch("http://localhost/musesmuseum/public/phps/MemberInfo.php").then(async (response) => {
-    //       this.memAllInfo = await response.json();
-    //       console.log(this.memAllInfo); 
-    //     })
-    //     .catch((error) => {
-    //       console.error('發生錯誤:', error);
-    //     });
-    //   },
+   
     //老師範例
     //  setDepts(members) {
     // this.memAllInfo = members
@@ -107,7 +100,7 @@ export default {
     // },
 
     getuser() {
-      console.log("getuser");
+      // console.log("getuser");
       fetch("http://localhost/musesmuseum/public/phps/MemberInfo.php")
         .then(response => {
           return response.json();
@@ -115,52 +108,47 @@ export default {
         })
         .then(result => {
           console.log(result);
+          this.mbr_name = result.mbr_name;
           if (Array.isArray(result)) {
             this.memAllInfo = result
           } else {
-            alert("無法取得部門資料");
+            alert("無法取得資料");
           }
         })
-    
-
-    }
-
-    //目前
-    // senduserData() {
-    //     console.log("senduserData");
-
-    //     // let input = {
-    //     //   mbr_email: document.getElementById("mbr_email").value,
-    //     //   mbr_psw: document.getElementById("mbr_psw").value,
-    //     // };
-
-    //     const data = new URLSearchParams({ mbr_email, mbr_psw });
-    //     fetch("http://localhost/musesmuseum/public/phps/MemberInfo.php", 
-    //     {
-    //       method: "POST",
-    //       headers: {
-    //         "Content-Type": "application/x-www-form-urlencoded",
-    //       },
-    //       // body: new URLSearchParams(input),
-    //     }
-    //     )
-    //       .then((response) => {
-    //         return response.json();
-    //       })
-    //       .then((result) => {
-    //         this.memAllInfo = result;
-    //     console.log(memAllInfo);
-    //       })
-    //       .catch(function (error) {
-    //         console.log(error);
-    //       });
-    //   },
+        // .then(() => {
+        //   if (this.mbr_name) {
+        //     let members = JSON.stringify(this);
+        //     document.cookie = "members= " + members + "; expires=Thu, 01 Jan 2025 00:00:00 UTC; path=/";
+        //     // document.location.href = "/Home/MemberInfo";
+        //   } else {
+        //     alert("無法獲取 mbr_name");
+        //   }
+        // })      
+    },
+ 
   },
   mounted() {
     document.body.style.height = `auto`;
-    //  senduserData();
-    this.getuser()
+   
+    this.getuser();
 
+    const name = "members" + "=";
+        const decodedCookie = decodeURIComponent(document.cookie);
+        const cookieArray = decodedCookie.split(';');
+
+        for (let i = 0; i < cookieArray.length; i++) {
+            let cookie = cookieArray[i];
+            while (cookie.charAt(0) === ' ') {
+                cookie = cookie.substring(1);
+            }
+            if (cookie.indexOf(name) === 0) {
+                // console.log(cookie.substring(name.length, cookie.length));
+                if(cookie.substring(name.length, cookie.length)){
+                    // document.location.href = "/DashBoard";
+                }
+            }
+        }
+        return "";
   }
 };
 </script>

@@ -1,7 +1,7 @@
 <template>
   <div class="bgcGY cardCenter">
     <main>
-      <span v-for="i in mem">{{ i.mbr_name }}123</span>   <!-- 使用者姓名 -->
+      <span>{{ mem.mbr_name }} 123</span>   <!-- 使用者姓名 -->
       <span id="spanLogin"></span>  
       <div class="backGroundCard">
         <div class="backGroundCardBtns">
@@ -117,6 +117,8 @@ export default {
         console.log(this.mem)
         this.mem = result;
         this.memEmail = result.mbr_email;
+        this.memName = result.mbr_name;
+
         if (
           this.mem.mbr_email == document.getElementById("mbr_email").value &&
           this.mem.mbr_psw == document.getElementById("mbr_psw").value
@@ -167,7 +169,7 @@ export default {
       if (cookie.indexOf(name) === 0) {
           console.log(cookie.substring(name.length, cookie.length));
           if(cookie.substring(name.length, cookie.length)){
-              document.location.href = "/Home/MemberInfo";
+              // document.location.href = "/Home/MemberInfo";
           }
       }
     }
