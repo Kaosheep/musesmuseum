@@ -67,8 +67,6 @@
 </template>
 
 <script>
-// const getImg = (path) =>
-//   require(`@/assets/image/productimage/productimage${path}.png`);
 export default {
   data() {
     return {

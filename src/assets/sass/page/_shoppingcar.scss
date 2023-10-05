@@ -1,61 +1,60 @@
-.shoppingcar_stepbar{
+.shoppingcar_stepbar {
     width: 85%;
     margin: 2rem auto;
     display: flex;
     align-items: center;
     justify-content: center;
-    div{
+
+    div {
         border-radius: 50%;
         border: 3px solid $myellow;
         margin: 1%;
         width: 100px;
-        height: 100px; 
+        height: 100px;
         display: flex;
         justify-content: center;
-        align-items: center;    
-        p{
+        align-items: center;
+
+        p {
             text-align: center;
             color: $mgreen;
         }
     }
-    div:first-child{
+
+    div:first-child {
         background: $myellow;
     }
-    svg{
-        margin: 1%;   
+
+    svg {
+        margin: 1%;
         width: 20%;
         height: 19px;
         fill: none;
-        line{
+
+        line {
             stroke: $myellow;
             stroke-width: 3px;
         }
     }
 }
-.shoppingcar_mbl{
+
+.shoppingcar_mbl {
     width: 70%;
     max-width: 700px;
     margin: auto;
-    position: relative;
-    .dot{
-        width: 136px;
-        height: 80px;
-        background-image: url('@/assets/image/exhibition/specialexhibition/spex_deco5.png');
-        background-size: 1rem;
-        position: absolute;
-        top: -15%;
-        left: 65%;
-    }
-    .checkAll{
+
+    .checkAll {
         width: 20px;
         height: 20px;
         margin: 0 2%;
     }
-    label{
+
+    label {
         color: $mgreen;
         font-size: 1.2rem;
     }
-    .shoppingcar_mbi{
+
+    .shoppingcar_mbi {
         background-color: #fff;
         display: flex;
         border: 1px solid $mgreen;
@@ -64,50 +63,60 @@
         align-items: center;
         position: relative;
         margin-bottom: 0.5rem;
-        input{
+
+        input {
             width: 25px;
             height: 25px;
             margin: 0 1%;
             text-align: center;
             border: none;
         }
-        .shoppingcar_productimage{
+
+        .shoppingcar_productimage {
             min-width: 100px;
             width: 30%;
             margin: 0 1%;
-            img{
+
+            img {
                 width: 100%;
                 border-radius: 8px;
                 vertical-align: bottom;
             }
         }
-        .shoppingcar_productinfo{            
+
+        .shoppingcar_productinfo {
             margin: 0 2%;
-            width: 30%;
-            p{
-                font-size: 1.5rem;                
+            width: 50%;
+
+            p {
+                font-size: 1.5rem;
                 padding: 1% 0;
             }
-            .shoppingcar_function{
+
+            .shoppingcar_function {
                 padding: 1% 0;
-                .shoppingcar_productcount{
-                    button{
+
+                .shoppingcar_productcount {
+                    button {
                         width: 1.5rem;
                         height: 1.5rem;
                         font-size: 1rem;
-                        line-height:  1.5rem;
+                        line-height: 1.5rem;
                         border-radius: 4px;
                         border: none;
                         background-color: $mgreen;
                         vertical-align: middle;
                     }
+
                     #minus path {
                         fill: #fff
                     }
+
                     #plus path {
                         fill: #fff
                     }
-                    span{
+
+                    span {
                         display: inline-block;
                         text-align: center;
                         width: 65px;
@@ -117,7 +126,8 @@
                 }
             }
         }
-        .shoppingcar_itemdelete{
+
+        .shoppingcar_itemdelete {
             width: 20px;
             height: 20px;
             border: none;
@@ -127,112 +137,124 @@
             top: 3%;
             right: 3%;
         }
-        
+
     }
 }
-.shoppingcar_total{
+
+.shoppingcar_total {
     width: 70%;
     max-width: 700px;
     margin: auto;
     text-align: right;
-    p{
+
+    p {
         padding: 1% 0;
         font-size: 1rem;
-        span{
+
+        span {
             color: $mpink;
             font-size: 1.5rem;
             padding: 0 0.5rem;
         }
     }
-    p:nth-child(2){
+
+    p:nth-child(2) {
         border-top: 1px $mgreen solid;
     }
 }
-.shoppingcar_nextstep{
-    position: relative;
+
+.shoppingcar_nextstep {
     margin: auto;
     width: 10%;
     min-width: 100px;
-    .pinkBtn{
+
+    .pinkBtn {
         background-color: $myellow;
     }
-    .pinkBtn:hover{
+
+    .pinkBtn:hover {
         background-color: $mpink;
     }
-    .dot{
-        width: 45px;
-        height: 45px;
-        background-image: url('@/assets/image/exhibition/specialexhibition/spex_deco5.png');
-        background-size: 3rem;
-        position: absolute;
-        left: -200%;
-    }
 }
+
 @include t() {
     @media screen and (max-width:$t) {
-        .shoppingcar_stepbar{
+        .shoppingcar_stepbar {
             width: 100%;
-            div{
+
+            div {
                 width: 85px;
                 height: 85px;
             }
-            svg{
-                margin: 0.5%;   
+
+            svg {
+                margin: 0.5%;
                 width: 15%;
                 height: 19px;
             }
         }
-        .shoppingcar_mbl{
+
+        .shoppingcar_mbl {
             width: 80%;
-            .shoppingcar_mbi{
-                .shoppingcar_productinfo{
-                     p{
+
+            .shoppingcar_mbi {
+                .shoppingcar_productinfo {
+                    p {
                         font-size: 1.2rem;
                     }
                 }
             }
 
         }
-                
     }
 }
-@include m(){
+
+@include m() {
     @media screen and (max-width:$m) {
-        .shoppingcar_stepbar{
+        .shoppingcar_stepbar {
             width: 100%;
-            p{
+
+            p {
                 font-size: 14px;
             }
-            svg{
+
+            svg {
                 margin: 0.5%;
                 width: 12%;
                 height: 19px;
             }
         }
-        .shoppingcar_mbl{
+
+        .shoppingcar_mbl {
             width: 90%;
-            .dot{
+
+            .dot {
                 display: none;
             }
-            .checkAll{
+
+            .checkAll {
                 width: 15px;
                 height: 15px;
             }
-            label{
+
+            label {
                 font-size: 1rem;
             }
-            .shoppingcar_mbi{
-                input{
+
+            .shoppingcar_mbi {
+                input {
                     width: 15px;
                     height: 15px;
                 }
-                .shoppingcar_productinfo{
-                    p{
+
+                .shoppingcar_productinfo {
+                    p {
                         font-size: 1rem;
                     }
-                    .shoppingcar_function{
-                        .shoppingcar_productcount{
-                            span{
+
+                    .shoppingcar_function {
+                        .shoppingcar_productcount {
+                            span {
                                 font-size: 1em;
                                 width: 45px;
                             }

@@ -88,7 +88,6 @@ export default {
       value: 0,
       aside: [
         { kind: "所有商品" },
-        // { kind: "熱銷Top5" },
         { kind: "聯名系列" },
         { kind: "時尚彩妝" },
         { kind: "生活用品" },
