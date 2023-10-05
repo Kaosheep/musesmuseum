@@ -16,17 +16,17 @@
           <tr>
             <th></th>
             <th>編號</th>
-            <th>標題</th>
-            <th>回答</th>
+            <th>問題</th>
+            <th>答案</th>
             <!-- <th>狀態</th> -->
             <th></th>
           </tr>
           <tr v-for="(i, index) in faq" :key="index">
-            <td><input type="checkbox" v-model="i.selected"></td>
-            <td>{{ i.faq_id }}</td>
-            <td>{{ i.faq_question }}</td>
-            <td>{{ i.faq_ans }}</td>
-            <td>
+            <td class="faqmChoise"><input type="checkbox" v-model="i.selected"></td>
+            <td class="faqmId">{{ i.faq_id }}</td>
+            <td class="faqmQues">{{ i.faq_question }}</td>
+            <td class="faqmAns">{{ i.faq_ans }}</td>
+            <td class="faqmEdit" >
               <button class="edit" @click="showEditForm('edit', i.faq_id)"
               >
                 編輯
@@ -282,157 +282,130 @@ export default {
 
 <style scoped lang="scss">
 @import "@/assets/sass/style.scss";
-
 div {
-  color: #000;
+    color: #000;
 
-  form {
-    height: 80vh;
-  }
+    form {
+        height: 80vh;
+    }
 }
 
 .bTab {
-  background-color: #ffffff80;
-  border-radius: 10px 10px 0 0;
-  border-width: 1px 1px 0 1px;
-  border-style: none;
-  padding: 8px;
-  color: #000;
-  transition: .3s;
-  cursor: pointer;
-
+    background-color: #ffffff80;
+    border-radius: 10px 10px 0 0;
+    border-width: 1px 1px 0 1px;
+    border-style: none;
+    padding: 8px;
+    color: #000;
+    transition: .3s;
+    cursor: pointer;
 }
 
 .admin_editbar {
-  display: flex;
-  background-color: #f2f2f2;
-  padding: 5px;
-  border-radius: 10px 10px 0 0;
+    display: flex;
+    background-color: #f2f2f2;
+    padding: 5px;
+    border-radius: 10px 10px 0 0;
 }
 
 .onlyB {
-  position: relative;
-  box-shadow: none;
-  margin-right: 0;
-  width: 190px;
+    position: relative;
+    box-shadow: none;
+    margin-right: 0;
+    width: 190px;
 }
 
 .btn_admin {
-  margin-right: 10px;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  width: 70px;
-  height: 40px;
-  background-color: $mblue;
-  border-radius: 4px;
-  color: #fff;
-  border: none;
-  cursor: pointer;
+    margin-right: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 70px;
+    height: 40px;
+    background-color: $mblue;
+    color: #fff;
+    border: none;
+    cursor: pointer;
 }
 
 .dmain {
-  background-color: #ffffff80;
-  height: 80%;
-  border-radius: 0 10px 10px 10px;
+    position: relative;
+    background-color: #ffffff80;
+    height: 80%;
+    border-radius: 0 10px 10px 10px;
 
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        border-spacing: 0;
 
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    border-spacing: 0;
-
-    th,
-    td {
-      padding: 10px;
-      text-align: center;
-      border-bottom: 1px solid #ccc;
-
-    }
-
-    th {
-      background-color: #f2f2f2;
-      font-weight: bold;
-
-    }
-
-    td {
-
-      // display: inline-block;
-
-      &:first-child {
-        // width: 5%;
-        // background-color: #009CA8;
-
-        input[type="checkbox"] {
-          margin-right: 5px;
-
-        }
-      }
-
-      // &:nth-child(2) {
-      //   width: 10%;
-      // }
-
-      // &:nth-child(3),
-      // &:nth-child(4) {
-      //   background-color: #f00;
-      //   width: 33%;
-      //   overflow: hidden;
-      //   text-overflow: ellipsis;
-      //   white-space: nowrap;
-      // }
-
-      // &:nth-child(5) {
-      //   background-color: #0f0;
-      //   width: 13%;
-      // }
-
-      &:last-child {
-        // background-color: #00f;
-        // width: 5%;
-
-        button {
-          color: #000;
-          border: none;
-          cursor: pointer;
+        th,
+        td {
+            padding: 10px;
+            text-align: center;
+            border-bottom: 1px solid #ccc;
         }
 
-      }
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
 
-      p {
-        margin: 0;
-        padding: 5px;
+        td {
+            &:first-child {
+                input[type="checkbox"] {
+                    margin-right: 5px;
+                }
+            }
+            &:nth-child(3){
+              overflow: hidden;
+              white-space: nowrap;
+              text-overflow: ellipsis;
+              max-width: 250px; /* 调整为适当的宽度 */
+            }
+            &:nth-child(4){
+              overflow: hidden;
+              white-space: nowrap;
+              text-overflow: ellipsis;
+              max-width: 250px; /* 调整为适当的宽度 */
+            }
 
-      }
+            &:last-child {
+                button {
+                    color: #000;
+                    border: none;
+                    cursor: pointer;
+                }
+            }
+
+            p {
+                margin: 0;
+                padding: 5px;
+
+            }
+        }
     }
-  }
 
+}
+.faqmQues,.faqmAns{
+  height: 4.3em;
 }
 
 .pop {
-  position: absolute;
-  top: -1%;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  padding: 20px;
-  background-color: rgba(255, 248, 248);
-  justify-content: center;
-  align-items: center;
-  z-index: 999;
-  border-radius: 10px;
-  overflow: auto;
-
-  .xedit {
-    display: flex;
-
-    div {
-      margin-right: 10px;
-    }
-  }
-
-  input,
-  textarea {
+    position: absolute;
+    top: -1%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    background-color: rgba(255, 248, 248);
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+    border-radius: 10px;
+    overflow: auto;
+    div{
+        margin-top: 10px;
+        textarea {
     width: 100%;
     background-color: #ffffff1b;
     border: 1px solid #009CA8;
@@ -442,17 +415,32 @@ div {
     padding-right: 5px;
 
   }
+    }
 
-  .img_wrap {
-    width: 100%;
-    background-color: #000;
-  }
+    .info_col {
+        display: flex;
+        margin-right: 10px;
+        margin-bottom: 10px;
+        div {
+            width: 100%;
+            margin-top: 10px;
+            margin-right: 10px;
+            .img_box{
+                padding-left: 5px;
+                padding-right: 5px;
+                border: 1px solid $mblue;
+                margin-left: 30px;
+            }
+        }
+    }
 
-  .form_btn {
-    position: fixed;
-    bottom: 0;
-    right: 20px;
-  }
+
+
+    .form_btn {
+        position: fixed;
+        bottom: 0;
+        left: 20px;
+    }
 }
 </style>
     
