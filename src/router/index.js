@@ -175,6 +175,11 @@ const routes = [
         path: 'PaintDetail/:id',
         name: 'PaintDetail',
         component: () => import('../views/frontend/PaintDetail.vue'),
+      },
+      {
+        path: 'ShoppingSuccess',
+        name: 'ShoppingSuccess',
+        component: () => import('../views/frontend/ShoppingSuccess.vue'),
       }
     ]
   },

@@ -24,7 +24,7 @@
       <select class="deliverway" v-model="selected">
         <option v-for="way in deliverway">{{ way.ship }}</option>
       </select>
-      <label> <input type="checkbox" />收件人同會員資訊 </label>
+      <label><input type="checkbox" />收件人同會員資訊</label>
       <label>收件人：
         <input type="text" class="textInner" required v-model="po_name" />
       </label>
@@ -45,18 +45,17 @@
       <label>連絡電話：
         <input type="text" class="textInner" v-model="po_phone" />
       </label>
-      <textarea placeholder="有甚麼想告訴謬思的嗎?"></textarea>
     </div>
     <div class="fee_shopping">
       <p>
-        商品總計<span>{{ totolprice }}</span>
+        商品總計<span>${{ totolprice }}</span>
       </p>
       <p>運費<span>${{ shipcharge.charge }}</span></p>
       <p>合計<span>${{ bill }}</span></p>
     </div>
   </div>
   <div class="shopping_finish">
-    <router-link to="">
+    <router-link to="/home/ShoppingSuccess">
       <button class="pinkBtn" @click="getOrderInfo">送出訂單</button>
     </router-link>
   </div>
@@ -66,6 +65,7 @@
 export default {
   data() {
     return {
+      storageitem: localStorage["addItemlist"],
       totolprice: localStorage["totalAmount"],
       selected: '宅配到府',
       deliverway: [
@@ -74,17 +74,26 @@ export default {
       ],
       countyList: [],
       districtList: [],
+      itemarr: [],
       selectedCounty: '請選擇',
       selectedDistrict: '請選擇',
       publicpath: "http://localhost/musesmuseum/public/phps/",
-      mbr_id: "",
+      mbr_id: 'M0001',
       po_addr: "",
       po_phone: "",
       po_name: "",
       nowDay: "",
+      po_id: "",
     };
   },
   computed: {
+    items() {
+      if (localStorage.length > 0) {
+        let itemString = this.storageitem.split(",");
+        let items = [...new Set(itemString.filter((el) => el))];
+        return items;
+      }
+    },
     shipcharge() {
       return this.deliverway.find((way) => way.ship === this.selected)
     },
@@ -98,6 +107,7 @@ export default {
     },
   },
   methods: {
+    //把城市抓回來
     fetchCounty() {
       fetch(`${this.publicpath}shopping.php`).then(async (response) => {
         let countyList = await response.json();
@@ -108,6 +118,7 @@ export default {
           console.error('發生錯誤:', error);
         });
     },
+    //把區域抓回來
     fetchDistricts() {
       const URL = `${this.publicpath}shopping.php`;
       const formData = new URLSearchParams();
@@ -126,7 +137,7 @@ export default {
         // console.log(this.districtList);
       }).catch(error => console.log(error));
     },
-    // 得到當下時間
+    //得到訂單時間
     timeFormate() {
       let newdate = new Date();
 
@@ -136,10 +147,11 @@ export default {
 
       this.nowDay = String(year + month + date);
     },
+    //得到訂單資訊，並送回資料庫建檔
     getOrderInfo() {
       const URL = `${this.publicpath}shopping_info.php`;
       const formDataObj = {
-        mbr_id: 'M0001',
+        mbr_id: this.mbr_id,
         po_date: this.nowDay,
         po_sum: this.bill,
         po_addr: this.po_addr,
@@ -153,12 +165,65 @@ export default {
         body: JSON.stringify(formDataObj),
       }).then(response => {
         return response.json();
+      }).then(result => {
+        this.fetchPO();
       }).catch(error => console.log(error));
     },
+    //抓取localStorage裡的商品陣列
+    getitemarr() {
+      this.items.forEach((it) => {
+        let itemstr = [...localStorage[it].split(",")];
+        return this.itemarr.push(itemstr);
+      });
+      console.log(this.itemarr);
+    },
+    //給會員編號，把該筆訂單編號抓回來
+    fetchPO() {
+      const URL = `${this.publicpath}shopping_getpoid.php`;
+      const formData = new URLSearchParams();
+      formData.append('mbr_id', this.mbr_id);
+      fetch(URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'
+        },
+        body: formData,
+      }).then(response => {
+        return response.json();
+      }).then(result => {
+        this.po_id = result[0].po_id;
+        this.getOrderDLT();
+      }).catch(error => console.log(error));
+    },
+    // 得到訂單明細，並送回資料庫建檔
+    async getOrderDLT() {
+      for (const item of this.itemarr) {
+        const URL = `${this.publicpath}shopping_details.php`;
+        const orderDLTObj = {
+          po_id: this.po_id,
+          prod_id: item[0],
+          prod_dlt_actual_price: item[2],
+          prod_dlt_qty: item[4],
+          prod_dlt_total: item[2] * item[4],
+        };
+        try {
+          const response = await fetch(URL, {
+            method: 'POST',
+            body: JSON.stringify(orderDLTObj),
+          });
+          const result = await response.json();
+        } catch (error) {
+          console.log(error);
+        }
+      }
+    }
   },
   mounted() {
     this.fetchCounty();
     this.timeFormate();
+    if (localStorage.length > 0) {
+      this.getitemarr();
+    }
   }
 };
 </script>

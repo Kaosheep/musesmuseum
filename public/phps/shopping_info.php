@@ -29,16 +29,15 @@ header("Content-Type: application/json");
         $result = ["error"=>$e->getMessage()];
         echo json_encode($result);
     }
+
+    // $newOrder->bindVaule(":mbr_id", $_POST["mbr_id"]);
+    // $newOrder->bindVaule(":po_date", $_POST["po_date"]);
+    // $newOrder->bindVaule(":po_sum", $_POST["po_sum"]);
+    // $newOrder->bindVaule(":po_addr", $_POST["po_addr"]);
+    // $newOrder->bindVaule(":po_area", $_POST["po_area"]);
+    // $newOrder->bindVaule(":po_city", $_POST["po_city"]);
+    // $newOrder->bindVaule(":po_phone", $_POST["po_phone"]);
+    // $newOrder->bindVaule(":po_name", $_POST["po_name"]);
+
 ?>
 
-
-<!-- 
-$newOrder->bindVaule(":mbr_id", $_POST["mbr_id"]);
-$newOrder->bindVaule(":po_date", $_POST["po_date"]);
-$newOrder->bindVaule(":po_sum", $_POST["po_sum"]);
-$newOrder->bindVaule(":po_addr", $_POST["po_addr"]);
-$newOrder->bindVaule(":po_area", $_POST["po_area"]);
-$newOrder->bindVaule(":po_city", $_POST["po_city"]);
-$newOrder->bindVaule(":po_phone", $_POST["po_phone"]);
-$newOrder->bindVaule(":po_name", $_POST["po_name"]);
--->
