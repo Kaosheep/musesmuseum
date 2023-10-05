@@ -25,17 +25,6 @@ export default {
     methods: {
 
     },
-    // mounted() {
-    //     fetch('http://localhost/musesmuseum_dbtest/php/aa.php')
-    //         .then(res => res.json())
-    //         .then(res => {
-    //             this.news = res;
-    //             console.log(res)
-
-    //         })
-
-    // }
-
 }
 </script>
   
