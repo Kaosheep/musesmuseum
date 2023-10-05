@@ -14,16 +14,19 @@
           <div class="memloginActi" v-for="i in memAllInfo">
 
             <label :for="`${i.mbr_id}-name`">{{ i.mbr_name }}</label>
-            <input :key="i.mbr_id" type="text" :id="`${i.mbr_id}-name`" placeholder="NAME" :value="i.mbr_name" required />
+            <input class= "fillInClumn" :key="i.mbr_id" type="text" :id="`${i.mbr_id}-name`" placeholder="NAME" :value="i.mbr_name" required />
+
+            <label :for="`${i.mbr_id}-birth`">{{ f['mbr_birth'].memTitColumn }}</label>
+            <input class= "fillInClumn" type="date" :id="`${i.mbr_birth}-birth`" :value="i.mbr_birth" required />
+
+            <label :for="`${i.mbr_id}-email`">{{ f['mbr_email'].memTitColumn }}</label>
+            <input class= "fillInClumn" type="text" :id="`${i.mbr_email}-email`" placeholder="email" :value="i.mbr_email" required />
+
+            <label :for="`${i.mbr_id}-phone`">{{ f['mbr_phone'].memTitColumn }}</label>
+            <input class= "fillInClumn" type="text" :id="`${i.mbr_phone}-phone`" placeholder="phone" :value="i.mbr_phone" required />
 
             <label :for="`${i.mbr_id}-address`">{{ f['mbr_addr'].memTitColumn }}</label>
-            <input type="text" :id="`${i.mbr_id}-address`" placeholder="addr" :value="i.mbr_addr" required />
-
-            <label :for="`${i.mbr_id}-address`">{{ f['mbr_addr'].memTitColumn }}</label>
-            <input type="text" :id="`${i.mbr_id}-address`" placeholder="addr" :value="i.mbr_addr" required />
-
-            <label :for="`${i.mbr_id}-address`">{{ f['mbr_addr'].memTitColumn }}</label>
-            <input type="text" :id="`${i.mbr_id}-address`" placeholder="addr" :value="i.mbr_addr" required />
+            <input class= "fillInClumn" type="text" :id="`${i.mbr_id}-address`" placeholder="addres" :value="i.mbr_addr" required />
           </div>
           <!-- <div class="resetPswEmail">
              <a href="#">信箱驗證</a>
@@ -59,6 +62,15 @@ export default {
         /** form data: name */
         mbr_name: {
           memTitColumn: "姓名", type: "text", id: "mbr_id", name: "mbr_id", class: "fillInClumn", placeholder: "姓名"
+        },
+        mbr_birth: {
+          memTitColumn: "生日", type: "date",id: "mbr_birth",name: "mbr_birth",class:"fillInClumn",placeholder:""  
+        },
+        mbr_email: {
+          memTitColumn: "信箱", type: "email",id: "mbr_email",name: "mbr_email",class: "fillInClumn",placeholder:"信箱" 
+        },
+        mbr_phone: {
+          memTitColumn: "聯絡電話",type: "text",id: "mbr_phone",name: "mbr_phone",class: "fillInClumn",placeholder:"電話" 
         },
         mbr_addr: {
           memTitColumn: "聯絡地址", type: "text", id: "mbr_addr", name: "mbr_addr", class: "fillInClumn", placeholder: "地址"
@@ -109,10 +121,7 @@ export default {
             alert("無法取得部門資料");
           }
         })
-      // .then((result) => {
-      //         this.memAllInfo = result;
-      //     console.log(memAllInfo);
-      // })
+    
 
     }
 
