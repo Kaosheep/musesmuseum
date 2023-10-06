@@ -3,7 +3,7 @@
     <div class="dashborad">
       <div class="console">
         <Row>
-          <Menu :theme="theme" class="list_style" accordion :open-names="['1']" active-name="1-1">
+          <Menu :theme="theme" class="list_style" accordion open-names="['1']" active-name="1-1">
             <Submenu v-for="(submenu, index) in menuData" :key="index" :name="submenu.name">
               <template #title>
                 {{ submenu.title }}
@@ -107,15 +107,31 @@ export default {
     const name = "manager" + "=";
     const decodedCookie = decodeURIComponent(document.cookie);
     const cookieArray = decodedCookie.split(';');
+    let foundCookie = false; // 用于标记是否找到匹配的 cookie
 
+
+    // for (let i = 0; i < cookieArray.length; i++) {
+    //   let cookie = cookieArray[i];
+    //   while (cookie.charAt(0) === ' ') {
+    //     cookie = cookie.substring(1);
+    //   }
+    //   if (cookie.indexOf(name) !== 0) {
+    //     document.location.href = "/Admin";
+    //   }
+    // }
     for (let i = 0; i < cookieArray.length; i++) {
-      let cookie = cookieArray[i];
-      while (cookie.charAt(0) === ' ') {
-        cookie = cookie.substring(1);
-      }
-      if (cookie.indexOf(name) !== 0) {
+        let cookie = cookieArray[i];
+        while (cookie.charAt(0) === ' ') {
+            cookie = cookie.substring(1);
+        }
+        if (cookie.indexOf(name) === 0) {
+            foundCookie = true;
+            break; // 找到匹配的 cookie 后退出循环
+        }
+    }
+
+    if (!foundCookie) {
         document.location.href = "/Admin";
-      }
     }
     return "";
   },
