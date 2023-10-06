@@ -1,7 +1,6 @@
 <template>
   <div class="bgcGY cardCenter">
     <main>
-      <div class="backGroundCardbBlue"></div>
       <span>{{ mbr_name }} 123</span>
       <div class="backGroundCard">
         <div class="backGroundCardBtns">
@@ -14,7 +13,7 @@
         <form>
           <div class="memloginActi" v-for="i in memAllInfo">
 
-            <label :for="`${i.mbr_id}-name`">{{ i.mbr_name }}</label>
+            <label :for="`${i.mbr_id}-name`">{{ f['mbr_name'].memTitColumn }}</label>
             <input class="fillInClumn" :key="i.mbr_id" type="text" :id="`${i.mbr_id}-name`" placeholder="NAME"
               :value="i.mbr_name" required />
 
@@ -55,14 +54,7 @@ export default {
   data() {
     return {
       mbr_name: '',
-      memAllInfo: [
-        //  { memTitColumn:"姓名",type:"text",id:"mbr_id",name:"mbr_id",class:"fillInClumn",placeholder:"姓名",value:"巴特特" },  
-        //  { memTitColumn:"生日",type:"date",id:"birthday",name:"birthday",class:"fillInClumn",placeholder:"" ,value: '2000-01-01' },
-        //  { memTitColumn:"信箱",type:"email",id:"mbr_email",name:"mbr_email",class:"fillInClumn",placeholder:"信箱" ,value:"muse001@gmail.com" },
-        //  { memTitColumn:"聯絡電話",type:"text",id:"mbr_phone",name:"mbr_phone",class:"fillInClumn",placeholder:"電話" ,value:"0989123456" },
-        //  { memTitColumn:"聯絡地址",type:"text",id:"mbr_addr",name:"mbr_addr",class:"fillInClumn",placeholder:"地址" ,value:"光明市珍珠區謬思路1號" },
-
-      ],
+      memAllInfo: [ ],
       /** form data */
       f: {
         /** form data: name */
