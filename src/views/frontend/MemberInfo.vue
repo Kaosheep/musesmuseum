@@ -1,7 +1,7 @@
 <template>
   <div class="bgcGY cardCenter">
     <main>
-      <span>{{ mbr_name }} 123</span>
+      <span>{{ mbr_name }}</span>
       <div class="backGroundCard">
         <div class="backGroundCardBtns">
           <router-link :to="a.link" v-for="a in memBtnLink">
@@ -85,16 +85,6 @@ export default {
   },
   methods: {
 
-    //老師範例
-    //  setDepts(members) {
-    // this.memAllInfo = members
-    // for(let i=0; i<members.length; i++) {
-    //   console.log(i, members[i]);
-    //   // html += `<option value="${members[i].deptno}">${members[i].dname}</option>`
-    // }
-    // document.getElementById("deptno").innerHTML = html;
-    // },
-
     getuser() {
       // console.log("getuser");
       fetch("http://localhost/musesmuseum/public/phps/MemberInfo.php")
@@ -145,6 +135,7 @@ export default {
       try {
         const memberInfo = JSON.parse(members);
         if (memberInfo.mbr_name && memberInfo.mbr_email) {
+          this.mbr_name = memberInfo.mbr_name;
           this.memAllInfo.push(memberInfo);
         } else {
           console.error('Cookie中缺少屬性');

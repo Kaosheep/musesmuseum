@@ -7,7 +7,7 @@ header("Content-Type: application/json");
 
 
 
-session_start();
+// session_start();
 try{
         //連線
 	require_once("connectMuses.php");
