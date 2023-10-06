@@ -1,162 +1,172 @@
 <template>
-  
   <div class="title">購票</div>
   <div class="entitle">Book Tickets</div>
-  <div  style="display: flex;">
-  <div class="forrwd">
-    <div class="block">
-      <div>  
-        <div class="FareAndIllustrate">票價</div>
+  <div style="display: flex;">
+    <div class="forrwd">
+      <div class="block">
+        <div>
+          <div class="FareAndIllustrate">票價</div>
+        </div>
+        <div class="SweatBee"><li>成人票${{ price }}</li></div>
+        <div class="white">13歲(含)以上之遊客</div>
+        <div class="SweatBee"><li>兒童票${{ price2 }}</li></div>
+        <div class="white">3歲(含)至12歲之兒童</div>
+        <div class="SweatBee"><li>老人票${{ price3 }}</li></div>
+        <div class="white">65歲(含)以上之長者</div>
+        <div class="SweatBee"><li>愛心票${{ price4 }}</li></div>
+        <div class="white">持有主管機關核發之身心障礙證明(手冊)者。</div>
+        <div class="FareAndIllustrate">說明</div>
+        <div class="white">-本館為一票可觀賞當期所有展覽(包含常設展)。</div>
+        <div class="white">-票券無使用期限。</div>
+        <div class="white">-售出票券無法線上退票，請至現場退票。</div>
+        <div class="white">-兒童票、優待票請現場出示身分證。</div>
+        <div class="white">-愛心票請現場出示身心障礙證明（手冊）。</div>
+        <img class=shormatrix src="@/assets/image/tick/shortmatrix.png"/>
       </div>
-    <div class="SweatBee"><li>成人票${{price}}</li></div>
-    <div class="white">13歲(含)以上之遊客</div>
-    <div class="SweatBee"><li>兒童票${{price2}}</li></div>
-    <div class="white">3歲(含)至12歲之兒童</div>
-    <div class="SweatBee"><li>老人票${{price3}}</li></div>
-    <div class="white">65歲(含)以上之長者</div>
-    <div class="SweatBee"><li>愛心票${{price4}}</li></div>
-    <div class="white">持有主管機關核發之身心障礙證明(手冊)者。</div>
-    <div class="FareAndIllustrate">說明</div>
-    <div class="white">-本館為一票可觀賞當期所有展覽(包含常設展)。</div>
-    <div class="white">-票券無使用期限。</div>
-    <div class="white">-售出票券無法線上退票，請至現場退票。</div>
-    <div class="white">-兒童票、優待票請現場出示身分證。</div>
-    <div class="white">-愛心票請現場出示身心障礙證明（手冊）。</div>
-    <img class=shormatrix src="@/assets/image/tick/shortmatrix.png"/>
-  </div>
-  
-  <div class="buytick">
-    <div class="tick">成人票
-      <button class="addandsub" @click="reduce1">-</button>
-      <span>{{qua}}</span>
-      <button class="addandsub" @click="add1">+</button>
-      <span class="red" v-show="qua">${{subt1(qua,price)}}</span> 
-      <button class="clear" @click="clear">清除</button>
-    </div>
-    <div class="tick">兒童票
-      <button class="addandsub" @click="reduce2">-</button>
-      <span>{{qua2}}</span>
-      <button class="addandsub" @click="add2">+</button>
-      <span class="red" v-show="qua2">${{subt1(qua2,price2)}}</span>
-      <button class="clear" @click="clear2">清除</button>
+      <div class="buytick">
+        <div class="tick">成人票
+          <button class="addandsub" @click="reduce1">-</button>
+          <span>{{ qua }}</span>
+          <button class="addandsub" @click="add1">+</button>
+          <span class="red" v-show="qua">${{ subt1(qua, price) }}</span>
+          <button class="clear" @click="clear">清除</button>
+        </div>
+        <div class="tick">兒童票
+          <button class="addandsub" @click="reduce2">-</button>
+          <span>{{ qua2 }}</span>
+          <button class="addandsub" @click="add2">+</button>
+          <span class="red" v-show="qua2">${{ subt1(qua2, price2) }}</span>
+          <button class="clear" @click="clear2">清除</button>
+        </div>
+        <div class="tick">老人票
+          <button class="addandsub" @click="reduce3">-</button>
+          <span>{{ qua3 }}</span>
+          <button class="addandsub" @click="add3">+</button>
+          <span class="red" v-show="qua3">${{ subt1(qua3, price3) }}</span>
+          <button class="clear" @click="clear3">清除</button>
+        </div>
+        <div class="tick">愛心票
+          <button class="addandsub" @click="reduce4">-</button>
+          <span>{{ qua4 }}</span>
+          <button class="addandsub" @click="add4">+</button>
+          <span class="red" v-show="qua4">${{ subt1(qua4, price4) }}</span>
+          <button class="clear" @click="clear4">清除</button>
+        </div>
+        <div class="line"></div>
+        <div class="ball"></div>
+        <div class="sumline"></div>
+        <div class="sum">總金額
+          <span style="color:#EB5F86">${{ total }}</span>
+        </div>
+        <button class="submit" @click="submit">送出</button>
       </div>
-    <div class="tick">老人票
-      <button class="addandsub" @click="reduce3">-</button>
-      <span>{{qua3}}</span>
-      <button class="addandsub" @click="add3">+</button>
-      <span class="red" v-show="qua3">${{subt1(qua3,price3)}}</span> 
-      <button class="clear" @click="clear3">清除</button>
     </div>
-    <div class="tick">愛心票
-      <button class="addandsub" @click="reduce4">-</button>
-      <span>{{qua4}}</span>
-      <button class="addandsub" @click="add4">+</button>
-      <span class="red" v-show="qua4">${{subt1(qua4,price4)}}</span> 
-      <button class="clear" @click="clear4">清除</button>
-    </div>
-    <div class="line"></div>
-    <div class="ball"></div>
-    <div class="sumline"></div>
-    <div class="sum">總金額
-      <span style="color:#EB5F86">${{ total }}</span>
-    </div>
-    <button class="submit">送出</button>
-  </div> 
+    <img class=squarematrix src="@/assets/image/tick/squarematrix.png">
+    <img class=bigmatrix src="@/assets/image/tick/bigmatrix.png">
   </div>
-  <img class=squarematrix src="@/assets/image/tick/squarematrix.png">
-  <img class=bigmatrix src="@/assets/image/tick/bigmatrix.png">
-   
-  </div>
-  <!-- <img class=cube src="@/assets/image/tick/cube1.png"/>
-  <img class=cube2 src="@/assets/image/tick/cube2.png"/> -->
   <div class="frame"></div>
   <img class=longmatrix src="@/assets/image/tick/longmatrix.png"/>
   <div>cube/</div>
-  </template>
-  
-  <script>
-  
-  export default {
-      data() {
-      return {
-        price:200,
-        price2:100,
-        price3:100,
-        price4:100,
-        qua: 0,
-        qua2:0,
-        qua3:0,
-        qua4:0,
-        sum:0,  
-      };
+</template>
+
+<script>
+import axios from 'axios';
+
+export default {
+  data() {
+    return {
+      qua: 0,
+      qua2: 0,
+      qua3: 0,
+      qua4: 0,
+      price: 0,
+      price2: 0,
+      price3: 0,
+      price4: 0,
+      error: null,
+    };
+  },
+  created() {
+    this.fetchTickets();
+  },
+  computed: {
+    total() {
+      return this.subt1(this.qua, this.price) + this.subt1(this.qua2, this.price2) + this.subt1(this.qua3, this.price3) + this.subt1(this.qua4, this.price4);
     },
-    computed: {
-      total() {
-        return this.price * this.qua + this.price2 * this.qua2 + this.price3*this.qua3+this.price4*this.qua4;
-      },
+  },
+  methods: {
+    fetchTickets() {
+      axios.get('http://localhost/musesmuseum/public/phps/tickets.php') 
+        .then(response => {
+          if (response.status === 200) {
+            const data = response.data;
+            // Assuming the data structure of tickets is consistent
+            this.price = data[0].tkt_price;
+            this.price2 = data[1].tkt_price;
+            this.price3 = data[2].tkt_price;
+            this.price4 = data[3].tkt_price;
+          } else {
+            throw new Error('Network response was not ok');
+          }
+        })
+        .catch(error => {
+          console.error("An error occurred while fetching the data: ", error);
+          this.error = '無法獲取票價資訊。請稍後再試。';
+        });
     },
-    methods: {
-      subt1(x,y){   
-        return x*y;
-      },    
-      subt2(qua2,price2){   
-        return qua2*price2;
-      }, 
-      subt3(qua3,price3){   
-        return qua3*price3;
-      },   
-      subt4(qua4,price4){   
-        return qua4*price4;
-      },     
-      reduce1() {
-        if (this.qua > 0) {
-          this.qua--;
-        }
-      },
-      add1() {
-        this.qua++
-      },
-      reduce2() {
-        if (this.qua2 > 0) {
-          this.qua2--;
-        }
-      },
-      add2() {
-        this.qua2++;
-      },
-      reduce3() {
-        if (this.qua3 > 0) {
-          this.qua3--;
-        }
-      },
-      add3() {
-        this.qua3++;
-      },
-      reduce4() {
-        if (this.qua4 > 0) {
-          this.qua4--;
-        }
-      },
-      add4() {
-        this.qua4++;
-        
-      },
-      clear(){
-        this.qua = 0;
-      },
-      clear2(){
-        this.qua2 = 0;
-      },
-      clear3(){
-        this.qua3 = 0;
-      },
-      clear4(){
-        this.qua4 = 0;
-      },
+    subt1(x, y) {
+      return x * y;
     },
-  }
-  </script>
-  
+    reduce1() {
+      if (this.qua > 0) {
+        this.qua--;
+      }
+    },
+    add1() {
+      this.qua++;
+    },
+    clear() {
+      this.qua = 0;
+    },
+    reduce2() {
+      if (this.qua2 > 0) {
+        this.qua2--;
+      }
+    },
+    add2() {
+      this.qua2++;
+    },
+    clear2() {
+      this.qua2 = 0;
+    },
+    reduce3() {
+      if (this.qua3 > 0) {
+        this.qua3--;
+      }
+    },
+    add3() {
+      this.qua3++;
+    },
+    clear3() {
+      this.qua3 = 0;
+    },
+    reduce4() {
+      if (this.qua4 > 0) {
+        this.qua4--;
+      }
+    },
+    add4() {
+      this.qua4++;
+    },
+    clear4() {
+      this.qua4 = 0;
+    },
+    submit() {
+      // 在此添加提交逻辑
+    },
+  },
+};
+</script>
   <style lang="scss" scoped>
   
    @media screen and (max-width:767px) {
