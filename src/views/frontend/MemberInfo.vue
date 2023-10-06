@@ -2,7 +2,7 @@
   <div class="bgcGY cardCenter">
     <main>
       <div class="backGroundCardbBlue"></div>
-      <span>{{ mbr_name }} 123</span> 
+      <span>{{ mbr_name }} 123</span>
       <div class="backGroundCard">
         <div class="backGroundCardBtns">
           <router-link :to="a.link" v-for="a in memBtnLink">
@@ -15,19 +15,23 @@
           <div class="memloginActi" v-for="i in memAllInfo">
 
             <label :for="`${i.mbr_id}-name`">{{ i.mbr_name }}</label>
-            <input class= "fillInClumn" :key="i.mbr_id" type="text" :id="`${i.mbr_id}-name`" placeholder="NAME" :value="i.mbr_name" required />
+            <input class="fillInClumn" :key="i.mbr_id" type="text" :id="`${i.mbr_id}-name`" placeholder="NAME"
+              :value="i.mbr_name" required />
 
             <label :for="`${i.mbr_id}-birth`">{{ f['mbr_birth'].memTitColumn }}</label>
-            <input class= "fillInClumn" type="date" :id="`${i.mbr_birth}-birth`" :value="i.mbr_birth" required />
+            <input class="fillInClumn" type="date" :id="`${i.mbr_birth}-birth`" :value="i.mbr_birth" required />
 
             <label :for="`${i.mbr_id}-email`">{{ f['mbr_email'].memTitColumn }}</label>
-            <input class= "fillInClumn" type="text" :id="`${i.mbr_email}-email`" placeholder="email" :value="i.mbr_email" required />
+            <input class="fillInClumn" type="text" :id="`${i.mbr_email}-email`" placeholder="email" :value="i.mbr_email"
+              required />
 
             <label :for="`${i.mbr_id}-phone`">{{ f['mbr_phone'].memTitColumn }}</label>
-            <input class= "fillInClumn" type="text" :id="`${i.mbr_phone}-phone`" placeholder="phone" :value="i.mbr_phone" required />
+            <input class="fillInClumn" type="text" :id="`${i.mbr_phone}-phone`" placeholder="phone" :value="i.mbr_phone"
+              required />
 
             <label :for="`${i.mbr_id}-address`">{{ f['mbr_addr'].memTitColumn }}</label>
-            <input class= "fillInClumn" type="text" :id="`${i.mbr_id}-address`" placeholder="addres" :value="i.mbr_addr" required />
+            <input class="fillInClumn" type="text" :id="`${i.mbr_id}-address`" placeholder="addres" :value="i.mbr_addr"
+              required />
           </div>
           <!-- <div class="resetPswEmail">
              <a href="#">信箱驗證</a>
@@ -50,7 +54,7 @@ export default {
   },
   data() {
     return {
-      mbr_name: '', 
+      mbr_name: '',
       memAllInfo: [
         //  { memTitColumn:"姓名",type:"text",id:"mbr_id",name:"mbr_id",class:"fillInClumn",placeholder:"姓名",value:"巴特特" },  
         //  { memTitColumn:"生日",type:"date",id:"birthday",name:"birthday",class:"fillInClumn",placeholder:"" ,value: '2000-01-01' },
@@ -66,13 +70,13 @@ export default {
           memTitColumn: "姓名", type: "text", id: "mbr_id", name: "mbr_id", class: "fillInClumn", placeholder: "姓名"
         },
         mbr_birth: {
-          memTitColumn: "生日", type: "date",id: "mbr_birth",name: "mbr_birth",class:"fillInClumn",placeholder:""  
+          memTitColumn: "生日", type: "date", id: "mbr_birth", name: "mbr_birth", class: "fillInClumn", placeholder: ""
         },
         mbr_email: {
-          memTitColumn: "信箱", type: "email",id: "mbr_email",name: "mbr_email",class: "fillInClumn",placeholder:"信箱" 
+          memTitColumn: "信箱", type: "email", id: "mbr_email", name: "mbr_email", class: "fillInClumn", placeholder: "信箱"
         },
         mbr_phone: {
-          memTitColumn: "聯絡電話",type: "text",id: "mbr_phone",name: "mbr_phone",class: "fillInClumn",placeholder:"電話" 
+          memTitColumn: "聯絡電話", type: "text", id: "mbr_phone", name: "mbr_phone", class: "fillInClumn", placeholder: "電話"
         },
         mbr_addr: {
           memTitColumn: "聯絡地址", type: "text", id: "mbr_addr", name: "mbr_addr", class: "fillInClumn", placeholder: "地址"
@@ -88,7 +92,7 @@ export default {
     };
   },
   methods: {
-   
+
     //老師範例
     //  setDepts(members) {
     // this.memAllInfo = members
@@ -115,40 +119,49 @@ export default {
             alert("無法取得資料");
           }
         })
-        // .then(() => {
-        //   if (this.mbr_name) {
-        //     let members = JSON.stringify(this);
-        //     document.cookie = "members= " + members + "; expires=Thu, 01 Jan 2025 00:00:00 UTC; path=/";
-        //     // document.location.href = "/Home/MemberInfo";
-        //   } else {
-        //     alert("無法獲取 mbr_name");
-        //   }
-        // })      
+        .then(() => {
+          if (this.mbr_name) {
+            let members = JSON.stringify(this);
+            document.cookie = "members= " + members + "; expires=Thu, 01 Jan 2025 00:00:00 UTC; path=/";
+            // document.location.href = "/Home/MemberInfo";
+          } else {
+            alert("無法獲取 mbr_name");
+          }
+        })
     },
- 
+
   },
   mounted() {
     document.body.style.height = `auto`;
-   
     this.getuser();
 
-    const name = "members" + "=";
-        const decodedCookie = decodeURIComponent(document.cookie);
-        const cookieArray = decodedCookie.split(';');
+    //確認抓取餅乾
+    const cookies = document.cookie.split(';');
+    let members = null;
 
-        for (let i = 0; i < cookieArray.length; i++) {
-            let cookie = cookieArray[i];
-            while (cookie.charAt(0) === ' ') {
-                cookie = cookie.substring(1);
-            }
-            if (cookie.indexOf(name) === 0) {
-                // console.log(cookie.substring(name.length, cookie.length));
-                if(cookie.substring(name.length, cookie.length)){
-                    // document.location.href = "/DashBoard";
-                }
-            }
+    for (let i = 0; i < cookies.length; i++) {
+      const cookie = cookies[i].trim();
+      console.log(cookie);
+      if (cookie.startsWith('members=')) {
+        members = decodeURIComponent(cookie.substring('members='.length));
+
+        break;
+      }
+    }
+
+    if (members) {
+      try {
+        const memberInfo = JSON.parse(members);
+        if (memberInfo.mbr_name && memberInfo.mbr_email) {
+          this.memAllInfo.push(memberInfo);
+        } else {
+          console.error('Cookie中缺少屬性');
         }
-        return "";
+      } catch (error) {
+        console.error('解析Cookie數據錯誤', error);
+      }
+    }
+
   }
 };
 </script>
@@ -166,5 +179,4 @@ export default {
       }
     }
   }
-}
-</style>
+}</style>

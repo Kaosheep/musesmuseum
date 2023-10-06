@@ -140,15 +140,15 @@ export default {
             alert("無法獲取 mbr_email");
           }
         })
-      // .then((json) => {
-      //     if (json.result['mbr_email']) {
-      //         let members = JSON.stringify(json.result);
-      //         document.cookie = "members= " + members + "; expires=Thu, 01 Jan 2025 00:00:00 UTC; path=/";
-      //         document.location.href = "/MemberInfo";
-      //     } else {
-      //         alert(json.result);
-      //     }
-      // })
+      .then((json) => {
+          if (json.result['mbr_email']) {
+              let members = JSON.stringify(json.result);
+              document.cookie = "members= " + members + "; expires=Thu, 01 Jan 2025 00:00:00 UTC; path=/";
+              document.location.href = "/MemberInfo";
+          } else {
+              alert(json.result);
+          }
+      })
       .catch(function (error) {
         console.log(error);
       });
