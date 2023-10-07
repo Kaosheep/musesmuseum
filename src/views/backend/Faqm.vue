@@ -7,6 +7,7 @@
           >
             新增
           </button>
+          <button class="btn_admin" @click="deleten">刪除</button>
         </div>
         <Searchbar class="onlyB" />
       </div>
@@ -21,8 +22,11 @@
             <!-- <th>狀態</th> -->
             <th></th>
           </tr>
-          <tr v-for="(i, index) in faq" :key="index">
-            <td class="faqmChoise"><input type="checkbox" v-model="i.selected"></td>
+          <tr v-for="(i, index) in pagefaq" :key="index">
+            <td class="faqmChoise">
+              <!-- <input type="checkbox" v-model="i.selected"> -->
+              <input type="checkbox"  @change="inchecked(i.faq_id, $event)">
+            </td>
             <td class="faqmId">{{ i.faq_id }}</td>
             <td class="faqmQues">{{ i.faq_question }}</td>
             <td class="faqmAns">{{ i.faq_ans }}</td>
@@ -107,6 +111,7 @@ export default {
           question: '',
           ans: '',  
         }],
+      faqched: [],
       showForm: false,
       addfaqs: false,
       // status: 0,
@@ -117,6 +122,63 @@ export default {
     }
   },
   methods: {
+    deleten(){
+      fetch(`${this.$store.state.publicpath}faq_del.php`, {
+        method: "post",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded; charset=utf-8",
+        },
+        body: JSON.stringify({ data: Object.values(this.faqched) }),
+      })
+        .then((response) => {
+          if (response.ok) {
+            return response.json();
+          } else {
+            throw new Error("新增失敗");
+          }
+        })
+        .then((json) => {
+          alert(json);
+          window.location.reload();
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    },
+    inchecked(id, e) {
+      if (e.target.checked) {
+        this.faqched.push({ id: id });
+        console.log(this.faqched);
+        console.log(Object.values(this.faqched));
+      } else {
+        this.faqched.splice(this.faqched.indexOf(id), 1);
+        console.log(this.faqched);
+      }
+    },
+    updatestatus(b) {
+      this.faqched.splice(0,0,{type:b});
+      fetch(`${this.$store.state.publicpath}faq_updatestatus.php`, {
+        method: "post",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded; charset=utf-8",
+        },
+        body: JSON.stringify({ data: Object.values(this.faqched) }),
+      })
+        .then((response) => {
+          if (response.ok) {
+            return response.json();
+          } else {
+            throw new Error("新增失敗");
+          }
+        })
+        .then((json) => {
+          alert(json);
+          window.location.reload();
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    },
     previousPage() {
       // 切換到上一頁
       if (this.currentPage > 1) {
@@ -162,7 +224,7 @@ export default {
             if (response.ok) {
               return response.json(); // 如果請求成功，解析JSON數據
             } else {
-              //throw new Error("取得失敗"); // 如果請求不成功，拋出錯誤
+              throw new Error("取得失敗"); // 如果請求不成功，拋出錯誤
             }
           })
           .then((json) => {
@@ -229,14 +291,14 @@ export default {
             window.location.reload();
           })
           .catch((error) => {
-            //console.log(error.message);
+            console.log(error.message);
           });
       }
     },
  
   },
   computed: {
-    faq() {
+    pagefaq() {
       // 根據當前頁碼和每頁顯示的數據量計算需要顯示的數據
       const start = (this.currentPage - 1) * this.pageSize;
       const end = start + this.pageSize;
@@ -272,7 +334,7 @@ export default {
       })
       .catch(error => {
         // 在失敗時顯示提示
-        //alert(error.message);
+        console.log(error.message);
       });
 
 
