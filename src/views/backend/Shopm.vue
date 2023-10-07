@@ -18,57 +18,58 @@
             <th>狀態</th>
             <th></th>
           </tr>
-          <tr v-for="(i, index) in shopm" :key="index">
+          <tr v-for="(item) in getPageItems" :key="item.prod_id">
             <td><input type="checkbox"></td>
-            <td>{{ i.id }}</td>
-            <td>{{ i.title }}</td>
+            <td>{{ item.prod_id }}</td>
+            <td>{{ item.prod_name }}</td>
             <td>
-              <p v-if="parseInt(i.statusn) === 1">已上架</p>
+              <p v-if="parseInt(item.prod_status) === 1">已上架</p>
               <p v-else>未上架</p>
             </td>
             <td>
-              <button class="edit" @click="showEditForm">編輯</button>
+              <button class="edit" @click="showEditForm('edit', i.prod_id)">編輯</button>
             </td>
           </tr>
         </table>
       </div>
-      <form action="" class="pop" v-if="showForm" @submit.prevent="submitForm">
+      <form class="pop" v-for="(item) in produstdislist" :key="item.prod_id" v-if="showForm" @submit.prevent="submitForm">
         <h2>編輯</h2>
         <div class="info_col">
           <div>
             <div>商品編號</div>
-            <div>PD20230001</div>
+            <div>{{ item.prod_id }}</div>
           </div>
           <div>
             <div>產品名稱</div>
-            <div>小謬思銅像</div>
+            <div>{{ item.prod_name }}</div>
           </div>
         </div>
         <div>
           <div>商品敘述</div>
-          <textarea name="" id="" cols="30" rows="5"></textarea>
+          <textarea cols="30" rows="5">{{ item.prod_desc }}</textarea>
         </div>
         <div class="info_col needspace">
           <div>
             <div>商品規格</div>
-            <textarea name="" id="" cols="30" rows="5"></textarea>
+            <textarea cols="30" rows="5">{{ item.prod_spec }}</textarea>
           </div>
           <div class="info_price">
             <div>
               <div>定價</div>
-              <div>3,500</div>
+              <div>{{ item.prod_fixedprice }}</div>
             </div>
             <div>
               <div>售價</div>
-              <div>3,500</div>
+              <div>{{ item.prod_sellingprice }}</div>
             </div>
           </div>
         </div>
         <div>
           <div>狀態</div>
           <div>
-            <select name="" id="">
+            <select>
               <option value="">未上架</option>
+              <option value="">已上架</option>
             </select>
             <input type="file" id="fileInput" accept="image/*" style="display: none;" />
             <label class="img_box" for="fileInput">+選擇圖片</label>
@@ -84,7 +85,9 @@
         </div>
       </form>
     </div>
-
+    <div class="page">
+      <Page :total="searchFilter.length" :page-size="pageItems" v-model="currentPage" />
+    </div>
   </div>
 </template>
    
@@ -103,84 +106,41 @@ export default {
   },
   data() {
     return {
-      shopm: [
-        {
-          id: "PD20230001",
-          title: "小謬思銅像",
-          statusn: "0",
-        },
-        {
-          id: "PD20230002",
-          title: "手繪紅鶴小廢包",
-          statusn: "1",
-        },
-        {
-          id: "PD20230003",
-          title: "維納斯口紅",
-          statusn: "0",
-        },
-        {
-          id: "PD20230004",
-          title: "諾貝爾仿徽",
-          statusn: "0",
-        }
-      ],
-      news: [],
-      test: [
-        {
-          id: "MN20230901",
-          title: "「科技奇觀展」探索未來科...",
-          statusn: "0",
-        },
-        {
-          id: "MN20231101",
-          title: "「古文明珍寶展」現已開展...",
-          statusn: "1",
-
-        }
-      ],
-      memt: [
-        {
-          id: "MM2023061901",
-          name: "阿阿阿",
-          statusn: "1",
-        }, {
-          id: "MM2023061902",
-          name: "欸欸欸",
-          statusn: "0",
-        }
-
-      ],
-      exhm: [
-        {
-          id: "EXH20230901",
-          title: "獨居沙漠，藝術家喬治亞．歐姬芙",
-          statusn: "0",
-        },
-        {
-          id: "EXH20231101",
-          title: "派對對物：人要金裝，佛要...",
-          statusn: "0",
-        },
-        {
-          id: "EXH20230701",
-          title: "線條、形狀、空間：建築美......",
-          statusn: "0",
-        },
-      ],
-      showForm: false
+      produstdislist: [],
+      showForm: false,
+      publicpath: "http://localhost/musesmuseum/public/phps/",
+      currentPage: 1,
+      pageItems: 10,
+      searchinput: "",
     }
   },
+  computed: {
+    searchFilter() {
+      if (this.searchinput) {
+        return this.produstdislist.filter((v) =>
+          v.prod_name?.includes(this.searchinput)
+        );
+      } else {
+        return this.produstdislist
+      }
+    },
+    getPageItems() {
+      const startIndex = (this.currentPage - 1) * this.pageItems;
+      const endIndex = startIndex + this.pageItems;
+      return this.searchFilter.slice(startIndex, endIndex);
+    },
+  },
+  watch: {},
   methods: {
     toggleStatus(newStatus) {
-      this.test.forEach(item => {
+      this.produstdislist.forEach(item => {
         if (item.selected) {
-          item.statusn = newStatus;
+          item.prod_status = newStatus;
         }
       });
     },
     canToggle(newStatus) {
-      return this.test.some(item => item.selected && item.statusn !== newStatus);
+      return this.produstdislist.some(item => item.selected && item.prod_status !== newStatus);
     },
     showEditForm() {
       this.showForm = true;
@@ -190,12 +150,67 @@ export default {
     },
     submitForm() {
       this.hideEditForm();
-    }
-
+    },
+    showEditForm(type, id) {
+      if (type == "add") {
+        this.addprod = false;
+        this.add_prod = [
+          {
+            id: "",
+            title: "",
+            content: "",
+            date: "",
+            image: "",
+          },
+        ];
+      } else {
+        this.addprod = true;
+      }
+      if (type == "edit") {
+        const url = `http://localhost/musesmuseum/public/phps/prod_list.php`;
+        let headers = {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        };
+        let body = {
+          id: id,
+        };
+        fetch(url, {
+          method: "POST",
+          headers: headers,
+          body: JSON.stringify({ data: body }),
+        })
+          .then((response) => {
+            if (response.ok) {
+              return response.json();
+            } else {
+              throw new Error("取得失敗");
+            }
+          })
+          .then((json) => {
+            this.add_prod.title = json.prod_title;
+            this.add_prod.content = json.prod_content;
+            this.add_prod.date = json.prod_date;
+            this.add_prod.id = json.prod_id;
+            this.status = json.prod_status;
+            this.add_prod.image = json.prod_img;
+          });
+      }
+      this.showForm = true;
+    },
+    fetchprod() {
+      fetch(`${this.publicpath}shop.php`).then(async (response) => {
+        this.produstdislist = await response.json();
+        console.log(this.produstdislist);
+      })
+        .catch((error) => {
+          console.error('發生錯誤:', error);
+        });
+    },
   },
   mounted() {
-
-  }
+    this.fetchprod();
+  },
 }
 </script>
 
@@ -360,6 +375,10 @@ div {
   .form_btn {
     position: relative;
   }
+}
+.page{
+  margin: 2rem 0;
+  text-align: center;
 }
 </style>
     
