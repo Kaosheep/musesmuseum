@@ -40,6 +40,7 @@
       /></router-link>
     </div>
     <div class="login">
+      <div>{{ this.$store.state.mbr_name }}123</div>
       <router-link to="/Home/Login" @click="closemenu">會員登入</router-link>
     </div>
     <div class="menu">
@@ -121,6 +122,9 @@ export default {
       }
     },
   },
+  created() {
+    this.$store.dispatch('fetchMbrName'); // 分发一个 action 来获取 mbr_name
+  },
   methods: {
     togglemenu() {
       const nav = document.querySelector("nav");
@@ -137,6 +141,7 @@ export default {
       document.querySelector("nav").style.transform = "translateX(-100%)";
       this.isClick = false;
     },
+   
   },
 };
 </script>

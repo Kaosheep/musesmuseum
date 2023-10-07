@@ -33,7 +33,7 @@ try{
 		echo json_encode($memRow);
 	  }
 }catch(PDOException $e){
-	echo "錯誤行號 : ", $e->getLine();
+	echo "login錯誤行號 : ", $e->getLine();
 	echo "錯誤原因 : ", $e->getMessage();
 	// echo "系統暫時不能正常運行，請稍後再試<br>";	
 	if (isset($yourArray["mbr_email"])) {

@@ -1,7 +1,6 @@
 <template>
   <div class="bgcGY cardCenter">
     <main>
-      <span>{{ mem.mbr_name }} 123</span>   <!-- 使用者姓名 -->
       <span id="spanLogin"></span>  
       <div class="backGroundCard">
         <div class="backGroundCardBtns">
@@ -130,7 +129,7 @@ export default {
         }
 
       })  
-        //寫記住id
+     
         .then(() => {
           if (this.memEmail) {
             let members = JSON.stringify(this.mem);

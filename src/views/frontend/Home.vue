@@ -1,6 +1,6 @@
 <template>
-    <Header></Header>
-    <Footer></Footer>
+  <Header></Header>
+  <Footer></Footer>
 </template>
    
 <script>
@@ -12,41 +12,36 @@ export default {
     Header,
     Footer
   },
+  el: '#app',
   data() {
     return {
-      // isLogin: false,
-      // userData: null//抓他傳到php都要
-    }
+      mbr_name: '',
+    };
   },
+  created() {
+    // // 在这里从 API 获取会员信息，并设置 mbr_name
+    // this.getMemberInfo();
+  },
+
   methods: {
-    // setUserData(data) {
-    //   localStorage.setItem('user', JSON.stringify(data))
-    // },
-    // updateUser() {
-    //   if (localStorage.getItem('user')) {
-    //     this.isLogin = true
-    //     this.userData = JSON.parse(localStorage.getItem('user'))
-    //   }
+    // getMemberInfo() {
+    //   // 从 API 获取会员信息的逻辑
+    //   fetch("http://localhost/musesmuseum/public/phps/MemberInfo.php")
+    //     .then(response => {
+    //       return response.json();
+    //     })
+    //     .then(result => {
+    //       console.log(result);
+    //       this.mbr_name = result.mbr_name;
+    //     })
+    //     .catch(error => {
+    //       console.error('获取会员信息失败', error);
+    //     });
     // },
   },
+
   mounted() {
-    // // localStorage.clear()
-    // this.updateUser()
-    // window.addEventListener("storage", this.updateUser);
 
-    // fetch('http://localhost/musesmuseum/public/phps/login.php').then((res) => res.json()).then((res) => {
-    //   if (res !== 0) {
-    //     this.setUserData(res)
-    //   } else {
-    //     this.setUserData(null)
-    //   }
-    // })
-
-    // // this.setUserData({
-    // //   no: 1234,
-    // //   name: 'Hi'
-    // // })
-    // // this.setUserData(null)
   }
 
 }
@@ -55,5 +50,4 @@ export default {
 
 <style scoped lang="scss">
 @import "@/assets/sass/style.scss";
-
 </style>
