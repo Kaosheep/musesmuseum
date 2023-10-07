@@ -54,6 +54,7 @@ export default {
   data() {
     return {
       mbr_name: '',
+      mbr_email: '',
       memAllInfo: [ ],
       /** form data */
       f: {
@@ -111,9 +112,29 @@ export default {
           }
         })
     },
+    getemail(){
+      const formData = new URLSearchParams();
+      formData.append('mbr_email', 'apple@gmail.com');
 
+      console.log(formData.get('mbr_email'));
+
+      fetch("http://localhost/musesmuseum/public/phps/memtest.php", {
+        method: 'POST', 
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'
+        },
+        body: formData,
+      })
+        .then(response => {
+          return response.json();
+        })
+        .then(result => {
+          console.log(result);
+        });
+    },
   },
   mounted() {
+    this.getemail();
     document.body.style.height = `auto`;
     this.getuser();
 
