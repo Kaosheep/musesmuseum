@@ -10,18 +10,19 @@ header("Content-Type: application/json");
 // session_start();
 try{
         //連線
-	require_once("connectMuses.php");
-
-	//在`member`資料表 將來會有mbr_email=:有命名的參數 資料帶入
-	$sql = "select * from `members` where `mbr_email`=:mbr_email"; //where mbr_email=:mbr_email
-	//將sql指令編譯過
-	$members = $pdo->query($sql);
-    
-      if (isset($_POST["mbr_email"])) {
+	require_once("./connectMuses.php");
+    if (isset($_POST["mbr_email"])) {
         $mbr_email = $_POST["mbr_email"];
     } else {
         $mbr_email = ""; 
     }
+
+	//在`member`資料表 將來會有mbr_email=:有命名的參數 資料帶入
+	$sql = "select * from `members` where `mbr_email` = :mbr_email"; //where mbr_email=:mbr_email
+	//將sql指令編譯過
+	$members = $pdo->query($sql);
+    
+
     $members->bindParam(":mbr_email", $mbr_email, PDO::PARAM_STR);
     $members->execute();
  
@@ -30,13 +31,7 @@ try{
         echo json_encode($result);
       } else { 
         $membersRows = $members->fetch(PDO::FETCH_ASSOC);
-        $result = [
-        "error" => false, 
-        "msg" => "取得資料", 
-        "members" => $membersRows,
-        "mbr_name" => $membersRows["mbr_name"],
-        ];
-
+        $result [] = $membersRows;
         echo json_encode($result);//送出json字串
       }
 	//將資料代入參數中(未知數中);

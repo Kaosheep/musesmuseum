@@ -87,21 +87,20 @@ export default {
   methods: {
 
     getuser() {
-      // console.log("getuser");
+      
       fetch("http://localhost/musesmuseum/public/phps/MemberInfo.php")
         .then(response => {
           return response.json();
 
         })
         .then(result => {
-          console.log(result);
           this.mbr_name = result.mbr_name;
           if (Array.isArray(result)) {
             this.memAllInfo = result
           } else {
             alert("無法取得資料");
           }
-        })
+        })    
         .then(() => {
           if (this.mbr_name) {
             let members = JSON.stringify(this);
@@ -111,14 +110,16 @@ export default {
             alert("無法獲取 mbr_name");
           }
         })
+   
     },
     getemail(){
       const formData = new URLSearchParams();
       formData.append('mbr_email', 'apple@gmail.com');
 
       console.log(formData.get('mbr_email'));
+      console.log(formData.get('mbr_name'));
 
-      fetch("http://localhost/musesmuseum/public/phps/memtest.php", {
+      fetch("http://localhost/musesmuseum/public/phps/MemberInfo.php", {
         method: 'POST', 
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'

@@ -19,13 +19,13 @@ export default {
     };
   },
   created() {
-    // // 在这里从 API 获取会员信息，并设置 mbr_name
+    // // 在這裡從 API 獲取會員資料，設置 mbr_name
     // this.getMemberInfo();
   },
 
   methods: {
     // getMemberInfo() {
-    //   // 从 API 获取会员信息的逻辑
+    //   // 從 API 獲取會員資訊
     //   fetch("http://localhost/musesmuseum/public/phps/MemberInfo.php")
     //     .then(response => {
     //       return response.json();
@@ -35,7 +35,7 @@ export default {
     //       this.mbr_name = result.mbr_name;
     //     })
     //     .catch(error => {
-    //       console.error('获取会员信息失败', error);
+    //       console.error('獲取會員資訊失敗', error);
     //     });
     // },
   },
