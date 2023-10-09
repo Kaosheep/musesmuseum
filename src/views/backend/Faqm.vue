@@ -25,7 +25,9 @@
           <tr v-for="(i, index) in pagefaq" :key="index">
             <td class="faqmChoise">
               <!-- <input type="checkbox" v-model="i.selected"> -->
-              <input type="checkbox"  @change="inchecked(i.faq_id, $event)">
+              <input 
+                type="checkbox"  
+                @change="inchecked(i.faq_id, $event)">
             </td>
             <td class="faqmId">{{ i.faq_id }}</td>
             <td class="faqmQues">{{ i.faq_question }}</td>
@@ -57,7 +59,7 @@
         <h2>編輯</h2>
         <div class="xedit" v-show="addfaqs">
           <div>
-            <div>編號</div>
+            <div>問題編號</div>
             <div v-text="add_faq.id"></div>
           </div>
         </div>
@@ -194,7 +196,7 @@ export default {
     showEditForm(type, id) {
       if (type == 'add') {
         this.addfaqs = false;
-        this.add_faqsaddfaqs = [
+        this.add_faq = [
           {
             id: '',
             question: '',
@@ -212,13 +214,13 @@ export default {
         }
         let body = {
           id: id,
-        }
+        };
         fetch(url, {
           method: "POST",
           headers: headers,
           //別忘了把主體参數轉成字串，否則資料會變成[object Object]，它無法被成功儲存在後台
           // body: JSON.stringify(body)
-          body: JSON.stringify({ data: body })
+          body: JSON.stringify({ data: body }),
         })
           .then(response => {
             if (response.ok) {
@@ -228,8 +230,9 @@ export default {
             }
           })
           .then((json) => {
-            this.add_faqsaddfaqs.question = json.faqsaddfaqs_question;
-            this.add_faqsaddfaqs.ans = json.faqsaddfaqs_ans;
+            this.add_faq.id = json.faq_id;
+            this.add_faq.question = json.faq_question;
+            this.add_faq.ans = json.faq_ans;
           });
       }
 
@@ -269,7 +272,7 @@ export default {
             console.log(error.message);
           });
       } else {
-        const url = `http://localhost/musesmuseum/public/phps/faq_insertupload.php`;
+        const url = `http://localhost/musesmuseum/public/phps/faq_add.php`;
         const formData = new FormData();
         formData.append("id", this.add_faq.id);
         formData.append("question", this.add_faq.question);
@@ -287,7 +290,8 @@ export default {
             }
           })
           .then((json) => {
-            alert("新增成功");//要抓錯誤
+            //alert("新增成功");//要抓錯誤
+            alert(json);
             window.location.reload();
           })
           .catch((error) => {
