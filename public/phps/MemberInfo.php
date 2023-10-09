@@ -11,19 +11,19 @@ header("Content-Type: application/json");
 try{
         //連線
 	require_once("./connectMuses.php");
-    if (isset($_POST["mbr_email"])) {
-        $mbr_email = $_POST["mbr_email"];
+    if (isset($_POST["mbr_id"])) {
+        $mbr_id = $_POST["mbr_id"];
     } else {
-        $mbr_email = ""; 
+        $mbr_id = ""; 
     }
 
-	//在`member`資料表 將來會有mbr_email=:有命名的參數 資料帶入
-	$sql = "select * from `members` where `mbr_email` = :mbr_email"; //where mbr_email=:mbr_email
+	//在`member`資料表 將來會有mbr_id=:有命名的參數 資料帶入
+	$sql = "SELECT * FROM members WHERE mbr_id=:mbr_id"; //where mbr_id=:mbr_id
 	//將sql指令編譯過
-	$members = $pdo->query($sql);
+	$members = $pdo->prepare($sql);
     
 
-    $members->bindParam(":mbr_email", $mbr_email, PDO::PARAM_STR);
+    $members->bindParam(":mbr_id", $mbr_id, PDO::PARAM_STR);
     $members->execute();
  
     if ( $members->rowCount()=== 0) { 

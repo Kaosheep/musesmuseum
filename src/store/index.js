@@ -5,6 +5,22 @@ const publicpath = process.env.NODE_ENV === 'development' ? 'http://localhost/mu
 const imgpublicpath = process.env.NODE_ENV === 'development' ? process.env.BASE_URL : ''
 
 
+const getCookie = (cname) => {
+  let name = cname + "=";
+  let decodedCookie = decodeURIComponent(document.cookie);
+  let ca = decodedCookie.split(';');
+  for(let i = 0; i <ca.length; i++) {
+    let c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
+}
+
 export default createStore({
   //類似vue裡面的data
   state: {
@@ -25,20 +41,8 @@ export default createStore({
   },
   actions: {
     async fetchMbrName({ commit }) {
-      try {
-        //  API 獲取 mbr_name 數據
-        const response = await fetch("http://localhost/musesmuseum/public/phps/MemberInfo.php");
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        const result = await response.json();
-        console.log('mbr_name:', result.mbr_name);
-        // 調用 mutation 設置 mbr_name
-        commit('setMbrName', result.mbr_name);
-      
-      } catch (error) {
-        console.error('獲取會員訊息失敗' , error );
-      }
+        const members = JSON.parse(getCookie('members'));
+        commit('setMbrName', members.mbr_name);
     },
   },
 })

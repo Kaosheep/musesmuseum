@@ -40,7 +40,7 @@
       /></router-link>
     </div>
     <div class="login">
-      <div>{{ this.$store.state.mbr_name }}123</div>
+      <div>{{ $store.state.mbr_name }}</div>
       <router-link to="/Home/Login" @click="closemenu">會員登入</router-link>
     </div>
     <div class="menu">
