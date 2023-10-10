@@ -21,7 +21,7 @@
       ></router-link>
       <router-link to="/Home/MemberInfo" @click="closemenu">
       <span class="sspan">
-       <i class="sicon fa-solid fa-user" id="social_user"></i> 
+        <i class="sicon fa-solid fa-user" id="social_user"></i> 
       </span>
       </router-link>
       <span class="sspan"
@@ -40,8 +40,9 @@
       /></router-link>
     </div>
     <div class="login">
-      <div>{{ this.$store.state.mbr_name }}123</div>
-      <router-link to="/Home/Login" @click="closemenu">會員登入</router-link>
+      <div>{{ $store.state.mbr_name }}
+      </div>
+      <router-link v-if="!$store.state.isLogin" to="/Home/Login" @click="closemenu">會員登入</router-link>
     </div>
     <div class="menu">
       <ul>
@@ -141,7 +142,7 @@ export default {
       document.querySelector("nav").style.transform = "translateX(-100%)";
       this.isClick = false;
     },
-   
+
   },
 };
 </script>

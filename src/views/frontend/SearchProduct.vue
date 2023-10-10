@@ -1,18 +1,18 @@
 <template>
   <div class="bgcGY cardCenter">
-   <main class="searchProdMain">
+    <main class="searchProdMain">
     <div class="search">
         <Searchbar @click="searchClick"/>
         <Searchbarclick/>
     </div>
-       <div class="backGroundCardbBlue"></div>
-       <div class="backGroundCard">
+      <div class="backGroundCardbBlue"></div>
+      <div class="backGroundCard">
           <div class="backGroundCardBtns">
-           <router-link :to="a.link" v-for="a in memBtnLink">
-             <button :class="[a.name === '訂單查詢' ? 'pinkBtnLight' : 'pinkBtn']">
-               {{a.name}}
-             </button>
-           </router-link>
+            <router-link :to="a.link" v-for="a in memBtnLink">
+              <button :class="[a.name === '訂單查詢' ? 'pinkBtnLight' : 'pinkBtn']">
+                {{a.name}}
+              </button>
+            </router-link>
           </div>
           <div class="productInfo">
             <div class="headerRow">
@@ -51,8 +51,8 @@
                 <Page :total="productInfoArr.length" :page-size="itemsPerPage" v-model="currentPage"/>
             </div>
           </div>
-       </div>
-   </main>
+        </div>
+    </main>
   </div>
 </template>
 
@@ -61,13 +61,13 @@ import Footer from "@/components/Footer.vue";
 import Searchbar from "/src/components/Searchbar.vue";
 import Searchbarclick from "/src/components/Searchbarclick.vue";
 export default {
- components: {
-   Footer,
-   Searchbar,
-   Searchbarclick,
- },
- data() {
-   return {
+  components: {
+    Footer,
+    Searchbar,
+    Searchbarclick,
+  },
+  data() {
+    return {
     currentItemId: '',
     rowitem:{},
     publicpath: "http://localhost/musesmuseum/public/phps/",
@@ -95,15 +95,15 @@ export default {
         
       },
     memBtnLink:[
-       { link:"/Home/MemberInfo", name:"會員資料" },
-       { link:"", name:"訂單查詢" },
-       { link:"/Home/SearchTicket", name:"票券查詢" },
-     ],
-     currentPage: 1,
+      { link:"/Home/MemberInfo", name:"會員資料" },
+      { link:"", name:"訂單查詢" },
+      { link:"/Home/SearchTicket", name:"票券查詢" },
+    ],
+    currentPage: 1,
     itemsPerPage: 5,
-   };
- },
- computed: {
+    };
+  },
+  computed: {
     pagedProductInfo() {
       const startIndex = (this.currentPage - 1) * this.itemsPerPage;
       const endIndex = startIndex + this.itemsPerPage;
@@ -113,29 +113,29 @@ export default {
       return Math.ceil(this.productInfoArr.length / this.itemsPerPage);
     },
   },
- methods: {
-  fetchprod() {
-      fetch(`${this.publicpath}productPage.php`).then(async (response) => {
-        this.productInfoArr = await response.json();
-        if (this.productInfoArr.length > 0) {
-            this.currentItemId = this.productInfoArr[0].id;
-          }
-        // const idToFind = this.$route.params.prod_id;
-        // this.rowitem = this.productInfoArr.find((rowitem) => rowitem.prod_id === idToFind); 
-        // console.log(rowitem);
-        console.log('fetchprod 方法被调用了')
-        console.log(this.productInfoArr)
-      })
-      .catch((error) => {
-        console.error('發生錯誤:', error);
-      });
-    },
+  methods: {
+    fetchprod() {
+        fetch(`${this.publicpath}productPage.php`).then(async (response) => {
+          this.productInfoArr = await response.json();
+          if (this.productInfoArr.length > 0) {
+              this.currentItemId = this.productInfoArr[0].id;
+            }
+          // const idToFind = this.$route.params.prod_id;
+          // this.rowitem = this.productInfoArr.find((rowitem) => rowitem.prod_id === idToFind); 
+          // console.log(rowitem);
+          console.log('fetchprod 方法被调用了')
+          console.log(this.productInfoArr)
+        })
+        .catch((error) => {
+          console.error('發生錯誤:', error);
+        });
+      },
       
- },
- mounted() {
-   document.body.style.height = `auto`;
-   this.fetchprod();
- }
+  },
+  mounted() {
+    document.body.style.height = `auto`;
+    this.fetchprod();
+  }
 };
 </script>
 <style scoped lang="scss">
