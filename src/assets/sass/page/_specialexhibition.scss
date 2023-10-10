@@ -27,10 +27,12 @@ template {
     }
     .spe_scroll_left {
         left: 0;
+        padding: 0 12px;
     }
     
     .spe_scroll_right {
         right: 0;
+        padding: 0 12px;
         transform: scaleX(-1);
         img {
             transform: scaleX(-1);
@@ -55,7 +57,7 @@ template {
     .spe_exhi_section {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        margin: 3% 8% 3% 0;
+        margin: 5% 8% 0 0;
         position: relative;
         .spe_img_deco {
             background: radial-gradient(circle, transparent 14%, #009CA8 15%, #009CA8 25%, transparent 26%);
@@ -221,6 +223,7 @@ template {
                     position: absolute;
                     left: 6px;
                     top: 50%;
+                    padding: 0;
                     transform: translateY(-50%);
                     background-color: transparent;
                     border: none;
@@ -326,6 +329,7 @@ template {
                     position: absolute;
                     right: 0;
                     top: 50%;
+                    padding: 0;
                     transform: translateY(-50%) scaleX(-1);;
                     background-color: transparent;
                     border: none;

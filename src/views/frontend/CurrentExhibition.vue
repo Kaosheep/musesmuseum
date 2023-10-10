@@ -24,7 +24,7 @@
                     </div>
                     <div class="cur_exhi_desc_deco">
                     </div>
-                    <h3 style="color: #EB5F86;">{{ curexhibitions[currentIndex].curexhiTitle }}</h3>
+                    <h3 class="cur_title">{{ curexhibitions[currentIndex].curexhiTitle }}</h3>
                     <p>{{ curexhibitions[currentIndex].curexhiDesc }}</p>
                     <span class="cur_loc">展覽地點：{{ curexhibitions[currentIndex].curexhiLoc }}</span>
                     <div class="background_deco"></div>
