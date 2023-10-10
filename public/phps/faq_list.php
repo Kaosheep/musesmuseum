@@ -5,11 +5,17 @@ header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Ac
 header("Content-Type: application/json"); 
 
 try {
-    require_once("connectMuses.php");
+    //require_once("connectMuses.php");
+    //$data = json_decode(file_get_contents('php://input'));
+    $dbname = "musesmuseum";
+    $user = "root";
+    $password = "";
+    $dsn = "mysql:host=localhost;port=3306;dbname=musesmuseum;charset=UTF8";	
+    $options = [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, PDO::ATTR_CASE => PDO::CASE_NATURAL];
+    $pdo = new PDO($dsn, $user, $password, $options);
 
     $data = json_decode(file_get_contents('php://input'));
-
-
+    
     if(empty($data)){
         $sql = "select * from `faq`";
         $faq = $pdo->query($sql);
@@ -17,10 +23,10 @@ try {
         
     }else{
         $sql = "select * from `faq` where `faq_id` = :faq_id";
-        $faqtmt = $pdo->prepare($sql);
-        $faqtmt->bindValue(":faq_id", $data->data->id);
-        $faqtmt->execute();
-        $faqRow = $faqtmt->fetch(PDO::FETCH_ASSOC);
+        $faqStmt = $pdo->prepare($sql);
+        $faqStmt->bindValue(":faq_id", $data->data->id);
+        $faqStmt->execute();
+        $faqRow = $faqStmt->fetch(PDO::FETCH_ASSOC);
     }
 
     echo json_encode($faqRow);
