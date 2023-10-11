@@ -17,8 +17,6 @@
                             登入
                         </button>
                     </div>
-
-
                 </div>
             </form>
         </div>
@@ -59,14 +57,21 @@ export default {
                 "Content-Type": "application/json",
                 Accept: "application/json",
             };
+            // let body = {
+            //     account: this.account,
+            //     pwd: this.pwd,
+            // };
+            //---------------
             let body = {
                 account: this.account,
                 pwd: this.pwd,
             };
+            let formData = new FormData();
+            formData.append("account", this.account);
+            formData.append("pwd", this.pwd);
             fetch(url, {
                 method: "POST",
-                headers: headers,
-                body: JSON.stringify({ data: body }),
+                body: formData,
             })
                 .then((response) => {
                     if (response.ok) {
