@@ -16,7 +16,7 @@ try {
         $managerRow = $manager->fetchAll(PDO::FETCH_ASSOC);
         
     }else{
-        $sql = "select * from `manager` where `manager_id` = :manager_id";
+        $sql = "select * from `manager` where `ma_id` = :manager_id";
         $managertmt = $pdo->prepare($sql);
         $managertmt->bindValue(":manager_id", $data->data->id);
         $managertmt->execute();
