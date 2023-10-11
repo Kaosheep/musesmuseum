@@ -1,0 +1,260 @@
+<template>
+  <div class="bgcGY cardCenter">
+    <main class="searchProdMain">
+      <div class="backGroundCardbBlue"></div>
+      <div class="backGroundCard">
+        <div class="love_search">
+          <Searchbar :functype="1" @update-search-text="searchClick" />
+          <Searchbarclick />
+        </div>
+        <div class="loveblock">
+          <div class="backGroundCardBtns">
+            <router-link :to="a.link" v-for="a in memBtnLink">
+              <button
+                :class="[a.name === '收藏清單' ? 'pinkBtnLight' : 'pinkBtn']"
+              >
+                {{ a.name }}
+              </button>
+            </router-link>
+          </div>
+          <div class="con">
+            <div class="shop_container">
+              <div v-if="lovescol == 0">查無商品</div>
+              <div
+                class="item"
+                v-for="item in getPageItems"
+                :key="item.prod_id"
+                v-else
+              >
+                <router-link :to="`/Home/ProductPage/${item.prod_id}`">
+                  <div class="image">
+                    <img
+                      :src="
+                        `${this.$store.state.imgpublicpath}image/productimage/` +
+                        item.prod_img
+                      "
+                      :alt="item.prod_name"
+                    />
+                  </div>
+                </router-link>
+                <div class="info">
+                  <span>
+                    <Heart :loveid="item.prod_id"> </Heart>
+                    <router-link :to="`/Home/ProductPage/${item.prod_id}`">
+                      <p>{{ item.prod_name }}</p>
+                    </router-link>
+                    <font-awesome-icon
+                      :icon="['fas', 'cart-shopping']"
+                      id="car"
+                      @click="addcart(item.prod_id)"
+                    />
+                  </span>
+                  <router-link :to="`/Home/ProductPage/${item.prod_id}`">
+                    <span> ${{ item.prod_sellingprice }} </span>
+                  </router-link>
+                </div>
+              </div>
+            </div>
+            <div class="shop_paginationbar">
+              <Page
+                :total="lovescol.length"
+                :page-size="pageItems"
+                v-model="currentPage"
+                class="shop_page"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</template>
+
+<script>
+import Searchbar from "/src/components/Searchbar.vue";
+import Searchbarclick from "/src/components/Searchbarclick.vue";
+import Heart from "/src/components/Heart.vue";
+export default {
+  components: {
+    Searchbar,
+    Searchbarclick,
+    Heart,
+  },
+  data() {
+    return {
+      lovescol: [],
+      memAllInfo: {},
+      loven: null,
+      memBtnLink: [
+        { link: "/Home/MemberInfo", name: "會員資料" },
+        { link: "", name: "訂單查詢" },
+        { link: "/Home/SearchTicket", name: "票券查詢" },
+        { link: "/Home/LoveProduct", name: "收藏清單" },
+      ],
+      pageItems: 6,
+      currentPage: 1,
+      itemsPerPage: 5,
+      searchinput:"",
+    };
+  },
+  computed: {
+    searchFilter() {
+      if (this.searchinput) {
+        return this.lovescol.filter((v) =>
+          v.prod_name?.includes(this.searchinput)
+        );
+      } else {
+        return this.lovescol;
+      }
+    },
+    getPageItems() {
+      const startIndex = (this.currentPage - 1) * this.pageItems;
+      const endIndex = startIndex + this.pageItems;
+      return this.searchFilter.slice(startIndex, endIndex);
+    },
+  },
+  watch: {
+    searchinput() {
+      this.currentPage = 1;
+    },
+  },
+  methods: {
+    searchClick(text) {
+      this.searchinput = text;
+    },
+    loveid(id) {
+      this.loven = id;
+    },
+    getlove() {
+      const formData = new URLSearchParams();
+      formData.append("mbr_id", this.memAllInfo["mbr_id"]);
+
+      fetch(`${this.$store.state.publicpath}love_fetch.php`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded; charset=utf-8",
+        },
+        body: formData,
+      }).then(async (response) => {
+        this.lovescol = await response.json();
+      });
+    },
+  },
+  mounted() {
+    const cookies = document.cookie.split(";");
+    let members = null;
+
+    for (let i = 0; i < cookies.length; i++) {
+      const cookie = cookies[i].trim();
+      if (cookie.startsWith("members=")) {
+        members = decodeURIComponent(cookie.substring("members=".length));
+
+        break;
+      }
+    }
+
+    if (members) {
+      try {
+        const memberInfo = JSON.parse(members);
+        if (memberInfo.mbr_name && memberInfo.mbr_email) {
+          this.memAllInfo = memberInfo;
+          this.$store.state.mbr_id = this.memAllInfo.mbr_id;
+        } else {
+          console.error("Cookie中缺少屬性");
+        }
+      } catch (error) {
+        console.error("解析Cookie數據錯誤", error);
+      }
+    }
+    this.getlove();
+  },
+};
+</script>
+<style scoped lang="scss">
+.cardCenter {
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .searchProdMain {
+    width: 83.33%;
+    height: 91vh;
+    .backGroundCard {
+      height: 100%;
+      flex-direction: column;
+      padding: 1.5rem;
+      .love_search {
+        width: 250px;
+        margin-bottom: 0.5rem;
+        text-align: start;
+        margin-left: auto;
+      }
+      .loveblock {
+        display: flex;
+        justify-content: space-around;
+        .con {
+          width: 80%;
+          .shop_paginationbar {
+            margin: 0;
+            padding-top: 0.5rem;
+          }
+          .shop_container {
+            width: 100%;
+            display: grid;
+            grid-template-columns: repeat(3, 30%);
+            grid-template-rows: repeat(2, 1fr);
+            justify-items: center;
+            align-items: flex-end;
+            gap: 25px;
+            .item {
+              width: 100%;
+              text-align: center;
+
+              img {
+                width: 100%;
+                height: 20vh;
+                max-width: 240px;
+                border-radius: 8px;
+                object-fit: cover;
+              }
+            }
+            .info {
+              margin: 10px 0px;
+              text-align: center;
+              span {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                color: $mblue;
+                .heart {
+                  padding: 3px 1px 0 0;
+                  width: 24px;
+                }
+                #car {
+                  height: 20px;
+                }
+                a {
+                  width: calc(100% - 60px);
+                  p {
+                    width: 100%;
+                    overflow: hidden;
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
+                  }
+                }
+              }
+              a {
+                span {
+                  text-align: center;
+                  color: $mpink;
+                  display: block;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+</style>

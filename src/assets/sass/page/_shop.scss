@@ -107,13 +107,7 @@
                     text-overflow: ellipsis;
                 }
             }
-            #car path {
-                fill: $mgreen;
-            }
-            #car {
-                height: 25px;
-                color: $mgreen;
-            }
+
         }
         a {
             span {
@@ -124,7 +118,14 @@
         }
     }
 }
-
+#car path {
+    fill: $mgreen;
+}
+#car {
+    height: 25px;
+    color: $mgreen;
+    cursor: pointer;
+}
 .shop_block {
     margin: auto;
     max-width: 1050px;

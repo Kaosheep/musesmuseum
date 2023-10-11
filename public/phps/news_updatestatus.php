@@ -10,6 +10,7 @@ try {
    $data = json_decode(file_get_contents('php://input'));
    $type = $data->data[0]->type;
 
+
    if($type == 1){
       $sql = "update news set news_status=1 where news_id=:id";
    }else{

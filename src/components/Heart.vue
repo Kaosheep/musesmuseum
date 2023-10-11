@@ -1,64 +1,110 @@
 <template>
-    <div :class="['heart',{active:isClick}]" @click="like">
-        <svg viewBox="-10 -10 162 143" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path fill-rule="evenodd" clip-rule="evenodd" d="M136.206 73.9802C143.523 66.1228 148 55.5842 148 44C148 19.6995 128.301 0 104 0C92.4061 0 81.8596 4.48413 74.0001 11.8127C66.1406 4.48413 55.5939 0 44 0C19.6995 0 0 19.6995 0 44C0 56.2075 4.97119 67.2544 13 75.2256L59.9487 122.174C67.7592 129.985 80.4225 129.985 88.233 122.174L136.316 74.0911L136.206 73.9802Z"/>
-        </svg>
-    </div>
+  <div :class="['heart', { active: activelove }]" @click="uplove()">
+    <svg
+      viewBox="-10 -8 162 143"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        fill-rule="evenodd"
+        clip-rule="evenodd"
+        d="M136.206 73.9802C143.523 66.1228 148 55.5842 148 44C148 19.6995 128.301 0 104 0C92.4061 0 81.8596 4.48413 74.0001 11.8127C66.1406 4.48413 55.5939 0 44 0C19.6995 0 0 19.6995 0 44C0 56.2075 4.97119 67.2544 13 75.2256L59.9487 122.174C67.7592 129.985 80.4225 129.985 88.233 122.174L136.316 74.0911L136.206 73.9802Z"
+      />
+    </svg>
+  </div>
 </template>
 <script>
 export default {
+  props: ["loveid"],
   data() {
     return {
-        isClick:false
+      lovescol: [],
     };
   },
+  computed: {
+    activelove() {
+      if (this.loveid) {
+        return this.lovescol.some((item) => item.prod_id === this.loveid);
+      } else {
+        return 0;
+      }
+    },
+  },
   methods: {
-    like(){
-        this.isClick = !this.isClick
-    }
-  }
-}
+    getlove() {
+      const formData = new URLSearchParams();
+      formData.append("mbr_id", this.$store.state.mbr_id);
+
+      fetch(`${this.$store.state.publicpath}love_fetch.php`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded; charset=utf-8",
+        },
+        body: formData,
+      }).then(async (response) => {
+        this.lovescol = await response.json();
+      });
+    },
+    uplove() {
+      const formData = new URLSearchParams();
+      formData.append("prod_id", this.loveid);
+      formData.append("mbr_id", this.$store.state.mbr_id);
+
+      fetch(`${this.$store.state.publicpath}love_insertupload.php`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded; charset=utf-8",
+        },
+        body: formData,
+      })
+      window.location.reload();
+    },
+  },
+  mounted() {
+    this.getlove();
+  },
+};
 </script>
 <style scoped lang="scss">
-.heart{
-    cursor: pointer;
-    // position: absolute;
-    right: 5px;
-    top: 5px;
-    width: 30px;
-    z-index: 3;
+.heart {
+  cursor: pointer;
+  // position: absolute;
+  right: 5px;
+  top: 5px;
+  width: 30px;
+  z-index: 3;
 }
-.heart path{
-    fill : #FFF;
-    stroke-width: 10;
-    stroke: $mpink;
-    stroke-dasharray: 440;
-    stroke-dashoffset: 0;
+.heart path {
+  fill: #fff;
+  stroke-width: 10;
+  stroke: $mpink;
+  stroke-dasharray: 440;
+  stroke-dashoffset: 0;
 }
 
-.heart.active path{
-    fill : $mpink;
-    animation: none;
+.heart.active path {
+  fill: $mpink;
+  animation: none;
 }
 @keyframes heart {
-    0%{
-        stroke-dashoffset: 0; 
-    }
-    40%{
-        stroke-dashoffset: 440;
-    }
-    80%{
-        stroke-dashoffset: 880;
-        fill: #fff;
-    }
-    100%{
-        stroke-dashoffset: 880;
-        fill: $mpink;
-    }
+  0% {
+    stroke-dashoffset: 0;
+  }
+  40% {
+    stroke-dashoffset: 440;
+  }
+  80% {
+    stroke-dashoffset: 880;
+    fill: #fff;
+  }
+  100% {
+    stroke-dashoffset: 880;
+    fill: $mpink;
+  }
 }
-@media screen and (hover:hover) {
-    .heart:not(.active):hover path{
-        animation:heart .7s .05s linear forwards;
-    }
+@media screen and (hover: hover) {
+  .heart:not(.active):hover path {
+    animation: heart 0.7s 0.05s linear forwards;
+  }
 }
 </style>

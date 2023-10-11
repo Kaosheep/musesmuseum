@@ -16,12 +16,12 @@ try {
 
 
     if(empty($data)){
-        $sql = "select * from `news`";
+        $sql = "SELECT * FROM news ORDER BY news_date DESC";
         $news = $pdo->query($sql);
         $newsRow = $news->fetchAll(PDO::FETCH_ASSOC);
         
     }else{
-        $sql = "select * from `news` where `news_id` = :news_id";
+        $sql = "select * from `news` where `news_id` = :news_id ";
         $newStmt = $pdo->prepare($sql);
         $newStmt->bindValue(":news_id", $data->data->id);
         $newStmt->execute();

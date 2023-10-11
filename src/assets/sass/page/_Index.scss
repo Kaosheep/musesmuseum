@@ -142,7 +142,7 @@
                     h2 {
                         font-size: 1.25rem;
                         font-weight: 700;
-                        // white-space: nowrap;
+                        white-space: nowrap;
                     }
                 }
 
@@ -234,6 +234,8 @@
                         }
 
                         ul {
+                            margin-bottom: 2rem;
+
                             @include t() {
                                 width: 100%;
                                 display: flex;
@@ -243,7 +245,12 @@
                                 li {
                                     text-align: center;
                                     width: 30%;
-                                    padding: 0.5rem 0;
+                                    padding: 1rem 0;
+                                    margin: 0.5rem 0;
+
+                                    a {
+                                        line-height: 2;
+                                    }
                                 }
 
                             }
@@ -279,6 +286,7 @@
                     overflow: hidden;
                     position: relative;
                     min-width: 80px;
+
                     @include t() {
                         position: absolute;
                         right: 0;
@@ -350,80 +358,114 @@
                         height: 70vh;
                         display: flex;
                         justify-content: center;
-                        overflow: hidden;
+                        overflow-x:clip;
+                        overflow-y: visible;
                         position: relative;
 
                         @include t() {
                             width: 85vw;
                         }
-                    }
 
-                    .gallery {
-                        width: 50%;
-                        height: 75%;
-                        position: relative;
-                        transform-style: preserve-3d;
-                        transform: perspective(2000px) rotateX(-5deg) rotateY(0deg);
-                        transition: 2s;
-
-                        .img {
-                            display: inline-block;
-                            width: 100%;
-                            height: 100%;
+                        .gbtnl,
+                        .gbtnr {
+                            z-index: 10;
                             position: absolute;
+                            bottom: -50px;
+                            width: 30px;
+                            height: 30px;
+                            border-radius: 50%;
+                            border: none;
                             cursor: pointer;
-
-                            img {
-                                width: 100%;
-                                height: 100%;
-                                object-fit: cover;
-                                object-position: top;
+                            transition: .3s;
+                            
+                            &:hover{
+                                background-color: $mgreen;
                             }
+                        }
 
-                            .imginfo {
-                                position: absolute;
+                        .gbtnl {
+                            left: 20%;
+                            #gbtnlfas{
+                                pointer-events: none;
+                            }
+                        }
+
+                        .gbtnr {
+                            right: 20%;
+                            #gbtnrfas{
+                                pointer-events: none;
+
+                            }
+                        }
+
+                        .gallery {
+                            width: 50%;
+                            height: 75%;
+                            position: relative;
+                            transform-style: preserve-3d;
+                            transform: perspective(2000px) rotateX(-5deg) rotateY(0deg);
+                            transition: 2s;
+
+                            .img {
+                                display: inline-block;
                                 width: 100%;
                                 height: 100%;
-                                background-color: rgb(251, 247, 150, .7);
-                                backdrop-filter: blur(10px);
-                                color: #fff;
-                                top: 0;
-                                left: 0;
-                                padding: 2rem;
-                                opacity: 0;
-                                transition: .3s;
+                                position: absolute;
+                                cursor: pointer;
 
-                                p {
-                                    position: relative;
+                                img {
+                                    width: 100%;
+                                    height: 100%;
+                                    object-fit: cover;
+                                    object-position: top;
+                                }
 
-                                    &:nth-child(2) {
-                                        display: inline-block;
-                                        line-height: 3;
+                                .imginfo {
+                                    position: absolute;
+                                    width: 100%;
+                                    height: 100%;
+                                    background-color: rgb(251, 247, 150, .7);
+                                    backdrop-filter: blur(10px);
+                                    color: #fff;
+                                    top: 0;
+                                    left: 0;
+                                    padding: 2rem;
+                                    opacity: 0;
+                                    transition: .3s;
 
-                                        &::after {
-                                            position: absolute;
-                                            content: "";
-                                            bottom: 0.8rem;
-                                            left: 0;
-                                            width: 100%;
-                                            height: 1px;
-                                            background-color: $mblue;
+                                    p {
+                                        position: relative;
+
+                                        &:nth-child(2) {
+                                            display: inline-block;
+                                            line-height: 3;
+
+                                            &::after {
+                                                position: absolute;
+                                                content: "";
+                                                bottom: 0.8rem;
+                                                left: 0;
+                                                width: 100%;
+                                                height: 1px;
+                                                background-color: $mblue;
+                                            }
+                                        }
+
+                                        &:last-child {
+                                            padding-top: 2rem;
+                                            text-align: end;
                                         }
                                     }
-
-                                    &:last-child {
-                                        padding-top: 2rem;
-                                        text-align: end;
-                                    }
                                 }
-                            }
 
-                            &:hover {
-                                .imginfo {
-                                    opacity: 1;
+                                &:hover {
+                                    .imginfo {
+                                        opacity: 1;
+                                    }
                                 }
                             }
                         }
+
                     }
 
                     .moreexb {
@@ -863,9 +905,11 @@
                         transform-origin: bottom;
                         bottom: -100%;
                         transition: .3s;
-                        &:hover{
+
+                        &:hover {
                             background-color: $mgreen;
                         }
+
                         @include t() {
                             position: static;
                         }
@@ -911,9 +955,11 @@
                         left: 10%;
                         bottom: -100%;
                         transition: .3s;
-                        &:hover{
+
+                        &:hover {
                             background-color: $mlblue;
                         }
+
                         @include t() {
                             position: static;
                         }
@@ -1368,7 +1414,8 @@
                             max-width: 65vmin;
                             transform-origin: center;
                             width: 65%;
-                            @include m(){
+
+                            @include m() {
                                 max-width: 30vmin;
                                 width: 30%;
                             }

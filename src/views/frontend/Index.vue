@@ -26,7 +26,7 @@
               <ul>
                 <li v-for="(li, index) in homenav" :key="index">
                   <RouterLink :to="li.link"
-                    >{{ li.title }}<br />{{ li.entitle }}</RouterLink
+                    >{{ li.title }}</RouterLink
                   >
                 </li>
               </ul>
@@ -70,6 +70,8 @@
                   </div>
                 </div>
               </div>
+              <button class="gbtnl"><font-awesome-icon :icon="['fas', 'arrow-left']"  id="gbtnlfas"/></button>
+              <button type="button" class="gbtnr"><font-awesome-icon :icon="['fas', 'arrow-right']" id="gbtnrfas"/></button>
             </div>
             <div class="moreexb">
               <router-link to="/Home/SpecialExhibition"
