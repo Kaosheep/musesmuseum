@@ -4,11 +4,11 @@
       <div class="console">
         <Row>
           <Menu :theme="theme" class="list_style" accordion open-names="['1']" active-name="1-1">
-            <Submenu v-for="(submenu, index) in menuData" :key="index" :name="submenu.name">
+            <Submenu v-show = "test(submenu.name)" v-for="(submenu, index) in menuData" :key="index" :name="submenu.name">
               <template #title>
                 {{ submenu.title }}
               </template>
-              <MenuItem v-for="(item, itemIndex) in submenu.items" :key="itemIndex" :name="item.name" :to="item.link">
+              <MenuItem  v-for="(item, itemIndex) in submenu.items" :key="itemIndex" :name="item.name" :to="item.link">
               {{ item.text }}
               </MenuItem>
             </Submenu>
@@ -39,6 +39,7 @@ export default {
   },
   data() {
     return {
+      all_pri: true,
       menuData: [
         {
           name: '1',
@@ -91,6 +92,17 @@ export default {
   },
 
   methods: {
+    test(id){
+      if(id == 6){
+        if(this.all_pri == 0){
+          return false
+        }else{
+          return true
+        }
+      }else{
+        return true;
+      }
+    },
     logout() {
       // 在這裡執行登出功能，例如發送請求到後端清除會話狀態
       // 清除 cookie 的程式碼可以放在這裡或在登出功能中執行
@@ -124,8 +136,16 @@ export default {
         while (cookie.charAt(0) === ' ') {
             cookie = cookie.substring(1);
         }
+        
         if (cookie.indexOf(name) === 0) {
+          console.log()
             foundCookie = true;
+            console.log(cookie.split('=')[1])
+            console.log(JSON.parse(cookie.split('=')[1]))
+            let cookie_vale = JSON.parse(cookie.split('=')[1])['ma_type'];
+            if(cookie_vale == 0) {
+              this.all_pri = false
+            }
             break; // 找到匹配的 cookie 后退出循环
         }
     }
