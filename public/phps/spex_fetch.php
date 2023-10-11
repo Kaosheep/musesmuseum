@@ -14,9 +14,9 @@ try{
     if ($exhibitions->rowCount() === 0) { //無此會員資料
         echo "{}";
       } else {
-        $newRows = $exhibitions->fetchAll(PDO::FETCH_ASSOC);
+        $exhibitionsRows = $exhibitions->fetchAll(PDO::FETCH_ASSOC);
         
-        echo json_encode($newRows);//送出json字串
+        echo json_encode($exhibitionsRows);//送出json字串
       }
 
   
