@@ -29,9 +29,9 @@ try{
 		$members["successful"] = false;
 		echo json_encode($members);
 		return;
-	  }else{
+	}else{
 		echo json_encode($memRow);
-	  }
+	}
 }catch(PDOException $e){
 	echo "login錯誤行號 : ", $e->getLine();
 	echo "錯誤原因 : ", $e->getMessage();

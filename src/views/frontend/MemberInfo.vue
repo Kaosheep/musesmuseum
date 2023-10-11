@@ -1,7 +1,7 @@
 <template>
   <div class="bgcGY cardCenter">
     <main>
-      <span>{{ mbr_name }}</span>
+      <!-- <span>{{ mbr_name }}</span> -->
       <div class="backGroundCard">
         <div class="backGroundCardBtns">
           <router-link :to="a.link" v-for="a in memBtnLink">
@@ -54,7 +54,6 @@ export default {
   data() {
     return {
       mbr_name: '',
-      mbr_email: '',
       memAllInfo: [ ],
       /** form data */
       f: {
@@ -109,27 +108,25 @@ export default {
           }
         })
     },
-    getemail(){
-      const formData = new URLSearchParams();
-      formData.append('mbr_email', 'apple@gmail.com');
-
-      console.log(formData.get('mbr_email'));
-      console.log(formData.get('mbr_name'));
-
-      fetch("http://localhost/musesmuseum/public/phps/MemberInfo.php", {
-        method: 'POST', 
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'
-        },
-        body: formData,
-      })
-        .then(response => {
-          return response.json();
-        })
-        .then(result => {
-          console.log(result);
-        });
-    },
+    // getemail(){
+    //   const formData = new URLSearchParams();
+    //   formData.append('mbr_email', 'apple@gmail.com');
+    //   console.log(formData.get('mbr_email'));
+    //   console.log(formData.get('mbr_name'));
+    //   fetch("http://localhost/musesmuseum/public/phps/MemberInfo.php", {
+    //     method: 'POST', 
+    //     headers: {
+    //       'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'
+    //     },
+    //     body: formData,
+    //   })
+    //     .then(response => {
+    //       return response.json();
+    //     })
+    //     .then(result => {
+    //       console.log(result);
+    //     });
+    // },
     checkLoginStatus() {
       if (!this.$store.state.isLogin) {
         this.$router.push("/Home/Login");
@@ -138,7 +135,7 @@ export default {
   },
   mounted() {
     document.body.style.height = `auto`;
-    this.getemail();
+    // this.getemail();
     this.getuser();
     this.checkLoginStatus();
 
