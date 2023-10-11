@@ -6,13 +6,14 @@ header('Content-Type: application/json');
 
 
 try {
- //連線
+ //連線Z
  require_once("./connectMuses.php");
     
  //準備sql
  $sql = "insert into manager (ma_id, ma_name, ma_email, ma_psw, ma_type) values (:id, :name, :email, :psw, :type)";
 
  $news = $pdo->prepare($sql);
+
  $news->bindValue(":id", $_POST["id"]);
  $news->bindValue(":name", $_POST["name"]);
  $news->bindValue(":email", $_POST["email"]);
@@ -20,7 +21,9 @@ try {
  $news->bindValue(":type", $_POST["type"]);
  //執行sql
  $news->execute();
+ $response =  "新增成功";
 
+ echo json_encode($response);
 
 
  
