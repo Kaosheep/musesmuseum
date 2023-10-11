@@ -65,13 +65,20 @@
         </div>
         <div>
           <div>標題</div>
-          <input type="text" name="" id="" v-model="add_faq.question">
+          <textarea  
+            name="" 
+            id="" 
+            v-model="add_faq.question"
+            cols="3" 
+            rows="3" >
+          </textarea>
+
           <div>內容</div>
           <textarea 
             name=""
             id="" 
-            cols="30" 
-            rows="7" 
+            cols="3" 
+            rows="5" 
             v-model="add_faq.ans"
           ></textarea>
 
