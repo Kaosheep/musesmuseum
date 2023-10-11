@@ -18,58 +18,68 @@
         </tr>
         <tr v-for="(i, index) in manager" :key="index">
           <td>
-            <input type="checkbox" class="statusinput" @change="inchecked(i.ma_id, $event)"  v-show="i.ma_id != 'MA01'"/>
+            <input
+              type="checkbox"
+              class="statusinput"
+              @change="inchecked(i.ma_id, $event)"
+              v-show="i.ma_id != 'MA01'"
+            />
           </td>
           <td>{{ i.ma_id }}</td>
           <td>{{ i.ma_name }}</td>
-          <td>{{ i.ma_type }}</td>
           <td>
-            <button class="edit" v-show="i.ma_id != 'MA01'" @click="showEditForm('edit', i.ma_id)">編輯</button>
+            <p v-if="parseInt(i.ma_type) === 1">全權</p>
+            <p v-else>部分</p>
+          </td>
+          <td>
+            <button
+              class="edit"
+              v-show="i.ma_id != 'MA01'"
+              @click="showEditForm('edit', i.ma_id)"
+            >
+              編輯
+            </button>
           </td>
         </tr>
       </table>
       <form action="" class="pop" v-show="showForm">
         <h2>編輯</h2>
-        <div class="xedit" v-show="addnews">
-          <div>
-            <div>管理員編號</div>
-            <div></div>
-          </div>
+        <div>
+          <div>管理員編號</div>
+          <div v-text="add_news.id"></div>
         </div>
         <div>
           <div>管理員名稱</div>
-          <div></div>
-          <div class="xedit">
-            <div>
-              <div>帳號</div>
-              <input type="text">
-            </div>
-            <div>
-              <div>密碼</div>
-              <input type="text">
-            </div>
-          </div>
-          <div class="switch_status">
-            <div>狀態</div>
-            <select>
-              <option value="1">上架中</option>
-              <option value="0">未上架</option>
-            </select>
-          </div>
-          <div class="form_btn">
-            <button type="button" class="btn_admin" @click="hideEditForm">
-              取消
-            </button>
-            <button type="button" class="btn_admin" @click="addnews_btn()">
-              儲存
-            </button>
-          </div>
+          <input
+            type="text"
+            name=""
+            v-model="add_news.name"
+          />
+        </div>
+        <div>
+          <div>e-mail</div>
+          <input type="email" v-model="add_news.email" @input="validateEmail" />
+        </div>
+        <div>
+          <div>密碼</div>
+          <input type="password" v-model="add_news.psw" />
+        </div>
+        <div class="switch_status">
+          <div>狀態</div>
+          <select v-model="add_news.type">
+            <option value="1">全權</option>
+            <option value="0">部分</option>
+          </select>
+        </div>
+        <div class="form_btn">
+          <button type="button" class="btn_admin" @click="hideEditForm">取消</button>
+          <button type="button" class="btn_admin" @click="addnews_btn(add_news.id)">儲存</button>
         </div>
       </form>
     </div>
   </div>
 </template>
-   
+
 <script>
 import PinkButton from "/src/components/PinkButton.vue";
 import Searchbar from "/src/components/Searchbar.vue";
@@ -78,17 +88,96 @@ export default {
   components: {
     Searchbar,
     Searchbarclick,
-    PinkButton
+    PinkButton,
   },
   data() {
     return {
       manager: [],
       newsched: [],
+      add_news: [
+        {
+          id: "",
+          name: "",
+          email: "",
+          psw: "",
+          type: "",
+        },
+      ],
       showForm: false,
-      addnews: false,
-    }
+    };
   },
   methods: {
+    validateEmail() {
+      //驗證電子郵件地址
+      // const emailRegex = /^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/;
+      console.log("待更新");
+      // if (!emailRegex.test(this.add_news.email)) {
+
+      // }
+    },
+    addnews_btn(id) {
+      if (id !== undefined) {
+        console.log(id)
+        const url = `${this.$store.state.publicpath}manager_updateupload.php`;
+        const formData = new FormData();
+        formData.append("id", this.add_news.id);
+        formData.append("name", this.add_news.name);
+        formData.append("email", this.add_news.email);
+        formData.append("psw", this.add_news.psw);
+        formData.append("type", this.add_news.type);
+        
+        fetch(url, {
+          method: "POST",
+          body: formData,
+        })
+          .then((response) => {
+            if (response.ok) {
+              console.log(response.ok)
+              return response.json();
+            } else {
+              throw new Error("新增失敗");
+            }
+          })
+          .then((json) => {
+            alert(json);
+            window.location.reload();
+          })
+          .catch((error) => {
+            console.log(error.message);
+          });
+      } else {
+        const url = `${this.$store.state.publicpath}manager_insertupload.php`;
+        const formData = new FormData();
+        formData.append("id", this.add_news.id);
+        formData.append("name", this.add_news.name);
+        formData.append("psw", this.add_news.psw);
+        formData.append("email", this.add_news.email);
+        formData.append("type", this.add_news.type);
+        fetch(url, {
+          method: "POST",
+          body: formData,
+        })
+        
+          .then((response) => {
+           
+            if (response) {
+              return response.json();
+            } else {
+              throw new Error("新增失敗");
+            }
+          })
+          .then((json) => {
+            alert(json);
+            window.location.reload();
+          })
+          .catch((error) => {
+            console.log(error.message);
+          });
+      }
+    },
+    hideEditForm() {
+      this.showForm = false;
+    },
     deleten() {
       fetch(`${this.$store.state.publicpath}manager_del.php`, {
         method: "post",
@@ -124,20 +213,16 @@ export default {
     },
     showEditForm(type, id) {
       if (type == "add") {
-        this.addnews = false;
         this.add_news = [
           {
             id: "",
-            title: "",
-            content: "",
-            date: "",
-            image: "",
+            name: "",
+            email: "",
+            psw: "",
+            type: "",
           },
         ];
-      } else {
-        this.addnews = true;
-      }
-      if (type == "edit") {
+      } else if (type == "edit") {
         const url = `http://localhost/musesmuseum/public/phps/manager_list.php`;
         let headers = {
           "Content-Type": "application/json",
@@ -159,20 +244,18 @@ export default {
             }
           })
           .then((json) => {
-            console.log(json);
-            // this.add_news.id = json.ma_id ;
-            // this.add_news.name = json.ma_name;
-            // this.add_news.email = json.ma_email;
-            // this.add_news.psw = json.ma_psw;
-            // this.status = json.news_status;
-            // this.add_news.type = json.ma_type;
+            this.add_news.id = json.ma_id;
+            this.add_news.name = json.ma_name;
+            this.add_news.email = json.ma_email;
+            this.add_news.psw = json.ma_psw;
+            this.add_news.type = json.ma_type;
           });
       }
 
       this.showForm = true;
     },
-
-  }, mounted() {
+  },
+  mounted() {
     //先檢查資料格式是否符合DB規則
     const url = `http://localhost/musesmuseum/public/phps/manager_list.php`;
     let headers = {
@@ -200,9 +283,7 @@ export default {
         // alert(error.message);
       });
   },
-
-
-}
+};
 </script>
 
 <style scoped lang="scss">
@@ -243,6 +324,7 @@ div {
   width: 70px;
   height: 40px;
   background-color: $mblue;
+  border-radius: 4px;
   color: #fff;
   border: none;
   cursor: pointer;
@@ -288,7 +370,6 @@ div {
       p {
         margin: 0;
         padding: 5px;
-
       }
     }
   }
@@ -306,6 +387,9 @@ div {
     z-index: 999;
     border-radius: 10px;
     overflow: auto;
+    >div{
+      margin-top:10px
+    }
 
     .xedit {
       display: flex;
@@ -321,7 +405,6 @@ div {
 
     input,
     textarea {
-      width: 100%;
       background-color: #ffffff1b;
       border: 1px solid #009ca8;
       border-radius: 10px;
