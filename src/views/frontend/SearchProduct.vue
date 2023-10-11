@@ -84,7 +84,7 @@ export default {
       p: {
         /** form data: name */
         prod_date: {
-          date1:2022/10/10, date2:2022/5/5 ,date3:2021/11/11, date4:2020/12/10
+          date1:2022-10-10, date2:2022-5-5 ,date3:2021-11-11, date4:2020-12-10
         },
         mbr_pay: {
           memTitColumn: "生日", type: "date", id: "mbr_birth", name: "mbr_birth", class: "fillInClumn", placeholder: ""
