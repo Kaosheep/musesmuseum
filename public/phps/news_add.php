@@ -11,7 +11,7 @@ try {
     $options = [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, PDO::ATTR_CASE => PDO::CASE_NATURAL];
     $pdo = new PDO($dsn, $user, $password, $options);
 
-    $data = file_get_contents('php://input');
+    $data = json_decode(file_get_contents('php://input'));
 
     $id = isset($data->data->id) ? $data->data->id: '';
     $title = $data->data->title;

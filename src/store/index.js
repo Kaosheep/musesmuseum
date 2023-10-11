@@ -31,6 +31,7 @@ export default createStore({
     imgpublicpath: imgpublicpath,
     test: 'test data',
     mbr_name: '',
+    mbr_id:'',
     isLogin: false,
   },
   getters: {

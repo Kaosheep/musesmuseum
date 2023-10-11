@@ -1,5 +1,11 @@
 <template>
-  <Carousel v-model="value" autoplay loop :autoplay-speed="4000" class="shop_carousel">
+  <Carousel
+    v-model="value"
+    autoplay
+    loop
+    :autoplay-speed="4000"
+    class="shop_carousel"
+  >
     <CarouselItem class="banner">
       <img src="@/assets/image/productimage/banner/banner0.jpg" />
     </CarouselItem>
@@ -36,7 +42,11 @@
           {{ list.kind }}
         </button>
       </li>
-      <select class="shop_filter" v-model="sortType" @change="priceClick(sortType)">
+      <select
+        class="shop_filter"
+        v-model="sortType"
+        @change="priceClick(sortType)"
+      >
         <option>商品排序</option>
         <option value="asc">價格低至高</option>
         <option value="desc">價格高至低</option>
@@ -44,19 +54,29 @@
     </aside>
     <div class="shop_container">
       <div v-if="productSorting == 0">查無商品</div>
-      <div class="item" v-for="(item) in getPageItems" :key="item.prod_id" v-else>
+      <div class="item" v-for="item in getPageItems" :key="item.prod_id" v-else>
         <router-link :to="`/Home/ProductPage/${item.prod_id}`">
           <div class="image">
-            <img :src="(`${this.$store.state.imgpublicpath}image/productimage/` + item.prod_img)" :alt="item.prod_name" />
+            <img
+              :src="
+                `${this.$store.state.imgpublicpath}image/productimage/` +
+                item.prod_img
+              "
+              :alt="item.prod_name"
+            />
           </div>
         </router-link>
         <div class="info">
           <span>
-            <Heart> </Heart>
+            <Heart :loveid="item.prod_id"> </Heart>
             <router-link :to="`/Home/ProductPage/${item.prod_id}`">
               <p>{{ item.prod_name }}</p>
             </router-link>
-            <font-awesome-icon :icon="['fas', 'cart-shopping']" id="car" @click="addcart(item.prod_id)" />
+            <font-awesome-icon
+              :icon="['fas', 'cart-shopping']"
+              id="car"
+              @click="addcart(item.prod_id)"
+            />
           </span>
           <router-link :to="`/Home/ProductPage/${item.prod_id}`">
             <span> ${{ item.prod_sellingprice }} </span>
@@ -66,7 +86,12 @@
     </div>
   </div>
   <div class="shop_paginationbar">
-    <Page :total="productSorting.length" :page-size="pageItems" v-model="currentPage" class="shop_page" />
+    <Page
+      :total="productSorting.length"
+      :page-size="pageItems"
+      v-model="currentPage"
+      class="shop_page"
+    />
   </div>
 </template>
 
@@ -85,6 +110,7 @@ export default {
   },
   data() {
     return {
+      lovescol: [],
       value: 0,
       aside: [
         { kind: "所有商品" },
@@ -106,7 +132,9 @@ export default {
   },
   computed: {
     categoryFilter() {
-      return this.produstdislist.filter((v) => v.prod_kind?.includes(this.prodKind));
+      return this.produstdislist.filter((v) =>
+        v.prod_kind?.includes(this.prodKind)
+      );
     },
     searchFilter() {
       if (this.searchinput) {
@@ -114,7 +142,7 @@ export default {
           v.prod_name?.includes(this.searchinput)
         );
       } else {
-        return this.categoryFilter
+        return this.categoryFilter;
       }
     },
     productSorting() {
@@ -144,14 +172,32 @@ export default {
     },
   },
   methods: {
-    fetchprod() {
-      fetch(`${this.publicpath}shop.php`).then(async (response) => {
-        this.produstdislist = await response.json();
-        console.log(this.produstdislist); 
-      })
-      .catch((error) => {
-        console.error('發生錯誤:', error);
+    loveid(id) {
+      this.loven = id;
+    },
+    getlove() {
+      const formData = new URLSearchParams();
+      formData.append("mbr_id", this.$store.state.mbr_id);
+
+      fetch(`${this.$store.state.publicpath}love_fetch.php`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded; charset=utf-8",
+        },
+        body: formData,
+      }).then(async (response) => {
+        this.lovescol = await response.json();
       });
+    },
+    fetchprod() {
+      fetch(`${this.publicpath}shop.php`)
+        .then(async (response) => {
+          this.produstdislist = await response.json();
+          console.log(this.produstdislist);
+        })
+        .catch((error) => {
+          console.error("發生錯誤:", error);
+        });
     },
     selectkind(prod_kind) {
       this.prodKind = prod_kind;
@@ -171,7 +217,9 @@ export default {
       if (this.storage["addItemlist"] == null) {
         this.storage["addItemlist"] = "";
       }
-      let additem = this.produstdislist.find((item) => item.prod_id === prod_id);
+      let additem = this.produstdislist.find(
+        (item) => item.prod_id === prod_id
+      );
 
       this.storage["addItemlist"] += `${prod_id},`;
       if (this.storage[prod_id]) {
@@ -193,6 +241,32 @@ export default {
     },
   },
   mounted() {
+    const cookies = document.cookie.split(";");
+    let members = null;
+
+    for (let i = 0; i < cookies.length; i++) {
+      const cookie = cookies[i].trim();
+      if (cookie.startsWith("members=")) {
+        members = decodeURIComponent(cookie.substring("members=".length));
+
+        break;
+      }
+    }
+
+    if (members) {
+      try {
+        const memberInfo = JSON.parse(members);
+        if (memberInfo.mbr_name && memberInfo.mbr_email) {
+          this.memAllInfo = memberInfo;
+          this.$store.state.mbr_id = this.memAllInfo.mbr_id;
+        } else {
+          console.error("Cookie中缺少屬性");
+        }
+      } catch (error) {
+        console.error("解析Cookie數據錯誤", error);
+      }
+    }
+    this.getlove();
     this.fetchprod();
   },
 };

@@ -139,6 +139,11 @@ const routes = [
         component: () => import('../views/frontend/SearchProduct.vue'),
       },
       {
+        path: 'LoveProduct',
+        name: 'LoveProduct',
+        component: () => import('../views/frontend/LoveProduct.vue'),
+      },
+      {
         path: 'SearchProductInfo/:id',
         name: 'SearchProductInfo',
         component: () => import('../views/frontend/SearchProductInfo.vue'),

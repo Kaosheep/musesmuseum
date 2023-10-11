@@ -14,7 +14,7 @@
         <table>
           <tr>
             <th></th>
-            <th>消息編號</th>
+            <th>新增時間</th>
             <th>消息標題</th>
             <th>狀態</th>
             <th></th>
@@ -27,7 +27,7 @@
                 @change="inchecked(i.news_id, $event)"
               />
             </td>
-            <td>{{ i.news_id }}</td>
+            <td>{{ i.news_date }}</td>
             <td>{{ i.news_title }}</td>
             <td>
               <p v-if="parseInt(i.news_status) === 1">上架中</p>
@@ -108,7 +108,6 @@
                   "
                   alt=""
                 />
-                <!-- <img v-else :src="src" alt="" /> -->
               </label>
             </div>
           </div>
@@ -118,7 +117,7 @@
               取消
             </button>
             <button
-              type="button"
+              type="type"
               class="btn_admin"
               @click="addnews_btn(add_news.id)"
             >
@@ -178,28 +177,30 @@ export default {
     };
   },
   methods: {
-    deleten(){
-      fetch(`${this.$store.state.publicpath}news_del.php`, {
-        method: "post",
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded; charset=utf-8",
-        },
-        body: JSON.stringify({ data: Object.values(this.newsched) }),
-      })
-        .then((response) => {
-          if (response.ok) {
-            return response.json();
-          } else {
-            throw new Error("新增失敗");
-          }
+    deleten() {
+      if (window.confirm("確認刪除資料?")) {
+        fetch(`${this.$store.state.publicpath}news_del.php`, {
+          method: "post",
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded; charset=utf-8",
+          },
+          body: JSON.stringify({ data: Object.values(this.newsched) }),
         })
-        .then((json) => {
-          alert(json);
-          window.location.reload();
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
+          .then((response) => {
+            if (response.ok) {
+              return response.json();
+            } else {
+              throw new Error("新增失敗");
+            }
+          })
+          .then((json) => {
+            alert(json);
+            window.location.reload();
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+      }
     },
     inchecked(id, e) {
       if (e.target.checked) {
@@ -212,7 +213,7 @@ export default {
       }
     },
     updatestatus(b) {
-      this.newsched.splice(0,0,{type:b});
+      this.newsched.splice(0, 0, { type: b });
       fetch(`${this.$store.state.publicpath}news_updatestatus.php`, {
         method: "post",
         headers: {
@@ -314,6 +315,9 @@ export default {
     },
     //新增
     addnews_btn(id) {
+      // if(){
+
+      // }
       if (id != undefined) {
         const url = `http://localhost/musesmuseum/public/phps/news_updateupload.php`;
         const formData = new FormData();

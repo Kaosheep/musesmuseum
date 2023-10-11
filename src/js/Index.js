@@ -78,6 +78,7 @@ export default {
         { imgtitle: '時光之旅', time: '2023/5/1-2023/6/15', info: '這個展覽將追溯藝術的演變，從古代到當代。通過展出各個時代的代表性藝術品，讓觀眾感受藝術的時光之旅。' },
       ],
       isshow: false,
+      j:0
     };
   },
   methods: {
@@ -120,8 +121,26 @@ export default {
         image.onclick = () => {
           gallery.style.transform = `perspective(2000px) rotateX(-5deg) rotateY(-${(i + 1) * angle
             }deg)`;
+          return this.j = i;
+          
         };
+
       });
+      document.querySelector('.gbtnl').addEventListener("click", ()=>{
+        this.j += 1;
+        console.log(this.j)
+        gallery.style.transform = `perspective(2000px) rotateX(-5deg) rotateY(${(this.j) * angle
+          }deg)`;
+        return this.j;
+      });
+      document.querySelector('.gbtnr').addEventListener("click", (e) => {
+        this.j -= 1;
+        console.log(this.j)
+        gallery.style.transform = `perspective(2000px) rotateX(-5deg) rotateY(${(this.j) * angle
+          }deg)`;
+        return this.j;
+
+      })
     },
     followcursor() {
       let btns = document.querySelectorAll(".container .row .card button");
@@ -179,7 +198,12 @@ export default {
       let y = (window.innerHeight - e.pageY) / 80;
       document.querySelector('.balla').style.transform = `translate(${x}px , ${y}px)`;
       document.querySelector('.ballb').style.transform = `translate(${-x}px , ${-y}px)`;
-    }
+    },
+    fetchnews() {
+      fetch(`${this.$store.state.publicpath}news_fetch.php`).then(async (response) => {
+        this.newscol = await response.json();
+      });
+    },
 
   },
   mounted() {
@@ -246,8 +270,21 @@ export default {
       setTransform(homecart, `translateX(${intersectionratio * 20}px)`)
 
     }
+    // document.querySelector('.gbtnl').addEventListener("click", ()=>{
+    //   this.j -= 1;
+    //   console.log(this.j)
+    //   gallery.style.transform = `perspective(2000px) rotateX(-5deg) rotateY(${(this.j) * angle
+    //     }deg)`;
+    //   return this.j;
+    // });
+    // document.querySelector('.gbtnr').addEventListener("click", (e) => {
+    //   this.j -= 1;
+    //   console.log(this.j)
+    //   gallery.style.transform = `perspective(2000px) rotateX(-5deg) rotateY(${(this.j) * angle
+    //     }deg)`;
+    //   return this.j;
 
-
+    // })
 
     let anchorli = [...document.querySelectorAll(".anchor ul li")];
     anchorli.forEach((li, i) => {

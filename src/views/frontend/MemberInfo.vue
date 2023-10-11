@@ -79,7 +79,7 @@ export default {
         { link: "", name: "會員資料" },
         { link: "/Home/SearchProduct", name: "訂單查詢" },
         { link: "/Home/SearchTicket", name: "票券查詢" },
-        { link: "", name: "收藏清單" },
+        { link: "/Home/LoveProduct", name: "收藏清單" },
       ],
     };
   },
