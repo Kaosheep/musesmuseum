@@ -54,8 +54,12 @@ export default createStore({
       const members = JSON.parse(memberCookie);
       
       commit('setIsLogin', true);
-        
       commit('setMbrName', members.mbr_name);
     },
+    async logout({ commit }) {
+      //清除 Cookie
+      document.cookie = "members=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+      commit('setIsLogin', false); 
+    }
   },
 })

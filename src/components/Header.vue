@@ -43,6 +43,9 @@
       <div>{{ $store.state.mbr_name }}
       </div>
       <router-link v-if="!$store.state.isLogin" to="/Home/Login" @click="closemenu">會員登入</router-link>
+      <span v-else>
+        <a href="/Home" @click="logout">登出</a>
+      </span>
     </div>
     <div class="menu">
       <ul>
@@ -142,6 +145,9 @@ export default {
       document.querySelector("nav").style.transform = "translateX(-100%)";
       this.isClick = false;
     },
+    logout() {//登出
+      this.$store.dispatch('logout'); 
+    }
 
   },
 };
