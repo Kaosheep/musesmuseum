@@ -33,8 +33,8 @@
               required />
           </div>
           <!-- <div class="resetPswEmail">
-             <a href="#">信箱驗證</a>
-           </div> -->
+            <a href="#">信箱驗證</a>
+          </div> -->
           <div class="memloginSubmit">
             <input type="button" id="btnLogin" class="submitBtn" value="送出" @click="sendUserData" />
             <!-- <input type="button" id="btnCancel" value="取消"> -->
@@ -87,18 +87,16 @@ export default {
   methods: {
 
     getuser() {
-      
       fetch("http://localhost/musesmuseum/public/phps/MemberInfo.php")
         .then(response => {
           return response.json();
-
         })
         .then(result => {
           this.mbr_name = result.mbr_name;
           if (Array.isArray(result)) {
             this.memAllInfo = result
           } else {
-            alert("無法取得資料");
+            // alert("無法取得資料");
           }
         })    
         .then(() => {
@@ -107,10 +105,9 @@ export default {
             document.cookie = "members= " + members + "; expires=Thu, 01 Jan 2025 00:00:00 UTC; path=/";
             // document.location.href = "/Home/MemberInfo";
           } else {
-            alert("無法獲取 mbr_name");
+            // alert("無法獲取 mbr_name");
           }
         })
-   
     },
     getemail(){
       const formData = new URLSearchParams();
@@ -133,11 +130,17 @@ export default {
           console.log(result);
         });
     },
+    checkLoginStatus() {
+      if (!this.$store.state.isLogin) {
+        this.$router.push("/Home/Login");
+      }
+    },
   },
   mounted() {
-    this.getemail();
     document.body.style.height = `auto`;
+    this.getemail();
     this.getuser();
+    this.checkLoginStatus();
 
     //確認抓取餅乾
     const cookies = document.cookie.split(';');

@@ -1,4 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import MemberInfo from '../views/frontend/MemberInfo.vue';
+import store from '@/store';
 
 const routes = [
   {
@@ -203,7 +205,7 @@ const routes = [
             name: 'Newsm',
             component: () => import('../views/backend/Newsm.vue'),
           },
-           {
+          {
             path: 'Faqm',
             name: 'Faqm',
             component: () => import('../views/backend/Faqm.vue'),

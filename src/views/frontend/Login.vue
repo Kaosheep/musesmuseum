@@ -123,13 +123,14 @@ export default {
           this.mem.mbr_psw == document.getElementById("mbr_psw").value
         ) {
           window.alert("登入成功");
-          this.router.push("/Home/MemberInfo");
+          this.$router.push("/Home/MemberInfo");
+          // next();
         } else {
           window.alert("帳密錯誤");
         }
 
       })  
-     
+
         .then(() => {
           if (this.memEmail) {
             let members = JSON.stringify(this.mem);
@@ -143,7 +144,7 @@ export default {
           if (json.result['mbr_email']) {
               let members = JSON.stringify(json.result);
               document.cookie = "members= " + members + "; expires=Thu, 01 Jan 2025 00:00:00 UTC; path=/";
-              document.location.href = "/MemberInfo";
+              document.location.href = "/Home/MemberInfo";
           } else {
               alert(json.result);
           }
@@ -173,7 +174,7 @@ export default {
       }
     }
     return "";
-   
+
   },
 };
 </script>

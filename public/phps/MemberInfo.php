@@ -34,10 +34,6 @@ try{
         $result [] = $membersRows;
         echo json_encode($result);//送出json字串
     }
-	//將資料代入參數中(未知數中);
-
-
-	//執行之
 
     // $mbrInfoArray = $members->fetchAll(PDO::FETCH_ASSOC);
     // echo json_encode($mbrInfoArray);
