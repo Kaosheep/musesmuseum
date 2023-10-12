@@ -3,7 +3,7 @@
         <div>
             <div class="admin_editbar">
                 <div>
-                    <PinkButton class="btn_admin" text="新增" />
+                    <PinkButton class="btn_admin" text="新增" @click="showAddForm" />
                     <PinkButton class="btn_admin" text="上架" @click="toggleStatus('1')" :disabled="!canToggle('1')" />
                     <PinkButton class="btn_admin" text="下架" @click="toggleStatus('0')" :disabled="!canToggle('0')" />
                 </div>
@@ -18,48 +18,49 @@
                         <th>狀態</th>
                         <th></th>
                     </tr>
-                    <tr v-for="(i, index) in exhm" :key="index">
+                    <tr v-for="(exhibition, index) in exhibitions" :key="index">
                         <td><input type="checkbox"></td>
-                        <td>{{ i.id }}</td>
-                        <td>{{ i.title }}</td>
+                        <td>{{ exhibition.id }}</td>
+                        <td>{{ exhibition.title }}</td>
                         <td>
-                            <p v-if="parseInt(i.statusn) === 1">已上架</p>
+                            <p v-if="parseInt(exhibition.status) === 1">已上架</p>
                             <p v-else>未上架</p>
                         </td>
                         <td>
-                            <button class="edit" @click="showEditForm()">編輯</button>
+                            <button class="edit" @click="showEditForm(exhibition)">編輯</button>
                         </td>
                     </tr>
                 </table>
             </div>
             <form action="" class="pop" v-if="showForm" @submit.prevent="submitForm">
-                <h2>編輯</h2>
+                <h2>{{ editMode ? '編輯' : '新增' }}</h2>
                 <div>
                     <div>展覽編號</div>
-                    <div>EXH20230901</div>
+                    <div>{{ editMode ? exhibition.id : '自動生成' }}</div>
                 </div>
                 <div>
                     <div>標題</div>
-                    <div>獨居沙漠，藝術家喬治亞．歐姬芙</div>
+                    <div><input type="text" v-model="formData.title" /></div>
                 </div>
                 <div>
                     <div>內容</div>
-                    <textarea name="" id="" cols="30" rows="10"></textarea>
+                    <textarea v-model="formData.content" cols="30" rows="10"></textarea>
                 </div>
 
                 <div class="info_col">
                     <div>
                         <div>展覽期間</div>
                         <div>
-                            <input type="date" id="dateInput" v-model="selectedDate" /> 至
-                            <input type="date" id="dateInput" v-model="selectedDate" />
+                            <iinput type="date" v-model="formData.startDate" /> 至
+                            <input type="date" v-model="formData.endDate" />
                         </div>
                     </div>
                     <div>
                         <div>狀態</div>
                         <div>
-                            <select name="" id="">
-                                <option value="">未上架</option>
+                            <select v-model="formData.status">
+                                <option value="0">未上架</option>
+                                <option value="1">已上架</option>
                             </select>
                             <input type="file" id="fileInput" accept="image/*" style="display: none;" />
                             <label class="img_box" for="fileInput">+選擇圖片</label>
@@ -71,8 +72,8 @@
                 </div>
            
                 <div class="form_btn">
-                    <PinkButton class="btn_admin" text="取消" @click="hideEditForm" />
-                    <PinkButton class="btn_admin" text="儲存" />
+                    <PinkButton class="btn_admin" text="取消" @click="hideForm" />
+                    <PinkButton class="btn_admin" text="儲存" type="submit" />
                 </div>
             </form>
         </div>
@@ -95,6 +96,16 @@ export default {
     },
     data() {
         return {
+            exhibitions: [], // 假設你有一個存放展覽數據的數組
+            showForm: false,
+            editMode: false,
+            formData: {
+                title: "",
+                content: "",
+                startDate: "",
+                endDate: "",
+                status: "0" // 預設為未上架
+            },
             news: [],
             test: [
                 {
@@ -142,6 +153,52 @@ export default {
         }
     },
     methods: {
+        showAddForm() {
+            this.editMode = false;
+            this.showForm = true;
+            this.resetFormData();
+        },
+
+        showEditForm(exhibition) {
+            this.editMode = true;
+            this.showForm = true;
+            this.formData = {
+                id: exhibition.id,
+                title: exhibition.title,
+                content: exhibition.content,
+                startDate: exhibition.startDate,
+                endDate: exhibition.endDate,
+                status: exhibition.status
+                // 其他欄位
+            };
+        },
+
+        hideForm() {
+            this.showForm = false;
+            this.resetFormData();
+        },
+
+        resetFormData() {
+            this.formData = {
+                title: "",
+                content: "",
+                startDate: "",
+                endDate: "",
+                status: "0"
+                // 其他欄位
+            };
+        },
+
+        submitForm() {
+            // 處理表單提交邏輯，可以根據 editMode 來判斷是新增還是編輯
+            // 提交後要更新數據，隱藏表單，並重置表單數據
+            if (this.editMode) {
+                // 呼叫編輯的 API
+            } else {
+                // 呼叫新增的 API
+            }
+            this.hideForm();
+        },
         toggleStatus(newStatus) {
             this.test.forEach(item => {
                 if (item.selected) {
