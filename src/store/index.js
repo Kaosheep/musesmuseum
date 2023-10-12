@@ -1,8 +1,8 @@
 import { createStore } from 'vuex'
 //中央狀態管理
-const publicURL = process.env.NODE_ENV === 'development' ? '' : 'https://tibamef2e.com/chd103/g1'
-const publicpath = process.env.NODE_ENV === 'development' ? 'http://localhost/musesmuseum/public/phps/' : ''
-const imgpublicpath = process.env.NODE_ENV === 'development' ? process.env.BASE_URL : ''
+const publicURL = process.env.NODE_ENV === 'development' ? '' : 'https://tibamef2e.com/chd103/g1/'
+const publicpath = process.env.NODE_ENV === 'development' ? 'http://localhost/musesmuseum/public/phps/' : 'https://tibamef2e.com/chd103/g1/phps/'
+const imgpublicpath = process.env.NODE_ENV === 'development' ? process.env.BASE_URL : 'https://tibamef2e.com/chd103/g1/'
 
 
 const getCookie = (cname) => {

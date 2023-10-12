@@ -348,33 +348,33 @@ export default {
             console.log(error.message);
           });
       } else {
-        // const url = `http://localhost/musesmuseum/public/phps/news_insertupload.php`;
-        // const formData = new FormData();
-        // formData.append("id", this.add_news.id);
-        // formData.append("title", this.add_news.title);
-        // formData.append("content", this.add_news.content);
-        // formData.append("status", this.status);
-        // formData.append("date", this.add_news.date);
-        // formData.append("image", document.getElementById("fileimg").files[0]);
+        const url = `http://localhost/musesmuseum/public/phps/news_insertupload.php`;
+        const formData = new FormData();
+        formData.append("id", this.add_news.id);
+        formData.append("title", this.add_news.title);
+        formData.append("content", this.add_news.content);
+        formData.append("status", this.status);
+        formData.append("date", this.add_news.date);
+        formData.append("image", document.getElementById("fileimg").files[0]);
 
-        // fetch(url, {
-        //   method: "POST",
-        //   body: formData,
-        // })
-        //   .then((response) => {
-        //     if (response.ok) {
-        //       return response.json();
-        //     } else {
-        //       throw new Error("新增失敗");
-        //     }
-        //   })
-        //   .then((json) => {
-        //     alert(json);
-        //     window.location.reload();
-        //   })
-        //   .catch((error) => {
-        //     console.log(error.message);
-        //   });
+        fetch(url, {
+          method: "POST",
+          body: formData,
+        })
+          .then((response) => {
+            if (response.ok) {
+              return response.json();
+            } else {
+              throw new Error("新增失敗");
+            }
+          })
+          .then((json) => {
+            alert(json);
+            window.location.reload();
+          })
+          .catch((error) => {
+            console.log(error.message);
+          });
       }
     },
   },

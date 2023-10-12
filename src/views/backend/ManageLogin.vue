@@ -52,7 +52,7 @@ export default {
                 alert("密碼長度不符");
                 return false;
             }
-            const url = `http://localhost/musesmuseum/public/phps/manager_login.php`;
+            const url = `${this.$store.state.publicpath}manager_login.php`;
             let headers = {
                 "Content-Type": "application/json",
                 Accept: "application/json",
@@ -84,7 +84,7 @@ export default {
                     if (json.result['ma_id']) {
                         let manager = JSON.stringify(json.result);
                         document.cookie = "manager= " + manager + "; expires=Thu, 01 Jan 2025 00:00:00 UTC; path=/";
-                        document.location.href = "/DashBoard";
+                        document.location.href = `${this.$store.state.imgpublicpath}DashBoard`;
                     } else {
                         alert(json.result);
                     }
@@ -104,7 +104,7 @@ export default {
             if (cookie.indexOf(name) === 0) {
                 console.log(cookie.substring(name.length, cookie.length));
                 if(cookie.substring(name.length, cookie.length)){
-                    document.location.href = "/DashBoard";
+                    document.location.href = `${this.$store.state.publicURL}DashBoard`;
                 }
             }
         }
