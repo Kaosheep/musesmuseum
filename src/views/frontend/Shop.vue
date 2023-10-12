@@ -190,7 +190,7 @@ export default {
       });
     },
     fetchprod() {
-      fetch(`${this.publicpath}shop.php`)
+      fetch(`${this.$store.state.publicpath}shop.php`)
         .then(async (response) => {
           this.produstdislist = await response.json();
           console.log(this.produstdislist);

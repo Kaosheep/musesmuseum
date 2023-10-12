@@ -86,7 +86,7 @@ export default {
   },
   methods: {
     fetchprod() {
-      fetch(`${this.publicpath}productPage.php`).then(async (response) => {
+      fetch(`${this.$store.state.publicpath}productPage.php`).then(async (response) => {
         this.produstdislist = await response.json();
         const idToFind = this.$route.params.prod_id;
         this.foundObject = this.produstdislist.find((item) => item.prod_id === idToFind); 
