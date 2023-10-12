@@ -148,7 +148,6 @@ export default {
       console.log(cookie);
       if (cookie.startsWith('members=')) {
         members = decodeURIComponent(cookie.substring('members='.length));
-
         break;
       }
     }

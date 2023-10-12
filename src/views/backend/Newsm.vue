@@ -275,7 +275,7 @@ export default {
         this.addnews = true;
       }
       if (type == "edit") {
-        const url = `http://localhost/musesmuseum/public/phps/news_list.php`;
+        const url = `${this.$store.state.publicpath}news_list.php`;
         let headers = {
           "Content-Type": "application/json",
           Accept: "application/json",
@@ -316,7 +316,7 @@ export default {
     //新增
     addnews_btn(id) {
       if (id != undefined) {
-        const url = `http://localhost/musesmuseum/public/phps/news_updateupload.php`;
+        const url = `${this.$store.state.publicpath}news_updateupload.php`;
         const formData = new FormData();
         formData.append("id", this.add_news.id);
         formData.append("title", this.add_news.title);
@@ -348,7 +348,7 @@ export default {
             console.log(error.message);
           });
       } else {
-        const url = `http://localhost/musesmuseum/public/phps/news_insertupload.php`;
+        const url = `${this.$store.state.publicpath}news_insertupload.php`;
         const formData = new FormData();
         formData.append("id", this.add_news.id);
         formData.append("title", this.add_news.title);
@@ -392,7 +392,7 @@ export default {
   },
   mounted() {
     //先檢查資料格式是否符合DB規則
-    const url = `http://localhost/musesmuseum/public/phps/news_list.php`;
+    const url = `${this.$store.state.publicpath}news_list.php`;
     let headers = {
       "Content-Type": "application/json",
       Accept: "application/json",
