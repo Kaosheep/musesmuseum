@@ -3,7 +3,7 @@
         <div>
             <div class="admin_editbar">
                 <div>
-                    <PinkButton class="btn_admin" text="新增" @click="showAddForm" />
+                    <button class="btn_admin" @click="showEditForm('add')">新增</button>
                     <PinkButton class="btn_admin" text="上架" @click="toggleStatus('1')" :disabled="!canToggle('1')" />
                     <PinkButton class="btn_admin" text="下架" @click="toggleStatus('0')" :disabled="!canToggle('0')" />
                 </div>
@@ -20,14 +20,14 @@
                     </tr>
                     <tr v-for="(exhibition, index) in exhibitions" :key="index">
                         <td><input type="checkbox"></td>
-                        <td>{{ exhibition.id }}</td>
-                        <td>{{ exhibition.title }}</td>
+                        <td>{{ exhibition.exh_id }}</td>
+                        <td>{{ exhibition.exh_name }}</td>
                         <td>
                             <p v-if="parseInt(exhibition.status) === 1">已上架</p>
                             <p v-else>未上架</p>
                         </td>
                         <td>
-                            <button class="edit" @click="showEditForm(exhibition)">編輯</button>
+                            <button class="edit" @click="showEditForm('edit', exhibition.exh_id)">編輯</button>
                         </td>
                     </tr>
                 </table>
@@ -36,7 +36,7 @@
                 <h2>編輯</h2>
                 <div>
                     <div>展覽編號</div>
-                    <div>{{ editMode ? exhibition.id : '自動生成' }}</div>
+                    <div v-text="formData.id"></div>
                 </div>
                 <div>
                     <div>標題</div>
@@ -100,11 +100,12 @@ export default {
             showForm: false,
             editMode: false,
             formData: {
+                id:"",
                 title: "",
                 content: "",
                 startDate: "",
                 endDate: "",
-                status: "0" // 預設為未上架
+                status: "", // 預設為未上架
             },
             news: [],
             test: [
@@ -153,25 +154,65 @@ export default {
         }
     },
     methods: {
-        showAddForm() {
-            this.editMode = false;
+        showEditForm(type, id) {
+            if (type == "add") {
+                // this.addnews = false;
+                this.formData = [
+                    {
+                        id: "",
+                        title: "",
+                        content: "",
+                        startDate: "",
+                        endDate: "",
+                        status: "", // 預設為未上架
+                    },
+                ];
+            } else {
+                // this.addnews = true;
+            }
+            if (type == "edit") {
+                const url = `${this.$store.state.publicpath}spex_list.php`;
+                let headers = {
+                    "Content-Type": "application/json",
+                    Accept: "application/json",
+                };
+                let body = {
+                    id: id,
+                };
+                fetch(url, {
+                    method: "POST",
+                    headers: headers,
+                    body: JSON.stringify({ data: body }),
+                })
+                    .then((response) => {
+                     
+                        if (response.ok) {
+                            return response.json();
+                        } else {
+                            throw new Error("取得失敗");
+                        }
+                    })
+                    .then((json) => {
+                        // title: "",
+                        // content: "",
+                        // startDate: "",
+                        // endDate: "",
+                        // status: "",
+                        console.log(json) 
+                        this.formData.id = json.exh_id;    
+                        this.formData.title = json.exh_name;
+                        this.formData.content = json.exh_desc;
+                        this.formData.startDate = json.exh_startdate;
+                        this.formData.endDate = json.exh_enddate;
+                        this.formData.status = json.exh_status;
+                  
+                    });
+                    this.showForm = true;
+            }
+
             this.showForm = true;
-            this.resetFormData();
         },
 
-        showEditForm(exhibition) {
-            this.editMode = true;
-            this.showForm = true;
-            this.formData = {
-                id: exhibition.id,
-                title: exhibition.title,
-                content: exhibition.content,
-                startDate: exhibition.startDate,
-                endDate: exhibition.endDate,
-                status: exhibition.status
-                // 其他欄位
-            };
-        },
 
         hideForm() {
             this.showForm = false;
@@ -209,9 +250,6 @@ export default {
         canToggle(newStatus) {
             return this.test.some(item => item.selected && item.statusn !== newStatus);
         },
-        showEditForm() {
-            this.showForm = true;
-        },
         hideEditForm() {
             this.showForm = false;
         },
@@ -239,6 +277,7 @@ export default {
             })
             .then((json) => {
                 this.exhibitions = json;
+
                 // 在成功時顯示提示
                 //alert(json.message); // 假設JSON數據中有一個message屬性
             })
