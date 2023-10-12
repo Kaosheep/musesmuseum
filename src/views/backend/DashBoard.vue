@@ -3,13 +3,29 @@
     <div class="dashborad">
       <div class="console">
         <Row>
-          <Menu :theme="theme" class="list_style" accordion open-names="['1']" active-name="1-1">
-            <Submenu v-show = "test(submenu.name)" v-for="(submenu, index) in menuData" :key="index" :name="submenu.name">
+          <Menu
+            :theme="theme"
+            class="list_style"
+            accordion
+            open-names="['1']"
+            active-name="1-1"
+          >
+            <Submenu
+              v-show="test(submenu.name)"
+              v-for="(submenu, index) in menuData"
+              :key="index"
+              :name="submenu.name"
+            >
               <template #title>
                 {{ submenu.title }}
               </template>
-              <MenuItem  v-for="(item, itemIndex) in submenu.items" :key="itemIndex" :name="item.name" :to="item.link">
-              {{ item.text }}
+              <MenuItem
+                v-for="(item, itemIndex) in submenu.items"
+                :key="itemIndex"
+                :name="item.name"
+                :to="item.link"
+              >
+                {{ item.text }}
               </MenuItem>
             </Submenu>
             <MenuItem name="1">
@@ -35,71 +51,65 @@ export default {
   components: {
     Searchbar,
     Searchbarclick,
-    PinkButton
+    PinkButton,
   },
   data() {
     return {
       all_pri: true,
       menuData: [
         {
-          name: '1',
-          title: '消息管理',
+          name: "1",
+          title: "消息管理",
           items: [
-            { name: '1-1', text: '消息管理', link: "/DashBoard" },
-            { name: '1-2', text: '常見問題管理', link: "/DashBoard/Faqm" },
+            { name: "1-1", text: "消息管理", link: "/DashBoard" },
+            { name: "1-2", text: "常見問題管理", link: "/DashBoard/Faqm" },
           ],
         },
         {
-          name: '2',
-          title: '會員管理',
+          name: "2",
+          title: "會員管理",
+          items: [{ name: "2-1", text: "會員管理", link: "/DashBoard/Memberm" }],
+        },
+        {
+          name: "3",
+          title: "展覽資訊",
+          items: [{ name: "3-1", text: "展覽資訊", link: "/DashBoard/Exhm" }],
+        },
+        {
+          name: "4",
+          title: "購物管理",
           items: [
-            { name: '2-1', text: '會員管理', link: "/DashBoard/Memberm" },
+            { name: "4-1", text: "商品管理", link: "/DashBoard/Shopm" },
+            { name: "4-2", text: "訂單管理", link: "/DashBoard/Orderm" },
           ],
         },
         {
-          name: '3',
-          title: '展覽資訊',
+          name: "5",
+          title: "訂票管理",
           items: [
-            { name: '3-1', text: '展覽資訊', link: "/DashBoard/Exhm" },
+            { name: "5-1", text: "票種管理", link: "/DashBoard/Ticketsm" },
+            { name: "5-2", text: "訂票管理", link: "/DashBoard/TicketsOrdm" },
+            { name: "5-3", text: "日期管理", link: "/DashBoard/ClosedOnm" },
           ],
         },
         {
-          name: '4',
-          title: '購物管理',
-          items: [
-            { name: '4-1', text: '商品管理', link: "/DashBoard/Shopm" },
-            { name: '4-2', text: '訂單管理', link: "/DashBoard/Orderm" },
-          ],
-        },
-        {
-          name: '5',
-          title: '訂票管理',
-          items: [
-            { name: '5-1', text: '票種管理', link: "/DashBoard/Ticketsm" },
-            { name: '5-2', text: '訂票管理', link: "/DashBoard/TicketsOrdm" },
-            { name: '5-3', text: '日期管理', link: "/DashBoard/ClosedOnm" },
-          ],
-        },
-        {
-          name: '6',
-          title: '帳號管理',
-          items: [
-            { name: '6-1', text: '管理員帳號', link: "/DashBoard/Manager" },
-          ],
+          name: "6",
+          title: "帳號管理",
+          items: [{ name: "6-1", text: "管理員帳號", link: "/DashBoard/Manager" }],
         },
       ],
-    }
+    };
   },
 
   methods: {
-    test(id){
-      if(id == 6){
-        if(this.all_pri == 0){
-          return false
-        }else{
-          return true
+    test(id) {
+      if (id == 6) {
+        if (this.all_pri == 0) {
+          return false;
+        } else {
+          return true;
         }
-      }else{
+      } else {
         return true;
       }
     },
@@ -113,14 +123,13 @@ export default {
       document.cookie = "manager=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
       // 清除 cookie 後重新載入頁面
       window.location.reload();
-    }
+    },
   },
   mounted() {
     const name = "manager" + "=";
     const decodedCookie = decodeURIComponent(document.cookie);
-    const cookieArray = decodedCookie.split(';');
+    const cookieArray = decodedCookie.split(";");
     let foundCookie = false; // 用于标记是否找到匹配的 cookie
-
 
     // for (let i = 0; i < cookieArray.length; i++) {
     //   let cookie = cookieArray[i];
@@ -132,45 +141,43 @@ export default {
     //   }
     // }
     for (let i = 0; i < cookieArray.length; i++) {
-        let cookie = cookieArray[i];
-        while (cookie.charAt(0) === ' ') {
-            cookie = cookie.substring(1);
+      let cookie = cookieArray[i];
+      while (cookie.charAt(0) === " ") {
+        cookie = cookie.substring(1);
+      }
+
+      if (cookie.indexOf(name) === 0) {
+        console.log();
+        foundCookie = true;
+        console.log(cookie.split("=")[1]);
+        console.log(JSON.parse(cookie.split("=")[1]));
+        let cookie_vale = JSON.parse(cookie.split("=")[1])["ma_type"];
+        if (cookie_vale == 0) {
+          this.all_pri = false;
         }
-        
-        if (cookie.indexOf(name) === 0) {
-          console.log()
-            foundCookie = true;
-            console.log(cookie.split('=')[1])
-            console.log(JSON.parse(cookie.split('=')[1]))
-            let cookie_vale = JSON.parse(cookie.split('=')[1])['ma_type'];
-            if(cookie_vale == 0) {
-              this.all_pri = false
-            }
-            break; // 找到匹配的 cookie 后退出循环
-        }
+        break; // 找到匹配的 cookie 后退出循环
+      }
     }
 
     if (!foundCookie) {
-        document.location.href = "/Admin";
+      document.location.href = `${this.$store.state.publicURL}Admin`;
     }
     return "";
   },
-}
-
+};
 </script>
 
 <style scoped lang="scss">
 main {
   width: 100vw;
   height: 100vh;
-  background-image: linear-gradient(to bottom right, #009CA8, #FBF796);
+  background-image: linear-gradient(to bottom right, #009ca8, #fbf796);
   display: flex;
   justify-content: center;
   align-items: center;
 
   .list_style {
-    background-color: #D9D9D9;
+    background-color: #d9d9d9;
   }
 }
 </style>
-

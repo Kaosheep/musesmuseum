@@ -16,7 +16,7 @@
         <table>
           <tr>
             <th></th>
-            <th>編號</th>
+            <!--<th>編號</th>-->
             <th>問題</th>
             <th>答案</th>
             <!-- <th>狀態</th> -->
@@ -29,7 +29,7 @@
                 type="checkbox"  
                 @change="inchecked(i.faq_id, $event)">
             </td>
-            <td class="faqmId">{{ i.faq_id }}</td>
+            <!-- <td class="faqmId">{{ i.faq_id }}</td> -->
             <td class="faqmQues">{{ i.faq_question }}</td>
             <td class="faqmAns">{{ i.faq_ans }}</td>
             <td class="faqmEdit" >
@@ -268,7 +268,7 @@ export default {
             if (response.ok) {
               return response.json();
             } else {
-              throw new Error("新增失敗");
+              throw new Error("更改失敗");
             }
           })
           .then((json) => {
@@ -429,13 +429,13 @@ div {
                     margin-right: 5px;
                 }
             }
-            &:nth-child(3){
+            &:nth-child(2){
               overflow: hidden;
               white-space: nowrap;
               text-overflow: ellipsis;
               max-width: 250px; /* 调整为适当的宽度 */
             }
-            &:nth-child(4){
+            &:nth-child(3){
               overflow: hidden;
               white-space: nowrap;
               text-overflow: ellipsis;
