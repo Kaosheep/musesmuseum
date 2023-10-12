@@ -204,19 +204,24 @@ header {
             }
 
             span {
-                width: 20px;
-                height: 20px;
-                border-radius: 50%;
-                background-color: #fff;
+                @include tc();
                 position: absolute;
-                bottom: 80%;
-                left: 50%;
-                transform: translateX(-50%);
-                font-size: 16px;
-                line-height: 20px;
-                padding: 0;
-                color: $mpink;
-                border: 1px solid $myellow;
+                padding: 0 0 10px 1px;
+
+                &:nth-child(2){
+                    font-size: 18px;
+                    color: #000;
+                    font-weight: 700;
+                }
+                &:first-child {
+                    font-size: 18px;
+                    color: #fff;
+                    -webkit-text-stroke: 2px #fff;
+                    font-weight: 900;
+                }
+
+                // text-shadow: 0px 0px 3px #fff;
+
             }
         }
 
