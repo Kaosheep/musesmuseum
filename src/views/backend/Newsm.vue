@@ -152,6 +152,7 @@ export default {
           date: "",
           src: "",
           image: "",
+          status:""
         },
       ],
       newsched: [],
@@ -195,7 +196,7 @@ export default {
           })
           .then((json) => {
             alert(json);
-            // window.location.reload();
+            window.location.reload();
           })
           .catch(function (error) {
             console.log(error);
@@ -230,7 +231,12 @@ export default {
         })
         .then((json) => {
           alert(json);
-          // window.location.reload();
+          this.fetchnew();
+          this.newsched = [];
+          document.querySelectorAll('.statusinput').forEach((inputb)=>{
+            inputb.checked = false;
+          })
+
         })
         .catch(function (error) {
           console.log(error);
@@ -377,22 +383,8 @@ export default {
           });
       }
     },
-  },
-  computed: {
-    pagenews() {
-      // 根據當前頁碼和每頁顯示的數據量計算需要顯示的數據
-      const start = (this.currentPage - 1) * this.pageSize;
-      const end = start + this.pageSize;
-      return this.news.slice(start, end);
-    },
-    totalPages() {
-      // 計算總頁數
-      return Math.ceil(this.news.length / this.pageSize);
-    },
-  },
-  mounted() {
-    //先檢查資料格式是否符合DB規則
-    const url = `${this.$store.state.publicpath}news_list.php`;
+    fetchnew(){
+      const url = `${this.$store.state.publicpath}news_list.php`;
     let headers = {
       "Content-Type": "application/json",
       Accept: "application/json",
@@ -414,6 +406,23 @@ export default {
       .catch((error) => {
         console.log(error.message);
       });
+    }
+  },
+  computed: {
+    pagenews() {
+      // 根據當前頁碼和每頁顯示的數據量計算需要顯示的數據
+      const start = (this.currentPage - 1) * this.pageSize;
+      const end = start + this.pageSize;
+      return this.news.slice(start, end);
+    },
+    totalPages() {
+      // 計算總頁數
+      return Math.ceil(this.news.length / this.pageSize);
+    },
+  },
+  mounted() {
+    //先檢查資料格式是否符合DB規則
+    this.fetchnew();
   },
 };
 </script>
