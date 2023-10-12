@@ -213,7 +213,12 @@ export default {
         this.sortType = type;
       }
     },
+    // addcartnum(){
+    //   this.$store.state.cartnum+=1;
+    //   console.log(this.$store.state.cartnum)
+    // },
     addcart(prod_id) {
+      this.$store.state.cartnum+=1;
       if (this.storage["addItemlist"] == null) {
         this.storage["addItemlist"] = "";
       }
@@ -230,6 +235,7 @@ export default {
         itemstr.splice(4, 1, nowamount);
         this.storage[prod_id] = "";
         this.storage[prod_id] += itemstr;
+       
       } else {
         this.storage[prod_id] = "";
         this.storage[prod_id] += `${prod_id},`;

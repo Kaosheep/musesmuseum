@@ -33,6 +33,7 @@ export default createStore({
     mbr_name: '',
     mbr_id:'',
     isLogin: false,
+    cartnum:0,
   },
   getters: {
   },

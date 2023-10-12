@@ -195,7 +195,7 @@ export default {
           })
           .then((json) => {
             alert(json);
-            window.location.reload();
+            // window.location.reload();
           })
           .catch(function (error) {
             console.log(error);
@@ -230,7 +230,7 @@ export default {
         })
         .then((json) => {
           alert(json);
-          window.location.reload();
+          // window.location.reload();
         })
         .catch(function (error) {
           console.log(error);
@@ -315,9 +315,6 @@ export default {
     },
     //新增
     addnews_btn(id) {
-      // if(){
-
-      // }
       if (id != undefined) {
         const url = `http://localhost/musesmuseum/public/phps/news_updateupload.php`;
         const formData = new FormData();
@@ -326,8 +323,12 @@ export default {
         formData.append("content", this.add_news.content);
         formData.append("status", this.status);
         formData.append("date", this.add_news.date);
-        formData.append("image", document.getElementById("fileimg").files[0]);
-
+        if(document.getElementById("fileimg").files[0]){
+         formData.append("image", document.getElementById("fileimg").files[0]);
+        }else{
+          formData.append("image", this.add_news.image);
+        }
+        
         fetch(url, {
           method: "POST",
           body: formData,
@@ -347,33 +348,33 @@ export default {
             console.log(error.message);
           });
       } else {
-        const url = `http://localhost/musesmuseum/public/phps/news_insertupload.php`;
-        const formData = new FormData();
-        formData.append("id", this.add_news.id);
-        formData.append("title", this.add_news.title);
-        formData.append("content", this.add_news.content);
-        formData.append("status", this.status);
-        formData.append("date", this.add_news.date);
-        formData.append("image", document.getElementById("fileimg").files[0]);
+        // const url = `http://localhost/musesmuseum/public/phps/news_insertupload.php`;
+        // const formData = new FormData();
+        // formData.append("id", this.add_news.id);
+        // formData.append("title", this.add_news.title);
+        // formData.append("content", this.add_news.content);
+        // formData.append("status", this.status);
+        // formData.append("date", this.add_news.date);
+        // formData.append("image", document.getElementById("fileimg").files[0]);
 
-        fetch(url, {
-          method: "POST",
-          body: formData,
-        })
-          .then((response) => {
-            if (response.ok) {
-              return response.json();
-            } else {
-              throw new Error("新增失敗");
-            }
-          })
-          .then((json) => {
-            alert(json);
-            window.location.reload();
-          })
-          .catch((error) => {
-            console.log(error.message);
-          });
+        // fetch(url, {
+        //   method: "POST",
+        //   body: formData,
+        // })
+        //   .then((response) => {
+        //     if (response.ok) {
+        //       return response.json();
+        //     } else {
+        //       throw new Error("新增失敗");
+        //     }
+        //   })
+        //   .then((json) => {
+        //     alert(json);
+        //     window.location.reload();
+        //   })
+        //   .catch((error) => {
+        //     console.log(error.message);
+        //   });
       }
     },
   },
