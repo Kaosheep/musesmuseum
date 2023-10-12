@@ -122,16 +122,17 @@
             <div class="item" v-for="(item, index) in newscol" :key="index">
               <RouterLink to="">
                 <div class="txt">
-                  <span>{{ item.time }}</span>
-                  <h3>{{ item.title }}</h3>
-                  <p>{{ item.info }}</p>
+                  <span>{{ item.news_date }}</span>
+                  <h3>{{ item.news_title }}</h3>
+                  <p>{{ item.news_content }}</p>
                 </div>
                 <div class="seemore">
                   <ThinArrow :text="'More'"></ThinArrow>
                 </div>
                 <div class="image">
+                  <!-- <img class="forw" src="@/assets/image/space/spaceTheShop.png"> -->
                   <img
-                    :src="(`${this.$store.state.imgpublicpath}image/news/n` + index + '.jpg')"
+                    :src="(`${this.$store.state.imgpublicpath}image/news/` + item.news_img)"
                     alt=""
                   />
                 </div>

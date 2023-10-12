@@ -31,26 +31,7 @@ export default {
         { title: "商品", entitle: "Shop", link: "/Home/Shop" },
         { title: "關於我們", entitle: "About Us", link: "/Home/History" },
       ],
-      newscol: [
-        {
-          time: "2023-08-25",
-          title: "抽象藝術簡談",
-          info: "本館將舉辦一系列藝術家講座，本次邀請知明藝術家小林堅丙、伍時媛分享他們的創作理念和經驗。為藝術愛好者提供與藝術家近距離互動的機會。本館將舉辦一系列藝術家講座，本次邀請知明藝術家小林堅丙、伍時媛分享他們的創作理念和經驗。為藝術愛好者提供與藝術家近距離互動的機會。",
-          imgsrc: "",
-        },
-        {
-          time: "2023-07-15",
-          title: "文青集社—意象創作展",
-          info: "近期熱門的文青集社來了!除了於本館展出最新作品外，經典系列也會收錄在這次創作展中。喜愛文青集社作品的人可別錯過了!",
-          imgsrc: "",
-        },
-        {
-          time: "2023-06-22",
-          title: "清晨台北",
-          info: "攝影新星—巫隆迺，用最擅長的黑白鏡頭帶領大家一同深入台灣角落。感受發生於台北之中的各種酸甜苦辣",
-          imgsrc: "",
-        },
-      ],
+      newscol: [],
       productlist: [
         {
           title: "MUSE筆記本",
@@ -78,7 +59,7 @@ export default {
         { imgtitle: '時光之旅', time: '2023/5/1-2023/6/15', info: '這個展覽將追溯藝術的演變，從古代到當代。通過展出各個時代的代表性藝術品，讓觀眾感受藝術的時光之旅。' },
       ],
       isshow: false,
-      j:0
+      j: 0
     };
   },
   methods: {
@@ -122,16 +103,17 @@ export default {
           gallery.style.transform = `perspective(2000px) rotateX(-5deg) rotateY(-${(i + 1) * angle
             }deg)`;
           return this.j = i;
-          
+
         };
 
       });
-      document.querySelector('.gbtnl').addEventListener("click", ()=>{
-        this.j += 1;
+      document.querySelector('.gbtnl').addEventListener("click", (e) => {
+        // this.j += 1;
         console.log(this.j)
+        console.log(e.target)
         gallery.style.transform = `perspective(2000px) rotateX(-5deg) rotateY(${(this.j) * angle
           }deg)`;
-        return this.j;
+        // return this.j;
       });
       document.querySelector('.gbtnr').addEventListener("click", (e) => {
         this.j -= 1;
@@ -200,11 +182,14 @@ export default {
       document.querySelector('.ballb').style.transform = `translate(${-x}px , ${-y}px)`;
     },
     fetchnews() {
-      fetch(`${this.$store.state.publicpath}news_fetch.php`).then(async (response) => {
+      fetch(`${this.$store.state.publicpath}index_fetch.php`).then(async (response) => {
         this.newscol = await response.json();
       });
     },
 
+  },
+  beforeMount() {
+    this.fetchnews();
   },
   mounted() {
 
@@ -235,23 +220,23 @@ export default {
       animateimg();
       requestAnimationFrame(animate);
     }
-    let newimgs = [...document.querySelectorAll(".eventwrap .item .image img")];
-    let newimgWidth = document.querySelector(
-      ".eventwrap .item .image img"
-    ).offsetWidth;
+    // let newimgs = [...document.querySelectorAll(".eventwrap .item .image img")];
+    // let newimgWidth = document.querySelector(
+    //   ".eventwrap .item .image img"
+    // ).offsetWidth;
 
     function animateimg() {
-      let ratio = current / newimgWidth;
+      // let ratio = current / newimgWidth;
       let intersectionratio;
 
-      newimgs.forEach((image, i) => {
-        intersectionratio = ratio - i * 1.5;
-        if (window.innerWidth > 820) {
-          setTransform(image, `translateX(-${intersectionratio * 8}px)`);
-        } else {
-          setTransform(image, `translateX(0px)`)
-        }
-      });
+      // newimgs.forEach((image, i) => {
+      //   intersectionratio = ratio - i * 1.5;
+      //   if (window.innerWidth > 820) {
+      //     setTransform(image, `translateX(-${intersectionratio * 8}px)`);
+      //   } else {
+      //     setTransform(image, `translateX(0px)`)
+      //   }
+      // });
       txtframe.forEach((txtframe) => {
         setTransform(txtframe, `translateX(${intersectionratio * 20}px)`);
       });
@@ -270,22 +255,6 @@ export default {
       setTransform(homecart, `translateX(${intersectionratio * 20}px)`)
 
     }
-    // document.querySelector('.gbtnl').addEventListener("click", ()=>{
-    //   this.j -= 1;
-    //   console.log(this.j)
-    //   gallery.style.transform = `perspective(2000px) rotateX(-5deg) rotateY(${(this.j) * angle
-    //     }deg)`;
-    //   return this.j;
-    // });
-    // document.querySelector('.gbtnr').addEventListener("click", (e) => {
-    //   this.j -= 1;
-    //   console.log(this.j)
-    //   gallery.style.transform = `perspective(2000px) rotateX(-5deg) rotateY(${(this.j) * angle
-    //     }deg)`;
-    //   return this.j;
-
-    // })
-
     let anchorli = [...document.querySelectorAll(".anchor ul li")];
     anchorli.forEach((li, i) => {
       li.addEventListener("click", (e) => {
@@ -303,6 +272,7 @@ export default {
     this.followcursor();
     this.resize();
     this.gallerycircle();
+
     document.querySelector('.comfooter').style.display = 'none';
   },
   beforeUnmount() {

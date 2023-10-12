@@ -5,7 +5,8 @@ header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Ac
 header("Content-Type: application/json"); 
 try{
 	require_once("./connectMuses.php");
-    $sql = "select * from news order by news_date DESC"; 
+
+    $sql = "select * from news where news_status=1 order by news_date DESC"; 
     $news = $pdo->query($sql);
     
     $news->execute();
