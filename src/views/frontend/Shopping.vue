@@ -109,7 +109,7 @@ export default {
   methods: {
     //把城市抓回來
     fetchCounty() {
-      fetch(`${this.publicpath}shopping.php`).then(async (response) => {
+      fetch(`${this.$store.state.publicpath}shopping.php`).then(async (response) => {
         let countyList = await response.json();
         this.countyList = countyList[0];
         // console.log(this.countyList);
@@ -120,7 +120,7 @@ export default {
     },
     //把區域抓回來
     fetchDistricts() {
-      const URL = `${this.publicpath}shopping.php`;
+      const URL = `${this.$store.state.publicpath}shopping.php`;
       const formData = new URLSearchParams();
       formData.append('countyId', this.selectedCounty.county_id);
       // console.log(formData.get('countyId'));
@@ -149,7 +149,7 @@ export default {
     },
     //得到訂單資訊，並送回資料庫建檔
     getOrderInfo() {
-      const URL = `${this.publicpath}shopping_info.php`;
+      const URL = `${this.$store.state.publicpath}shopping_info.php`;
       const formDataObj = {
         mbr_id: this.mbr_id,
         po_date: this.nowDay,
@@ -179,7 +179,7 @@ export default {
     },
     //給會員編號，把該筆訂單編號抓回來
     fetchPO() {
-      const URL = `${this.publicpath}shopping_getpoid.php`;
+      const URL = `${this.$store.state.publicpath}shopping_getpoid.php`;
       const formData = new URLSearchParams();
       formData.append('mbr_id', this.mbr_id);
       fetch(URL, {
@@ -198,7 +198,7 @@ export default {
     // 得到訂單明細，並送回資料庫建檔
     async getOrderDLT() {
       for (const item of this.itemarr) {
-        const URL = `${this.publicpath}shopping_details.php`;
+        const URL = `${this.$store.state.publicpath}shopping_details.php`;
         const orderDLTObj = {
           po_id: this.po_id,
           prod_id: item[0],

@@ -7,29 +7,29 @@ header("Content-Type: application/json");
 try {
     require_once("./connectMuses.php");
 
-    if (isset($_POST["prod_id"])) {
-        $prod_id = $_POST["prod_id"];
+    $data = json_decode(file_get_contents('php://input'));
 
-        $data = json_decode(file_get_contents('php://input'));
 
-        $sql = "SELECT * FROM products WHERE prod_id=:prod_id";
+    if(empty($data)){
+        $sql = "SELECT * FROM products";
+        $prods = $pdo->query($sql);
+        $prodsRow = $prods->fetchAll(PDO::FETCH_ASSOC);
+        
+    }else{
+        $sql = "SELECT * FROM products WHERE prods_id=:prods_id ";
         $prodStmt = $pdo->prepare($sql);
-
-        $prodStmt->bindParam(":prod_id", $prod_id, PDO::PARAM_STR);           
-
+        $prodStmt->bindValue(":prods_id", $data->data->id);
         $prodStmt->execute();
-
-        if ($districts->rowCount() === 0) {
-            echo "查無資料";
-        } else {
-            $prodsRow = $prodStmt->fetch(PDO::FETCH_ASSOC);
-                            
-            echo json_encode($prodsRow);
-        }
+        $prodsRow = $prodStmt->fetch(PDO::FETCH_ASSOC);
     }
 
+    echo json_encode($prodsRow);
+    
+
 } catch (PDOException $e) {
-    $result = ["error" => "儲存失敗：" . $e->getMessage()];
-    echo json_encode($result);
+    // 返回 JSON 錯誤響應
+    $errorResponse = ["message" => "新增失敗：" . $e->getMessage()];
+    echo json_encode($errorResponse);
 }
 ?>
+

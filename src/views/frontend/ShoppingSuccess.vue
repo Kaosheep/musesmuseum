@@ -38,7 +38,7 @@ export default {
     methods: {
         //給會員編號，把該筆訂單編號抓回來
         fetchPO() {
-        const URL = `${this.publicpath}shopping_getpoid.php`;
+        const URL = `${this.$store.state.publicpath}shopping_getpoid.php`;
         const formData = new URLSearchParams();
         formData.append('mbr_id', this.mbr_id);
         fetch(URL, {
