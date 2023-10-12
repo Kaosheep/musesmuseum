@@ -9,7 +9,7 @@
       <div class="product_image">
         <img :src="(`${this.$store.state.imgpublicpath}image/productimage/` + foundObject.prod_img)" :alt="foundObject.prod_name" />
         <div>
-          <Heart></Heart>
+          <Heart :loveid="$route.params.prod_id"> </Heart>
           <p>收藏</p>
         </div>
       </div>
@@ -80,11 +80,29 @@ export default {
       count: 1,
       foundObject: {},
       produstdislist: [],
+      lovescol: [],
       storage: localStorage,
       publicpath: "http://localhost/musesmuseum/public/phps/",
     };
   },
   methods: {
+    loveid(id) {
+      this.loven = this.$route.params.prod_id;
+    },
+    getlove() {
+      const formData = new URLSearchParams();
+      formData.append("mbr_id", this.$store.state.mbr_id);
+
+      fetch(`${this.$store.state.publicpath}love_fetch.php`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded; charset=utf-8",
+        },
+        body: formData,
+      }).then(async (response) => {
+        this.lovescol = await response.json();
+      });
+    },
     fetchprod() {
       fetch(`${this.$store.state.publicpath}productPage.php`).then(async (response) => {
         this.produstdislist = await response.json();

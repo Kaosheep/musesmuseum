@@ -23,9 +23,11 @@ export default {
   },
   computed: {
     activelove() {
-      if (this.loveid) {
+      if (!this.$store.state.mbr_id) {
+        return 0;
+      }else if(this.loveid) {
         return this.lovescol.some((item) => item.prod_id === this.loveid);
-      } else {
+      }else {
         return 0;
       }
     },
@@ -46,18 +48,22 @@ export default {
       });
     },
     uplove() {
-      const formData = new URLSearchParams();
-      formData.append("prod_id", this.loveid);
-      formData.append("mbr_id", this.$store.state.mbr_id);
+      if (!this.$store.state.mbr_id) {
+        document.location.href = `${this.$store.state.imgpublicpath}Home/MemberInfo`;
+      } else {
+        const formData = new URLSearchParams();
+        formData.append("prod_id", this.loveid);
+        formData.append("mbr_id", this.$store.state.mbr_id);
 
-      fetch(`${this.$store.state.publicpath}love_insertupload.php`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded; charset=utf-8",
-        },
-        body: formData,
-      })
-      window.location.reload();
+        fetch(`${this.$store.state.publicpath}love_insertupload.php`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded; charset=utf-8",
+          },
+          body: formData,
+        });
+        window.location.reload();
+      }
     },
   },
   mounted() {
