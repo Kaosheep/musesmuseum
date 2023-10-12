@@ -13,9 +13,8 @@
     <div class="social">
       <router-link to="/Home/Shoppingcar" @click="closemenu">
         <span class="sspan">
-          <!-- v-if="$store.state.cartnum>1" -->
-          <span >{{$store.state.cartnum }}</span>
-          <span >{{$store.state.cartnum }}</span>
+          <span v-if="totalitem>1">{{ totalitem }}</span>
+          <span v-if="totalitem>1">{{ totalitem }}</span>
           <i
             class="sicon fa-solid fa-cart-shopping"
             id="social_cart"

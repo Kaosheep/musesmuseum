@@ -102,7 +102,7 @@ export default {
       };
 
       const data = new URLSearchParams({ mbr_email, mbr_psw });
-      fetch("http://localhost/musesmuseum/public/phps/login.php", {
+      fetch(`${this.$store.state.publicpath}login.php`, {
         method: "POST",
         headers: {
           "Content-Type": "application/x-www-form-urlencoded",

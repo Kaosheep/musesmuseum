@@ -21,7 +21,7 @@
             echo json_encode($prodRow);//送出json字串
         }
     } catch (PDOException $e) {
-        $result = ["error"=>$e->getMessage()];
-        echo json_encode($result);
+        echo "錯誤行號 : ", $e->getLine(), "<br>";
+        echo "錯誤原因 : ", $e->getMessage(), "<br>";
     }
 ?>

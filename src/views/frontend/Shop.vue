@@ -213,10 +213,6 @@ export default {
         this.sortType = type;
       }
     },
-    // addcartnum(){
-    //   this.$store.state.cartnum+=1;
-    //   console.log(this.$store.state.cartnum)
-    // },
     addcart(prod_id) {
       this.$store.state.cartnum+=1;
       if (this.storage["addItemlist"] == null) {
