@@ -24,11 +24,11 @@ try {
 
     if (empty($id)) {  
         // Insert
-        $sql = "INSERT INTO spexhibitions (spexhiImg, spexhi_startdate, spexhi_enddate, spexhiTitle, spexhiDesc, spexhiLoc) VALUES (:spexhiImg, :spexhi_startdate, :spexhi_enddate, :spexhiTitle, :spexhiDesc, :spexhiLoc)";
+        $sql = "INSERT INTO exhibitions (spexhiImg, spexhi_startdate, spexhi_enddate, spexhiTitle, spexhiDesc, spexhiLoc) VALUES (:spexhiImg, :spexhi_startdate, :spexhi_enddate, :spexhiTitle, :spexhiDesc, :spexhiLoc)";
         $newSpex = $pdo->prepare($sql);
     } else {
         // Update
-        $sql = "UPDATE spexhibitions SET `spexhiImg` = :spexhiImg, `spexhi_startdate` = :spexhi_startdate, `spexhi_enddate` = :spexhi_enddate, `spexhiTitle` = :spexhiTitle, `spexhiDesc` = :spexhiDesc, `spexhiLoc` = :spexhiLoc WHERE `id` = :id";
+        $sql = "UPDATE exhibitions SET `spexhiImg` = :spexhiImg, `spexhi_startdate` = :spexhi_startdate, `spexhi_enddate` = :spexhi_enddate, `spexhiTitle` = :spexhiTitle, `spexhiDesc` = :spexhiDesc, `spexhiLoc` = :spexhiLoc WHERE `id` = :id";
         $newSpex = $pdo->prepare($sql);
         $newSpex->bindValue(":id", $id);
     }
