@@ -16,7 +16,7 @@ try {
 
 
     if(empty($data)){
-        $sql = "select * from `exhibitions`";
+        $sql = "select * from exhibitions";
         $spex = $pdo->query($sql);
         $spexRow = $spex->fetchAll(PDO::FETCH_ASSOC);
         
@@ -28,7 +28,7 @@ try {
         $spexRow = $newSpex->fetch(PDO::FETCH_ASSOC);
     }
 
-    echo json_encode($newsRow);
+    echo json_encode($spexRow);
     
 
 } catch (PDOException $e) {

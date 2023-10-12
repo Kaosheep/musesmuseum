@@ -14,40 +14,36 @@ try {
 
     $data = json_decode(file_get_contents('php://input'));
 
-    $id = isset($data->data->id) ? $data->data->id : '';
-    $spexhiImg = $data->data->spexhiImg;
-    $spexhi_startdate = $data->data->spexhi_startdate;
-    $spexhi_enddate = $data->data->spexhi_enddate;
-    $spexhiTitle = $data->data->spexhiTitle;
-    $spexhiDesc = $data->data->spexhiDesc;
-    $spexhiLoc = $data->data->spexhiLoc;
 
-    if (empty($id)) {  
-        // Insert
-        $sql = "INSERT INTO exhibitions (spexhiImg, spexhi_startdate, spexhi_enddate, spexhiTitle, spexhiDesc, spexhiLoc) VALUES (:spexhiImg, :spexhi_startdate, :spexhi_enddate, :spexhiTitle, :spexhiDesc, :spexhiLoc)";
-        $newSpex = $pdo->prepare($sql);
-    } else {
-        // Update
-        $sql = "UPDATE exhibitions SET `spexhiImg` = :spexhiImg, `spexhi_startdate` = :spexhi_startdate, `spexhi_enddate` = :spexhi_enddate, `spexhiTitle` = :spexhiTitle, `spexhiDesc` = :spexhiDesc, `spexhiLoc` = :spexhiLoc WHERE `id` = :id";
-        $newSpex = $pdo->prepare($sql);
-        $newSpex->bindValue(":id", $id);
-    }
+    $id = isset($data->data->id) ? $data->data->id: '';
+    $title = $data->title;
+    $content = $data->content;
+    $status = $data->status;
+    $startDate = $data->startDate;
+    $endDate = $data->endDate;
 
-    $newSpex->bindValue(":spexhiImg", $spexhiImg);
-    $newSpex->bindValue(":spexhi_startdate", $spexhi_startdate);
-    $newSpex->bindValue(":spexhi_enddate", $spexhi_enddate);
-    $newSpex->bindValue(":spexhiTitle", $spexhiTitle);
-    $newSpex->bindValue(":spexhiDesc", $spexhiDesc);
-    $newSpex->bindValue(":spexhiLoc", $spexhiLoc);
+    $sql = "INSERT INTO exhibitions (exhibition_id, title, content, status, start_date, end_date) VALUES (:id, :title, :content, :status, :startDate, :endDate)";
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindValue(":id", $id);
+    $stmt->bindValue(":title", $title);
+    $stmt->bindValue(":content", $content);
+    $stmt->bindValue(":status", $status);
+    $stmt->bindValue(":startDate", $startDate);
+    $stmt->bindValue(":endDate", $endDate);
 
-    $result = $newSpex->execute();
+    $result = $stmt->execute();
 
     // 返回 JSON 響應
-    $response = ["message" => "新增成功"];
+    $response = ["message" => $result ? "新增成功" : "新增失敗"];
     echo json_encode($response);
 } catch (PDOException $e) {
     // 返回 JSON 錯誤響應
     $errorResponse = ["message" => "新增失敗：" . $e->getMessage()];
     echo json_encode($errorResponse);
+}
+
+// Function to generate a unique exhibition ID (you may need to implement your own logic)
+function generateExhibitionId() {
+    return "EXH" . date("YmdHis") . rand(1000, 9999);
 }
 ?>

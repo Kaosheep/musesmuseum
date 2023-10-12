@@ -33,7 +33,7 @@
                 </table>
             </div>
             <form action="" class="pop" v-if="showForm" @submit.prevent="submitForm">
-                <h2>{{ editMode ? '編輯' : '新增' }}</h2>
+                <h2>編輯</h2>
                 <div>
                     <div>展覽編號</div>
                     <div>{{ editMode ? exhibition.id : '自動生成' }}</div>
@@ -51,7 +51,7 @@
                     <div>
                         <div>展覽期間</div>
                         <div>
-                            <iinput type="date" v-model="formData.startDate" /> 至
+                            <input type="date" v-model="formData.startDate" /> 至
                             <input type="date" v-model="formData.endDate" />
                         </div>
                     </div>
@@ -70,7 +70,7 @@
                         </div>
                     </div>
                 </div>
-           
+
                 <div class="form_btn">
                     <PinkButton class="btn_admin" text="取消" @click="hideForm" />
                     <PinkButton class="btn_admin" text="儲存" type="submit" />
@@ -221,7 +221,31 @@ export default {
 
     },
     mounted() {
-
+        const url = `http://localhost/musesmuseum/public/phps/spex_list.php`
+        let headers = {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+        }
+        fetch(url, {
+            method: "POST",
+            headers: headers,
+        })
+            .then((response) => {
+                if (response.ok) {
+                    return response.json(); // 如果請求成功，解析JSON數據
+                } else {
+                    throw new Error("取得消息失敗");
+                }
+            })
+            .then((json) => {
+                this.exhibitions = json;
+                // 在成功時顯示提示
+                //alert(json.message); // 假設JSON數據中有一個message屬性
+            })
+            .catch(error => {
+                // 在失敗時顯示提示
+                console.log(error.message);
+            });
     }
 }
 </script>
@@ -335,29 +359,33 @@ div {
     z-index: 999;
     border-radius: 10px;
     overflow: auto;
-    div{
-        margin-top: 10px;
-        textarea {
-    width: 100%;
-    background-color: #ffffff1b;
-    border: 1px solid #009CA8;
-    border-radius: 10px;
-    resize: none;
-    padding-left: 5px;
-    padding-right: 5px;
 
-  }
+    div {
+        margin-top: 10px;
+
+        textarea {
+            width: 100%;
+            background-color: #ffffff1b;
+            border: 1px solid #009CA8;
+            border-radius: 10px;
+            resize: none;
+            padding-left: 5px;
+            padding-right: 5px;
+
+        }
     }
 
     .info_col {
         display: flex;
         margin-right: 10px;
         margin-bottom: 10px;
+
         div {
             width: 100%;
             margin-top: 10px;
             margin-right: 10px;
-            .img_box{
+
+            .img_box {
                 padding-left: 5px;
                 padding-right: 5px;
                 border: 1px solid $mblue;
