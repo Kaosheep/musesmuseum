@@ -152,7 +152,7 @@ export default {
           date: "",
           src: "",
           image: "",
-          status:""
+          status: "",
         },
       ],
       newsched: [],
@@ -178,6 +178,14 @@ export default {
     };
   },
   methods: {
+    success(nodesc, json) {
+      this.$Notice.success({
+        title: json,
+        desc: nodesc
+          ? ""
+          : "Here is the notification description. Here is the notification description. ",
+      });
+    },
     deleten() {
       if (window.confirm("確認刪除資料?")) {
         fetch(`${this.$store.state.publicpath}news_del.php`, {
@@ -195,8 +203,12 @@ export default {
             }
           })
           .then((json) => {
-            alert(json);
-            window.location.reload();
+            this.success(true, json);
+            this.fetchnew();
+            this.newsched = [];
+            document.querySelectorAll(".statusinput").forEach((inputb) => {
+              inputb.checked = false;
+            });
           })
           .catch(function (error) {
             console.log(error);
@@ -230,13 +242,12 @@ export default {
           }
         })
         .then((json) => {
-          alert(json);
+          this.success(true, json);
           this.fetchnew();
           this.newsched = [];
-          document.querySelectorAll('.statusinput').forEach((inputb)=>{
+          document.querySelectorAll(".statusinput").forEach((inputb) => {
             inputb.checked = false;
-          })
-
+          });
         })
         .catch(function (error) {
           console.log(error);
@@ -247,12 +258,18 @@ export default {
       if (this.currentPage > 1) {
         this.currentPage--;
       }
+      document.querySelectorAll(".statusinput").forEach((inputb) => {
+        inputb.checked = false;
+      });
     },
     nextPage() {
       // 切換到下一頁
       if (this.currentPage < this.totalPages) {
         this.currentPage++;
       }
+      document.querySelectorAll(".statusinput").forEach((inputb) => {
+        inputb.checked = false;
+      });
     },
     img(e) {
       let that = this;
@@ -329,12 +346,12 @@ export default {
         formData.append("content", this.add_news.content);
         formData.append("status", this.status);
         formData.append("date", this.add_news.date);
-        if(document.getElementById("fileimg").files[0]){
-         formData.append("image", document.getElementById("fileimg").files[0]);
-        }else{
+        if (document.getElementById("fileimg").files[0]) {
+          formData.append("image", document.getElementById("fileimg").files[0]);
+        } else {
           formData.append("image", this.add_news.image);
         }
-        
+
         fetch(url, {
           method: "POST",
           body: formData,
@@ -347,8 +364,9 @@ export default {
             }
           })
           .then((json) => {
-            alert(json);
-            window.location.reload();
+            this.success(true, json);
+            this.fetchnew();
+            this.add_news = [];
           })
           .catch((error) => {
             console.log(error.message);
@@ -375,38 +393,39 @@ export default {
             }
           })
           .then((json) => {
-            alert(json);
-            window.location.reload();
+            this.success(true, json);
+            this.fetchnew();
+            this.add_news = [];
           })
           .catch((error) => {
             console.log(error.message);
           });
       }
     },
-    fetchnew(){
+    fetchnew() {
       const url = `${this.$store.state.publicpath}news_list.php`;
-    let headers = {
-      "Content-Type": "application/json",
-      Accept: "application/json",
-    };
-    fetch(url, {
-      method: "POST",
-      headers: headers,
-    })
-      .then((response) => {
-        if (response.ok) {
-          return response.json(); // 如果請求成功，解析JSON數據
-        } else {
-          throw new Error("取得消息失敗"); // 如果請求不成功，拋出錯誤
-        }
+      let headers = {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      };
+      fetch(url, {
+        method: "POST",
+        headers: headers,
       })
-      .then((json) => {
-        this.news = json;
-      })
-      .catch((error) => {
-        console.log(error.message);
-      });
-    }
+        .then((response) => {
+          if (response.ok) {
+            return response.json(); // 如果請求成功，解析JSON數據
+          } else {
+            throw new Error("取得消息失敗"); // 如果請求不成功，拋出錯誤
+          }
+        })
+        .then((json) => {
+          this.news = json;
+        })
+        .catch((error) => {
+          console.log(error.message);
+        });
+    },
   },
   computed: {
     pagenews() {
@@ -422,6 +441,7 @@ export default {
   },
   mounted() {
     //先檢查資料格式是否符合DB規則
+
     this.fetchnew();
   },
 };

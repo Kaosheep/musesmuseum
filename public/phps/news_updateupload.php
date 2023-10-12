@@ -6,7 +6,7 @@ header('Content-Type: application/json');
 
 
 try {
-    print_r($_FILES["image"]);
+   
     if(isset($_FILES["image"])){
         switch ($_FILES["image"]["error"]) {
 
