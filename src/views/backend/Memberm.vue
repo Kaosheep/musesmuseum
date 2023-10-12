@@ -18,47 +18,62 @@
             <th>狀態</th>
             <th></th>
           </tr>
-          <tr v-for="(i, index) in add_member" :key="index">
-            <td><input type="checkbox" v-model="i.selected"></td>
-            <td>{{ mbr_id }}</td>
-            <td>{{ mbr_name }}</td>
+          <tr v-for="(i, index) in members" :key="index">
+            <td>
+              <input 
+              type="checkbox" 
+              class="statusinput"
+              @change="inchecked(i.mbr_id, $event)"
+              > 
+              <!-- v-model="i.selected" -->
+            </td>
+            <td>{{ i.mbr_id }}</td>
+            <td>{{ i.mbr_name }}</td>
             <td>
               <p v-if="parseInt(i.statusn) === 1">一般</p>
               <p v-else>凍結</p>
             </td>
             <td>
-              <button class="edit" @click="showEditForm('edit', i.id)">
+              <button 
+              class="edit" 
+              @click="showEditForm('edit', i.mbr_id)"
+              >
                 編輯
               </button>
             </td>
           </tr>
         </table>
       </div>
-      <form action="" class="pop" v-if="showForm" @submit.prevent="submitForm">
+      <form 
+      action="" 
+      class="pop" 
+      v-if="showForm" 
+      @submit.prevent="submitForm"
+      >
         <h2>編輯</h2>
         <div>
           <div>會員編號</div>
           <!-- <div>MM2023061901</div> -->
-          <div v-text="add_member.mbr_id"></div>
+          <div v-text="members.mbr_id"></div>
         </div>
         <div class="info_col">
           <div>
             <div>會員姓名</div>
-            <div>阿阿阿</div>
+            <div>{{ mbr_name }}</div>
           </div>
           <div>
             <div>生日</div>
-            <div>1995/01/01</div>
+            <div>{{ mbr_birth }}1</div>
           </div>
         </div>
         <div class="info_col">
           <div>
             <div>E-mail</div>
-            <div>muse001@gmail.com</div>
+            <div>{{ mbr_email }}</div>
           </div>
           <div>
             <div>連絡電話</div>
-            <div>0989123456</div>
+            <div>{{ mbr_phone }}</div>
           </div>
         </div>
         <div>
@@ -68,14 +83,15 @@
         <div>
           <div>會員狀態</div>
           <div>
-            <select name="" id="">
-              <option value="">一般</option>
+            <select v-model="members.statusn">
+              <option value="1">一般</option>
+              <option value="0">部分</option>
             </select>
           </div>
         </div>
         <div class="form_btn">
           <PinkButton class="btn_admin" text="取消" @click="hideEditForm" />
-          <PinkButton class="btn_admin" text="儲存" @click="addmember_btn(add_member.id)"/>
+          <PinkButton class="btn_admin" text="儲存" @click="addmember_btn(members.id)"/>
         </div>
       </form>
     </div>
@@ -91,10 +107,10 @@ import Addressfrom from "/src/views/backend/Address.vue";
 
 export default {
   components: {
-    Searchbar,
-    Searchbarclick,
-    PinkButton,
-    Addressfrom
+  Searchbar,
+  Searchbarclick,
+  PinkButton,
+  Addressfrom
   },
   data() {
     return {
@@ -102,16 +118,18 @@ export default {
       mbr_id: "",
       mbr_name: "",
       newsched: [],
-      add_member:[
-        // {
-        //   id: "",
-        //   email: "",
-        //   name: "",
-        //   birth: "",
-        //   city: "",
-        //   district: "",
-        //   addr: "",
-        // }
+      members:[
+        {
+          id: "",
+          email: "",
+          name: "",
+          birth: "",
+          phone:"",
+          city: "",
+          district: "",
+          addr: "",
+          statusn: "",
+        }
       ],
       
       // test: [
@@ -143,6 +161,75 @@ export default {
     }
   },
   methods: {
+    addmember_btn(id) {
+      if (id !== undefined) {
+        console.log(id)
+        const url = `${this.$store.state.publicpath}MemberInfo.php`;
+        const formData = new FormData();
+        formData.append("id", this.members.id);
+        formData.append("name", this.members.name);
+        formData.append("email", this.members.email);
+        formData.append("birth", this.members.birth);
+        formData.append("phone", this.members.phone);
+        formData.append("city", this.members.city);
+        formData.append("district", this.members.district);
+        formData.append("addr", this.members.addr);
+        formData.append("statusn", this.members.statusn);
+        
+        fetch(url, {
+          method: "POST",
+          body: formData,
+        })
+          .then((response) => {
+            if (response.ok) {
+              console.log(response.ok)
+              return response.json();
+            } else {
+              throw new Error("新增失敗");
+            }
+          })
+          .then((json) => {
+            alert(json);
+            window.location.reload();
+          })
+          .catch((error) => {
+            console.log(error.message);
+          });
+      } else {
+        const url = `${this.$store.state.publicpath}MemberInfo.php`;
+        const formData = new FormData();
+        formData.append("id", this.members.id);
+        formData.append("name", this.members.name);
+        formData.append("email", this.members.email);
+        formData.append("birth", this.members.birth);
+        formData.append("phone", this.members.phone);
+        formData.append("city", this.members.city);
+        formData.append("district", this.members.district);
+        formData.append("addr", this.members.addr);
+        formData.append("statusn", this.members.statusn);
+        fetch(url, {
+          method: "POST",
+          body: formData,
+        })
+        
+          .then((response) => {
+
+            if (response) {
+              return response.json();
+            } else {
+              throw new Error("新增失敗");
+            }
+          })
+          .then((json) => {
+            alert(json);
+            window.location.reload();
+          })
+          .catch((error) => {
+            console.log(error.message);
+          });
+      }
+    },
+
     deleten(){
       fetch(`${this.$store.state.publicpath}MemberInfo.php`, {
         method: "post",
@@ -176,59 +263,36 @@ export default {
         console.log(this.newsched);
       }
     },
-    updatestatus(b) {
-      this.newsched.splice(0,0,{type:b});
-      fetch(`${this.$store.state.publicpath}login.php`, {
-        method: "post",
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded; charset=utf-8",
-        },
-        body: JSON.stringify({ data: Object.values(this.newsched) }),
-      })
-        .then((response) => {
-          if (response.ok) {
-            return response.json();
-          } else {
-            throw new Error("新增失敗");
-          }
-        })
-        .then((json) => {
-          alert(json);
-          window.location.reload();
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-    },
     toggleStatus(newStatus) {
-      this.add_member.forEach(item => {
+      this.members.forEach(item => {
         if (item.selected) {
           item.statusn = newStatus;
         }
       });
     },
     canToggle(newStatus) {
-      return this.add_member.some(item => item.selected && item.statusn !== newStatus);
+      return this.members.some(item => item.selected && item.statusn !== newStatus);
     },
     showEditForm(type, id) {
       if (type == "add") {
         console.log(id)
-        this.showForm = false;
-        this.add_member = [
+        // this.showForm = false;
+        this.members = [
           {
             id: "",
             email: "",
             name: "",
             birth: "",
+            phone:"",
             city: "",
             district: "",
             addr: "",
           },
           
         ];
-      } else {
-        this.showForm = true;
-      }
+       } else //{
+      //   this.showForm = true;
+      // }
       if (type == "edit") {
         const url = `http://localhost/musesmuseum/public/phps/memberInfo.php`;
         let headers = {
@@ -251,13 +315,14 @@ export default {
             }
           })
           .then((json) => {
-            this.add_member.id = json.mbr_id;
-            this.add_member.email = json.mbr_email;
-            this.add_member.name = json.mbr_name;
-            this.add_member.birth = json.mbr_birth;
-            this.add_member.city = json.mbr_city;
-            this.add_member.district = json.mbr_district;
-            this.add_member.addr = json.mbr_addr;
+            this.members.id = json.mbr_id;
+            this.members.email = json.mbr_email;
+            this.members.name = json.mbr_name;
+            this.members.birth = json.mbr_birth;
+            this.members.phone = json.mbr_phone;
+            this.members.city = json.mbr_city;
+            this.members.district = json.mbr_district;
+            this.members.addr = json.mbr_addr;
             this.status = json.member_status;
           });
       }
@@ -273,33 +338,32 @@ export default {
 
   },
   mounted() {
-       //確認抓取餅乾
-    const cookies = document.cookie.split(';');
-    let members = null;
-
-    for (let i = 0; i < cookies.length; i++) {
-      const cookie = cookies[i].trim();
-      console.log(cookie);
-      if (cookie.startsWith('members=')) {
-        members = decodeURIComponent(cookie.substring('members='.length));
-
-        break;
-      }
-    }
-
-    if (members) {
-      try {
-        const memberInfo = JSON.parse(members);
-        if (memberInfo.mbr_name && memberInfo.mbr_email) {
-          this.mbr_name = memberInfo.mbr_name;
-          this.memAllInfo.push(memberInfo);
+     //先檢查資料格式是否符合DB規則
+    const url = `http://localhost/musesmuseum/public/phps/MemberInfo.php`;
+    let headers = {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    };
+    fetch(url, {
+      method: "POST",
+      headers: headers,
+    })
+      .then((response) => {
+        if (response.ok) {
+          return response.json(); // 如果請求成功，解析JSON數據
         } else {
-          console.error('Cookie中缺少屬性');
+          throw new Error("取得消息失敗"); // 如果請求不成功，拋出錯誤
         }
-      } catch (error) {
-        console.error('解析Cookie數據錯誤', error);
-      }
-    }
+      })
+      .then((json) => {
+        this.manager = json;
+        // 在成功時顯示提示
+        // alert(json.message); // 假設JSON數據中有一個message屬性
+      })
+      .catch((error) => {
+        // 在失敗時顯示提示
+        // alert(error.message);
+      });
 
   }
 }
