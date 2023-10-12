@@ -6,6 +6,7 @@ header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Ac
 header("Content-Type: application/json"); 
 try{
 	require_once("./connectMuses.php");
+
     $sql = "select * from faq order by faq_id DESC"; 
     $faq = $pdo->query($sql);
     
