@@ -62,13 +62,19 @@
                                 <option value="0">未上架</option>
                                 <option value="1">已上架</option>
                             </select>
-                            <input type="file" id="fileInput" accept="image/*" style="display: none;" />
-                            <label class="img_box" for="fileInput">+選擇圖片</label>
-                            <div class="img_wrap">
-                                <img src="" alt="" id="img1" width="50">
-                            </div>
                         </div>
                     </div>
+                </div>
+                <div class="uploadblock">
+                    <label for="fileimg">
+                        <p v-if="formData.image == null">上傳圖片</p>
+                        <p v-else>{{ formData.image }}</p>
+
+                        <input @change="img($event)" type="file" id="fileimg" style="display: none" />
+                        <img v-if="formData.image == null" :src="`${$store.state.imgpublicpath}image/exhi/u.png`" />
+                        <img v-else :src="`${$store.state.imgpublicpath}image/exhi/` + formData.image
+                            " alt="" />
+                    </label>
                 </div>
 
                 <div class="form_btn">
@@ -100,11 +106,12 @@ export default {
             showForm: false,
             editMode: false,
             formData: {
-                id:"",
+                id: "",
                 title: "",
                 content: "",
                 startDate: "",
                 endDate: "",
+                image: "",
                 status: "", // 預設為未上架
             },
             news: [],
@@ -154,6 +161,17 @@ export default {
         }
     },
     methods: {
+        img(e) {
+            let that = this;
+            let files = e.target.files[0];
+            if (!e || !window.FileReader) return;
+            let reader = new FileReader();
+            reader.readAsDataURL(files);
+
+            reader.onloadend = function () {
+                that.formData.image = files.name;
+            };
+        },
         showEditForm(type, id) {
             if (type == "add") {
                 // this.addnews = false;
@@ -164,6 +182,7 @@ export default {
                         content: "",
                         startDate: "",
                         endDate: "",
+                        image: "",
                         status: "", // 預設為未上架
                     },
                 ];
@@ -185,7 +204,7 @@ export default {
                     body: JSON.stringify({ data: body }),
                 })
                     .then((response) => {
-                     
+
                         if (response.ok) {
                             return response.json();
                         } else {
@@ -198,16 +217,17 @@ export default {
                         // startDate: "",
                         // endDate: "",
                         // status: "",
-                        console.log(json) 
-                        this.formData.id = json.exh_id;    
+                        console.log(json)
+                        this.formData.id = json.exh_id;
                         this.formData.title = json.exh_name;
                         this.formData.content = json.exh_desc;
                         this.formData.startDate = json.exh_startdate;
                         this.formData.endDate = json.exh_enddate;
                         this.formData.status = json.exh_status;
-                  
+                        this.formData.image = json.exh_img;
+
                     });
-                    this.showForm = true;
+                this.showForm = true;
             }
 
             this.showForm = true;
@@ -326,6 +346,7 @@ div {
 }
 
 .btn_admin {
+    border-radius: 4px;
     margin-right: 10px;
     margin-top: 10px;
     margin-bottom: 10px;
@@ -433,12 +454,31 @@ div {
         }
     }
 
-
-
     .form_btn {
         position: fixed;
         bottom: 0;
         left: 20px;
+    }
+}
+
+.uploadblock {
+    margin-top: 1.5rem;
+    border: 1px solid #009ca8;
+    width: 100%;
+    height: 350px;
+    text-align: center;
+    border-radius: 10px;
+    padding: 1rem;
+    line-height: 2;
+
+    input {
+        border: none;
+    }
+
+    img {
+        width: 90%;
+        height: 80%;
+        object-fit: contain;
     }
 }
 </style>
