@@ -16,9 +16,9 @@ try {
         $prodsRow = $prods->fetchAll(PDO::FETCH_ASSOC);
         
     }else{
-        $sql = "SELECT * FROM products WHERE prods_id=:prods_id ";
+        $sql = "SELECT * FROM products WHERE prod_id=:prod_id ";
         $prodStmt = $pdo->prepare($sql);
-        $prodStmt->bindValue(":prods_id", $data->data->id);
+        $prodStmt->bindValue(":prod_id", $data->data->id);
         $prodStmt->execute();
         $prodsRow = $prodStmt->fetch(PDO::FETCH_ASSOC);
     }

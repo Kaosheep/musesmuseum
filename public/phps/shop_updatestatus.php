@@ -12,9 +12,9 @@ try {
 
 
    if($type == 1){
-      $sql = "update products set prod_status=1 where prod_id=:id";
+      $sql = "UPDATE products SET prod_status=1 WHERE prod_id=:id";
    }else{
-      $sql = "update products set prod_status=0 where prod_id=:id";
+      $sql = "UPDATE products SET prod_status=0 WHERE prod_id=:id";
    };
 
    $idArray = array();
@@ -23,9 +23,9 @@ try {
    foreach ($data->data as $item) {
 
       $idArray[] = $item->id;
-      $prods = $pdo->prepare($sql);
-      $prods->bindValue(":id", $item->id);
-      $prods->execute();
+      $prod = $pdo->prepare($sql);
+      $prod->bindValue(":id", $item->id);
+      $prod->execute();
 
    };
    echo json_encode("更新成功"); 

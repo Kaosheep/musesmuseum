@@ -14,9 +14,9 @@ try {
    foreach ($data->data as $item) {
 
       $idArray[] = $item->id;
-      $prods = $pdo->prepare($sql);
-      $prods->bindValue(":id", $item->id);
-      $prods->execute();
+      $prod = $pdo->prepare($sql);
+      $prod->bindValue(":id", $item->id);
+      $prod->execute();
 
    };
    echo json_encode("刪除成功"); 
