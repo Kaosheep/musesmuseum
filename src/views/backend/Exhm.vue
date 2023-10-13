@@ -56,13 +56,8 @@
                         </div>
                     </div>
                     <div>
-                        <div>狀態</div>
-                        <div>
-                            <select v-model="formData.status">
-                                <option value="0">未上架</option>
-                                <option value="1">已上架</option>
-                            </select>
-                        </div>
+                        <div>展覽地點</div>
+                        <div><input type="text" v-model="formData.loc" /></div>
                     </div>
                 </div>
                 <div class="uploadblock">
@@ -75,6 +70,15 @@
                         <img v-else :src="`${$store.state.imgpublicpath}image/exhi/` + formData.image
                             " alt="" />
                     </label>
+                </div>
+                <div>
+                    <div>狀態</div>
+                    <div>
+                        <select v-model="formData.status">
+                            <option value="0">未上架</option>
+                            <option value="1">已上架</option>
+                        </select>
+                    </div>
                 </div>
 
                 <div class="form_btn">
@@ -111,6 +115,7 @@ export default {
                 content: "",
                 startDate: "",
                 endDate: "",
+                loc: "",
                 image: "",
                 status: "", // 預設為未上架
             },
@@ -182,6 +187,7 @@ export default {
                         content: "",
                         startDate: "",
                         endDate: "",
+                        loc: "",
                         image: "",
                         status: "", // 預設為未上架
                     },
@@ -223,6 +229,7 @@ export default {
                         this.formData.content = json.exh_desc;
                         this.formData.startDate = json.exh_startdate;
                         this.formData.endDate = json.exh_enddate;
+                        this.formData.loc = json.exh_loc;
                         this.formData.status = json.exh_status;
                         this.formData.image = json.exh_img;
 
@@ -245,6 +252,7 @@ export default {
                 content: "",
                 startDate: "",
                 endDate: "",
+                loc: "",
                 status: "0"
                 // 其他欄位
             };
@@ -457,7 +465,7 @@ div {
     .form_btn {
         position: fixed;
         bottom: 0;
-        left: 20px;
+        right: 20px;
     }
 }
 
@@ -465,7 +473,7 @@ div {
     margin-top: 1.5rem;
     border: 1px solid #009ca8;
     width: 100%;
-    height: 350px;
+    height: 250px;
     text-align: center;
     border-radius: 10px;
     padding: 1rem;
