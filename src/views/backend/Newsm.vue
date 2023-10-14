@@ -10,44 +10,46 @@
         </div>
         <Searchbar class="onlyB" />
       </div>
-      <div class="dmain">
-        <table>
-          <tr>
-            <th></th>
-            <th>新增時間</th>
-            <th>消息標題</th>
-            <th>狀態</th>
-            <th></th>
-          </tr>
-          <tr v-for="(i, index) in pagenews" :key="index">
-            <td>
-              <input
-                type="checkbox"
-                class="statusinput"
-                @change="inchecked(i.news_id, $event)"
-              />
-            </td>
-            <td>{{ i.news_date }}</td>
-            <td>{{ i.news_title }}</td>
-            <td>
-              <p v-if="parseInt(i.news_status) === 1">上架中</p>
-              <p v-else>未上架</p>
-            </td>
-            <td>
-              <button class="edit" @click="showEditForm('edit', i.news_id)">
-                編輯
-              </button>
-            </td>
-          </tr>
-          <div class="pagination">
-            <button @click="previousPage" :disabled="currentPage === 1">
-              上一頁
-            </button>
-            <button @click="nextPage" :disabled="currentPage === totalPages">
-              下一頁
-            </button>
-          </div>
-        </table>
+      <div class="news_block">
+        <div class="dmain">
+          <table>
+            <tr>
+              <th></th>
+              <th>新增時間</th>
+              <th>消息標題</th>
+              <th>狀態</th>
+              <th></th>
+            </tr>
+            <tr v-for="(i, index) in pagenews" :key="index">
+              <td>
+                <input
+                  type="checkbox"
+                  class="statusinput"
+                  @change="inchecked(i.news_id, $event)"
+                />
+              </td>
+              <td>{{ i.news_date }}</td>
+              <td class="tdtit">{{ i.news_title }}</td>
+              <td>
+                <p v-if="parseInt(i.news_status) === 1">上架中</p>
+                <p v-else>未上架</p>
+              </td>
+              <td>
+                <button class="edit" @click="showEditForm('edit', i.news_id)">
+                  編輯
+                </button>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div class="pagination">
+          <button @click="previousPage" :disabled="currentPage === 1">
+            上一頁
+          </button>
+          <button @click="nextPage" :disabled="currentPage === totalPages">
+            下一頁
+          </button>
+        </div>
       </div>
       <form
         action=""
@@ -88,7 +90,7 @@
 
             <div class="uploadblock">
               <label for="fileimg">
-                <p v-if="add_news.image == null">上傳圖片</p>
+                <p v-if="add_news.src == null">上傳圖片</p>
                 <p v-else>{{ add_news.image }}</p>
 
                 <input
@@ -98,16 +100,10 @@
                   style="display: none"
                 />
                 <img
-                  v-if="add_news.image == null"
+                  v-if="add_news.src == null"
                   :src="`${$store.state.imgpublicpath}image/news/u.png`"
                 />
-                <img
-                  v-else
-                  :src="
-                    `${$store.state.imgpublicpath}image/news/` + add_news.image
-                  "
-                  alt=""
-                />
+                <img v-else :src="add_news.src" alt="" />
               </label>
             </div>
           </div>
@@ -218,8 +214,6 @@ export default {
     inchecked(id, e) {
       if (e.target.checked) {
         this.newsched.push({ id: id });
-        console.log(this.newsched);
-        console.log(Object.values(this.newsched));
       } else {
         this.newsched.splice(this.newsched.indexOf(id), 1);
         console.log(this.newsched);
@@ -274,11 +268,12 @@ export default {
     img(e) {
       let that = this;
       let files = e.target.files[0];
-      if (!e || !window.FileReader) return;
+      if (!files || !(files instanceof Blob) || !window.FileReader) return;
       let reader = new FileReader();
       reader.readAsDataURL(files);
 
       reader.onloadend = function () {
+        that.add_news.src = this.result;
         that.add_news.image = files.name;
       };
     },
@@ -291,7 +286,9 @@ export default {
             title: "",
             content: "",
             date: "",
+            src: "",
             image: "",
+            status: "",
           },
         ];
       } else {
@@ -325,6 +322,7 @@ export default {
             this.add_news.id = json.news_id;
             this.status = json.news_status;
             this.add_news.image = json.news_img;
+            this.add_news.src = `${this.$store.state.imgpublicpath}image/news/${json.news_img}`;
           });
       }
 
@@ -349,7 +347,7 @@ export default {
         if (document.getElementById("fileimg").files[0]) {
           formData.append("image", document.getElementById("fileimg").files[0]);
         } else {
-          formData.append("image", this.add_news.image);
+          formData.append("image", this.add_news.src);
         }
 
         fetch(url, {
@@ -421,6 +419,9 @@ export default {
         })
         .then((json) => {
           this.news = json;
+          let blockw = document.querySelector('.news_block').offsetHeight;
+          let roww = document.querySelector('tr').offsetHeight;
+          this.pageSize = Math.floor((blockw/roww)-2);
         })
         .catch((error) => {
           console.log(error.message);
@@ -440,9 +441,9 @@ export default {
     },
   },
   mounted() {
-    //先檢查資料格式是否符合DB規則
-
     this.fetchnew();
+
+
   },
 };
 </script>
@@ -487,7 +488,7 @@ div {
   margin-right: 10px;
   margin-top: 10px;
   margin-bottom: 10px;
-  width: 70px;
+  width: 68px;
   height: 40px;
   background-color: $mblue;
   border-radius: 4px;
@@ -495,49 +496,73 @@ div {
   border: none;
   cursor: pointer;
 }
+.news_block {
+  height: 70vh;
+  .dmain {
+    background-color: #ffffff80;
+    height: 100%;
+    border-radius: 0 10px 10px 10px;
 
-.dmain {
-  background-color: #ffffff80;
-  height: 80%;
-  border-radius: 0 10px 10px 10px;
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      border-spacing: 0;
+      table-layout: fixed;
+      th,
+      td {
+        padding: 10px;
+        text-align: center;
+        border-bottom: 1px solid #ccc;
+      }
 
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    border-spacing: 0;
-
-    th,
-    td {
-      padding: 10px;
-      text-align: center;
-      border-bottom: 1px solid #ccc;
-    }
-
-    th {
-      background-color: #f2f2f2;
-      font-weight: bold;
-    }
-
-    td {
-      &:first-child {
-        input[type="checkbox"] {
-          margin-right: 5px;
+      th {
+        background-color: #f2f2f2;
+        font-weight: bold;
+        &:nth-child(1) {
+          width: 8%;
+        }
+        &:nth-child(2) {
+          width: 15%;
+        }
+        &:nth-child(3) {
+          width: 55%;
         }
       }
+      tr {
+        .tdtit {
+          width: 100%;
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          text-align: start;
+        }
+        td {
+          &:first-child {
+            input[type="checkbox"] {
+              margin-right: 5px;
+              width: 100%;
+              height: 16px;
+            }
+          }
 
-      &:last-child {
-        button {
-          color: #000;
-          border: none;
-          cursor: pointer;
+          &:last-child {
+            button {
+              color: #000;
+              border: none;
+              cursor: pointer;
+            }
+          }
+
+          p {
+            margin: 0;
+            padding: 5px;
+          }
         }
       }
-
-      p {
-        margin: 0;
-        padding: 5px;
-      }
     }
+  }
+  .pagination {
+    text-align: center;
   }
 }
 

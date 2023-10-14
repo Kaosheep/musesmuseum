@@ -32,32 +32,8 @@ export default {
         { title: "關於我們", entitle: "About Us", link: "/Home/History" },
       ],
       newscol: [],
-      productlist: [
-        {
-          title: "MUSE筆記本",
-          price: 350,
-        },
-        {
-          title: "手繪紅鶴小廢包",
-          price: 3000,
-        },
-        {
-          title: "維納斯口紅",
-          price: 2500,
-        },
-        {
-          title: "諾貝爾仿徽",
-          price: 3500,
-        },
-      ],
-      galleryimgs: [
-        { imgtitle: '現代之魅', time: '2023/5/1-2023/6/15', info: '探索當代藝術的多樣性和深度，這個展覽將呈現來自世界各地的藝術家的傑出作品，包括繪畫、雕塑和多媒體藝術。' },
-        { imgtitle: '光之舞', time: '2023/5/1-2023/6/15', info: '這個展覽將探討光和色彩如何影響我們的情感和感知。通過投影、互動藝術和光學效應，觀眾將沉浸在充滿魔力的光之世界。' },
-        { imgtitle: '古典之美', time: '2023/5/1-2023/6/15', info: '一場關於古代藝術的探索之旅。這個展覽將展示古希臘和羅馬時期的藝術珍品，包括雕塑、陶瓷和古典繪畫。' },
-        { imgtitle: '數位幻境', time: '2023/5/1-2023/6/15', info: '通過虛擬現實和互動藝術，這個展覽將帶領觀眾進入一個全新的數位世界。體驗未來藝術的奇妙之處。' },
-        { imgtitle: '大自然的韻律', time: '2023/5/1-2023/6/15', info: '這個展覽將藉由藝術家對大自然的啟發，呈現出關於自然美的藝術作品。包括風景畫、植物描繪和生態藝術。' },
-        { imgtitle: '時光之旅', time: '2023/5/1-2023/6/15', info: '這個展覽將追溯藝術的演變，從古代到當代。通過展出各個時代的代表性藝術品，讓觀眾感受藝術的時光之旅。' },
-      ],
+      productlist: [],
+      galleryimgs: [],
       isshow: false,
       j: 0
     };
@@ -183,78 +159,95 @@ export default {
     },
     fetchnews() {
       fetch(`${this.$store.state.publicpath}index_fetch.php`).then(async (response) => {
-        this.newscol = await response.json();
+        let indexarr = await response.json();
+        this.newscol = indexarr[0];
+        this.productlist = indexarr[1];
       });
     },
 
   },
-  beforeMount() {
-    this.fetchnews();
-  },
   mounted() {
+    fetch(`${this.$store.state.publicpath}index_fetch.php`)
+      .then(async (response) => {
+        let indexarr = await response.json();
+        this.newscol = indexarr[0];
+        this.productlist = indexarr[1];
+        this.galleryimgs = indexarr[2];
 
-    let slider = document.querySelector(".home_slider");
-    let current = 0;
-    let target = 0;
-    let ease = 0.05;
-    let txtframe = document.querySelectorAll(".txtframe");
-    let max1 = document.getElementById("max1");
-    let max2 = document.getElementById("max2");
-    let homecart = document.querySelector('.homecart');
+      })
+      .then(() => {
+        let slider = document.querySelector(".home_slider");
+        let current = 0;
+        let target = 0;
+        let ease = 0.05;
+        let txtframe = document.querySelectorAll(".txtframe");
+        let max1 = document.getElementById("max1");
+        let max2 = document.getElementById("max2");
+        let homecart = document.querySelector('.homecart');
 
-    function lerp(start, end, t) {
-      return start * (1 - t) + end * t;
-    }
-    function setTransform(el, transform) {
-      el.style.transform = transform;
-    }
+        function lerp(start, end, t) {
+          return start * (1 - t) + end * t;
+        }
+        function setTransform(el, transform) {
+          el.style.transform = transform;
+        }
 
-    function animate() {
-      current = parseFloat(lerp(current, target, ease)).toFixed(2);
-      target = window.scrollY;
-      if (window.innerWidth > 820) {
-        setTransform(slider, `translateX(-${current}px)`);
-      } else {
-        setTransform(slider, `translateY('')`);
-      }
-      animateimg();
-      requestAnimationFrame(animate);
-    }
-    // let newimgs = [...document.querySelectorAll(".eventwrap .item .image img")];
-    // let newimgWidth = document.querySelector(
-    //   ".eventwrap .item .image img"
-    // ).offsetWidth;
+        function animate() {
+          current = parseFloat(lerp(current, target, ease)).toFixed(2);
+          target = window.scrollY;
+          if (window.innerWidth > 820) {
+            setTransform(slider, `translateX(-${current}px)`);
+          } else {
+            setTransform(slider, `translateY('')`);
+          }
+          animateimg();
+          requestAnimationFrame(animate);
+        }
+        var newimgs = [...document.querySelectorAll(".eventwrap .item .image img")];
+        var newimgWidth = document.querySelector(
+          ".eventwrap .item .image img"
+        ).offsetWidth;
 
-    function animateimg() {
-      // let ratio = current / newimgWidth;
-      let intersectionratio;
+        function animateimg() {
 
-      // newimgs.forEach((image, i) => {
-      //   intersectionratio = ratio - i * 1.5;
-      //   if (window.innerWidth > 820) {
-      //     setTransform(image, `translateX(-${intersectionratio * 8}px)`);
-      //   } else {
-      //     setTransform(image, `translateX(0px)`)
-      //   }
-      // });
-      txtframe.forEach((txtframe) => {
-        setTransform(txtframe, `translateX(${intersectionratio * 20}px)`);
+          let intersectionratio;
+          let ratio = current / newimgWidth;
+          newimgs.forEach((image, i) => {
+            intersectionratio = ratio - i * 1.5;
+            if (window.innerWidth > 820) {
+              setTransform(image, `translateX(-${intersectionratio * 8}px)`);
+            } else {
+              setTransform(image, `translateX(0px)`)
+            }
+          });
+          txtframe.forEach((txtframe) => {
+            setTransform(txtframe, `translateX(${intersectionratio * 20}px)`);
+          });
+
+          setTransform(
+            max1,
+            `translateX(${-window.innerWidth + current / 5}px) translateY(${window.innerWidth * 0.0785
+            }px)`
+          );
+          setTransform(
+            max2,
+            `translateX(${-window.innerWidth + current / 5}px) translateY(${(-window.innerWidth + current / 5) * 0.2588190451
+            }px) skewY(15deg)`
+          );
+
+          setTransform(homecart, `translateX(${intersectionratio * 20}px)`)
+
+        }
+        animate();
+        this.resize();
+        this.gallerycircle();
+      })
+      .catch((error) => {
+        console.error("發生錯誤", error);
       });
 
-      setTransform(
-        max1,
-        `translateX(${-window.innerWidth + current / 5}px) translateY(${window.innerWidth * 0.0785
-        }px)`
-      );
-      setTransform(
-        max2,
-        `translateX(${-window.innerWidth + current / 5}px) translateY(${(-window.innerWidth + current / 5) * 0.2588190451
-        }px) skewY(15deg)`
-      );
 
-      setTransform(homecart, `translateX(${intersectionratio * 20}px)`)
 
-    }
     let anchorli = [...document.querySelectorAll(".anchor ul li")];
     anchorli.forEach((li, i) => {
       li.addEventListener("click", (e) => {
@@ -268,10 +261,8 @@ export default {
     window.addEventListener("scroll", this.anchor);
     window.addEventListener("scroll", this.show);
     window.addEventListener("mousemove", this.ballmove);
-    animate();
     this.followcursor();
-    this.resize();
-    this.gallerycircle();
+
 
     document.querySelector('.comfooter').style.display = 'none';
   },
