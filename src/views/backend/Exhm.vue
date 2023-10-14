@@ -82,8 +82,12 @@
                 </div>
 
                 <div class="form_btn">
-                    <PinkButton class="btn_admin" text="取消" @click="hideForm" />
-                    <PinkButton class="btn_admin" text="儲存" type="submit" />
+                    <button type="button" class="btn_admin" @click="hideForm">
+                        取消
+                    </button>
+                    <button type="type" class="btn_admin" @click="addexhi_btn(formData.id)">
+                        儲存
+                    </button>
                 </div>
             </form>
         </div>
@@ -119,6 +123,7 @@ export default {
                 image: "",
                 status: "", // 預設為未上架
             },
+            newsched: [],
             news: [],
             test: [
                 {
@@ -166,6 +171,71 @@ export default {
         }
     },
     methods: {
+        success(nodesc, json) {
+            this.$Notice.success({
+                title: json,
+                desc: nodesc
+                    ? ""
+                    : "Here is the notification description. Here is the notification description. ",
+            });
+        },
+        deleten() {
+            if (window.confirm("確認刪除資料?")) {
+                fetch(`${this.$store.state.publicpath}spex_del.php`, {
+                    method: "post",
+                    headers: {
+                        "Content-Type": "application/x-www-form-urlencoded; charset=utf-8",
+                    },
+                    body: JSON.stringify({ data: Object.values(this.newsched) }),
+                })
+                    .then((response) => {
+                        if (response.ok) {
+                            return response.json();
+                        } else {
+                            throw new Error("新增失敗");
+                        }
+                    })
+                    .then((json) => {
+                        this.success(true, json);
+                        this.fetchnew();
+                        this.newsched = [];
+                        document.querySelectorAll(".statusinput").forEach((inputb) => {
+                            inputb.checked = false;
+                        });
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+            }
+        },
+        updatestatus(b) {
+            this.newsched.splice(0, 0, { type: b });
+            fetch(`${this.$store.state.publicpath}spex_updatestatus.php`, {
+                method: "post",
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded; charset=utf-8",
+                },
+                body: JSON.stringify({ data: Object.values(this.newsched) }),
+            })
+                .then((response) => {
+                    if (response.ok) {
+                        return response.json();
+                    } else {
+                        throw new Error("新增失敗");
+                    }
+                })
+                .then((json) => {
+                    this.success(true, json);
+                    this.fetchnew();
+                    this.newsched = [];
+                    document.querySelectorAll(".statusinput").forEach((inputb) => {
+                        inputb.checked = false;
+                    });
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        },
         img(e) {
             let that = this;
             let files = e.target.files[0];
@@ -283,10 +353,104 @@ export default {
         },
         submitForm() {
             this.hideEditForm();
-        }
+        },
+        addexhi_btn(id) {
+            if (id != undefined) {
+                const url = `${this.$store.state.publicpath}news_updateupload.php`;
+                const formData = new FormData();
+                formData.append("id", this.formData.id);
+                formData.append("title", this.formData.title);
+                formData.append("content", this.formData.content);
+                formData.append("status", this.status);
+                formData.append("startDate", this.formData.startDate);
+                formData.append("endDate", this.formData.endDate);
+                formData.append("loc", this.formData.loc);
+                if (document.getElementById("fileimg").files[0]) {
+                    formData.append("image", document.getElementById("fileimg").files[0]);
+                } else {
+                    formData.append("image", this.formData.image);
+                }
+
+                fetch(url, {
+                    method: "POST",
+                    body: formData,
+                })
+                    .then((response) => {
+                        if (response.ok) {
+                            return response.json();
+                        } else {
+                            throw new Error("新增失敗");
+                        }
+                    })
+                    .then((json) => {
+                        this.success(true, json);
+                        this.fetchnew();
+                        this.add_news = [];
+                    })
+                    .catch((error) => {
+                        console.log(error.message);
+                    });
+            } else {
+                const url = `${this.$store.state.publicpath}spex_insertupload.php`;
+                const formData = new FormData();
+                formData.append("id", this.formData.id);
+                formData.append("title", this.formData.title);
+                formData.append("content", this.formData.content);
+                formData.append("status", this.status);
+                formData.append("startDate", this.formData.startDate);
+                formData.append("endDate", this.formData.endDate);
+                formData.append("loc", this.formData.loc);
+                formData.append("image", document.getElementById("fileimg").files[0]);
+
+                fetch(url, {
+                    method: "POST",
+                    body: formData,
+                })
+                    .then((response) => {
+                        if (response.ok) {
+                            return response.json();
+                        } else {
+                            throw new Error("新增失敗");
+                        }
+                    })
+                    .then((json) => {
+                        this.success(true, json);
+                        this.fetchnew();
+                        this.formData = [];
+                    })
+                    .catch((error) => {
+                        console.log(error.message);
+                    });
+            }
+        },
+        fetchnew() {
+            const url = `${this.$store.state.publicpath}spex_list.php`;
+            let headers = {
+                "Content-Type": "application/json",
+                Accept: "application/json",
+            };
+            fetch(url, {
+                method: "POST",
+                headers: headers,
+            })
+                .then((response) => {
+                    if (response.ok) {
+                        return response.json(); // 如果請求成功，解析JSON數據
+                    } else {
+                        throw new Error("取得消息失敗"); // 如果請求不成功，拋出錯誤
+                    }
+                })
+                .then((json) => {
+                    this.news = json;
+                })
+                .catch((error) => {
+                    console.log(error.message);
+                });
+        },
 
     },
     mounted() {
+        this.fetchnew();
         const url = `http://localhost/musesmuseum/public/phps/spex_list.php`
         let headers = {
             "Content-Type": "application/json",
