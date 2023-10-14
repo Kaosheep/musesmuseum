@@ -421,7 +421,7 @@ export default {
           this.news = json;
           let blockw = document.querySelector('.news_block').offsetHeight;
           let roww = document.querySelector('tr').offsetHeight;
-          this.pageSize = Math.floor((blockw/roww)-2);
+          this.pageSize = Math.floor((blockw/roww)-3);
         })
         .catch((error) => {
           console.log(error.message);
@@ -510,7 +510,7 @@ div {
       table-layout: fixed;
       th,
       td {
-        padding: 10px;
+        padding: 8px;
         text-align: center;
         border-bottom: 1px solid #ccc;
       }
@@ -562,6 +562,7 @@ div {
     }
   }
   .pagination {
+    margin-top: 5px;
     text-align: center;
   }
 }
