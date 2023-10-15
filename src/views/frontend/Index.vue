@@ -25,9 +25,7 @@
             <div class="homenav">
               <ul>
                 <li v-for="(li, index) in homenav" :key="index">
-                  <RouterLink :to="li.link"
-                    >{{ li.title }}</RouterLink
-                  >
+                  <RouterLink :to="li.link">{{ li.title }}</RouterLink>
                 </li>
               </ul>
             </div>
@@ -55,13 +53,16 @@
                   :key="imgindex"
                 >
                   <img
-                    :src="require('@/assets/image/exb/e' + imgindex + '.jpg')"
+                  :src="
+                    `${this.$store.state.imgpublicpath}image/exhi/` +
+                    img.exh_img
+                  "
                     :alt="img.imgtitle"
                   />
                   <div class="imginfo">
-                    <h3>{{ img.imgtitle }}</h3>
-                    <p>{{ img.time }}</p>
-                    <p>{{ img.info }}</p>
+                    <h3>{{ img.exh_name }}</h3>
+                  <p>{{ img.exh_startdate }}</p>
+                  <p>{{ img.exh_desc }}</p>
                     <p>
                       <router-link to="/"
                         ><ThinArrow :text="'展覽資訊'"></ThinArrow
@@ -70,8 +71,18 @@
                   </div>
                 </div>
               </div>
-              <button class="gbtnl"><font-awesome-icon :icon="['fas', 'arrow-left']"  id="gbtnlfas"/></button>
-              <button type="button" class="gbtnr"><font-awesome-icon :icon="['fas', 'arrow-right']" id="gbtnrfas"/></button>
+              <button class="gbtnl">
+                <font-awesome-icon
+                  :icon="['fas', 'arrow-left']"
+                  id="gbtnlfas"
+                />
+              </button>
+              <button type="button" class="gbtnr">
+                <font-awesome-icon
+                  :icon="['fas', 'arrow-right']"
+                  id="gbtnrfas"
+                />
+              </button>
             </div>
             <div class="moreexb">
               <router-link to="/Home/SpecialExhibition"
@@ -92,13 +103,16 @@
             <CarouselItem v-for="(img, imgindex) in galleryimgs">
               <div class="artcarousel">
                 <img
-                  :src="require('@/assets/image/exb/e' + imgindex + '.jpg')"
+                  :src="
+                    `${this.$store.state.imgpublicpath}image/exhi/` +
+                    img.exh_img
+                  "
                   alt=""
                 />
                 <div class="txt">
-                  <h3>{{ img.imgtitle }}</h3>
-                  <p>{{ img.time }}</p>
-                  <p>{{ img.info }}</p>
+                  <h3>{{ img.exh_name }}</h3>
+                  <p>{{ img.exh_startdate }}</p>
+                  <p>{{ img.exh_desc }}</p>
                 </div>
               </div>
             </CarouselItem>
@@ -132,7 +146,10 @@
                 <div class="image">
                   <!-- <img class="forw" src="@/assets/image/space/spaceTheShop.png"> -->
                   <img
-                    :src="(`${this.$store.state.imgpublicpath}image/news/` + item.news_img)"
+                    :src="
+                      `${this.$store.state.imgpublicpath}image/news/` +
+                      item.news_img
+                    "
                     alt=""
                   />
                 </div>
@@ -246,12 +263,15 @@
                     v-for="(pro, num) in productlist"
                     :key="num"
                   >
-                    <router-link :to="`/Home/ProductPage/${num}`">
+                    <router-link :to="`/Home/ProductPage/${pro.prod_id}`">
                       <img
-                        :src="(`${this.$store.state.imgpublicpath}image/productimage/` + num)"
+                        :src="
+                          `${this.$store.state.imgpublicpath}image/productimage/` +
+                          pro.prod_img
+                        "
                         :alt="pro.title"
                       />
-                      <p>{{ pro.title }}</p>
+                      <p>{{ pro.prod_name }}</p>
                     </router-link>
                   </div>
                 </div>

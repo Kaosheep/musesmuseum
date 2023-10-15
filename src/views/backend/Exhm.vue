@@ -3,7 +3,7 @@
         <div>
             <div class="admin_editbar">
                 <div>
-                    <PinkButton class="btn_admin" text="新增" @click="showAddForm" />
+                    <button class="btn_admin" @click="showEditForm('add')">新增</button>
                     <PinkButton class="btn_admin" text="上架" @click="toggleStatus('1')" :disabled="!canToggle('1')" />
                     <PinkButton class="btn_admin" text="下架" @click="toggleStatus('0')" :disabled="!canToggle('0')" />
                 </div>
@@ -20,14 +20,14 @@
                     </tr>
                     <tr v-for="(exhibition, index) in exhibitions" :key="index">
                         <td><input type="checkbox"></td>
-                        <td>{{ exhibition.id }}</td>
-                        <td>{{ exhibition.title }}</td>
+                        <td>{{ exhibition.exh_id }}</td>
+                        <td>{{ exhibition.exh_name }}</td>
                         <td>
                             <p v-if="parseInt(exhibition.status) === 1">已上架</p>
                             <p v-else>未上架</p>
                         </td>
                         <td>
-                            <button class="edit" @click="showEditForm(exhibition)">編輯</button>
+                            <button class="edit" @click="showEditForm('edit', exhibition.exh_id)">編輯</button>
                         </td>
                     </tr>
                 </table>
@@ -36,7 +36,7 @@
                 <h2>編輯</h2>
                 <div>
                     <div>展覽編號</div>
-                    <div>{{ editMode ? exhibition.id : '自動生成' }}</div>
+                    <div v-text="formData.id"></div>
                 </div>
                 <div>
                     <div>標題</div>
@@ -56,24 +56,38 @@
                         </div>
                     </div>
                     <div>
-                        <div>狀態</div>
-                        <div>
-                            <select v-model="formData.status">
-                                <option value="0">未上架</option>
-                                <option value="1">已上架</option>
-                            </select>
-                            <input type="file" id="fileInput" accept="image/*" style="display: none;" />
-                            <label class="img_box" for="fileInput">+選擇圖片</label>
-                            <div class="img_wrap">
-                                <img src="" alt="" id="img1" width="50">
-                            </div>
-                        </div>
+                        <div>展覽地點</div>
+                        <div><input type="text" v-model="formData.loc" /></div>
+                    </div>
+                </div>
+                <div class="uploadblock">
+                    <label for="fileimg">
+                        <p v-if="formData.image == null">上傳圖片</p>
+                        <p v-else>{{ formData.image }}</p>
+
+                        <input @change="img($event)" type="file" id="fileimg" style="display: none" />
+                        <img v-if="formData.image == null" :src="`${$store.state.imgpublicpath}image/exhi/u.png`" />
+                        <img v-else :src="`${$store.state.imgpublicpath}image/exhi/` + formData.image
+                            " alt="" />
+                    </label>
+                </div>
+                <div>
+                    <div>狀態</div>
+                    <div>
+                        <select v-model="formData.status">
+                            <option value="0">未上架</option>
+                            <option value="1">已上架</option>
+                        </select>
                     </div>
                 </div>
 
                 <div class="form_btn">
-                    <PinkButton class="btn_admin" text="取消" @click="hideForm" />
-                    <PinkButton class="btn_admin" text="儲存" type="submit" />
+                    <button type="button" class="btn_admin" @click="hideForm">
+                        取消
+                    </button>
+                    <button type="type" class="btn_admin" @click="addexhi_btn(formData.id)">
+                        儲存
+                    </button>
                 </div>
             </form>
         </div>
@@ -100,12 +114,16 @@ export default {
             showForm: false,
             editMode: false,
             formData: {
+                id: "",
                 title: "",
                 content: "",
                 startDate: "",
                 endDate: "",
-                status: "0" // 預設為未上架
+                loc: "",
+                image: "",
+                status: "", // 預設為未上架
             },
+            newsched: [],
             news: [],
             test: [
                 {
@@ -153,25 +171,145 @@ export default {
         }
     },
     methods: {
-        showAddForm() {
-            this.editMode = false;
-            this.showForm = true;
-            this.resetFormData();
+        success(nodesc, json) {
+            this.$Notice.success({
+                title: json,
+                desc: nodesc
+                    ? ""
+                    : "Here is the notification description. Here is the notification description. ",
+            });
         },
+        deleten() {
+            if (window.confirm("確認刪除資料?")) {
+                fetch(`${this.$store.state.publicpath}spex_del.php`, {
+                    method: "post",
+                    headers: {
+                        "Content-Type": "application/x-www-form-urlencoded; charset=utf-8",
+                    },
+                    body: JSON.stringify({ data: Object.values(this.newsched) }),
+                })
+                    .then((response) => {
+                        if (response.ok) {
+                            return response.json();
+                        } else {
+                            throw new Error("新增失敗");
+                        }
+                    })
+                    .then((json) => {
+                        this.success(true, json);
+                        this.fetchnew();
+                        this.newsched = [];
+                        document.querySelectorAll(".statusinput").forEach((inputb) => {
+                            inputb.checked = false;
+                        });
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+            }
+        },
+        updatestatus(b) {
+            this.newsched.splice(0, 0, { type: b });
+            fetch(`${this.$store.state.publicpath}spex_updatestatus.php`, {
+                method: "post",
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded; charset=utf-8",
+                },
+                body: JSON.stringify({ data: Object.values(this.newsched) }),
+            })
+                .then((response) => {
+                    if (response.ok) {
+                        return response.json();
+                    } else {
+                        throw new Error("新增失敗");
+                    }
+                })
+                .then((json) => {
+                    this.success(true, json);
+                    this.fetchnew();
+                    this.newsched = [];
+                    document.querySelectorAll(".statusinput").forEach((inputb) => {
+                        inputb.checked = false;
+                    });
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        },
+        img(e) {
+            let that = this;
+            let files = e.target.files[0];
+            if (!e || !window.FileReader) return;
+            let reader = new FileReader();
+            reader.readAsDataURL(files);
 
-        showEditForm(exhibition) {
-            this.editMode = true;
-            this.showForm = true;
-            this.formData = {
-                id: exhibition.id,
-                title: exhibition.title,
-                content: exhibition.content,
-                startDate: exhibition.startDate,
-                endDate: exhibition.endDate,
-                status: exhibition.status
-                // 其他欄位
+            reader.onloadend = function () {
+                that.formData.image = files.name;
             };
         },
+        showEditForm(type, id) {
+            if (type == "add") {
+                // this.addnews = false;
+                this.formData = [
+                    {
+                        id: "",
+                        title: "",
+                        content: "",
+                        startDate: "",
+                        endDate: "",
+                        loc: "",
+                        image: "",
+                        status: "", // 預設為未上架
+                    },
+                ];
+            } else {
+                // this.addnews = true;
+            }
+            if (type == "edit") {
+                const url = `${this.$store.state.publicpath}spex_list.php`;
+                let headers = {
+                    "Content-Type": "application/json",
+                    Accept: "application/json",
+                };
+                let body = {
+                    id: id,
+                };
+                fetch(url, {
+                    method: "POST",
+                    headers: headers,
+                    body: JSON.stringify({ data: body }),
+                })
+                    .then((response) => {
+
+                        if (response.ok) {
+                            return response.json();
+                        } else {
+                            throw new Error("取得失敗");
+                        }
+                    })
+                    .then((json) => {
+                        // title: "",
+                        // content: "",
+                        // startDate: "",
+                        // endDate: "",
+                        // status: "",
+                        console.log(json)
+                        this.formData.id = json.exh_id;
+                        this.formData.title = json.exh_name;
+                        this.formData.content = json.exh_desc;
+                        this.formData.startDate = json.exh_startdate;
+                        this.formData.endDate = json.exh_enddate;
+                        this.formData.loc = json.exh_loc;
+                        this.formData.status = json.exh_status;
+                        this.formData.image = json.exh_img;
+
+                    });
+                this.showForm = true;
+            }
+
+            this.showForm = true;
+        },
+
 
         hideForm() {
             this.showForm = false;
@@ -184,6 +322,7 @@ export default {
                 content: "",
                 startDate: "",
                 endDate: "",
+                loc: "",
                 status: "0"
                 // 其他欄位
             };
@@ -209,18 +348,109 @@ export default {
         canToggle(newStatus) {
             return this.test.some(item => item.selected && item.statusn !== newStatus);
         },
-        showEditForm() {
-            this.showForm = true;
-        },
         hideEditForm() {
             this.showForm = false;
         },
         submitForm() {
             this.hideEditForm();
-        }
+        },
+        addexhi_btn(id) {
+            if (id != undefined) {
+                const url = `${this.$store.state.publicpath}news_updateupload.php`;
+                const formData = new FormData();
+                formData.append("id", this.formData.id);
+                formData.append("title", this.formData.title);
+                formData.append("content", this.formData.content);
+                formData.append("status", this.status);
+                formData.append("startDate", this.formData.startDate);
+                formData.append("endDate", this.formData.endDate);
+                formData.append("loc", this.formData.loc);
+                if (document.getElementById("fileimg").files[0]) {
+                    formData.append("image", document.getElementById("fileimg").files[0]);
+                } else {
+                    formData.append("image", this.formData.image);
+                }
+
+                fetch(url, {
+                    method: "POST",
+                    body: formData,
+                })
+                    .then((response) => {
+                        if (response.ok) {
+                            return response.json();
+                        } else {
+                            throw new Error("新增失敗");
+                        }
+                    })
+                    .then((json) => {
+                        this.success(true, json);
+                        this.fetchnew();
+                        this.add_news = [];
+                    })
+                    .catch((error) => {
+                        console.log(error.message);
+                    });
+            } else {
+                const url = `${this.$store.state.publicpath}spex_insertupload.php`;
+                const formData = new FormData();
+                formData.append("id", this.formData.id);
+                formData.append("title", this.formData.title);
+                formData.append("content", this.formData.content);
+                formData.append("status", this.status);
+                formData.append("startDate", this.formData.startDate);
+                formData.append("endDate", this.formData.endDate);
+                formData.append("loc", this.formData.loc);
+                formData.append("image", document.getElementById("fileimg").files[0]);
+
+                fetch(url, {
+                    method: "POST",
+                    body: formData,
+                })
+                    .then((response) => {
+                        if (response.ok) {
+                            return response.json();
+                        } else {
+                            throw new Error("新增失敗");
+                        }
+                    })
+                    .then((json) => {
+                        this.success(true, json);
+                        this.fetchnew();
+                        this.formData = [];
+                    })
+                    .catch((error) => {
+                        console.log(error.message);
+                    });
+            }
+        },
+        fetchnew() {
+            const url = `${this.$store.state.publicpath}spex_list.php`;
+            let headers = {
+                "Content-Type": "application/json",
+                Accept: "application/json",
+            };
+            fetch(url, {
+                method: "POST",
+                headers: headers,
+            })
+                .then((response) => {
+                    if (response.ok) {
+                        return response.json(); // 如果請求成功，解析JSON數據
+                    } else {
+                        throw new Error("取得消息失敗"); // 如果請求不成功，拋出錯誤
+                    }
+                })
+                .then((json) => {
+                    this.news = json;
+                })
+                .catch((error) => {
+                    console.log(error.message);
+                });
+        },
 
     },
     mounted() {
+        this.fetchnew();
         const url = `http://localhost/musesmuseum/public/phps/spex_list.php`
         let headers = {
             "Content-Type": "application/json",
@@ -239,6 +469,7 @@ export default {
             })
             .then((json) => {
                 this.exhibitions = json;
+
                 // 在成功時顯示提示
                 //alert(json.message); // 假設JSON數據中有一個message屬性
             })
@@ -287,6 +518,7 @@ div {
 }
 
 .btn_admin {
+    border-radius: 4px;
     margin-right: 10px;
     margin-top: 10px;
     margin-bottom: 10px;
@@ -394,12 +626,31 @@ div {
         }
     }
 
-
-
     .form_btn {
         position: fixed;
         bottom: 0;
-        left: 20px;
+        right: 20px;
+    }
+}
+
+.uploadblock {
+    margin-top: 1.5rem;
+    border: 1px solid #009ca8;
+    width: 100%;
+    height: 250px;
+    text-align: center;
+    border-radius: 10px;
+    padding: 1rem;
+    line-height: 2;
+
+    input {
+        border: none;
+    }
+
+    img {
+        width: 90%;
+        height: 80%;
+        object-fit: contain;
     }
 }
 </style>

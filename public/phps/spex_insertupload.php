@@ -6,19 +6,19 @@ header('Content-Type: application/json');
 
 
 try {
-    switch ($_FILES['img']["error"]) {
+    switch ($_FILES["image"]["error"]) {
 
     case UPLOAD_ERR_OK :
-        $dir = "../image/productimage/";
+        $dir = "../image/exhi/";
         if( !file_exists($dir) ){
             mkdir($dir);
         }
                 
-        $from = $_FILES['img']["tmp_name"];
+        $from = $_FILES["image"]["tmp_name"];
     
-        $filename = basename($_FILES['img']['name']);
+        $filename = basename($_FILES['image']['name']);
     
-        $to = $dir . basename($_FILES['img']['name']);
+        $to = $dir . basename($_FILES['image']['name']);
         copy($from, $to);
         echo json_encode("上傳成功");    
         break;
@@ -36,24 +36,25 @@ try {
         break;
 
 }
-//  連線
+ //連線
  require_once("./connectMuses.php");
     
  //準備sql
- $sql = "INSERT INTO products (prod_id, prod_name, prod_desc, prod_img, prod_fixedprice, prod_spec, prod_sellingprice, prod_status, prod_kind) VALUES (:id, :name, :desc, :img, :fixedprice, :spec, :sellingprice, :status, :kind)";
+ $sql = "insert into exhibitions (exh_name, exh_desc, exh_status, exh_startdate, exh_enddate, exh_loc, exh_img) values (:name, :desc, :status, :startdate, :enddate, :loc, :img)";
 
- $prod = $pdo->prepare($sql);
- $prod->bindValue(":name", $_POST["name"]);
- $prod->bindValue(":desc", $_POST["desc"]);
- $prod->bindValue(":status", $_POST["status"]);
- $prod->bindValue(":fixedprice", $_POST["fixedprice"]);
- $prod->bindValue(":spec", $_POST["spec"]);
- $prod->bindValue(":sellingprice", $_POST["sellingprice"]);
- $prod->bindValue(":kind", $_POST["kind"]);
- $prod->bindValue(":id", $_POST["id"]);
- $prod->bindValue(":img", $filename); 
+ $news = $pdo->prepare($sql);
+ $news->bindValue(":name", $_POST["name"]);
+ $news->bindValue(":desc", $_POST["desc"]);
+ $news->bindValue(":status", $_POST["status"]);
+ $news->bindValue(":startdate", $_POST["startdate"]);
+ $news->bindValue(":enddate", $_POST["enddate"]);
+ $news->bindValue(":loc", $_POST["loc"]);
+ $news->bindValue(":img", $filename); //
  //執行sql
- $prod->execute();
+ $news->execute();
+
+
+
  
 } catch (Exception $e) {
  echo "錯誤行號 : ", $e->getLine(), "<br>";

@@ -11,7 +11,7 @@ try {
         switch ($_FILES["image"]["error"]) {
 
             case UPLOAD_ERR_OK :
-                $dir = "../image/news/";
+                $dir = "../image/exhi/";
                 if( !file_exists($dir) ){
                     mkdir($dir);
                 }
@@ -49,15 +49,16 @@ try {
     
  //準備sql
 
- $sql = "update news set news_title=:title, news_content=:content, news_status=:status,news_date=:date,news_img=:image where news_id=:id";
+ $sql = "update exhibitions set exh_name=:name, exh_desc=:desc, exh_status=:status, exh_startdate=:startdate, exh_enddate=:enddate, exh_loc=:loc, exh_img=:img where exh_id=:id";
 
  $news = $pdo->prepare($sql);
- $news->bindValue(":title", $_POST["title"]);
- $news->bindValue(":content", $_POST["content"]);
+ $news->bindValue(":name", $_POST["name"]);
+ $news->bindValue(":desc", $_POST["desc"]);
  $news->bindValue(":status", $_POST["status"]);
- $news->bindValue(":date", $_POST["date"]);
- $news->bindValue(":id", $_POST["id"]);
- $news->bindValue(":image", $filename); //
+ $news->bindValue(":startdate", $_POST["startdate"]);
+ $news->bindValue(":enddate", $_POST["enddate"]);
+ $news->bindValue(":loc", $_POST["loc"]);
+ $news->bindValue(":img", $filename); //
  //執行sql
  $news->execute();
 

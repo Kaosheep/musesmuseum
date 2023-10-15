@@ -3,9 +3,13 @@
     <div>
       <div class="admin_editbar">
         <div>
-          <PinkButton class="btn_admin" text="新增" />
-          <PinkButton class="btn_admin" text="上架" @click="toggleStatus('1')" :disabled="!canToggle('1')" />
-          <PinkButton class="btn_admin" text="下架" @click="toggleStatus('0')" :disabled="!canToggle('0')" />
+          <PinkButton
+            class="btn_admin"
+            @click="showEditForm('add')"
+            text="新增"
+          />
+          <PinkButton class="btn_admin" text="上架" @click="updatestatus(1)" />
+          <PinkButton class="btn_admin" text="下架" @click="updatestatus(0)" />
         </div>
         <Searchbar class="onlyB" />
       </div>
@@ -19,7 +23,12 @@
             <th></th>
           </tr>
           <tr v-for="item in getPageItems" :key="item.prod_id">
-            <td><input type="checkbox"></td>
+            <td>
+              <input
+                type="checkbox"
+                @change="inchecked(item.prod_id, $event)"
+              />
+            </td>
             <td>{{ item.prod_id }}</td>
             <td>{{ item.prod_name }}</td>
             <td>
@@ -27,12 +36,20 @@
               <p v-else>未上架</p>
             </td>
             <td>
-              <button class="edit" @click="showEditForm('edit', item.prod_id)">編輯</button>
+              <button class="edit" @click="showEditForm('edit', item.prod_id)">
+                編輯
+              </button>
             </td>
           </tr>
         </table>
       </div>
-      <form action="" class="pop" v-show="showForm" @submit.prevent="submitForm" id="edform">
+      <form
+        action=""
+        class="pop"
+        v-show="showForm"
+        @submit.prevent="submitForm"
+        id="edform"
+      >
         <h2>編輯</h2>
         <div class="info_col" v-show="addprod">
           <div>
@@ -67,36 +84,57 @@
         <div>
           <div>狀態</div>
           <div>
-            <select>
-              <option value="0">未上架</option>
-              <option value="1">已上架</option>
+            <select v-model="add_prod.status">
+              <option :value="0">未上架</option>
+              <option :value="1">已上架</option>
             </select>
             <div class="uploadblock">
               <label for="fileimg">
                 <p v-if="add_prod.img == null">上傳圖片</p>
                 <p v-else>{{ add_prod.img }}</p>
 
-                <input @change="img($event)" type="file" id="fileimg" style="display: none" />
-                <img v-if="add_prod.img == null" :src="`${$store.state.imgpublicpath}image/productimage/.png`" />
-                <img v-else :src="`${$store.state.imgpublicpath}image/productimage/` + add_prod.img
-                  " alt="" />
+                <input
+                  @change="img($event)"
+                  type="file"
+                  id="fileimg"
+                  style="display: none"
+                />
+                <img
+                  v-if="add_prod.img == null"
+                  :src="`${$store.state.imgpublicpath}image/productimage/u.png`"
+                />
+                <img
+                  v-else
+                  :src="
+                    `${$store.state.imgpublicpath}image/productimage/` +
+                    add_prod.img
+                  "
+                  alt=""
+                />
               </label>
             </div>
           </div>
         </div>
         <div class="form_btn">
-          <PinkButton class="btn_admin" text="刪除" @click="deleten" />
           <PinkButton class="btn_admin" text="取消" @click="hideEditForm" />
-          <PinkButton class="btn_admin" text="儲存" @click="addnews_btn(add_prod.id)"/>
+          <PinkButton
+            class="btn_admin"
+            text="儲存"
+            @click="addprod_btn(add_prod.id)"
+          />
         </div>
       </form>
     </div>
     <div class="page">
-      <Page :total="searchFilter.length" :page-size="pageItems" v-model="currentPage" />
+      <Page
+        :total="searchFilter.length"
+        :page-size="pageItems"
+        v-model="currentPage"
+      />
     </div>
   </div>
 </template>
-   
+
 <script>
 import PinkButton from "/src/components/PinkButton.vue";
 import Searchbar from "/src/components/Searchbar.vue";
@@ -108,7 +146,7 @@ export default {
     Searchbar,
     Searchbarclick,
     PinkButton,
-    Addressfrom
+    Addressfrom,
   },
   data() {
     return {
@@ -117,12 +155,11 @@ export default {
       addprod: false,
       showForm: false,
       publicpath: "http://localhost/musesmuseum/public/phps/",
-      status: 0,
       src: 0,
       currentPage: 1,
       pageItems: 10,
       searchinput: "",
-      prodsched: [],
+      prodched: [],
       add_prod: [
         {
           id: "",
@@ -133,9 +170,10 @@ export default {
           fixedprice: "",
           spec: "",
           kind: "",
+          status: "",
         },
       ],
-    }
+    };
   },
   computed: {
     searchFilter() {
@@ -144,7 +182,7 @@ export default {
           v.prod_name?.includes(this.searchinput)
         );
       } else {
-        return this.produstdislist
+        return this.produstdislist;
       }
     },
     getPageItems() {
@@ -155,49 +193,35 @@ export default {
   },
   watch: {},
   methods: {
-    deleten() {
-      if (window.confirm("確認刪除資料?")) {
-        fetch(`${this.$store.state.publicpath}shop_del.php`, {
-          method: "post",
-          headers: {
-            "Content-Type": "application/x-www-form-urlencoded; charset=utf-8",
-          },
-          body: JSON.stringify({ data: Object.values(this.prodsched) }),
-        })
-          .then((response) => {
-            if (response.ok) {
-              return response.json();
-            } else {
-              throw new Error("新增失敗");
-            }
-          })
-          .then((json) => {
-            alert(json);
-            window.location.reload();
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
-      }
+    img(e) {
+      let that = this;
+      let files = e.target.files[0];
+      if (!e || !window.FileReader) return;
+      let reader = new FileReader();
+      reader.readAsDataURL(files);
+
+      reader.onloadend = function () {
+        that.add_prod.img = files.name;
+      };
     },
     inchecked(id, e) {
       if (e.target.checked) {
-        this.prodsched.push({ id: id });
-        console.log(this.prodsched);
-        console.log(Object.values(this.prodsched));
+        this.prodched.push({ id: id });
+        console.log(this.prodched);
+        console.log(Object.values(this.prodched));
       } else {
-        this.prodsched.splice(this.prodsched.indexOf(id), 1);
-        console.log(this.prodsched);
+        this.prodched.splice(this.prodched.indexOf(id), 1);
+        console.log(this.prodched);
       }
     },
     updatestatus(b) {
-      this.prodsched.splice(0, 0, { type: b });
+      this.prodched.splice(0, 0, { type: b });
       fetch(`${this.$store.state.publicpath}shop_updatestatus.php`, {
         method: "post",
         headers: {
           "Content-Type": "application/x-www-form-urlencoded; charset=utf-8",
         },
-        body: JSON.stringify({ data: Object.values(this.prodsched) }),
+        body: JSON.stringify({ data: Object.values(this.prodched) }),
       })
         .then((response) => {
           if (response.ok) {
@@ -207,22 +231,12 @@ export default {
           }
         })
         .then((json) => {
-          alert(json);
-          window.location.reload();
+          // alert(json);
+          // window.location.reload();
         })
         .catch(function (error) {
           console.log(error);
         });
-    },
-    toggleStatus(newStatus) {
-      this.produstdislist.forEach(item => {
-        if (item.selected) {
-          item.prod_status = newStatus;
-        }
-      });
-    },
-    canToggle(newStatus) {
-      return this.produstdislist.some(item => item.selected && item.prod_status !== newStatus);
     },
     hideEditForm() {
       this.showForm = false;
@@ -232,7 +246,7 @@ export default {
     },
     showEditForm(type, id) {
       if (type == "add") {
-        this.addprod = false;
+        this.addprod = true;
         this.add_prod = [
           {
             id: "",
@@ -243,13 +257,14 @@ export default {
             fixedprice: "",
             spec: "",
             kind: "",
+          status: ""
           },
         ];
       } else {
         this.addprod = true;
       }
       if (type == "edit") {
-        const url = `http://localhost/musesmuseum/public/phps/prod_list.php`;
+        const url = `${this.$store.state.publicpath}prod_list.php`;
         let headers = {
           "Content-Type": "application/json",
           Accept: "application/json",
@@ -277,34 +292,39 @@ export default {
             this.add_prod.fixedprice = json.prod_fixedprice;
             this.add_prod.spec = json.prod_spec;
             this.add_prod.sellingprice = json.prod_sellingprice;
-            this.status = json.prod_status;
+            this.add_prod.status = json.prod_status;
             this.add_prod.kind = json.prod_kind;
           });
       }
       this.showForm = true;
     },
     fetchprod() {
-      fetch(`${this.$store.state.publicpath}shop.php`).then(async (response) => {
-        this.produstdislist = await response.json();
-        console.log(this.produstdislist);
-      })
+      fetch(`${this.$store.state.publicpath}shop.php`)
+        .then(async (response) => {
+          this.produstdislist = await response.json();
+          console.log(this.produstdislist);
+        })
         .catch((error) => {
-          console.error('發生錯誤:', error);
+          console.error("發生錯誤:", error);
         });
     },
     addprod_btn(id) {
       if (id != undefined) {
-        const url = `http://localhost/musesmuseum/public/phps/shop_updateupload.php`;
+        const url = `${this.$store.state.publicpath}shop_updateupload.php`;
         const formData = new FormData();
         formData.append("id", this.add_prod.id);
         formData.append("name", this.add_prod.name);
         formData.append("desc", this.add_prod.desc);
-        formData.append("status", this.status);
-        formData.append("kind", this.add_prod_kind);
+        formData.append("status", this.add_prod.status);
+        formData.append("kind", this.add_prod.kind);
         formData.append("fixedprice", this.add_prod.fixedprice);
-        formData.append("spec", this.spec);
-        formData.append("sellingprice", this.add_prod_sellingprice);
-        formData.append("img", document.getElementById("fileimg").files[0]);
+        formData.append("spec", this.add_prod.spec);
+        formData.append("sellingprice", this.add_prod.sellingprice);
+        if (document.getElementById("fileimg").files[0]) {
+          formData.append("img", document.getElementById("fileimg").files[0]);
+        } else {
+          formData.append("img", this.add_prod.img);
+        }
 
         fetch(url, {
           method: "POST",
@@ -318,23 +338,24 @@ export default {
             }
           })
           .then((json) => {
-            alert(json);
-            window.location.reload();
+            // alert(json);
+            // window.location.reload();
           })
           .catch((error) => {
             console.log(error.message);
           });
       } else {
-        const url = `http://localhost/musesmuseum/public/phps/shop_insertupload.php`;
+        const url = `${this.$store.state.publicpath}shop_insertupload.php`;
         const formData = new FormData();
+        this.add_prod.id = 0;
         formData.append("id", this.add_prod.id);
         formData.append("name", this.add_prod.name);
         formData.append("desc", this.add_prod.desc);
-        formData.append("status", this.status);
-        formData.append("kind", this.add_prod_kind);
+        formData.append("status", this.add_prod.status);
+        formData.append("kind", this.add_prod.kind);
         formData.append("fixedprice", this.add_prod.fixedprice);
-        formData.append("spec", this.spec);
-        formData.append("sellingprice", this.add_prod_sellingprice);
+        formData.append("spec", this.add_prod.spec);
+        formData.append("sellingprice", this.add_prod.sellingprice);
         formData.append("img", document.getElementById("fileimg").files[0]);
 
         fetch(url, {
@@ -343,14 +364,15 @@ export default {
         })
           .then((response) => {
             if (response.ok) {
+              console.log(response.ok)
               return response.json();
             } else {
               throw new Error("新增失敗");
             }
           })
           .then((json) => {
-            alert(json);
-            window.location.reload();
+            // alert(json);
+            // window.location.reload();
           })
           .catch((error) => {
             console.log(error.message);
@@ -361,7 +383,7 @@ export default {
   mounted() {
     this.fetchprod();
   },
-}
+};
 </script>
 
 <style scoped lang="scss">
@@ -403,7 +425,7 @@ div {
   border-style: none;
   padding: 8px;
   color: #000;
-  transition: .3s;
+  transition: 0.3s;
   cursor: pointer;
 }
 
@@ -474,11 +496,9 @@ div {
       p {
         margin: 0;
         padding: 5px;
-
       }
     }
   }
-
 }
 
 .pop {
@@ -501,12 +521,11 @@ div {
     textarea {
       width: 100%;
       background-color: #ffffff1b;
-      border: 1px solid #009CA8;
+      border: 1px solid #009ca8;
       border-radius: 10px;
       resize: none;
       padding-left: 5px;
       padding-right: 5px;
-
     }
   }
 
@@ -524,14 +543,10 @@ div {
     margin-right: 10px;
     margin-bottom: 10px;
 
-
-
     div {
       width: 100%;
       margin-top: 10px;
       margin-right: 10px;
-
-
     }
   }
 
@@ -541,7 +556,6 @@ div {
     border: 1px solid $mblue;
     margin-left: 30px;
   }
-
 
   .form_btn {
     position: relative;
@@ -553,5 +567,3 @@ div {
   text-align: center;
 }
 </style>
-    
-
