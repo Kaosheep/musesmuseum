@@ -73,10 +73,10 @@ export default {
     currentItemId: '',
     rowitem:{},
     publicpath: "http://localhost/musesmuseum/public/phps/",
+    originalProductInfoArr: [],
     productInfoArr:[],
     po_id: [],
     po_date: [],
-    po_sum: [],
     memBtnLink:[
       { link:"/Home/MemberInfo", name:"會員資料" },
       { link:"", name:"訂單查詢" },
@@ -100,8 +100,9 @@ export default {
   },
   methods: {
     fetchprod() {
-        fetch(`${this.$store.state.publicpath}searchproduct.php`).then(async (response) => {
+        fetch(`${this.publicpath}searchproduct.php`).then(async (response) => {
           this.productInfoArr = await response.json();
+          this.originalProductInfoArr = [...this.productInfoArr];
           if (this.productInfoArr.length > 0) {
               this.currentItemId = this.productInfoArr[0].id;
               this.rowitem = this.productInfoArr[0];
@@ -111,14 +112,12 @@ export default {
           // console.log(rowitem);
           console.log('fetchprod 方法被调用了')
           console.log(this.productInfoArr)
-          console.log(this.rowitem.po_id)
-
         })
         .catch((error) => {
           console.error('發生錯誤:', error);
         });
       },
-      getStatus(po_status) {
+    getStatus(po_status) {
       po_status = parseInt(po_status);
       switch (po_status) {
         case 0:
@@ -133,10 +132,25 @@ export default {
           return '未知';
       }
     },
+    // restoreOriginalData() {
+    //   this.productInfoArr = [...this.originalProductInfoArr]; 
+    //   this.searchinput = ""; 
+    // },
     searchClick(text) {
-      this.searchinput = text;
+      const searchText = text.toLowerCase(); // 将搜索文本转换为小写
+      this.productInfoArr = this.originalProductInfoArr.filter(item => {
+        // 在过滤时将字段的文本形式也转换为小写，并进行匹配
+        return (
+          item.po_id.toLowerCase().includes(searchText) ||
+          item.po_date.toLowerCase().includes(searchText) ||
+          item.po_sum.toString().toLowerCase().includes(searchText) ||
+          this.getStatus(item.po_status).toLowerCase().includes(searchText)
+        );
+      });
+    //   } else {
+    //     this.restoreOriginalData();
+    //   } 
     },
-      
   },
   mounted() {
     document.body.style.height = `auto`;
