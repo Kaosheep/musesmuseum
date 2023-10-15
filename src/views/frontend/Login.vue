@@ -123,8 +123,7 @@ export default {
           this.mem.mbr_psw == document.getElementById("mbr_psw").value
         ) {
           window.alert("登入成功");
-          this.$router.push("/Home/MemberInfo");
-          // next();
+          document.location.href = `${this.$store.state.publicURL}Login`;
         } else {
           window.alert("帳密錯誤");
         }

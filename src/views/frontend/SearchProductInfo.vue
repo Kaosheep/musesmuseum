@@ -23,29 +23,31 @@
             <p>數量</p>
             <p>小計</p>
           </div>
-          <div v-for="(rowitem, rowindex) in productInfoArr" 
-          :key="rowindex" 
-          class="yellowRow">
-
-            <div class="itemInfoList">{{ rowitem.id }}</div>
+          <div 
+          v-for="(rowitem, rowindex) in productInfoArr" 
+          :key="rowindex" class="yellowRow">
+            <div class="itemInfoList">{{ rowitem.prod_dlt_id }}</div>
             <div class="itemInfoList">
-              <img :src="(`${this.$store.state.imgpublicpath}image/productimage/` + item.prod_img)" :alt="rowitem.name" />
+              <img 
+                  :src="(`${this.$store.state.imgpublicpath}image/productimage/` + rowitem.prod_img)" 
+                  :alt="rowitem.prod_name" />
             </div>
-            <div class="itemInfoList">{{ rowitem.name }}</div>
-            <div class="itemInfoList">{{ rowitem.price }}</div>
-            <div class="itemInfoList">{{ rowitem.count }}</div>
-            <div class="itemInfoList">{{ rowitem.total }}</div>
+            <div class="itemInfoList">{{ rowitem.prod_name }}</div>
+            <div class="itemInfoList">{{ rowitem.prod_dlt_actual_price }}</div>
+            <div class="itemInfoList">{{ rowitem.prod_dlt_qty }}</div>
+            <div class="itemInfoList">{{ rowitem.prod_dlt_total }}</div>
           </div>
-
-          <div class="underRow">
+          <div 
+          class="underRow"
+          >
             <p>付款狀態</p>
-            <div>已付款</div>
+            <div>{{rowitem.po_pay === 0 ? '未付款' : '已付款'}}</div>
             <p>運送方式</p>
             <div>宅配</div>
             <p>訂單狀態</p>
-            <div>已完成</div>
+            <div>{{ getStatus(rowitem.po_status) }}</div>
             <p>總金額</p>
-            <div>1000</div>
+            <div>{{rowitem.po_sum}}</div>
           </div>
           <div class="pagination">
                 <Page :total="productInfoArr.length" :page-size="itemsPerPage" v-model="currentPage"/>
@@ -68,6 +70,8 @@ export default {
   },
   data() {
     return {
+      currentItemId: '',
+      rowitem: {},
       productInfoArr: [],
       memBtnLink: [
         { link: "/Home/MemberInfo", name: "會員資料" },
@@ -89,25 +93,72 @@ export default {
     },
   },
   methods: {
+    fetchprod() {
+        fetch(`${this.$store.state.publicpath}searchproductinfo.php`)
+        .then(async (response) => {
+          this.productInfoArr = await response.json();
+          if (this.productInfoArr.length > 0) {
+              this.currentItemId = this.productInfoArr[0].id;
+              this.rowitem = this.productInfoArr[0];
+            }
+          // const idToFind = this.$route.params.prod_id;
+          // this.rowitem = this.productInfoArr.find((rowitem) => rowitem.prod_id === idToFind); 
+          console.log('fetchprod 方法被调用了')
+          console.log(this.productInfoArr[0])
+        })
+        .catch((error) => {
+          console.error('發生錯誤:', error);
+        });
+      },
+      getStatus(po_status) {
+      po_status = parseInt(po_status);
+      switch (po_status) {
+        case 0:
+          return '處理中';
+        case 1:
+          return '已確認';
+        case 2:
+          return '已出貨';
+        case 3:
+          return '已完成';
+        default:
+          return '未知';
+      }
+    },
   },
   mounted() {
+    const productId = this.$route.params.productId; // 获取路由参数中的商品 ID
+  // 使用 productId 加载数据
+  this.fetchprod(productId);
     // 去資料庫拿 productInfoArr
     // const idToFind = parseInt(this.$route.params.id);
     // this.productInfoArr = $ajax(`...php?id=${idToFind}`);
-    this.productInfoArr = [
-      { id: "W001", pic: "@/assets/image/productimage", name: "muses筆記", date: "2023/08/01", price: "$200", count: "2", total: "$400" },
-      { id: "K001", pic: "@/assets/image/productimage", name: "muses筆記", date: "2023/08/01", price: "$200", count: "2", total: "$400" },
-      { id: "K003", pic: "@/assets/image/productimage", name: "muses筆記", date: "2023/08/01", price: "$200", count: "2", total: "$400" },
-      { id: "L001", pic: "@/assets/image/productimage", name: "muses筆記", date: "2023/08/01", price: "$200", count: "2", total: "$400" },
-      { id: "L002", pic: "@/assets/image/productimage", name: "muses筆記", date: "2023/08/01", price: "$200", count: "2", total: "$400" },
-    ]
-
+    // this.productInfoArr = [
+    //   { id: "W001", pic: "@/assets/image/productimage", name: "muses筆記", date: "2023/08/01", price: "$200", count: "2", total: "$400" },
+    //   { id: "K001", pic: "@/assets/image/productimage", name: "muses筆記", date: "2023/08/01", price: "$200", count: "2", total: "$400" },
+    //   { id: "K003", pic: "@/assets/image/productimage", name: "muses筆記", date: "2023/08/01", price: "$200", count: "2", total: "$400" },
+    //   { id: "L001", pic: "@/assets/image/productimage", name: "muses筆記", date: "2023/08/01", price: "$200", count: "2", total: "$400" },
+    //   { id: "L002", pic: "@/assets/image/productimage", name: "muses筆記", date: "2023/08/01", price: "$200", count: "2", total: "$400" },
+    // ]
+    this.fetchprod();
     document.body.style.height = `auto`;
   }
 };
 </script>
 <style scoped lang="scss">
-
+.searchProdMain{
+    .yellowRow{
+    justify-content: space-between;
+    }
+    .whiteRow{
+        justify-content: space-between;
+    }
+    .itemInfoList{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+}
 .backGroundCard{
   align-items: flex-start; 
   justify-content:center;

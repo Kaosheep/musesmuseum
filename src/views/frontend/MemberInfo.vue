@@ -86,7 +86,7 @@ export default {
   methods: {
 
     getuser() {
-      fetch("http://localhost/musesmuseum/public/phps/MemberInfo.php")
+      fetch(`${this.$store.state.publicpath}MemberInfo.php`)
         .then(response => {
           return response.json();
         })
@@ -128,9 +128,9 @@ export default {
     //     });
     // },
     checkLoginStatus() {
-      if (!this.$store.state.isLogin) {
-        this.$router.push("/Home/Login");
-      }
+    if (!this.$store.state.isLogin) {
+      document.location.href = `${this.$store.state.publicURL}Login`;
+    }
     },
   },
   mounted() {

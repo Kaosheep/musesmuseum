@@ -1,6 +1,6 @@
 
 <template>
-   <div class="bgcGY cardCenter">
+  <div class="bgcGY cardCenter">
     <main>
       <div class="flex-container">
       <div class="file-upload-container">
@@ -50,7 +50,7 @@
         </div>
       </div>
     </main>
-   </div>
+  </div>
 </template>
 
 <script>
@@ -69,7 +69,7 @@ export default {
         { memTitColumn:"聯絡電話",type:"text",id:"memPsw",name:"memPsw",class:"fillInClumn",placeholder:"電話" },
         { memTitColumn:"聯絡地址",type:"text",id:"memPsw",name:"memPsw",class:"fillInClumn",placeholder:"地址" },
       ],
- 
+
       memBtnLink:[
         { link:"", name:"會員註冊" },
         { link:"/Home/Login", name:"會員登入" },
