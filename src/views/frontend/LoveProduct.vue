@@ -82,6 +82,7 @@ export default {
   },
   data() {
     return {
+      produstdislist: [],
       lovescol: [],
       memAllInfo: {},
       loven: null,
@@ -94,10 +95,12 @@ export default {
       pageItems: 6,
       currentPage: 1,
       itemsPerPage: 5,
-      searchinput:"",
+      searchinput: "",
+      storage: localStorage,
     };
   },
   computed: {
+    
     searchFilter() {
       if (this.searchinput) {
         return this.lovescol.filter((v) =>
@@ -119,6 +122,24 @@ export default {
     },
   },
   methods: {
+    fetchprod() {
+      fetch(`${this.$store.state.publicpath}shop.php`)
+        .then(async (response) => {
+          this.produstdislist = await response.json();
+          console.log(this.produstdislist);
+        })
+        .catch((error) => {
+          console.error("發生錯誤:", error);
+        });
+    },
+    success(nodesc) {
+      this.$Notice.success({
+        title: "加入購物車",
+        desc: nodesc
+          ? ""
+          : "Here is the notification description. Here is the notification description. ",
+      });
+    },
     searchClick(text) {
       this.searchinput = text;
     },
@@ -150,9 +171,37 @@ export default {
           console.log(error.message);
         });
     },
-    updateh(){
+    updateh() {
       this.getlove();
-    }
+    },
+    addcart(prod_id) {
+      this.$store.state.cartnum += 1;
+      this.success(true);
+      if (this.storage["addItemlist"] == null) {
+        this.storage["addItemlist"] = "";
+      }
+      let additem = this.produstdislist.find(
+        (item) => item.prod_id === prod_id
+      );
+
+      this.storage["addItemlist"] += `${prod_id},`;
+      if (this.storage[prod_id]) {
+        let itemstr = [...this.storage[prod_id].split(",")];
+        // console.log(itemstr)
+        let nowamount = parseInt(itemstr.slice(4, 5));
+        nowamount++;
+        itemstr.splice(4, 1, nowamount);
+        this.storage[prod_id] = "";
+        this.storage[prod_id] += itemstr;
+      } else {
+        this.storage[prod_id] = "";
+        this.storage[prod_id] += `${prod_id},`;
+        this.storage[prod_id] += `${additem.prod_name},`;
+        this.storage[prod_id] += `${additem.prod_sellingprice},`;
+        this.storage[prod_id] += `${additem.prod_img},`;
+        this.storage[prod_id] += "1,";
+      }
+    },
   },
   mounted() {
     const cookies = document.cookie.split(";");
@@ -181,6 +230,7 @@ export default {
       }
     }
     this.getlove();
+    this.fetchprod();
   },
 };
 </script>

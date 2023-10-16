@@ -40,6 +40,10 @@ export default {
     };
   },
   methods: {
+    closehint(){
+      this.$store.state.first = true;
+      console.log(this.$store.state.first)
+    },
     totop() {
       window.scrollTo(0, 0);
     },

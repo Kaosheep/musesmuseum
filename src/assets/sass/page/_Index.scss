@@ -1,3 +1,61 @@
+.hint.closehint {
+    display: none;
+}
+
+.hint {
+    position: fixed;
+    background-color: rgba(255, 255, 255, 0.5);
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    backdrop-filter: blur(10px);
+
+    .group {
+        position: absolute;
+        @include tc;
+        text-align: center;
+
+        span {
+            display: inline-block;
+            width: 70px;
+            height: 80px;
+            margin: 1rem;
+            animation: scrollhintan .5s 0s infinite alternate;
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+                pointer-events: none;
+            }
+
+        }
+
+        p {
+            line-height: 2;
+
+            &:first-child {
+                margin-bottom: 2rem;
+                font-size: 18px;
+                font-weight: 700;
+            }
+
+            &:last-child {
+                animation: scrollhintan .5s 0s infinite alternate;
+            }
+
+            @keyframes scrollhintan {
+                100% {
+                    transform: translateY(5px);
+                }
+            }
+        }
+    }
+
+}
+
 .home_main {
     position: fixed;
     top: 0;
@@ -57,6 +115,7 @@
                     display: flex;
                     justify-content: center;
                     align-items: center;
+                    pointer-events: none;
 
                     @include t() {
                         margin-top: 100px;
@@ -164,7 +223,7 @@
                         height: 120px;
                         margin-left: auto;
                         position: relative;
-                        z-index: 2;
+                        z-index: 5;
 
                         @include t() {
                             margin: 4rem auto 2.5rem;
@@ -200,17 +259,6 @@
                         }
                     }
 
-                    .scrollhint {
-                        padding-right: 5px;
-                        text-align: end;
-                        animation: scrollhint .5s 0s linear infinite alternate-reverse;
-
-                        @include t() {
-                            display: none;
-                        }
-
-                    }
-
                     @keyframes scrollhint {
                         0% {
                             transform: translateX(0px);
@@ -234,7 +282,45 @@
                         }
 
                         ul {
-                            margin-bottom: 2rem;
+                            margin-bottom: 0.5rem;
+
+                            li {
+                                margin-bottom: 2px;
+
+                                a {
+                                    // border-left: 1px solid $mblue;
+                                    width: 100%;
+                                    display: inline-block;
+                                    margin-bottom: 5px;
+                                    background: linear-gradient(90deg, $mgreen 45%, #ffffff 60%);
+                                    background-size: 220%;
+                                    // background-size: 100%;
+                                    background-position: 100% 100%;
+                                    transition: .4s;
+                                    padding:4px 0.5rem 4px 1rem;
+
+                                    &:hover {
+                                        background-position: 0% 0%;
+
+                                        p {
+                                            background-position: 0% 0%;
+                                        }
+                                    }
+
+                                    p {
+                                        color: transparent;
+                                        background: linear-gradient(90deg, #ffffff 45%, $mgreen 60%);
+                                        background-size: 220%;
+                                        // background-size: 100%;
+                                        background-position: 100% 100%;
+                                        background-clip: text;
+                                        -webkit-background-clip: text;
+                                        transition: .4s;
+                                        pointer-events: none;
+                                    }
+
+                                }
+                            }
 
                             @include t() {
                                 width: 100%;
