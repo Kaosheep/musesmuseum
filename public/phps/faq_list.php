@@ -5,16 +5,9 @@ header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Ac
 header("Content-Type: application/json"); 
 
 try {
-    //require_once("connectMuses.php");
-    //$data = json_decode(file_get_contents('php://input'));
-    $dbname = "musesmuseum";
-    $user = "root";
-    $password = "";
-    $dsn = "mysql:host=localhost;port=3306;dbname=musesmuseum;charset=UTF8";	
-    $options = [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, PDO::ATTR_CASE => PDO::CASE_NATURAL];
-    $pdo = new PDO($dsn, $user, $password, $options);
-
+    require_once("./connectMuses.php");
     $data = json_decode(file_get_contents('php://input'));
+
     
     if(empty($data)){
         $sql = "select * from `faq`";
