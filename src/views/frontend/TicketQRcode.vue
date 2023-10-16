@@ -31,12 +31,12 @@
             :key="rowindex"
             :class="[rowindex % 2 === 0 ? 'yellowRow' : 'whiteRow']"
           >
-            <div class="itemInfoList">{{ rowitem.to_id }}</div>
+            <div class="itemInfoList"><p>{{ rowitem.to_id }}</p></div>
             <div
               class="itemInfoList fingerlink"
               @click="showSection(rowitem.tkt_dlt_id)"
             >
-              {{ rowitem.tkt_name }}
+              <p>{{ rowitem.tkt_name }}</p>
             </div>
 
             <router-link
@@ -54,13 +54,13 @@
                 <p>{{ rowitem.tkt_name }}</p>
               </section>
             </router-link>
-            <div class="itemInfoList hideInfo">{{ rowitem.to_date }}</div>
-            <div class="itemInfoList">{{ rowitem.tkt_dlt_actual_price }}</div>
+            <div class="itemInfoList hideInfo"><p>{{ rowitem.to_date }}</p></div>
+            <div class="itemInfoList"><p>{{ rowitem.tkt_dlt_actual_price }}</p></div>
             <div class="itemInfoList hideInfo">
               <p v-if="parseInt(rowitem.to_pay_status) === 0">未付款</p>
               <p v-else-if="parseInt(rowitem.to_pay_status) === 1">已付款</p>
             </div>
-            <div class="itemInfoList">{{ rowitem.tkt_dlt_qty_used }}</div>
+            <div class="itemInfoList"><p>{{ rowitem.tkt_dlt_qty_used }}</p></div>
           </div>
           <div
             class="mask"
@@ -238,20 +238,43 @@ export default {
 };
 </script>
 <style scoped lang="scss">
+.headerRow{
+  p{
+    margin: 0;
+    &:nth-child(1){
+      width: 20%;
+    }
+    &:nth-child(2){
+      width: 12%;
+
+    }
+    &:nth-child(3){
+      width: 13%;
+
+    }
+    &:nth-child(4){
+
+    }
+    &:nth-child(5){
+
+    }
+    &:nth-child(6){
+
+    }
+  }
+}
+
 .fingerlink {
   cursor: pointer;
 }
 section {
-  position: absolute;
+  position: fixed;
   background: #f5f5f5;
-  left: 35%;
-  padding: 2rem;
-  text-align: center;
+  @include tc;
   border-radius: 10px;
   z-index: 9;
 }
 .mask {
-  // display: none;
   position: fixed;
   left: 0;
   top: 0;
@@ -293,12 +316,12 @@ section {
 
 @include t() {
   .searchProdMain {
-    .productInfo {
+    
       .headerRow {
         p {
-          margin: auto;
+          margin: 0;
         }
-      }
+      
       .underRow {
         text-align: start;
         flex-wrap: wrap;
