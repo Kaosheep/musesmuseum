@@ -6,6 +6,7 @@
                     <button class="btn_admin" @click="showEditForm('add')">新增</button>
                     <PinkButton class="btn_admin" text="上架" @click="toggleStatus('1')" :disabled="!canToggle('1')" />
                     <PinkButton class="btn_admin" text="下架" @click="toggleStatus('0')" :disabled="!canToggle('0')" />
+                    <button class="btn_admin" @click="deleten">刪除</button>
                 </div>
                 <Searchbar class="onlyB" />
             </div>
@@ -356,12 +357,12 @@ export default {
         },
         addexhi_btn(id) {
             if (id != undefined) {
-                const url = `${this.$store.state.publicpath}news_updateupload.php`;
+                const url = `${this.$store.state.publicpath}spex_updateupload.php`;
                 const formData = new FormData();
                 formData.append("id", this.formData.id);
                 formData.append("title", this.formData.title);
                 formData.append("content", this.formData.content);
-                formData.append("status", this.status);
+                formData.append("status", this.formData.status);
                 formData.append("startDate", this.formData.startDate);
                 formData.append("endDate", this.formData.endDate);
                 formData.append("loc", this.formData.loc);
@@ -385,7 +386,7 @@ export default {
                     .then((json) => {
                         this.success(true, json);
                         this.fetchnew();
-                        this.add_news = [];
+                        this.formData = [];
                     })
                     .catch((error) => {
                         console.log(error.message);
@@ -396,7 +397,7 @@ export default {
                 formData.append("id", this.formData.id);
                 formData.append("title", this.formData.title);
                 formData.append("content", this.formData.content);
-                formData.append("status", this.status);
+                formData.append("status", this.formData.status);
                 formData.append("startDate", this.formData.startDate);
                 formData.append("endDate", this.formData.endDate);
                 formData.append("loc", this.formData.loc);
@@ -441,7 +442,7 @@ export default {
                     }
                 })
                 .then((json) => {
-                    this.news = json;
+                    this.exhibitions = json;
                 })
                 .catch((error) => {
                     console.log(error.message);
