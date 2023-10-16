@@ -11,23 +11,21 @@ try {
     if (isset($data->mbr_id)) {
         $mbr_id = $data->mbr_id;
 
-        $sql = "SELECT * FROM product_orders AS po
-        JOIN product_details AS pd ON po.po_id = pd.po_id
-        JOIN products AS p ON pd.prod_id = p.prod_id
-        WHERE po.mbr_id = :mbr_id";
+        $sql = "SELECT * FROM ticket_orders AS tod
+        JOIN ticket_details AS td ON tod.to_id = td.to_id
+        JOIN tickets AS tk ON td.tkt_id = tk.tkt_id
+        WHERE tod.mbr_id = :mbr_id;";
 
         $prods = $pdo->prepare($sql);
         $prods->bindParam(':mbr_id', $mbr_id);
 
         $prods->execute();
-        
-        // 如果找得資料，取回資料，送出 JSON
+        //如果找得資料，取回資料，送出json
         if ($prods->rowCount() === 0) {
             echo "查無資料";
         } else {
             $prodRow = $prods->fetchAll(PDO::FETCH_ASSOC);
-
-            echo json_encode($prodRow); // 送出 JSON 字串
+            echo json_encode($prodRow);//送出json字串
         }
     } else {
         echo "未提供 mbr_id";
