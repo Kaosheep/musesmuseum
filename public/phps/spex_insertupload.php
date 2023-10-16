@@ -43,13 +43,13 @@ try {
  $sql = "insert into exhibitions (exh_name, exh_desc, exh_status, exh_startdate, exh_enddate, exh_loc, exh_img) values (:name, :desc, :status, :startdate, :enddate, :loc, :img)";
 
  $news = $pdo->prepare($sql);
- $news->bindValue(":name", $_POST["name"]);
- $news->bindValue(":desc", $_POST["desc"]);
+ $news->bindValue(":name", $_POST["title"]);
+ $news->bindValue(":desc", $_POST["content"]);
  $news->bindValue(":status", $_POST["status"]);
- $news->bindValue(":startdate", $_POST["startdate"]);
- $news->bindValue(":enddate", $_POST["enddate"]);
+ $news->bindValue(":startdate", $_POST["startDate"]);
+ $news->bindValue(":enddate", $_POST["endDate"]);
  $news->bindValue(":loc", $_POST["loc"]);
- $news->bindValue(":img", $filename); //
+ $news->bindValue(":img", $_FILES["image"]["name"]); //
  //執行sql
  $news->execute();
 
