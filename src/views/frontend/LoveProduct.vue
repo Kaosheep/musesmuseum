@@ -39,7 +39,7 @@
                 </router-link>
                 <div class="info">
                   <span>
-                    <Heart :loveid="item.prod_id"> </Heart>
+                    <Heart :loveid="item.prod_id" @click="updateh"> </Heart>
                     <router-link :to="`/Home/ProductPage/${item.prod_id}`">
                       <p>{{ item.prod_name }}</p>
                     </router-link>
@@ -127,7 +127,7 @@ export default {
     },
     getlove() {
       const formData = new URLSearchParams();
-      formData.append("mbr_id", this.memAllInfo["mbr_id"]);
+      formData.append("mbr_id", this.$store.state.mbr_id);
 
       fetch(`${this.$store.state.publicpath}love_fetch.php`, {
         method: "POST",
@@ -135,10 +135,24 @@ export default {
           "Content-Type": "application/x-www-form-urlencoded; charset=utf-8",
         },
         body: formData,
-      }).then(async (response) => {
-        this.lovescol = await response.json();
-      });
+      })
+        .then((response) => {
+          if (response.ok) {
+            return response.json(); // 如果請求成功，解析JSON數據
+          } else {
+            throw new Error("取得消息失敗"); // 如果請求不成功，拋出錯誤
+          }
+        })
+        .then((json) => {
+          this.lovescol = json;
+        })
+        .catch((error) => {
+          console.log(error.message);
+        });
     },
+    updateh(){
+      this.getlove();
+    }
   },
   mounted() {
     const cookies = document.cookie.split(";");

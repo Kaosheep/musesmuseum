@@ -25,14 +25,22 @@ export default {
     activelove() {
       if (!this.$store.state.mbr_id) {
         return 0;
-      }else if(this.loveid) {
+      } else if (this.loveid) {
         return this.lovescol.some((item) => item.prod_id === this.loveid);
-      }else {
+      } else {
         return 0;
       }
     },
   },
   methods: {
+    success(nodesc, json) {
+      this.$Notice.success({
+        title: json,
+        desc: nodesc
+          ? ""
+          : "Here is the notification description. Here is the notification description. ",
+      });
+    },
     getlove() {
       const formData = new URLSearchParams();
       formData.append("mbr_id", this.$store.state.mbr_id);
@@ -43,11 +51,23 @@ export default {
           "Content-Type": "application/x-www-form-urlencoded; charset=utf-8",
         },
         body: formData,
-      }).then(async (response) => {
-        this.lovescol = await response.json();
-      });
+      })
+        .then((response) => {
+          if (response.ok) {
+            return response.json(); // 如果請求成功，解析JSON數據
+          } else {
+            throw new Error("取得消息失敗"); // 如果請求不成功，拋出錯誤
+          }
+        })
+        .then((json) => {
+          this.lovescol = json;
+        })
+        .catch((error) => {
+          console.log(error.message);
+        });
     },
     uplove() {
+      
       if (!this.$store.state.mbr_id) {
         document.location.href = `${this.$store.state.imgpublicpath}Home/MemberInfo`;
       } else {
@@ -61,8 +81,19 @@ export default {
             "Content-Type": "application/x-www-form-urlencoded; charset=utf-8",
           },
           body: formData,
-        });
-        window.location.reload();
+        })
+          .then((response) => {
+            if (response.ok) {
+              return response.json();
+            } else {
+              throw new Error("取得消息失敗");
+            }
+          })
+          .then((json) => {
+            this.success(true, json);
+            this.lovescol=[];
+            this.getlove();
+          });
       }
     },
   },

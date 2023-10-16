@@ -7,7 +7,13 @@
     </div>
     <div class="product_info">
       <div class="product_image">
-        <img :src="(`${this.$store.state.imgpublicpath}image/productimage/` + foundObject.prod_img)" :alt="foundObject.prod_name" />
+        <img
+          :src="
+            `${this.$store.state.imgpublicpath}image/productimage/` +
+            foundObject.prod_img
+          "
+          :alt="foundObject.prod_name"
+        />
         <div>
           <Heart :loveid="$route.params.prod_id"> </Heart>
           <p>收藏</p>
@@ -44,7 +50,7 @@
           <Panel name="2">
             配送方式
             <template #content>
-              宅配到府：將商品配送至指定地點。<br/>
+              宅配到府：將商品配送至指定地點。<br />
               超商取貨：依商品運送到達時間，自行至指定門市取貨。
             </template>
           </Panel>
@@ -104,14 +110,17 @@ export default {
       });
     },
     fetchprod() {
-      fetch(`${this.$store.state.publicpath}productPage.php`).then(async (response) => {
-        this.produstdislist = await response.json();
-        const idToFind = this.$route.params.prod_id;
-        this.foundObject = this.produstdislist.find((item) => item.prod_id === idToFind); 
-      })
-      .catch((error) => {
-        console.error('發生錯誤:', error);
-      });
+      fetch(`${this.$store.state.publicpath}productPage.php`)
+        .then(async (response) => {
+          this.produstdislist = await response.json();
+          const idToFind = this.$route.params.prod_id;
+          this.foundObject = this.produstdislist.find(
+            (item) => item.prod_id === idToFind
+          );
+        })
+        .catch((error) => {
+          console.error("發生錯誤:", error);
+        });
     },
     decrease() {
       if (this.count > 1) {
@@ -122,13 +131,16 @@ export default {
       this.count++;
     },
     addcart() {
+      this.$store.state.cartnum += this.count;
       const prod_id = this.$route.params.prod_id;
-      console.log(this.$route.params.prod_id);
+      
       if (this.storage["addItemlist"] == null) {
         this.storage["addItemlist"] = "";
       }
-      let additem = this.produstdislist.find((item) => item.prod_id === prod_id);
-      console.log(additem)
+      let additem = this.produstdislist.find(
+        (item) => item.prod_id === prod_id
+      );
+
       this.storage["addItemlist"] += `${prod_id},`;
       if (this.storage[prod_id]) {
         let itemstr = [...this.storage[prod_id].split(",")];
@@ -144,12 +156,12 @@ export default {
         this.storage[prod_id] += `${additem.prod_name},`;
         this.storage[prod_id] += `${additem.prod_sellingprice},`;
         this.storage[prod_id] += `${additem.prod_img},`;
-        this.storage[prod_id] += "1,";
+        this.storage[prod_id] += this.count;
       }
     },
   },
   watch: {
-    '$route.params.prod_id': 'fetchData',
+    "$route.params.prod_id": "fetchData",
   },
   mounted() {
     document.body.style.height = `auto`;

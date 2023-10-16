@@ -33,7 +33,7 @@ export default createStore({
     mbr_name: '',
     mbr_id:'',
     isLogin: false,
-    cartnum:0,
+    cartnum: parseInt(localStorage.getItem("cartnum")) || 0,
   },
   getters: {
   },
@@ -43,7 +43,13 @@ export default createStore({
   },
     setIsLogin(state , status) {
       state.isLogin = status;
-    }
+    },
+    setcartnum(state, value) {
+      state.cartnum = value;
+    },
+    Loaded(state) {
+      state.cartnum = this.storage["cartnum"]
+    },
   },
   actions: {
     async fetchMbrName({ commit }) {
@@ -62,6 +68,14 @@ export default createStore({
       //清除 Cookie
       document.cookie = "members=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
       commit('setIsLogin', false); 
-    }
+    },
+    async setBeforeUnloadEvent({commit, state}) {
+      window.addEventListener("beforeunload", (e) => {
+        localStorage.setItem("cartnum", this.state.cartnum);
+      });
+    },
+    removeBeforeUnloadEvent() {
+      window.removeEventListener("beforeunload");
+    },
   },
 })

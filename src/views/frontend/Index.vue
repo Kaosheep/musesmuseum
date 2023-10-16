@@ -53,16 +53,16 @@
                   :key="imgindex"
                 >
                   <img
-                  :src="
-                    `${this.$store.state.imgpublicpath}image/exhi/` +
-                    img.exh_img
-                  "
+                    :src="
+                      `${this.$store.state.imgpublicpath}image/exhi/` +
+                      img.exh_img
+                    "
                     :alt="img.imgtitle"
                   />
                   <div class="imginfo">
                     <h3>{{ img.exh_name }}</h3>
-                  <p>{{ img.exh_startdate }}</p>
-                  <p>{{ img.exh_desc }}</p>
+                    <p>{{ img.exh_startdate }}</p>
+                    <p>{{ img.exh_desc }}</p>
                     <p>
                       <router-link to="/"
                         ><ThinArrow :text="'展覽資訊'"></ThinArrow
