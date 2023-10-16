@@ -2,7 +2,7 @@
   <div class="bgcGY cardCenter">
     <main class="searchProdMain">
       <div class="search">
-        <Searchbar @click="searchClick" />
+        <Searchbar :functype="1" @update-search-text="searchClick" />
         <Searchbarclick />
       </div>
       <!-- <div class="backGroundCardbBlue"></div> -->
@@ -72,6 +72,8 @@ export default {
     return {
       currentItemId: '',
       rowitem: {},
+      publicpath: "http://localhost/musesmuseum/public/phps/",
+      originalProductInfoArr: [],
       productInfoArr: [],
       memBtnLink: [
         { link: "/Home/MemberInfo", name: "會員資料" },
@@ -80,6 +82,7 @@ export default {
       ],
       currentPage: 1,
       itemsPerPage: 5,
+      searchinput:"",
     };
   },
   computed: {
@@ -97,6 +100,7 @@ export default {
         fetch(`${this.$store.state.publicpath}searchproductinfo.php`)
         .then(async (response) => {
           this.productInfoArr = await response.json();
+          this.originalProductInfoArr = [...this.productInfoArr];
           if (this.productInfoArr.length > 0) {
               this.currentItemId = this.productInfoArr[0].id;
               this.rowitem = this.productInfoArr[0];
@@ -127,19 +131,9 @@ export default {
     },
   },
   mounted() {
-    const productId = this.$route.params.productId; // 获取路由参数中的商品 ID
-  // 使用 productId 加载数据
-  this.fetchprod(productId);
-    // 去資料庫拿 productInfoArr
-    // const idToFind = parseInt(this.$route.params.id);
-    // this.productInfoArr = $ajax(`...php?id=${idToFind}`);
-    // this.productInfoArr = [
-    //   { id: "W001", pic: "@/assets/image/productimage", name: "muses筆記", date: "2023/08/01", price: "$200", count: "2", total: "$400" },
-    //   { id: "K001", pic: "@/assets/image/productimage", name: "muses筆記", date: "2023/08/01", price: "$200", count: "2", total: "$400" },
-    //   { id: "K003", pic: "@/assets/image/productimage", name: "muses筆記", date: "2023/08/01", price: "$200", count: "2", total: "$400" },
-    //   { id: "L001", pic: "@/assets/image/productimage", name: "muses筆記", date: "2023/08/01", price: "$200", count: "2", total: "$400" },
-    //   { id: "L002", pic: "@/assets/image/productimage", name: "muses筆記", date: "2023/08/01", price: "$200", count: "2", total: "$400" },
-    // ]
+  //   const productId = this.$route.params.productId; // 获取路由参数中的商品 ID
+  // // 使用 productId 加载数据
+  // this.fetchprod(productId);
     this.fetchprod();
     document.body.style.height = `auto`;
   }

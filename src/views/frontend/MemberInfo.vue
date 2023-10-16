@@ -54,7 +54,7 @@ export default {
   data() {
     return {
       mbr_name: '',
-      memAllInfo: [ ],
+      memAllInfo: [],
       /** form data */
       f: {
         /** form data: name */
@@ -88,12 +88,14 @@ export default {
     getuser() {
       fetch(`${this.$store.state.publicpath}MemberInfo.php`)
         .then(response => {
+     
           return response.json();
         })
         .then(result => {
           this.mbr_name = result.mbr_name;
           if (Array.isArray(result)) {
             this.memAllInfo = result
+       
           } else {
             // alert("無法取得資料");
           }
@@ -155,6 +157,7 @@ export default {
     if (members) {
       try {
         const memberInfo = JSON.parse(members);
+        console.log(memberInfo)
         if (memberInfo.mbr_name && memberInfo.mbr_email) {
           this.mbr_name = memberInfo.mbr_name;
           this.memAllInfo.push(memberInfo);

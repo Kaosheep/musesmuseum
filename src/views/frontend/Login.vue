@@ -28,14 +28,15 @@
 
           <div class="memloginActi">
             <label for="verification">驗證碼:</label>
-            <div id="verification-code"></div>
+            <div id="verification-code">{{ verificationCode }}</div>
             <input
               type="text"
               id="entered-code"
               class="fillInClumn"
               placeholder="輸入隨機碼"
+              v-model="enteredCode"
             />
-            <p id="message"></p>
+            <p id="message">{{ message }}</p>
           </div>
           <div class="resetPswEmail">
             <a href="#">忘記密碼</a>
@@ -90,19 +91,34 @@ export default {
       ],
       mbr_email: "",
       mem: {},
+      verificationCode: '',
+      enteredCode: '',
+      message: '',
     };
   },
   methods: {
+    generateVerificationCode() {
+      this.verificationCode = Math.floor(Math.random() * 9000) + 1000;
+    },
+    verifyCode() {
+      if (this.enteredCode === this.verificationCode.toString()) {
+        this.message = '驗證成功';
+      } else {
+        this.message = '驗證失敗，請檢查輸入的隨機碼';
+        this.generateVerificationCode(); // 重新生成隨機碼
+      }
+    },
     checkLoginData() {
-      console.log("checkLoginData");
+      // 驗證
+      if (this.enteredCode === this.verificationCode.toString()) {
+        console.log("驗證成功");
+        let input = {
+          mbr_email: document.getElementById("mbr_email").value,
+          mbr_psw: document.getElementById("mbr_psw").value,
+        };
 
-      let input = {
-        mbr_email: document.getElementById("mbr_email").value,
-        mbr_psw: document.getElementById("mbr_psw").value,
-      };
-
-      const data = new URLSearchParams({ mbr_email, mbr_psw });
-      fetch(`${this.$store.state.publicpath}login.php`, {
+        const data = new URLSearchParams({ mbr_email, mbr_psw });
+        fetch(`${this.$store.state.publicpath}login.php`, {
         method: "POST",
         headers: {
           "Content-Type": "application/x-www-form-urlencoded",
@@ -117,7 +133,6 @@ export default {
         this.mem = result;
         this.memEmail = result.mbr_email;
         this.memName = result.mbr_name;
-
         if (
           this.mem.mbr_email == document.getElementById("mbr_email").value &&
           this.mem.mbr_psw == document.getElementById("mbr_psw").value
@@ -127,18 +142,16 @@ export default {
         } else {
           window.alert("帳密錯誤");
         }
-
       })  
-
-        .then(() => {
-          if (this.memEmail) {
-            let members = JSON.stringify(this.mem);
-            document.cookie = "members= " + members + "; expires=Thu, 01 Jan 2025 00:00:00 UTC; path=/";
-            document.location.href = "/Home/MemberInfo";
-          } else {
-            alert("無法獲取 mbr_email");
-          }
-        })
+      .then(() => {
+        if (this.memEmail) {
+          let members = JSON.stringify(this.mem);
+          document.cookie = "members= " + members + "; expires=Thu, 01 Jan 2025 00:00:00 UTC; path=/";
+          document.location.href = "/Home/MemberInfo";
+        } else {
+          alert("無法獲取 mbr_email");
+        }
+      })
       .then((json) => {
           if (json.result['mbr_email']) {
               let members = JSON.stringify(json.result);
@@ -151,9 +164,15 @@ export default {
       .catch(function (error) {
         console.log(error);
       });
+      } else {
+        // 驗證失敗
+        this.message = '驗證失敗，請重新輸入驗證碼';
+        this.generateVerificationCode(); // 重新產生隨機碼
+      }
     },
   },
   mounted() {
+    this.generateVerificationCode(); 
     this.router = this.$router; 
     document.body.style.height = `auto`;
     const name = "members" + "=";
