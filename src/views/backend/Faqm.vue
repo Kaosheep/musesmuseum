@@ -164,30 +164,30 @@ export default {
         console.log(this.faqched);
       }
     },
-    updatestatus(b) {
-      this.faqched.splice(0,0,{type:b});
-      fetch(`${this.$store.state.publicpath}faq_updatestatus.php`, {
-        method: "post",
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded; charset=utf-8",
-        },
-        body: JSON.stringify({ data: Object.values(this.faqched) }),
-      })
-        .then((response) => {
-          if (response.ok) {
-            return response.json();
-          } else {
-            throw new Error("新增失敗");
-          }
-        })
-        .then((json) => {
-          alert(json);
-          window.location.reload();
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-    },
+    // updatestatus(b) {
+    //   this.faqched.splice(0,0,{type:b});
+    //   fetch(`${this.$store.state.publicpath}faq_updatestatus.php`, {
+    //     method: "post",
+    //     headers: {
+    //       "Content-Type": "application/x-www-form-urlencoded; charset=utf-8",
+    //     },
+    //     body: JSON.stringify({ data: Object.values(this.faqched) }),
+    //   })
+    //     .then((response) => {
+    //       if (response.ok) {
+    //         return response.json();
+    //       } else {
+    //         throw new Error("新增失敗");
+    //       }
+    //     })
+    //     .then((json) => {
+    //       alert(json);
+    //       window.location.reload();
+    //     })
+    //     .catch(function (error) {
+    //       console.log(error);
+    //     });
+    // },
     previousPage() {
       // 切換到上一頁
       if (this.currentPage > 1) {

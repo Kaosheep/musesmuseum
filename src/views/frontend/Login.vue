@@ -25,7 +25,7 @@
               required
             />
           </div>
-
+          <!-- <reca></reca> -->
           <div class="memloginActi">
             <label for="verification">驗證碼:</label>
             <div id="verification-code">{{ verificationCode }}</div>
@@ -59,11 +59,11 @@
 </template>
 
 <script>
-// import $ from "jquery";
-import Footer from "@/components/Footer.vue";
+import reca from "@/components/reca.vue";
+
 export default {
   components: {
-    Footer,
+    reca,
   },
   data() {
     return {
