@@ -23,12 +23,15 @@ if(in_array($prod_id, array_column($loveRows, 'prod_id'))){
     $loves->bindValue(":mbr_id", $_POST["mbr_id"]);
     $loves->bindValue(":prod_id", $_POST["prod_id"]);
     $loves->execute();
+    echo json_encode("刪除成功");
+
 }else{
     $sql2 = "insert into favoriteslist (prod_id, mbr_id) values (:prod_id, :mbr_id	)"; 
     $loves = $pdo->prepare($sql2);
     $loves->bindValue(":mbr_id", $_POST["mbr_id"]);
     $loves->bindValue(":prod_id", $_POST["prod_id"]);
     $loves->execute();
+    echo json_encode("加入成功");
 }
 
 }

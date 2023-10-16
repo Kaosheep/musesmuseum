@@ -35,8 +35,9 @@
               <button @click="decrease(item, item[4], item[0], j)">
                 <font-awesome-icon :icon="['fas', 'minus']" id="minus" />
               </button>
-              <input type="text" :value="item[4]" class="itemamount"
-                @change="updateditemamount(item, item[4], item[0])" />
+              <!-- <input type="text" :value="item[4]" class="itemamount"
+                @change="updateditemamount(item, item[4], item[0])" /> -->
+                <span>{{ item[4] }}</span>
               <button @click="increase(item, item[4], item[0])">
                 <font-awesome-icon :icon="['fas', 'plus']" id="plus" />
               </button>
@@ -44,7 +45,7 @@
             </div>
           </div>
         </div>
-        <button class="shoppingcar_itemdelete" @click="clean(j, item[0])">
+        <button class="shoppingcar_itemdelete" @click="clean(j, item[0],item[4])">
           X
         </button>
       </div>
@@ -79,7 +80,7 @@ export default {
   },
   computed: {
     items() {
-      if (localStorage.length > 0) {
+      if (this.storageitem) {
         let itemString = this.storageitem.split(",");
         let items = [...new Set(itemString.filter((el) => el))];
         return items;
@@ -118,17 +119,20 @@ export default {
       });
     },
     decrease(item, n, prod_id, j) {
+      this.$store.state.cartnum-=1;
       n--;
       this.updateditemamount(item, n, prod_id);
       if (n < 1) {
-        this.clean(j, prod_id);
+        this.clean(j, prod_id,n);
       }
     },
     increase(item, n, prod_id) {
+      this.$store.state.cartnum+=1;
       n++;
       this.updateditemamount(item, n, prod_id);
     },
-    clean(j, prod_id) {
+    clean(j, prod_id ,inum) {
+      this.$store.state.cartnum-=inum;
       this.itemarr.splice(j, 1);
       localStorage["addItemlist"] = localStorage["addItemlist"].replaceAll(
         `${prod_id},`,
@@ -142,7 +146,7 @@ export default {
     },
   },
   mounted() {
-    if (localStorage.length > 0) {
+    if (this.storageitem) {
       this.getitemarr();
     }
   },
