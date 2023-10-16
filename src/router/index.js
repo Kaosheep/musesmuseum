@@ -1,6 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import MemberInfo from '../views/frontend/MemberInfo.vue';
-import store from '@/store';
+
 
 const routes = [
   {

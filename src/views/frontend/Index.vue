@@ -1,4 +1,13 @@
 <template>
+  <div :class="['hint', { closehint: $store.state.first }]" @click="closehint">
+    <div class="group">
+      <p>| 點擊關閉 |</p>
+      <span><img src="@/assets/image/home/scrolldownh.png" /> </span>
+      <span><img src="@/assets/image/home/scrolldownm.png" /> </span>
+      <p>向下滑動</p>
+      <p><font-awesome-icon :icon="['fas', 'angles-down']" /></p>
+    </div>
+  </div>
   <main class="home_main">
     <div class="home_slider">
       <div class="wrap">
@@ -19,13 +28,10 @@
                 <p>MUSES</p>
               </router-link>
             </div>
-            <div class="scrollhint">
-              <ThinArrow :text="'scroll'"></ThinArrow>
-            </div>
             <div class="homenav">
               <ul>
                 <li v-for="(li, index) in homenav" :key="index">
-                  <RouterLink :to="li.link">{{ li.title }}</RouterLink>
+                  <RouterLink :to="li.link"><p>{{ li.title }}<br>{{ li.entitle }}</p></RouterLink>
                 </li>
               </ul>
             </div>

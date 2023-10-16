@@ -24,6 +24,7 @@ const getCookie = (cname) => {
 export default createStore({
   //類似vue裡面的data
   state: {
+    first:false,
     siteLoading: false,
     apiURL: '', 
     publicURL: publicURL,
