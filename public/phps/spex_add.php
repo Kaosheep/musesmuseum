@@ -16,11 +16,11 @@ try {
 
 
     $id = isset($data->data->id) ? $data->data->id: '';
-    $title = $data->title;
-    $content = $data->content;
-    $status = $data->status;
-    $startDate = $data->startDate;
-    $endDate = $data->endDate;
+    $title = $data->data->title;
+    $content = $data->data->content;
+    $status = $data->data->status;
+    $startDate = $data->data->startDate;
+    $endDate = $data->data->endDate;
 
     $sql = "INSERT INTO exhibitions (exhibition_id, title, content, status, start_date, end_date) VALUES (:id, :title, :content, :status, :startDate, :endDate)";
     $stmt = $pdo->prepare($sql);
