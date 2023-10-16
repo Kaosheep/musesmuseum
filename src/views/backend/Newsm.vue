@@ -347,7 +347,7 @@ export default {
         if (document.getElementById("fileimg").files[0]) {
           formData.append("image", document.getElementById("fileimg").files[0]);
         } else {
-          formData.append("image", this.add_news.src);
+          formData.append("image", this.add_news.image);
         }
 
         fetch(url, {
