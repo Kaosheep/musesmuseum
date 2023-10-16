@@ -12,12 +12,12 @@ try{
     $news->execute();
 
 
-    if ($news->rowCount() === 0) { //無此會員資料
+    if ($news->rowCount() === 0) { 
         echo "{}";
       } else {
         $newRows = $news->fetchAll(PDO::FETCH_ASSOC);
         
-        echo json_encode($newRows);//送出json字串
+        echo json_encode($newRows);
       }
 
   

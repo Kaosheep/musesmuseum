@@ -75,7 +75,7 @@
             <font-awesome-icon
               :icon="['fas', 'cart-shopping']"
               id="car"
-              @click="addcart(item.prod_id)"
+              @click="[addcart(item.prod_id),addstore()]"
             />
           </span>
           <router-link :to="`/Home/ProductPage/${item.prod_id}`">
@@ -172,6 +172,14 @@ export default {
     },
   },
   methods: {
+    success(nodesc) {
+      this.$Notice.success({
+        title: "加入購物車",
+        desc: nodesc
+          ? ""
+          : "Here is the notification description. Here is the notification description. ",
+      });
+    },
     loveid(id) {
       this.loven = id;
     },
@@ -214,7 +222,7 @@ export default {
       }
     },
     addcart(prod_id) {
-      this.$store.state.cartnum+=1;
+      this.success(true);
       if (this.storage["addItemlist"] == null) {
         this.storage["addItemlist"] = "";
       }
@@ -241,6 +249,9 @@ export default {
         this.storage[prod_id] += "1,";
       }
     },
+    addstore(){
+      this.$store.state.cartnum += 1;
+    }
   },
   mounted() {
     const cookies = document.cookie.split(";");

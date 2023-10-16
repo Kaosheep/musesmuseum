@@ -35,7 +35,8 @@ export default {
       productlist: [],
       galleryimgs: [],
       isshow: false,
-      j: 0
+      j: 0,
+      gallr: 0
     };
   },
   methods: {
@@ -67,6 +68,11 @@ export default {
 
       anchorli[0].style.backgroundColor = `#EB5F86`;
     },
+    // backgal(){
+    //   this.j += 1;
+    //   this.gallerycircle(this.j);
+    //   console.log(this.j)
+    // },
     gallerycircle() {
       const images = [...document.querySelectorAll(".gallery .img")];
       let galleryr = document.querySelector(".new .gallery").clientWidth;
@@ -76,27 +82,37 @@ export default {
         image.style.transform = `rotate3d(0,1,0,${(i + 1) * angle
           }deg) translateZ(${galleryr}px)`;
         image.onclick = () => {
+          // if(this.j){
+          //   this.j += i;
+          // }else{
           gallery.style.transform = `perspective(2000px) rotateX(-5deg) rotateY(-${(i + 1) * angle
             }deg)`;
-          return this.j = i;
+          this.j = i + 1;
+          // }
 
+          console.log(this.j);
+          return this.j;
         };
 
       });
       document.querySelector('.gbtnl').addEventListener("click", (e) => {
-        // this.j += 1;
+        // e.stopPropagation();
+        // this.j %= 6
+        // this.j += 0.5;
+        // gallery.style.transform = `perspective(2000px) rotateX(-5deg) rotateY(${(this.j + 1) * angle
+        //   }deg)`;
+        // this.j += 0.5;
         console.log(this.j)
-        console.log(e.target)
-        gallery.style.transform = `perspective(2000px) rotateX(-5deg) rotateY(${(this.j) * angle
-          }deg)`;
         // return this.j;
       });
       document.querySelector('.gbtnr').addEventListener("click", (e) => {
-        this.j -= 1;
+        // this.j %= 6
+        
         console.log(this.j)
-        gallery.style.transform = `perspective(2000px) rotateX(-5deg) rotateY(${(this.j) * angle
-          }deg)`;
-        return this.j;
+        // gallery.style.transform = `perspective(2000px) rotateX(-5deg) rotateY(${(this.j - 1) * angle
+        //   }deg)`;
+        //   this.j -= 0.5;
+        // return this.j;
 
       })
     },
