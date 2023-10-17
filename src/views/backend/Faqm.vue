@@ -6,7 +6,11 @@
           <button class="btn_admin" @click="showEditForm('add')">新增</button>
           <button class="btn_admin" @click="deleten">刪除</button>
         </div>
-        <Searchbar class="onlyB" />
+        <Searchbar 
+          class="onlyB" 
+          @update-search-text = "searchClick"
+          :functype="1"
+        />
       </div>
       <div class="faq_block">
         <div class="dmain">
@@ -17,7 +21,10 @@
               <th>答案</th>
               <th></th>
             </tr>
-            <tr v-for="(i, index) in pagefaq" :key="index">
+            <tr 
+            v-for="(i, index) in pagefaq" 
+            :key="index"
+            >
               <td class="faqmChoise">
                 <input
                   type="checkbox"
@@ -25,7 +32,10 @@
                   @change="inchecked(i.faq_id, $event)"
                 />
               </td>
-              <td class="faqmQues">{{ i.faq_question }}</td>
+              <td class="faqmQues">
+                 <span  
+                  v-html="highlightSearchText(i.faq_question, searchinput)"
+                ></span></td>
               <td class="faqmAns">{{ i.faq_ans }}</td>
               <td class="faqmEdit">
                 <button class="edit" @click="showEditForm('edit', i.faq_id)">
@@ -123,6 +133,7 @@ export default {
       addfaqs: false,
       currentPage: 1, // 當前頁碼
       pageSize: 5, // 每頁顯示的數據量
+      searchinput:"",
     };
   },
   methods: {
@@ -162,12 +173,10 @@ export default {
           console.log(error);
         });
     }
-  },
+    },
     inchecked(id, e) {
       if (e.target.checked) {
         this.faqched.push({ id: id });
-        // console.log(this.faqched);
-        // console.log(Object.values(this.faqched));
       } else {
         this.faqched.splice(this.faqched.indexOf(id), 1);
         console.log(this.faqched);
@@ -217,8 +226,6 @@ export default {
         fetch(url, {
           method: "POST",
           headers: headers,
-          //別忘了把主體参數轉成字串，否則資料會變成[object Object]，它無法被成功儲存在後台
-          // body: JSON.stringify(body)
           body: JSON.stringify({ data: body }),
         })
           .then((response) => {
@@ -243,7 +250,7 @@ export default {
     submitForm() {
       this.hideEditForm();
     },
-    //新增
+  //新增
     addfaqs_btn(id) {
       if (id != undefined) {
         const url = `${this.$store.state.publicpath}faq_updateupload.php`;
@@ -330,6 +337,34 @@ export default {
           console.log(error.message);
         });
     },
+    searchClick(text){
+      this.searchinput = text;
+      this.jumpPage();
+    },
+
+    jumpPage() {
+      if (this.searchinput) {
+        const matchingFAQ = this.faq.filter((e) =>
+        e.faq_question?.includes(this.searchinput)
+      );
+
+        if (matchingFAQ.length > 0) {
+          const firstMatch = matchingFAQ[0];
+          const firstMatchIndex = this.faq.indexOf(firstMatch);
+          const pageToNavigate = Math.floor(firstMatchIndex / this.pageSize) + 1;
+          this.currentPage = pageToNavigate;
+        }else {
+          alert("未找到相關資訊");
+        }
+      }
+    },
+    highlightSearchText(text, searchText) {
+      if (searchText && text) {
+        const regex = new RegExp(searchText, 'gi');
+        return text.replace(regex, (match) => `<span style="background-color: yellow">${match}</span>`);
+      }
+      return text;
+    },
   },
   computed: {
     pagefaq() {
@@ -345,33 +380,8 @@ export default {
   },
   mounted() {
     this.fetchfaq();
-    // 先檢查資料格式是否符合DB規則
-    // const url = `http://localhost/musesmuseum/public/phps/faq_list.php`;
-    // let headers = {
-    //   "Content-Type": "application/json",
-    //   Accept: "application/json",
-    // };
-    // fetch(url, {
-    //   method: "POST",
-    //   headers: headers,
-    // })
-    //   .then((response) => {
-    //     if (response.ok) {
-    //       return response.json(); // 如果請求成功，解析JSON數據
-    //     } else {
-    //       throw new Error("取得消息失敗");
-    //     }
-    //   })
-    //   .then((json) => {
-    //     this.faq = json;
-    //     // 在成功時顯示提示
-    //     //alert(json.message); // 假設JSON數據中有一個message屬性
-    //   })
-    //   .catch((error) => {
-    //     // 在失敗時顯示提示
-    //     console.log(error.message);
-    //   });
   },
+  
 };
 </script>
 
@@ -504,6 +514,9 @@ div {
 .faqmQues,
 .faqmAns {
   height: 4.3em;
+}
+.faqmQues span{
+  color:#000
 }
 }
 .pop {
