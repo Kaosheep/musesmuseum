@@ -23,8 +23,9 @@ export default {
   mounted() {
     this.$store.dispatch('setBeforeUnloadEvent');
   },
-  beforeUnmounted() {
+  beforeUnmount() {
     this.$store.dispatch('removeBeforeUnloadEvent');
-  },
+},
+
 };
 </script>

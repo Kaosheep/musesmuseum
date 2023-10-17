@@ -9,7 +9,7 @@ const getCookie = (cname) => {
   let name = cname + "=";
   let decodedCookie = decodeURIComponent(document.cookie);
   let ca = decodedCookie.split(';');
-  for(let i = 0; i <ca.length; i++) {
+  for (let i = 0; i < ca.length; i++) {
     let c = ca[i];
     while (c.charAt(0) == ' ') {
       c = c.substring(1);
@@ -24,15 +24,15 @@ const getCookie = (cname) => {
 export default createStore({
   //類似vue裡面的data
   state: {
-    first:false,
+    first: false,
     siteLoading: false,
-    apiURL: '', 
+    apiURL: '',
     publicURL: publicURL,
     publicpath: publicpath,
     imgpublicpath: imgpublicpath,
     test: 'test data',
     mbr_name: '',
-    mbr_id:'',
+    mbr_id: '',
     isLogin: false,
     cartnum: parseInt(localStorage.getItem("cartnum")) || 0,
   },
@@ -40,42 +40,46 @@ export default createStore({
   },
   mutations: {
     setMbrName(state, newName) {
-    state.mbr_name = newName;
-  },
-    setIsLogin(state , status) {
+      state.mbr_name = newName;
+    },
+    setIsLogin(state, status) {
       state.isLogin = status;
     },
     setcartnum(state, value) {
       state.cartnum = value;
     },
     Loaded(state) {
-      state.cartnum = this.storage["cartnum"]
+      if (localStorage["cartnum"]) {
+        state.cartnum = parseInt(localStorage.getItem("cartnum"))
+      } else {
+        localStorage.setItem("cartnum", 0);
+      }
     },
   },
   actions: {
     async fetchMbrName({ commit }) {
       const memberCookie = getCookie('members');
-      if(!memberCookie ) {
+      if (!memberCookie) {
         // 沒登入
         commit('setIsLogin', false);
         return;
       }
       const members = JSON.parse(memberCookie);
-      
+
       commit('setIsLogin', true);
       commit('setMbrName', members.mbr_name);
     },
     async logout({ commit }) {
       //清除 Cookie
       document.cookie = "members=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-      commit('setIsLogin', false); 
+      commit('setIsLogin', false);
     },
-    async setBeforeUnloadEvent({commit, state}) {
+    async setBeforeUnloadEvent({ commit, state }) {
       window.addEventListener("beforeunload", (e) => {
         localStorage.setItem("cartnum", this.state.cartnum);
       });
     },
-    removeBeforeUnloadEvent() {
+    async removeBeforeUnloadEvent() {
       window.removeEventListener("beforeunload");
     },
   },
