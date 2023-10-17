@@ -334,7 +334,7 @@ export default {
           this.faq = json;
           let blockw = document.querySelector(".faq_block").offsetHeight;
           let roww = document.querySelector("tr").offsetHeight;
-          this.pageSize = Math.floor((blockw/roww)-4);
+          this.pageSize = Math.floor((blockw/roww)-5);
          })
         .catch((error) => {
           console.log(error.message);
