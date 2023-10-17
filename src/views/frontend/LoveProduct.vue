@@ -19,7 +19,7 @@
           </div>
           <div class="con">
             <div class="shop_container">
-              <div v-if="lovescol == 0">查無商品</div>
+              <div v-if="getPageItems == 0">查無商品</div>
               <div
                 class="item"
                 v-for="item in getPageItems"

@@ -249,13 +249,7 @@ export default {
       }
     },
     addstore() {
-      if (this.$store.state.cartnum) {
-        this.$store.commit("Loaded");
-        this.$store.state.cartnum += 1;
-      } else {
-        this.$store.commit("Loaded");
-        this.$store.state.cartnum = 1;
-      }
+      this.$store.state.cartnum += 1;
     },
   },
   mounted() {
