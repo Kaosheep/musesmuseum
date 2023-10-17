@@ -21,6 +21,9 @@
               <th>答案</th>
               <th></th>
             </tr>
+            <tr v-if="pagefaq == 0">
+              <td colspan="2" style="width: 100%; white-space: nowrap;">查無資料</td>
+            </tr>
             <tr 
             v-for="(i, index) in pagefaq" 
             :key="index"
@@ -32,10 +35,7 @@
                   @change="inchecked(i.faq_id, $event)"
                 />
               </td>
-              <td class="faqmQues">
-                 <span  
-                  v-html="highlightSearchText(i.faq_question, searchinput)"
-                ></span></td>
+              <td class="faqmQues">{{ i.faq_question }}</td>
               <td class="faqmAns">{{ i.faq_ans }}</td>
               <td class="faqmEdit">
                 <button class="edit" @click="showEditForm('edit', i.faq_id)">
@@ -137,6 +137,9 @@ export default {
     };
   },
   methods: {
+    searchClick(text) {
+      this.searchinput = text;
+    },
     success(nodesc, json) {
       this.$Notice.success({
         title: json,
@@ -337,41 +340,22 @@ export default {
           console.log(error.message);
         });
     },
-    searchClick(text){
-      this.searchinput = text;
-      this.jumpPage();
-    },
-
-    jumpPage() {
-      if (this.searchinput) {
-        const matchingFAQ = this.faq.filter((e) =>
-        e.faq_question?.includes(this.searchinput)
-      );
-
-        if (matchingFAQ.length > 0) {
-          const firstMatch = matchingFAQ[0];
-          const firstMatchIndex = this.faq.indexOf(firstMatch);
-          const pageToNavigate = Math.floor(firstMatchIndex / this.pageSize) + 1;
-          this.currentPage = pageToNavigate;
-        }else {
-          alert("未找到相關資訊");
-        }
-      }
-    },
-    highlightSearchText(text, searchText) {
-      if (searchText && text) {
-        const regex = new RegExp(searchText, 'gi');
-        return text.replace(regex, (match) => `<span style="background-color: yellow">${match}</span>`);
-      }
-      return text;
-    },
   },
   computed: {
+    searchFilter() {
+      if (this.searchinput) {
+        return this.faq.filter((v) =>
+          v.faq_question?.includes(this.searchinput) || v.faq_ans?.includes(this.searchinput)
+        );
+      } else {
+        return this.faq;
+      }
+    },
     pagefaq() {
       // 根據當前頁碼和每頁顯示的數據量計算需要顯示的數據
       const start = (this.currentPage - 1) * this.pageSize;
       const end = start + this.pageSize;
-      return this.faq.slice(start, end);
+      return this.searchFilter.slice(start, end);
     },
     totalPages() {
       // 計算總頁數
