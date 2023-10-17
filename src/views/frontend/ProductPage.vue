@@ -2,7 +2,7 @@
   <main v-if="foundObject" class="productpage_main">
     <div class="shop_Breadcrumbs">
       <router-link to="/Home"> 首頁 / </router-link>
-      <router-link to="/Home/Shop"> 精選商城 / </router-link>
+      <router-link to="/Home/Shop"> 精選商品 / </router-link>
       <span>{{ foundObject.prod_name }}</span>
     </div>
     <div class="product_info">

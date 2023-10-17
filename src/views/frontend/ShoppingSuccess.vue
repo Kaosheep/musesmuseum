@@ -20,7 +20,7 @@
     </div>
     <div class="shopping_success">
         <h2>訂單編號：#{{po_id}}</h2>
-        <h3>我們盡快處理您的訂單，若想查詢訂單請至 <router-link to="">會員專區</router-link> 查詢訂單的處理情形。非常感謝您的惠顧!!</h3>
+        <h3>我們盡快處理您的訂單，若想查詢訂單請至 <router-link to="/Home/SearchProduct">會員專區</router-link> 查詢訂單的處理情形。非常感謝您的惠顧!!</h3>
     </div>
 </template>
 
