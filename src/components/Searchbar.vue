@@ -1,20 +1,22 @@
 <template>
   <div class="searchbar_search">
-    <form action="">
-      <input
-        type="text"
-        placeholder="Search"
-        id="search"
-        v-model="searchinput"
-        @change="searchbar()"
+    <input
+      type="text"
+      placeholder="Search"
+      id="search"
+      v-model="searchinput"
+      @change="searchbar()"
+    />
+
+    <button v-if="!searchinput" type="button" @click="searchbar()">
+      <font-awesome-icon
+        :icon="['fas', 'magnifying-glass']"
+        id="searchbar_searchglass"
       />
-      <button type="button" @click="searchbar()">
-        <font-awesome-icon
-          :icon="['fas', 'magnifying-glass']"
-          id="searchbar_searchglass"
-        />
-      </button>
-    </form>
+    </button>
+    <button v-else type="button" @click="searchbarclean()">
+      <font-awesome-icon :icon="['far', 'circle-xmark']" />
+    </button>
   </div>
 </template>
 
@@ -23,18 +25,21 @@ export default {
   props: ["functype"],
   data() {
     return {
-      searchinput:""
+      searchinput: "",
     };
   },
   methods: {
     searchbar() {
       if (this.functype === 1) {
-        this.$emit('update-search-text', this.searchinput) 
-      }else if(this.functype === 2){
-        this.$emit('update-search-text', this.searchinput) 
+        this.$emit("update-search-text", this.searchinput);
+      } else if (this.functype === 2) {
+        this.$emit("update-search-text", this.searchinput);
       }
     },
-
+    searchbarclean() {
+      this.searchinput = "";
+      this.$emit("update-search-text", this.searchinput);
+    },
   },
 };
 </script>

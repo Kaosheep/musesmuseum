@@ -4,8 +4,8 @@
             <div class="admin_editbar">
                 <div>
                     <button class="btn_admin" @click="showEditForm('add')">新增</button>
-                    <PinkButton class="btn_admin" text="上架" @click="toggleStatus('1')" :disabled="!canToggle('1')" />
-                    <PinkButton class="btn_admin" text="下架" @click="toggleStatus('0')" :disabled="!canToggle('0')" />
+                    <button class="btn_admin" @click="updatestatus(1)">上架</button>
+                    <button class="btn_admin" @click="updatestatus(0)">下架</button>
                     <button class="btn_admin" @click="deleten">刪除</button>
                 </div>
                 <Searchbar class="onlyB" />
@@ -139,35 +139,35 @@ export default {
 
                 }
             ],
-            memt: [
-                {
-                    id: "MM2023061901",
-                    name: "阿阿阿",
-                    statusn: "1",
-                }, {
-                    id: "MM2023061902",
-                    name: "欸欸欸",
-                    statusn: "0",
-                }
+            // memt: [
+            //     {
+            //         id: "MM2023061901",
+            //         name: "阿阿阿",
+            //         statusn: "1",
+            //     }, {
+            //         id: "MM2023061902",
+            //         name: "欸欸欸",
+            //         statusn: "0",
+            //     }
 
-            ],
-            exhm: [
-                {
-                    id: "EXH20230901",
-                    title: "獨居沙漠，藝術家喬治亞．歐姬芙",
-                    statusn: "0",
-                },
-                {
-                    id: "EXH20231101",
-                    title: "派對對物：人要金裝，佛要...",
-                    statusn: "0",
-                },
-                {
-                    id: "EXH20230701",
-                    title: "線條、形狀、空間：建築美......",
-                    statusn: "0",
-                },
-            ],
+            // ],
+            // exhm: [
+            //     {
+            //         id: "EXH20230901",
+            //         title: "獨居沙漠，藝術家喬治亞．歐姬芙",
+            //         statusn: "0",
+            //     },
+            //     {
+            //         id: "EXH20231101",
+            //         title: "派對對物：人要金裝，佛要...",
+            //         statusn: "0",
+            //     },
+            //     {
+            //         id: "EXH20230701",
+            //         title: "線條、形狀、空間：建築美......",
+            //         statusn: "0",
+            //     },
+            // ],
             showForm: false
         }
     },
@@ -197,6 +197,7 @@ export default {
                         }
                     })
                     .then((json) => {
+                        console.log(json);
                         this.success(true, json);
                         this.fetchnew();
                         this.newsched = [];
@@ -207,6 +208,14 @@ export default {
                     .catch(function (error) {
                         console.log(error);
                     });
+            }
+        },
+        inchecked(id, e) {
+            if (e.target.checked) {
+                this.newsched.push({ id: id });
+            } else {
+                this.newsched.splice(this.newsched.indexOf(id), 1);
+                console.log(this.newsched);
             }
         },
         updatestatus(b) {
@@ -442,7 +451,7 @@ export default {
                     }
                 })
                 .then((json) => {
-                    this.exhibitions = json;
+                    this.news = json;
                 })
                 .catch((error) => {
                     console.log(error.message);
