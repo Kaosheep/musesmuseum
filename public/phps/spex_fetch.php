@@ -5,18 +5,18 @@ header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Ac
 header("Content-Type: application/json"); 
 try{
 	require_once("./connectMuses.php");
-    $sql = "select * from exhibitions order by exh_id DESC";
-    $exhibitions = $pdo->query($sql);
+    $sql = "select * from exhibitions where exh_status=1 order by exh_id DESC";
+    $news = $pdo->query($sql);
     
-    $exhibitions->execute();
+    $news->execute();
 
 
-    if ($exhibitions->rowCount() === 0) { //無此會員資料
+    if ($news->rowCount() === 0) { //無此會員資料
         echo "{}";
       } else {
-        $exhibitionsRows = $exhibitions->fetchAll(PDO::FETCH_ASSOC);
+        $newRows = $news->fetchAll(PDO::FETCH_ASSOC);
         
-        echo json_encode($exhibitionsRows);//送出json字串
+        echo json_encode($newRows);//送出json字串
       }
 
   

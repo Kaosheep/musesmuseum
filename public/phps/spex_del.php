@@ -12,12 +12,11 @@ try {
    $sql = "DELETE FROM exhibitions WHERE exh_id=:id";
    
    foreach ($data->data as $item) {
-
+      
       $idArray[] = $item->id;
-      $spex = $pdo->prepare($sql);
-      $spex->bindValue(":id", $item->id);
-      $spex->execute();
-
+      $news = $pdo->prepare($sql);
+      $news->bindValue(":id", $item->id);
+      $news->execute();
    };
    echo json_encode("刪除成功"); 
 
