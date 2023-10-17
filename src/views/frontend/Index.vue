@@ -146,9 +146,7 @@
                   <h3>{{ item.news_title }}</h3>
                   <p>{{ item.news_content }}</p>
                 </div>
-                <div class="seemore">
-                  <ThinArrow :text="'More'"></ThinArrow>
-                </div>
+                
                 <div class="image">
                   <!-- <img class="forw" src="@/assets/image/space/spaceTheShop.png"> -->
                   <img

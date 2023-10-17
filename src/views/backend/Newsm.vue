@@ -8,7 +8,7 @@
           <button class="btn_admin" @click="updatestatus(0)">下架</button>
           <button class="btn_admin" @click="deleten">刪除</button>
         </div>
-        <Searchbar class="onlyB" />
+        <Searchbar class="onlyB" :functype="1" @update-search-text="searchClick" />
       </div>
       <div class="news_block">
         <div class="dmain">
@@ -20,7 +20,8 @@
               <th>狀態</th>
               <th></th>
             </tr>
-            <tr v-for="(i, index) in pagenews" :key="index">
+            <tr v-if="pagenews == 0"><td colspan="2" style="width: 100%; white-space: nowrap;">查無資料</td></tr>
+            <tr v-for="(i, index) in pagenews" :key="index" v-else>
               <td>
                 <input
                   type="checkbox"
@@ -164,6 +165,7 @@ export default {
           statusn: "1",
         },
       ],
+      searchinput: "",
       wchecked: false,
       showForm: false,
       addnews: false,
@@ -174,6 +176,9 @@ export default {
     };
   },
   methods: {
+    searchClick(text) {
+      this.searchinput = text;
+    },
     success(nodesc, json) {
       this.$Notice.success({
         title: json,
@@ -429,11 +434,19 @@ export default {
     },
   },
   computed: {
+    searchFilter() {
+      if (this.searchinput) {
+        return this.news.filter((v) =>
+          v.news_title?.includes(this.searchinput) || v.news_date?.includes(this.searchinput)
+        );
+      } else {
+        return this.news;
+      }
+    },
     pagenews() {
-      // 根據當前頁碼和每頁顯示的數據量計算需要顯示的數據
       const start = (this.currentPage - 1) * this.pageSize;
       const end = start + this.pageSize;
-      return this.news.slice(start, end);
+      return this.searchFilter.slice(start, end);
     },
     totalPages() {
       // 計算總頁數
