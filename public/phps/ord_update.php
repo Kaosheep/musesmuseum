@@ -16,7 +16,7 @@ try {
     $po->bindParam(":po_pay", $data->po_pay);
     $po->execute();
 
-    echo json_encode(['message' => '更新成功!!']);
+    echo json_encode('更新成功');
 
 }
 catch (Exception $e) {

@@ -250,13 +250,13 @@ export default {
             throw new Error("儲存失敗");
           }
         })
-        .then((result) => {
-          this.hideEditForm();
-          window.location.reload();
+        .then((json) => {
+          this.success(true, json);
         })
         .catch(function (error) {
           console.log(error);
         });
+      this.hideEditForm();
     },
     fetchord() {
       fetch(`${this.$store.state.publicpath}ord.php`)

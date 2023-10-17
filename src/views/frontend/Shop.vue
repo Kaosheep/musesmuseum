@@ -25,11 +25,11 @@
       <img src="@/assets/image/productimage/banner/banner5.jpg" />
     </CarouselItem>
   </Carousel>
-  <h1>精選商城</h1>
+  <h1>精選商品</h1>
   <div class="shop_block">
     <div class="shop_Breadcrumbs">
       <router-link to="/Home"> 首頁 / </router-link>
-      <router-link to="/Home/Shop"> 精選商城 </router-link>
+      <router-link to="/Home/Shop"> 精選商品 </router-link>
     </div>
     <div class="search">
       <Searchbar :functype="1" @update-search-text="searchClick" />
@@ -211,7 +211,7 @@ export default {
       this.prodKind = prod_kind;
     },
     searchClick(text) {
-      this.searchinput = text;
+      this.searchinput = text.toUpperCase();
     },
     reset() {
       this.searchinput = "";
