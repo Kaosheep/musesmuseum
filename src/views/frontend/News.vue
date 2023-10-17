@@ -2,7 +2,13 @@
   <div class="news">
     <main class="news_main">
       <h1>最新消息<br />NEWS</h1>
-      <div class="item" v-for="(item, j) in getPageItems" :key="j">
+
+      <div
+        class="item"
+        v-for="(item, j) in getPageItems"
+        :key="j"
+        v-if="newscol.length > 0"
+      >
         <div class="txt">
           <span>{{ item.news_date }}</span>
           <h3>{{ item.news_title }}</h3>
@@ -10,13 +16,18 @@
         </div>
         <div class="image">
           <img
-            :src="(`${this.$store.state.imgpublicpath}image/news/` + item.news_img)"
+            :src="
+              `${this.$store.state.imgpublicpath}image/news/` + item.news_img
+            "
             alt=""
           />
         </div>
       </div>
+      <div class="nonew" v-else>
+        <p>目前無最新消息</p>
+      </div>
     </main>
-    <div class="page">
+    <div class="page" v-if="newscol.length > 0">
       <Page
         :total="newscol.length"
         :page-size="pageItems"
@@ -38,16 +49,20 @@ export default {
   },
   computed: {
     getPageItems() {
-      const startIndex = (this.currentPage - 1) * this.pageItems;
-      const endIndex = startIndex + this.pageItems;
-      return this.newscol.slice(startIndex, endIndex);
+      if (this.newscol.length > 0) {
+        const startIndex = (this.currentPage - 1) * this.pageItems;
+        const endIndex = startIndex + this.pageItems;
+        return this.newscol.slice(startIndex, endIndex);
+      }
     },
   },
   methods: {
     fetchnews() {
-      fetch(`${this.$store.state.publicpath}news_fetch.php`).then(async (response) => {
-        this.newscol = await response.json();
-      });
+      fetch(`${this.$store.state.publicpath}news_fetch.php`).then(
+        async (response) => {
+          this.newscol = await response.json();
+        }
+      );
     },
     backtop() {
       window.scrollTo(0, 0);
@@ -61,6 +76,7 @@ export default {
 
 <style scoped lang="scss">
 .news {
+  min-height: 100vh;
   background-image: linear-gradient(45deg, $mlblue 50%, $myellow 50%);
   padding: 20px 0 50px;
   .news_main {

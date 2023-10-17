@@ -22,123 +22,929 @@
             width: 70px;
             height: 80px;
             margin: 1rem;
-            animation: scrollhintan .5s 0s infinite alternate;
 
-            img {
-                width: 100%;
-                height: 100%;
-                object-fit: contain;
-                pointer-events: none;
+            &:nth-child(2) {
+                animation: scrollhintan .5s -2.5s infinite alternate;
             }
 
-        }
-
-        p {
-            line-height: 2;
-
-            &:first-child {
-                margin-bottom: 2rem;
-                font-size: 18px;
-                font-weight: 700;
-            }
-
-            &:last-child {
+            &:nth-child(3) {
                 animation: scrollhintan .5s 0s infinite alternate;
             }
 
-            @keyframes scrollhintan {
-                100% {
-                    transform: translateY(5px);
+
+                img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: contain;
+                    pointer-events: none;
+                }
+
+            }
+
+            p {
+                line-height: 2;
+
+                &:first-child {
+                    margin-bottom: 2rem;
+                    font-size: 18px;
+                    font-weight: 700;
+                }
+
+                &:last-child {
+                    animation: scrollhintan .5s 0s infinite alternate;
+                }
+
+                @keyframes scrollhintan {
+                    100% {
+                        transform: translateY(5px);
+                    }
                 }
             }
         }
+
     }
 
-}
-
-.home_main {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-
-    @include t() {
-        position: static;
-        height: auto;
-        width: auto;
-    }
-
-    .home_slider {
-        position: absolute;
+    .home_main {
+        position: fixed;
         top: 0;
         left: 0;
-        width: 700vw;
+        width: 100%;
         height: 100vh;
 
         @include t() {
             position: static;
-            width: 100%;
             height: auto;
+            width: auto;
         }
 
-        .wrap {
+        .home_slider {
             position: absolute;
             top: 0;
-            height: 100%;
-            display: flex;
-            justify-content: space-around;
-            width: 100%;
+            left: 0;
+            width: 700vw;
+            height: 100vh;
 
             @include t() {
                 position: static;
-                flex-direction: column;
+                width: 100%;
                 height: auto;
             }
 
-            section {
+            .wrap {
+                position: absolute;
+                top: 0;
+                height: 100%;
                 display: flex;
-                width: 100vw;
-                height: calc(100vh - 80px);
-                position: relative;
+                justify-content: space-around;
+                width: 100%;
 
                 @include t() {
-                    height: auto;
+                    position: static;
                     flex-direction: column;
-                    overflow: hidden;
-                    width: auto;
+                    height: auto;
                 }
 
-                .spotlight {
-                    width: 70%;
-                    padding-left: 80px;
+                section {
                     display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    pointer-events: none;
+                    width: 100vw;
+                    height: calc(100vh - 80px);
+                    position: relative;
 
                     @include t() {
-                        margin-top: 100px;
-                        width: 100%;
-                        padding-left: 0
+                        height: auto;
+                        flex-direction: column;
+                        overflow: hidden;
+                        width: auto;
                     }
 
-                    .maxlogo {
-                        position: relative;
-                        width: 75%;
-                        text-align: center;
+                    .spotlight {
+                        width: 70%;
+                        padding-left: 80px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        pointer-events: none;
 
                         @include t() {
-                            width: 50%;
+                            margin-top: 100px;
+                            width: 100%;
+                            padding-left: 0
                         }
 
-                        img {
-                            object-fit: cover;
+                        .maxlogo {
+                            position: relative;
+                            width: 75%;
+                            text-align: center;
+
+                            @include t() {
+                                width: 50%;
+                            }
+
+                            img {
+                                object-fit: cover;
+                                width: 100%;
+                                max-width: 600px;
+                                -webkit-mask: url('@/assets/image/home/mmodel.png') no-repeat center center;
+                                mask: url('@/assets/image/home/mmodel.png') no-repeat center center;
+                                mask-size: contain;
+                            }
+
+                            .light {
+                                position: absolute;
+                                border-radius: 50%;
+                                opacity: .2;
+                                backdrop-filter: brightness(120%);
+
+                                &.yellow {
+                                    width: 300px;
+                                    height: 300px;
+                                    top: 0;
+                                    right: 0;
+                                    background-color: $myellow;
+                                    transform-origin: 0% 50%;
+                                    animation: circle 5s 0s cubic-bezier(.26, .46, .74, .53) infinite reverse;
+                                }
+
+                                &.green {
+                                    width: 350px;
+                                    height: 350px;
+                                    right: 0;
+                                    bottom: 10px;
+                                    background-color: $mgreen;
+                                    transform-origin: 20% 50%;
+                                    animation: circle 5s 0s cubic-bezier(.17, .3, .83, .63) infinite;
+                                }
+
+                                &.pink {
+                                    width: 330px;
+                                    height: 330px;
+                                    bottom: 20%;
+                                    left: 0;
+                                    background-color: $mpink;
+                                    transform-origin: 110% 50%;
+                                    animation: circle 6s linear infinite;
+                                }
+
+                                @keyframes circle {
+                                    0% {
+                                        transform: rotate(0deg)
+                                    }
+
+                                    100% {
+                                        transform: rotate(360deg)
+                                    }
+                                }
+                            }
+                        }
+
+                    }
+
+                    .smalltitle {
+                        padding: 0.6rem 0;
+
+                        @include t() {
+                            padding-left: 2rem;
+                        }
+
+                        h2 {
+                            font-size: 1.25rem;
+                            font-weight: 700;
+                            white-space: nowrap;
+                        }
+                    }
+
+                    .path {
+                        width: 25%;
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: space-between;
+
+                        @include t() {
                             width: 100%;
-                            max-width: 600px;
-                            -webkit-mask: url('@/assets/image/home/mmodel.png') no-repeat center center;
-                            mask: url('@/assets/image/home/mmodel.png') no-repeat center center;
-                            mask-size: contain;
+                        }
+
+                        .ticket {
+                            background-image: url('@/assets/image/home/ticket.png');
+                            background-size: contain;
+                            background-repeat: no-repeat;
+                            width: 250px;
+                            height: 120px;
+                            margin-left: auto;
+                            position: relative;
+                            z-index: 5;
+
+                            @include t() {
+                                margin: 4rem auto 2.5rem;
+                            }
+
+                            a {
+                                display: inline-block;
+                                width: 100%;
+                                height: 100%;
+                                padding: 28px 0px 0px 50px;
+                                position: relative;
+
+                                p {
+                                    color: #fff;
+                                    font-weight: 700;
+                                    font-size: 1.4rem;
+                                    line-height: 1.5;
+
+                                    &:first-child {
+                                        display: inline-block;
+                                        border-bottom: 2px solid #fff;
+                                    }
+
+                                    &:last-child {
+                                        font-size: 1.25rem;
+                                        position: absolute;
+                                        top: 28px;
+                                        right: 25px;
+                                        writing-mode: vertical-lr;
+                                        text-orientation: mixed;
+                                    }
+                                }
+                            }
+                        }
+
+                        @keyframes scrollhint {
+                            0% {
+                                transform: translateX(0px);
+                            }
+
+                            100% {
+                                transform: translateX(-5px);
+                            }
+                        }
+
+                        .homenav {
+                            width: fit-content;
+                            margin-left: auto;
+                            padding-right: 2rem;
+
+                            @include t() {
+                                padding: 0;
+                                margin: auto;
+                                width: 100%;
+                                margin-bottom: 80px;
+                            }
+
+                            ul {
+                                margin-bottom: 0.5rem;
+
+                                li {
+                                    margin-bottom: 2px;
+
+                                    a {
+                                        // border-left: 1px solid $mblue;
+                                        width: 100%;
+                                        display: inline-block;
+                                        margin-bottom: 5px;
+                                        background: linear-gradient(90deg, $mgreen 45%, #ffffff 60%);
+                                        background-size: 220%;
+                                        // background-size: 100%;
+                                        background-position: 100% 100%;
+                                        transition: .4s;
+                                        padding: 4px 0.5rem 4px 1rem;
+
+                                        &:hover {
+                                            background-position: 0% 0%;
+
+                                            p {
+                                                background-position: 0% 0%;
+                                            }
+                                        }
+
+                                        p {
+                                            color: transparent;
+                                            background: linear-gradient(90deg, #ffffff 45%, $mgreen 60%);
+                                            background-size: 220%;
+                                            // background-size: 100%;
+                                            background-position: 100% 100%;
+                                            background-clip: text;
+                                            -webkit-background-clip: text;
+                                            transition: .4s;
+                                            pointer-events: none;
+                                        }
+
+                                    }
+                                }
+
+                                @include t() {
+                                    width: 100%;
+                                    display: flex;
+                                    flex-wrap: wrap;
+                                    justify-content: center;
+
+                                    li {
+                                        text-align: center;
+                                        width: 30%;
+                                        padding: 1rem 0;
+                                        margin: 0.5rem 0;
+
+                                        a {
+                                            line-height: 2;
+                                        }
+                                    }
+
+                                }
+
+                            }
+
+                        }
+                    }
+
+
+                    .shadow {
+                        display: inline-block;
+                        position: relative;
+                        height: 100%;
+                        min-width: 200px;
+                        background-color: $myellow;
+                        z-index: 2;
+
+                        &::after {
+                            content: "";
+                            position: absolute;
+                            border-top: 100px solid transparent;
+                            border-right: 140px solid transparent;
+                            border-bottom: 100px solid $myellow;
+                            left: 100%;
+                            bottom: 0px;
+                            z-index: 2;
+                        }
+                    }
+
+                    .sectiontitle {
+                        height: 100%;
+                        overflow: hidden;
+                        position: relative;
+                        min-width: 80px;
+
+                        @include t() {
+                            position: absolute;
+                            right: 0;
+                        }
+
+                        .txtgo {
+                            display: flex;
+                            flex-direction: column;
+                            animation: txtgo 10s linear infinite;
+                            min-width: 100px;
+
+                            @include t() {
+                                min-width: 64px;
+                                opacity: .3;
+                            }
+                        }
+
+                        .txtskew {
+
+                            animation: txtgos linear infinite;
+                            animation-duration: 10s;
+
+                            @include t() {
+                                animation: txtgo 10s linear infinite;
+                            }
+                        }
+
+                        h1 {
+                            flex-shrink: 0;
+                            display: inline-block;
+                            width: 64px;
+                            writing-mode: vertical-lr;
+                            text-orientation: mixed;
+                            font-size: 64px;
+                            white-space: pre-wrap;
+                            padding: 2rem 0;
+                        }
+
+                        @keyframes txtgo {
+                            0% {
+                                transform: translateY(0%);
+                            }
+
+                            100% {
+                                transform: translateY(-50%);
+                            }
+                        }
+
+                        @keyframes txtgos {
+                            0% {
+                                transform: translateY(0%) skewY(35deg);
+                            }
+
+                            100% {
+                                transform: translateY(-50%) skewY(35deg);
+                            }
+                        }
+                    }
+
+
+                    .new {
+                        @include t() {
+                            display: none;
+                        }
+
+                        .container {
+                            width: 75vw;
+                            padding-top: 8%;
+                            height: 70vh;
+                            display: flex;
+                            justify-content: center;
+                            overflow-x: clip;
+                            overflow-y: visible;
+                            position: relative;
+
+                            @include t() {
+                                width: 85vw;
+                            }
+
+                            .gbtnl,
+                            .gbtnr {
+                                z-index: 10;
+                                position: absolute;
+                                bottom: -50px;
+                                width: 30px;
+                                height: 30px;
+                                border-radius: 50%;
+                                border: none;
+                                cursor: pointer;
+                                transition: .3s;
+                                background-color: $mgreen;
+                                border-bottom: 0 0 3px #fff;
+                                &:hover {
+                                    background-color: $mpink;
+                                }
+                            }
+
+                            .gbtnl {
+                                left: 20%;
+
+                                #gbtnlfas {
+                                    pointer-events: none;
+                                }
+                            }
+
+                            .gbtnr {
+                                right: 20%;
+
+                                #gbtnrfas {
+                                    pointer-events: none;
+
+                                }
+                            }
+
+                            .gallery {
+                                width: 50%;
+                                height: 75%;
+                                position: relative;
+                                transform-style: preserve-3d;
+                                transform: perspective(2000px) rotateX(-5deg) rotateY(0deg);
+                                transition: 2s;
+
+                                .img {
+                                    display: inline-block;
+                                    width: 100%;
+                                    height: 100%;
+                                    position: absolute;
+                                    cursor: pointer;
+
+                                    img {
+                                        width: 100%;
+                                        height: 100%;
+                                        object-fit: cover;
+                                        object-position: top;
+                                    }
+
+                                    .imginfo {
+                                        position: absolute;
+                                        width: 100%;
+                                        height: 100%;
+                                        background-color: rgb(251, 247, 150, .7);
+                                        backdrop-filter: blur(10px);
+                                        color: #fff;
+                                        top: 0;
+                                        left: 0;
+                                        padding: 2rem;
+                                        opacity: 0;
+                                        transition: .3s;
+
+
+
+                                        p {
+                                            position: relative;
+                                            display: -webkit-box;
+                                            -webkit-box-orient: vertical;
+                                            -webkit-line-clamp: 3;
+                                            overflow: hidden;
+
+                                            &:nth-child(2) {
+                                                display: inline-block;
+                                                line-height: 1.5;
+
+                                                &::after {
+                                                    position: absolute;
+                                                    content: "";
+                                                    bottom: 0rem;
+                                                    left: 0;
+                                                    width: 100%;
+                                                    height: 1px;
+                                                    background-color: $mblue;
+                                                }
+                                            }
+
+                                            &:last-child {
+                                                padding-top: 2rem;
+                                                text-align: end;
+                                            }
+                                        }
+                                    }
+
+                                    &:hover {
+                                        .imginfo {
+                                            opacity: 1;
+                                        }
+                                    }
+                                }
+                            }
+
+                        }
+
+                        .moreexb {
+                            text-align: end;
+                            padding-top: 1rem;
+                            a{
+                                display: inline-block;
+                            }
+                        }
+
+                    }
+
+                    .index_carousel {
+                        display: none;
+                        height: 60vh;
+
+                        @include t() {
+                            display: block;
+                            margin-bottom: 80px;
+                        }
+
+                        @include m() {
+                            height: 90vh;
+                        }
+
+                        .artcarousel {
+                            position: relative;
+                            height: 100%;
+
+                            img {
+                                width: 100%;
+                                height: 60vh;
+                                object-fit: cover;
+
+                                @include m() {
+                                    height: 90vh;
+                                }
+                            }
+
+                            .txt {
+                                width: 100%;
+                                padding: 3% 5% 5%;
+                                position: absolute;
+                                bottom: 0;
+                                right: 0;
+                                background-color: #fff;
+                            }
+                        }
+                    }
+
+                    .eventwrap {
+                        width: calc(100% - 80px);
+                        display: flex;
+                        margin-left: 1.5rem;
+
+                        @include t() {
+                            flex-direction: column;
+                            width: 95%;
+                            margin: auto;
+                        }
+
+                        @include m() {
+                            width: 90%;
+                            margin: auto;
+                        }
+
+                        .item {
+                            width: 29%;
+                            height: 100%;
+                            padding: 2rem .5rem 1rem 0;
+                            border-left: 2px solid $mblue;
+
+                            @include t() {
+                                width: 100%;
+                                height: 260px;
+                                border-bottom: 2px solid $mblue;
+                                padding: 1rem 0;
+                            }
+
+                            @include m() {
+                                height: auto;
+                            }
+
+                            a {
+                                display: flex;
+                                flex-direction: column;
+                                justify-content: flex-end;
+                                width: 100%;
+                                height: 100%;
+                                margin-top: auto;
+                                position: relative;
+                                gap: 3rem;
+                                @include t() {
+                                    flex-direction: row;
+                                }
+
+                                @include m() {
+                                    flex-direction: column;
+                                }
+
+                                .image {
+                                    width: 100%;
+                                    height: 40%;
+                                    overflow: hidden;
+
+                                    @include t() {
+                                        order: -1;
+                                        width: 100%;
+                                        height: 100%;
+                                    }
+
+                                    img {
+                                        vertical-align: bottom;
+                                        width: 125%;
+                                        height: 100%;
+                                        object-fit: cover;
+
+                                        @include t() {
+                                            width: 100%;
+                                            height: 100%;
+                                        }
+
+
+                                    }
+
+                                }
+
+
+
+                                .txt {
+                                    padding-left:0.5rem;
+                                    height: 50%;
+
+                                    @include t() {
+                                        max-width: 300px;
+                                        height: 100%;
+                                        padding: 0.5rem 0.5rem 2rem;
+                                    }
+
+                                    @include m() {
+                                        max-width: none;
+                                    }
+
+                                    h3 {
+                                        margin: 1rem 0;
+                                        background-color: $myellow;
+                                        overflow: hidden;
+                                        white-space: nowrap;
+                                        text-overflow: ellipsis;
+
+                                        @include t() {
+                                            margin: 0 0 0.5rem 0;
+                                        }
+                                    }
+
+                                    p {
+                                        display: -webkit-box;
+                                        -webkit-box-orient: vertical;
+                                        -webkit-line-clamp: 5;
+                                        overflow: hidden;
+
+                                        @include m() {
+                                            -webkit-line-clamp: 3;
+                                        }
+                                    }
+                                }
+                            }
+
+                           
+
+                        }
+
+                        .more {
+                            width: 13%;
+                            position: relative;
+
+                            @include t() {
+                                width: 100%;
+                                text-align: end;
+                                padding: 1rem 0;
+                            }
+
+                            a {
+                                position: absolute;
+                                bottom: 1.5rem;
+                                left: 0;
+
+                                @include t() {
+                                    position: static;
+                                }
+                            }
+                        }
+                    }
+
+                    .draw img {
+                        height: 100%;
+                        width: 200px;
+                        object-position: bottom;
+                        object-fit: contain;
+
+                        @include t() {
+                            display: none;
+                        }
+                    }
+
+                    .container {
+                        width: 100%;
+
+                        @include t() {
+                            margin: 50px 0;
+                        }
+
+                        .row {
+                            position: relative;
+                            width: 90%;
+                            height: 50%;
+
+                            @include t() {
+                                width: 90%;
+                                margin: auto;
+                                height: 230px;
+                            }
+
+                            &:first-child {
+                                @include t() {
+                                    margin-left: auto;
+                                }
+                            }
+
+                            &:last-child {
+                                margin-left: auto;
+                            }
+
+                            .txtframe {
+                                position: absolute;
+                                top: 0;
+                                left: -25%;
+
+                                @include t() {
+                                    display: none;
+                                }
+
+                                h1 {
+                                    font-size: 64px;
+                                    color: #fff;
+                                    -webkit-text-stroke: 2px $mblue;
+                                    font-family: 'Noto Sans TC', 'sans-serif';
+                                }
+
+                                z-index: 5;
+                            }
+
+                            .card {
+                                width: 100%;
+                                height: 100%;
+                                padding: 1rem 0;
+
+                                @include m() {
+                                    position: relative;
+                                }
+
+                                a {
+                                    width: 100%;
+                                    height: 100%;
+                                    display: flex;
+                                    align-items: center;
+                                }
+
+                                img {
+                                    width: 70%;
+                                    height: 100%;
+                                    object-fit: cover;
+                                    border-radius: 8px;
+                                    border: 3px solid $mgreen;
+                                    box-shadow: -8px 8px 0px $mgreen;
+                                    transition: .3s;
+                                    transform: translate(0px 0px);
+
+                                    &:hover {
+                                        box-shadow: 0px 0px 0px $mgreen;
+                                        transform: translate(-8px, 8px);
+                                    }
+
+                                    @include t() {
+                                        width: 50%;
+                                        height: 100%;
+                                        min-height: 210px;
+                                    }
+
+                                    @include m() {
+                                        width: 100%;
+                                    }
+
+                                }
+
+                                .txt {
+                                    width: 30%;
+                                    height: 100%;
+                                    padding: 2rem 1rem;
+                                    position: relative;
+                                    overflow: hidden;
+
+                                    @include t() {
+                                        width: 50%;
+                                    }
+
+                                    @include m() {
+                                        position: absolute;
+                                        width: 100%;
+                                        right: 0;
+                                        top: 0;
+                                    }
+
+                                    h2 {
+                                        pointer-events: none;
+
+                                        @include t() {
+                                            display: inline-block;
+                                            height: 150px;
+                                        }
+
+                                        @include m() {
+                                            font-weight: 900;
+                                            color: #fff;
+                                            text-shadow: -2px 2px 5px #000;
+                                        }
+                                    }
+
+                                    button {
+                                        position: absolute;
+                                        right: 16px;
+                                        bottom: 0;
+                                        background-color: $mpink;
+                                        width: 70px;
+                                        height: 70px;
+                                        border: none;
+                                        border-radius: 50%;
+                                        text-align: center;
+                                        transition: 0.1s;
+                                        pointer-events: none;
+
+                                        @include m() {
+                                            bottom: 2rem;
+                                        }
+
+                                        #visitarrow,
+                                        #spacearrow {
+                                            font-size: 20px;
+                                            pointer-events: none;
+                                        }
+
+                                        #visitarrow path,
+                                        #spacearrow path {
+                                            fill: #fff;
+                                        }
+                                    }
+
+                                }
+                            }
+                        }
+
+                    }
+
+                    .artblock {
+                        width: 100%;
+                        height: 100%;
+                        position: relative;
+
+                        @include t() {
+                            padding: 50px 0px;
+                            min-height: 500px;
+                            display: flex;
+                            justify-content: space-evenly;
+                            align-items: center;
+                            flex-wrap: wrap;
+                            margin-bottom: 50px;
                         }
 
                         .light {
@@ -146,6 +952,7 @@
                             border-radius: 50%;
                             opacity: .2;
                             backdrop-filter: brightness(120%);
+                            z-index: -1;
 
                             &.yellow {
                                 width: 300px;
@@ -187,1406 +994,604 @@
                                 }
                             }
                         }
-                    }
 
-                }
-
-                .smalltitle {
-                    padding: 0.6rem 0;
-
-                    @include t() {
-                        padding-left: 2rem;
-                    }
-
-                    h2 {
-                        font-size: 1.25rem;
-                        font-weight: 700;
-                        white-space: nowrap;
-                    }
-                }
-
-                .path {
-                    width: 25%;
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: space-between;
-
-                    @include t() {
-                        width: 100%;
-                    }
-
-                    .ticket {
-                        background-image: url('@/assets/image/home/ticket.png');
-                        background-size: contain;
-                        background-repeat: no-repeat;
-                        width: 250px;
-                        height: 120px;
-                        margin-left: auto;
-                        position: relative;
-                        z-index: 5;
-
-                        @include t() {
-                            margin: 4rem auto 2.5rem;
-                        }
-
-                        a {
-                            display: inline-block;
-                            width: 100%;
-                            height: 100%;
-                            padding: 28px 0px 0px 50px;
-                            position: relative;
-
-                            p {
-                                color: #fff;
-                                font-weight: 700;
-                                font-size: 1.4rem;
-                                line-height: 1.5;
-
-                                &:first-child {
-                                    display: inline-block;
-                                    border-bottom: 2px solid #fff;
-                                }
-
-                                &:last-child {
-                                    font-size: 1.25rem;
-                                    position: absolute;
-                                    top: 28px;
-                                    right: 25px;
-                                    writing-mode: vertical-lr;
-                                    text-orientation: mixed;
-                                }
-                            }
-                        }
-                    }
-
-                    @keyframes scrollhint {
-                        0% {
-                            transform: translateX(0px);
-                        }
-
-                        100% {
-                            transform: translateX(-5px);
-                        }
-                    }
-
-                    .homenav {
-                        width: fit-content;
-                        margin-left: auto;
-                        padding-right: 2rem;
-
-                        @include t() {
-                            padding: 0;
-                            margin: auto;
-                            width: 100%;
-                            margin-bottom: 80px;
-                        }
-
-                        ul {
-                            margin-bottom: 0.5rem;
-
-                            li {
-                                margin-bottom: 2px;
-
-                                a {
-                                    // border-left: 1px solid $mblue;
-                                    width: 100%;
-                                    display: inline-block;
-                                    margin-bottom: 5px;
-                                    background: linear-gradient(90deg, $mgreen 45%, #ffffff 60%);
-                                    background-size: 220%;
-                                    // background-size: 100%;
-                                    background-position: 100% 100%;
-                                    transition: .4s;
-                                    padding:4px 0.5rem 4px 1rem;
-
-                                    &:hover {
-                                        background-position: 0% 0%;
-
-                                        p {
-                                            background-position: 0% 0%;
-                                        }
-                                    }
-
-                                    p {
-                                        color: transparent;
-                                        background: linear-gradient(90deg, #ffffff 45%, $mgreen 60%);
-                                        background-size: 220%;
-                                        // background-size: 100%;
-                                        background-position: 100% 100%;
-                                        background-clip: text;
-                                        -webkit-background-clip: text;
-                                        transition: .4s;
-                                        pointer-events: none;
-                                    }
-
-                                }
-                            }
-
-                            @include t() {
-                                width: 100%;
-                                display: flex;
-                                flex-wrap: wrap;
-                                justify-content: center;
-
-                                li {
-                                    text-align: center;
-                                    width: 30%;
-                                    padding: 1rem 0;
-                                    margin: 0.5rem 0;
-
-                                    a {
-                                        line-height: 2;
-                                    }
-                                }
-
-                            }
-
-                        }
-
-                    }
-                }
-
-
-                .shadow {
-                    display: inline-block;
-                    position: relative;
-                    height: 100%;
-                    min-width: 200px;
-                    background-color: $myellow;
-                    z-index: 2;
-
-                    &::after {
-                        content: "";
-                        position: absolute;
-                        border-top: 100px solid transparent;
-                        border-right: 140px solid transparent;
-                        border-bottom: 100px solid $myellow;
-                        left: 100%;
-                        bottom: 0px;
-                        z-index: 2;
-                    }
-                }
-
-                .sectiontitle {
-                    height: 100%;
-                    overflow: hidden;
-                    position: relative;
-                    min-width: 80px;
-
-                    @include t() {
-                        position: absolute;
-                        right: 0;
-                    }
-
-                    .txtgo {
-                        display: flex;
-                        flex-direction: column;
-                        animation: txtgo 10s linear infinite;
-                        min-width: 100px;
-
-                        @include t() {
-                            min-width: 64px;
-                            opacity: .3;
-                        }
-                    }
-
-                    .txtskew {
-
-                        animation: txtgos linear infinite;
-                        animation-duration: 10s;
-
-                        @include t() {
-                            animation: txtgo 10s linear infinite;
-                        }
-                    }
-
-                    h1 {
-                        flex-shrink: 0;
-                        display: inline-block;
-                        width: 64px;
-                        writing-mode: vertical-lr;
-                        text-orientation: mixed;
-                        font-size: 64px;
-                        white-space: pre-wrap;
-                        padding: 2rem 0;
-                    }
-
-                    @keyframes txtgo {
-                        0% {
-                            transform: translateY(0%);
-                        }
-
-                        100% {
-                            transform: translateY(-50%);
-                        }
-                    }
-
-                    @keyframes txtgos {
-                        0% {
-                            transform: translateY(0%) skewY(35deg);
-                        }
-
-                        100% {
-                            transform: translateY(-50%) skewY(35deg);
-                        }
-                    }
-                }
-
-
-                .new {
-                    @include t() {
-                        display: none;
-                    }
-
-                    .container {
-                        width: 75vw;
-                        padding-top: 8%;
-                        height: 70vh;
-                        display: flex;
-                        justify-content: center;
-                        overflow-x: clip;
-                        overflow-y: visible;
-                        position: relative;
-
-                        @include t() {
-                            width: 85vw;
-                        }
-
-                        .gbtnl,
-                        .gbtnr {
-                            z-index: 10;
+                        .balla {
+                            width: 50px;
+                            height: 50px;
                             position: absolute;
-                            bottom: -50px;
-                            width: 30px;
-                            height: 30px;
                             border-radius: 50%;
-                            border: none;
-                            cursor: pointer;
+                            background-color: $mpink;
+                            transform-origin: bottom;
+                            bottom: -100%;
                             transition: .3s;
 
                             &:hover {
                                 background-color: $mgreen;
                             }
-                        }
-
-                        .gbtnl {
-                            left: 20%;
-
-                            #gbtnlfas {
-                                pointer-events: none;
-                            }
-                        }
-
-                        .gbtnr {
-                            right: 20%;
-
-                            #gbtnrfas {
-                                pointer-events: none;
-
-                            }
-                        }
-
-                        .gallery {
-                            width: 50%;
-                            height: 75%;
-                            position: relative;
-                            transform-style: preserve-3d;
-                            transform: perspective(2000px) rotateX(-5deg) rotateY(0deg);
-                            transition: 2s;
-
-                            .img {
-                                display: inline-block;
-                                width: 100%;
-                                height: 100%;
-                                position: absolute;
-                                cursor: pointer;
-
-                                img {
-                                    width: 100%;
-                                    height: 100%;
-                                    object-fit: cover;
-                                    object-position: top;
-                                }
-
-                                .imginfo {
-                                    position: absolute;
-                                    width: 100%;
-                                    height: 100%;
-                                    background-color: rgb(251, 247, 150, .7);
-                                    backdrop-filter: blur(10px);
-                                    color: #fff;
-                                    top: 0;
-                                    left: 0;
-                                    padding: 2rem;
-                                    opacity: 0;
-                                    transition: .3s;
-
-
-
-                                    p {
-                                        position: relative;
-                                        display: -webkit-box;
-                                        -webkit-box-orient: vertical;
-                                        -webkit-line-clamp: 3;
-                                        overflow: hidden;
-
-                                        &:nth-child(2) {
-                                            display: inline-block;
-                                            line-height: 1.5;
-
-                                            &::after {
-                                                position: absolute;
-                                                content: "";
-                                                bottom: 0rem;
-                                                left: 0;
-                                                width: 100%;
-                                                height: 1px;
-                                                background-color: $mblue;
-                                            }
-                                        }
-
-                                        &:last-child {
-                                            padding-top: 2rem;
-                                            text-align: end;
-                                        }
-                                    }
-                                }
-
-                                &:hover {
-                                    .imginfo {
-                                        opacity: 1;
-                                    }
-                                }
-                            }
-                        }
-
-                    }
-
-                    .moreexb {
-                        text-align: end;
-                    }
-
-                }
-
-                .index_carousel {
-                    display: none;
-                    height: 60vh;
-
-                    @include t() {
-                        display: block;
-                        margin-bottom: 80px;
-                    }
-
-                    @include m() {
-                        height: 90vh;
-                    }
-
-                    .artcarousel {
-                        position: relative;
-                        height: 100%;
-
-                        img {
-                            width: 100%;
-                            height: 60vh;
-                            object-fit: cover;
-
-                            @include m() {
-                                height: 90vh;
-                            }
-                        }
-
-                        .txt {
-                            width: 100%;
-                            padding: 3% 5% 5%;
-                            position: absolute;
-                            bottom: 0;
-                            right: 0;
-                            background-color: #fff;
-                        }
-                    }
-                }
-
-                .eventwrap {
-                    width: calc(100% - 80px);
-                    display: flex;
-                    margin-left: 1.5rem;
-
-                    @include t() {
-                        flex-direction: column;
-                        width: 95%;
-                        margin: auto;
-                    }
-
-                    @include m() {
-                        width: 90%;
-                        margin: auto;
-                    }
-
-                    .item {
-                        width: 29%;
-                        height: 100%;
-                        padding: 2rem .5rem 1rem 0;
-                        border-left: 2px solid $mblue;
-
-                        @include t() {
-                            width: 100%;
-                            height: 260px;
-                            border-bottom: 2px solid $mblue;
-                            padding: 1rem 0;
-                        }
-
-                        @include m() {
-                            height: auto;
-                        }
-
-                        a {
-                            display: flex;
-                            flex-direction: column;
-                            justify-content: flex-end;
-                            width: 100%;
-                            height: 100%;
-                            margin-top: auto;
-                            position: relative;
-
-                            @include t() {
-                                flex-direction: row;
-                            }
-
-                            @include m() {
-                                flex-direction: column;
-                            }
-
-                            .image {
-                                width: 100%;
-                                height: 40%;
-                                overflow: hidden;
-
-                                @include t() {
-                                    order: -1;
-                                    width: 100%;
-                                    height: 100%;
-                                }
-
-                                img {
-                                    vertical-align: bottom;
-                                    width: 125%;
-                                    height: 100%;
-                                    object-fit: cover;
-
-                                    @include t() {
-                                        width: 100%;
-                                        height: 100%;
-                                    }
-
-
-                                }
-
-                            }
-
-
-
-                            .txt {
-                                padding: 1rem;
-                                height: 50%;
-
-                                @include t() {
-                                    max-width: 300px;
-                                    height: 100%;
-                                    padding: 0.5rem 0.5rem 2rem;
-                                }
-
-                                @include m() {
-                                    max-width: none;
-                                }
-
-                                h3 {
-                                    margin: 1rem 0;
-                                    background-color: $myellow;
-                                    overflow: hidden;
-                                    white-space: nowrap;
-                                    text-overflow: ellipsis;
-
-                                    @include t() {
-                                        margin: 0 0 0.5rem 0;
-                                    }
-                                }
-
-                                p {
-                                    display: -webkit-box;
-                                    -webkit-box-orient: vertical;
-                                    -webkit-line-clamp: 5;
-                                    overflow: hidden;
-
-                                    @include m() {
-                                        -webkit-line-clamp: 3;
-                                    }
-                                }
-                            }
-                        }
-
-                        .seemore {
-                            text-align: end;
-
-                            @include t() {
-                                position: absolute;
-                                right: 0;
-                                bottom: -24px;
-                            }
-                        }
-
-                    }
-
-                    .more {
-                        width: 13%;
-                        position: relative;
-
-                        @include t() {
-                            width: 100%;
-                            text-align: end;
-                            padding: 1rem 0;
-                        }
-
-                        a {
-                            position: absolute;
-                            bottom: 1.5rem;
-                            left: 0;
 
                             @include t() {
                                 position: static;
                             }
-                        }
-                    }
-                }
 
-                .draw img {
-                    height: 100%;
-                    width: 200px;
-                    object-position: bottom;
-                    object-fit: contain;
+                            .artballa {
+                                width: 90%;
+                                height: 90%;
+                                border-radius: 50%;
+                                text-align: end;
+                                padding-top: 2rem;
+                                background: radial-gradient(#fff 20%, transparent 21%, transparent 79%, #fff 80%);
+                                background-size: 1em 1em;
+                                background-color: $myellow;
+                                opacity: 1;
+                                background-position: center;
+                                transform: scale(0);
+                                position: relative;
 
-                    @include t() {
-                        display: none;
-                    }
-                }
+                                h3 {
+                                    font-size: 32px;
+                                    font-weight: 700;
+                                    position: absolute;
+                                    top: 2rem;
+                                    left: 50%;
+                                    transform: translateX(-50%);
+                                }
 
-                .container {
-                    width: 100%;
-
-                    @include t() {
-                        margin: 50px 0;
-                    }
-
-                    .row {
-                        position: relative;
-                        width: 90%;
-                        height: 50%;
-
-                        @include t() {
-                            width: 90%;
-                            margin: auto;
-                            height: 230px;
-                        }
-
-                        &:first-child {
-                            @include t() {
-                                margin-left: auto;
+                                img {
+                                    object-position: center;
+                                    height: 120%;
+                                }
                             }
+
                         }
 
-                        &:last-child {
-                            margin-left: auto;
-                        }
-
-                        .txtframe {
+                        .ballb {
+                            width: 50px;
+                            height: 50px;
                             position: absolute;
-                            top: 0;
-                            left: -25%;
+                            border-radius: 50%;
+                            background-color: $mpink;
+                            transform-origin: bottom;
+                            left: 10%;
+                            bottom: -100%;
+                            transition: .3s;
+
+                            &:hover {
+                                background-color: $mlblue;
+                            }
 
                             @include t() {
-                                display: none;
+                                position: static;
                             }
 
-                            h1 {
-                                font-size: 64px;
-                                color: #fff;
-                                -webkit-text-stroke: 2px $mblue;
-                                font-family: 'Noto Sans TC', 'sans-serif';
-                            }
-
-                            z-index: 5;
-                        }
-
-                        .card {
-                            width: 100%;
-                            height: 100%;
-                            padding: 1rem 0;
-
-                            @include m() {
+                            .artballb {
+                                width: 90%;
+                                height: 90%;
+                                border-radius: 50%;
+                                text-align: center;
+                                background: radial-gradient(#fff 20%, transparent 21%, transparent 79%, #fff 80%);
+                                background-size: 1em 1em;
+                                background-color: $myellow;
+                                opacity: 1;
+                                background-position: center;
+                                transform: scale(0);
                                 position: relative;
-                            }
+                                padding-top: 6rem;
 
-                            a {
-                                width: 100%;
-                                height: 100%;
-                                display: flex;
-                                align-items: center;
-                            }
-
-                            img {
-                                width: 70%;
-                                height: 100%;
-                                object-fit: cover;
-                                border-radius: 8px;
-                                border: 3px solid $mgreen;
-                                box-shadow: -8px 8px 0px $mgreen;
-                                transition: .3s;
-                                transform: translate(0px 0px);
-
-                                &:hover {
-                                    box-shadow: 0px 0px 0px $mgreen;
-                                    transform: translate(-8px, 8px);
+                                h3 {
+                                    font-size: 32px;
+                                    font-weight: 700;
+                                    position: absolute;
+                                    top: 2rem;
+                                    left: 50%;
+                                    transform: translateX(-50%);
                                 }
 
-                                @include t() {
-                                    width: 50%;
+                                img {
+                                    object-position: bottom;
                                     height: 100%;
-                                    min-height: 210px;
                                 }
-
-                                @include m() {
-                                    width: 100%;
-                                }
-
                             }
 
-                            .txt {
-                                width: 30%;
-                                height: 100%;
-                                padding: 2rem 1rem;
-                                position: relative;
-                                overflow: hidden;
-
-                                @include t() {
-                                    width: 50%;
-                                }
-
-                                @include m() {
-                                    position: absolute;
-                                    width: 100%;
-                                    right: 0;
-                                    top: 0;
-                                }
-
-                                h2 {
-                                    pointer-events: none;
-
-                                    @include t() {
-                                        display: inline-block;
-                                        height: 150px;
-                                    }
-
-                                    @include m() {
-                                        font-weight: 900;
-                                        color: #fff;
-                                        text-shadow: -2px 2px 5px #000;
-                                    }
-                                }
-
-                                button {
-                                    position: absolute;
-                                    right: 16px;
-                                    bottom: 0;
-                                    background-color: $mpink;
-                                    width: 70px;
-                                    height: 70px;
-                                    border: none;
-                                    border-radius: 50%;
-                                    text-align: center;
-                                    transition: 0.1s;
-                                    pointer-events: none;
-
-                                    @include m() {
-                                        bottom: 2rem;
-                                    }
-
-                                    #visitarrow,
-                                    #spacearrow {
-                                        font-size: 20px;
-                                        pointer-events: none;
-                                    }
-
-                                    #visitarrow path,
-                                    #spacearrow path {
-                                        fill: #fff;
-                                    }
-                                }
-
-                            }
-                        }
-                    }
-
-                }
-
-                .artblock {
-                    width: 100%;
-                    height: 100%;
-                    position: relative;
-
-                    @include t() {
-                        padding: 50px 0px;
-                        min-height: 500px;
-                        display: flex;
-                        justify-content: space-evenly;
-                        align-items: center;
-                        flex-wrap: wrap;
-                        margin-bottom: 50px;
-                    }
-
-                    .light {
-                        position: absolute;
-                        border-radius: 50%;
-                        opacity: .2;
-                        backdrop-filter: brightness(120%);
-                        z-index: -1;
-
-                        &.yellow {
-                            width: 300px;
-                            height: 300px;
-                            top: 0;
-                            right: 0;
-                            background-color: $myellow;
-                            transform-origin: 0% 50%;
-                            animation: circle 5s 0s cubic-bezier(.26, .46, .74, .53) infinite reverse;
                         }
 
-                        &.green {
-                            width: 350px;
-                            height: 350px;
-                            right: 0;
-                            bottom: 10px;
-                            background-color: $mgreen;
-                            transform-origin: 20% 50%;
-                            animation: circle 5s 0s cubic-bezier(.17, .3, .83, .63) infinite;
-                        }
-
-                        &.pink {
-                            width: 330px;
-                            height: 330px;
-                            bottom: 20%;
-                            left: 0;
-                            background-color: $mpink;
-                            transform-origin: 110% 50%;
-                            animation: circle 6s linear infinite;
-                        }
-
-                        @keyframes circle {
+                        @keyframes downa {
                             0% {
-                                transform: rotate(0deg)
+                                width: 50px;
+                                height: 50px;
+                                bottom: 100%;
+                                left: 10%;
                             }
 
                             100% {
-                                transform: rotate(360deg)
+                                width: 50px;
+                                height: 50px;
+                                bottom: 0%;
+                                left: 25%;
+                            }
+                        }
+
+                        @keyframes upa {
+                            0% {
+                                width: 50px;
+                                height: 50px;
+                                bottom: 0%;
+                                left: 25%;
+                            }
+
+                            100% {
+                                width: 300px;
+                                height: 300px;
+                                bottom: 25%;
+                                left: 45%;
+                            }
+                        }
+
+                        @keyframes downb {
+                            0% {
+                                width: 50px;
+                                height: 50px;
+                                bottom: 100%;
+                                left: 35%;
+                            }
+
+                            100% {
+                                width: 50px;
+                                height: 50px;
+                                bottom: 0%;
+                                left: 20%;
+                            }
+                        }
+
+                        @keyframes upb {
+                            0% {
+                                width: 50px;
+                                height: 50px;
+                                bottom: 0%;
+                                left: 20%;
+                            }
+
+                            100% {
+                                width: 300px;
+                                height: 300px;
+                                bottom: 30%;
+                                left: 5%;
+                            }
+                        }
+
+                        @keyframes showinfoa {
+                            0% {
+                                transform: scale(0);
+
+                            }
+
+                            100% {
+                                transform: scale(1) translate(40px, -32px);
+                            }
+                        }
+
+                        @keyframes showinfob {
+                            0% {
+                                transform: scale(0);
+
+                            }
+
+                            100% {
+                                transform: scale(1) translate(-30px, -32px);
                             }
                         }
                     }
 
-                    .balla {
-                        width: 50px;
-                        height: 50px;
-                        position: absolute;
-                        border-radius: 50%;
-                        background-color: $mpink;
-                        transform-origin: bottom;
-                        bottom: -100%;
-                        transition: .3s;
+                    .artblock.show {
+                        .balla {
+                            animation: downa 1s 0s 1 cubic-bezier(.58, .08, .92, .43),
+                                upa 1s 1s 1 cubic-bezier(.11, .46, .39, .85) forwards;
 
-                        &:hover {
-                            background-color: $mgreen;
+                            .artballa {
+                                animation: showinfoa .5s 1.8s 1 forwards;
+                            }
                         }
 
-                        @include t() {
-                            position: static;
-                        }
+                        .ballb {
+                            animation: downb 1s 0s 1 cubic-bezier(.58, .08, .92, .43),
+                                upb 1s 1s 1 cubic-bezier(.11, .46, .39, .85) forwards;
 
-                        .artballa {
+                            .artballb {
+                                animation: showinfob .5s 1.8s 1 forwards;
+                            }
+                        }
+                    }
+
+                    .shop {
+                        width: 100%;
+
+                        .block {
                             width: 90%;
-                            height: 90%;
-                            border-radius: 50%;
-                            text-align: end;
-                            padding-top: 2rem;
-                            background: radial-gradient(#fff 20%, transparent 21%, transparent 79%, #fff 80%);
-                            background-size: 1em 1em;
-                            background-color: $myellow;
-                            opacity: 1;
-                            background-position: center;
-                            transform: scale(0);
-                            position: relative;
-
-                            h3 {
-                                font-size: 32px;
-                                font-weight: 700;
-                                position: absolute;
-                                top: 2rem;
-                                left: 50%;
-                                transform: translateX(-50%);
-                            }
-
-                            img {
-                                object-position: center;
-                                height: 120%;
-                            }
-                        }
-
-                    }
-
-                    .ballb {
-                        width: 50px;
-                        height: 50px;
-                        position: absolute;
-                        border-radius: 50%;
-                        background-color: $mpink;
-                        transform-origin: bottom;
-                        left: 10%;
-                        bottom: -100%;
-                        transition: .3s;
-
-                        &:hover {
-                            background-color: $mlblue;
-                        }
-
-                        @include t() {
-                            position: static;
-                        }
-
-                        .artballb {
-                            width: 90%;
-                            height: 90%;
-                            border-radius: 50%;
-                            text-align: center;
-                            background: radial-gradient(#fff 20%, transparent 21%, transparent 79%, #fff 80%);
-                            background-size: 1em 1em;
-                            background-color: $myellow;
-                            opacity: 1;
-                            background-position: center;
-                            transform: scale(0);
-                            position: relative;
-                            padding-top: 6rem;
-
-                            h3 {
-                                font-size: 32px;
-                                font-weight: 700;
-                                position: absolute;
-                                top: 2rem;
-                                left: 50%;
-                                transform: translateX(-50%);
-                            }
-
-                            img {
-                                object-position: bottom;
-                                height: 100%;
-                            }
-                        }
-
-                    }
-
-                    @keyframes downa {
-                        0% {
-                            width: 50px;
-                            height: 50px;
-                            bottom: 100%;
-                            left: 10%;
-                        }
-
-                        100% {
-                            width: 50px;
-                            height: 50px;
-                            bottom: 0%;
-                            left: 25%;
-                        }
-                    }
-
-                    @keyframes upa {
-                        0% {
-                            width: 50px;
-                            height: 50px;
-                            bottom: 0%;
-                            left: 25%;
-                        }
-
-                        100% {
-                            width: 300px;
-                            height: 300px;
-                            bottom: 25%;
-                            left: 45%;
-                        }
-                    }
-
-                    @keyframes downb {
-                        0% {
-                            width: 50px;
-                            height: 50px;
-                            bottom: 100%;
-                            left: 35%;
-                        }
-
-                        100% {
-                            width: 50px;
-                            height: 50px;
-                            bottom: 0%;
-                            left: 20%;
-                        }
-                    }
-
-                    @keyframes upb {
-                        0% {
-                            width: 50px;
-                            height: 50px;
-                            bottom: 0%;
-                            left: 20%;
-                        }
-
-                        100% {
-                            width: 300px;
-                            height: 300px;
-                            bottom: 30%;
-                            left: 5%;
-                        }
-                    }
-
-                    @keyframes showinfoa {
-                        0% {
-                            transform: scale(0);
-
-                        }
-
-                        100% {
-                            transform: scale(1) translate(40px, -32px);
-                        }
-                    }
-
-                    @keyframes showinfob {
-                        0% {
-                            transform: scale(0);
-
-                        }
-
-                        100% {
-                            transform: scale(1) translate(-30px, -32px);
-                        }
-                    }
-                }
-
-                .artblock.show {
-                    .balla {
-                        animation: downa 1s 0s 1 cubic-bezier(.58, .08, .92, .43),
-                            upa 1s 1s 1 cubic-bezier(.11, .46, .39, .85) forwards;
-
-                        .artballa {
-                            animation: showinfoa .5s 1.8s 1 forwards;
-                        }
-                    }
-
-                    .ballb {
-                        animation: downb 1s 0s 1 cubic-bezier(.58, .08, .92, .43),
-                            upb 1s 1s 1 cubic-bezier(.11, .46, .39, .85) forwards;
-
-                        .artballb {
-                            animation: showinfob .5s 1.8s 1 forwards;
-                        }
-                    }
-                }
-
-                .shop {
-                    width: 100%;
-
-                    .block {
-                        width: 90%;
-                        height: 85%;
-                        margin-left: auto;
-                        border: 2px solid $mgreen;
-                        padding: 7% 8% 2.5%;
-
-                        @include t() {
-                            width: 92%;
-                            height: auto;
-                            padding: 7% 8%
-                        }
-
-                        @include m() {
-                            width: 100%;
-                            padding: 1rem;
-                        }
-
-                        .shopframe {
-                            width: 100%;
-                            height: 100%;
+                            height: 85%;
+                            margin-left: auto;
                             border: 2px solid $mgreen;
-                            position: relative;
-                            background-color: $myellow;
-                            padding: 0px 5px;
+                            padding: 7% 8% 2.5%;
+
+                            @include t() {
+                                width: 92%;
+                                height: auto;
+                                padding: 7% 8%
+                            }
+
+                            @include m() {
+                                width: 100%;
+                                padding: 1rem;
+                            }
+
+                            .shopframe {
+                                width: 100%;
+                                height: 100%;
+                                border: 2px solid $mgreen;
+                                position: relative;
+                                background-color: $myellow;
+                                padding: 0px 5px;
+
+                                &::after {
+                                    content: "";
+                                    z-index: -999;
+                                    position: absolute;
+                                    width: 105%;
+                                    height: 108%;
+                                    border: 2px solid $mgreen;
+                                    top: -4%;
+                                    left: -2.5%;
+                                    background: radial-gradient(circle, $mgreen 10%, transparent 11%), radial-gradient(circle at bottom left, $mgreen 5%, transparent 6%), radial-gradient(circle at bottom right, $mgreen 5%, transparent 6%), radial-gradient(circle at top left, $mgreen 5%, transparent 6%), radial-gradient(circle at top right, $mgreen 5%, transparent 6%);
+                                    background-size: 2.5em 2.5em;
+                                    background-color: #ffffff;
+
+                                    @include m() {
+                                        width: 105%;
+                                        height: 105%;
+                                        top: -2.5%;
+                                    }
+                                }
+
+                                .productrow {
+                                    height: 100%;
+                                    display: flex;
+                                    flex-wrap: wrap;
+                                    justify-content: space-evenly;
+                                    align-items: center;
+                                    align-content: center;
+
+                                    h3 {
+                                        width: 100%;
+                                        display: inline-block;
+                                        text-align: center;
+                                        line-height: 3;
+
+                                    }
+
+                                    .product {
+                                        max-width: 300px;
+                                        width: 25%;
+                                        text-align: center;
+                                        padding: 0px 5px;
+
+                                        @include t() {
+                                            width: 45%;
+                                        }
+
+                                        img {
+                                            width: 100%;
+                                            border: 3px solid #fff;
+                                        }
+
+                                        p {
+                                            overflow: hidden;
+                                            white-space: nowrap;
+                                            text-overflow: ellipsis;
+                                        }
+                                    }
+                                }
+
+                            }
+                        }
+
+                        .homecart {
+                            position: absolute;
+                            z-index: 5;
+                            bottom: 0;
+                            left: -100px;
+
+                            @include t() {
+                                display: none;
+                            }
+                        }
+
+                        .homelight {
+                            position: absolute;
+                            z-index: 5;
+                            top: 0;
+                            right: 7.5%;
 
                             &::after {
                                 content: "";
-                                z-index: -999;
                                 position: absolute;
-                                width: 105%;
-                                height: 108%;
-                                border: 2px solid $mgreen;
-                                top: -4%;
-                                left: -2.5%;
-                                background: radial-gradient(circle, $mgreen 10%, transparent 11%), radial-gradient(circle at bottom left, $mgreen 5%, transparent 6%), radial-gradient(circle at bottom right, $mgreen 5%, transparent 6%), radial-gradient(circle at top left, $mgreen 5%, transparent 6%), radial-gradient(circle at top right, $mgreen 5%, transparent 6%);
-                                background-size: 2.5em 2.5em;
-                                background-color: #ffffff;
-
-                                @include m() {
-                                    width: 105%;
-                                    height: 105%;
-                                    top: -2.5%;
-                                }
+                                height: 100px;
+                                width: 100%;
+                                background-color: #fff;
+                                opacity: .2;
+                                border-radius: 50%;
+                                bottom: 0;
+                                left: 0;
+                                z-index: 6;
                             }
-
-                            .productrow {
-                                height: 100%;
-                                display: flex;
-                                flex-wrap: wrap;
-                                justify-content: space-evenly;
-                                align-items: center;
-                                align-content: center;
-
-                                h3 {
-                                    width: 100%;
-                                    display: inline-block;
-                                    text-align: center;
-                                    line-height: 3;
-
-                                }
-
-                                .product {
-                                    max-width: 300px;
-                                    width: 25%;
-                                    text-align: center;
-                                    padding: 0px 5px;
-
-                                    @include t() {
-                                        width: 45%;
-                                    }
-
-                                    img {
-                                        width: 100%;
-                                        border: 3px solid #fff;
-                                    }
-
-                                    p {
-                                        overflow: hidden;
-                                        white-space: nowrap;
-                                        text-overflow: ellipsis;
-                                    }
-                                }
-                            }
-
                         }
-                    }
 
-                    .homecart {
-                        position: absolute;
-                        z-index: 5;
-                        bottom: 0;
-                        left: -100px;
-
-                        @include t() {
-                            display: none;
-                        }
-                    }
-
-                    .homelight {
-                        position: absolute;
-                        z-index: 5;
-                        top: 0;
-                        right: 7.5%;
-
-                        &::after {
-                            content: "";
-                            position: absolute;
-                            height: 100px;
+                        .floor {
                             width: 100%;
-                            background-color: #fff;
-                            opacity: .2;
-                            border-radius: 50%;
-                            bottom: 0;
-                            left: 0;
-                            z-index: 6;
-                        }
-                    }
-
-                    .floor {
-                        width: 100%;
-                        height: 15%;
-                        clip-path: polygon(10% 0%, 100% 0%, 100% 100%, 0% 100%);
-                        background-color: $myellow;
-                        text-align: end;
-
-                        @include t() {
-                            padding-right: 1.5rem;
-                            clip-path: polygon(8% 0%, 100% 0%, 100% 100%, 0% 100%);
-                        }
-
-                        @include m() {
-                            clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
-                        }
-                    }
-                }
-
-                .footersilde {
-                    background-color: $myellow;
-                    width: 100%;
-
-                    .slide {
-                        width: 100%;
-                        height: 100%;
-                        position: relative;
-
-                        .mobile {
-                            display: none;
-
-                            @include m() {
-                                display: block;
-                                text-align: end;
-                                color: $mpink;
-                                margin-top: 40px;
-                                padding-right: 1rem;
-                            }
-                        }
-
-                        #max1 {
-                            color: $mpink;
-
-                            @include m() {
-                                display: none;
-                            }
-                        }
-
-                        #max2 {
-                            transform-origin: left;
-
-                            @include m() {
-                                display: none;
-                            }
-                        }
-
-                        .homenav {
-                            padding-left: 32%;
-                            position: absolute;
-                            left: 0;
-                            bottom: 0;
+                            height: 15%;
+                            clip-path: polygon(10% 0%, 100% 0%, 100% 100%, 0% 100%);
+                            background-color: $myellow;
+                            text-align: end;
 
                             @include t() {
-                                position: static;
-                                padding: 4rem 0 2rem 32%;
+                                padding-right: 1.5rem;
+                                clip-path: polygon(8% 0%, 100% 0%, 100% 100%, 0% 100%);
                             }
 
-                            table {
-                                tr {
-                                    td {
-                                        color: $mblue;
-                                        vertical-align: top;
+                            @include m() {
+                                clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+                            }
+                        }
+                    }
 
-                                        &:first-child {
-                                            white-space: nowrap;
+                    .footersilde {
+                        background-color: $myellow;
+                        width: 100%;
+
+                        .slide {
+                            width: 100%;
+                            height: 100%;
+                            position: relative;
+
+                            .mobile {
+                                display: none;
+
+                                @include m() {
+                                    display: block;
+                                    text-align: end;
+                                    color: $mpink;
+                                    margin-top: 40px;
+                                    padding-right: 1rem;
+                                }
+                            }
+
+                            #max1 {
+                                color: $mpink;
+
+                                @include m() {
+                                    display: none;
+                                }
+                            }
+
+                            #max2 {
+                                transform-origin: left;
+
+                                @include m() {
+                                    display: none;
+                                }
+                            }
+
+                            .homenav {
+                                padding-left: 32%;
+                                position: absolute;
+                                left: 0;
+                                bottom: 0;
+
+                                @include t() {
+                                    position: static;
+                                    padding: 4rem 0 2rem 32%;
+                                }
+
+                                table {
+                                    tr {
+                                        td {
+                                            color: $mblue;
+                                            vertical-align: top;
+
+                                            &:first-child {
+                                                white-space: nowrap;
+                                            }
                                         }
                                     }
                                 }
                             }
                         }
-                    }
 
-                    .box {
-                        width: 30%;
-                        height: 100%;
-                        position: absolute;
-                        top: 0;
-                        left: 0;
-                        overflow: hidden;
-                        background-color: #fff;
-
-                        &::after {
-                            content: "";
-                            position: absolute;
-                            width: 100%;
-                            height: 15%;
-                            right: 0;
-                            bottom: 0px;
-                            z-index: 2;
-                            background-color: $myellow;
-                            clip-path: polygon(0 0, 0% 100%, 100% 100%);
-                        }
-
-                        .totop {
-                            position: absolute;
-                            right: 1rem;
-                            bottom: 1.5rem;
-                            background-color: $mpink;
-                            width: 70px;
-                            height: 70px;
-                            border: none;
-                            border-radius: 50%;
-                            text-align: center;
-                            transition: 0.1s;
-                            transform: skewY(15deg);
-                            padding: 15px;
-                            cursor: pointer;
-
-                            @include t() {
-                                transform: skewY(15deg) rotate(90deg);
-                                bottom: 2.5rem;
-                            }
-
-                            @include m() {
-                                bottom: 4rem;
-                            }
-                        }
-
-                        #totop {
-                            height: 40px;
-                            pointer-events: none;
-
-                            path {
-                                fill: #fff;
-                            }
-
-
-                        }
-
-                    }
-
-                    .tibame {
-                        background-color: #fff;
-                        position: absolute;
-                        right: 2rem;
-                        bottom: 2rem;
-                        width: 300px;
-                        height: 300px;
-                        border-radius: 50%;
-                        animation: pathrotate 20s 0s linear infinite;
-
-                        @include t() {
-                            position: static;
-                            margin-left: auto;
-                            margin-right: 2rem;
-                            margin-bottom: 2rem;
-                        }
-
-                        @include m() {
-                            width: 240px;
-                            height: 240px;
-                            margin-right: 1rem;
-                            margin-bottom: 1rem;
-                        }
-
-                        &::after {
-                            content: "";
-                            position: absolute;
-                            background-color: $mpink;
-                            width: 100%;
+                        .box {
+                            width: 30%;
                             height: 100%;
+                            position: absolute;
                             top: 0;
                             left: 0;
+                            overflow: hidden;
+                            background-color: #fff;
+
+                            &::after {
+                                content: "";
+                                position: absolute;
+                                width: 100%;
+                                height: 15%;
+                                right: 0;
+                                bottom: 0px;
+                                z-index: 2;
+                                background-color: $myellow;
+                                clip-path: polygon(0 0, 0% 100%, 100% 100%);
+                            }
+
+                            .totop {
+                                position: absolute;
+                                right: 1rem;
+                                bottom: 1.5rem;
+                                background-color: $mpink;
+                                width: 70px;
+                                height: 70px;
+                                border: none;
+                                border-radius: 50%;
+                                text-align: center;
+                                transition: 0.1s;
+                                transform: skewY(15deg);
+                                padding: 15px;
+                                cursor: pointer;
+
+                                @include t() {
+                                    transform: skewY(15deg) rotate(90deg);
+                                    bottom: 2.5rem;
+                                }
+
+                                @include m() {
+                                    bottom: 4rem;
+                                }
+                            }
+
+                            #totop {
+                                height: 40px;
+                                pointer-events: none;
+
+                                path {
+                                    fill: #fff;
+                                }
+
+
+                            }
+
+                        }
+
+                        .tibame {
+                            background-color: #fff;
+                            position: absolute;
+                            right: 2rem;
+                            bottom: 2rem;
+                            width: 300px;
+                            height: 300px;
                             border-radius: 50%;
-                            opacity: .3;
-                            transform-origin: 53% 53%;
-                            animation: pathrotate 10s 0s linear infinite;
-                            pointer-events: none;
-                            z-index: -1;
-                        }
+                            animation: pathrotate 20s 0s linear infinite;
 
-                        #svg1 {
-                            position: absolute;
-                            @include tc();
-                            fill: $mblue;
-                            height: auto;
-                            max-width: 70vmin;
-                            transform-origin: center;
-                            width: 70%;
-                        }
-
-                        #svg2 {
-                            position: absolute;
-                            @include tc();
-                            fill: $mblue;
-                            max-width: 65vmin;
-                            transform-origin: center;
-                            width: 65%;
+                            @include t() {
+                                position: static;
+                                margin-left: auto;
+                                margin-right: 2rem;
+                                margin-bottom: 2rem;
+                            }
 
                             @include m() {
-                                max-width: 30vmin;
-                                width: 30%;
+                                width: 240px;
+                                height: 240px;
+                                margin-right: 1rem;
+                                margin-bottom: 1rem;
+                            }
+
+                            &::after {
+                                content: "";
+                                position: absolute;
+                                background-color: $mpink;
+                                width: 100%;
+                                height: 100%;
+                                top: 0;
+                                left: 0;
+                                border-radius: 50%;
+                                opacity: .3;
+                                transform-origin: 53% 53%;
+                                animation: pathrotate 10s 0s linear infinite;
+                                pointer-events: none;
+                                z-index: -1;
+                            }
+
+                            #svg1 {
+                                position: absolute;
+                                @include tc();
+                                fill: $mblue;
+                                height: auto;
+                                max-width: 70vmin;
+                                transform-origin: center;
+                                width: 70%;
+                            }
+
+                            #svg2 {
+                                position: absolute;
+                                @include tc();
+                                fill: $mblue;
+                                max-width: 65vmin;
+                                transform-origin: center;
+                                width: 65%;
+
+                                @include m() {
+                                    max-width: 30vmin;
+                                    width: 30%;
+                                }
+                            }
+
+                            #svg3 {
+                                position: absolute;
+                                @include tc();
+                                fill: $mblue;
+                                height: auto;
+                                max-width: 95vmin;
+                                transform-origin: center;
+                                width: 95%;
+                            }
+
+                            #svg4 {
+                                position: absolute;
+                                @include tc();
+                                fill: $mblue;
+                                height: auto;
+                                max-width: 50vmin;
+                                transform-origin: center;
+                                width: 50%;
+
                             }
                         }
-
-                        #svg3 {
-                            position: absolute;
-                            @include tc();
-                            fill: $mblue;
-                            height: auto;
-                            max-width: 95vmin;
-                            transform-origin: center;
-                            width: 95%;
-                        }
-
-                        #svg4 {
-                            position: absolute;
-                            @include tc();
-                            fill: $mblue;
-                            height: auto;
-                            max-width: 50vmin;
-                            transform-origin: center;
-                            width: 50%;
-
-                        }
                     }
-                }
 
+                }
             }
         }
+
     }
 
-}
+    .anchor {
+        @include t() {
+            display: none;
+        }
 
-.anchor {
-    @include t() {
-        display: none;
+        padding: 2rem 0 0 90px;
+
+
+        ul {
+            display: flex;
+            width: fit-content;
+            position: relative;
+
+            li {
+                width: 15px;
+                height: 15px;
+                background-color: $mgreen;
+                border-radius: 50%;
+                cursor: pointer;
+            }
+
+            li+li {
+                margin-left: 1rem;
+            }
+
+            span {
+                position: absolute;
+                width: 186px;
+                height: 4px;
+                background: linear-gradient(90deg, $mpink 0%, $mgreen 0%);
+                top: 50%;
+                right: 0;
+                transform: translateY(-50%);
+                transition: .3s;
+                z-index: -1;
+            }
+        }
+
     }
-
-    padding: 2rem 0 0 90px;
-
-
-    ul {
-        display: flex;
-        width: fit-content;
-        position: relative;
-
-        li {
-            width: 15px;
-            height: 15px;
-            background-color: $mgreen;
-            border-radius: 50%;
-            cursor: pointer;
-        }
-
-        li+li {
-            margin-left: 1rem;
-        }
-
-        span {
-            position: absolute;
-            width: 186px;
-            height: 4px;
-            background: linear-gradient(90deg, $mpink 0%, $mgreen 0%);
-            top: 50%;
-            right: 0;
-            transform: translateY(-50%);
-            transition: .3s;
-            z-index: -1;
-        }
-    }
-
-}
