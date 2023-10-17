@@ -2,7 +2,11 @@
   <div>
     <div>
       <div class="admin_editbar">
-        <Searchbar class="onlyB" />
+        <Searchbar
+          class="onlyB"
+          :functype="1"
+          @update-search-text="searchClick"
+        />
       </div>
       <div class="dmain">
         <table>
@@ -13,7 +17,10 @@
             <th>金額</th>
             <th></th>
           </tr>
-          <tr v-for="(i, index) in ordlist" :key="index">
+          <tr v-if="getPageItems == 0">
+            查無資料
+          </tr>
+          <tr v-for="(i, index) in getPageItems" :key="index" v-else>
             <td>{{ i.po_id }}</td>
             <td>{{ i.mbr_id }}</td>
             <td>
@@ -63,7 +70,7 @@
           </tr>
           <tr v-for="(item, index) in orddlt" :key="index">
             <td>{{ item.prod_dlt_id }}</td>
-            <td>{{ item.prod_name }}</td>
+            <td class="prod_name">{{ item.prod_name }}</td>
             <td>{{ item.prod_dlt_qty }}</td>
             <td>{{ item.prod_dlt_actual_price }}</td>
             <td>{{ item.prod_dlt_total }}</td>
@@ -100,23 +107,32 @@
         </div>
         <div class="form_btn">
           <PinkButton class="btn_admin" text="取消" @click="hideEditForm" />
-          <PinkButton class="btn_admin" text="儲存" @click="submitForm(i.po_id, selectedPoStatus, selectedPoPay)" />
+          <PinkButton
+            class="btn_admin"
+            text="儲存"
+            @click="submitForm(i.po_id, selectedPoStatus, selectedPoPay)"
+          />
         </div>
       </form>
     </div>
+  </div>
+  <div class="page">
+    <Page
+      :total="searchFilter.length"
+      :page-size="pageItems"
+      v-model="currentPage"
+    />
   </div>
 </template>
 
 <script>
 import PinkButton from "/src/components/PinkButton.vue";
 import Searchbar from "/src/components/Searchbar.vue";
-import Searchbarclick from "/src/components/Searchbarclick.vue";
 import Addressfrom from "/src/views/backend/Address.vue";
 
 export default {
   components: {
     Searchbar,
-    Searchbarclick,
     PinkButton,
     Addressfrom,
   },
@@ -130,9 +146,67 @@ export default {
       po_id: "",
       po_status: "",
       po_pay: "",
+      currentPage: 1,
+      pageItems: 10,
+      searchinput: "",
     };
   },
+  computed: {
+    searchFilter() {
+      if (this.searchinput) {
+        // 方法一
+        // return this.ordlist.reduce((filter, v) => {
+        //   if (
+        //     v.mbr_id?.includes(this.searchinput) ||
+        //     v.po_id?.includes(this.searchinput)
+        //   ) {
+        //     filter.push(v);
+        //   }
+        //   return filter;
+        // }, []);
+
+        // 方法二
+        // return this.ordlist.filter((v) => {
+        //   return [v.mbr_id, v.po_id].some((id) =>
+        //     id?.includes(this.searchinput)
+        //   );
+        // });
+        // 方法三
+        return this.ordlist.filter(
+          (v) =>
+            v.mbr_id.includes(this.searchinput) ||
+            v.po_id.includes(this.searchinput)
+        );
+      } else {
+        return this.ordlist;
+      }
+    },
+    getPageItems() {
+      const startIndex = (this.currentPage - 1) * this.pageItems;
+      const endIndex = startIndex + this.pageItems;
+      return this.searchFilter.slice(startIndex, endIndex);
+    },
+  },
+  watch: {
+    searchinput() {
+      this.currentPage = 1;
+    },
+  },
   methods: {
+    reset() {
+      this.searchinput = "";
+    },
+    success(nodesc, json) {
+      this.$Notice.success({
+        title: json,
+        desc: nodesc
+          ? ""
+          : "Here is the notification description. Here is the notification description. ",
+      });
+    },
+    searchClick(text) {
+      this.searchinput = text.toUpperCase();
+    },
     showEditForm(id, status, pay) {
       this.po_id = id;
 
@@ -252,7 +326,8 @@ div {
 .dmain {
   position: relative;
   background-color: #ffffff80;
-  height: 80%;
+  min-height: 650px;
+  height: 100%;
   border-radius: 0 10px 10px 10px;
 
   table {
@@ -313,6 +388,9 @@ div {
     width: 100%;
     border-collapse: collapse;
     border-spacing: 0;
+    .prod_name {
+      text-align: left;
+    }
 
     th,
     td {
@@ -378,5 +456,9 @@ div {
     right: 10px;
     bottom: 0;
   }
+}
+.page {
+  margin: 2rem 0;
+  text-align: center;
 }
 </style>
