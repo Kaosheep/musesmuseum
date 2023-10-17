@@ -129,6 +129,14 @@ export default {
     },
   },
   methods: {
+    //抓取localStorage裡的商品陣列
+    getitemarr() {
+      this.items.forEach((it) => {
+        let itemstr = [...localStorage[it].split(",")];
+        return this.itemarr.push(itemstr);
+      });
+      console.log(this.itemarr);
+    },
     //把城市抓回來
     fetchCounty() {
       fetch(`${this.$store.state.publicpath}shopping.php`)
@@ -192,6 +200,7 @@ export default {
         po_phone: this.po_phone,
         po_name: this.po_name,
       };
+
       fetch(URL, {
         method: "POST",
         body: JSON.stringify(formDataObj),
@@ -201,16 +210,13 @@ export default {
         })
         .then((result) => {
           this.fetchPO();
+          this.clean();
         })
         .catch((error) => console.log(error));
     },
-    //抓取localStorage裡的商品陣列
-    getitemarr() {
-      this.items.forEach((it) => {
-        let itemstr = [...localStorage[it].split(",")];
-        return this.itemarr.push(itemstr);
-      });
-      console.log(this.itemarr);
+    //清除localStorage裡的商品陣列
+    clean() {
+      localStorage.removeItem("addItemlist");
     },
     //給會員編號，把該筆訂單編號抓回來
     fetchPO() {

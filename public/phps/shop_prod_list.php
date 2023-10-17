@@ -7,7 +7,7 @@
     try {
         require_once("./connectMuses.php");
 
-        $sql = "SELECT * FROM products WHERE prod_status=1 ORDER BY prod_id ";        
+        $sql = "SELECT * FROM products ORDER BY prod_id ";        
         $prods = $pdo->prepare($sql);
         
         $prods->execute();

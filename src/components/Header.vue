@@ -13,22 +13,20 @@
     <div class="social">
       <router-link to="/Home/Shoppingcar" @click="closemenu">
         <span class="sspan">
-
           <span v-if="$store.state.cartnum >= 1">
-            <span>{{$store.state.cartnum}}</span>
-            <span>{{$store.state.cartnum}}</span>
-            
+            <span>{{ $store.state.cartnum }}</span>
+            <span>{{ $store.state.cartnum }}</span>
           </span>
-          <!-- <span v-if="$store.state.cartnum >= 1">{{$store.state.cartnum}}</span> -->
+
           <i
             class="sicon fa-solid fa-cart-shopping"
             id="social_cart"
           ></i> </span
       ></router-link>
       <router-link to="/Home/MemberInfo" @click="closemenu">
-      <span class="sspan">
-        <i class="sicon fa-solid fa-user" id="social_user"></i> 
-      </span>
+        <span class="sspan">
+          <i class="sicon fa-solid fa-user" id="social_user"></i>
+        </span>
       </router-link>
       <span class="sspan"
         ><i class="sicon fa-solid fa-envelope" id="social_envelope"></i
@@ -36,7 +34,9 @@
       <span class="sspan"
         ><i class="sicon fa-brands fa-square-facebook" id="social_facebook"></i
       ></span>
-      <span class="sspan"><i class="sicon fa-brands fa-youtube" id="social_youtub"></i></span>
+      <span class="sspan"
+        ><i class="sicon fa-brands fa-youtube" id="social_youtub"></i
+      ></span>
     </div>
   </header>
   <nav>
@@ -46,9 +46,13 @@
       /></router-link>
     </div>
     <div class="login">
-      <div>{{ $store.state.mbr_name }}
-      </div>
-      <router-link v-if="!$store.state.isLogin" to="/Home/Login" @click="closemenu">會員登入</router-link>
+      <div>{{ $store.state.mbr_name }}</div>
+      <router-link
+        v-if="!$store.state.isLogin"
+        to="/Home/Login"
+        @click="closemenu"
+        >會員登入</router-link
+      >
       <span v-else>
         <a href="/Home" @click="logout">登出</a>
       </span>
@@ -79,7 +83,10 @@ export default {
   data() {
     return {
       navlist: [
+        { title: "最新消息", link: "/Home/News" },
         { title: "購票專區", link: "/Home/Tick" },
+        { title: "館內地圖", link: "/Home/Museumspace" },
+        { title: "精選商品", link: "/Home/Shop" },
         {
           title: "展覽資訊",
           sublist: [
@@ -94,13 +101,7 @@ export default {
             { subtitle: "畫作區", sublink: "/Home/Paintings" },
           ],
         },
-        {
-          title: "園區導覽",
-          sublist: [
-            { subtitle: "館內地圖", sublink: "/Home/Museumspace" },
-            { subtitle: "周邊景點", sublink: "/Home/SpaceMap" },
-          ],
-        },
+
         {
           title: "參觀服務",
           sublist: [
@@ -116,24 +117,21 @@ export default {
             { subtitle: "歷代館長", sublink: "/Home/Curator" },
           ],
         },
-        { title: "商品", link: "/Home/Shop" },
       ],
       isClick: false,
-      Storage:localStorage["addItemlist"]
+      Storage: localStorage["addItemlist"],
     };
   },
-  watch:{
-
-  },
-  computed:{
+  watch: {},
+  computed: {
     totalitem() {
-      if(this.Storage){
-        return this.Storage.split(",").length-1;
+      if (this.Storage) {
+        return this.Storage.split(",").length - 1;
       }
     },
   },
   created() {
-    this.$store.dispatch('fetchMbrName'); // 分发一个 action 来获取 mbr_name
+    this.$store.dispatch("fetchMbrName"); // 分发一个 action 来获取 mbr_name
   },
   methods: {
     togglemenu() {
@@ -151,10 +149,10 @@ export default {
       document.querySelector("nav").style.transform = "translateX(-100%)";
       this.isClick = false;
     },
-    logout() {//登出
-      this.$store.dispatch('logout'); 
-    }
-
+    logout() {
+      //登出
+      this.$store.dispatch("logout");
+    },
   },
 };
 </script>

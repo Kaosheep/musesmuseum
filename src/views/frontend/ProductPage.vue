@@ -63,10 +63,10 @@
         {{ foundObject.prod_desc }}
       </p>
     </div>
-    <div class="recommend">
+    <!-- <div class="recommend">
       <h2>推薦商品</h2>
-      <!-- <ProductWrap></ProductWrap> -->
-    </div>
+      <ProductWrap></ProductWrap>
+    </div> -->
   </main>
 </template>
 

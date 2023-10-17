@@ -11,37 +11,53 @@
           <PinkButton class="btn_admin" text="上架" @click="updatestatus(1)" />
           <PinkButton class="btn_admin" text="下架" @click="updatestatus(0)" />
         </div>
-        <Searchbar class="onlyB" />
+        <Searchbar
+          class="onlyB"
+          :functype="1"
+          @update-search-text="searchClick"
+        />
       </div>
-      <div class="dmain">
-        <table>
-          <tr>
-            <th></th>
-            <th>商品編號</th>
-            <th>商品名稱</th>
-            <th>狀態</th>
-            <th></th>
-          </tr>
-          <tr v-for="item in getPageItems" :key="item.prod_id">
-            <td>
-              <input
-                type="checkbox"
-                @change="inchecked(item.prod_id, $event)"
-              />
-            </td>
-            <td>{{ item.prod_id }}</td>
-            <td>{{ item.prod_name }}</td>
-            <td>
-              <p v-if="parseInt(item.prod_status) === 1">已上架</p>
-              <p v-else>未上架</p>
-            </td>
-            <td>
-              <button class="edit" @click="showEditForm('edit', item.prod_id)">
-                編輯
-              </button>
-            </td>
-          </tr>
-        </table>
+      <div class="prods_block">
+        <div class="dmain">
+          <table>
+            <tr>
+              <th></th>
+              <th>商品編號</th>
+              <th>商品名稱</th>
+              <th>狀態</th>
+              <th></th>
+            </tr>
+            <tr v-for="item in getPageItems" :key="item.prod_id">
+              <td>
+                <input
+                  type="checkbox"
+                  @change="inchecked(item.prod_id, $event)"
+                />
+              </td>
+              <td>{{ item.prod_id }}</td>
+              <td class="prod_name">{{ item.prod_name }}</td>
+              <td>
+                <p v-if="parseInt(item.prod_status) === 1">已上架</p>
+                <p v-else>未上架</p>
+              </td>
+              <td>
+                <button
+                  class="edit"
+                  @click="showEditForm('edit', item.prod_id)"
+                >
+                  編輯
+                </button>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div class="page">
+          <Page
+            :total="searchFilter.length"
+            :page-size="pageItems"
+            v-model="currentPage"
+          />
+        </div>
       </div>
       <form
         action=""
@@ -70,6 +86,10 @@
             <div>商品規格</div>
             <textarea cols="30" rows="5" v-model="add_prod.spec"></textarea>
           </div>
+          <div>
+            <div>分類</div>
+            <textarea v-model="add_prod.kind"></textarea>
+          </div>
           <div class="info_price">
             <div>
               <div>定價</div>
@@ -90,7 +110,7 @@
             </select>
             <div class="uploadblock">
               <label for="fileimg">
-                <p v-if="add_prod.img == null">上傳圖片</p>
+                <p v-if="add_prod.src == null">上傳圖片</p>
                 <p v-else>{{ add_prod.img }}</p>
 
                 <input
@@ -100,17 +120,10 @@
                   style="display: none"
                 />
                 <img
-                  v-if="add_prod.img == null"
+                  v-if="add_prod.src == null"
                   :src="`${$store.state.imgpublicpath}image/productimage/u.png`"
                 />
-                <img
-                  v-else
-                  :src="
-                    `${$store.state.imgpublicpath}image/productimage/` +
-                    add_prod.img
-                  "
-                  alt=""
-                />
+                <img v-else :src="add_prod.src" alt="" />
               </label>
             </div>
           </div>
@@ -124,13 +137,6 @@
           />
         </div>
       </form>
-    </div>
-    <div class="page">
-      <Page
-        :total="searchFilter.length"
-        :page-size="pageItems"
-        v-model="currentPage"
-      />
     </div>
   </div>
 </template>
@@ -171,6 +177,7 @@ export default {
           spec: "",
           kind: "",
           status: "",
+          src: "",
         },
       ],
     };
@@ -191,8 +198,23 @@ export default {
       return this.searchFilter.slice(startIndex, endIndex);
     },
   },
-  watch: {},
+  watch: {
+    searchinput() {
+      this.currentPage = 1;
+    },
+  },
   methods: {
+    reset() {
+      this.searchinput = "";
+    },
+    success(nodesc, json) {
+      this.$Notice.success({
+        title: json,
+        desc: nodesc
+          ? ""
+          : "Here is the notification description. Here is the notification description. ",
+      });
+    },
     img(e) {
       let that = this;
       let files = e.target.files[0];
@@ -202,6 +224,7 @@ export default {
 
       reader.onloadend = function () {
         that.add_prod.img = files.name;
+        that.add_prod.src = this.result;
       };
     },
     inchecked(id, e) {
@@ -231,8 +254,7 @@ export default {
           }
         })
         .then((json) => {
-          // alert(json);
-          // window.location.reload();
+          this.success(true, json);
         })
         .catch(function (error) {
           console.log(error);
@@ -257,7 +279,8 @@ export default {
             fixedprice: "",
             spec: "",
             kind: "",
-          status: ""
+            status: "",
+            src: "",
           },
         ];
       } else {
@@ -281,28 +304,34 @@ export default {
             if (response.ok) {
               return response.json();
             } else {
-              throw new Error("取得失敗");
+              throw new Error("取得商品失敗");
             }
           })
           .then((json) => {
             this.add_prod.id = json.prod_id;
             this.add_prod.name = json.prod_name;
             this.add_prod.desc = json.prod_desc;
-            this.add_prod.img = json.prod_img;
             this.add_prod.fixedprice = json.prod_fixedprice;
             this.add_prod.spec = json.prod_spec;
             this.add_prod.sellingprice = json.prod_sellingprice;
             this.add_prod.status = json.prod_status;
             this.add_prod.kind = json.prod_kind;
+            this.add_prod.img = json.prod_img;
+            this.add_prod.src = `${this.$store.state.imgpublicpath}image/productimage/${json.prod_img}`;
           });
       }
       this.showForm = true;
     },
     fetchprod() {
-      fetch(`${this.$store.state.publicpath}shop.php`)
+      fetch(`${this.$store.state.publicpath}shop_prod_list.php`)
         .then(async (response) => {
           this.produstdislist = await response.json();
           console.log(this.produstdislist);
+        })
+        .then((json) => {
+          let blockw = document.querySelector(".prods_block").offsetHeight;
+          let roww = document.querySelector("tr").offsetHeight;
+          this.pageItems = Math.floor(blockw / roww - 3);
         })
         .catch((error) => {
           console.error("發生錯誤:", error);
@@ -338,8 +367,7 @@ export default {
             }
           })
           .then((json) => {
-            // alert(json);
-            // window.location.reload();
+            this.success(true, json);
           })
           .catch((error) => {
             console.log(error.message);
@@ -364,20 +392,22 @@ export default {
         })
           .then((response) => {
             if (response.ok) {
-              console.log(response.ok)
+              console.log(response.ok);
               return response.json();
             } else {
               throw new Error("新增失敗");
             }
           })
           .then((json) => {
-            // alert(json);
-            // window.location.reload();
+            this.success(true, json);
           })
           .catch((error) => {
             console.log(error.message);
           });
       }
+    },
+    searchClick(text) {
+      this.searchinput = text.toUpperCase();
     },
   },
   mounted() {
@@ -454,50 +484,60 @@ div {
   border: none;
   cursor: pointer;
 }
+.prods_block {
+  height: 65vh;
+  .dmain {
+    position: relative;
+    background-color: #ffffff80;
+    height: 100%;
+    border-radius: 0 10px 10px 10px;
 
-.dmain {
-  position: relative;
-  background-color: #ffffff80;
-  height: 80%;
-  border-radius: 0 10px 10px 10px;
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      border-spacing: 0;
 
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    border-spacing: 0;
+      .prod_name {
+        text-align: left;
+      }
 
-    th,
-    td {
-      padding: 10px;
-      text-align: center;
-      border-bottom: 1px solid #ccc;
-    }
+      th,
+      td {
+        padding: 10px;
+        text-align: center;
+        border-bottom: 1px solid #ccc;
+      }
 
-    th {
-      background-color: #f2f2f2;
-      font-weight: bold;
-    }
+      th {
+        background-color: #f2f2f2;
+        font-weight: bold;
+      }
 
-    td {
-      &:first-child {
-        input[type="checkbox"] {
-          margin-right: 5px;
+      td {
+        &:first-child {
+          input[type="checkbox"] {
+            margin-right: 5px;
+          }
+        }
+
+        &:last-child {
+          button {
+            color: #000;
+            border: none;
+            cursor: pointer;
+          }
+        }
+
+        p {
+          margin: 0;
+          padding: 5px;
         }
       }
-
-      &:last-child {
-        button {
-          color: #000;
-          border: none;
-          cursor: pointer;
-        }
-      }
-
-      p {
-        margin: 0;
-        padding: 5px;
-      }
     }
+  }
+  .page {
+    margin-top: 1rem;
+    text-align: center;
   }
 }
 
@@ -535,6 +575,7 @@ div {
     .info_price {
       display: flex;
       width: 50%;
+      margin-top: 0px;
     }
   }
 
@@ -560,10 +601,5 @@ div {
   .form_btn {
     position: relative;
   }
-}
-
-.page {
-  margin: 2rem 0;
-  text-align: center;
 }
 </style>
