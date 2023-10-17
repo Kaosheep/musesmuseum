@@ -8,10 +8,12 @@ try {
     
     require_once("connectMuses.php");
    
-    $data = json_decode(file_get_contents('php://input'));
+    //$data = json_decode(file_get_contents('php://input'));
     // $pwd = md5($data->data->pwd); //md5加密,不可逆
-    $pwd = $data->data->pwd;
-    $account =  $data->data->account;
+    // $account =  $_POST["account"];
+    // $pwd = $_POST["pwd"];
+    $account = "money@yahoo.com";
+    $pwd = 123456;
     
     $sql = "select * from `manager` where `ma_email` = :ma_email and `ma_psw` = :ma_psw";
     $managerStmt = $pdo->prepare($sql);
