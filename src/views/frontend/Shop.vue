@@ -48,8 +48,8 @@
         @change="priceClick(sortType)"
       >
         <option>商品排序</option>
-        <option value="asc">價格低至高</option>
-        <option value="desc">價格高至低</option>
+        <option value="asc">$$低至高</option>
+        <option value="desc">$$高至低</option>
       </select>
     </aside>
     <div class="shop_container">
