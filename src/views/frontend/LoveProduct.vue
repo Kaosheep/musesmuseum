@@ -100,7 +100,6 @@ export default {
     };
   },
   computed: {
-    
     searchFilter() {
       if (this.searchinput) {
         return this.lovescol.filter((v) =>

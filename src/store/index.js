@@ -49,7 +49,11 @@ export default createStore({
       state.cartnum = value;
     },
     Loaded(state) {
-      state.cartnum = this.storage["cartnum"]
+      if(localStorage["cartnum"]){
+        state.cartnum = localStorage["cartnum"]
+      }else{
+        localStorage.setItem("cartnum", 0);
+      }
     },
   },
   actions: {
