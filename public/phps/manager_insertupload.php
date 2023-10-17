@@ -21,9 +21,9 @@ try {
  $news->bindValue(":type", $_POST["type"]);
  //執行sql
  $news->execute();
- $response =  "新增成功";
 
- echo json_encode($response);
+
+ echo json_encode("新增成功");
 
 
  

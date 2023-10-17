@@ -45,25 +45,32 @@
         </table>
         <form action="" class="pop" v-show="showForm">
           <h2>編輯</h2>
-          <div>
+          <div v-show="addnews">
             <div>管理員編號</div>
             <div v-text="add_news.id"></div>
           </div>
           <div>
             <div>管理員名稱</div>
-            <input type="text" name="" v-model="add_news.name" />
+            <input type="text" v-model="add_news.name" />
+            <span v-if="nameError || !add_news.name">請輸入正確名稱</span>
           </div>
           <div>
             <div>e-mail</div>
-            <input type="email" v-model="add_news.email" @input="validateEmail" />
+            <input type="email" v-model="add_news.email" />
+            <span v-if="emailError || !isValidEmail(add_news.email)"
+              >請輸入正確email</span
+            >
           </div>
           <div>
-            <div>密碼</div>
-            <input type="password" v-model="add_news.psw" />
+            <div>
+              <div>密碼</div>
+              <input type="password" v-model="add_news.psw" />
+              <span v-if="passwordError || !add_news.psw">請輸入正確密碼</span>
+            </div>
           </div>
           <div class="switch_status">
             <div>狀態</div>
-            <select v-model="add_news.type">
+            <select v-model="type">
               <option value="1">全權</option>
               <option value="0">部分</option>
             </select>
@@ -104,9 +111,18 @@ export default {
         },
       ],
       showForm: false,
+      addnews: false,
+      passwordError: false,
+      nameError: false,
+      emailError: false,
+      type: 0,
     };
   },
   methods: {
+    isValidEmail(email) {
+      const emailRegex = /^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,3}$/;
+      return emailRegex.test(email);
+    },
     success(nodesc, json) {
       this.$Notice.success({
         title: json,
@@ -115,15 +131,45 @@ export default {
           : "Here is the notification description. Here is the notification description. ",
       });
     },
-    validateEmail() {
-      //驗證電子郵件地址
-      // const emailRegex = /^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/;
-      console.log("待更新");
-      // if (!emailRegex.test(this.add_news.email)) {
-
-      // }
+    error(nodesc, json) {
+      this.$Notice.error({
+        title: json,
+        desc: nodesc ? "" : "This is an error tip",
+      });
     },
+
     addnews_btn(id) {
+      // 检查各个字段是否为空
+      if (!this.add_news.name || !this.add_news.email || !this.add_news.psw) {
+        // 如果有任何字段为空，显示错误信息
+        if (!this.add_news.name) {
+          this.nameError = true;
+        } else {
+          this.nameError = false;
+        }
+        console.log("aaaaaa")
+        if (!this.add_news.email) {
+          this.emailError = true;
+          
+        } else {
+          this.emailError = false;
+        }
+        if (!this.add_news.psw) {
+          this.passwordError = true;
+        } else {
+          this.passwordError = false;
+        }
+        this.error(true, "資料錯誤,重新輸入");
+        this.fetchnew();
+        this.add_news = [];
+        return; // 阻止提交
+      }
+
+      // 如果所有字段都不为空，清除错误信息
+      this.nameError = false;
+      this.emailError = false;
+      this.passwordError = false;
+
       if (id !== undefined) {
         console.log(id);
         const url = `${this.$store.state.publicpath}manager_updateupload.php`;
@@ -147,6 +193,7 @@ export default {
             }
           })
           .then((json) => {
+            console.log(json)
             this.success(true, json);
             this.fetchnew();
             this.add_news = [];
@@ -186,6 +233,7 @@ export default {
       }
     },
     hideEditForm() {
+      this.type = 0 ;
       this.showForm = false;
     },
     deleten() {
@@ -227,36 +275,37 @@ export default {
         console.log(this.newsched);
       }
     },
-    fetchnew(){
-//先檢查資料格式是否符合DB規則
-    const url = `${this.$store.state.publicpath}manager_list.php`;
-    let headers = {
-      "Content-Type": "application/json",
-      Accept: "application/json",
-    };
-    fetch(url, {
-      method: "POST",
-      headers: headers,
-    })
-      .then((response) => {
-        if (response.ok) {
-          return response.json(); // 如果請求成功，解析JSON數據
-        } else {
-          throw new Error("取得消息失敗"); // 如果請求不成功，拋出錯誤
-        }
+    fetchnew() {
+      //先檢查資料格式是否符合DB規則
+      const url = `${this.$store.state.publicpath}manager_list.php`;
+      let headers = {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      };
+      fetch(url, {
+        method: "POST",
+        headers: headers,
       })
-      .then((json) => {
-        this.manager = json;
-        let blockw = document.querySelector(".man_block").offsetHeight;
-        let roww = document.querySelector("tr").offsetHeight;
-        this.pageSize = Math.floor(blockw / roww - 3);
-      })
-      .catch((error) => {
-        console.log(error.message);
-      });
+        .then((response) => {
+          if (response.ok) {
+            return response.json(); // 如果請求成功，解析JSON數據
+          } else {
+            throw new Error("取得消息失敗"); // 如果請求不成功，拋出錯誤
+          }
+        })
+        .then((json) => {
+          this.manager = json;
+          let blockw = document.querySelector(".man_block").offsetHeight;
+          let roww = document.querySelector("tr").offsetHeight;
+          this.pageSize = Math.floor(blockw / roww - 3);
+        })
+        .catch((error) => {
+          console.log(error.message);
+        });
     },
     showEditForm(type, id) {
       if (type == "add") {
+        this.addnews = false;
         this.add_news = [
           {
             id: "",
@@ -267,6 +316,7 @@ export default {
           },
         ];
       } else if (type == "edit") {
+        this.addnews = true;
         const url = `${this.$store.state.publicpath}manager_list.php`;
         let headers = {
           "Content-Type": "application/json",
@@ -292,7 +342,7 @@ export default {
             this.add_news.name = json.ma_name;
             this.add_news.email = json.ma_email;
             this.add_news.psw = json.ma_psw;
-            this.add_news.type = json.ma_type;
+            this.type = json.ma_type;
           });
       }
 
@@ -313,7 +363,13 @@ export default {
     color: $mblue;
   }
 }
-
+// class="ivu-menu-item ivu-menu-item-active ivu-menu-item-selected"
+.ivu-menu-item-selected{
+  color: black;
+}
+.ivu-menu-light.ivu-menu-vertical .ivu-menu-item-active:not(.ivu-menu-submenu){
+  color: black;
+}
 div {
   form {
     height: 80vh;

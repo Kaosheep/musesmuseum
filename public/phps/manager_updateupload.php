@@ -19,8 +19,8 @@ try {
     $result = $news->execute();
 
     // 返回 JSON 响应
-    $response = ["message" => "新增成功"];
-    echo json_encode($response);
+    // $response = ["message" => "新增成功"];
+    echo json_encode("新增成功");
 } catch (Exception $e) {
     echo "錯誤行號 : ", $e->getLine(), "<br>";
     echo "錯誤原因 : ", $e->getMessage(), "<br>";
