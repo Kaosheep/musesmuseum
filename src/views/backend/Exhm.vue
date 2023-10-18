@@ -20,11 +20,13 @@
                         <th></th>
                     </tr>
                     <tr v-for="(exhibition, index) in exhibitions" :key="index">
-                        <td><input type="checkbox"></td>
+                        <td>
+                            <input type="checkbox" class="statusinput" @change="inchecked(exhibition.exh_id, $event)">
+                        </td>
                         <td>{{ exhibition.exh_id }}</td>
                         <td>{{ exhibition.exh_name }}</td>
                         <td>
-                            <p v-if="parseInt(exhibition.status) === 1">已上架</p>
+                            <p v-if="parseInt(exhibition.exh_status) === 1">已上架</p>
                             <p v-else>未上架</p>
                         </td>
                         <td>
