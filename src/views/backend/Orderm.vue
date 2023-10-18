@@ -19,7 +19,7 @@
               <th></th>
             </tr>
             <tr v-if="getPageItems == 0">
-              查無資料
+              <td>查無資料</td>
             </tr>
             <tr v-for="(i, index) in getPageItems" :key="index" v-else>
               <td>{{ i.po_id }}</td>
@@ -155,15 +155,6 @@ export default {
   computed: {
     searchFilter() {
       if (this.searchinput) {
-        // 方法一
-        // return this.ordlist.filter((v) => {
-        //   return [v.mbr_id, v.po_id].some((id) =>
-        //     id?.includes(this.searchinput)
-        //   );
-        // });
-
-        // 方法二
-
         return this.ordlist.filter(
           (v) =>
             v.mbr_id?.includes(this.searchinput) ||

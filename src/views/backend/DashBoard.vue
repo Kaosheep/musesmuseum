@@ -8,7 +8,7 @@
             :theme="theme"
             class="list_style"
             accordion
-            :open-names="`['${avtiveId}']`"
+            :open-names="`['${open}']`"
             :active-name="avtiveId"
             @on-select="selected"
           >
@@ -30,9 +30,8 @@
                 {{ item.text }}
               </MenuItem>
             </Submenu>
-            <MenuItem name="1">
+            <MenuItem name="7">
               <router-link @click="logout()" to="/Admin">管理員登出</router-link>
-              <!-- <div @click="logout()">管理員登出</div> -->
             </MenuItem>
           </Menu>
         </Row>
@@ -61,6 +60,7 @@ export default {
       all_pri: true,
       avtiveId: "",
       isCheck: false,
+      open: "",
       menuData: [
         {
           name: "1",
@@ -107,10 +107,16 @@ export default {
   },
 
   methods: {
-    selected(aaa) {
-      console.log(aaa);
-      this.avtiveId = aaa;
-      localStorage.setItem("nowpage", aaa);
+    selected(page) {
+      console.log(page);
+      this.avtiveId = page;
+      localStorage.setItem("nowpage", page);
+
+      if (this.avtiveId) {
+        open = this.avtiveId.split("-")[0];
+        localStorage.setItem("open", open);
+        console.log(open);
+      }
     },
 
     test(id) {
@@ -125,21 +131,30 @@ export default {
       }
     },
     logout() {
-      // 在這裡執行登出功能，例如發送請求到後端清除會話狀態
-      // 清除 cookie 的程式碼可以放在這裡或在登出功能中執行
-
+      localStorage.removeItem("nowpage");
+      localStorage.removeItem("open");
+      console.log(localStorage.getItem("nowpage"));
+      console.log(localStorage.getItem("open"));
+      localStorage.clear();
       document.cookie = "manager=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-      // 清除 cookie 後重新載入頁面
-      // window.location.reload();
     },
-    // clearCookie() {
-    //   // 清除 cookie 的程式碼示例，你需要根據你的實際情況來實現
-
-    // },
+  },
+  beforeUnmount() {
+    localStorage.clear();
   },
   mounted() {
-    this.avtiveId = localStorage.getItem("nowpage") || 1-1;
+    if (localStorage["nowpage"]) {
+      this.avtiveId = localStorage.getItem("nowpage");
+    } else {
+      localStorage.setItem("nowpage", "1-1");
+    }
+    if (localStorage["open"]) {
+      this.open = localStorage.getItem("open");
+    } else {
+      localStorage.setItem("open", "1");
+    }
     this.isCheck = true;
+    console.log(this.open);
 
     const name = "manager" + "=";
     const decodedCookie = decodeURIComponent(document.cookie);
@@ -162,11 +177,11 @@ export default {
       }
 
       if (cookie.indexOf(name) === 0) {
-        console.log();
         foundCookie = true;
         console.log(cookie.split("=")[1]);
         console.log(JSON.parse(cookie.split("=")[1]));
         let cookie_vale = JSON.parse(cookie.split("=")[1])["ma_type"];
+        console.log(cookie_vale);
         if (cookie_vale == 0) {
           this.all_pri = false;
         }

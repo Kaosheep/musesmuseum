@@ -23,7 +23,7 @@
                 type="checkbox"
                 class="statusinput"
                 @change="inchecked(i.ma_id, $event)"
-                v-show="i.ma_id != 'MA01'"
+                v-show="i.ma_id != 'MA001'"
               />
             </td>
             <td>{{ i.ma_id }}</td>
@@ -35,7 +35,7 @@
             <td>
               <button
                 class="edit"
-                v-show="i.ma_id != 'MA01'"
+                v-show="i.ma_id != 'MA001'"
                 @click="showEditForm('edit', i.ma_id)"
               >
                 編輯

@@ -11,11 +11,26 @@ template {
     }
 }
 .spe_container {
-    width: calc(100% - 64px);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    width: 1000px;
+    // display: flex;
+    // align-items: center;
+    // justify-content: space-between;
     position: relative;
+    overflow: hidden;
+
+
+    #speContent{
+        width: 5000px;
+        position: relative;
+        right: 0px;
+
+    }
+
+    .exhi_item{
+        display: inline-block;
+        width: 1000px;
+    }
+
     .spe_scroll_left,
     .spe_scroll_right {
         position: relative;
@@ -59,6 +74,8 @@ template {
         grid-template-columns: 1fr 1fr;
         margin: 5% 8% 0 0;
         position: relative;
+     
+        
         .spe_img_deco {
             background: radial-gradient(circle, transparent 14%, #009CA8 15%, #009CA8 25%, transparent 26%);
             background-size: 1em 1em;
@@ -348,3 +365,4 @@ template {
         }
     }
 }
+
