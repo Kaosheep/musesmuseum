@@ -4,10 +4,22 @@
       <div class="admin_editbar">
         <div>
           <!-- <PinkButton class="btn_admin" @click="showEditForm('add')" text="新增" /> -->
-          <PinkButton class="btn_admin" text="凍結" @click="updatestatus('1')"  />
-          <PinkButton class="btn_admin" text="一般" @click="updatestatus('0')" />
+          <PinkButton
+            class="btn_admin"
+            text="凍結"
+            @click="updatestatus('1')"
+          />
+          <PinkButton
+            class="btn_admin"
+            text="一般"
+            @click="updatestatus('0')"
+          />
         </div>
-        <Searchbar class="onlyB" />
+        <Searchbar
+          class="onlyB"
+          :functype="1"
+          @update-search-text="searchClick"
+        />
       </div>
       <div class="dmain">
         <table>
@@ -18,14 +30,17 @@
             <th>狀態</th>
             <th></th>
           </tr>
-          <tr v-for="( i , index) in pagenews" :key="index">
+          <tr v-if="pagenews == 0">
+            <td></td>
+            <td style="width: 30%; white-space: nowrap">查無資料</td>
+          </tr>
+          <tr v-for="(i, index) in pagenews" :key="index" v-else>
             <td>
-              <input 
-              type="checkbox" 
-              class="statusinput"
-              @change="inchecked( i.mbr_id, $event)"
-              > 
-              <!-- v-model="i.selected" -->
+              <input
+                type="checkbox"
+                class="statusinput"
+                @change="inchecked(i.mbr_id, $event)"
+              />
             </td>
             <td>{{ i.mbr_id }}</td>
             <td>{{ i.mbr_name }}</td>
@@ -34,29 +49,26 @@
               <p v-else>一般</p>
             </td>
             <td>
-              <button 
-              class="edit" 
-              @click="showEditForm('edit', i.mbr_id)"
-              >
+              <button class="edit" @click="showEditForm('edit', i.mbr_id)">
                 編輯
               </button>
             </td>
           </tr>
-          <div class="pagination">
-            <button @click="previousPage" :disabled="currentPage === 1">
-              上一頁
-            </button>
-            <button @click="nextPage" :disabled="currentPage === totalPages">
-              下一頁
-            </button>
-          </div>
         </table>
       </div>
-      <form 
-      action="" 
-      class="pop" 
-      v-show="showForm"
-      @submit.prevent="submitForm"
+      <div class="pagination">
+        <button @click="previousPage" :disabled="currentPage === 1">
+          上一頁
+        </button>
+        <button @click="nextPage" :disabled="currentPage === totalPages">
+          下一頁
+        </button>
+      </div>
+      <form
+        action=""
+        class="pop"
+        v-show="showForm"
+        @submit.prevent="submitForm"
       >
         <h2>編輯</h2>
         <div>
@@ -85,7 +97,9 @@
         </div>
         <div>
           <div>通訊地址</div>
-          <div  v-text="members.city + ' ' + members.district + ' ' + members.addr"></div>
+          <div
+            v-text="members.city + ' ' + members.district + ' ' + members.addr"
+          ></div>
         </div>
         <div>
           <div>會員狀態</div>
@@ -99,11 +113,14 @@
         </div>
         <div class="form_btn">
           <PinkButton class="btn_admin" text="取消" @click="hideEditForm" />
-          <PinkButton class="btn_admin" text="儲存" @click="addmember_btn(members.id)"/>
+          <PinkButton
+            class="btn_admin"
+            text="儲存"
+            @click="addmember_btn(members.id)"
+          />
         </div>
       </form>
     </div>
-
   </div>
 </template>
 
@@ -115,37 +132,48 @@ import Addressfrom from "/src/views/backend/Address.vue";
 
 export default {
   components: {
-  Searchbar,
-  Searchbarclick,
-  PinkButton,
-  Addressfrom
+    Searchbar,
+    Searchbarclick,
+    PinkButton,
+    Addressfrom,
   },
   data() {
     return {
-    members:[
-    {
-      id: "",
-      email: "",
-      name: "",
-      birth: "",
-      phone:"",
-      city: "",
-      district: "",
-      addr: "",
-      statusn: "",
-    }
-    ],
-    newsched: [],
-    pageSize: 10,
-    currentPage: 1,
-    showForm: false,
-    // statusn: 0,
-    }
+      members: [
+        {
+          id: "",
+          email: "",
+          name: "",
+          birth: "",
+          phone: "",
+          city: "",
+          district: "",
+          addr: "",
+          statusn: "",
+        },
+      ],
+      newsched: [],
+      pageSize: 10,
+      currentPage: 1,
+      showForm: false,
+      searchinput: "",
+      // statusn: 0,
+    };
   },
   methods: {
+    success(nodesc, json) {
+      this.$Notice.success({
+        title: json,
+        desc: nodesc
+          ? ""
+          : "Here is the notification description. Here is the notification description. ",
+      });
+    },
+    searchClick(text) {
+      this.searchinput = text;
+    },
     addmember_btn(id) {
       if (id !== undefined) {
-        
         const url = `${this.$store.state.publicpath}Memberm_updateload.php`;
         const formData = new FormData();
         formData.append("id", this.members.id);
@@ -162,22 +190,21 @@ export default {
           method: "POST",
           body: formData,
         })
-        .then((response) => {
-          if (response.ok) {
-            console.log(response.ok)
-            return response.json();
-          } else {
-            throw new Error("新增失敗");
-          }
-        })
-        .then((json) => {
-          // console.log(json);
-          alert(json);
-          window.location.reload();
-        })
-        .catch((error) => {
-          console.log(error.message);
-        });
+          .then((response) => {
+            if (response.ok) {
+              console.log(response.ok);
+              return response.json();
+            } else {
+              throw new Error("新增失敗");
+            }
+          })
+          .then((json) => {
+            this.success(true, json);
+            this.fetchme();
+          })
+          .catch((error) => {
+            console.log(error.message);
+          });
       } else {
         const url = `${this.$store.state.publicpath}Memberm_updateload.php`;
         const formData = new FormData();
@@ -194,22 +221,20 @@ export default {
           method: "POST",
           body: formData,
         })
-        
-        .then((response) => {
-
-          if (response) {
-            return response.json();
-          } else {
-            throw new Error("新增失敗");
-          }
-        })
-        .then((json) => {
-          alert(json);
-          window.location.reload();
-        })
-        .catch((error) => {
-          console.log(error.message);
-        });
+          .then((response) => {
+            if (response) {
+              return response.json();
+            } else {
+              throw new Error("新增失敗");
+            }
+          })
+          .then((json) => {
+            this.success(true, json);
+            this.fetchme();
+          })
+          .catch((error) => {
+            console.log(error.message);
+          });
       }
     },
     inchecked(id, e) {
@@ -231,20 +256,24 @@ export default {
         },
         body: JSON.stringify({ data: Object.values(this.newsched) }),
       })
-      .then((response) => {
-        if (response.ok) {
-          return response.json();
-        } else {
-          throw new Error("新增失敗");
-        }
-      })
-      .then((json) => {
-        alert(json);
-        window.location.reload();
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+        .then((response) => {
+          if (response.ok) {
+            return response.json();
+          } else {
+            throw new Error("新增失敗");
+          }
+        })
+        .then((json) => {
+          this.success(true, json);
+          this.fetchme();
+          this.newsched = [];
+          document.querySelectorAll(".statusinput").forEach((inputb) => {
+            inputb.checked = false;
+          });
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
     },
     previousPage() {
       // 切換到上一頁
@@ -260,25 +289,24 @@ export default {
     },
     showEditForm(type, id) {
       if (type == "add") {
-        console.log(id)
+        console.log(id);
         this.members = [
           {
             id: "",
             email: "",
             name: "",
             birth: "",
-            phone:"",
+            phone: "",
             city: "",
             district: "",
             addr: "",
           },
-          
         ];
       } else {
         this.showForm = true;
       }
       if (type == "edit") {
-        const url = `http://localhost/musesmuseum/public/phps/Memberm_list.php`;
+        const url = `${this.$store.state.publicpath}Memberm_list.php`;
         let headers = {
           "Content-Type": "application/json",
           Accept: "application/json",
@@ -293,14 +321,13 @@ export default {
         })
           .then((response) => {
             if (response.ok) {
-              console.log(response.ok)
+              console.log(response.ok);
               return response.json();
             } else {
               throw new Error("取得失敗");
             }
           })
           .then((json) => {
-            console.log(json)
             this.members.id = json.mbr_id;
             this.members.email = json.mbr_email;
             this.members.name = json.mbr_name;
@@ -320,45 +347,65 @@ export default {
     },
     submitForm() {
       this.hideEditForm();
-    }
-
+    },
+    fetchme() {
+      const url = `${this.$store.state.publicpath}Memberm.php`;
+      let headers = {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      };
+      fetch(url, {
+        method: "POST",
+        headers: headers,
+      })
+        .then((response) => {
+          return response.json();
+        })
+        .then((data) => {
+          this.members = data;
+          let blockw = document.querySelector(".dmain").offsetHeight;
+          let roww = document.querySelector("tr").offsetHeight;
+          this.pageSize = Math.floor(blockw / roww - 3);
+        })
+        .catch((error) => {
+          // 在失敗時顯示提示
+          // alert(error.message);
+        });
+    },
+  },
+  watch: {
+    searchinput() {
+      this.currentPage = 1;
+    },
   },
   computed: {
+    searchFilter() {
+      if (this.searchinput) {
+        return this.members.filter(
+          (v) =>
+            v.mbr_id?.includes(this.searchinput) ||
+            v.mbr_name?.includes(this.searchinput)
+        );
+      } else {
+        return this.members;
+      }
+    },
     pagenews() {
       // 根據當前頁碼和每頁顯示的數據量計算需要顯示的數據
       const start = (this.currentPage - 1) * this.pageSize;
       const end = start + this.pageSize;
-      return this.members.slice(start, end);
+      return this.searchFilter.slice(start, end);
     },
     totalPages() {
       // 計算總頁數
-      return Math.ceil(this.members.length / this.pageSize);
+      return Math.ceil(this.searchFilter.length / this.pageSize);
     },
   },
   mounted() {
-     //先檢查資料格式是否符合DB規則
-    const url = `http://localhost/musesmuseum/public/phps/Memberm.php`;
-    let headers = {
-      "Content-Type": "application/json",
-      Accept: "application/json",
-    };
-    fetch(url, {
-      method: "POST",
-      headers: headers,
-    })
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        this.members = data;
-      })
-      .catch((error) => {
-        // 在失敗時顯示提示
-        // alert(error.message);
-      });
-
-  }
-}
+    //先檢查資料格式是否符合DB規則
+    this.fetchme();
+  },
+};
 </script>
 
 <style scoped lang="scss">
@@ -379,7 +426,7 @@ div {
   border-style: none;
   padding: 8px;
   color: #000;
-  transition: .3s;
+  transition: 0.3s;
   cursor: pointer;
 }
 
@@ -412,7 +459,7 @@ div {
 .dmain {
   position: relative;
   background-color: #ffffff80;
-  height: 80%;
+  height: 70vh;
   border-radius: 0 10px 10px 10px;
 
   table {
@@ -450,13 +497,14 @@ div {
       p {
         margin: 0;
         padding: 5px;
-
       }
     }
   }
-
 }
-
+.pagination {
+  margin-top: 5px;
+  text-align: center;
+}
 .pop {
   position: absolute;
   top: -1%;
@@ -471,7 +519,6 @@ div {
   border-radius: 10px;
   overflow: auto;
 
-
   .info_col {
     display: flex;
     margin-right: 10px;
@@ -483,14 +530,11 @@ div {
       margin-top: 10px;
       margin-right: 10px;
       :nth-child(2) {
-      text-decoration: underline;
-      padding-bottom: 5px;
+        text-decoration: underline;
+        padding-bottom: 5px;
+      }
     }
-    }
-
   }
-
-
 
   .form_btn {
     position: fixed;
@@ -499,5 +543,3 @@ div {
   }
 }
 </style>
-    
-

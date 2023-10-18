@@ -450,7 +450,12 @@ export default {
     },
     totalPages() {
       // 計算總頁數
-      return Math.ceil(this.news.length / this.pageSize);
+      return Math.ceil(this.searchFilter.length/ this.pageSize);
+    },
+  },
+  watch: {
+    searchinput() {
+      this.currentPage = 1;
     },
   },
   mounted() {
