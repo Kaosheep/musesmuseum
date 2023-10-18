@@ -62,19 +62,7 @@ components: {
 data() {
   return {
     publicpath: "http://localhost/musesmuseum/public/phps/",
-    productInfoArr:[
-        // { id:"A00103",pic:"",date:"2023/08/01",ticketName:"普通票",price:"$1200",pay:"已付款",finish:"1" },
-        // { id:"B00103",pic:"",date:"2023/08/01",ticketName:"普通票",price:"$1200",pay:"已付款",finish:"1"  },
-        // { id:"C00103",pic:"",date:"2023/08/01",ticketName:"普通票",price:"$1200",pay:"已付款",finish:"1"  },
-        // { id:"D00103",pic:"",date:"2023/08/01",ticketName:"普通票",price:"$1200",pay:"已付款",finish:"2"  },
-        // { id:"E00103",pic:"",date:"2023/08/01",ticketName:"普通票",price:"$1200",pay:"已付款",finish:"1"  },
-        // { id:"A00104",pic:"",date:"2023/08/01",ticketName:"普通票",price:"$1200",pay:"已付款",finish:"1"  },
-        // { id:"B00104",pic:"",date:"2023/08/01",ticketName:"普通票",price:"$1200",pay:"已付款",finish:"3"  },
-        // { id:"C00104",pic:"",date:"2023/08/01",ticketName:"普通票",price:"$1200",pay:"已付款",finish:"1"  },
-        // { id:"D00104",pic:"",date:"2023/08/01",ticketName:"普通票",price:"$1200",pay:"已付款",finish:"4"  },
-        // { id:"E00104",pic:"",date:"2023/08/01",ticketName:"普通票",price:"$1200",pay:"已付款",finish:"1"  },
-
-      ],
+    productInfoArr:[],
     memBtnLink:[
         { link: "/Home/MemberInfo", name: "會員資料" },
         { link: "/Home/SearchProduct", name: "訂單查詢" },
@@ -134,7 +122,7 @@ data() {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ mbr_id }), // 将 mbr_id 发送到后端
+          body: JSON.stringify({ mbr_id }), 
         })
           .then(async (response) => {
             this.productInfoArr = await response.json();
@@ -158,16 +146,11 @@ data() {
 <style scoped lang="scss">
 .searchProdMain {
   .backGroundCard {
-    // display: flex;
-    // align-items: flex-start;
     justify-content: center;
   }
   .itemInfoList {
     margin: auto 27px;
     width: 48px;
-  }
-  .yellowRow{
-    justify-content: center;
   }
 }
 
