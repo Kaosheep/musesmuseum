@@ -107,10 +107,10 @@ export default {
   },
 
   methods: {
-    selected(aaa) {
-      console.log(aaa);
-      this.avtiveId = aaa;
-      localStorage.setItem("nowpage", aaa);
+    selected(page) {
+      console.log(page);
+      this.avtiveId = page;
+      localStorage.setItem("nowpage", page);
 
       if (this.avtiveId) {
         open = this.avtiveId.split("-")[0];
@@ -142,7 +142,7 @@ export default {
   beforeUnmount() {
     localStorage.clear();
   },
-  created() {
+  mounted() {
     if (localStorage["nowpage"]) {
       this.avtiveId = localStorage.getItem("nowpage");
     } else {
@@ -153,8 +153,6 @@ export default {
     } else {
       localStorage.setItem("open", "1");
     }
-  },
-  mounted() {
     this.isCheck = true;
     console.log(this.open);
 
