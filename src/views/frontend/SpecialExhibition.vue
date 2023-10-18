@@ -47,7 +47,7 @@
                 <span>{{ formattedExhibitionDate }}</span>
             </div>
             <div class="spe_m_title">
-                <span>{{ spexhiTitle }}</span>
+                <span>{{ spexhibitions[currentIndex].spexhiTitle }}</span>
             </div>
 
 
@@ -74,7 +74,7 @@ export default {
         return {
             spexhibitions: [
                 {
-                    spexhiImg: "http://localhost/musesmuseum/public/image/exhi/spec_ex0.jpg",
+                    spexhiImg: "http://localhost/musesmuseum/public/image/exhi/spec_ex1.png",
                     spexhi_startdate: "2023-10-01",
                     spexhi_enddate: "2023-12-30",
                     spexhiTitle: "春之詠歌：多彩藝術的季節",
@@ -82,7 +82,7 @@ export default {
                     spexhiLoc: "展區A",
                 },
                 {
-                    spexhiImg: "http://localhost/musesmuseum/public/image/exhi/spec_ex1.png",
+                    spexhiImg: "http://localhost/musesmuseum/public/image/exhi/spec_ex2.jpg",
                     spexhi_startdate: "2023-11-01",
                     spexhi_enddate: "2024-01-30",
                     spexhiTitle: "派對對物：人要金裝，動物要衣裝",
@@ -90,7 +90,7 @@ export default {
                     spexhiLoc: "展區C",
                 },
                 {
-                    spexhiImg: "http://localhost/musesmuseum/public/image/exhi/spec_ex2.jpg",
+                    spexhiImg: "http://localhost/musesmuseum/public/image/exhi/spec_ex3.jpg",
                     spexhi_startdate: "2023-12-01",
                     spexhi_enddate: "2024-03-30",
                     spexhiTitle: "線條、形狀、空間：建築美學的探索",
@@ -98,7 +98,7 @@ export default {
                     spexhiLoc: "展區D",
                 },
                 {
-                    spexhiImg: "http://localhost/musesmuseum/public/image/exhi/spec_ex3.jpg",
+                    spexhiImg: "http://localhost/musesmuseum/public/image/exhi/spec_ex0.jpg",
                     spexhi_startdate: "2023-09-10",
                     spexhi_enddate: "2023-11-30",
                     spexhiTitle: "獨居沙漠，藝術家喬治亞．歐姬芙",
