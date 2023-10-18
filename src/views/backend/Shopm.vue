@@ -93,11 +93,11 @@
           <div class="info_price">
             <div>
               <div>定價</div>
-              <textarea v-model="add_prod.fixedprice"></textarea>
+              <textarea v-model="formatFixedPrice"></textarea>
             </div>
             <div>
               <div>售價</div>
-              <textarea v-model="add_prod.sellingprice"></textarea>
+              <textarea v-model="formatSellingPrice"></textarea>
             </div>
           </div>
         </div>
@@ -197,6 +197,34 @@ export default {
       const endIndex = startIndex + this.pageItems;
       return this.searchFilter.slice(startIndex, endIndex);
     },
+    formatSellingPrice: {
+      get() {
+        return new Intl.NumberFormat("zh-TW", { style: "decimal" }).format(
+          this.add_prod.sellingprice
+        );
+      },
+      set(newValue) {
+        const valueWithoutCommas = parseFloat(newValue.replace(/,/g, ""));
+
+        if (!isNaN(valueWithoutCommas)) {
+          this.add_prod.sellingprice = valueWithoutCommas;
+        }
+      },
+    },
+    formatFixedPrice: {
+      get() {
+        return new Intl.NumberFormat("zh-TW", { style: "decimal" }).format(
+          this.add_prod.fixedprice
+        );
+      },
+      set(newValue) {
+        const valueWithoutCommas = parseFloat(newValue.replace(/,/g, ""));
+
+        if (!isNaN(valueWithoutCommas)) {
+          this.add_prod.fixedprice = valueWithoutCommas;
+        }
+      },
+    },
   },
   watch: {
     searchinput() {
@@ -205,7 +233,7 @@ export default {
   },
   methods: {
     formatPrice(value) {
-      return new Intl.NumberFormat("en-US", { style: "decimal" }).format(value);
+      return new Intl.NumberFormat("zh-TW", { style: "decimal" }).format(value);
     },
     success(nodesc, json) {
       this.$Notice.success({

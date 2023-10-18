@@ -89,7 +89,7 @@ export default {
   },
   methods: {
     formatPrice(value) {
-      return new Intl.NumberFormat("en-US", { style: "decimal" }).format(value);
+      return new Intl.NumberFormat("zh-TW", { style: "decimal" }).format(value);
     },
     loveid(id) {
       this.loven = this.$route.params.prod_id;

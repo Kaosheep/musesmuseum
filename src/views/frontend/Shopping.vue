@@ -130,7 +130,7 @@ export default {
   },
   methods: {
     formatPrice(value) {
-      return new Intl.NumberFormat("en-US", { style: "decimal" }).format(value);
+      return new Intl.NumberFormat("zh-TW", { style: "decimal" }).format(value);
     },
     //抓取localStorage裡的商品陣列
     getitemarr() {

@@ -111,7 +111,7 @@ export default {
   },
   methods: {
     formatPrice(value) {
-      return new Intl.NumberFormat("en-US", { style: "decimal" }).format(value);
+      return new Intl.NumberFormat("zh-TW", { style: "decimal" }).format(value);
     },
     updateditemamount(item, now, prod_id) {
       item.splice(4, 1, now);
