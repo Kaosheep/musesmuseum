@@ -204,8 +204,8 @@ export default {
     },
   },
   methods: {
-    reset() {
-      this.searchinput = "";
+    formatNumber(value) {
+      return new Intl.NumberFormat('en-US', { style: 'decimal' }).format(value);
     },
     success(nodesc, json) {
       this.$Notice.success({

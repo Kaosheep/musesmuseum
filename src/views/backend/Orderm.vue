@@ -8,44 +8,52 @@
           @update-search-text="searchClick"
         />
       </div>
-      <div class="dmain">
-        <table>
-          <tr>
-            <th>訂單編號</th>
-            <th>會員編號</th>
-            <th>訂單狀態</th>
-            <th>金額</th>
-            <th></th>
-          </tr>
-          <tr v-if="getPageItems == 0">
-            查無資料
-          </tr>
-          <tr v-for="(i, index) in getPageItems" :key="index" v-else>
-            <td>{{ i.po_id }}</td>
-            <td>{{ i.mbr_id }}</td>
-            <td>
-              <p v-if="parseInt(i.po_status) === 0">處理中</p>
-              <p v-else-if="parseInt(i.po_status) === 1">已確認</p>
-              <p v-else-if="parseInt(i.po_status) === 2">已出貨</p>
-              <p v-else>已完成</p>
-            </td>
-            <td>{{ i.po_sum }}</td>
-            <td>
-              <button
-                class="edit"
-                @click="showEditForm(i.po_id, i.po_status, i.po_pay)"
-              >
-                編輯
-              </button>
-            </td>
-          </tr>
-        </table>
+      <div class="po_block">
+        <div class="dmain">
+          <table>
+            <tr>
+              <th>訂單編號</th>
+              <th>會員編號</th>
+              <th>訂單狀態</th>
+              <th>金額</th>
+              <th></th>
+            </tr>
+            <tr v-if="getPageItems == 0">
+              查無資料
+            </tr>
+            <tr v-for="(i, index) in getPageItems" :key="index" v-else>
+              <td>{{ i.po_id }}</td>
+              <td>{{ i.mbr_id }}</td>
+              <td>
+                <p v-if="parseInt(i.po_status) === 0">處理中</p>
+                <p v-else-if="parseInt(i.po_status) === 1">已確認</p>
+                <p v-else-if="parseInt(i.po_status) === 2">已出貨</p>
+                <p v-else>已完成</p>
+              </td>
+              <td>{{ formatNumber(i.po_sum) }}</td>
+              <td>
+                <button
+                  class="edit"
+                  @click="showEditForm(i.po_id, i.po_status, i.po_pay)"
+                >
+                  編輯
+                </button>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div class="page">
+          <Page
+            :total="searchFilter.length"
+            :page-size="pageItems"
+            v-model="currentPage"
+          />
+        </div>
       </div>
       <form
-        action=""
         class="pop"
         v-if="showForm"
-        @submit.prevent="submitForm"
+        @submit.prevent
         v-for="(i, index) in orddlt"
         :key="index"
       >
@@ -72,15 +80,15 @@
             <td>{{ item.prod_dlt_id }}</td>
             <td class="prod_name">{{ item.prod_name }}</td>
             <td>{{ item.prod_dlt_qty }}</td>
-            <td>{{ item.prod_dlt_actual_price }}</td>
-            <td>{{ item.prod_dlt_total }}</td>
+            <td>{{ formatNumber(item.prod_dlt_actual_price) }}</td>
+            <td>{{ formatNumber(item.prod_dlt_total) }}</td>
           </tr>
           <tr class="two_line">
             <td></td>
             <td></td>
             <td></td>
             <td>總金額</td>
-            <td>{{ i.po_sum }}</td>
+            <td>{{ formatNumber(i.po_sum) }}</td>
           </tr>
         </table>
         <div class="info_row">
@@ -115,13 +123,6 @@
         </div>
       </form>
     </div>
-  </div>
-  <div class="page">
-    <Page
-      :total="searchFilter.length"
-      :page-size="pageItems"
-      v-model="currentPage"
-    />
   </div>
 </template>
 
@@ -193,6 +194,13 @@ export default {
     },
   },
   methods: {
+    formatNumber(value) {
+      // 方法一：正規表達式
+      // return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+      // 方法二：原生JS函數
+      return new Intl.NumberFormat('en-US', { style: 'decimal' }).format(value);
+    },
     reset() {
       this.searchinput = "";
     },
@@ -264,6 +272,11 @@ export default {
           this.ordlist = await response.json();
           console.log(this.ordlist);
         })
+        .then((json) => {
+          let blockw = document.querySelector(".po_block").offsetHeight;
+          let roww = document.querySelector("tr").offsetHeight;
+          this.pageItems = Math.floor(blockw / roww - 3);
+        })
         .catch((error) => {
           console.error("發生錯誤:", error);
         });
@@ -322,51 +335,56 @@ div {
   border: none;
   cursor: pointer;
 }
+.po_block {
+  height: 65vh;
+  .dmain {
+    position: relative;
+    background-color: #ffffff80;
+    height: 100%;
+    border-radius: 0 10px 10px 10px;
 
-.dmain {
-  position: relative;
-  background-color: #ffffff80;
-  min-height: 650px;
-  height: 100%;
-  border-radius: 0 10px 10px 10px;
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      border-spacing: 0;
 
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    border-spacing: 0;
+      th,
+      td {
+        padding: 10px;
+        text-align: center;
+        border-bottom: 1px solid #ccc;
+      }
 
-    th,
-    td {
-      padding: 10px;
-      text-align: center;
-      border-bottom: 1px solid #ccc;
-    }
+      th {
+        background-color: #f2f2f2;
+        font-weight: bold;
+      }
 
-    th {
-      background-color: #f2f2f2;
-      font-weight: bold;
-    }
+      td {
+        &:first-child {
+          input[type="checkbox"] {
+            margin-right: 5px;
+          }
+        }
 
-    td {
-      &:first-child {
-        input[type="checkbox"] {
-          margin-right: 5px;
+        &:last-child {
+          button {
+            color: #000;
+            border: none;
+            cursor: pointer;
+          }
+        }
+
+        p {
+          margin: 0;
+          padding: 5px;
         }
       }
-
-      &:last-child {
-        button {
-          color: #000;
-          border: none;
-          cursor: pointer;
-        }
-      }
-
-      p {
-        margin: 0;
-        padding: 5px;
-      }
     }
+  }
+  .page {
+    margin-top: 1rem;
+    text-align: center;
   }
 }
 
@@ -456,9 +474,5 @@ div {
     right: 10px;
     bottom: 0;
   }
-}
-.page {
-  margin: 2rem 0;
-  text-align: center;
 }
 </style>
