@@ -5,26 +5,13 @@ header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Ac
 header("Content-Type: application/json"); 
 
 try {
-<<<<<<< HEAD
     require_once("./connectMuses.php");
-=======
-    $dbname = "musesmuseum";
-    $user = "root";
-    $password = "";
-    $dsn = "mysql:host=localhost;port=3306;dbname=musesmuseum;charset=UTF8";	
-    $options = [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, PDO::ATTR_CASE => PDO::CASE_NATURAL];
-    $pdo = new PDO($dsn, $user, $password, $options);
->>>>>>> Jeff_dev
 
     $data = json_decode(file_get_contents('php://input'));
 
 
     if(empty($data)){
-<<<<<<< HEAD
         $sql = "select * from exhibitions";
-=======
-        $sql = "select * from `exhibitions`";
->>>>>>> Jeff_dev
         $spex = $pdo->query($sql);
         $spexRow = $spex->fetchAll(PDO::FETCH_ASSOC);
         
@@ -36,11 +23,7 @@ try {
         $spexRow = $newSpex->fetch(PDO::FETCH_ASSOC);
     }
 
-<<<<<<< HEAD
     echo json_encode($spexRow);
-=======
-    echo json_encode($newsRow);
->>>>>>> Jeff_dev
     
 
 } catch (PDOException $e) {
