@@ -25,11 +25,11 @@
       <img src="@/assets/image/productimage/banner/banner5.jpg" />
     </CarouselItem>
   </Carousel>
-  <h1>精選商城</h1>
+  <h1>精選商品</h1>
   <div class="shop_block">
     <div class="shop_Breadcrumbs">
       <router-link to="/Home"> 首頁 / </router-link>
-      <router-link to="/Home/Shop"> 精選商城 </router-link>
+      <router-link to="/Home/Shop"> 精選商品 </router-link>
     </div>
     <div class="search">
       <Searchbar :functype="1" @update-search-text="searchClick" />
@@ -75,11 +75,11 @@
             <font-awesome-icon
               :icon="['fas', 'cart-shopping']"
               id="car"
-              @click="[addcart(item.prod_id),addstore()]"
+              @click="[addcart(item.prod_id), addstore()]"
             />
           </span>
           <router-link :to="`/Home/ProductPage/${item.prod_id}`">
-            <span> ${{ item.prod_sellingprice }} </span>
+            <span> ${{ formatPrice(item.prod_sellingprice) }} </span>
           </router-link>
         </div>
       </div>
@@ -172,6 +172,9 @@ export default {
     },
   },
   methods: {
+    formatPrice(value) {
+      return new Intl.NumberFormat('en-US', { style: 'decimal' }).format(value);
+    },
     success(nodesc) {
       this.$Notice.success({
         title: "加入購物車",
@@ -211,10 +214,7 @@ export default {
       this.prodKind = prod_kind;
     },
     searchClick(text) {
-      this.searchinput = text;
-    },
-    reset() {
-      this.searchinput = "";
+      this.searchinput = text.toUpperCase();
     },
     priceClick(type) {
       if (this.sortType != type) {
@@ -239,7 +239,6 @@ export default {
         itemstr.splice(4, 1, nowamount);
         this.storage[prod_id] = "";
         this.storage[prod_id] += itemstr;
-       
       } else {
         this.storage[prod_id] = "";
         this.storage[prod_id] += `${prod_id},`;
@@ -249,9 +248,9 @@ export default {
         this.storage[prod_id] += "1,";
       }
     },
-    addstore(){
+    addstore() {
       this.$store.state.cartnum += 1;
-    }
+    },
   },
   mounted() {
     const cookies = document.cookie.split(";");

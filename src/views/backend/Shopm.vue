@@ -204,8 +204,8 @@ export default {
     },
   },
   methods: {
-    reset() {
-      this.searchinput = "";
+    formatPrice(value) {
+      return new Intl.NumberFormat("en-US", { style: "decimal" }).format(value);
     },
     success(nodesc, json) {
       this.$Notice.success({
@@ -255,6 +255,8 @@ export default {
         })
         .then((json) => {
           this.success(true, json);
+          this.fetchprod();
+          this.prodched = [];
         })
         .catch(function (error) {
           console.log(error);
@@ -265,6 +267,8 @@ export default {
     },
     submitForm() {
       this.hideEditForm();
+      this.fetchprod();
+      this.prodched = [];
     },
     showEditForm(type, id) {
       if (type == "add") {

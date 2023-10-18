@@ -6,7 +6,11 @@
 
 try {
     require_once("./connectMuses.php");
-    $po_id = "PO20230002";
+    $data = json_decode(file_get_contents('php://input'));
+    
+    // $po_id = "PO20230001"; 
+    $po_id =  $data; 
+    
     $sql = "SELECT * FROM product_orders AS po
     JOIN product_details AS pd ON po.po_id = pd.po_id
     JOIN products AS p ON pd.prod_id = p.prod_id
@@ -15,8 +19,7 @@ try {
     $prods = $pdo->prepare($sql);
     $prods->bindValue(":po_id", $po_id, PDO::PARAM_STR);
     $prods->execute();
-    // echo "SQL: " . $sql;
-    // print_r($prods->errorInfo());
+    
     //如果找得資料，取回資料，送出json
     if ($prods->rowCount() === 0) {
         echo "查無資料";

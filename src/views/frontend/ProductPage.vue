@@ -2,7 +2,7 @@
   <main v-if="foundObject" class="productpage_main">
     <div class="shop_Breadcrumbs">
       <router-link to="/Home"> 首頁 / </router-link>
-      <router-link to="/Home/Shop"> 精選商城 / </router-link>
+      <router-link to="/Home/Shop"> 精選商品 / </router-link>
       <span>{{ foundObject.prod_name }}</span>
     </div>
     <div class="product_info">
@@ -24,7 +24,7 @@
           {{ foundObject.prod_name }}
         </h1>
         <span>
-          {{ foundObject.prod_sellingprice }}
+          {{ formatPrice(foundObject.prod_sellingprice) }}
         </span>
         <div class="product_function">
           <div class="product_count">
@@ -63,10 +63,6 @@
         {{ foundObject.prod_desc }}
       </p>
     </div>
-    <!-- <div class="recommend">
-      <h2>推薦商品</h2>
-      <ProductWrap></ProductWrap>
-    </div> -->
   </main>
 </template>
 
@@ -92,6 +88,9 @@ export default {
     };
   },
   methods: {
+    formatPrice(value) {
+      return new Intl.NumberFormat("en-US", { style: "decimal" }).format(value);
+    },
     loveid(id) {
       this.loven = this.$route.params.prod_id;
     },
@@ -133,7 +132,7 @@ export default {
     addcart() {
       this.$store.state.cartnum += this.count;
       const prod_id = this.$route.params.prod_id;
-      
+
       if (this.storage["addItemlist"] == null) {
         this.storage["addItemlist"] = "";
       }
@@ -166,8 +165,6 @@ export default {
   mounted() {
     document.body.style.height = `auto`;
     this.fetchprod();
-    // const idToFind = this.$route.params.prod_id;
-    // this.foundObject = this.produstdislist.find((item) => item.prod_id === idToFind);
   },
 };
 </script>

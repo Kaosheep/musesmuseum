@@ -22,11 +22,15 @@
     <div class="shoppingcar_mbl" v-if="counttotalitem === 0">
       <p>目前無商品喔</p>
     </div>
-    <!-- mbl:mightbuylist；mbi:mightbuyitem -->
     <div class="shoppingcar_mbl" v-else>
       <div class="shoppingcar_mbi" v-for="(item, j) in itemarr" :key="j">
         <div class="shoppingcar_productimage">
-          <img :src="(`${this.$store.state.imgpublicpath}image/productimage/` + item[3])" alt="" />
+          <img
+            :src="
+              `${this.$store.state.imgpublicpath}image/productimage/` + item[3]
+            "
+            alt=""
+          />
         </div>
         <div class="shoppingcar_productinfo">
           <p>{{ item[1] }}</p>
@@ -35,27 +39,30 @@
               <button @click="decrease(item, item[4], item[0], j)">
                 <font-awesome-icon :icon="['fas', 'minus']" id="minus" />
               </button>
-              <!-- <input type="text" :value="item[4]" class="itemamount"
-                @change="updateditemamount(item, item[4], item[0])" /> -->
-                <span>{{ item[4] }}</span>
+              <span>{{ item[4] }}</span>
               <button @click="increase(item, item[4], item[0])">
                 <font-awesome-icon :icon="['fas', 'plus']" id="plus" />
               </button>
-              <span>{{ subtotal(item[2], item[4]) }}</span>
+              <span>{{ formatPrice(subtotal(item[2], item[4])) }}</span>
             </div>
           </div>
         </div>
-        <button class="shoppingcar_itemdelete" @click="clean(j, item[0],item[4])">
+        <button
+          class="shoppingcar_itemdelete"
+          @click="clean(j, item[0], item[4])"
+        >
           X
         </button>
       </div>
     </div>
     <div class="shoppingcar_total">
       <p>
-        共計<span>{{ counttotaltype }}</span>樣，<span>{{ counttotalitem }}</span>件商品
+        共計<span>{{ counttotaltype }}</span
+        >樣，<span>{{ counttotalitem }}</span
+        >件商品
       </p>
       <p>
-        商品總金額<span>{{ totalAmount }}</span>
+        商品總金額<span>{{ formatPrice(totalAmount) }}</span>
       </p>
     </div>
     <div class="shoppingcar_nextstep" v-if="counttotalitem > 0">
@@ -93,7 +100,7 @@ export default {
     },
     counttotalitem() {
       return this.itemarr.reduce((totalitem, item) => {
-        return totalitem += parseInt(item[4]);
+        return (totalitem += parseInt(item[4]));
       }, 0);
     },
     counttotaltype() {
@@ -103,6 +110,9 @@ export default {
     },
   },
   methods: {
+    formatPrice(value) {
+      return new Intl.NumberFormat("en-US", { style: "decimal" }).format(value);
+    },
     updateditemamount(item, now, prod_id) {
       item.splice(4, 1, now);
       let itemstr = item.toString();
@@ -119,20 +129,20 @@ export default {
       });
     },
     decrease(item, n, prod_id, j) {
-      this.$store.state.cartnum-=1;
+      this.$store.state.cartnum -= 1;
       n--;
       this.updateditemamount(item, n, prod_id);
       if (n < 1) {
-        this.clean(j, prod_id,n);
+        this.clean(j, prod_id, n);
       }
     },
     increase(item, n, prod_id) {
-      this.$store.state.cartnum+=1;
+      this.$store.state.cartnum += 1;
       n++;
       this.updateditemamount(item, n, prod_id);
     },
-    clean(j, prod_id ,inum) {
-      this.$store.state.cartnum-=inum;
+    clean(j, prod_id, inum) {
+      this.$store.state.cartnum -= inum;
       this.itemarr.splice(j, 1);
       localStorage["addItemlist"] = localStorage["addItemlist"].replaceAll(
         `${prod_id},`,

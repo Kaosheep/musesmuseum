@@ -31,12 +31,15 @@
             :key="rowindex"
             :class="[rowindex % 2 === 0 ? 'yellowRow' : 'whiteRow']"
           >
-            <div class="itemInfoList"><p>{{ rowitem.to_id }}</p></div>
+            <div class="itemInfoList"><p>{{ rowitem.tkt_dlt_id }}</p></div>
             <div
               class="itemInfoList fingerlink"
               @click="showSection(rowitem.tkt_dlt_id)"
             >
-              <p>{{ rowitem.tkt_name }}</p>
+              <div class="itemLink">
+                <p>{{ rowitem.tkt_name }}</p>
+                <span class="tooltip">QRcode票劵</span>
+              </div>
             </div>
 
             <router-link
@@ -54,13 +57,19 @@
                 <p>{{ rowitem.tkt_name }}</p>
               </section>
             </router-link>
-            <div class="itemInfoList hideInfo"><p>{{ rowitem.to_date }}</p></div>
-            <div class="itemInfoList"><p>{{ rowitem.tkt_dlt_actual_price }}</p></div>
             <div class="itemInfoList hideInfo">
-              <p v-if="parseInt(rowitem.to_pay_status) === 0">未付款</p>
-              <p v-else-if="parseInt(rowitem.to_pay_status) === 1">已付款</p>
+              <p class="w50">{{ rowitem.to_date }}</p>
             </div>
-            <div class="itemInfoList"><p>{{ rowitem.tkt_dlt_qty_used }}</p></div>
+            <div class="itemInfoList">
+              <p class="w50">{{ rowitem.tkt_dlt_total }}</p>
+            </div>
+            <div class="itemInfoList hideInfo">
+              <p class="w50" v-if="parseInt(rowitem.to_pay_status) === 0">未付款</p>
+              <p class="w50" v-else-if="parseInt(rowitem.to_pay_status) === 1">已付款</p>
+            </div>
+            <div class="itemInfoList">
+              <p class="w50">{{ rowitem.tkt_dlt_qty_used }}</p>
+            </div>
           </div>
           <div
             class="mask"
@@ -102,68 +111,13 @@ export default {
   data() {
     return {
       isSectionVisible: false,
-      productInfoArr: [
-        {
-          id: "A01",
-          pic: "",
-          date: "2023/08/01",
-          ticketName: "普通票",
-          price: "$200",
-          pay: "已付款",
-          finish: "1",
-        },
-        {
-          id: "B02",
-          pic: "",
-          date: "2023/08/01",
-          ticketName: "老人票",
-          price: "$100",
-          pay: "已付款",
-          finish: "1",
-        },
-        {
-          id: "C03",
-          pic: "",
-          date: "2023/08/02",
-          ticketName: "普通票",
-          price: "$200",
-          pay: "已付款",
-          finish: "1",
-        },
-        {
-          id: "D04",
-          pic: "",
-          date: "2023/08/03",
-          ticketName: "普通票",
-          price: "$200",
-          pay: "已付款",
-          finish: "0",
-        },
-        {
-          id: "E05",
-          pic: "",
-          date: "2023/08/04",
-          ticketName: "兒童票",
-          price: "$100",
-          pay: "已付款",
-          finish: "0",
-        },
-        {
-          id: "A06",
-          pic: "",
-          date: "2023/08/05",
-          ticketName: "普通票",
-          price: "$200",
-          pay: "已付款",
-          finish: "0",
-        },
-      ],
+      productInfoArr: [],
       ticketDlts: [],
       memAllInfo: {},
       memBtnLink: [
         { link: "/Home/MemberInfo", name: "會員資料" },
         { link: "/Home/SearchProduct", name: "訂單查詢" },
-        { link: "", name: "票券查詢" },
+        { link: "/Home/SearchTicket", name: "票券查詢" },
       ],
       currentPage: 1,
       itemsPerPage: 5,
@@ -184,6 +138,25 @@ export default {
     },
   },
   methods: {
+    
+    fetchprod() {
+        fetch(`${this.$store.state.publicpath}ticketqrcode.php`)
+        .then(async (response) => {
+          this.productInfoArr = await response.json();
+          this.originalProductInfoArr = [...this.productInfoArr];
+          if (this.productInfoArr.length > 0) {
+              this.currentItemId = this.productInfoArr[0].id;
+              this.rowitem = this.productInfoArr[0];
+            }
+          // const idToFind = this.$route.params.prod_id;
+          // this.rowitem = this.productInfoArr.find((rowitem) => rowitem.prod_id === idToFind); 
+          console.log('fetchprod 方法被调用了')
+          console.log(this.productInfoArr[0])
+        })
+        .catch((error) => {
+          console.error('發生錯誤:', error);
+        });
+      },
     showSection(id) {
       this.currentId = id;
       this.isSectionVisible = true;
@@ -245,11 +218,11 @@ export default {
       width: 20%;
     }
     &:nth-child(2){
-      width: 12%;
+      width: 10%;
 
     }
     &:nth-child(3){
-      width: 13%;
+      width: 18%;
 
     }
     &:nth-child(4){
@@ -320,6 +293,7 @@ section {
       .headerRow {
         p {
           margin: 0;
+          width: auto;
         }
       
       .underRow {

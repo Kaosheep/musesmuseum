@@ -13,30 +13,40 @@
     <div class="social">
       <router-link to="/Home/Shoppingcar" @click="closemenu">
         <span class="sspan">
-          <span v-if="$store.state.cartnum >= 1">
+          <span class="cartnum" v-if="$store.state.cartnum > 0">
             <span>{{ $store.state.cartnum }}</span>
             <span>{{ $store.state.cartnum }}</span>
           </span>
-
-          <i
-            class="sicon fa-solid fa-cart-shopping"
-            id="social_cart"
-          ></i> </span
+          <span>
+            <i class="sicon fa-solid fa-cart-shopping" id="social_cart"></i
+          ></span> </span
       ></router-link>
       <router-link to="/Home/MemberInfo" @click="closemenu">
         <span class="sspan">
-          <i class="sicon fa-solid fa-user" id="social_user"></i>
+          <span> <i class="sicon fa-solid fa-user" id="social_user"></i></span>
         </span>
       </router-link>
-      <span class="sspan"
-        ><i class="sicon fa-solid fa-envelope" id="social_envelope"></i
-      ></span>
-      <span class="sspan"
-        ><i class="sicon fa-brands fa-square-facebook" id="social_facebook"></i
-      ></span>
-      <span class="sspan"
-        ><i class="sicon fa-brands fa-youtube" id="social_youtub"></i
-      ></span>
+      <a href="mailto:service@tibame.com" target="_blank">
+        <span class="sspan">
+          <span
+            ><i
+              class="sicon fa-solid fa-envelope"
+              id="social_envelope"
+            ></i></span></span
+      ></a>
+      <a href="https://www.facebook.com/TibaMe/?locale=zh_TW" target="_blank">
+        <span class="sspan"
+          ><span
+            ><i
+              class="sicon fa-brands fa-square-facebook"
+              id="social_facebook"
+            ></i></span></span
+      ></a>
+      <a href="#" target="_blank">
+        <span class="sspan"
+          >
+          <span><i class="sicon fa-brands fa-youtube" id="social_youtub"></i></span></span
+      ></a>
     </div>
   </header>
   <nav>
@@ -131,7 +141,7 @@ export default {
     },
   },
   created() {
-    this.$store.dispatch("fetchMbrName"); // 分发一个 action 来获取 mbr_name
+    this.$store.dispatch("fetchMbrName");
   },
   methods: {
     togglemenu() {

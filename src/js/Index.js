@@ -26,9 +26,9 @@ export default {
       homenav: [
         { title: "最新消息", entitle: "News", link: "/Home/News" },
         { title: "展覽資訊", entitle: "Current Exhibitions", link: "/Home/CurrentExhibition_main" },
-        { title: "園區導覽", entitle: "Space", link: "/Home/Museumspace" },
-        { title: "參觀與服務", entitle: "Visit", link: "/Home/VisitInformation" },
-        { title: "商品", entitle: "Shop", link: "/Home/Shop" },
+        { title: "館內地圖", entitle: "Map", link: "/Home/Museumspace" },
+        { title: "參觀服務", entitle: "Visit", link: "/Home/VisitInformation" },
+        { title: "精選商品", entitle: "Shop", link: "/Home/Shop" },
         { title: "關於我們", entitle: "About Us", link: "/Home/History" },
       ],
       newscol: [],
@@ -72,11 +72,6 @@ export default {
 
       anchorli[0].style.backgroundColor = `#EB5F86`;
     },
-    // backgal(){
-    //   this.j += 1;
-    //   this.gallerycircle(this.j);
-    //   console.log(this.j)
-    // },
     gallerycircle() {
       const images = [...document.querySelectorAll(".gallery .img")];
       let galleryr = document.querySelector(".new .gallery").clientWidth;

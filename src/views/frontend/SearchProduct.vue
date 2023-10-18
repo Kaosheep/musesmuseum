@@ -15,8 +15,7 @@
         </div>
         <div class="productInfo">
           <div class="headerRow">
-            <p>訂單編號</p>
-            <p class="spacew"></p>
+            <p class="w140">訂單編號</p>
             <p class="hideInfo">訂購日期</p>
             <p>總金額</p>
             <p class="hideInfo">付款狀態</p>
@@ -27,29 +26,20 @@
             :key="rowindex"
             :class="[rowindex % 2 === 0 ? 'yellowRow' : 'whiteRow']"
           >
-            <div class="itemInfoList">{{ rowitem.po_id }}</div>
             <div class="itemInfoList" v-if="rowitem.po_id" v-bind:key="rowitem.po_id">
               <router-link
                 :to="`/Home/SearchProductInfo/${rowitem.po_id}`"
                 class="itemLink"
               >
-                <div class="itemInfoList">
-                  <img
-                    :src="
-                      `${this.$store.state.imgpublicpath}image/productimage/` +
-                      rowitem.prod_img
-                    "
-                    :alt="rowitem.prod_name"
-                  />
+                  <div class="itemInfoList w140">{{ rowitem.po_id }}</div>
                   <span class="tooltip">查看詳細</span>
-                </div>
               </router-link>
-              <div class="margin10 hideInfo">{{ rowitem.po_date }}</div>
-              <div class="margin10">{{ rowitem.po_sum }}</div>
-              <div class="margin10 hideInfo">
+              <div class="hideInfo w100">{{ rowitem.po_date }}</div>
+              <div class="w100">{{ rowitem.po_sum }}</div>
+              <div class="hideInfo w100">
                 {{ rowitem.po_pay === 0 ? "未付款" : "已付款" }}
               </div>
-              <div class="margin10">{{ getStatus(rowitem.po_status) }}</div>
+              <div class="w100">{{ getStatus(rowitem.po_status) }}</div>
               <!-- <div
                   :id="rowitem.id"
                   :name="rowitem.name"
@@ -226,7 +216,6 @@ export default {
   align-items: flex-start;
   justify-content: center;
 }
-
 .productInfo {
   white-space: nowrap;
 }
