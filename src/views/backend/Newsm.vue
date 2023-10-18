@@ -8,7 +8,11 @@
           <button class="btn_admin" @click="updatestatus(0)">下架</button>
           <button class="btn_admin" @click="deleten">刪除</button>
         </div>
-        <Searchbar class="onlyB" :functype="1" @update-search-text="searchClick" />
+        <Searchbar
+          class="onlyB"
+          :functype="1"
+          @update-search-text="searchClick"
+        />
       </div>
       <div class="news_block">
         <div class="dmain">
@@ -20,7 +24,11 @@
               <th>狀態</th>
               <th></th>
             </tr>
-            <tr v-if="pagenews == 0"><td colspan="2" style="width: 100%; white-space: nowrap;">查無資料</td></tr>
+            <tr v-if="pagenews == 0">
+              <td colspan="2" style="width: 100%; white-space: nowrap">
+                查無資料
+              </td>
+            </tr>
             <tr v-for="(i, index) in pagenews" :key="index" v-else>
               <td>
                 <input
@@ -52,13 +60,7 @@
           </button>
         </div>
       </div>
-      <form
-        action=""
-        class="pop"
-        v-show="showForm"
-        @submit.prevent="submitForm"
-        id="edform"
-      >
+      <form class="pop" v-show="showForm" @submit.prevent id="edform">
         <h2>編輯</h2>
         <div class="xedit" v-show="addnews">
           <div>
@@ -113,11 +115,7 @@
             <button type="button" class="btn_admin" @click="hideEditForm">
               取消
             </button>
-            <button
-              type="type"
-              class="btn_admin"
-              @click="addnews_btn(add_news.id)"
-            >
+            <button class="btn_admin save" @click="addnews_btn(add_news.id)">
               儲存
             </button>
           </div>
@@ -176,6 +174,14 @@ export default {
     };
   },
   methods: {
+    warning(nodesc, w) {
+      this.$Notice.warning({
+        title: w,
+        desc: nodesc
+          ? ""
+          : "Here is the notification description. Here is the notification description. ",
+      });
+    },
     searchClick(text) {
       this.searchinput = text;
     },
@@ -367,6 +373,7 @@ export default {
             }
           })
           .then((json) => {
+            this.hideEditForm();
             this.success(true, json);
             this.fetchnew();
             this.add_news = [];
@@ -375,34 +382,45 @@ export default {
             console.log(error.message);
           });
       } else {
-        const url = `${this.$store.state.publicpath}news_insertupload.php`;
-        const formData = new FormData();
-        formData.append("id", this.add_news.id);
-        formData.append("title", this.add_news.title);
-        formData.append("content", this.add_news.content);
-        formData.append("status", this.status);
-        formData.append("date", this.add_news.date);
-        formData.append("image", document.getElementById("fileimg").files[0]);
+        if (this.add_news.date == undefined) {
+          this.warning(true, "未輸入日期");
+        } else if (this.add_news.title == undefined) {
+          this.warning(true, "未輸入標題");
+        } else if (this.add_news.content == undefined) {
+          this.warning(true, "未輸入內容");
+        } else if (this.add_news.image == undefined) {
+          this.warning(true, "未選擇圖片");
+        } else {
+          const url = `${this.$store.state.publicpath}news_insertupload.php`;
+          const formData = new FormData();
+          formData.append("id", this.add_news.id);
+          formData.append("title", this.add_news.title);
+          formData.append("content", this.add_news.content);
+          formData.append("status", this.status);
+          formData.append("date", this.add_news.date);
+          formData.append("image", document.getElementById("fileimg").files[0]);
 
-        fetch(url, {
-          method: "POST",
-          body: formData,
-        })
-          .then((response) => {
-            if (response.ok) {
-              return response.json();
-            } else {
-              throw new Error("新增失敗");
-            }
+          fetch(url, {
+            method: "POST",
+            body: formData,
           })
-          .then((json) => {
-            this.success(true, json);
-            this.fetchnew();
-            this.add_news = [];
-          })
-          .catch((error) => {
-            console.log(error.message);
-          });
+            .then((response) => {
+              if (response.ok) {
+                return response.json();
+              } else {
+                throw new Error("新增失敗");
+              }
+            })
+            .then((json) => {
+              this.hideEditForm();
+              this.success(true, json);
+              this.fetchnew();
+              this.add_news = [];
+            })
+            .catch((error) => {
+              console.log(error.message);
+            });
+        }
       }
     },
     fetchnew() {
@@ -424,9 +442,9 @@ export default {
         })
         .then((json) => {
           this.news = json;
-          let blockw = document.querySelector('.news_block').offsetHeight;
-          let roww = document.querySelector('tr').offsetHeight;
-          this.pageSize = Math.floor((blockw/roww)-3);
+          let blockw = document.querySelector(".news_block").offsetHeight;
+          let roww = document.querySelector("tr").offsetHeight;
+          this.pageSize = Math.floor(blockw / roww - 3);
         })
         .catch((error) => {
           console.log(error.message);
@@ -436,8 +454,10 @@ export default {
   computed: {
     searchFilter() {
       if (this.searchinput) {
-        return this.news.filter((v) =>
-          v.news_title?.includes(this.searchinput) || v.news_date?.includes(this.searchinput)
+        return this.news.filter(
+          (v) =>
+            v.news_title?.includes(this.searchinput) ||
+            v.news_date?.includes(this.searchinput)
         );
       } else {
         return this.news;
@@ -450,7 +470,7 @@ export default {
     },
     totalPages() {
       // 計算總頁數
-      return Math.ceil(this.searchFilter.length/ this.pageSize);
+      return Math.ceil(this.searchFilter.length / this.pageSize);
     },
   },
   watch: {
@@ -460,8 +480,6 @@ export default {
   },
   mounted() {
     this.fetchnew();
-
-
   },
 };
 </script>
