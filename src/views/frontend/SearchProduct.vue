@@ -3,12 +3,13 @@
     <main class="searchProdMain">
       <div class="search">
         <Searchbar :functype="1" @update-search-text="searchClick" />
-        <Searchbarclick />
       </div>
       <div class="backGroundCard">
         <div class="backGroundCardBtns">
           <router-link :to="a.link" v-for="a in memBtnLink">
-            <button :class="[a.name === '訂單查詢' ? 'pinkBtnLight' : 'pinkBtn']">
+            <button
+              :class="[a.name === '訂單查詢' ? 'pinkBtnLight' : 'pinkBtn']"
+            >
               {{ a.name }}
             </button>
           </router-link>
@@ -23,12 +24,16 @@
             <p>訂單狀態</p>
           </div>
           <div
+            v-if="pagedProductInfo"
             v-for="(rowitem, rowindex) in pagedProductInfo"
             :key="rowindex"
-            :class="[rowindex % 2 === 0 ? 'yellowRow' : 'whiteRow']"
-          >
+            :class="[rowindex % 2 === 0 ? 'yellowRow' : 'whiteRow']">
             <div class="itemInfoList">{{ rowitem.po_id }}</div>
-            <div class="itemInfoList" v-if="rowitem.po_id" v-bind:key="rowitem.po_id">
+            <div
+              class="itemInfoList"
+              v-if="rowitem.po_id"
+              v-bind:key="rowitem.po_id"
+            >
               <router-link
                 :to="`/Home/SearchProductInfo/${rowitem.po_id}`"
                 class="itemLink"
@@ -56,7 +61,9 @@
                   ></div> -->
             </div>
           </div>
-          <div class="pagination">
+          <div v-show="pagedProductInfo == 0"><p>查無資料</p></div>
+
+          <div class="pagination" v-if="pagedProductInfo">
             <Page
               :total="productInfoArr.length"
               :page-size="itemsPerPage"
@@ -98,14 +105,30 @@ export default {
       searchinput: "",
     };
   },
+  watch: {
+    searchinput() {
+      this.currentPage = 1;
+    },
+  },
   computed: {
+    searchFilter() {
+      if (this.searchinput) {
+        return this.productInfoArr.filter(
+          (v) =>
+            v.po_id?.includes(this.searchinput) ||
+            v.po_date?.includes(this.searchinput)
+        );
+      } else {
+        return this.productInfoArr;
+      }
+    },
     pagedProductInfo() {
       const startIndex = (this.currentPage - 1) * this.itemsPerPage;
       const endIndex = startIndex + this.itemsPerPage;
-      return this.productInfoArr.slice(startIndex, endIndex);
+      return this.searchFilter.slice(startIndex, endIndex);
     },
     totalPages() {
-      return Math.ceil(this.productInfoArr.length / this.itemsPerPage);
+      return Math.ceil(this.searchFilter.length / this.itemsPerPage);
     },
   },
   methods: {
@@ -124,7 +147,7 @@ export default {
       if (membersCookie) {
         const membersData = JSON.parse(decodeURIComponent(membersCookie));
         const mbr_id = membersData.mbr_id;
-        console.log(mbr_id); // 在這裡顯示 mbr_id
+
 
         fetch(`${this.$store.state.publicpath}searchproduct.php`, {
           method: "POST",
@@ -139,12 +162,7 @@ export default {
               this.currentItemId = this.productInfoArr[0].id;
               this.rowitem = this.productInfoArr[0];
             }
-            // const idToFind = this.$route.params.prod_id;
-            // this.rowitem = this.productInfoArr.find((rowitem) => rowitem.prod_id === idToFind);
-            // console.log(rowitem);
-            console.log("fetchprod 方法被调用了");
-            console.log(this.productInfoArr);
-            console.log(this.rowitem.po_id);
+
           })
           .catch((error) => {
             console.error("發生錯誤:", error);
@@ -212,7 +230,7 @@ export default {
       }
     },
     searchClick(text) {
-      this.searchinput = text;
+      this.searchinput = text.toUpperCase();
     },
   },
   mounted() {

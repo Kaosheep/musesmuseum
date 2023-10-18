@@ -57,7 +57,7 @@
             </div>
             <div class="shop_paginationbar">
               <Page
-                :total="lovescol.length"
+                :total="searchFilter.length"
                 :page-size="pageItems"
                 v-model="currentPage"
                 class="shop_page"
