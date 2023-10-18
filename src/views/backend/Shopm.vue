@@ -204,7 +204,7 @@ export default {
     },
   },
   methods: {
-    formatNumber(value) {
+    formatPrice(value) {
       return new Intl.NumberFormat("en-US", { style: "decimal" }).format(value);
     },
     success(nodesc, json) {

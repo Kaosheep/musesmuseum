@@ -66,13 +66,13 @@
     </div>
     <div class="fee_shopping">
       <p>
-        商品總計<span>${{ totolprice }}</span>
+        商品總計<span>${{ formatPrice(totolprice) }}</span>
       </p>
       <p>
         運費<span>${{ shipcharge.charge }}</span>
       </p>
       <p>
-        合計<span>${{ bill }}</span>
+        合計<span>${{ formatPrice(bill) }}</span>
       </p>
     </div>
   </div>
@@ -129,6 +129,9 @@ export default {
     },
   },
   methods: {
+    formatPrice(value) {
+      return new Intl.NumberFormat("en-US", { style: "decimal" }).format(value);
+    },
     //抓取localStorage裡的商品陣列
     getitemarr() {
       this.items.forEach((it) => {

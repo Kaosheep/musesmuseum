@@ -30,7 +30,7 @@
                 <p v-else-if="parseInt(i.po_status) === 2">已出貨</p>
                 <p v-else>已完成</p>
               </td>
-              <td>{{ formatNumber(i.po_sum) }}</td>
+              <td>{{ formatPrice(i.po_sum) }}</td>
               <td>
                 <button
                   class="edit"
@@ -80,15 +80,15 @@
             <td>{{ item.prod_dlt_id }}</td>
             <td class="prod_name">{{ item.prod_name }}</td>
             <td>{{ item.prod_dlt_qty }}</td>
-            <td>{{ formatNumber(item.prod_dlt_actual_price) }}</td>
-            <td>{{ formatNumber(item.prod_dlt_total) }}</td>
+            <td>{{ formatPrice(item.prod_dlt_actual_price) }}</td>
+            <td>{{ formatPrice(item.prod_dlt_total) }}</td>
           </tr>
           <tr class="two_line">
             <td></td>
             <td></td>
             <td></td>
             <td>總金額</td>
-            <td>{{ formatNumber(i.po_sum) }}</td>
+            <td>{{ formatPrice(i.po_sum) }}</td>
           </tr>
         </table>
         <div class="info_row">
@@ -194,7 +194,7 @@ export default {
     },
   },
   methods: {
-    formatNumber(value) {
+    formatPrice(value) {
       // 方法一：正規表達式
       // return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
