@@ -27,12 +27,25 @@
         justify-content: space-between;
         border-bottom: 2px solid $mblue;
         p{
+            width: 100px;
             margin: auto;
             color: $mgreen;
         } 
         .spacew{
         width: 70px;
+        }
+        .w160{
+            width: 160px;
+        }
     }
+    .w140{
+        width: 140px;
+    }
+    .w100{
+        width: 80px;
+    }
+    .w50{
+        width: 50px;
     }
 
     .yellowRow{
@@ -72,7 +85,7 @@
     .tooltip {
         display: none;
         position: absolute;
-        background: rgba(0, 0, 0, 0.7);
+        background: rgba(0, 156, 168, 0.5);
         color: #fff;
         padding: 5px;
         border: 1px solid #ccc;
@@ -100,9 +113,9 @@
             justify-content: end;
         }
     }
-    .margin10{
-        margin: 10px;
-    }
+    // .margin10{
+    //     margin: 10px;
+    // }
 
 }
 @include t(){
@@ -121,9 +134,9 @@
             margin-top: 20px;
             .headerRow{
                 width: 100%;
-                padding: 0;
+                padding: 0 5px;
                 p{
-                    margin: 0 15px;
+                    // margin: 0 15px;
                     // width: auto;
                 }
             }

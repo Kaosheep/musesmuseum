@@ -23,34 +23,29 @@
             <p>數量</p>
             <p>小計</p>
           </div>
-          <div 
-          v-for="(rowitem, rowindex) in productInfoArr" 
-          :key="rowindex" class="yellowRow">
-            <div class="itemInfoList">{{ rowitem.prod_dlt_id }}</div>
+          <div v-for="(rowitem, rowindex) in productInfoArr" :key="rowindex" class="yellowRow">
+            <div class="itemInfoList">{{ rowitem.prod_id  }}</div>
             <div class="itemInfoList">
-              <img 
-                  :src="(`${this.$store.state.imgpublicpath}image/productimage/` + rowitem.prod_img)" 
-                  :alt="rowitem.prod_name" />
+              <img :src="(`${this.$store.state.imgpublicpath}image/productimage/` + rowitem.prod_img)"
+                :alt="rowitem.prod_name" />
             </div>
             <div class="itemInfoList">{{ rowitem.prod_name }}</div>
             <div class="itemInfoList">{{ rowitem.prod_dlt_actual_price }}</div>
             <div class="itemInfoList">{{ rowitem.prod_dlt_qty }}</div>
             <div class="itemInfoList">{{ rowitem.prod_dlt_total }}</div>
           </div>
-          <div 
-          class="underRow"
-          >
+          <div class="underRow">
             <p>付款狀態</p>
-            <div>{{rowitem.po_pay === 0 ? '未付款' : '已付款'}}</div>
+            <div>{{ rowitem.po_pay === 0 ? '未付款' : '已付款' }}</div>
             <p>運送方式</p>
             <div>宅配</div>
             <p>訂單狀態</p>
             <div>{{ getStatus(rowitem.po_status) }}</div>
             <p>總金額</p>
-            <div>{{rowitem.po_sum}}</div>
+            <div>{{ rowitem.po_sum }}</div>
           </div>
           <div class="pagination">
-                <Page :total="productInfoArr.length" :page-size="itemsPerPage" v-model="currentPage"/>
+            <Page :total="productInfoArr.length" :page-size="itemsPerPage" v-model="currentPage" />
           </div>
         </div>
       </div>
@@ -82,7 +77,7 @@ export default {
       ],
       currentPage: 1,
       itemsPerPage: 5,
-      searchinput:"",
+      searchinput: "",
     };
   },
   computed: {
@@ -95,26 +90,38 @@ export default {
       return Math.ceil(this.productInfoArr.length / this.itemsPerPage);
     },
   },
+
   methods: {
     fetchprod() {
-        fetch(`${this.$store.state.publicpath}searchproductinfo.php`)
-        .then(async (response) => {
-          this.productInfoArr = await response.json();
-          this.originalProductInfoArr = [...this.productInfoArr];
-          if (this.productInfoArr.length > 0) {
-              this.currentItemId = this.productInfoArr[0].id;
-              this.rowitem = this.productInfoArr[0];
-            }
-          // const idToFind = this.$route.params.prod_id;
-          // this.rowitem = this.productInfoArr.find((rowitem) => rowitem.prod_id === idToFind); 
-          console.log('fetchprod 方法被调用了')
-          console.log(this.productInfoArr[0])
-        })
-        .catch((error) => {
-          console.error('發生錯誤:', error);
-        });
+      const currentURL = window.location.href;
+      const urlParts = currentURL.split('/');
+      const lastPart = urlParts[urlParts.length - 1];
+
+      console.log(lastPart)
+      fetch(`${this.$store.state.publicpath}searchproductinfo.php`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json", // 使用 JSON 格式
       },
-      getStatus(po_status) {
+      body: JSON.stringify(lastPart), 
+    })
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error("新增失敗");
+        }
+      })
+      .then((data) => {
+        this.productInfoArr = data;
+        this.rowitem = data[0]; 
+        console.log(data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    },
+    getStatus(po_status) {
       po_status = parseInt(po_status);
       switch (po_status) {
         case 0:
@@ -131,60 +138,70 @@ export default {
     },
   },
   mounted() {
-  //   const productId = this.$route.params.productId; // 获取路由参数中的商品 ID
-  // // 使用 productId 加载数据
-  // this.fetchprod(productId);
+
     this.fetchprod();
     document.body.style.height = `auto`;
   }
 };
 </script>
 <style scoped lang="scss">
-.searchProdMain{
-    .yellowRow{
-    justify-content: space-between;
-    }
-    .whiteRow{
-        justify-content: space-between;
-    }
-    .itemInfoList{
-        width: 100%;
-        display: flex;
-        justify-content: center;
-    }
-}
-.backGroundCard{
-  align-items: flex-start; 
-  justify-content:center;
-  }
-  
-  .cardCenter{
-    align-items: start;
-  }
-.underRow{
-  padding:10px 16px;
-  display:flex;
-  justify-content: space-between;
-  border-top: 2px solid $mblue;
+.searchProdMain {
+  .headerRow{
     p{
-      // width: 80px;
-      color: $mgreen;
+      width: auto;
     }
+  }
+  .yellowRow {
+    justify-content: space-between;
+  }
+
+  .whiteRow {
+    justify-content: space-between;
+  }
+
+  .itemInfoList {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
 }
 
-@include t(){
+.backGroundCard {
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.cardCenter {
+  align-items: start;
+}
+
+.underRow {
+  padding: 10px 16px;
+  display: flex;
+  justify-content: space-between;
+  border-top: 2px solid $mblue;
+
+  p {
+    // width: 80px;
+    color: $mgreen;
+  }
+}
+
+@include t() {
   .searchProdMain {
-    .productInfo{
-      .headerRow{
-        p{
+    .productInfo {
+      .headerRow {
+        p {
           margin: auto;
         }
       }
     }
-    .underRow{
+
+    .underRow {
       text-align: start;
       flex-wrap: wrap;
-      p{
+
+      p {
         width: 80px;
       }
     }

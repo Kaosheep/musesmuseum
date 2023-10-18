@@ -38,7 +38,7 @@ const routes = [
         component: () => import('../views/frontend/Faq.vue')
       },
       {
-        path: 'ProductPage/:prod_id',
+        path: 'ProductPage/:po_id',
         name: 'ProductPage',
         component: () => import('../views/frontend/ProductPage.vue')
       },
@@ -128,7 +128,7 @@ const routes = [
         component: () => import('../views/frontend/TicketQRcode.vue')
       },
       {
-        path: 'TicketQRcode/:id',
+        path: 'TicketQRcode/:to_id',
         name: 'TicketQRcode',
         component: () => import('../views/frontend/TicketQRcode.vue')
       },
