@@ -199,7 +199,7 @@ export default {
       // return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
       // 方法二：原生JS函數
-      return new Intl.NumberFormat('en-US', { style: 'decimal' }).format(value);
+      return new Intl.NumberFormat("en-US", { style: "decimal" }).format(value);
     },
     reset() {
       this.searchinput = "";
@@ -260,6 +260,8 @@ export default {
         })
         .then((json) => {
           this.success(true, json);
+          this.fetchord();
+          this.orddlt = [];
         })
         .catch(function (error) {
           console.log(error);
