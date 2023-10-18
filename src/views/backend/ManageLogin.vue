@@ -2,7 +2,7 @@
     <main>
         <div>
             <form action="">
-                <img src="../../assets/image/logo/logo.png" alt="">
+                <img src="../../assets/image/logo/logo.png"  alt="">
                 <div>
                     <div>
                         <label>管理員帳號:</label>
@@ -141,7 +141,7 @@ main {
             img {
                 display: block;
                 padding: 10px;
-                width: 50%;
+                width: 200px;
                 margin: 0 auto;
             }
 
