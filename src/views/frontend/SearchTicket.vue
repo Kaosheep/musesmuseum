@@ -15,12 +15,11 @@
           </div>
           <div class="productInfo">
             <div class="headerRow">
-              <p>訂票編號</p>
-              <p>票劵</p>
+              <p class="w140">購票編號</p>
               <p class="hideInfo">訂購日期</p>
               <p>總金額</p>
               <p  class="hideInfo">付款狀態</p>
-              <p  class="hideInfo">使用張數</p>
+              <p  class="hideInfo">購買數量</p>
             </div>
             <div 
               v-for="(rowitem, rowindex) in pagedProductInfo" 
@@ -28,18 +27,14 @@
               :class="[rowindex % 2 === 0 ? 'yellowRow' : 'whiteRow']"
               >
               <router-link 
-              :to="`/Home/TicketQRcode/${rowitem.tkt_id}`" >
-                <div class="itemInfoList">{{ rowitem.tkt_id }}</div>
+              :to="`/Home/TicketQRcode/${rowitem.to_id}`" class="itemLink">
+                <div class="itemInfoList w140">{{ rowitem.to_id }}</div>
+                <span class="tooltip">查看詳細</span>
               </router-link>  
-                  <div class="itemInfoList">
-                    {{ rowitem.tkt_name}}
-                  </div>
-                <div class="itemInfoList hideInfo">{{ rowitem.to_date}}</div>
-                <div class="itemInfoList">{{ rowitem.tkt_dlt_actual_price }}</div>
-                <div class="itemInfoList hideInfo">{{ rowitem.to_pay_status }}</div>
-                <router-link :to="`/Home/TicketQRcode/${rowitem.tkt_id}`" >
-                  <div class="itemInfoList hideInfo">詳細內容</div>
-                </router-link>
+                <div class="hideInfo w100">{{ rowitem.to_date}}</div>
+                <div class="w100">{{ rowitem.tkt_dlt_actual_price }}</div>
+                <div class=" hideInfo w100">{{ rowitem.to_pay_status === 0 ? "已付款" : "未付款" }}</div>
+                <div class="hideInfo w100">{{ rowitem.tkt_dlt_qty}}</div>
             </div>
             <div class="pagination">
               <Page :total="productInfoArr.length" :page-size="itemsPerPage" v-model="currentPage"/>
@@ -64,19 +59,7 @@ components: {
 data() {
   return {
     publicpath: "http://localhost/musesmuseum/public/phps/",
-    productInfoArr:[
-        // { id:"A00103",pic:"",date:"2023/08/01",ticketName:"普通票",price:"$1200",pay:"已付款",finish:"1" },
-        // { id:"B00103",pic:"",date:"2023/08/01",ticketName:"普通票",price:"$1200",pay:"已付款",finish:"1"  },
-        // { id:"C00103",pic:"",date:"2023/08/01",ticketName:"普通票",price:"$1200",pay:"已付款",finish:"1"  },
-        // { id:"D00103",pic:"",date:"2023/08/01",ticketName:"普通票",price:"$1200",pay:"已付款",finish:"2"  },
-        // { id:"E00103",pic:"",date:"2023/08/01",ticketName:"普通票",price:"$1200",pay:"已付款",finish:"1"  },
-        // { id:"A00104",pic:"",date:"2023/08/01",ticketName:"普通票",price:"$1200",pay:"已付款",finish:"1"  },
-        // { id:"B00104",pic:"",date:"2023/08/01",ticketName:"普通票",price:"$1200",pay:"已付款",finish:"3"  },
-        // { id:"C00104",pic:"",date:"2023/08/01",ticketName:"普通票",price:"$1200",pay:"已付款",finish:"1"  },
-        // { id:"D00104",pic:"",date:"2023/08/01",ticketName:"普通票",price:"$1200",pay:"已付款",finish:"4"  },
-        // { id:"E00104",pic:"",date:"2023/08/01",ticketName:"普通票",price:"$1200",pay:"已付款",finish:"1"  },
-
-      ],
+    productInfoArr:[],
     memBtnLink:[
         { link: "/Home/MemberInfo", name: "會員資料" },
         { link: "/Home/SearchProduct", name: "訂單查詢" },
@@ -160,9 +143,6 @@ mounted() {
   .itemInfoList{
     margin: auto 27px;
     width: 48px;
-  }
-  .yellowRow{
-    justify-content: center;
   }
 }
 

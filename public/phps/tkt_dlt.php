@@ -6,14 +6,17 @@ header("Content-Type: application/json");
 try{
 	require_once("./connectMuses.php");
 
-  $mbr_id = $_POST["mbr_id"];
+  $to_id ="TO20230001";
 
-  $sql = "select * from ticket_details join tickets on ticket_details.tkt_id = tickets.tkt_id join ticket_orders on ticket_details.to_id = ticket_orders.to_id where mbr_id=:mbr_id";
+  $sql = "SELECT * from ticket_details JOIN tickets 
+  on ticket_details.tkt_id = tickets.tkt_id 
+  join ticket_orders ON ticket_details.to_id = ticket_orders.to_id 
+  WHERE ticket_details.to_id=:to_id";
 
   $tkt_dlts = $pdo->prepare($sql);
-  $tkt_dlts->bindValue(":mbr_id", $_POST["mbr_id"]);
-  
+  $tkt_dlts->bindValue(":to_id", $to_id, PDO::PARAM_STR);
   $tkt_dlts->execute();
+  
   if ($tkt_dlts->rowCount() === 0) { //無此會員資料
       echo "{}";
     } else {
