@@ -69,6 +69,7 @@
                 <button class="spe_scroll_right" type="button" @click="scrollpage('right')">
                     <img src="@/assets/image/paint/arrow.svg" alt="" />
                 </button>
+                </div>
             </div>
         </div>
     </main>
