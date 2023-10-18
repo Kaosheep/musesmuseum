@@ -334,7 +334,7 @@ export default {
           this.faq = json;
           let blockw = document.querySelector(".faq_block").offsetHeight;
           let roww = document.querySelector("tr").offsetHeight;
-          this.pageSize = Math.floor((blockw/roww)-5);
+          this.pageSize = Math.floor((blockw/roww)-3);
          })
         .catch((error) => {
           console.log(error.message);
@@ -463,7 +463,6 @@ div {
            input[type="checkbox"] {
               margin-right: 5px;
               width: 100%;
-              height: 16px;
           }
         }
         &:nth-child(2) {
@@ -494,10 +493,10 @@ div {
       }
     }
   }
-}
-.faqmQues,
-.faqmAns {
-  height: 4.3em;
+ }
+ .faqmQues,
+ .faqmAns {
+  height: 3em;
 }
 .faqmQues span{
   color:#000
