@@ -27,7 +27,10 @@
               <th>狀態</th>
               <th></th>
             </tr>
-            <tr v-for="item in getPageItems" :key="item.prod_id">
+            <tr v-if="getPageItems == 0">
+              <td>查無資料</td>
+            </tr>
+            <tr v-for="item in getPageItems" :key="item.prod_id" v-else>
               <td>
                 <input
                   type="checkbox"
