@@ -60,19 +60,6 @@
                     <img src="@/assets/image/paint/arrow.svg" alt="" />
                 </button>
                 </div>
-<<<<<<< HEAD
-                <div class="spe_m_title">
-                    <span>{{ exhi.exh_name }}</span>
-                </div>
-
-
-
-                <button class="spe_scroll_right" type="button" @click="scrollpage('right')">
-                    <img src="@/assets/image/paint/arrow.svg" alt="" />
-                </button>
-                </div>
-=======
->>>>>>> 11_uting
             </div>
         </div>
     </main>
