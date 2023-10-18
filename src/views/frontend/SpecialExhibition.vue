@@ -3,12 +3,12 @@
         <div class="spe_carousel_header">
             <VerHeader :title="'展 覽 區 Exhibitions'"></VerHeader>
         </div>
-        <div class="spe_container">
-            <div 
-            class="exhi_item" 
-            v-for="(exhi,j) in spexhibitions" 
-            :key="j">
-                <button class="spe_scroll_left" type="button" @click="scrollpage('left')">
+        <div class="spe_container" id="spe_backBoard">
+            <div id="speContent">
+                <div class="exhi_item" v-for="(exhi, j) in spexhibitions" :key="j">
+                <button class="spe_scroll_left" type="button" @click="scrollpage('left')"
+                id="left_button"
+                >
                     <img src="@/assets/image/paint/arrow.svg" alt="" />
                 </button>
                 <div class="spe_exb_search">
@@ -21,7 +21,7 @@
                 <div class="spe_exhi_section">
                     <div class="spe_img_deco"></div>
                     <div class="spe_exhi_img">
-                        <img :src="`${this.$store.state.imgpublicpath}image/exhi/` + item.exh_img" alt="">
+                        <img :src="`${this.$store.state.imgpublicpath}image/exhi/` + exhi.exh_img" alt="">
                     </div>
                     <div class="spe_exhi_desc">
                         <div class="spe_bgc_deco_a"></div>
@@ -56,9 +56,10 @@
 
 
 
-                <button class="spe_scroll_right" type="button" @click="scrollpage('right')">
+                <button class="spe_scroll_right" type="button" @click="scrollpage('right')" id="right_button">
                     <img src="@/assets/image/paint/arrow.svg" alt="" />
                 </button>
+                </div>
             </div>
         </div>
     </main>
@@ -92,10 +93,25 @@ export default {
     },
     methods: {
         scrollpage(direction) {
-            if (direction === 'left') {
-                this.currentIndex = (this.currentIndex - 1 + this.spexhibitions.length) % this.spexhibitions.length;
-            } else {
-                this.currentIndex = (this.currentIndex + 1) % this.spexhibitions.length;
+            const speContent = document.getElementById('speContent');
+            const scrollAmount = 1000; // 滚动的距离
+            const leftButton = document.getElementById('left_button');
+            const rightButton = document.getElementById('right_button')
+            if(speContent.style.right === "4000px"){
+                leftButton.disabled = true;
+            }else{
+                if (direction === 'left') {
+                    speContent.style.right = `${parseInt(speContent.style.right || 0) + scrollAmount}px`;
+                    rightButton.disabled = false;
+                }
+            }
+            if(speContent.style.right === "0px"){
+                rightButton.disabled = true;
+            }else{
+                if(direction === 'right') {
+                    speContent.style.right = `${parseInt(speContent.style.right || 0) - scrollAmount}px`;
+                    leftButton.disabled = false;
+                }
             }
         },
         fetchexhi() {
@@ -105,7 +121,8 @@ export default {
         }
     },
     mounted() {
-    this.fetchexhi();
-  },
+        this.fetchexhi();
+        
+    },
 }
 </script>
