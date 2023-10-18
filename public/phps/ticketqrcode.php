@@ -7,17 +7,19 @@
 try {
     require_once("./connectMuses.php");
     $to_id = $_GET["to_id"]; 
+    $mbr_id = $_GET["mbr_id"];
 
 
         $sql = "SELECT * FROM ticket_orders AS tod
         JOIN ticket_details AS td ON tod.to_id = td.to_id
         JOIN tickets AS tk ON td.tkt_id = tk.tkt_id
-        WHERE tod.to_id = :to_id
+        WHERE tod.to_id = :to_id AND tod.mbr_id = :mbr_id
         GROUP BY tod.to_id = :to_id
         ORDER BY tod.to_date DESC;";
 
         $prods = $pdo->prepare($sql);
-        $prods->bindValue(":tkt_id", $tkt_id, PDO::PARAM_STR);
+        $prods->bindValue(":tkt_dlt_id", $tkt_dlt_id, PDO::PARAM_STR);
+        $prods->bindValue(":mbr_id", $mbr_id, PDO::PARAM_STR);
         $prods->execute();
         //如果找得資料，取回資料，送出json
         if ($prods->rowCount() === 0) {
