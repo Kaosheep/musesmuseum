@@ -79,7 +79,7 @@
             />
           </span>
           <router-link :to="`/Home/ProductPage/${item.prod_id}`">
-            <span> ${{ formatNumber(item.prod_sellingprice) }} </span>
+            <span> ${{ formatPrice(item.prod_sellingprice) }} </span>
           </router-link>
         </div>
       </div>
@@ -172,7 +172,7 @@ export default {
     },
   },
   methods: {
-    formatNumber(value) {
+    formatPrice(value) {
       return new Intl.NumberFormat('en-US', { style: 'decimal' }).format(value);
     },
     success(nodesc) {
