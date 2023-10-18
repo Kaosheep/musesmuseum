@@ -156,27 +156,18 @@ export default {
     searchFilter() {
       if (this.searchinput) {
         // 方法一
-        // return this.ordlist.reduce((filter, v) => {
-        //   if (
-        //     v.mbr_id?.includes(this.searchinput) ||
-        //     v.po_id?.includes(this.searchinput)
-        //   ) {
-        //     filter.push(v);
-        //   }
-        //   return filter;
-        // }, []);
-
-        // 方法二
         // return this.ordlist.filter((v) => {
         //   return [v.mbr_id, v.po_id].some((id) =>
         //     id?.includes(this.searchinput)
         //   );
         // });
-        // 方法三
+
+        // 方法二
+
         return this.ordlist.filter(
           (v) =>
-            v.mbr_id.includes(this.searchinput) ||
-            v.po_id.includes(this.searchinput)
+            v.mbr_id?.includes(this.searchinput) ||
+            v.po_id?.includes(this.searchinput)
         );
       } else {
         return this.ordlist;
@@ -198,8 +189,13 @@ export default {
       // 方法一：正規表達式
       // return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
-      // 方法二：原生JS函數
-      return new Intl.NumberFormat("en-US", { style: "decimal" }).format(value);
+      // 方法二：內建的 JavaScript 函數
+      return new Intl.NumberFormat("zh-TW", { style: "decimal" }).format(value);
+
+      // "decimal"：千分位格式，將數字格式化為千分位分隔的方式，例如：1,234,567.89
+      // "percent"：百分比格式，將數字轉換為百分比形式，例如：12.34%
+      // "currency"：貨幣格式，將數字格式化為指定貨幣的形式，例如：$1,234.56
+      // "compact"：簡潔格式，根據數字大小選擇最合適的簡潔表示法，例如：1.2M
     },
     reset() {
       this.searchinput = "";

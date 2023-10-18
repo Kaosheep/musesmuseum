@@ -13,8 +13,7 @@ try {
     $members->bindValue(":statusn", $_POST["statusn"]);
     $result = $members->execute();
 
-echo ($result);
-    $response = ["message" => "新增成功"];
+    $response = "修改成功";
     echo json_encode($response);
 } catch (Exception $e) {
     echo "錯誤行號 : ", $e->getLine(), "<br>";
