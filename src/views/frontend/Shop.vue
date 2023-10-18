@@ -79,7 +79,7 @@
             />
           </span>
           <router-link :to="`/Home/ProductPage/${item.prod_id}`">
-            <span> ${{ item.prod_sellingprice }} </span>
+            <span> ${{ formatNumber(item.prod_sellingprice) }} </span>
           </router-link>
         </div>
       </div>
@@ -172,6 +172,9 @@ export default {
     },
   },
   methods: {
+    formatNumber(value) {
+      return new Intl.NumberFormat('en-US', { style: 'decimal' }).format(value);
+    },
     success(nodesc) {
       this.$Notice.success({
         title: "加入購物車",
@@ -212,9 +215,6 @@ export default {
     },
     searchClick(text) {
       this.searchinput = text.toUpperCase();
-    },
-    reset() {
-      this.searchinput = "";
     },
     priceClick(type) {
       if (this.sortType != type) {
