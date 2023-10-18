@@ -4,11 +4,13 @@
       <div class="console">
         <Row>
           <Menu
+            :key="isCheck"
             :theme="theme"
             class="list_style"
             accordion
-            open-names="['1']"
-            active-name="1-1"
+            :open-names="`['${avtiveId}']`"
+            :active-name="avtiveId"
+            @on-select="selected"
           >
             <Submenu
               v-show="test(submenu.name)"
@@ -29,7 +31,8 @@
               </MenuItem>
             </Submenu>
             <MenuItem name="1">
-              <div @click="logout()">管理員登出</div>
+              <router-link @click="logout()" to="/Admin">管理員登出</router-link>
+              <!-- <div @click="logout()">管理員登出</div> -->
             </MenuItem>
           </Menu>
         </Row>
@@ -56,6 +59,8 @@ export default {
   data() {
     return {
       all_pri: true,
+      avtiveId: "",
+      isCheck: false,
       menuData: [
         {
           name: "1",
@@ -102,6 +107,12 @@ export default {
   },
 
   methods: {
+    selected(aaa) {
+      console.log(aaa);
+      this.avtiveId = aaa;
+      localStorage.setItem("nowpage", aaa);
+    },
+
     test(id) {
       if (id == 6) {
         if (this.all_pri == 0) {
@@ -116,16 +127,20 @@ export default {
     logout() {
       // 在這裡執行登出功能，例如發送請求到後端清除會話狀態
       // 清除 cookie 的程式碼可以放在這裡或在登出功能中執行
-      this.clearCookie();
-    },
-    clearCookie() {
-      // 清除 cookie 的程式碼示例，你需要根據你的實際情況來實現
+
       document.cookie = "manager=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
       // 清除 cookie 後重新載入頁面
-      window.location.reload();
+      // window.location.reload();
     },
+    // clearCookie() {
+    //   // 清除 cookie 的程式碼示例，你需要根據你的實際情況來實現
+
+    // },
   },
   mounted() {
+    this.avtiveId = localStorage.getItem("nowpage") || 1-1;
+    this.isCheck = true;
+
     const name = "manager" + "=";
     const decodedCookie = decodeURIComponent(document.cookie);
     const cookieArray = decodedCookie.split(";");
@@ -160,7 +175,7 @@ export default {
     }
 
     if (!foundCookie) {
-      document.location.href = `${this.$store.state.publicURL}Admin`;
+      document.location.href = `/`;
     }
     return "";
   },
