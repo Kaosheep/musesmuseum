@@ -9,9 +9,7 @@
       <div class="backGroundCard">
         <div class="backGroundCardBtns">
           <router-link :to="a.link" v-for="a in memBtnLink">
-            <button
-              :class="[a.name === '票券查詢' ? 'pinkBtnLight' : 'pinkBtn']"
-            >
+            <button :class="[a.name === '票券查詢' ? 'pinkBtnLight' : 'pinkBtn']">
               {{ a.name }}
             </button>
           </router-link>
@@ -26,34 +24,22 @@
             <p class="hideInfo">付款狀態</p>
             <p>使用張數</p>
           </div>
-          <div
-            v-for="(rowitem, rowindex) in pagedProductInfo"
-            :key="rowindex"
-            :class="[rowindex % 2 === 0 ? 'yellowRow' : 'whiteRow']"
-          >
-            <div class="itemInfoList"><p>{{ rowitem.tkt_dlt_id }}</p></div>
-            <div
-              class="itemInfoList fingerlink"
-              @click="showSection(rowitem.tkt_dlt_id)"
-            >
+          <div v-for="(rowitem, rowindex) in pagedProductInfo" :key="rowindex"
+            :class="[rowindex % 2 === 0 ? 'yellowRow' : 'whiteRow']">
+            <div class="itemInfoList">
+              <p>{{ rowitem.tkt_dlt_id }}</p>
+            </div>
+            <div class="itemInfoList fingerlink" @click="showSection(rowitem.tkt_dlt_id)">
               <div class="itemLink">
                 <p>{{ rowitem.tkt_name }}</p>
                 <span class="tooltip">QRcode票劵</span>
               </div>
             </div>
 
-            <router-link
-              v-if="currentId === rowitem.tkt_dlt_id"
-              v-show="isSectionVisible"
-              :to="`/Home/TicketQRcode/${rowitem.tkt_dlt_id}`"
-            >
+            <router-link v-if="currentId === rowitem.tkt_dlt_id" v-show="isSectionVisible"
+              :to="`/Home/TicketQRcode/${rowitem.tkt_dlt_id}`">
               <section class="itemInfoList" id="showqrcode">
-                <qrcode-vue
-                  :value="`${rowitem.tkt_dlt_id}`"
-                  :size="200"
-                  level="H"
-                  :margin="2"
-                />
+                <qrcode-vue :value="`${rowitem.tkt_dlt_id}`" :size="200" level="H" :margin="2" />
                 <p>{{ rowitem.tkt_name }}</p>
               </section>
             </router-link>
@@ -71,11 +57,7 @@
               <p class="w50">{{ rowitem.tkt_dlt_qty_used }}</p>
             </div>
           </div>
-          <div
-            class="mask"
-            v-show="isSectionVisible"
-            @click="hideSection"
-          ></div>
+          <div class="mask" v-show="isSectionVisible" @click="hideSection"></div>
           <div class="underRow">
             <p>付款狀態</p>
             <div>已付款</div>
@@ -83,11 +65,7 @@
             <div>1000</div>
           </div>
           <div class="pagination">
-            <Page
-              :total="ticketDlts.length"
-              :page-size="itemsPerPage"
-              v-model="currentPage"
-            />
+            <Page :total="ticketDlts.length" :page-size="itemsPerPage" v-model="currentPage" />
           </div>
         </div>
       </div>
@@ -138,25 +116,19 @@ export default {
     },
   },
   methods: {
-    
+
     fetchprod() {
-        fetch(`${this.$store.state.publicpath}ticketqrcode.php`)
+      const currentURL = window.location.href;
+      const urlParts = currentURL.split('/');
+      const lastPart = urlParts[urlParts.length - 1];
+      fetch(`${this.$store.state.publicpath}searchticket.php?to_id=${lastPart}`)
         .then(async (response) => {
-          this.productInfoArr = await response.json();
-          this.originalProductInfoArr = [...this.productInfoArr];
-          if (this.productInfoArr.length > 0) {
-              this.currentItemId = this.productInfoArr[0].id;
-              this.rowitem = this.productInfoArr[0];
-            }
-          // const idToFind = this.$route.params.prod_id;
-          // this.rowitem = this.productInfoArr.find((rowitem) => rowitem.prod_id === idToFind); 
-          console.log('fetchprod 方法被调用了')
-          console.log(this.productInfoArr[0])
+          this.ticketDlts = await response.json();
         })
         .catch((error) => {
-          console.error('發生錯誤:', error);
+          console.error('发生错误:', error);
         });
-      },
+    },
     showSection(id) {
       this.currentId = id;
       this.isSectionVisible = true;
@@ -211,35 +183,36 @@ export default {
 };
 </script>
 <style scoped lang="scss">
-.headerRow{
-  p{
+.headerRow {
+  p {
     margin: 0;
-    &:nth-child(1){
+
+    &:nth-child(1) {
       width: 20%;
     }
-    &:nth-child(2){
+
+    &:nth-child(2) {
       width: 10%;
 
     }
-    &:nth-child(3){
+
+    &:nth-child(3) {
       width: 18%;
 
     }
-    &:nth-child(4){
 
-    }
-    &:nth-child(5){
+    &:nth-child(4) {}
 
-    }
-    &:nth-child(6){
+    &:nth-child(5) {}
 
-    }
+    &:nth-child(6) {}
   }
 }
 
 .fingerlink {
   cursor: pointer;
 }
+
 section {
   position: fixed;
   background: #f5f5f5;
@@ -247,6 +220,7 @@ section {
   border-radius: 10px;
   z-index: 9;
 }
+
 .mask {
   position: fixed;
   left: 0;
@@ -256,6 +230,7 @@ section {
   background: rgba(251, 247, 150, 0.85);
   z-index: 1;
 }
+
 #showqrcode {
   width: 280px;
   height: 300px;
@@ -263,7 +238,8 @@ section {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  p{
+
+  p {
     margin-top: 1.5rem;
     font-size: 1.5rem;
   }
@@ -274,10 +250,12 @@ section {
   display: flex;
   justify-content: space-between;
   border-top: 2px solid $mblue;
+
   p {
     color: $mgreen;
   }
 }
+
 .backGroundCard {
   align-items: flex-start;
   justify-content: center;
@@ -289,21 +267,23 @@ section {
 
 @include t() {
   .searchProdMain {
-    
-      .headerRow {
-        p {
-          margin: 0;
-          width: auto;
-        }
-      
+
+    .headerRow {
+      p {
+        margin: 0;
+        width: auto;
+      }
+
       .underRow {
         text-align: start;
         flex-wrap: wrap;
+
         p {
           width: 80px;
         }
       }
     }
+
     section {
       left: 22%;
     }
