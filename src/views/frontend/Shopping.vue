@@ -220,6 +220,7 @@ export default {
     //清除localStorage裡的商品陣列
     clean() {
       localStorage.removeItem("addItemlist");
+      this.$store.state.cartnum = 0;
     },
     //給會員編號，把該筆訂單編號抓回來
     fetchPO() {
