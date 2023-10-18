@@ -27,29 +27,24 @@
             v-for="(rowitem, rowindex) in pagedProductInfo"
             :key="rowindex"
             :class="[rowindex % 2 === 0 ? 'yellowRow' : 'whiteRow']">
+            <router-link
+                :to="`/Home/SearchProductInfo/${rowitem.po_id}`"
+                class="itemLink"
+              >
             <div class="itemInfoList">{{ rowitem.po_id }}</div>
+            <span class="tooltip">查看詳細</span>
+              </router-link>
             <div
               class="itemInfoList"
               v-if="rowitem.po_id"
               v-bind:key="rowitem.po_id"
             >
-              <router-link
-                :to="`/Home/SearchProductInfo/${rowitem.po_id}`"
-                class="itemLink"
-              >
-                  <div class="itemInfoList w140">{{ rowitem.po_id }}</div>
-                  <span class="tooltip">查看詳細</span>
-              </router-link>
-              <div class="hideInfo w100">{{ rowitem.po_date }}</div>
+                  <div class="itemInfoList w140">{{ rowitem.po_date }}</div>
               <div class="w100">{{ rowitem.po_sum }}</div>
               <div class="hideInfo w100">
                 {{ rowitem.po_pay === 0 ? "未付款" : "已付款" }}
               </div>
               <div class="w100">{{ getStatus(rowitem.po_status) }}</div>
-              <!-- <div
-                  :id="rowitem.id"
-                  :name="rowitem.name"
-                  ></div> -->
             </div>
           </div>
           <div v-show="pagedProductInfo == 0"><p>查無資料</p></div>
@@ -139,13 +134,12 @@ export default {
         const membersData = JSON.parse(decodeURIComponent(membersCookie));
         const mbr_id = membersData.mbr_id;
 
-
         fetch(`${this.$store.state.publicpath}searchproduct.php`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ mbr_id }), // 将 mbr_id 发送到后端
+          body: JSON.stringify({ mbr_id }), 
         })
           .then(async (response) => {
             this.productInfoArr = await response.json();
@@ -160,51 +154,6 @@ export default {
           });
       }
     },
-    // // =======================
-    // async fetchprod() {
-    //   function getCookieValue(cookieName) {
-    //     const cookies = document.cookie.split(";");
-    //     for (let i = 0; i < cookies.length; i++) {
-    //       const cookie = cookies[i].trim();
-    //       if (cookie.startsWith(cookieName + "=")) {
-    //         return cookie.split("=")[1];
-    //       }
-    //     }
-    //     return null;
-    //   }
-
-    //   const membersCookie = getCookieValue("members");
-    //   if (membersCookie) {
-    //     const membersData = JSON.parse(decodeURIComponent(membersCookie));
-    //     const mbr_id = membersData.mbr_id;
-
-    //     return mbr_id;
-    //   }
-    //   console.log(mbr_id); // 在控制台中顯示 mbr_id
-    //   fetch(`${this.$store.state.publicpath}searchproduct.php`, {
-    //     method: "POST",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //     body: JSON.stringify({ mbr_id }), // 将 mbr_id 发送到后端
-    //   })
-    //     .then(async (response) => {
-    //       this.productInfoArr = await response.json();
-    //       if (this.productInfoArr.length > 0) {
-    //         this.currentItemId = this.productInfoArr[0].id;
-    //         this.rowitem = this.productInfoArr[0];
-    //       }
-    //       // const idToFind = this.$route.params.prod_id;
-    //       // this.rowitem = this.productInfoArr.find((rowitem) => rowitem.prod_id === idToFind);
-    //       // console.log(rowitem);
-    //       console.log("fetchprod 方法被调用了");
-    //       console.log(this.productInfoArr);
-    //       console.log(this.rowitem.po_id);
-    //     })
-    //     .catch((error) => {
-    //       console.error("發生錯誤:", error);
-    //     });
-    // },
     getStatus(po_status) {
       po_status = parseInt(po_status);
       switch (po_status) {
