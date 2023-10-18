@@ -93,6 +93,7 @@ export default {
         this.j -= 0.5;
         gallery.style.transform = `perspective(2000px) rotateX(-5deg) rotateY(${(this.j) * angle
           }deg)`;
+        console.log(this.j)
           
         return this.j;
 

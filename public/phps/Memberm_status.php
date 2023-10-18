@@ -10,7 +10,6 @@ require_once("./connectMuses.php");
 $data = json_decode(file_get_contents('php://input'));
 $type = $data->data[0]->type;
 
-
 if($type == 1){
     $sql = "update members set mbr_status=1 where mbr_id=:id";
 }else{
