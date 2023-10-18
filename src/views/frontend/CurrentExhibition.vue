@@ -17,7 +17,7 @@
             <div class="cur_exhi_section">
                 <div class="cur_img_deco"></div>
                 <div class="cur_exhi_img">
-                    <img :src="curexhibitions[currentIndex].img" alt="">
+                    <img :src="curexhibitions[currentIndex].curexhiImg" alt="">
                 </div>
                 <div class="cur_exhi_desc">
                     <div class="cur_back_deco">
