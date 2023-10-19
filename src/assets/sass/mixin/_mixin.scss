@@ -65,6 +65,12 @@
 }
 
 //RWD
+@mixin d() {
+    @media screen and (max-width:$d) {
+        @content;
+    }
+}
+
 @mixin m() {
     @media screen and (max-width:$m) {
         @content;

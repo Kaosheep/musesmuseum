@@ -89,7 +89,7 @@ export default {
     rgba(251, 247, 150, 1) 30%,
     rgba(195, 227, 232, 1) 70%
   );
-  height: 100vh;
+  min-height: 100vh;
   @include t(){
     height: auto;
     padding-bottom: 80px;

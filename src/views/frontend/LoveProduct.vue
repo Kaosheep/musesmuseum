@@ -233,11 +233,18 @@ export default {
 };
 </script>
 <style scoped lang="scss">
+.bgcGY {
+  height: auto;
+}
 .cardCenter {
   width: 100vw;
   display: flex;
   justify-content: center;
   align-items: center;
+  @include t() {
+    height: auto;
+    padding:5rem 0 200px;
+  }
   .searchProdMain {
     width: 83.33%;
     height: 91vh;
@@ -245,6 +252,10 @@ export default {
       height: 100%;
       flex-direction: column;
       padding: 1.5rem;
+      @include t() {
+        width: auto;
+        height: auto;
+      }
       .love_search {
         width: 250px;
         margin-bottom: 0.5rem;
@@ -254,6 +265,10 @@ export default {
       .loveblock {
         display: flex;
         justify-content: space-around;
+        @include t() {
+          flex-direction: column;
+          align-items: center;
+        }
         .con {
           width: 80%;
           .shop_paginationbar {
@@ -265,6 +280,10 @@ export default {
             display: grid;
             grid-template-columns: repeat(3, 30%);
             grid-template-rows: repeat(2, 1fr);
+            @include t() {
+              grid-template-columns: repeat(2, 45%);
+              margin: auto;
+            }
             justify-items: center;
             align-items: flex-end;
             gap: 25px;

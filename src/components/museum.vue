@@ -6,7 +6,7 @@
     </button>
     <canvas id="three"></canvas>
     <div class="momap">
-      <img src="@/assets/image/museumspace/map.png" alt="">
+      <img src="@/assets/image/museumspace/map.png" alt="" />
     </div>
     <button
       v-for="local in locallist"
@@ -48,19 +48,18 @@
   margin: auto;
 
   #three {
-  
     max-width: 1500px;
-    @include m(){
+    @include m() {
       display: none;
     }
   }
-  .momap{
+  .momap {
     display: none;
     padding: 4rem 1rem;
-    @include m(){
+    @include m() {
       display: block;
     }
-    img{
+    img {
       width: 100%;
     }
   }
@@ -73,7 +72,7 @@
     border-radius: 50%;
     border: none;
     background-color: #fff;
-    @include m(){
+    @include m() {
       pointer-events: none;
     }
     p {
@@ -123,67 +122,90 @@
   }
   #store {
     top: 32%;
-    left: 70%;
+    left: 73%;
+    @include d() {
+      top: 32%;
+      left: 70%;
+    }
     @include t() {
       left: 81%;
     }
-    @include m(){
+    @include m() {
       left: 73%;
       top: 56%;
     }
   }
   #localA {
     top: 20%;
-    left: 42%;
+    left: 55%;
+    @include d {
+      top: 20%;
+      left: 42%;
+    }
     @include t() {
       top: 24%;
     }
-    @include m(){
+    @include m() {
       left: 62%;
       top: 17%;
     }
   }
   #localB {
     top: 30%;
-    left: 40%;
+    left: 53%;
+    @include d {
+      top: 30%;
+      left: 40%;
+    }
     @include t() {
       top: 33%;
-      
     }
-    @include m(){
+    @include m() {
       left: 50%;
       top: 28%;
     }
   }
   #localC {
     top: 50%;
-    left: 30%;
+    left: 45%;
+    @include d {
+      top: 50%;
+      left: 30%;
+    }
     @include t() {
       top: 58%;
     }
-    @include m(){
-      top:28%;
+    @include m() {
+      top: 28%;
       left: 25%;
     }
   }
   #rest {
     top: 43%;
-    left: 67.5%;
+    left: 70.5%;
+    @include d {
+      top: 43%;
+      left: 67.5%;
+    }
     @include t() {
       left: 77%;
     }
-    @include m(){
+    @include m() {
       left: 50%;
       top: 56%;
     }
   }
   #info {
     top: 56%;
-    left: 65%;
+    left: 68%;
+    @include d {
+      top: 56%;
+      left: 65%;
+    }
     @include t() {
       left: 72%;
     }
-    @include m(){
+    @include m() {
       left: 33%;
     }
   }
