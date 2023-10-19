@@ -69,10 +69,11 @@ export default createStore({
       commit('setIsLogin', true);
       commit('setMbrName', members.mbr_name);
     },
-    async logout({ commit }) {
+    async logout({ commit, state }) {//state
       //清除 Cookie
       document.cookie = "members=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
       commit('setIsLogin', false);
+      localStorage.setItem("cartnum", state.cartnum);//
     },
     async setBeforeUnloadEvent({ commit, state }) {
       window.addEventListener("beforeunload", (e) => {
