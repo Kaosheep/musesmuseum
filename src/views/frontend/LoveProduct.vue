@@ -1,12 +1,12 @@
 <template>
   <div class="bgcGY cardCenter">
     <main class="searchProdMain">
-      <div class="backGroundCardbBlue"></div>
-      <div class="backGroundCard">
-        <div class="love_search">
+      <div class="search">
           <Searchbar :functype="1" @update-search-text="searchClick" />
           <Searchbarclick />
         </div>
+      <div class="backGroundCard">
+        
         <div class="loveblock">
           <div class="backGroundCardBtns">
             <router-link :to="a.link" v-for="a in memBtnLink">
@@ -233,35 +233,53 @@ export default {
 };
 </script>
 <style scoped lang="scss">
-.bgcGY {
-  height: auto;
+// .bgcGY {
+//   height: auto;
+// }
+.shop_paginationbar {
+  .shop_page{
+    width: auto;
+    @include t() {
+      width: 80%;
+    }
+  }
 }
+// .searchProdMain {
+//     width: 83.33%;
+//     height: 91vh;
+//   }
 .cardCenter {
-  width: 100vw;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  // width: 100vw;
+  // display: flex;
+  // justify-content: center;
+  // align-items: center;
   @include t() {
     height: auto;
     padding:5rem 0 200px;
   }
   .searchProdMain {
     width: 83.33%;
-    height: 91vh;
+    // height: 91vh;
+    .search{
+      width: 1000px;
+    }
+    @include t() {
+      width: auto;
+    }
     .backGroundCard {
-      height: 100%;
+      // height: 100%;
       flex-direction: column;
       padding: 1.5rem;
       @include t() {
-        width: auto;
+        // width: auto;
         height: auto;
       }
-      .love_search {
-        width: 250px;
-        margin-bottom: 0.5rem;
-        text-align: start;
-        margin-left: auto;
-      }
+      // .love_search {
+      //   width: 250px;
+      //   margin-bottom: 0.5rem;
+      //   text-align: start;
+      //   margin-left: auto;
+      // }
       .loveblock {
         display: flex;
         justify-content: space-around;
