@@ -97,6 +97,14 @@ export default {
     };
   },
   methods: {
+    success(nodesc) {
+      this.$Notice.success({
+        title: "登入成功",
+        desc: nodesc
+          ? ""
+          : "Here is the notification description. Here is the notification description. ",
+      });
+    },
     generateVerificationCode() {
       this.verificationCode = Math.floor(Math.random() * 9000) + 1000;
     },
@@ -135,7 +143,7 @@ export default {
           this.mem.mbr_email == document.getElementById("mbr_email").value &&
           this.mem.mbr_psw == document.getElementById("mbr_psw").value
         ) {
-          window.alert("登入成功");
+          // window.alert("登入成功");
           document.location.href = `${this.$store.state.imgpublicpath}Home/Login`;
         } else {
           window.alert("帳密錯誤");
@@ -151,11 +159,12 @@ export default {
         }
       })
       .then((json) => {
+        this.success(true);
           if (json.result['mbr_email']) {
               let members = JSON.stringify(json.result);
               document.cookie = "members= " + members + "; expires=Thu, 01 Jan 2025 00:00:00 UTC; path=/";
               document.location.href = `${this.$store.state.imgpublicpath}Home/MemberInfo`;
-          } else {
+            } else {
               alert(json.result);
           }
       })
