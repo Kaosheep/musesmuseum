@@ -51,6 +51,25 @@ export default {
             return response.json();
         }).then(result => {
             this.po_id = result[0].po_id;
+        }).then((json) => {
+            this.fetchline();
+        }).catch(error => console.log(error));
+        },
+        // line
+        fetchline() {
+        const URL = `${this.$store.state.publicpath}shopping_line.php`;
+        const formData = new URLSearchParams();
+        formData.append('mbr_id', this.mbr_id);
+        fetch(URL, {
+            method: 'POST',
+            headers: {
+            'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'
+            },
+            body: formData,
+        }).then(response => {
+            return response.json();
+        }).then(result => {
+            this.po_id = result[0].po_id;
         }).catch(error => console.log(error));
         },
     },
