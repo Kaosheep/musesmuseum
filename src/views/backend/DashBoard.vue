@@ -190,7 +190,7 @@ export default {
     }
 
     if (!foundCookie) {
-      document.location.href = `/`;
+      document.location.href = `${this.$store.state.imgpublicpath}Admin`;
     }
     return "";
   },

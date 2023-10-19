@@ -71,7 +71,7 @@ export default createStore({
     },
     async logout({ commit }) {
       //清除 Cookie
-      document.cookie = "members=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+      document.cookie = `members=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=${state.imgpublicpath}Home;`;
       commit('setIsLogin', false);
     },
     async setBeforeUnloadEvent({ commit, state }) {

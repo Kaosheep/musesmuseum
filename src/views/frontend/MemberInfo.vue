@@ -131,7 +131,7 @@ export default {
     // },
     checkLoginStatus() {
     if (!this.$store.state.isLogin) {
-      document.location.href = `${this.$store.state.publicURL}Login`;
+      document.location.href = `${this.$store.state.imgpublicpath}Home/Login`;
     }
     },
   },

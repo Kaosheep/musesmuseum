@@ -38,7 +38,7 @@ const routes = [
         component: () => import('../views/frontend/Faq.vue')
       },
       {
-        path: 'ProductPage/:po_id',
+        path: 'ProductPage/:prod_id',
         name: 'ProductPage',
         component: () => import('../views/frontend/ProductPage.vue')
       },

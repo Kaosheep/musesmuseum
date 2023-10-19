@@ -138,7 +138,7 @@ export default {
           this.mem.mbr_psw == document.getElementById("mbr_psw").value
         ) {
           window.alert("登入成功");
-          document.location.href = `${this.$store.state.publicURL}Login`;
+          document.location.href = `${this.$store.state.imgpublicpath}Home/Login`;
         } else {
           window.alert("帳密錯誤");
         }
@@ -147,7 +147,7 @@ export default {
         if (this.memEmail) {
           let members = JSON.stringify(this.mem);
           document.cookie = "members= " + members + "; expires=Thu, 01 Jan 2025 00:00:00 UTC; path=/";
-          document.location.href = "/Home/MemberInfo";
+          document.location.href = `${this.$store.state.imgpublicpath}Home/MemberInfo`;
         } else {
           alert("無法獲取 mbr_email");
         }
@@ -156,7 +156,7 @@ export default {
           if (json.result['mbr_email']) {
               let members = JSON.stringify(json.result);
               document.cookie = "members= " + members + "; expires=Thu, 01 Jan 2025 00:00:00 UTC; path=/";
-              document.location.href = "/Home/MemberInfo";
+              document.location.href = `${this.$store.state.imgpublicpath}Home/MemberInfo`;
           } else {
               alert(json.result);
           }
