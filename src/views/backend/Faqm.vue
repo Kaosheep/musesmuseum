@@ -61,7 +61,7 @@
         @submit.prevent="submitForm"
         id="edform"
       >
-        <h2>編輯</h2>
+        <h2>{{ faq.title}}</h2>
         <div class="xedit" v-show="addfaqs">
           <div>
             <div>問題編號</div>
@@ -70,7 +70,7 @@
         </div>
         
         <div>
-          <div>標題</div>
+          <div>問題</div>
           <textarea 
             name="" 
             id="" 
@@ -79,7 +79,7 @@
             rows="3">
           </textarea>
 
-          <div>內容</div>
+          <div>答案</div>
           <textarea
             name=""
             id=""
@@ -137,6 +137,14 @@ export default {
     };
   },
   methods: {
+    warning(nodesc, w) {
+      this.$Notice.warning({
+        title: w,
+        desc: nodesc
+        ? ""
+        : "Here is the notification description. Here is the notification description. ",
+      });
+    }, 
     searchClick(text) {
       this.searchinput = text;
     },
@@ -206,6 +214,7 @@ export default {
     },
     showEditForm(type, id) {
       if (type == "add") {
+        this.faq.title = "新增";
         this.addfaqs = false;
         this.add_faq = [
           {
@@ -218,6 +227,7 @@ export default {
         this.addfaqs = true;
       }
       if (type == "edit") {
+        this.faq.title = "編輯";
         const url = `${this.$store.state.publicpath}faq_list.php`;
         let headers = {
           "Content-Type": "application/json",
@@ -271,7 +281,7 @@ export default {
               return response.json();
               //跳更新成功的通知
             } else {
-              throw new Error("更改失敗");
+              throw new Error("新增失敗");
             }
           })
           .then((json) => {
@@ -284,6 +294,11 @@ export default {
             console.log(error.message);
           });
       } else {
+         if (this.add_faq.question == undefined) {
+          this.warning(true, "未輸入問題");
+        } else if (this.add_faq.ans == undefined) {
+          this.warning(true, "未輸入答案");
+        }else{
         const url = `${this.$store.state.publicpath}faq_add.php`;
         const formData = new FormData();
         formData.append("id", this.add_faq.id);
@@ -310,6 +325,7 @@ export default {
           .catch((error) => {
             console.log(error.message);
           });
+        }
       }
     },
     fetchfaq() {
