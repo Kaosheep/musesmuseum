@@ -112,7 +112,7 @@ export default {
       if (cookie.indexOf(name) === 0) {
         console.log(cookie.substring(name.length, cookie.length));
         if (cookie.substring(name.length, cookie.length)) {
-          document.location.href = `${this.$store.state.publicURL}DashBoard`;
+          document.location.href = `${this.$store.state.imgpublicpath}DashBoard`;
         }
       }
     }

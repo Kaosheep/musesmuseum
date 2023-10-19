@@ -71,7 +71,7 @@ export default createStore({
     },
     async logout({ commit, state }) {//state
       //清除 Cookie
-      document.cookie = "members=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+      document.cookie = `members=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=${state.imgpublicpath}Home;`;
       commit('setIsLogin', false);
       localStorage.setItem("cartnum", state.cartnum);//
     },

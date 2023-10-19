@@ -64,7 +64,7 @@
         >會員登入</router-link
       >
       <span v-else>
-        <a href="/Home" @click="logout">登出</a>
+        <router-link to="/Home" @click="logout">登出</router-link>
       </span>
     </div>
     <div class="menu">

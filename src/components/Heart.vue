@@ -69,7 +69,7 @@ export default {
     uplove() {
       
       if (!this.$store.state.mbr_id) {
-        document.location.href = `${this.$store.state.imgpublicpath}Home/MemberInfo`;
+        document.location.href = `${this.$store.state.imgpublicpath}Home/Login`;
       } else {
         const formData = new URLSearchParams();
         formData.append("prod_id", this.loveid);
