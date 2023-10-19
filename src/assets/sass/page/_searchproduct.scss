@@ -1,4 +1,5 @@
 .searchProdMain{
+    white-space:nowrap;
     height: 100%;
     z-index: 10;
     .backGroundCard{
@@ -96,7 +97,6 @@
         z-index: 1;
     }
     .itemInfoList{
-        // width: 100%;
         display: contents;
         img{
             width:70px;
