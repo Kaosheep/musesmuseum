@@ -135,7 +135,7 @@ export default {
         { link: "/Home/Login", name: "會員登入" },
       ],
       rep: "",
-      isuse: "",
+      isuse: false,
     };
   },
   methods: {
@@ -176,7 +176,7 @@ export default {
         this.warning(true, "未輸入信箱");
       } else if (!emailPattern.test(email)) {
         this.warning(true, "信箱格式錯誤");
-      } else if (!isuse) {
+      } else if (!this.isuse) {
         this.warning(true, "信箱已使用");
       } else if (memPsw == "") {
         this.warning(true, "未輸入密碼");
