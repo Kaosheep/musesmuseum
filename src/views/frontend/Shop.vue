@@ -68,7 +68,7 @@
         </router-link>
         <div class="info">
           <span>
-            <Heart :loveid="item.prod_id"> </Heart>
+            <Heart :loveid="item.prod_id"></Heart>
             <router-link :to="`/Home/ProductPage/${item.prod_id}`">
               <p>{{ item.prod_name }}</p>
             </router-link>
@@ -173,7 +173,7 @@ export default {
   },
   methods: {
     formatPrice(value) {
-      return new Intl.NumberFormat('en-US', { style: 'decimal' }).format(value);
+      return new Intl.NumberFormat("en-US", { style: "decimal" }).format(value);
     },
     success(nodesc) {
       this.$Notice.success({
@@ -220,35 +220,52 @@ export default {
         this.sortType = type;
       }
     },
+    warning(nodesc, w) {
+      this.$Notice.warning({
+        title: w,
+        desc: nodesc
+          ? ""
+          : "Here is the notification description. Here is the notification description. ",
+      });
+    },
     addcart(prod_id) {
-      this.success(true);
-      if (this.storage["addItemlist"] == null) {
-        this.storage["addItemlist"] = "";
-      }
-      let additem = this.produstdislist.find(
-        (item) => item.prod_id === prod_id
-      );
-
-      this.storage["addItemlist"] += `${prod_id},`;
-      if (this.storage[prod_id]) {
-        let itemstr = [...this.storage[prod_id].split(",")];
-        // console.log(itemstr)
-        let nowamount = parseInt(itemstr.slice(4, 5));
-        nowamount++;
-        itemstr.splice(4, 1, nowamount);
-        this.storage[prod_id] = "";
-        this.storage[prod_id] += itemstr;
+      if (!this.$store.state.mbr_id) {
+        this.warning(true, "請先登入");
+        setTimeout(() => {
+          document.location.href = `${this.$store.state.imgpublicpath}Home/Login`;
+        }, 500);
       } else {
-        this.storage[prod_id] = "";
-        this.storage[prod_id] += `${prod_id},`;
-        this.storage[prod_id] += `${additem.prod_name},`;
-        this.storage[prod_id] += `${additem.prod_sellingprice},`;
-        this.storage[prod_id] += `${additem.prod_img},`;
-        this.storage[prod_id] += "1,";
+        if (this.storage["addItemlist"] == null) {
+          this.storage["addItemlist"] = "";
+        }
+        let additem = this.produstdislist.find(
+          (item) => item.prod_id === prod_id
+        );
+
+        this.storage["addItemlist"] += `${prod_id},`;
+        if (this.storage[prod_id]) {
+          let itemstr = [...this.storage[prod_id].split(",")];
+          // console.log(itemstr)
+          let nowamount = parseInt(itemstr.slice(4, 5));
+          nowamount++;
+          itemstr.splice(4, 1, nowamount);
+          this.storage[prod_id] = "";
+          this.storage[prod_id] += itemstr;
+        } else {
+          this.storage[prod_id] = "";
+          this.storage[prod_id] += `${prod_id},`;
+          this.storage[prod_id] += `${additem.prod_name},`;
+          this.storage[prod_id] += `${additem.prod_sellingprice},`;
+          this.storage[prod_id] += `${additem.prod_img},`;
+          this.storage[prod_id] += "1,";
+        }
+        this.success(true);
       }
     },
     addstore() {
-      this.$store.state.cartnum += 1;
+      if (this.$store.state.mbr_id) {
+        this.$store.state.cartnum += 1;
+      }
     },
   },
   mounted() {

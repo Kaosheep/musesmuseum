@@ -79,13 +79,13 @@ export default {
   },
   data() {
     return {
-      prod_id:"",
+      prod_id: "",
       count: 1,
       foundObject: {},
       produstdislist: [],
       lovescol: [],
       storage: localStorage,
-      // publicpath: "http://localhost/musesmuseum/public/phps/",
+      publicpath: "http://localhost/musesmuseum/public/phps/",
     };
   },
   methods: {
@@ -130,34 +130,58 @@ export default {
     increase() {
       this.count++;
     },
+    success(nodesc, json) {
+      this.$Notice.success({
+        title: json,
+        desc: nodesc
+          ? ""
+          : "Here is the notification description. Here is the notification description. ",
+      });
+    },
+    warning(nodesc, w) {
+      this.$Notice.warning({
+        title: w,
+        desc: nodesc
+          ? ""
+          : "Here is the notification description. Here is the notification description. ",
+      });
+    },
     addcart() {
-      this.$store.state.cartnum += this.count;
-      const prod_id = this.$route.params.prod_id;
-
-      if (this.storage["addItemlist"] == null) {
-        this.storage["addItemlist"] = "";
-      }
-      let additem = this.produstdislist.find(
-        (item) => item.prod_id === prod_id
-      );
-
-      this.storage["addItemlist"] += `${prod_id},`;
-      if (this.storage[prod_id]) {
-        let itemstr = [...this.storage[prod_id].split(",")];
-        let nowamount = parseInt(itemstr.slice(4, 5));
-        let inputnum = this.count;
-        nowamount += inputnum;
-        itemstr.splice(4, 1, nowamount);
-        this.storage[prod_id] = "";
-        this.storage[prod_id] += itemstr;
+      if (!this.$store.state.mbr_id) {
+        this.warning(true, "請先登入");
+        setTimeout(() => {
+          document.location.href = `${this.$store.state.imgpublicpath}Home/Login`;
+        }, 500);
       } else {
-        this.storage[prod_id] = "";
-        this.storage[prod_id] += `${prod_id},`;
-        this.storage[prod_id] += `${additem.prod_name},`;
-        this.storage[prod_id] += `${additem.prod_sellingprice},`;
-        this.storage[prod_id] += `${additem.prod_img},`;
-        this.storage[prod_id] += this.count;
+        this.$store.state.cartnum += this.count;
+        const prod_id = this.$route.params.prod_id;
+
+        if (this.storage["addItemlist"] == null) {
+          this.storage["addItemlist"] = "";
+        }
+        let additem = this.produstdislist.find(
+          (item) => item.prod_id === prod_id
+        );
+
+        this.storage["addItemlist"] += `${prod_id},`;
+        if (this.storage[prod_id]) {
+          let itemstr = [...this.storage[prod_id].split(",")];
+          let nowamount = parseInt(itemstr.slice(4, 5));
+          let inputnum = this.count;
+          nowamount += inputnum;
+          itemstr.splice(4, 1, nowamount);
+          this.storage[prod_id] = "";
+          this.storage[prod_id] += itemstr;
+        } else {
+          this.storage[prod_id] = "";
+          this.storage[prod_id] += `${prod_id},`;
+          this.storage[prod_id] += `${additem.prod_name},`;
+          this.storage[prod_id] += `${additem.prod_sellingprice},`;
+          this.storage[prod_id] += `${additem.prod_img},`;
+          this.storage[prod_id] += this.count;
+        }
       }
+      this.success(true, "加入購物車");
     },
   },
   watch: {

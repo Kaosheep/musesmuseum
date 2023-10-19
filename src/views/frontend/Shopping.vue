@@ -77,9 +77,8 @@
     </div>
   </div>
   <div class="shopping_finish">
-    <router-link to="/home/ShoppingSuccess">
-      <button class="pinkBtn" @click="getOrderInfo">送出訂單</button>
-    </router-link>
+    <!-- <router-link to="/home/ShoppingSuccess"> -->
+    <button class="pinkBtn" @click="getOrderInfo">送出訂單</button>
   </div>
 </template>
 
@@ -100,7 +99,7 @@ export default {
       selectedCounty: "請選擇",
       selectedDistrict: "請選擇",
       publicpath: "http://localhost/musesmuseum/public/phps/",
-      mbr_id: "M0001",
+      memAllInfo: {},
       po_addr: "",
       po_phone: "",
       po_name: "",
@@ -129,6 +128,15 @@ export default {
     },
   },
   methods: {
+    warning(nodesc, w) {
+      this.$Notice.warning({
+        title: w,
+        desc: nodesc
+          ? ""
+          : "Here is the notification description. Here is the notification description. ",
+      });
+    },
+    //給商品價格千分位
     formatPrice(value) {
       return new Intl.NumberFormat("zh-TW", { style: "decimal" }).format(value);
     },
@@ -191,30 +199,44 @@ export default {
     },
     //得到訂單資訊，並送回資料庫建檔
     getOrderInfo() {
-      const URL = `${this.$store.state.publicpath}shopping_info.php`;
-      const formDataObj = {
-        mbr_id: this.mbr_id,
-        po_date: this.nowDay,
-        po_sum: this.bill,
-        po_addr: this.po_addr,
-        po_area: this.selectedDistrict.district_name,
-        po_city: this.selectedCounty.county_name,
-        po_phone: this.po_phone,
-        po_name: this.po_name,
-      };
+      console.log(this.po_name);
+      if (this.po_name === "") {
+        this.warning(true, "請輸入收件人");
+      } else if (this.selectedCounty.county_name == undefined) {
+        this.warning(true, "請選擇縣市");
+      } else if (this.selectedDistrict.district_name == undefined) {
+        this.warning(true, "請選擇區域");
+      } else if (this.po_addr === "") {
+        this.warning(true, "請輸入地址");
+      } else if (this.po_phone === "") {
+        this.warning(true, "請輸入連絡電話");
+      } else {
+        const URL = `${this.$store.state.publicpath}shopping_info.php`;
+        const formDataObj = {
+          mbr_id: this.$store.state.mbr_id,
+          po_date: this.nowDay,
+          po_sum: this.bill,
+          po_addr: this.po_addr,
+          po_area: this.selectedDistrict.district_name,
+          po_city: this.selectedCounty.county_name,
+          po_phone: this.po_phone,
+          po_name: this.po_name,
+        };
+        fetch(URL, {
+          method: "POST",
+          body: JSON.stringify(formDataObj),
+        })
+          .then((response) => {
+            return response.json();
+          })
+          .then((result) => {
+            this.fetchPO();
+            this.clean();
 
-      fetch(URL, {
-        method: "POST",
-        body: JSON.stringify(formDataObj),
-      })
-        .then((response) => {
-          return response.json();
-        })
-        .then((result) => {
-          this.fetchPO();
-          this.clean();
-        })
-        .catch((error) => console.log(error));
+            document.location.href = `${this.$store.state.imgpublicpath}Home/ShoppingSuccess`;
+          })
+          .catch((error) => console.log(error));
+      }
     },
     //清除localStorage裡的商品陣列
     clean() {
@@ -225,7 +247,8 @@ export default {
     fetchPO() {
       const URL = `${this.$store.state.publicpath}shopping_getpoid.php`;
       const formData = new URLSearchParams();
-      formData.append("mbr_id", this.mbr_id);
+      formData.append("mbr_id", this.$store.state.mbr_id);
+      // console.log(this.$store.state.mbr_id);
       fetch(URL, {
         method: "POST",
         headers: {
@@ -267,10 +290,38 @@ export default {
   },
   mounted() {
     this.fetchCounty();
+
     this.timeFormate();
+
     if (localStorage.length > 0) {
       this.getitemarr();
     }
+
+      const cookies = document.cookie.split(";");
+      let members = null;
+
+      for (let i = 0; i < cookies.length; i++) {
+        const cookie = cookies[i].trim();
+        if (cookie.startsWith("members=")) {
+          members = decodeURIComponent(cookie.substring("members=".length));
+
+          break;
+        }
+      }
+
+      if (members) {
+        try {
+          const memberInfo = JSON.parse(members);
+          if (memberInfo.mbr_name && memberInfo.mbr_email) {
+            this.memAllInfo = memberInfo;
+            this.$store.state.mbr_id = this.memAllInfo.mbr_id;
+          } else {
+            console.error("Cookie中缺少屬性");
+          }
+        } catch (error) {
+          console.error("解析Cookie數據錯誤", error);
+        }
+      }
   },
 };
 </script>
