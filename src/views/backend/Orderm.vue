@@ -216,7 +216,6 @@ export default {
         body: formData,
       }).then(async (response) => {
         this.orddlt = await response.json();
-        console.log(this.orddlt);
       });
       this.showForm = true;
       this.selectedPoStatus = status;
@@ -259,7 +258,6 @@ export default {
       fetch(`${this.$store.state.publicpath}ord.php`)
         .then(async (response) => {
           this.ordlist = await response.json();
-          console.log(this.ordlist);
         })
         .then((json) => {
           let blockw = document.querySelector(".po_block").offsetHeight;

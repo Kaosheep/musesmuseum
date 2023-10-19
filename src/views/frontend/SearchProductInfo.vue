@@ -97,7 +97,6 @@ export default {
       const urlParts = currentURL.split('/');
       const lastPart = urlParts[urlParts.length - 1];
 
-      console.log(lastPart)
       fetch(`${this.$store.state.publicpath}searchproductinfo.php`, {
       method: "POST",
       headers: {
@@ -115,7 +114,6 @@ export default {
       .then((data) => {
         this.productInfoArr = data;
         this.rowitem = data[0]; 
-        console.log(data);
       })
       .catch((error) => {
         console.log(error);

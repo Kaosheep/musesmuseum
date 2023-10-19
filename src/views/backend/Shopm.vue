@@ -261,11 +261,8 @@ export default {
     inchecked(id, e) {
       if (e.target.checked) {
         this.prodched.push({ id: id });
-        console.log(this.prodched);
-        console.log(Object.values(this.prodched));
       } else {
         this.prodched.splice(this.prodched.indexOf(id), 1);
-        console.log(this.prodched);
       }
     },
     updatestatus(b) {
@@ -361,7 +358,6 @@ export default {
       fetch(`${this.$store.state.publicpath}shop_prod_list.php`)
         .then(async (response) => {
           this.produstdislist = await response.json();
-          console.log(this.produstdislist);
         })
         .then((json) => {
           let blockw = document.querySelector(".prods_block").offsetHeight;
@@ -427,7 +423,6 @@ export default {
         })
           .then((response) => {
             if (response.ok) {
-              console.log(response.ok);
               return response.json();
             } else {
               throw new Error("新增失敗");

@@ -147,7 +147,6 @@ export default {
         } else {
           this.nameError = false;
         }
-        console.log("aaaaaa")
         if (!this.add_news.email) {
           this.emailError = true;
           
@@ -171,7 +170,7 @@ export default {
       this.passwordError = false;
 
       if (id !== undefined) {
-        console.log(id);
+   
         const url = `${this.$store.state.publicpath}manager_updateupload.php`;
         const formData = new FormData();
         formData.append("id", this.add_news.id);
@@ -186,14 +185,13 @@ export default {
         })
           .then((response) => {
             if (response.ok) {
-              console.log(response.ok);
+    
               return response.json();
             } else {
               throw new Error("新增失敗");
             }
           })
           .then((json) => {
-            console.log(json)
             this.success(true, json);
             this.fetchnew();
             this.add_news = [];
@@ -268,11 +266,8 @@ export default {
     inchecked(id, e) {
       if (e.target.checked) {
         this.newsched.push({ id: id });
-        console.log(this.newsched);
-        console.log(Object.values(this.newsched));
       } else {
         this.newsched.splice(this.newsched.indexOf(id), 1);
-        console.log(this.newsched);
       }
     },
     fetchnew() {

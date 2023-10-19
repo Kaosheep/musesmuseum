@@ -108,14 +108,12 @@ export default {
 
   methods: {
     selected(page) {
-      console.log(page);
       this.avtiveId = page;
       localStorage.setItem("nowpage", page);
 
       if (this.avtiveId) {
         open = this.avtiveId.split("-")[0];
         localStorage.setItem("open", open);
-        console.log(open);
       }
     },
 
@@ -133,8 +131,6 @@ export default {
     logout() {
       localStorage.removeItem("nowpage");
       localStorage.removeItem("open");
-      console.log(localStorage.getItem("nowpage"));
-      console.log(localStorage.getItem("open"));
       localStorage.clear();
       document.cookie = "manager=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
     },
@@ -154,8 +150,6 @@ export default {
       localStorage.setItem("open", "1");
     }
     this.isCheck = true;
-    console.log(this.open);
-
     const name = "manager" + "=";
     const decodedCookie = decodeURIComponent(document.cookie);
     const cookieArray = decodedCookie.split(";");
@@ -178,10 +172,7 @@ export default {
 
       if (cookie.indexOf(name) === 0) {
         foundCookie = true;
-        console.log(cookie.split("=")[1]);
-        console.log(JSON.parse(cookie.split("=")[1]));
         let cookie_vale = JSON.parse(cookie.split("=")[1])["ma_type"];
-        console.log(cookie_vale);
         if (cookie_vale == 0) {
           this.all_pri = false;
         }

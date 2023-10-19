@@ -110,7 +110,6 @@ export default {
         cookie = cookie.substring(1);
       }
       if (cookie.indexOf(name) === 0) {
-        console.log(cookie.substring(name.length, cookie.length));
         if (cookie.substring(name.length, cookie.length)) {
           document.location.href = `${this.$store.state.imgpublicpath}DashBoard`;
         }

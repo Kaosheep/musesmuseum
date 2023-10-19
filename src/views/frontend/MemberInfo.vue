@@ -147,7 +147,6 @@ export default {
 
     for (let i = 0; i < cookies.length; i++) {
       const cookie = cookies[i].trim();
-      console.log(cookie);
       if (cookie.startsWith('members=')) {
         members = decodeURIComponent(cookie.substring('members='.length));
         break;
@@ -157,7 +156,6 @@ export default {
     if (members) {
       try {
         const memberInfo = JSON.parse(members);
-        console.log(memberInfo)
         if (memberInfo.mbr_name && memberInfo.mbr_email) {
           this.mbr_name = memberInfo.mbr_name;
           this.memAllInfo.push(memberInfo);

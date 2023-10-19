@@ -138,7 +138,6 @@ export default {
         let itemstr = [...localStorage[it].split(",")];
         return this.itemarr.push(itemstr);
       });
-      console.log(this.itemarr);
     },
     //把城市抓回來
     fetchCounty() {

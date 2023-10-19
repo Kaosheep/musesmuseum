@@ -125,7 +125,6 @@ export default {
       fetch(`${this.$store.state.publicpath}shop.php`)
         .then(async (response) => {
           this.produstdislist = await response.json();
-          console.log(this.produstdislist);
         })
         .catch((error) => {
           console.error("發生錯誤:", error);

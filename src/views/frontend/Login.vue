@@ -111,7 +111,6 @@ export default {
     checkLoginData() {
       // 驗證
       if (this.enteredCode === this.verificationCode.toString()) {
-        console.log("驗證成功");
         let input = {
           mbr_email: document.getElementById("mbr_email").value,
           mbr_psw: document.getElementById("mbr_psw").value,
@@ -129,7 +128,6 @@ export default {
         return response.json();
       })
       .then((result) => {
-        console.log(this.mem)
         this.mem = result;
         this.memEmail = result.mbr_email;
         this.memName = result.mbr_name;
@@ -185,7 +183,6 @@ export default {
           cookie = cookie.substring(1);
       }
       if (cookie.indexOf(name) === 0) {
-          console.log(cookie.substring(name.length, cookie.length));
           if(cookie.substring(name.length, cookie.length)){
               // document.location.href = "/Home/MemberInfo";
           }

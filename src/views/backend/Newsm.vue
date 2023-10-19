@@ -227,7 +227,6 @@ export default {
         this.newsched.push({ id: id });
       } else {
         this.newsched.splice(this.newsched.indexOf(id), 1);
-        console.log(this.newsched);
       }
     },
     updatestatus(b) {

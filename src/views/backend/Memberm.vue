@@ -185,14 +185,13 @@ export default {
         formData.append("district", this.members.district);
         formData.append("addr", this.members.addr);
         formData.append("statusn", this.members.statusn);
-        console.log(this.members.statusn);
+    
         fetch(url, {
           method: "POST",
           body: formData,
         })
           .then((response) => {
             if (response.ok) {
-              console.log(response.ok);
               return response.json();
             } else {
               throw new Error("新增失敗");
@@ -240,11 +239,8 @@ export default {
     inchecked(id, e) {
       if (e.target.checked) {
         this.newsched.push({ id: id });
-        console.log(this.newsched);
-        console.log(Object.values(this.newsched));
       } else {
         this.newsched.splice(this.newsched.indexOf(id), 1);
-        console.log(this.newsched);
       }
     },
     updatestatus(b) {
@@ -289,7 +285,6 @@ export default {
     },
     showEditForm(type, id) {
       if (type == "add") {
-        console.log(id);
         this.members = [
           {
             id: "",
@@ -321,7 +316,6 @@ export default {
         })
           .then((response) => {
             if (response.ok) {
-              console.log(response.ok);
               return response.json();
             } else {
               throw new Error("取得失敗");

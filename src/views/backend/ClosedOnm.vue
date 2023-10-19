@@ -202,7 +202,7 @@ export default {
             }
           })
           .then(json => {
-            console.log(json.news_date)
+            
             this.add_news.title = json.news_title;
             this.add_news.content = json.news_content;
             this.add_news.date = json.news_date;
@@ -250,7 +250,7 @@ export default {
             }
           })
           .then(json => {
-            console.log(json)
+
             // 在成功時顯示提示
             alert(json.message); // 假設JSON數據中有一個message屬性
             window.location.reload()
@@ -290,8 +290,7 @@ export default {
             }
           })
           .then(json => {
-            console.log(json)
-            // 在成功時顯示提示
+
             alert(json.message); // 假設JSON數據中有一個message屬性
             window.location.reload()
           })
@@ -334,7 +333,7 @@ export default {
         }
       })
       .then(json => {
-        console.log(json)
+
         this.news = json;
         // 在成功時顯示提示
         // alert(json.message); // 假設JSON數據中有一個message屬性

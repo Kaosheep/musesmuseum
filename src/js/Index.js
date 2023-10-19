@@ -42,7 +42,6 @@ export default {
   methods: {
     closehint(){
       this.$store.state.first = true;
-      console.log(this.$store.state.first)
     },
     totop() {
       window.scrollTo(0, 0);
@@ -86,14 +85,14 @@ export default {
         this.j += 0.5;
         gallery.style.transform = `perspective(2000px) rotateX(-5deg) rotateY(${(this.j) * angle
           }deg)`;
-        console.log(this.j)
+     
         return this.j;
       });
       document.querySelector('.gbtnr').addEventListener("click", (e) => {
         this.j -= 0.5;
         gallery.style.transform = `perspective(2000px) rotateX(-5deg) rotateY(${(this.j) * angle
           }deg)`;
-        console.log(this.j)
+    
           
         return this.j;
 

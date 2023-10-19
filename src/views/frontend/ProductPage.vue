@@ -117,7 +117,6 @@ export default {
           this.foundObject = this.produstdislist.find(
             (item) => item.prod_id === idToFind
           );
-          alert(this.$route.params.po_id)
         })
         .catch((error) => {
           console.error("發生錯誤:", error);

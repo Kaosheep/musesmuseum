@@ -139,7 +139,6 @@ export default {
     getTktDlt() {
       const formData = new URLSearchParams();
       formData.append("mbr_id", this.memAllInfo["mbr_id"]);
-      console.log(this.memAllInfo["mbr_id"]);
       fetch(`${this.$store.state.publicpath}tkt_dlt.php`, {
         method: "POST",
         headers: {
@@ -200,15 +199,8 @@ export default {
       width: 18%;
 
     }
-
-    &:nth-child(4) {}
-
-    &:nth-child(5) {}
-
-    &:nth-child(6) {}
-  }
 }
-
+}
 .fingerlink {
   cursor: pointer;
 }

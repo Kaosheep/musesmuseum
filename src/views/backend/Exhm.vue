@@ -199,7 +199,6 @@ export default {
                         }
                     })
                     .then((json) => {
-                        console.log(json);
                         this.success(true, json);
                         this.fetchnew();
                         this.newsched = [];
@@ -217,7 +216,6 @@ export default {
                 this.newsched.push({ id: id });
             } else {
                 this.newsched.splice(this.newsched.indexOf(id), 1);
-                console.log(this.newsched);
             }
         },
         updatestatus(b) {
@@ -300,12 +298,6 @@ export default {
                         }
                     })
                     .then((json) => {
-                        // title: "",
-                        // content: "",
-                        // startDate: "",
-                        // endDate: "",
-                        // status: "",
-                        console.log(json)
                         this.formData.id = json.exh_id;
                         this.formData.title = json.exh_name;
                         this.formData.content = json.exh_desc;

@@ -182,7 +182,7 @@ export default {
         this.faqched.push({ id: id });
       } else {
         this.faqched.splice(this.faqched.indexOf(id), 1);
-        console.log(this.faqched);
+
       }
     },
 
