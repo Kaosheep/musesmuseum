@@ -5,7 +5,7 @@ header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Ac
 header("Content-Type: application/json"); 
 try{
 	require_once("./connectMuses.php");
-    $sql = "select * from news order by news_date DESC limit 3"; 
+    $sql = "select * from news where news_status = 1 order by news_date DESC limit 3"; 
     $news = $pdo->query($sql); 
     $news->execute();
     $newRows = $news->fetchAll(PDO::FETCH_ASSOC);
@@ -17,7 +17,7 @@ try{
     $prods->execute();
     $prodRows = $prods->fetchAll(PDO::FETCH_ASSOC);
 
-    $sql2 = "select * from exhibitions limit 6"; 
+    $sql2 = "select * from exhibitions order by exh_startdate DESC limit 6"; 
     $exbs = $pdo->query($sql2);
     $exbs->execute();
     $exbRows = $exbs->fetchAll(PDO::FETCH_ASSOC);

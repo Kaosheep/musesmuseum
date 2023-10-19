@@ -61,7 +61,8 @@
         </div>
       </div>
       <form class="pop" v-show="showForm" @submit.prevent id="edform">
-        <h2>編輯</h2>
+        <h2 v-show="addnews">編輯</h2>
+        <h2 v-show="!addnews">新增</h2>
         <div class="xedit" v-show="addnews">
           <div>
             <div>消息編號</div>
