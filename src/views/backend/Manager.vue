@@ -23,7 +23,7 @@
                 type="checkbox"
                 class="statusinput"
                 @change="inchecked(i.ma_id, $event)"
-                v-show="i.ma_id != 'MA001'"
+                v-show="i.ma_id !== 'MA001' || i.ma_id === '1'"
               />
             </td>
             <td>{{ i.ma_id }}</td>
@@ -35,7 +35,7 @@
             <td>
               <button
                 class="edit"
-                v-show="i.ma_id != 'MA001'"
+                v-show="i.ma_id !== 'MA001' || i.ma_id === '1'"
                 @click="showEditForm('edit', i.ma_id)"
               >
                 編輯
@@ -44,7 +44,7 @@
           </tr>
         </table>
         <form action="" class="pop" v-show="showForm">
-          <h2>編輯</h2>
+          <h2>{{ notice }}</h2>
           <div v-show="addnews">
             <div>管理員編號</div>
             <div v-text="add_news.id"></div>
@@ -300,6 +300,7 @@ export default {
     },
     showEditForm(type, id) {
       if (type == "add") {
+        this.notice = "新增";
         this.addnews = false;
         this.add_news = [
           {
@@ -311,6 +312,7 @@ export default {
           },
         ];
       } else if (type == "edit") {
+        this.notice = "編輯";
         this.addnews = true;
         const url = `${this.$store.state.publicpath}manager_list.php`;
         let headers = {
