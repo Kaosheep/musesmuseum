@@ -63,14 +63,8 @@
           />
         </div>
       </div>
-      <form
-        action=""
-        class="pop"
-        v-show="showForm"
-        @submit.prevent="submitForm"
-        id="edform"
-      >
-        <h2>編輯</h2>
+      <form class="pop" v-show="showForm" @submit.prevent id="edform">
+        <h2>{{ showFormTitle }}</h2>
         <div class="info_col" v-show="addprod">
           <div>
             <div>商品編號</div>
@@ -137,6 +131,7 @@
           <PinkButton
             class="btn_admin"
             text="儲存"
+            save
             @click="addprod_btn(add_prod.id)"
           />
         </div>
@@ -168,6 +163,7 @@ export default {
       src: 0,
       currentPage: 1,
       pageItems: 10,
+      showFormTitle: "",
       searchinput: "",
       prodched: [],
       add_prod: [
@@ -203,9 +199,13 @@ export default {
     },
     formatSellingPrice: {
       get() {
-        return new Intl.NumberFormat("zh-TW", { style: "decimal" }).format(
-          this.add_prod.sellingprice
-        );
+        if (this.add_prod.sellingprice == undefined) {
+          return (this.add_prod.fixedprice = 0);
+        } else {
+          return new Intl.NumberFormat("zh-TW", { style: "decimal" }).format(
+            this.add_prod.sellingprice
+          );
+        }
       },
       set(newValue) {
         const valueWithoutCommas = parseFloat(newValue.replace(/,/g, ""));
@@ -217,9 +217,13 @@ export default {
     },
     formatFixedPrice: {
       get() {
-        return new Intl.NumberFormat("zh-TW", { style: "decimal" }).format(
-          this.add_prod.fixedprice
-        );
+        if (this.add_prod.fixedprice == undefined) {
+          return (this.add_prod.fixedprice = 0);
+        } else {
+          return new Intl.NumberFormat("zh-TW", { style: "decimal" }).format(
+            this.add_prod.fixedprice
+          );
+        }
       },
       set(newValue) {
         const valueWithoutCommas = parseFloat(newValue.replace(/,/g, ""));
@@ -242,6 +246,14 @@ export default {
     success(nodesc, json) {
       this.$Notice.success({
         title: json,
+        desc: nodesc
+          ? ""
+          : "Here is the notification description. Here is the notification description. ",
+      });
+    },
+    warning(nodesc, w) {
+      this.$Notice.warning({
+        title: w,
         desc: nodesc
           ? ""
           : "Here is the notification description. Here is the notification description. ",
@@ -299,11 +311,10 @@ export default {
     },
     submitForm() {
       this.hideEditForm();
-      this.fetchprod();
-      this.prodched = [];
     },
     showEditForm(type, id) {
       if (type == "add") {
+        this.showFormTitle = "新增";
         this.addprod = true;
         this.add_prod = [
           {
@@ -323,6 +334,7 @@ export default {
         this.addprod = true;
       }
       if (type == "edit") {
+        this.showFormTitle = "編輯";
         const url = `${this.$store.state.publicpath}prod_list.php`;
         let headers = {
           "Content-Type": "application/json",
@@ -372,6 +384,7 @@ export default {
           console.error("發生錯誤:", error);
         });
     },
+    //新增
     addprod_btn(id) {
       if (id != undefined) {
         const url = `${this.$store.state.publicpath}shop_updateupload.php`;
@@ -408,36 +421,55 @@ export default {
             console.log(error.message);
           });
       } else {
-        const url = `${this.$store.state.publicpath}shop_insertupload.php`;
-        const formData = new FormData();
-        this.add_prod.id = 0;
-        formData.append("id", this.add_prod.id);
-        formData.append("name", this.add_prod.name);
-        formData.append("desc", this.add_prod.desc);
-        formData.append("status", this.add_prod.status);
-        formData.append("kind", this.add_prod.kind);
-        formData.append("fixedprice", this.add_prod.fixedprice);
-        formData.append("spec", this.add_prod.spec);
-        formData.append("sellingprice", this.add_prod.sellingprice);
-        formData.append("img", document.getElementById("fileimg").files[0]);
+        if (this.add_prod_name === null) {
+          this.warning(true, "請輸入產品名稱");
+        } else if (this.add_prod_desc === null) {
+          this.warning(true, "請輸入商品敘述");
+        } else if (this.add_prod_spec === null) {
+          this.warning(true, "請輸入商品規格");
+        } else if (this.add_prod_kind === null) {
+          this.warning(true, "請輸入分類");
+        } else if (this.add_prod_fixedprice === null) {
+          this.warning(true, "請輸入定價");
+        } else if (this.add_prod_sellingprice === null) {
+          this.warning(true, "請輸入售價");
+        } else if (this.add_prod_img === null) {
+          this.warning(true, "未選擇圖片");
+        } else {
+          const url = `${this.$store.state.publicpath}shop_insertupload.php`;
+          const formData = new FormData();
+          this.add_prod.id = 0;
+          formData.append("id", this.add_prod.id);
+          formData.append("name", this.add_prod.name);
+          formData.append("desc", this.add_prod.desc);
+          formData.append("status", this.add_prod.status);
+          formData.append("kind", this.add_prod.kind);
+          formData.append("fixedprice", this.add_prod.fixedprice);
+          formData.append("spec", this.add_prod.spec);
+          formData.append("sellingprice", this.add_prod.sellingprice);
+          formData.append("img", document.getElementById("fileimg").files[0]);
 
-        fetch(url, {
-          method: "POST",
-          body: formData,
-        })
-          .then((response) => {
-            if (response.ok) {
-              return response.json();
-            } else {
-              throw new Error("新增失敗");
-            }
+          fetch(url, {
+            method: "POST",
+            body: formData,
           })
-          .then((json) => {
-            this.success(true, json);
-          })
-          .catch((error) => {
-            console.log(error.message);
-          });
+            .then((response) => {
+              if (response.ok) {
+                return response.json();
+              } else {
+                throw new Error("新增失敗");
+              }
+            })
+            .then((json) => {
+              this.hideEditForm();
+              this.success(true, json);
+              this.fetchprod();
+              this.add_prod = [];
+            })
+            .catch((error) => {
+              console.log(error.message);
+            });
+        }
       }
     },
     searchClick(text) {

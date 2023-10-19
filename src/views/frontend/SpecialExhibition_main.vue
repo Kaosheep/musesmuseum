@@ -9,25 +9,21 @@
       <div class="exb_search">
         <Searchbar></Searchbar>
       </div>
-      <div class="slideshow">
-
-        <div class="slideshow_main">
-          <span class="exhi_title">當期展覽</span>
-          <router-link to="/Home/SpecialExhibition">
-            <img src="@/assets/image/exhibition/specialexhibition/spec_ex0.jpg" alt="" />
-            <div class="deco_main"></div>
-          </router-link>
-          <span class="exhi_period">2024/02/01-2024/03/30</span>
-          <span class="exhi_name">春之詠歌：多彩藝術的季節華章</span>
-        </div>
-
-        <div class="slideshow_left">
-          <img src="@/assets/image/exhibition/specialexhibition/spec_ex1.png" alt="" />
-        </div>
-        <div class="slideshow_right">
-          <img src="@/assets/image/exhibition/specialexhibition/spec_ex3.jpg" alt="" />
-        </div>
-      </div>
+      <span class="exhi_title">當期展覽</span>
+      <Carousel v-model="value" :autoplay="setting.autoplay" :autoplay-speed="setting.autoplaySpeed" :dots="setting.dots"
+        :radius-dot="setting.radiusDot" :trigger="setting.trigger" :arrow="setting.arrow" class="exhi_carousel">
+        <CarouselItem v-for="(img, imgindex) in galleryimgs"> 
+          <div class="exhtxt">
+            {{ img.exh_name }}<br>
+            {{ img.exh_startdate }}
+          </div>
+          <div class="exhcarousel">
+            <img :src="`${this.$store.state.imgpublicpath}image/exhi/` +
+              img.exh_img
+              " alt="" />
+          </div>
+        </CarouselItem>
+      </Carousel>
     </div>
   </main>
 </template>
@@ -39,6 +35,31 @@ export default {
     VerHeader,
     Searchbar,
   },
-};
+  data() {
+    return {
+      value: 0,
+      setting: {
+        autoplay: true,
+        autoplaySpeed: 5500,
+        dots: 'inside',
+        radiusDot: true,
+        trigger: 'click',
+        arrow: 'always'
+      },
+      galleryimgs: [],
+    }
+  },
+  methods: {
+    fetchexhi() {
+      fetch(`${this.$store.state.publicpath}spex_fetch.php`).then(async (response) => {
+        this.galleryimgs = await response.json();
+      });
+    }
+  },
+  mounted() {
+    this.fetchexhi();
+
+  },
+}
 </script>
 <style scoped lang="scss"></style>
