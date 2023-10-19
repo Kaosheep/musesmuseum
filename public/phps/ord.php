@@ -14,7 +14,7 @@
 
         //如果找得資料，取回資料，送出json
         if ($ords->rowCount() === 0) {
-            echo "查無資料";
+            echo json_encode("查無資料");
         } else {
             $ordsRow = $ords->fetchAll(PDO::FETCH_ASSOC);
                         

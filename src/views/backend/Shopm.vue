@@ -33,6 +33,7 @@
             <tr v-for="item in getPageItems" :key="item.prod_id" v-else>
               <td>
                 <input
+                  class="statusinput"
                   type="checkbox"
                   @change="inchecked(item.prod_id, $event)"
                 />
@@ -285,6 +286,9 @@ export default {
           this.success(true, json);
           this.fetchprod();
           this.prodched = [];
+          document.querySelectorAll(".statusinput").forEach((inputb) => {
+            inputb.checked = false;
+          });
         })
         .catch(function (error) {
           console.log(error);

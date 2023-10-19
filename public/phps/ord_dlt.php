@@ -19,7 +19,7 @@ try{
 
         //如果找得資料，取回資料，送出json
         if ($dlts->rowCount() === 0) {
-            echo "查無資料";
+            echo json_encode("查無資料");
         } else {
             $dltsRow = $dlts->fetchAll(PDO::FETCH_ASSOC);
                         

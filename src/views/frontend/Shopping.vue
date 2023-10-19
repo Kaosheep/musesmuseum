@@ -24,7 +24,13 @@
       <select class="deliverway" v-model="selected">
         <option v-for="way in deliverway">{{ way.ship }}</option>
       </select>
-      <label><input type="checkbox" />收件人同會員資訊</label>
+      <label
+        ><input
+          type="checkbox"
+          v-model="isChecked"
+          @change="inchecked()"
+        />收件人同會員資訊</label
+      >
       <label
         >收件人：
         <input type="text" class="textInner" required v-model="po_name" />
@@ -105,6 +111,7 @@ export default {
       po_name: "",
       nowDay: "",
       po_id: "",
+      isChecked: false,
     };
   },
   computed: {
@@ -128,6 +135,17 @@ export default {
     },
   },
   methods: {
+    inchecked() {
+      if (this.isChecked) {
+        this.po_phone = this.memAllInfo.mbr_phone;
+        this.po_name = this.memAllInfo.mbr_name;
+        this.po_addr = this.memAllInfo.mbr_addr;
+      } else {
+        this.po_phone = null;
+        this.po_name = null;
+        this.po_addr = null;
+      }
+    },
     warning(nodesc, w) {
       this.$Notice.warning({
         title: w,
@@ -297,31 +315,31 @@ export default {
       this.getitemarr();
     }
 
-      const cookies = document.cookie.split(";");
-      let members = null;
+    const cookies = document.cookie.split(";");
+    let members = null;
 
-      for (let i = 0; i < cookies.length; i++) {
-        const cookie = cookies[i].trim();
-        if (cookie.startsWith("members=")) {
-          members = decodeURIComponent(cookie.substring("members=".length));
+    for (let i = 0; i < cookies.length; i++) {
+      const cookie = cookies[i].trim();
+      if (cookie.startsWith("members=")) {
+        members = decodeURIComponent(cookie.substring("members=".length));
 
-          break;
-        }
+        break;
       }
+    }
 
-      if (members) {
-        try {
-          const memberInfo = JSON.parse(members);
-          if (memberInfo.mbr_name && memberInfo.mbr_email) {
-            this.memAllInfo = memberInfo;
-            this.$store.state.mbr_id = this.memAllInfo.mbr_id;
-          } else {
-            console.error("Cookie中缺少屬性");
-          }
-        } catch (error) {
-          console.error("解析Cookie數據錯誤", error);
+    if (members) {
+      try {
+        const memberInfo = JSON.parse(members);
+        if (memberInfo.mbr_name && memberInfo.mbr_email) {
+          this.memAllInfo = memberInfo;
+          this.$store.state.mbr_id = this.memAllInfo.mbr_id;
+        } else {
+          console.error("Cookie中缺少屬性");
         }
+      } catch (error) {
+        console.error("解析Cookie數據錯誤", error);
       }
+    }
   },
 };
 </script>
