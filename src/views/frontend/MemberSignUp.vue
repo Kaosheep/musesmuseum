@@ -176,6 +176,8 @@ export default {
         this.warning(true, "未輸入信箱");
       } else if (!emailPattern.test(email)) {
         this.warning(true, "信箱格式錯誤");
+      } else if (!isuse) {
+        this.warning(true, "信箱已使用");
       } else if (memPsw == "") {
         this.warning(true, "未輸入密碼");
       } else if (!pswPattern.test(memPsw)) {
