@@ -32,12 +32,8 @@
             <input class="fillInClumn" type="text" :id="`${i.mbr_id}-address`" placeholder="addres" :value="i.mbr_addr"
               required />
           </div>
-          <!-- <div class="resetPswEmail">
-            <a href="#">信箱驗證</a>
-          </div> -->
           <div class="memloginSubmit">
             <input type="button" id="btnLogin" class="submitBtn" value="送出" @click="sendUserData" />
-            <!-- <input type="button" id="btnCancel" value="取消"> -->
           </div>
         </form>
       </div>
@@ -88,14 +84,12 @@ export default {
     getuser() {
       fetch(`${this.$store.state.publicpath}MemberInfo.php`)
         .then(response => {
-     
           return response.json();
         })
         .then(result => {
           this.mbr_name = result.mbr_name;
           if (Array.isArray(result)) {
             this.memAllInfo = result
-       
           } else {
             // alert("無法取得資料");
           }

@@ -19,7 +19,6 @@
           <div class="headerRow">
             <p>訂票編號</p>
             <p>票劵</p>
-            <p class="hideInfo">訂購日期</p>
             <p>總金額</p>
             <p class="hideInfo">付款狀態</p>
             <p>使用張數</p>
@@ -43,9 +42,6 @@
                 <p>{{ rowitem.tkt_name }}</p>
               </section>
             </router-link>
-            <div class="itemInfoList hideInfo">
-              <p class="w50">{{ rowitem.to_date }}</p>
-            </div>
             <div class="itemInfoList">
               <p class="w50">{{ rowitem.tkt_dlt_total }}</p>
             </div>
@@ -58,12 +54,6 @@
             </div>
           </div>
           <div class="mask" v-show="isSectionVisible" @click="hideSection"></div>
-          <div class="underRow">
-            <p>付款狀態</p>
-            <div>已付款</div>
-            <p>總金額</p>
-            <div>1000</div>
-          </div>
           <div class="pagination">
             <Page :total="ticketDlts.length" :page-size="itemsPerPage" v-model="currentPage" />
           </div>
@@ -234,17 +224,6 @@ section {
   p {
     margin-top: 1.5rem;
     font-size: 1.5rem;
-  }
-}
-
-.underRow {
-  padding: 10px 16px;
-  display: flex;
-  justify-content: space-between;
-  border-top: 2px solid $mblue;
-
-  p {
-    color: $mgreen;
   }
 }
 
