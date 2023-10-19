@@ -23,7 +23,7 @@
                 type="checkbox"
                 class="statusinput"
                 @change="inchecked(i.ma_id, $event)"
-                v-show="i.ma_id !== 'MA001' && i.ma_id !=='1'"
+                v-show="i.ma_id !== 'MA001' && i.ma_id !== '1'"
               />
             </td>
             <td>{{ i.ma_id }}</td>
@@ -35,7 +35,7 @@
             <td>
               <button
                 class="edit"
-                v-show="i.ma_id !== 'MA001' && i.ma_id !=='1'"
+                v-show="i.ma_id !== 'MA001' && i.ma_id !== '1'"
                 @click="showEditForm('edit', i.ma_id)"
               >
                 編輯
@@ -65,7 +65,7 @@
             <div>
               <div>密碼</div>
               <input type="password" v-model="add_news.psw" />
-              <span v-if="passwordError || !add_news.psw">請輸入正確密碼</span>
+              <span v-if="passwordError || !add_news.psw">請輸入密碼</span>
             </div>
           </div>
           <div class="switch_status">
@@ -149,7 +149,6 @@ export default {
         }
         if (!this.add_news.email) {
           this.emailError = true;
-          
         } else {
           this.emailError = false;
         }
@@ -163,14 +162,17 @@ export default {
         this.add_news = [];
         return; // 阻止提交
       }
-
+      if (!this.isValidEmail(this.add_news.email)) {
+        this.emailError = true;
+        this.error(true, "email格式錯誤");
+        return; // 阻止提交
+      }
       // 如果所有字段都不为空，清除错误信息
       this.nameError = false;
       this.emailError = false;
       this.passwordError = false;
 
       if (id !== undefined) {
-   
         const url = `${this.$store.state.publicpath}manager_updateupload.php`;
         const formData = new FormData();
         formData.append("id", this.add_news.id);
@@ -185,7 +187,6 @@ export default {
         })
           .then((response) => {
             if (response.ok) {
-    
               return response.json();
             } else {
               throw new Error("新增失敗");
@@ -231,7 +232,7 @@ export default {
       }
     },
     hideEditForm() {
-      this.type = 0 ;
+      this.type = 0;
       this.showForm = false;
     },
     deleten() {
@@ -361,10 +362,10 @@ export default {
   }
 }
 // class="ivu-menu-item ivu-menu-item-active ivu-menu-item-selected"
-.ivu-menu-item-selected{
+.ivu-menu-item-selected {
   color: black;
 }
-.ivu-menu-light.ivu-menu-vertical .ivu-menu-item-active:not(.ivu-menu-submenu){
+.ivu-menu-light.ivu-menu-vertical .ivu-menu-item-active:not(.ivu-menu-submenu) {
   color: black;
 }
 div {
