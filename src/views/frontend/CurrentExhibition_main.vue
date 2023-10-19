@@ -1,31 +1,26 @@
 <template>
-  <main class="specexhi_main">
+  <main class="curexhi_main">
     <!-- 導覽列 -->
     <div class="carousel_header">
       <VerHeader :title="'展 覽 區 Exhibitions'"></VerHeader>
     </div>
-    <div class="container">
+    <div class="current_container">
       <!-- 搜尋列 -->
-      <div class="exb_search">
+      <div class="curexb_search">
         <Searchbar></Searchbar>
       </div>
-      <div class="curr_slideshow">
-        <div class="curr_slideshow_main">
-          <span class="curr_exhi_title">常設展覽</span>
-          <router-link to="/Home/CurrentExhibition">
-            <img class="curr_main_img" src="@/assets/image/exhibition/currentexhibition/curr_ex0.jpg" alt="" />
-            <div class="curr_deco_main"></div>
-          </router-link>
-          <span class="curr_exhi_name">色彩之旅：印象主義大師</span>
-        </div>
-
-        <div class="current_slideshow_left">
-          <img src="@/assets/image/exhibition/currentexhibition/curr_ex1.jpg" alt="" />
-        </div>
-        <div class="current_slideshow_right">
-          <img src="@/assets/image/exhibition/currentexhibition/curr_ex2.jpg" alt="" />
-        </div>
+      <span class="cur_title">常設展覽</span>
+      <Carousel v-model="value" :autoplay="setting.autoplay" :autoplay-speed="setting.autoplaySpeed" :dots="setting.dots"
+    :radius-dot="setting.radiusDot" :trigger="setting.trigger" :arrow="setting.arrow" class="cur_exhi_carousel">
+    <CarouselItem v-for="(exhibition, index) in curexhibitions" :key="index">
+      <div class="cur_exhtxt">
+        {{ exhibition.curexhiTitle }}
       </div>
+      <div class="cur_exhcarousel">
+        <img :src="exhibition.curexhiImg" alt="">
+      </div>
+    </CarouselItem>
+  </Carousel>
     </div>
   </main>
 </template>
@@ -37,6 +32,38 @@ export default {
     VerHeader,
     Searchbar,
   },
-};
+  data() {
+    return {
+      value: 0,
+      setting: {
+        autoplay: true,
+        autoplaySpeed: 5500,
+        dots: 'inside',
+        radiusDot: true,
+        trigger: 'click',
+        arrow: 'always'
+      },
+      curexhibitions: [
+                {
+                    curexhiImg: "http://localhost/musesmuseum/public/image/exhi/spec_ex6.jpg",
+                    curexhiTitle: "色彩之旅：印象主義大師",
+                },
+                {
+                    curexhiImg: "http://localhost/musesmuseum/public/image/exhi/spec_ex7.jpg",
+                    curexhiTitle: "城市攝影：鏡像內心的多重情感",
+                },
+                {
+                    curexhiImg: "http://localhost/musesmuseum/public/image/exhi/spec_ex5.jpg",
+                    curexhiTitle: "萌翻你的心！小瓢蟲大出動",
+                },
+                {
+                    curexhiImg: "http://localhost/musesmuseum/public/image/exhi/spec_ex8.jpg",
+                    curexhiTitle: "藍色之路： 來自波斯的瑰麗藝術",
+                },
+            ],
+            currentIndex: 0,
+    }
+  },
+}
 </script>
 <style scoped lang="scss"></style>

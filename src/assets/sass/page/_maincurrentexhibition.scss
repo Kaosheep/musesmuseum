@@ -1,103 +1,155 @@
 template {
     position: relative;
 }
-.specexhi_main {
+
+.curexhi_main {
     width: 95%;
     height: 100vh;
     margin-left: auto;
     display: flex;
     overflow: hidden;
 }
-.container {
+
+.current_container {
     width: calc(100% - 64px);
-    .exb_search {
+    position: relative;
+
+    .curexb_search {
         margin: auto;
         margin-top: 2%;
         text-align: end;
         width: 83.33%;
     }
-    .curr_slideshow {
+
+    .cur_title {
+        font-size: 20px;
+        background-color: #009CA8;
+        padding: 1%;
+        border-radius: 4px;
+        color: #fff;
+        font-weight: bold;
+        text-align: center;
+        position: absolute;
+        z-index: 2;
+    }
+
+    .cur_exhi_carousel {
+        width: 83.33%;
+        margin: auto;
+        padding-top: 2%;
+    }
+
+    .cur_exhcarousel {
+        width: 100%;
+        height: 70vh;
+        padding-top: 2%;
+    }
+
+    .cur_exhcarousel img {
         width: 100%;
         height: 100%;
-        position: relative;
-        .curr_slideshow_main {
-            width: 30%;
-            position: absolute;
-            left: 48%;
-            top: 46%;
-            transform: translate(-50%, -50%);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            .curr_exhi_title {
-                display: block;
-                background-color: #009CA8;
-                padding: 2%;
-                border-radius: 4px;
-                color: #fff;
-                font-weight: bold;
-                text-align: center;
-                position: absolute;
-                top: -30%;
-                left: 0%;
-            }
-            .curr_main_img {
-                width: 100%;
-                vertical-align: bottom;
-                border: 3px solid #EB5F86;
-                border-radius: 4px;
-            }
-            .curr_deco_main {
-                content: "";
-                width: 100%;
-                height: 100%;
-                background: radial-gradient(circle, #EB5F86 10%, transparent 11%),
-                    radial-gradient(circle at bottom left, #EB5F86 5%, transparent 6%),
-                    radial-gradient(circle at bottom right, #EB5F86 5%, transparent 6%),
-                    radial-gradient(circle at top left, #EB5F86 5%, transparent 6%),
-                    radial-gradient(circle at top right, #EB5F86 5%, transparent 6%);
-                background-size: 0.9em 0.8em;
-                background-color: transparent;
-                opacity: 1;
-                border: 3px solid #EB5F86;
-                border-radius: 4px;
-                position: absolute;
-                left: 5%;
-                bottom: 6%;
-                z-index: -1;
-            }
-            .curr_exhi_name {
-                color: #1E5289;
-                font-weight: bold;
-                display: block;
-                position: absolute;
-                bottom: -15%;
-            }
-        }
-        .current_slideshow_left {
-            width: 15%;
-            position: absolute;
-            left: 3%;
-            top: 7%;
-            img {
-                width: 100%;
-                vertical-align: bottom;
-                border-radius: 4px;
-                border: 3px solid #EB5F86;
-            }
-        }
-        .current_slideshow_right {
-            width: 15%;
-            position: absolute;
-            right: 3%;
-            bottom: 12%;
-            img {
-                width: 100%;
-                vertical-align: bottom;
-                border-radius: 4px;
-                border: 3px solid #EB5F86;
-            }
-        }
+        object-fit: contain;
     }
+
+    .cur_exhtxt {
+        text-align: center;
+        font-weight: bold;
+    }
+
+    //   .exhtxt {
+    //     width: 100%;  /* 確保文本內容佔滿父容器 */
+    //     text-align: center;  /* 文本置中 */
+    //   }
+    // .slideshow {
+    //     width: 100%;
+    //     height: 100%;
+    //     position: relative;
+    //     .slideshow_main {
+    //         width: 40%;
+    //         position: absolute;
+    //         left: 48%;
+    //         top: 46%;
+    //         transform: translate(-50%, -50%);
+    //         display: flex;
+    //         flex-direction: column;
+    //         align-items: center;
+    //         text-align: center;
+    //         .exhi_title {
+    //             display: block;
+    //             background-color: #EB5F86;
+    //             padding: 2%;
+    //             border-radius: 4px;
+    //             color: #fff;
+    //             font-weight: bold;
+    //             text-align: center;
+    //             position: absolute;
+    //             top: -30%;
+    //             left: 0%;
+    //         }
+    //         img {
+    //             width: 100%;
+    //             vertical-align: bottom;
+    //             border: 3px solid #009CA8;
+    //             border-radius: 4px;
+    //         }
+    //         .deco_main {
+    //             content: "";
+    //             width: 100%;
+    //             height: 100%;
+    //             background: radial-gradient(circle, #009CA8 10%, transparent 11%),
+    //                 radial-gradient(circle at bottom left, #009CA8 5%, transparent 6%),
+    //                 radial-gradient(circle at bottom right, #009CA8 5%, transparent 6%),
+    //                 radial-gradient(circle at top left, #009CA8 5%, transparent 6%),
+    //                 radial-gradient(circle at top right, #009CA8 5%, transparent 6%);
+    //             background-size: 0.9em 0.8em;
+    //             background-color: transparent;
+    //             opacity: 1;
+    //             border: 3px solid #009CA8;
+    //             border-radius: 4px;
+    //             position: absolute;
+    //             left: 5%;
+    //             bottom: 6%;
+    //             z-index: -1;
+    //         }
+    //         .exhi_period {
+    //             color: #1E5289;
+    //             font-weight: bold;
+    //             display: block;
+    //             position: absolute;
+    //             bottom: -12%;
+    //         }
+    //         .exhi_name {
+    //             color: #1E5289;
+    //             font-weight: bold;
+    //             display: block;
+    //             position: absolute;
+    //             bottom: -22%;
+    //         }
+    //     }
+    //     .slideshow_left {
+    //         width: 15%;
+    //         position: absolute;
+    //         left: 3%;
+    //         top: 7%;
+    //         img {
+    //             width: 100%;
+    //             vertical-align: bottom;
+    //             border-radius: 4px;
+    //             padding: 8px;
+    //             border: 3px solid #009CA8;
+    //         }
+    //     }
+    //     .slideshow_right {
+    //         width: 15%;
+    //         position: absolute;
+    //         right: 3%;
+    //         bottom: 12%;
+    //         img {
+    //             width: 100%;
+    //             vertical-align: bottom;
+    //             border-radius: 4px;
+    //             border: 3px solid #009CA8;
+    //         }
+    //     }
+    // }
 }
