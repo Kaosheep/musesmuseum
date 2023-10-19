@@ -71,10 +71,12 @@ export default createStore({
     },
     async logout({ commit, state }) {//state
       //清除 Cookie
-      document.cookie = `members=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=${state.imgpublicpath}Home;`;
+      document.cookie = `members=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
       commit('setIsLogin', false);
       commit('setMbrName', ''); 
+      localStorage.removeItem('members');//
       localStorage.setItem("cartnum", state.cartnum);//
+      
     },
     async setBeforeUnloadEvent({ commit, state }) {
       window.addEventListener("beforeunload", (e) => {
