@@ -33,6 +33,14 @@ export default {
     },
   },
   methods: {
+    warning(nodesc, w) {
+      this.$Notice.warning({
+        title: w,
+        desc: nodesc
+          ? ""
+          : "Here is the notification description. Here is the notification description. ",
+      });
+    },
     success(nodesc, json) {
       this.$Notice.success({
         title: json,
@@ -67,9 +75,11 @@ export default {
         });
     },
     uplove() {
-      
       if (!this.$store.state.mbr_id) {
-        document.location.href = `${this.$store.state.imgpublicpath}Home/Login`;
+        this.warning(true, "請先登入");
+        setTimeout(() => {
+          document.location.href = `${this.$store.state.imgpublicpath}Home/Login`;
+        }, 500);
       } else {
         const formData = new URLSearchParams();
         formData.append("prod_id", this.loveid);
@@ -91,7 +101,7 @@ export default {
           })
           .then((json) => {
             this.success(true, json);
-            this.lovescol=[];
+            this.lovescol = [];
             this.getlove();
           });
       }
