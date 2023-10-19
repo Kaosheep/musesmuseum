@@ -57,7 +57,7 @@
         v-for="(i, index) in orddlt"
         :key="index"
       >
-        <h2>編輯</h2>
+        <h2>{{ showFormTitle }}</h2>
         <div class="info_row">
           <div>
             <div>訂單編號</div>
@@ -150,6 +150,7 @@ export default {
       currentPage: 1,
       pageItems: 10,
       searchinput: "",
+      showFormTitle: "",
     };
   },
   computed: {
@@ -203,6 +204,7 @@ export default {
       this.searchinput = text.toUpperCase();
     },
     showEditForm(id, status, pay) {
+      this.showFormTitle = "編輯";
       this.po_id = id;
 
       const formData = new URLSearchParams();
