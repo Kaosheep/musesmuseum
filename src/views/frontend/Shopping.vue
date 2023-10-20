@@ -251,8 +251,6 @@ export default {
           .then((result) => {
             this.fetchPO();
             this.clean();
-
-            document.location.href = `${this.$store.state.imgpublicpath}Home/ShoppingSuccess`;
           })
           .catch((error) => console.log(error));
       }
@@ -301,6 +299,8 @@ export default {
             body: JSON.stringify(orderDLTObj),
           });
           const result = await response.json();
+
+          document.location.href = `${this.$store.state.imgpublicpath}Home/ShoppingSuccess`;
         } catch (error) {
           console.log(error);
         }
