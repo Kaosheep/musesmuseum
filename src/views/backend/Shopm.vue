@@ -528,7 +528,7 @@ div {
 .admin_editbar {
   display: flex;
   background-color: #f2f2f2;
-  padding: 5px;
+  padding: 1.5rem 10px;
   border-radius: 10px 10px 0 0;
 }
 
@@ -540,11 +540,9 @@ div {
 }
 
 .btn_admin {
-  margin-right: 10px;
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin-left: 1rem;
   width: 70px;
-  height: 40px;
+  height: 35px;
   background-color: $mblue;
   color: #fff;
   border: none;
