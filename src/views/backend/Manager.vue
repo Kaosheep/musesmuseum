@@ -74,6 +74,13 @@
             <input type="password" v-model="passwordConfirm" />
             <span v-if="passwordConfirm != add_news.psw">請輸入相同密碼</span>
           </div>
+          <div class="switch_status">
+            <div>狀態</div>
+            <select v-model="type">
+              <option value="1">全權</option>
+              <option value="0">部分</option>
+            </select>
+          </div>
 
           <div class="form_btn">
             <button type="button" class="btn_admin" @click="hideEditForm">取消</button>
@@ -207,7 +214,7 @@ export default {
         formData.append("name", this.add_news.name);
         formData.append("email", this.add_news.email);
         formData.append("psw", this.add_news.psw);
-        formData.append("type", this.add_news.type);
+        formData.append("type", this.type);
 
         fetch(url, {
           method: "POST",
