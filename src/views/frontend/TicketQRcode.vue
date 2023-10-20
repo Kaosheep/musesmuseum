@@ -86,6 +86,7 @@ export default {
         { link: "/Home/MemberInfo", name: "會員資料" },
         { link: "/Home/SearchProduct", name: "訂單查詢" },
         { link: "/Home/SearchTicket", name: "票券查詢" },
+        { link: "/Home/LoveProduct", name: "收藏清單" },
       ],
       currentPage: 1,
       itemsPerPage: 5,
@@ -116,7 +117,7 @@ export default {
           this.ticketDlts = await response.json();
         })
         .catch((error) => {
-          console.error('发生错误:', error);
+          console.error('發生錯誤:', error);
         });
     },
     showSection(id) {
