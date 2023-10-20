@@ -3,7 +3,6 @@
     <main class="searchProdMain">
       <div class="search">
         <Searchbar :functype="1" @update-search-text="searchClick" />
-        <Searchbarclick />
       </div>
       <div class="backGroundCard">
         <div class="backGroundCardBtns">

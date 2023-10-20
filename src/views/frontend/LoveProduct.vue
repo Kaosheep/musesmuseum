@@ -3,7 +3,6 @@
     <main class="searchProdMain">
       <div class="search">
         <Searchbar :functype="1" @update-search-text="searchClick" />
-        <Searchbarclick />
       </div>
       <div class="backGroundCard">
 
@@ -218,13 +217,13 @@ export default {
     padding: 3rem 3rem 1.5rem;
   }
 }
-@include t(){
-  .comfooter {
-  .cube {
-    z-index: 10;
-  }
-}
-}
+// @include t(){
+//   .comfooter {
+//   .cube {
+//     z-index: 10;
+//   }
+// }
+// }
 .shop_paginationbar {
   .shop_page {
     width: auto;
@@ -252,7 +251,7 @@ export default {
 
   .searchProdMain {
     width: 83.33%;
-
+    margin: 50px 0 100px 0;
     // height: 91vh;
     @include t() {
       width: auto;
@@ -307,7 +306,7 @@ export default {
 
             // grid-template-rows: repeat(2, 1fr);
             @include t() {
-              grid-template-columns: repeat(2, 45%);
+              grid-template-columns: unset;
               margin: auto;
             }
 
