@@ -27,20 +27,21 @@
             />
             <span v-if="i.id == 'email'">
               <span v-if="inputData.email">
-                <span v-if="isuse == 'true'">
-                  <font-awesome-icon :icon="['far', 'circle-check']" />
+                <span v-if="ismail">
+                  <span v-if="isuse == 'true'">
+                    <font-awesome-icon :icon="['far', 'circle-check']" />
+                  </span>
+                  <span v-if="isuse == 'false'">
+                    <font-awesome-icon :icon="['far', 'circle-xmark']" />
+                  </span>
+                  <span v-show="isuse == 'true'">此email可使用</span>
+                  <span v-show="isuse == 'false'">此email已被註冊</span>
                 </span>
-                <span v-if="isuse == 'false'">
-                  <font-awesome-icon :icon="['far', 'circle-xmark']" />
-                </span>
-              </span>
-              <span v-if="inputData.email">
-               
-                <span v-show="isuse == 'true'">此email可使用</span>
-                <span v-show="isuse == 'false'">此email已被註冊</span>
+                <span v-else
+                  ><font-awesome-icon :icon="['fas', 'triangle-exclamation']" />非正確格式</span
+                >
               </span>
             </span>
-            <!-- <span class="psw" v-if="i.id == 'memPsw'" style="font-size: 12px;white-space: nowrap;transform: translateY(-10px);">至少 6 個字元，要有大小寫字母，至少一個數字</span> -->
           </div>
 
           <div class="memloginSubmit">
@@ -60,6 +61,7 @@
 
 <script>
 import Footer from "@/components/Footer.vue";
+import { faL } from "@fortawesome/free-solid-svg-icons";
 export default {
   components: {
     Footer,
@@ -139,15 +141,14 @@ export default {
         { link: "/Home/Login", name: "會員登入" },
       ],
       isuse: false,
+      ismail: false,
     };
   },
   methods: {
     success(nodesc, json) {
       this.$Notice.success({
         title: json,
-        desc: nodesc
-          ? ""
-          : "請重新登入，將會在0.5秒後跳轉",
+        desc: nodesc ? "" : "請重新登入，將會在0.5秒後跳轉",
       });
     },
     warning(nodesc, w) {
@@ -177,7 +178,7 @@ export default {
         this.warning(true, "未輸入信箱");
       } else if (!emailPattern.test(email)) {
         this.warning(true, "信箱格式錯誤");
-      } else if (this.isuse == 'false') {
+      } else if (this.isuse == "false") {
         this.warning(true, "信箱已使用");
       } else if (memPsw == "") {
         this.warning(true, "未輸入密碼");
@@ -227,7 +228,7 @@ export default {
     checkemail() {
       const formData = new URLSearchParams();
       formData.append("email", document.getElementById("email").value);
-      
+
       fetch(`${this.$store.state.publicpath}emailrespons.php`, {
         method: "POST",
         headers: {
@@ -237,7 +238,7 @@ export default {
       })
         .then((response) => {
           if (response.ok) {
-            return response.json(); 
+            return response.json();
           } else {
             throw new Error("取得消息失敗"); // 如果請求不成功，拋出錯誤
           }
@@ -249,15 +250,21 @@ export default {
           console.log(error.message);
         });
     },
+    checkismail() {
+      const email = document.getElementById("email").value;
+      const emailPattern = /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
+
+      this.ismail = emailPattern.test(email);
+    },
   },
   mounted() {
     let emailinput = document.getElementById("email");
     emailinput.addEventListener("change", this.checkemail);
+    emailinput.addEventListener("change", this.checkismail);
   },
 };
 </script>
 <style scoped lang="scss">
-
 @include t() {
   .backGroundCard {
     form {
