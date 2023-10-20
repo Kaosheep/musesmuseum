@@ -40,7 +40,7 @@
                 <span v-show="isuse == 'false'">此email已被註冊</span>
               </span>
             </span>
-            <span class="psw" v-if="i.id == 'memPsw'" style="font-size: 12px;white-space: nowrap;transform: translateY(-10px);">至少 6 個字元，要有大小寫字母，至少一個數字</span>
+            <!-- <span class="psw" v-if="i.id == 'memPsw'" style="font-size: 12px;white-space: nowrap;transform: translateY(-10px);">至少 6 個字元，要有大小寫字母，至少一個數字</span> -->
           </div>
 
           <div class="memloginSubmit">
