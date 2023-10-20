@@ -142,13 +142,15 @@
                 width: 100%;
                 padding: 0 5px;
                 p{
-                    // margin: 0 15px;
-                    // width: auto;
+                    margin: 0 15px;
+                    width: auto;
                 }
             }
         }
         .search{
             height:auto;
+            width: auto;
+            margin: auto;
             .searchbar_search{
                 display: none;
             }

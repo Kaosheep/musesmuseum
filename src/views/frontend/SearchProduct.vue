@@ -3,6 +3,7 @@
     <main class="searchProdMain">
       <div class="search">
         <Searchbar :functype="1" @update-search-text="searchClick" />
+        <Searchbarclick />
       </div>
       <div class="backGroundCard">
         <div class="backGroundCardBtns">
@@ -88,7 +89,7 @@ export default {
         { link: "/Home/LoveProduct", name: "收藏清單" },
       ],
       currentPage: 1,
-      itemsPerPage: 5,
+      itemsPerPage: 4,
       searchinput: "",
     };
   },

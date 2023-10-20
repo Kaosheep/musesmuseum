@@ -2,17 +2,15 @@
   <div class="bgcGY cardCenter">
     <main class="searchProdMain">
       <div class="search">
-          <Searchbar :functype="1" @update-search-text="searchClick" />
-          <Searchbarclick />
-        </div>
+        <Searchbar :functype="1" @update-search-text="searchClick" />
+        <Searchbarclick />
+      </div>
       <div class="backGroundCard">
-        
+
         <div class="loveblock">
           <div class="backGroundCardBtns">
             <router-link :to="a.link" v-for="a in memBtnLink">
-              <button
-                :class="[a.name === '收藏清單' ? 'pinkBtnLight' : 'pinkBtn']"
-              >
+              <button :class="[a.name === '收藏清單' ? 'pinkBtnLight' : 'pinkBtn']">
                 {{ a.name }}
               </button>
             </router-link>
@@ -20,21 +18,12 @@
           <div class="con">
             <div class="shop_container">
               <div v-if="getPageItems == 0">查無商品</div>
-              <div
-                class="item"
-                v-for="item in getPageItems"
-                :key="item.prod_id"
-                v-else
-              >
+              <div class="item" v-for="item in getPageItems" :key="item.prod_id" v-else>
                 <router-link :to="`/Home/ProductPage/${item.prod_id}`">
                   <div class="image">
-                    <img
-                      :src="
-                        `${this.$store.state.imgpublicpath}image/productimage/` +
-                        item.prod_img
-                      "
-                      :alt="item.prod_name"
-                    />
+                    <img :src="`${this.$store.state.imgpublicpath}image/productimage/` +
+                      item.prod_img
+                      " :alt="item.prod_name" />
                   </div>
                 </router-link>
                 <div class="info">
@@ -43,11 +32,7 @@
                     <router-link :to="`/Home/ProductPage/${item.prod_id}`">
                       <p>{{ item.prod_name }}</p>
                     </router-link>
-                    <font-awesome-icon
-                      :icon="['fas', 'cart-shopping']"
-                      id="car"
-                      @click="addcart(item.prod_id)"
-                    />
+                    <font-awesome-icon :icon="['fas', 'cart-shopping']" id="car" @click="addcart(item.prod_id)" />
                   </span>
                   <router-link :to="`/Home/ProductPage/${item.prod_id}`">
                     <span> ${{ item.prod_sellingprice }} </span>
@@ -56,12 +41,7 @@
               </div>
             </div>
             <div class="shop_paginationbar">
-              <Page
-                :total="searchFilter.length"
-                :page-size="pageItems"
-                v-model="currentPage"
-                class="shop_page"
-              />
+              <Page :total="searchFilter.length" :page-size="pageItems" v-model="currentPage" class="shop_page" />
             </div>
           </div>
         </div>
@@ -233,47 +213,70 @@ export default {
 };
 </script>
 <style scoped lang="scss">
-// .bgcGY {
-//   height: auto;
-// }
+.comfooter .footer {
+  @include t() {
+    padding: 3rem 3rem 1.5rem;
+  }
+}
+@include t(){
+  .comfooter {
+  .cube {
+    z-index: 10;
+  }
+}
+}
 .shop_paginationbar {
-  .shop_page{
+  .shop_page {
     width: auto;
+
     @include t() {
       width: 80%;
     }
   }
 }
+
 // .searchProdMain {
 //     width: 83.33%;
 //     height: 91vh;
 //   }
 .cardCenter {
+
   // width: 100vw;
   // display: flex;
   // justify-content: center;
   // align-items: center;
   @include t() {
     height: auto;
-    padding:5rem 0 200px;
+    // padding:5rem 0 200px;
   }
+
   .searchProdMain {
     width: 83.33%;
+
     // height: 91vh;
-    .search{
-      width: 1000px;
-    }
     @include t() {
       width: auto;
     }
+
+    .search {
+      width: 1000px;
+
+      @include t() {
+        width: auto;
+        margin: auto;
+      }
+    }
+
     .backGroundCard {
       // height: 100%;
       flex-direction: column;
       padding: 1.5rem;
+
       @include t() {
         // width: auto;
         height: auto;
       }
+
       // .love_search {
       //   width: 250px;
       //   margin-bottom: 0.5rem;
@@ -283,28 +286,35 @@ export default {
       .loveblock {
         display: flex;
         justify-content: space-around;
+
         @include t() {
           flex-direction: column;
           align-items: center;
         }
+
         .con {
           width: 80%;
+
           .shop_paginationbar {
             margin: 0;
             padding-top: 0.5rem;
           }
+
           .shop_container {
             width: 100%;
             display: grid;
             grid-template-columns: repeat(3, 30%);
-            grid-template-rows: repeat(2, 1fr);
+
+            // grid-template-rows: repeat(2, 1fr);
             @include t() {
               grid-template-columns: repeat(2, 45%);
               margin: auto;
             }
+
             justify-items: center;
             align-items: flex-end;
             gap: 25px;
+
             .item {
               width: 100%;
               text-align: center;
@@ -317,23 +327,29 @@ export default {
                 object-fit: cover;
               }
             }
+
             .info {
               margin: 10px 0px;
               text-align: center;
+
               span {
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
                 color: $mblue;
+
                 .heart {
                   padding: 3px 1px 0 0;
                   width: 24px;
                 }
+
                 #car {
                   height: 20px;
                 }
+
                 a {
                   width: calc(100% - 60px);
+
                   p {
                     width: 100%;
                     overflow: hidden;
@@ -342,6 +358,7 @@ export default {
                   }
                 }
               }
+
               a {
                 span {
                   text-align: center;
@@ -355,5 +372,4 @@ export default {
       }
     }
   }
-}
-</style>
+}</style>

@@ -49,12 +49,10 @@
 </template>
 
 <script>
-import Footer from "@/components/Footer.vue";
 import Searchbar from "/src/components/Searchbar.vue";
 import Searchbarclick from "/src/components/Searchbarclick.vue";
 export default {
 components: {
-  Footer,
   Searchbar,
   Searchbarclick,
 
