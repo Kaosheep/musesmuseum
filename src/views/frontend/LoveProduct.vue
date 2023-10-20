@@ -68,9 +68,9 @@ export default {
       loven: null,
       memBtnLink: [
         { link: "/Home/MemberInfo", name: "會員資料" },
-        { link: "", name: "訂單查詢" },
+        { link: "/Home/SearchProduct", name: "訂單查詢" },
         { link: "/Home/SearchTicket", name: "票券查詢" },
-        { link: "/Home/LoveProduct", name: "收藏清單" },
+        { link: "", name: "收藏清單" },
       ],
       pageItems: 6,
       currentPage: 1,

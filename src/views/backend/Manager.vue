@@ -61,20 +61,20 @@
               >請輸入正確email</span
             >
           </div>
-          <div>
-            <div>
-              <div>密碼</div>
-              <input type="password" v-model="add_news.psw" />
-              <span v-if="passwordError || !add_news.psw">請輸入密碼</span>
-            </div>
+          <button type="button" class="btn_admin" @click="toggleDiv()" v-show="addnews">
+            變更密碼
+          </button>
+          <div v-show="pswUp">
+            <div>密碼</div>
+            <input type="password" v-model="add_news.psw" />
+            <span v-if="passwordError && !add_news.psw">請輸入密碼</span>
           </div>
-          <div class="switch_status">
-            <div>狀態</div>
-            <select v-model="type">
-              <option value="1">全權</option>
-              <option value="0">部分</option>
-            </select>
+          <div v-show="pswUp">
+            <div>密碼確認</div>
+            <input type="password" v-model="passwordConfirm" />
+            <span v-if="passwordConfirm != add_news.psw">請輸入相同密碼</span>
           </div>
+
           <div class="form_btn">
             <button type="button" class="btn_admin" @click="hideEditForm">取消</button>
             <button type="button" class="btn_admin" @click="addnews_btn(add_news.id)">
@@ -115,10 +115,28 @@ export default {
       passwordError: false,
       nameError: false,
       emailError: false,
+      pswUp: false,
+      passwordConfirm: "",
       type: 0,
+      passwordRegex: /^.{6,10}$/,
     };
   },
   methods: {
+    validatePasswords() {
+      if (!this.add_news.psw || !this.passwordConfirm) {
+        this.passwordError = true;
+        return; // 阻止提交
+      }
+
+      if (this.add_news.psw !== this.passwordConfirm) {
+        this.passwordError = true;
+      } else {
+        this.passwordError = false;
+      }
+    },
+    toggleDiv() {
+      this.pswUp = !this.pswUp;
+    },
     isValidEmail(email) {
       const emailRegex = /^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,3}$/;
       return emailRegex.test(email);
@@ -157,18 +175,30 @@ export default {
         }
         this.error(true, "資料錯誤,請重新輸入");
         this.fetchnew();
-       
+
         return; // 阻止提交
       }
       if (!this.isValidEmail(this.add_news.email)) {
         this.emailError = true;
         this.error(true, "email格式錯誤");
-        return; // 阻止提交
+        return;
       }
-      // 如果所有字段都不为空，清除错误信息
+      if (!this.passwordRegex.test(this.add_news.psw)) {
+        this.passwordError = true;
+        this.error(true, "密碼需6~10個字");
+        return; 
+      }
+      if (this.add_news.psw !== this.passwordConfirm) {
+        this.passwordError = true;
+        this.error(true, "請輸入相同密碼");
+        return;
+      }
+
       this.nameError = false;
       this.emailError = false;
       this.passwordError = false;
+      this.pswUp= false,
+      this.passwordConfirm = "";
 
       if (id !== undefined) {
         const url = `${this.$store.state.publicpath}manager_updateupload.php`;
@@ -235,6 +265,7 @@ export default {
       this.nameError = false;
       this.emailError = false;
       this.passwordError = false;
+      (this.pswUp = false), (this.passwordConfirm = "");
     },
     deleten() {
       if (window.confirm("確認刪除資料?")) {
@@ -304,6 +335,7 @@ export default {
       if (type == "add") {
         this.notice = "新增";
         this.addnews = false;
+        this.pswUp = true;
         this.add_news = [
           {
             id: "",

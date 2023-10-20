@@ -97,9 +97,17 @@ export default {
     };
   },
   methods: {
-    success(nodesc) {
+    success(nodesc,json) {
       this.$Notice.success({
-        title: "登入成功",
+        title: json,
+        desc: nodesc
+          ? ""
+          : "Here is the notification description. Here is the notification description. ",
+      });
+    },
+    warning(nodesc, w) {
+      this.$Notice.warning({
+        title: w,
         desc: nodesc
           ? ""
           : "Here is the notification description. Here is the notification description. ",
@@ -146,7 +154,7 @@ export default {
           // window.alert("登入成功");
           document.location.href = `${this.$store.state.imgpublicpath}Home/Login`;
         } else {
-          window.alert("帳密錯誤");
+          this.warning(true,"帳密錯誤");
         }
       })  
       .then(() => {
@@ -155,17 +163,18 @@ export default {
           document.cookie = "members= " + members + "; expires=Thu, 01 Jan 2025 00:00:00 UTC; path=/";
           document.location.href = `${this.$store.state.imgpublicpath}Home/MemberInfo`;
         } else {
-          alert("無法獲取 mbr_email");
+          this.warning(true,"此email尚未註冊");
         }
       })
       .then((json) => {
-        this.success(true);
+        
           if (json.result['mbr_email']) {
+            this.success(true,json);
               let members = JSON.stringify(json.result);
               document.cookie = "members= " + members + "; expires=Thu, 01 Jan 2025 00:00:00 UTC; path=/";
               document.location.href = `${this.$store.state.imgpublicpath}Home/MemberInfo`;
             } else {
-              alert(json.result);
+              this.warning(true,json.result);
           }
       })
       .catch(function (error) {

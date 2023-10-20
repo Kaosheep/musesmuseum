@@ -31,7 +31,7 @@
                         </div>
                         <div class="spe_exhi_desc_deco">
                         </div>
-                        <span>{{ exhi.exh_startdate }}-{{ exhi.exh_enddate }}</span>
+                        <span class="spe_exh_date">{{ exhi.exh_startdate }} 至 {{ exhi.exh_enddate }}</span>
                         <h3 class="spe_title">{{ exhi.exh_name }}</h3>
                         <p>{{ exhi.exh_desc }}</p>
                         <span class="spe_loc">展覽地點：{{ exhi.exh_loc }}</span>
@@ -48,7 +48,7 @@
                 </div>
 
                 <div class="spe_m_date">
-                    <span>{{ exhi.exh_startdate }}-{{ exhi.exh_enddate }}</span>
+                    <span>{{ exhi.exh_startdate }} 至 {{ exhi.exh_enddate }}</span>
                 </div>
                 <div class="spe_m_title">
                     <span>{{ exhi.exh_name }}</span>

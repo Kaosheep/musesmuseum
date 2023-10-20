@@ -162,6 +162,7 @@ export default {
     logout() {
       //登出
       this.$store.dispatch("logout");
+      this.closemenu();
     },
   },
 };
