@@ -32,21 +32,36 @@ export default {
     };
   },
   methods: {
+    success(nodesc, json) {
+      this.$Notice.success({
+        title: json,
+        desc: nodesc
+          ? ""
+          : "Here is the notification description. Here is the notification description. ",
+      });
+    },
+    error(nodesc, json) {
+      this.$Notice.error({
+        title: json,
+        desc: nodesc ? "" : "This is an error tip",
+      });
+    },
+
     login() {
       if (this.account.length > 0) {
         const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
         emailPattern.test(this.account);
 
         if (!emailPattern.test(this.account)) {
-          alert("無效帳號");
+          this.error(true, "無效帳號");
           return false;
         }
       } else {
-        alert("請輸入帳號");
+        this.error(true, "請輸入帳號");
         return false;
       }
       if (this.pwd.length <= 3) {
-        alert("密碼長度不符");
+        this.error(true, "密碼長度不符");
         return false;
       }
       const url = `${this.$store.state.publicpath}manager_login.php`;
@@ -84,7 +99,7 @@ export default {
               "manager= " + manager + "; expires=Thu, 01 Jan 2025 00:00:00 UTC; path=/";
             document.location.href = `${this.$store.state.imgpublicpath}DashBoard`;
           } else {
-            alert(json.result);
+            this.error(true, json.result);
           }
         });
       if (localStorage["nowpage"]) {

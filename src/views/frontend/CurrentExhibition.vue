@@ -99,6 +99,6 @@ export default {
                 this.currentIndex = (this.currentIndex + 1) % this.curexhibitions.length;
             }
         },
-    }
+    },
 }
 </script>

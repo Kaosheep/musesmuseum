@@ -139,9 +139,7 @@ export default {
     },
 
     addnews_btn(id) {
-      // 检查各个字段是否为空
       if (!this.add_news.name || !this.add_news.email || !this.add_news.psw) {
-        // 如果有任何字段为空，显示错误信息
         if (!this.add_news.name) {
           this.nameError = true;
         } else {
@@ -157,9 +155,9 @@ export default {
         } else {
           this.passwordError = false;
         }
-        this.error(true, "資料錯誤,重新輸入");
+        this.error(true, "資料錯誤,請重新輸入");
         this.fetchnew();
-        this.add_news = [];
+       
         return; // 阻止提交
       }
       if (!this.isValidEmail(this.add_news.email)) {
@@ -234,6 +232,9 @@ export default {
     hideEditForm() {
       this.type = 0;
       this.showForm = false;
+      this.nameError = false;
+      this.emailError = false;
+      this.passwordError = false;
     },
     deleten() {
       if (window.confirm("確認刪除資料?")) {
