@@ -314,9 +314,8 @@ div {
 }
 
 .btn_admin {
-  margin-right: 10px;
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin: 0.8rem;
+  margin-bottom: 1.5rem;
   width: 70px;
   height: 40px;
   background-color: $mblue;
