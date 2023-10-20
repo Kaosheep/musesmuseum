@@ -18,7 +18,7 @@ try {
     $managerStmt->bindValue(":ma_psw",$pwd);
     $managerStmt->execute();
     if($managerStmt->rowCount() === 0){//查無此人, 帳密錯誤
-		echo json_encode(["result" => "帳密錯誤"]);
+		echo json_encode(["result" => "帳號或密碼錯誤,請重新輸入"]);
         exit;
 	}
 
