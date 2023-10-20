@@ -26,15 +26,18 @@
               required
             />
             <span v-if="i.id == 'email'">
-              <span v-show="inputData.email">
-                <span v-show="isuse">
+              <span v-if="inputData.email">
+                <span v-if="isuse == 'true'">
                   <font-awesome-icon :icon="['far', 'circle-check']" />
                 </span>
-                <span v-show="!isuse">
+                <span v-if="isuse == 'false'">
                   <font-awesome-icon :icon="['far', 'circle-xmark']" />
                 </span>
-                <span v-show="isuse">此email可使用</span>
-                <span v-show="!isuse">此email已被註冊</span>
+              </span>
+              <span v-if="inputData.email">
+               
+                <span v-show="isuse == 'true'">此email可使用</span>
+                <span v-show="isuse == 'false'">此email已被註冊</span>
               </span>
             </span>
           </div>
@@ -134,7 +137,6 @@ export default {
         { link: "", name: "會員註冊" },
         { link: "/Home/Login", name: "會員登入" },
       ],
-      rep: "",
       isuse: false,
     };
   },
@@ -150,9 +152,7 @@ export default {
     warning(nodesc, w) {
       this.$Notice.warning({
         title: w,
-        desc: nodesc
-          ? ""
-          : "Here is the notification description. Here is the notification description. ",
+        desc: nodesc ? "" : "請重新登入，將會在0.5秒後跳轉",
       });
     },
     sign() {
@@ -176,7 +176,7 @@ export default {
         this.warning(true, "未輸入信箱");
       } else if (!emailPattern.test(email)) {
         this.warning(true, "信箱格式錯誤");
-      } else if (!this.isuse) {
+      } else if (this.isuse == 'false') {
         this.warning(true, "信箱已使用");
       } else if (memPsw == "") {
         this.warning(true, "未輸入密碼");
@@ -210,10 +210,12 @@ export default {
             }
           })
           .then((json) => {
-            this.success(true, json);
+            this.success(false, json);
             document.querySelectorAll("input").forEach((inp) => {
               inp.value = "";
-              document.location.href = `${this.$store.state.imgpublicpath}Home/MemberInfo`;
+              setTimeout(() => {
+                document.location.href = `${this.$store.state.imgpublicpath}Home/Login`;
+              }, 500);
             });
           })
           .catch((error) => {
@@ -224,7 +226,7 @@ export default {
     checkemail() {
       const formData = new URLSearchParams();
       formData.append("email", document.getElementById("email").value);
-
+      
       fetch(`${this.$store.state.publicpath}emailrespons.php`, {
         method: "POST",
         headers: {
@@ -234,7 +236,7 @@ export default {
       })
         .then((response) => {
           if (response.ok) {
-            return response.json(); // 如果請求成功，解析JSON數據
+            return response.json(); 
           } else {
             throw new Error("取得消息失敗"); // 如果請求不成功，拋出錯誤
           }
@@ -248,11 +250,8 @@ export default {
     },
   },
   mounted() {
-    window.addEventListener("change", () => {
-      document
-        .getElementById("email")
-        .addEventListener("change", this.checkemail);
-    });
+    let emailinput = document.getElementById("email");
+    emailinput.addEventListener("change", this.checkemail);
   },
 };
 </script>
