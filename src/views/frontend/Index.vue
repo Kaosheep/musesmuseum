@@ -31,7 +31,9 @@
             <div class="homenav">
               <ul>
                 <li v-for="(li, index) in homenav" :key="index">
-                  <RouterLink :to="li.link"><p>{{ li.title }}<br>{{ li.entitle }}</p></RouterLink>
+                  <RouterLink :to="li.link"
+                    ><p>{{ li.title }}<br />{{ li.entitle }}</p></RouterLink
+                  >
                 </li>
               </ul>
             </div>
@@ -69,11 +71,6 @@
                     <h3>{{ img.exh_name }}</h3>
                     <p>{{ img.exh_startdate }}</p>
                     <p>{{ img.exh_desc }}</p>
-                    <p>
-                      <router-link to="/"
-                        ><ThinArrow :text="'展覽資訊'"></ThinArrow
-                      ></router-link>
-                    </p>
                   </div>
                 </div>
               </div>
@@ -91,38 +88,44 @@
               </button>
             </div>
             <div class="moreexb">
-              <router-link to="/Home/SpecialExhibition"
+              <router-link to="/Home/SpecialExhibition_main"
                 ><ThinArrow :text="'更多展覽'"></ThinArrow
               ></router-link>
             </div>
           </div>
-          <Carousel
-            v-model="value"
-            :autoplay="setting.autoplay"
-            :autoplay-speed="setting.autoplaySpeed"
-            :dots="setting.dots"
-            :radius-dot="setting.radiusDot"
-            :trigger="setting.trigger"
-            :arrow="setting.arrow"
-            class="index_carousel"
-          >
-            <CarouselItem v-for="(img, imgindex) in galleryimgs">
-              <div class="artcarousel">
-                <img
-                  :src="
-                    `${this.$store.state.imgpublicpath}image/exhi/` +
-                    img.exh_img
-                  "
-                  alt=""
-                />
-                <div class="txt">
-                  <h3>{{ img.exh_name }}</h3>
-                  <p>{{ img.exh_startdate }}</p>
-                  <p>{{ img.exh_desc }}</p>
+          <div class="index_carousel">
+            <Carousel
+              v-model="value"
+              :autoplay="setting.autoplay"
+              :autoplay-speed="setting.autoplaySpeed"
+              :dots="setting.dots"
+              :radius-dot="setting.radiusDot"
+              :trigger="setting.trigger"
+              :arrow="setting.arrow"
+            >
+              <CarouselItem v-for="(img, imgindex) in galleryimgs">
+                <div class="artcarousel">
+                  <img
+                    :src="
+                      `${this.$store.state.imgpublicpath}image/exhi/` +
+                      img.exh_img
+                    "
+                    alt=""
+                  />
+                  <div class="txt">
+                    <h3>{{ img.exh_name }}</h3>
+                    <p>{{ img.exh_startdate }}</p>
+                    <p>{{ img.exh_desc }}</p>
+                  </div>
                 </div>
-              </div>
-            </CarouselItem>
-          </Carousel>
+              </CarouselItem>
+            </Carousel>
+            <div class="moreexb">
+              <router-link to="/Home/SpecialExhibition_main"
+                ><ThinArrow :text="'更多展覽'"></ThinArrow
+              ></router-link>
+            </div>
+          </div>
         </section>
         <section>
           <div class="sectiontitle">
@@ -146,7 +149,7 @@
                   <h3>{{ item.news_title }}</h3>
                   <p>{{ item.news_content }}</p>
                 </div>
-                
+
                 <div class="image">
                   <!-- <img class="forw" src="@/assets/image/space/spaceTheShop.png"> -->
                   <img
@@ -158,6 +161,7 @@
                   />
                 </div>
               </RouterLink>
+              
             </div>
             <div class="more">
               <router-link to="/Home/News"

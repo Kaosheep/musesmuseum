@@ -25,7 +25,7 @@ export default {
       },
       homenav: [
         { title: "最新消息", entitle: "News", link: "/Home/News" },
-        { title: "展覽資訊", entitle: "Current Exhibitions", link: "/Home/CurrentExhibition_main" },
+        { title: "展覽資訊", entitle: "Exhibitions", link: "/Home/SpecialExhibition_main" },
         { title: "館內地圖", entitle: "Map", link: "/Home/Museumspace" },
         { title: "參觀服務", entitle: "Visit", link: "/Home/VisitInformation" },
         { title: "精選商品", entitle: "Shop", link: "/Home/Shop" },
