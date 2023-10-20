@@ -209,11 +209,11 @@ export default {
               throw new Error("新增失敗");
             }
           })
-          .then((json) => {
-            this.success(true, json);
+          .then(() => {
+            this.success(true,"註冊成功,請重新登入");
             document.querySelectorAll("input").forEach((inp) => {
               inp.value = "";
-              document.location.href = `${this.$store.state.imgpublicpath}Home/MemberInfo`;
+              // document.location.href = `${this.$store.state.imgpublicpath}Home/`;
             });
           })
           .catch((error) => {
