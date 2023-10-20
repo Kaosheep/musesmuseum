@@ -13,7 +13,7 @@
         </div>
 
         <form @submit.prevent>
-          <div class="memloginActi" v-for="i in memAllInfo">
+          <div class="memloginActi itemLink" v-for="i in memAllInfo">
             <label :key="i.id">{{ i.memTitColumn }}</label>
             <input
               :key="i.id"
@@ -35,12 +35,14 @@
                 </span>
               </span>
               <span v-if="inputData.email">
-               
                 <span v-show="isuse == 'true'">此email可使用</span>
                 <span v-show="isuse == 'false'">此email已被註冊</span>
               </span>
             </span>
-            <!-- <span class="psw" v-if="i.id == 'memPsw'" style="font-size: 12px;white-space: nowrap;transform: translateY(-10px);">至少 6 個字元，要有大小寫字母，至少一個數字</span> -->
+            <span class="tooltip" v-if="i.id == 'memPsw'" >至少 6 個字元，要有大小寫字母，至少一個數字</span>
+            <!-- <span class="psw" v-if="i.id == 'memPsw'" 
+              style="font-size: 12px;white-space: nowrap;
+              transform: translateY(-10px);">至少 6 個字元，要有大小寫字母，至少一個數字</span> -->
           </div>
 
           <div class="memloginSubmit">
@@ -257,6 +259,26 @@ export default {
 };
 </script>
 <style scoped lang="scss">
+ .itemLink {
+        position: relative;
+    }
+    .itemLink:hover .tooltip {
+        display: block;
+    }
+    .tooltip {
+        display: none;
+        position: absolute;
+        background: rgba(0, 156, 168, 0.5);
+        color: #fff;
+        padding: 5px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        bottom: -30px;
+        left: 50%;
+        transform: translateX(-50%);
+        white-space: nowrap;
+        z-index: 1;
+    }
 
 @include t() {
   .backGroundCard {
