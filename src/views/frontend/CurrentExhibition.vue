@@ -41,6 +41,10 @@
             <div class="cur_m_title">
                 <span>{{ curexhibitions[currentIndex].curexhiTitle }}</span>
             </div>
+            <div class="cur_m_info">
+                <p>{{ curexhibitions[currentIndex].curexhiDesc }}</p>
+                <span class="cur_loc">展覽地點：{{ curexhibitions[currentIndex].curexhiLoc }}</span>
+            </div>
 
             <button class="cur_scroll_right" type="button" @click="scrollpage('right')">
                 <img src="@/assets/image/paint/arrow.svg" alt="" />
