@@ -39,7 +39,7 @@ try{
 	if (isset($yourArray["mbr_email"])) {
 		$mbr_email = $yourArray["mbr_email"];
 	} else {
-		echo "mbr_email 未定义";
+		echo  json_encode("email 不存在");
 	}
 }
 
