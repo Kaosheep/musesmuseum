@@ -40,6 +40,7 @@
                 <span v-show="isuse == 'false'">此email已被註冊</span>
               </span>
             </span>
+            <span class="psw" v-if="i.id == 'memPsw'" style="font-size: 12px;white-space: nowrap;transform: translateY(-10px);">至少 6 個字元，要有大小寫字母，至少一個數字</span>
           </div>
 
           <div class="memloginSubmit">
@@ -146,13 +147,13 @@ export default {
         title: json,
         desc: nodesc
           ? ""
-          : "Here is the notification description. Here is the notification description. ",
+          : "請重新登入，將會在0.5秒後跳轉",
       });
     },
     warning(nodesc, w) {
       this.$Notice.warning({
         title: w,
-        desc: nodesc ? "" : "請重新登入，將會在0.5秒後跳轉",
+        desc: nodesc ? "" : "",
       });
     },
     sign() {
@@ -215,7 +216,7 @@ export default {
               inp.value = "";
               setTimeout(() => {
                 document.location.href = `${this.$store.state.imgpublicpath}Home/Login`;
-              }, 500);
+              }, 600);
             });
           })
           .catch((error) => {
@@ -256,6 +257,7 @@ export default {
 };
 </script>
 <style scoped lang="scss">
+
 @include t() {
   .backGroundCard {
     form {
