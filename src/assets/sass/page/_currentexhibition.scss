@@ -159,6 +159,9 @@ template {
 .cur_m_title {
     display: none;
 }
+.cur_m_info {
+    display: none;
+}
 .cur_buy_tickbtn {
     display: inline-block;
     position: absolute;
@@ -196,7 +199,7 @@ template {
                     display: block;
                     position: absolute;
                     left: 6px;
-                    top: 50%;
+                    top: 40%;
                     padding: 0;
                     transform: translateY(-50%);
                     background-color: transparent;
@@ -240,7 +243,7 @@ template {
                     display: flex;
                     justify-content: center;
                     align-items: center;
-                    margin: 20% 8% 0 0;
+                    margin: 25% 8% 0 0;
                     position: relative;
 
                     .cur_img_deco {
@@ -284,6 +287,21 @@ template {
                         color: #1E5289;
                         font-weight: bold;
                         padding-top: 30px;
+                        padding-bottom: 15px;
+                        font-size: 20px;
+                    }
+                }
+                .cur_m_info {
+                    display: block;
+                    p {
+                        padding: 0 20px 10px 20px;
+                        text-align: justify;
+                    }
+                    .cur_loc {
+                        display: flex;
+                        justify-content: center;
+                        padding: 0 20px 10px 20px;
+                        font-weight: bold;
                     }
                 }
                 .buy_tickbtn {
@@ -293,7 +311,7 @@ template {
                     display: block;
                     position: absolute;
                     right: 0;
-                    top: 50%;
+                    top: 40%;
                     padding: 0;
                     transform: translateY(-50%) scaleX(-1);;
                     background-color: transparent;
