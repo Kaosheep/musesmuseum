@@ -94,8 +94,9 @@ export default {
     return {
       storageitem: localStorage["addItemlist"],
       totolprice: localStorage["totalAmount"],
-      selected: "宅配到府",
+      selected: "園區取貨",
       deliverway: [
+        { ship: "園區取貨", charge: 0 },
         { ship: "宅配到府", charge: 70 },
         { ship: "超商取貨", charge: 100 },
       ],
