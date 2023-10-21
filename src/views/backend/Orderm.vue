@@ -177,6 +177,34 @@ export default {
     },
   },
   methods: {
+    // deleten() {
+    //   if (window.confirm("確認刪除資料?")) {
+    //     fetch(`${this.$store.state.publicpath}ord_dlt.php`, {
+    //       method: "post",
+    //       headers: {
+    //         "Content-Type": "application/x-www-form-urlencoded; charset=utf-8",
+    //       },
+    //       body: JSON.stringify({ data: Object.values(this.newsched) }),
+    //     })
+    //       .then((response) => {
+    //         if (response.ok) {
+    //           return response.json();
+    //         } else {
+    //           throw new Error("新增失敗");
+    //         }
+    //       })
+    //       .then((json) => {
+    //         this.success(true, json);
+    //         this.fetchnew();
+    //         document.querySelectorAll(".statusinput").forEach((inputb) => {
+    //           inputb.checked = false;
+    //         });
+    //       })
+    //       .catch(function (error) {
+    //         console.log(error);
+    //       });
+    //   }
+    // },
     formatPrice(value) {
       // 方法一：正規表達式
       // return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");

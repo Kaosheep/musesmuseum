@@ -415,25 +415,28 @@ export default {
             }
           })
           .then((json) => {
+            this.hideEditForm();
             this.success(true, json);
+            this.fetchprod();
+            this.add_prod = [];
           })
           .catch((error) => {
             console.log(error.message);
           });
       } else {
-        if (this.add_prod_name === null) {
+        if (this.add_prod.name == undefined) {
           this.warning(true, "請輸入產品名稱");
-        } else if (this.add_prod_desc === null) {
+        } else if (this.add_prod.desc == undefined) {
           this.warning(true, "請輸入商品敘述");
-        } else if (this.add_prod_spec === null) {
+        } else if (this.add_prod.spec == undefined) {
           this.warning(true, "請輸入商品規格");
-        } else if (this.add_prod_kind === null) {
+        } else if (this.add_prod.kind == undefined) {
           this.warning(true, "請輸入分類");
-        } else if (this.add_prod_fixedprice === null) {
+        } else if (this.add_prod.fixedprice == undefined) {
           this.warning(true, "請輸入定價");
-        } else if (this.add_prod_sellingprice === null) {
+        } else if (this.add_prod.sellingprice == undefined) {
           this.warning(true, "請輸入售價");
-        } else if (this.add_prod_img === null) {
+        } else if (this.add_prod.img == undefined) {
           this.warning(true, "未選擇圖片");
         } else {
           const url = `${this.$store.state.publicpath}shop_insertupload.php`;
