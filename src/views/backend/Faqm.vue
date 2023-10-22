@@ -260,6 +260,7 @@ export default {
     hideEditForm() {
       this.showForm = false;
     },
+
     submitForm() {
       this.hideEditForm();
     },
@@ -281,7 +282,7 @@ export default {
               return response.json();
               //跳更新成功的通知
             } else {
-              throw new Error("新增失敗");
+              throw new Error("新增失敗");  
             }
           })
           .then((json) => {
@@ -294,9 +295,9 @@ export default {
             console.log(error.message);
           });
       } else {
-         if (this.add_faq.question == undefined) {
+         if (this.add_faq.question === undefined) {
           this.warning(true, "未輸入問題");
-        } else if (this.add_faq.ans == undefined) {
+        } else if (this.add_faq.ans === undefined) {
           this.warning(true, "未輸入答案");
         }else{
         const url = `${this.$store.state.publicpath}faq_add.php`;

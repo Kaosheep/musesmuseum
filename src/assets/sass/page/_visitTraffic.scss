@@ -30,6 +30,11 @@
         width: 90%;
         margin: auto;
     }
+    @include m() {
+        padding-left: 10px;
+        width: 100%;
+        margin: auto;
+    }
 }
 
 
@@ -37,6 +42,7 @@
 
 .VisitTraffic-h1 {
     width: 216px;
+
     margin-top: 30px;
     color: #fff;
     background-color: $mpink;
@@ -48,6 +54,7 @@
 
     @include t() {
         width: 50%;
+
     }
 
     @media screen and (max-width:560px) {
@@ -199,7 +206,7 @@
         height: 150px;
     }
 
-    @include t() {
+    @include m() {
         height: 230px;
     }
 
@@ -263,9 +270,7 @@
 
 }
 
-.VisitTrafficPorkCarP-2 {
-    height: 350px;
-}
+
 
 // 自行開車z
 
@@ -279,27 +284,54 @@
     }
 
     @include m() {
-        height: 450px;
+        height: 300px;
     }
 }
 
 .VisitTrafficPorkCarP-0 {
-    @media screen and (max-width:560px) {
-        height: 250px;
+    padding: 15px;
+    @media screen and (max-width:1100px) {
+
+        height: 300px;
+    }
+    @include t() {
+        height: 200px;
     }
 
+    @media screen and (max-width:560px) {
+        height: 250px;
+        padding: 20px;
+    }
+
+
     @include m() {
-        height: 350px;
+        height: 300px;
     }
 }
 
 .VisitTrafficPorkCarP-1 {
+    @media screen and (max-width:1100px) {
+        padding: 20px;
+        height: 300px;
+    }
+    @include t() {
+        height: 200px;
+    }
     @media screen and (max-width:560px) {
         width: 95%;
         height: 200px;
         padding: 10px;
     }
+
 }
+
+.VisitTrafficPorkCarP-2 {
+    height: 350px;
+    @media screen and (max-width:401px) {
+        height: 400px;
+    }
+}
+
 
 // 輪播圖
 .VisitTrafficBoard {
