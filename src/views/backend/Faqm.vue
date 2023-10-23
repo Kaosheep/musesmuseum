@@ -299,17 +299,19 @@ export default {
           this.warning(true, "未輸入問題");
         } else if (this.add_faq.ans === undefined) {
           this.warning(true, "未輸入答案");
+        }else if(!this.add_faq.question || !this.add_faq.ans){
+          this.warning(true, "問題或答案不可為空");
         }else{
-        const url = `${this.$store.state.publicpath}faq_add.php`;
-        const formData = new FormData();
-        formData.append("id", this.add_faq.id);
-        formData.append("question", this.add_faq.question);
-        formData.append("ans", this.add_faq.ans);
+          const url = `${this.$store.state.publicpath}faq_add.php`;
+          const formData = new FormData();
+          formData.append("id", this.add_faq.id);
+          formData.append("question", this.add_faq.question);
+          formData.append("ans", this.add_faq.ans);
 
-        fetch(url, {
-          method: "POST",
-          body: formData,
-        })
+          fetch(url, {
+            method: "POST",
+            body: formData,
+          })
           .then((response) => {
             if (response.ok) {
               return response.json();
