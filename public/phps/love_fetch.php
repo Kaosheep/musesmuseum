@@ -15,7 +15,7 @@ try{
   
   $loves->execute();
   if ($loves->rowCount() === 0) { //無此會員資料
-      echo "{}";
+      echo "[]";
     } else {
       $loveRows = $loves->fetchAll(PDO::FETCH_ASSOC);
       
