@@ -45,19 +45,20 @@ export default {
       },
       curexhibitions: [
                 {
-                    curexhiImg: "http://localhost/musesmuseum/public/image/exhi/spec_ex6.jpg",
+                    curexhiImg: this.$store.state.imgpublicpath + "image/exhi/spec_ex6.jpg",
                     curexhiTitle: "色彩之旅：印象主義大師",
                 },
                 {
-                    curexhiImg: "http://localhost/musesmuseum/public/image/exhi/spec_ex7.jpg",
+                    curexhiImg: this.$store.state.imgpublicpath + "image/exhi/spec_ex7.jpg",
                     curexhiTitle: "城市攝影：鏡像內心的多重情感",
+                    //===g1/image/exhi/spec_ex0.jpg
                 },
                 {
-                    curexhiImg: "http://localhost/musesmuseum/public/image/exhi/spec_ex5.jpg",
+                    curexhiImg: this.$store.state.imgpublicpath + "image/exhi/spec_ex5.jpg",
                     curexhiTitle: "萌翻你的心！小瓢蟲大出動",
                 },
                 {
-                    curexhiImg: "http://localhost/musesmuseum/public/image/exhi/spec_ex8.jpg",
+                    curexhiImg: this.$store.state.imgpublicpath + "image/exhi/spec_ex8.jpg",
                     curexhiTitle: "藍色之路： 來自波斯的瑰麗藝術",
                 },
             ],
