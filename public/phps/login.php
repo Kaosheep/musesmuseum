@@ -5,6 +5,8 @@ header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Ac
 header("Content-Type: application/json"); 
 
 
+
+
 $mbr_email = $_POST["mbr_email"];//傳遞的資料用$mbr_email代表
 $mbr_psw = $_POST["mbr_psw"];
 
